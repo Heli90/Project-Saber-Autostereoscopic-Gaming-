@@ -45,6 +45,12 @@
 > Regarder des tutoriels pour comprendre Godot
 > Planning et répartition des tâches
 
+Pour l'évaluation intermédiaire : Il faudrait avoir une démo qui teste déjà MediaPipe, la corrélation, le stéréo et le jeu (ex : Un jeu où on a un cube qui tourne si on baisse la main et qui tourne si on le lève). L'idée est d'avoir une base solide qu'on peut réutiliser pour la suite (c'est censé représenter un tiers de la charge de travail totale). Ce n'est pas grave de ne pas avoir de jeu final (on peut toujours avoir une petite liste de candidats). Il faut s'assurer que chaque bloc est opérationnel.
+
+Rem :
+- Faire le versionning dans Git (pas de copie V2, V3, V4, etc...)
+- Pour les fihiers tests, les mettre dans un dossier `src` et les documenter de telle sorte que les autres puissent les utiliser.
+
 ### Séance 2 - 20/02
 
 #### Pendant la séance
