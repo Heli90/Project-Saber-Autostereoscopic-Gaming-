@@ -16,9 +16,9 @@
 | Tâche                         | Responsables  | V0 (prévu) | V0 (réalisé) | V1 (prévu) | V1 (réalisé) | V2 (prévu) | V2 (réalisé) |
 | ----------------------------  | ------------- | ----       | ----         | ----       | ----         | ---        | ---          |
 | Création des personnages      |               | .....      | .....        | .....      | .....        | .....      | .....        |
-| Création du terrain de jeu    |               | .....      | .....        | .....      | .....        | .....      | .....        |
-| Rendu des images              | Van-Kévin     | 20/02      | .....        | .....      | .....        | .....      | .....        |
-| Détection des mouvements      |               | .....      | .....        | .....      | .....        | .....      | .....        |
+| Création du terrain de jeu    | Van-Kévin     | 13/03      | .....        | .....      | .....        | .....      | .....        |
+| Rendu des images              |               | .....      | .....        | .....      | .....        | .....      | .....        |
+| Détection des mouvements      | Birame        | 13/03      | .....        | .....      | .....        | .....      | .....        |
 
 
 ## Suivi des séances
