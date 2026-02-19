@@ -1,6 +1,6 @@
 ## Diagramme / Planning global
 
-![[artishowGantV1.png]]
+![artishowGantV1.png](artishowGantV1.png)
 
 ## Répartition des tâches pour l'évaluation intermédiaire
 
