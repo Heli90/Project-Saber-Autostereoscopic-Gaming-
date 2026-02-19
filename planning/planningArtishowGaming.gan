@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><project name="Artishow Gaming" company="" webLink="http://" view-date="2025-12-29" view-index="0" gantt-divider-location="2" resource-divider-location="300" version="3.3.3307" locale="fr_FR">
+    <description/>
+    <view zooming-state="default:7" id="gantt-chart">
+        <field id="tpd3" name="Nom" width="387" order="0"/>
+        <field id="tpd4" name="Date de début" width="164" order="1"/>
+        <field id="tpd5" name="Date de fin" width="164" order="2"/>
+        <field id="tpd15" name="Notes" width="20" order="3"/>
+        <option id="taskLabelUp" value="coordinator"/>
+        <option id="taskLabelDown" value=""/>
+        <option id="taskLabelLeft" value="name"/>
+        <option id="taskLabelRight" value=""/>
+        <option id="filter.completedTasks" value="false"/>
+        <option id="filter.dueTodayTasks" value="false"/>
+        <option id="filter.overdueTasks" value="false"/>
+        <option id="filter.inProgressTodayTasks" value="false"/>
+        <timeline><![CDATA[1]]></timeline>
+        <option id="color.recent"><![CDATA[#ff0000]]></option>
+    </view>
+    <view id="resource-table">
+        <field id="0" name="Nom" width="209" order="0"/>
+        <field id="1" name="Rôle par défaut" width="85" order="1"/>
+    </view>
+    <!-- -->
+    <calendars>
+        <day-types>
+            <day-type id="0"/>
+            <day-type id="1"/>
+            <default-week id="1" name="default" sun="1" mon="0" tue="0" wed="0" thu="0" fri="0" sat="1"/>
+            <only-show-weekends value="false"/>
+            <overriden-day-types/>
+            <days/>
+        </day-types>
+    </calendars>
+    <tasks empty-milestones="true">
+        <taskproperties>
+            <taskproperty id="tpd0" name="type" type="default" valuetype="icon"/>
+            <taskproperty id="tpd1" name="priority" type="default" valuetype="icon"/>
+            <taskproperty id="tpd2" name="info" type="default" valuetype="icon"/>
+            <taskproperty id="tpd3" name="name" type="default" valuetype="text"/>
+            <taskproperty id="tpd4" name="begindate" type="default" valuetype="date"/>
+            <taskproperty id="tpd5" name="enddate" type="default" valuetype="date"/>
+            <taskproperty id="tpd6" name="duration" type="default" valuetype="int"/>
+            <taskproperty id="tpd7" name="completion" type="default" valuetype="int"/>
+            <taskproperty id="tpd8" name="coordinator" type="default" valuetype="text"/>
+            <taskproperty id="tpd9" name="predecessorsr" type="default" valuetype="text"/>
+        </taskproperties>
+        <task id="0" uid="de5c1c6ae43c4c6cb7438ce8a8b0711c" name="Artishow" shape="1,0,1,0,0,1,0,1,1,0,1,0,0,1,0,1" meeting="false" start="2026-02-11" duration="98" complete="0" expand="true"/>
+        <task id="6" uid="9174c02be44d49d8b2107fcb1288e52d" name="Générer une image 3D (entrelacement de 2 vues)" meeting="false" start="2026-02-11" duration="24" complete="90" expand="true">
+            <depend id="5" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="11" uid="11b40f78f5304d0388a5c124be1216f4" name="Apprendre les bases de Godot" meeting="false" start="2026-02-11" duration="9" complete="0" expand="true">
+            <depend id="4" type="2" difference="0" hardness="Strong"/>
+            <depend id="5" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="5" uid="01140d36c0784eac8d0db6b26b621d9b" name="Générer un rendu 3D (2 vues) d'une image du moteur de jeu" meeting="false" start="2026-03-17" duration="9" complete="0" expand="true">
+            <depend id="2" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="4" uid="4f7e66711bd240c3b23d0a151bb82f5b" name="Générer l'image d'un cube tournant dans le moteur de jeu" meeting="false" start="2026-02-24" duration="24" complete="0" expand="true">
+            <depend id="2" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="2" uid="ed4beb8f60604b78a0448c7ab9a7576b" name="Afficher une image en mouvement en 3D" meeting="false" start="2026-03-30" duration="4" complete="0" expand="true">
+            <notes><![CDATA[- Générer les image depuis le moteur dans le GPU, stocker les images de façon intermédiaire (pas dans la mémoire), les assembler pour un rendu 3D sur 2 vues
+
+- Que l'image (d'un cube) soit en mouvement]]></notes>
+            <depend id="1" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="10" uid="4125a28b5d9645919af41a09f9655928" name="Lire la doc MédiaPipe" meeting="false" start="2026-02-11" duration="9" complete="0" expand="true">
+            <notes><![CDATA[Commencer à prendre en main le truc 
+Ça se programme en quoi même ? Python ? C ?]]></notes>
+            <depend id="8" type="2" difference="0" hardness="Strong"/>
+            <depend id="9" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="8" uid="698a129252a144c4991f958c086942ce" name="Implémenter MédiaPipe dans Godot" meeting="false" start="2026-02-24" duration="15" complete="0" expand="true">
+            <depend id="7" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="9" uid="7714ce0b19af40e1830bb8daf364394e" name="Savoir détecter la position de la main grâce à MédiaPipe" meeting="false" start="2026-02-24" duration="15" complete="0" expand="true">
+            <depend id="7" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="7" uid="ca065213b5e04043974bacdbd80f0b99" name="Coder une action en fonction d'un mouvement MédiaPipe" meeting="false" start="2026-03-17" duration="9" complete="0" expand="true">
+            <depend id="3" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="3" uid="ce92243f83a44ef29694de40527d8989" name="Lien primitif MédiaPipe-Moteur" meeting="false" start="2026-03-30" duration="4" complete="0" expand="true">
+            <notes><![CDATA[Quand on lève la main, le cube arrête de tourner
+]]></notes>
+            <depend id="1" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="1" uid="5a6a79d7767a4eaf993f2dac62d151ff" name="ÉVALUATION INTERMÉDIAIRE" color="#ff0000" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="true" start="2026-04-03" duration="0" complete="0" expand="true"/>
+        <task id="13" uid="77137ed68e5c47fda8984db18cc95b90" name="Choisir le jeu" meeting="false" start="2026-04-06" duration="8" complete="0" expand="true">
+            <notes><![CDATA[Chercher des jeux open source qu'on a juste à modifier
+La piste des jeux VR est une bonne idée]]></notes>
+            <depend id="14" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="14" uid="da0d6aefe26547f68c159128a1273763" name="Choisir les commandes" meeting="false" start="2026-04-16" duration="4" complete="0" expand="true">
+            <notes><![CDATA[Quels mouvements font quelles commandes ?]]></notes>
+            <depend id="15" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="15" uid="4d63022a419947a488ffa8599f818823" name="Implémenter le lien mouvements - MédiaPipe - Commandes" meeting="false" start="2026-04-22" duration="39" complete="0" expand="true">
+            <depend id="21" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="16" uid="c9a93ea2f21946bab63f6cc52d94764c" name="Générer deux images 3D (une pour chaque joueur)" meeting="false" start="2026-04-15" duration="21" complete="0" expand="true">
+            <depend id="17" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="17" uid="1ee1381eedff4fb891efa6281e4c7733" name="Entrelacer l'image pour avoir les deux points de vues selon le placement" meeting="false" start="2026-05-14" duration="10" complete="0" expand="true">
+            <depend id="21" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="18" uid="4b3ca7f4285546e5a52b16d44fab8b66" name="Apprendre comment modifier l'entrelacement pour créer des effets visuels particuliers" meeting="false" start="2026-04-06" duration="38" complete="0" expand="true">
+            <depend id="20" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="20" uid="c78dd417dcaf442789eeb83e9b2564e1" name="Choisir des features qui prennent en compte les effets visuels" meeting="false" start="2026-05-28" duration="13" complete="0" expand="true">
+            <depend id="19" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="19" uid="160c441650794a9fa9a114a00d421a06" name="Implémenter des features qui prennent en compte ces effets visuels" meeting="false" start="2026-06-16" duration="4" complete="0" expand="true">
+            <depend id="21" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="21" uid="4b95854186834c4d8cf916183bf871c8" name="Faire tester le jeu" meeting="false" start="2026-06-22" duration="4" complete="0" expand="true">
+            <depend id="12" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="12" uid="c6e13246bacc4955a732b6062fcbd264" name="ÉVALUATION FINALE" color="#ff0000" shape="1,0,0,0,1,0,0,0,1,0,0,0,1,1,1,1" meeting="true" start="2026-06-26" duration="0" complete="0" priority="4" expand="true"/>
+    </tasks>
+    <resources/>
+    <allocations/>
+    <vacations/>
+    <previous/>
+    <roles roleset-name="Default"/>
+</project>
