@@ -1,31 +1,16 @@
-# Gaming Autostéréoscopique - Suivi de projet
+## Gaming Autostéréoscopique - Suivi de projet
 
 ## Descriptif :
----
+Nous disposons d'écrans auto-stéréoscopiques dits « multi vues ». Ce sont des écrans LCD munis de masques optiques, appelés « barrières de parallaxe », permettant à un observateur de visualiser du contenu en 3D et sans lunettes. Dans le cadre de ce projet, vous aurez à disposition un téléviseur 3D de grande taille affichant 8 points de vue.
+
+Le but de ce projet est de mettre en place un jeu pour cette TV 3D, allant de la génération des différents points de vue jusqu’à l’affichage final. Le jeu sera commandée par les mouvements des joueurs détectés via une caméra.
 
 ### Membres :
----
-
-## Répartition des tâches et Planning initial
----
-
-- **V0**: premiers exemples pour tester et expérimenter, sans structure bien définie
-- **V1**: code fonctionnel, structuré mais indépendant des autres tâches
-- **V2**: code fonctionnel intégré à l'ensemble
-
-| Tâche                         | Responsables  | V0 (prévu) | V0 (réalisé) | V1 (prévu) | V1 (réalisé) | V2 (prévu) | V2 (réalisé) |
-| ----------------------------  | ------------- | ----       | ----         | ----       | ----         | ---        | ---          |
-| Création des personnages      |               | .....      | .....        | .....      | .....        | .....      | .....        |
-| Création du terrain de jeu    | Van-Kévin     | 13/03      | .....        | .....      | .....        | .....      | .....        |
-| Rendu des images              |               | .....      | .....        | .....      | .....        | .....      | .....        |
-| Détection des mouvements      | Birame        | 13/03      | .....        | .....      | .....        | .....      | .....        |
-
+Hugo BELLE, Birame CISSÉ, Hélias GODARD--DELONGEAS, Adam KHATIRI, Van-Kévin NGUYEN
 
 ## Suivi des séances
 
 ### Séance 1 - 11/02
-
-#### Pendant la séance
 
 > Présentation du sujet Artishow et de la TV avec le réseau (avec démonstrations sur des images de test)
 > To-Do List créée :
