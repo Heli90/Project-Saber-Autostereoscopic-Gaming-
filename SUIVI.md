@@ -29,7 +29,7 @@ Hugo BELLE, Birame CISSÉ, Hélias GODARD--DELONGEAS, Adam KHATIRI, Van-Kévin N
 
 *19/02* : 
 
-- Elaboration du planning à l'aide de Gantt et et début de srépartition des tâches entre les membres :
+- Elaboration du planning à l'aide de Gantt et et début de répartition des tâches entre les membres :
   - Utilisation de MediaPipe ()
   - Entrelacement des images à partir du moteur de jeu ()
 - Familiarisation avec Godot
