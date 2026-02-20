@@ -21,6 +21,8 @@ Hugo BELLE, Birame CISSÉ, Hélias GODARD--DELONGEAS, Adam KHATIRI, Van-Kévin N
     * Implémentation MediaPipe dans Godot : création d'une interface pour la caméra (interface web ?) + squelette
     * Tests de caméra à faire pour voir comment ça marche, via un projet Godot à part (utilisation de templates)
 
+> Réalisation d'un algorithme d'entrelacement d'image sur Python
+
 ### Entre la séance 1 et la séance 2
 
 *16/02* :
@@ -36,7 +38,7 @@ Hugo BELLE, Birame CISSÉ, Hélias GODARD--DELONGEAS, Adam KHATIRI, Van-Kévin N
 
 ### Séance 2 - 20/02
 
-
+> Retour du professeur encadrant (J. Lefeuvre) sur le planning
 
 ### Séance 3 - 23/02 (Encadrant absent)
 

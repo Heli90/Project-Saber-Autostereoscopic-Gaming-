@@ -42,11 +42,15 @@ Objectifs pour la prochaine séance :
 
 ***Remarques de J. lefeuvre sur le planning :***
 - Rajouter des descriptions aux tâches
+- Remplir le tableau des tâches au fur et à mesure pour suivre la progression
 - Rajouter une tâche "Brainstorm d'idées de jeux" (quitte à ne pas les conserver après) qui durerait de maintenant à l'évaluation intermédiaire
 - Rajouter une tâche de groupe de documentation
 - Distinguer la phase d'implémentation du gameplay de l'implémentation d'effets autostéréoscopiques
-- Rajouter une phase de *gamification* dans le jeu. Il faudrait que tout le monde puisse tester le jeu -> Jeu court.
+- Rajouter une phase de *gamification* dans le jeu. Il faudrait que tout le monde puisse tester le jeu -> Jeu court. Il faut par ailleurs prévoir un cycle dev, test user, correction
 - La répartition des tâches s'interrompt à l'évaluation intermédiaire. Il faudra l'adapter entre l'évaluation intermédiaire et l'évaluation finale. Il y aura du boulot pour tout lemonde (ex : Séparer MediaPipe en 2 tâches : une partie utilisation de gestes simples et évaluation de le précision et une partie sur la gestion de la profondeur. Séparer le rendu en 2 tâches : Gestion des objets et gestion des effets visuels, etc...)
+
+***Autres remarques :***
+- Modifier le `README.md` pour rendre le dépôt plus lisible
 
 ### Séance 3 - 23/02 (Encadrant absent)
 
