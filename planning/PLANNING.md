@@ -10,10 +10,9 @@
 
 | Tâche                         | Responsables  | V0 (prévu) | V0 (réalisé) | V1 (prévu) | V1 (réalisé) | V2 (prévu) | V2 (réalisé) |
 | ----------------------------  | ------------- | ----       | ----         | ----       | ----         | ---        | ---          |
-| Création des personnages      |               | .....      | .....        | .....      | .....        | .....      | .....        |
-| Création du terrain de jeu    | Van-Kévin     | 13/03      | .....        | .....      | .....        | .....      | .....        |
-| Rendu des images              |               | .....      | .....        | .....      | .....        | .....      | .....        |
-| Détection des mouvements      | Birame        | 13/03      | .....        | .....      | .....        | .....      | .....        |
+| Création du terrain de jeu (cube, mouvement, caméra)   | Van-Kévin     | 13/03      | .....        | .....      | .....        | .....      | .....        |
+| Rendu des images              | Adam et Hélias              | .....      | .....        | .....      | .....        | .....      | .....        |
+| Détection des mouvements      | Birame et Hugo       | 13/03      | .....        | .....      | .....        | .....      | .....        |
 
 ## Compte-rendu des séances
 
