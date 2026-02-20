@@ -35,18 +35,18 @@ func _input(event):
 		
 func lever_bras_gauche():
 	var bras_gauche = create_tween()
-	# On fait tourner l'épaule de 90 degrés (1.5 radians environ) en 0.2 secondes
-	bras_gauche.tween_property(epaule_left, "rotation:x", deg_to_rad(-90), 0.2)
+	# On fait tourner l'épaule de 90 degrés en 0.2 secondes
+	bras_gauche.tween_property(epaule_left, "rotation:y", deg_to_rad(-90), 0.2)
 
 func baisser_bras_gauche():
 	var bras_gauche = create_tween()
-	bras_gauche.tween_property(epaule_left, "rotation:x", 0, 0.2)
+	bras_gauche.tween_property(epaule_left, "rotation:y", 0, 0.2)
 
 func lever_bras_droit():
 	var bras_droit = create_tween()
-	# On fait tourner l'épaule de 90 degrés (1.5 radians environ) en 0.2 secondes
-	bras_droit.tween_property(epaule_right, "rotation:x", deg_to_rad(-90), 0.2)
+	# On fait tourner l'épaule de 90 degrés en 0.2 secondes
+	bras_droit.tween_property(epaule_right, "rotation:y", deg_to_rad(90), 0.2)
 
 func baisser_bras_droit():
 	var bras_droit = create_tween()
-	bras_droit.tween_property(epaule_right, "rotation:x", 0, 0.2)
+	bras_droit.tween_property(epaule_right, "rotation:y", 0, 0.2)

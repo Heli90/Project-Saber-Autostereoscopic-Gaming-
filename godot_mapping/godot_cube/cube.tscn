@@ -54,12 +54,12 @@ mesh = SubResource("CapsuleMesh_gojnm")
 shape = SubResource("CapsuleShape3D_f7g2b")
 
 [node name="Camera" type="Camera3D" parent="Joueur" unique_id=1209157305]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.32959223, 0.121029854)
 
 [node name="Epaule_Right" type="Node3D" parent="Joueur" unique_id=1305863325]
 transform = Transform3D(1, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.75, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Joueur/Epaule_Right" unique_id=1278431830]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, 0)
 mesh = SubResource("BoxMesh_wd2d1")
 surface_material_override/0 = SubResource("StandardMaterial3D_ftslj")
 
@@ -67,6 +67,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_ftslj")
 transform = Transform3D(1, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.75, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Joueur/Epaule_Left" unique_id=1876490326]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, 0)
 mesh = SubResource("BoxMesh_ftslj")
 surface_material_override/0 = SubResource("StandardMaterial3D_n65sj")
 
