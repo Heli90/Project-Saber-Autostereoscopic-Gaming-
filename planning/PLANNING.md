@@ -36,6 +36,18 @@ Il faudrait avoir une démo qui teste déjà MediaPipe, la corrélation, le sté
 
 ### Séance 2 - 20/02
 
+Objectifs pour la prochaine séance :
+
+> Commencer le brainstorming sur les jeux (idées potentielles, critères de gameplay, etc...)
+
+***Remarques de J. lefeuvre sur le planning :***
+- Rajouter des descriptions aux tâches
+- Rajouter une tâche "Brainstorm d'idées de jeux" (quitte à ne pas les conserver après) qui durerait de maintenant à l'évaluation intermédiaire
+- Rajouter une tâche de groupe de documentation
+- Distinguer la phase d'implémentation du gameplay de l'implémentation d'effets autostéréoscopiques
+- Rajouter une phase de *gamification* dans le jeu. Il faudrait que tout le monde puisse tester le jeu -> Jeu court.
+- La répartition des tâches s'interrompt à l'évaluation intermédiaire. Il faudra l'adapter entre l'évaluation intermédiaire et l'évaluation finale. Il y aura du boulot pour tout lemonde (ex : Séparer MediaPipe en 2 tâches : une partie utilisation de gestes simples et évaluation de le précision et une partie sur la gestion de la profondeur. Séparer le rendu en 2 tâches : Gestion des objets et gestion des effets visuels, etc...)
+
 ### Séance 3 - 23/02 (Encadrant absent)
 
 ### Séance 4 - 13/03
