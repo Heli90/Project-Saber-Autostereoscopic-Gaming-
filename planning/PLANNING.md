@@ -1,6 +1,12 @@
 ## Diagramme / Planning global
 
-![artishowGantV1.png](artishowGantV1.png)
+![artishowGantV2.png](artishowGantV2.png)
+
+Légende : 
+- En vert : tâches de groupe
+- En bleu : tâches attribuées à une partie du groupe
+- En rouge : jalons
+
 
 ## Répartition des tâches pour l'évaluation intermédiaire
 
@@ -13,6 +19,36 @@
 | Création du terrain de jeu (cube, mouvement, caméra)   | Van-Kévin     | 13/03      | .....        | .....      | .....        | .....      | .....        |
 | Rendu des images              | Adam et Hélias              | .....      | .....        | .....      | .....        | .....      | .....        |
 | Détection des mouvements      | Birame et Hugo       | 13/03      | .....        | .....      | .....        | .....      | .....        |
+
+| Tâche (détaillée)             |Description |Responsables  |Date de début (effective) | Date de fin (effective) |
+| ----------------------------  | ------------- | ----       | ----         | ----       |
+| Générer une image 3D (entrelacement de 2 vues) | Écrire un programme Python pour entrelacer plusieurs vues et l'afficher | Van-Kévin | 11/02/26 | 11/02/26 |
+|Apprendre les bases de Godot | Lire la doc, regarder des tutos pour se familiariser avec l'environnement de développement | Groupe | 11/02/26 | ... |
+|Générer un rendu 3D (2 vues) d'une image du moteur de jeu | Générer et afficher une image 3D depuis Godot | Adam, Hélias | ... | ... |
+|Générer l'image d'un cube tournant dans le moteur de jeu | ... | Van-Kévin | ... | ... |
+|Afficher une image en mouvement en 3D | Génerer plusieurs images et les afficher pour rendre le mouvement sans stocker d'images intermédiaire dans l'espace mémoire | Adam, Hélias | ... | ... |
+|Lire la doc MédiaPipe | ... | Hugo et Birame | ... | ... |
+|Implémenter MédiaPipe dans Godot | ... | Hugo et Birame | ... | ... |
+|Savoir détecter la position de la main grâce à MédiaPipe | ... | Hugo et Birame | ... | ... |
+|Savoir détecter la profondeur de la main du joueur | ... | Hugo et Birame | ... | ... |
+|Coder une action en fonction d'un mouvement MédiaPipe | ... | Hugo et Birame | ... | ... |
+|Lien primitif MédiaPipe-Moteur | Afficher un cube tournant qui s'arrête de tourner quand l'utilisateur exécute un mouvement particulier (ouvrir ou lever la main) | Groupe | ... | ... | 
+| Réfléchir aux possibilités de jeux| Noter dans un fichier toutes les idées de jeux, chercher en ligne des templates open-source (la piste des jeux VR est à explorer) | Groupe |  ... |  ... | 
+|Choisir le jeu | ... | Groupe | ... | ... |
+|Choisir les commandes | ... | ... | ... | ... |
+|Implémenter le lien mouvements - MédiaPipe - Commandes | ... | ... | ... | ... |
+|Générer deux images 3D (une pour chaque joueur) | ... | ... | ... | ... |
+|Optimisation de l'entrelacement pour l'affichage du jeu | ... | ... | ... | ... |
+|Voir comment utiliser la caméra pour créer des effets visuels | ... | ... | ... | ... |
+|Choisir des features qui prennent en compte les effets visuels | ... | ... | ... | ... |
+|Implémenter des features qui prennent en compte ces effets visuels | ... | ... | ... | ... |
+|Faire tester le jeu | Phase cyclique de tests, corrections, tests, corrections... | Groupe | ... | ... |
+
+
+
+
+
+
 
 ## Compte-rendu des séances
 
