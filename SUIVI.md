@@ -46,6 +46,9 @@ mediapipe hands (https://github.com/google-ai-edge/mediapipe/blob/master/docs/so
 mediapipe pose (https://github.com/google-ai-edge/mediapipe/blob/master/docs/solutions/pose.md)
 ## Séance 3 - 23/02 (Encadrant absent)
 
+**Hélias** : Premiers essais d'entrelacement de deux images dans Godot. 
+Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive pas à accéder aux deux images désirées (prise de deux caméras)
+
 
 
 ### Séance 4 - 13/03
