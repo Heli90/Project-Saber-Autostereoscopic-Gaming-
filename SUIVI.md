@@ -40,7 +40,8 @@ Hugo BELLE, Birame CISSÉ, Hélias GODARD--DELONGEAS, Adam KHATIRI, Van-Kévin N
 
 > Retour du professeur encadrant (J. Lefeuvre) sur le planning
 20/02: 
-Hugo:  Lecture de la biblio de mediapipe et identification des différents type de mediapipe qui pourraient etre utiles :
+
+**Hugo:  Lecture de la biblio de mediapipe et identification des différents type de mediapipe qui pourraient etre utiles :
 mediapipe hands (https://github.com/google-ai-edge/mediapipe/blob/master/docs/solutions/hands.md)
 mediapipe pose (https://github.com/google-ai-edge/mediapipe/blob/master/docs/solutions/pose.md)
 ## Séance 3 - 23/02 (Encadrant absent)
