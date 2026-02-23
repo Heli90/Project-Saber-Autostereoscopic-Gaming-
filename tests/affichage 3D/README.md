@@ -11,16 +11,19 @@ Pour cela, on récupère les images de deux caméras (faisant face au cylindre, 
 
 ### main.tscn
 C'est la scène principale. Voici l'arborescence des objets :
+![arborescence](godot/arborescence_godot.png)
 
-Main
--> WorldEnvironment : déclare l'environnement à afficher (celui observé par les caméras)
--> MeshInstance3D : le cylindre à observer
--> ViewPortDroit : permet de récupérer les données de la caméra droite (noeuf enfant) pour en faire un texture entrelaçable
--->  Camera3DDroit
--> ViewPortGauche : permet de récupérer les données de la caméra gauche (noeuf enfant) pour en faire un texture entrelaçable
---> Camera3DGauche
--> FinalViewMesh : l'écran virtuel qui affiche l'image entrelacée
--> finalCamera : la caméra qui regarde FinalViewMesh pour l'afficher sur l'écran réel
+WorldEnvironment : déclare l'environnement à afficher (celui observé par les caméras)
+
+MeshInstance3D : le cylindre à observer
+
+ViewPortDroit : permet de récupérer les données de la caméra droite (noeuf enfant) pour en faire un texture entrelaçable
+
+ViewPortGauche : permet de récupérer les données de la caméra gauche (noeuf enfant) pour en faire un texture entrelaçable
+
+FinalViewMesh : l'écran virtuel qui affiche l'image entrelacée
+
+finalCamera : la caméra qui regarde FinalViewMesh pour l'afficher sur l'écran réel
 
 ### new_script.gd
 C'est le script principal du projet.
