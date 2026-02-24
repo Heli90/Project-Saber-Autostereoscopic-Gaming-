@@ -29,10 +29,15 @@ size = Vector2(200, 200)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_f7g2b"]
 
-[node name="Main" type="Node3D" unique_id=1026699542]
+[sub_resource type="PlaneMesh" id="PlaneMesh_y8ul7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dmbnc"]
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="CubeTournant" type="Node3D" unique_id=1026699542]
 
 [node name="Cube" type="AnimatableBody3D" parent="." unique_id=854079472 node_paths=PackedStringArray("perso")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 script = ExtResource("1_gojnm")
 perso = NodePath("../Joueur")
 
@@ -54,6 +59,7 @@ mesh = SubResource("CapsuleMesh_gojnm")
 shape = SubResource("CapsuleShape3D_f7g2b")
 
 [node name="Camera" type="Camera3D" parent="Joueur" unique_id=1209157305]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="Epaule_Right" type="Node3D" parent="Joueur" unique_id=1305863325]
 transform = Transform3D(1, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.75, 0, 0)
@@ -72,7 +78,7 @@ mesh = SubResource("BoxMesh_ftslj")
 surface_material_override/0 = SubResource("StandardMaterial3D_n65sj")
 
 [node name="Light" type="DirectionalLight3D" parent="." unique_id=596364777]
-transform = Transform3D(1, 0, 0, 0, 0.7207811, 0.6931629, 0, -0.6931629, 0.7207811, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.720781, 0.69316286, 0, -0.69316286, 0.720781, 0, 0, 0)
 
 [node name="Sol" type="StaticBody3D" parent="." unique_id=144602052]
 
@@ -81,3 +87,8 @@ mesh = SubResource("PlaneMesh_1c2mv")
 
 [node name="Collision_Sol" type="CollisionShape3D" parent="Sol" unique_id=1092382132]
 shape = SubResource("WorldBoundaryShape3D_f7g2b")
+
+[node name="Mur_Noir" type="MeshInstance3D" parent="." unique_id=30135268]
+transform = Transform3D(10, 0, 0, 0, -4.371139e-07, -10, 0, 10, -4.371139e-07, 50, 10, 0)
+mesh = SubResource("PlaneMesh_y8ul7")
+surface_material_override/0 = SubResource("StandardMaterial3D_dmbnc")

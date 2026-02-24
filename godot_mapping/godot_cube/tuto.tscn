@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://cc8lq4d0e1n3b"]
+
+[ext_resource type="Script" uid="uid://qwu2o0fqt5n5" path="res://tuto.gd" id="1_381v5"]
+[ext_resource type="Script" uid="uid://b0tv2fpd2x0l8" path="res://camera_3d_mov.gd" id="2_ydenu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ulpca"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_381v5"]
+albedo_color = Color(0.9079791, 0.40326744, 0.45338067, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ydenu"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_waot4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5do15"]
+transparency = 1
+albedo_color = Color(0.14509805, 0.48235294, 0.22745098, 1)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_7yh4x"]
+
+[node name="Node3D" type="Node3D" unique_id=1637341807]
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="." unique_id=1052106788]
+script = ExtResource("1_381v5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AnimatableBody3D" unique_id=813776681]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_ulpca")
+surface_material_override/0 = SubResource("StandardMaterial3D_381v5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D" unique_id=725574834]
+shape = SubResource("BoxShape3D_ydenu")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1661657402]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1798672501]
+transform = Transform3D(7, 0, 0, 0, 7, 0, 0, 0, 7, 0, 0, 0)
+mesh = SubResource("PlaneMesh_waot4")
+surface_material_override/0 = SubResource("StandardMaterial3D_5do15")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=1457747601]
+shape = SubResource("WorldBoundaryShape3D_7yh4x")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=397313456]
+transform = Transform3D(0.98558956, 0.044639148, 0.16315816, -0.055859845, 0.99633086, 0.06484214, -0.159665, -0.07302174, 0.9844668, 0.57421875, 2.543213, 5.053955)
+script = ExtResource("2_ydenu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1463246267]
+transform = Transform3D(-0.92281157, 0.20373659, 0.3269714, 0.3727872, 0.25808695, 0.8913029, 0.09720395, 0.94439536, -0.31411603, 9.939, 6.296, -6.02771)
+light_energy = 5.0
+sky_mode = 1
