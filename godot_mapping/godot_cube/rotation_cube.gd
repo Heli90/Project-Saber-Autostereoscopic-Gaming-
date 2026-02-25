@@ -8,7 +8,7 @@ var commande_bras_left = false
 var commande_bras_right = false
 
 """!-! TACHES FAITES A CHAQUE FRAME !-!"""
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	# Rotation du cube en cas de condition satisfaite.
 	# Prise en compte des FPS de l'ordinateur.
 	# if commande_bras_left:

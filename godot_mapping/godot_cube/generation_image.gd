@@ -16,8 +16,8 @@ func _ready():
 		var viewport_vue = "Vue" + str(i)
 		if has_node(viewport_vue):
 			var vue = get_node(viewport_vue) as SubViewport
-			viewport_vue.world_3d = world_3d # On met en commun le monde 3D
+			vue.world_3d = world_3d # On met en commun le monde 3D
 			await get_tree().process_frame # On attend un court instant pour l'initialisation de la texture
-			var texture_vue = viewport_vue.get_texture()
+			var texture_vue = vue.get_texture()
 			var shader_vue = "vue_" + str(i)
 			shader_mat.set_shader_parameter(shader_vue, texture_vue)

@@ -41,15 +41,18 @@ Hugo BELLE, Birame CISSÉ, Hélias GODARD--DELONGEAS, Adam KHATIRI, Van-Kévin N
 > Retour du professeur encadrant (J. Lefeuvre) sur le planning
 20/02: 
 
-**Hugo:  Lecture de la biblio de mediapipe et identification des différents type de mediapipe qui pourraient etre utiles :
+**Hugo** :  Lecture de la biblio de mediapipe et identification des différents type de mediapipe qui pourraient etre utiles :
 mediapipe hands (https://github.com/google-ai-edge/mediapipe/blob/master/docs/solutions/hands.md)
 mediapipe pose (https://github.com/google-ai-edge/mediapipe/blob/master/docs/solutions/pose.md)
-## Séance 3 - 23/02 (Encadrant absent)
+
+### Séance 3 - 23/02 (Encadrant absent)
 
 **Hélias** : Premiers essais d'entrelacement de deux images dans Godot. 
 Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive pas à accéder aux deux images désirées (prise de deux caméras)
 
+### Entre la séance 3 et la séance 4
 
+25/02 - **Van-Kévin** : Implémentation de l'algorithme d'entrelacement initié par Hélias. Visuel possible sur la TV avec les 8 vues, et 2 points de vue distincts par joueur. Prise en main des outils de Godot pour préparer un terrain de jeu (son, visuel de terrain...).
 
 ### Séance 4 - 13/03
 

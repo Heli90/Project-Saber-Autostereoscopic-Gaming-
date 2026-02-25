@@ -1,7 +1,11 @@
 extends CharacterBody3D
 
 const player_speed = 5.0
+@export var head_rotation = 1.0
+@export var inertie = 3.0
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+@onready var pivot_vertical = $PivotCamera
+@onready var son_marche = $Son_Marche
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -13,12 +17,39 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity.x = direction.x * player_speed
 		velocity.z = direction.z * player_speed
+		if not son_marche.playing:
+			son_marche.pitch_scale = randf_range(0.9, 1.1)
+			son_marche.play()
+		son_marche.volume_db = lerpf(son_marche.volume_db, 0, 10 * delta)
 	else:
+		son_marche.volume_db = lerpf(son_marche.volume_db, -80, 0.5 * delta)
 		velocity.x = move_toward(velocity.x, 0, player_speed)
 		velocity.z = move_toward(velocity.z, 0, player_speed)
 
 	# Application de la vélocité et gestion des collisions
 	move_and_slide()
+
+func _process(delta: float) -> void:
+	var dir_rotation = 0.0
+	
+	# Rotation HORIZONTALE (on fait tourner tout le corps du joueur)
+	if Input.is_action_pressed("TeteGauche"):
+		dir_rotation += 1.0
+	elif Input.is_action_pressed("TeteDroite"):
+		dir_rotation -= 1.0
+	var ry = lerpf(0, dir_rotation, inertie * delta)
+	rotate_y(ry)
+	
+	var dir_vertical = 0.0
+	if Input.is_action_pressed("TeteHaut"):
+		dir_vertical += 1.0
+	if Input.is_action_pressed("TeteBas"):
+		dir_vertical -= 1.0
+	var rx = lerpf(0, dir_vertical, inertie * delta)
+	pivot_vertical.rotate_x(rx)
+	
+	# Limiter la rotation verticale pour ne pas faire de salto avec la vue
+	pivot_vertical.rotation.x = clamp(pivot_vertical.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 
 @onready var epaule_right = $Epaule_Right
 @onready var epaule_left = $Epaule_Left
