@@ -3,6 +3,7 @@ extends CharacterBody3D
 const player_speed = 5.0
 @export var head_rotation = 1.0
 @export var inertie = 3.0
+@export var player_id = 1
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var pivot_vertical = $PivotCamera
 @onready var son_marche = $Son_Marche
@@ -11,12 +12,12 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 
-	var input_dir = Input.get_vector("Gauche", "Droite", "Avancer", "Reculer")
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var input_dir = Input.get_vector("GaucheJ%s"%player_id, "DroiteJ%s"%player_id, "AvancerJ%s"%player_id, "ReculerJ%s"%player_id)
+	var dir = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
-	if direction:
-		velocity.x = direction.x * player_speed
-		velocity.z = direction.z * player_speed
+	if dir:
+		velocity.x = dir.x * player_speed
+		velocity.z = dir.z * player_speed
 		if not son_marche.playing:
 			son_marche.pitch_scale = randf_range(0.9, 1.1)
 			son_marche.play()
