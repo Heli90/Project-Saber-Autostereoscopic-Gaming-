@@ -2,21 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsax0f2n5h4la"
-path.bptc="res://.godot/imported/sky_texture.exr-c955410bf51e1d6075ffe6fd7cb03a2c.bptc.ctex"
+uid="uid://b4xpo3x1n06pg"
+path="res://.godot/imported/fond_jeu_godot.png-79f469f623b79214622a9b5381822d95.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
-"vram_texture": true
+"vram_texture": false
 }
 
 [deps]
 
-source_file="res://sky_texture.exr"
-dest_files=["res://.godot/imported/sky_texture.exr-c955410bf51e1d6075ffe6fd7cb03a2c.bptc.ctex"]
+source_file="res://addons/assets/fond_jeu_godot.png"
+dest_files=["res://.godot/imported/fond_jeu_godot.png-79f469f623b79214622a9b5381822d95.ctex"]
 
 [params]
 
-compress/mode=2
+compress/mode=0
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -24,7 +23,7 @@ compress/rdo_quality_loss=0.0
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=true
+mipmaps/generate=false
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -38,4 +37,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

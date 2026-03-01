@@ -1,0 +1,270 @@
+[gd_scene format=3 uid="uid://cowlnii2y28cm"]
+
+[ext_resource type="Script" uid="uid://cpgnsda88gxfq" path="res://scripts/pause_menu.gd" id="1_7l7mv"]
+[ext_resource type="Shader" uid="uid://dtcbr8l1yp6kt" path="res://scenes/pause_menu.gdshader" id="1_v4r4p"]
+[ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="2_v4r4p"]
+[ext_resource type="FontFile" uid="uid://bd4geqghtkj13" path="res://addons/assets/TextFontBase.ttf" id="3_1s2dm"]
+[ext_resource type="FontFile" uid="uid://crtikirivhq6o" path="res://addons/assets/TextFontBold.otf" id="4_88e76"]
+[ext_resource type="Script" uid="uid://crmbnc6adwn05" path="res://scripts/audio_control.gd" id="5_knqa7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1s2dm"]
+shader = ExtResource("1_v4r4p")
+shader_parameter/blur = 0.50000002375
+shader_parameter/brightness = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_71k7c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cmnsq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ofnjo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1rgno"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4hnlu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3o3g3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h5b1d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_avs0h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ar2xs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jkjer"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5gujb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fy126"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bhxne"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vlav8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_shxmr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5wegr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ns75t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s8k84"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dmw1k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3hsps"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vtr1r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a1ndm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_etf8b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ndks8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_reqs4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7s4e5"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_0rd3c"]
+color = Color(1, 1, 1, 1)
+thickness = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_tye54"]
+color = Color(0, 0.685679, 0, 1)
+thickness = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ovuwl"]
+color = Color(0, 1, 0, 1)
+thickness = 5
+
+[node name="PauseMenu" type="ColorRect" unique_id=1703583179]
+process_mode = 3
+material = SubResource("ShaderMaterial_1s2dm")
+offset_right = 1920.0
+offset_bottom = 1080.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_7l7mv")
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=1311986995]
+stream = ExtResource("2_v4r4p")
+bus = &"SFX"
+
+[node name="FonduLayer" type="CanvasLayer" parent="." unique_id=592632005]
+
+[node name="FonduNoir" type="ColorRect" parent="FonduLayer" unique_id=900633217]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="MenuButtons" type="Panel" parent="." unique_id=230394103]
+layout_mode = 0
+offset_left = 643.0
+offset_top = 215.0
+offset_right = 1300.0
+offset_bottom = 826.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_71k7c")
+
+[node name="ContinueButton" type="Button" parent="MenuButtons" unique_id=1682942179]
+layout_mode = 0
+offset_left = 183.0
+offset_top = 183.0
+offset_right = 430.0
+offset_bottom = 233.0
+size_flags_vertical = 3
+focus_neighbor_top = NodePath("../QuitButton")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_1s2dm")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cmnsq")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ofnjo")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_1rgno")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_4hnlu")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_3o3g3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_h5b1d")
+text = "Continuer"
+
+[node name="OptionButton" type="Button" parent="MenuButtons" unique_id=1022310421]
+layout_mode = 0
+offset_left = 180.0
+offset_top = 315.0
+offset_right = 435.0
+offset_bottom = 365.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_1s2dm")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_avs0h")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ar2xs")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jkjer")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_5gujb")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_fy126")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bhxne")
+text = "Paramètres"
+
+[node name="QuitButton" type="Button" parent="MenuButtons" unique_id=571888186]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 447.0
+offset_right = 399.0
+offset_bottom = 497.0
+size_flags_vertical = 3
+focus_neighbor_bottom = NodePath("../ContinueButton")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_1s2dm")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_vlav8")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_shxmr")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5wegr")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_ns75t")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_s8k84")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dmw1k")
+text = "Quitter"
+
+[node name="Options" type="Panel" parent="." unique_id=1888251166]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -356.5
+offset_right = 400.0
+offset_bottom = 356.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_3hsps")
+
+[node name="OptionsTitle" type="Label" parent="Options" unique_id=2027796995]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 3.5
+offset_right = 679.0
+offset_bottom = 83.5
+size_flags_horizontal = 4
+size_flags_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 5
+theme_override_fonts/font = ExtResource("4_88e76")
+theme_override_font_sizes/font_size = 80
+text = "Paramètres"
+vertical_alignment = 1
+
+[node name="MusicTitle" type="Label" parent="Options" unique_id=1567091736]
+layout_mode = 0
+offset_left = 287.0
+offset_top = 207.5
+offset_right = 525.0
+offset_bottom = 258.5
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_1s2dm")
+theme_override_font_sizes/font_size = 50
+text = "Musique"
+
+[node name="SFXTitle" type="Label" parent="Options" unique_id=1953463545]
+layout_mode = 0
+offset_left = 353.0
+offset_top = 288.5
+offset_right = 446.0
+offset_bottom = 339.5
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_1s2dm")
+theme_override_font_sizes/font_size = 50
+text = "SFX"
+
+[node name="BackButton" type="Button" parent="Options" unique_id=1809133203]
+custom_minimum_size = Vector2(0, 127)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 650.0
+offset_right = 820.0
+offset_bottom = 777.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_1s2dm")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxEmpty_vtr1r")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_a1ndm")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_etf8b")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_ndks8")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_reqs4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7s4e5")
+text = "Menu Principal"
+
+[node name="MusicControl" type="HSlider" parent="Options" unique_id=1086393853]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 250.0
+offset_right = 751.0
+offset_bottom = 280.0
+theme_override_styles/slider = SubResource("StyleBoxLine_0rd3c")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_tye54")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_ovuwl")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("5_knqa7")
+audio_bus_name = "Musique"
+
+[node name="SFXControl" type="HSlider" parent="Options" unique_id=1708708710]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 330.0
+offset_right = 751.0
+offset_bottom = 360.0
+theme_override_styles/slider = SubResource("StyleBoxLine_0rd3c")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_tye54")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_ovuwl")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("5_knqa7")
+audio_bus_name = "SFX"
+
+[connection signal="pressed" from="MenuButtons/ContinueButton" to="." method="_onContinueButton_pressed"]
+[connection signal="pressed" from="MenuButtons/OptionButton" to="." method="_onOptionButton_pressed"]
+[connection signal="pressed" from="MenuButtons/QuitButton" to="." method="_onQuitButton_pressed"]
+[connection signal="pressed" from="Options/BackButton" to="." method="_onBackButton_pressed"]
+[connection signal="value_changed" from="Options/MusicControl" to="Options/MusicControl" method="_onValueChanged"]
+[connection signal="value_changed" from="Options/SFXControl" to="Options/SFXControl" method="_onValueChanged"]

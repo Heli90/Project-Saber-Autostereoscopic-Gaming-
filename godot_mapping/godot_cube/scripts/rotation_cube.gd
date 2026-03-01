@@ -17,11 +17,11 @@ func _physics_process(delta: float) -> void:
 		# rotate_z(vitesse_rotation * delta)
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("Contrôle du bras gauche"):
+	if event.is_action_pressed("Contrôle du bras gaucheJ1"):
 		commande_bras_left = true
-	elif event.is_action_pressed("Contrôle du bras droit"):
+	elif event.is_action_pressed("Contrôle du bras droitJ1"):
 		commande_bras_right = true
-	elif event.is_action_released("Contrôle du bras gauche"):
+	elif event.is_action_released("Contrôle du bras gaucheJ1"):
 		commande_bras_left = false
-	elif event.is_action_released("Contrôle du bras droit"):
+	elif event.is_action_released("Contrôle du bras droitJ1"):
 		commande_bras_right = false

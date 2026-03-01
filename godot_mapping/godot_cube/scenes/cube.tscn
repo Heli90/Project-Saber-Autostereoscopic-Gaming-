@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://vkh3oc4hwdmv"]
 
-[ext_resource type="Script" uid="uid://br3hbcc04lw64" path="res://rotation_cube.gd" id="1_gojnm"]
-[ext_resource type="Script" uid="uid://c065y5voivxxf" path="res://joueur.gd" id="2_1c2mv"]
-[ext_resource type="Texture2D" uid="uid://dsax0f2n5h4la" path="res://sky_texture.exr" id="3_ftslj"]
-[ext_resource type="AudioStream" uid="uid://bxhufoc8lqwjj" path="res://son_marche_herbe.mp3" id="3_n65sj"]
+[ext_resource type="Script" uid="uid://cdssy8fdiffsx" path="res://scripts/scene_jeu.gd" id="1_fu8w0"]
+[ext_resource type="Script" uid="uid://br3hbcc04lw64" path="res://scripts/rotation_cube.gd" id="1_gojnm"]
+[ext_resource type="Script" uid="uid://c065y5voivxxf" path="res://scripts/joueur.gd" id="2_1c2mv"]
+[ext_resource type="Texture2D" uid="uid://dsax0f2n5h4la" path="res://addons/assets/sky_texture.exr" id="3_ftslj"]
+[ext_resource type="AudioStream" uid="uid://bxhufoc8lqwjj" path="res://addons/sfx/son_marche_herbe.mp3" id="3_n65sj"]
+[ext_resource type="PackedScene" uid="uid://cowlnii2y28cm" path="res://scenes/pause_menu.tscn" id="6_04wrr"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_1c2mv"]
 
@@ -55,6 +57,18 @@ ssil_enabled = true
 glow_enabled = true
 
 [node name="CubeTournant" type="Node3D" unique_id=1026699542]
+script = ExtResource("1_fu8w0")
+
+[node name="FonduLayer" type="CanvasLayer" parent="." unique_id=478103391]
+
+[node name="FonduNoir" type="ColorRect" parent="FonduLayer" unique_id=1283066675]
+top_level = true
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="PauseMenu" parent="." unique_id=1550181832 instance=ExtResource("6_04wrr")]
 
 [node name="Cube" type="AnimatableBody3D" parent="." unique_id=854079472 node_paths=PackedStringArray("perso")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
@@ -154,7 +168,7 @@ mesh = SubResource("PlaneMesh_1c2mv")
 [node name="Collision_Sol" type="CollisionShape3D" parent="Sol" unique_id=1092382132]
 shape = SubResource("WorldBoundaryShape3D_f7g2b")
 
-[node name="Mur_Noir" type="MeshInstance3D" parent="." unique_id=30135268]
+[node name="MurNoir" type="MeshInstance3D" parent="." unique_id=30135268]
 transform = Transform3D(10, 0, 0, 0, -4.371139e-07, -10, 0, 10, -4.371139e-07, 50, 10, 0)
 mesh = SubResource("PlaneMesh_y8ul7")
 surface_material_override/0 = SubResource("StandardMaterial3D_dmbnc")
