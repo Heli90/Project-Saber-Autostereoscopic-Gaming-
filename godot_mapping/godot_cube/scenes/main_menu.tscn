@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://bd4geqghtkj13" path="res://addons/assets/TextFontBase.ttf" id="3_rtw2f"]
 [ext_resource type="Script" uid="uid://crmbnc6adwn05" path="res://scripts/audio_control.gd" id="4_8ln24"]
 [ext_resource type="FontFile" uid="uid://crtikirivhq6o" path="res://addons/assets/TextFontBold.otf" id="4_oa1go"]
+[ext_resource type="AudioStream" uid="uid://dptl0i02ypbka" path="res://addons/sfx/main_menu_music.mp3" id="4_wu84c"]
 [ext_resource type="Script" uid="uid://ct883kqsjhjbs" path="res://scripts/light_menu.gd" id="7_oa1go"]
 [ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="8_tbmy8"]
 
@@ -47,8 +48,6 @@ texture = ExtResource("2_bqqt6")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3wgol"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tbmy8"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5pajh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1acrt"]
@@ -58,6 +57,8 @@ texture = ExtResource("2_bqqt6")
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a8gd2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vr8o3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tbmy8"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_wu84c"]
 color = Color(1, 1, 1, 1)
@@ -82,6 +83,14 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_tbmy8")
 
+[node name="FonduLayer" type="CanvasLayer" parent="." unique_id=1999669690]
+
+[node name="FonduNoir" type="ColorRect" parent="FonduLayer" unique_id=2057717224]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
 [node name="LightMenu" type="DirectionalLight2D" parent="." unique_id=1067246271]
 color = Color(0.78431374, 0.7372549, 0.7372549, 1)
 script = ExtResource("7_oa1go")
@@ -100,15 +109,8 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_fu7sn")
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=53466756]
 stream = ExtResource("8_tbmy8")
+volume_db = -10.0
 bus = &"SFX"
-
-[node name="FonduLayer" type="CanvasLayer" parent="." unique_id=1999669690]
-
-[node name="FonduNoir" type="ColorRect" parent="FonduLayer" unique_id=2057717224]
-offset_right = 1920.0
-offset_bottom = 1080.0
-color = Color(0, 0, 0, 1)
-metadata/_edit_use_anchors_ = true
 
 [node name="MainButtons" type="Panel" parent="." unique_id=159356588]
 layout_mode = 1
@@ -197,6 +199,73 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_7b55j")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_3wgol")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
 text = "Quitter"
+
+[node name="ModeButtons" type="Panel" parent="." unique_id=845327797]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -574.0
+offset_top = -568.0
+offset_right = 574.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_hl5e0")
+
+[node name="PCButton" type="Button" parent="ModeButtons" unique_id=1019566275]
+layout_mode = 0
+offset_left = 398.0
+offset_right = 756.0
+offset_bottom = 50.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rtw2f")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_hstxw")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_oa1go")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_jk1qb")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8egab")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gw5y6")
+text = "1 Joueur (PC)"
+
+[node name="TVButton" type="Button" parent="ModeButtons" unique_id=2076503452]
+layout_mode = 0
+offset_left = 422.0
+offset_top = 137.0
+offset_right = 735.0
+offset_bottom = 187.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5dd4i")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_svtp6")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_lgwnu")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_flqon")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_1dfpl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
+text = "2 Joueurs (TV)"
+
+[node name="BackButton" type="Button" parent="ModeButtons" unique_id=673599691]
+custom_minimum_size = Vector2(0, 127)
+layout_mode = 0
+offset_left = 194.0
+offset_top = 322.0
+offset_right = 994.0
+offset_bottom = 449.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5pajh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_1acrt")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_j7ex8")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_a8gd2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_vr8o3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
+text = "Menu Principal"
 
 [node name="GameName" type="Label" parent="." unique_id=839660802]
 layout_mode = 0
@@ -317,6 +386,7 @@ script = ExtResource("4_8ln24")
 audio_bus_name = "SFX"
 
 [node name="MainMenuMusic" type="AudioStreamPlayer" parent="." unique_id=1460163922]
+stream = ExtResource("4_wu84c")
 volume_db = -10.0
 autoplay = true
 bus = &"Musique"
@@ -467,6 +537,9 @@ text = "Menu Principal"
 [connection signal="pressed" from="MainButtons/OptionButton" to="." method="_on_OptionButton_pressed"]
 [connection signal="pressed" from="MainButtons/CreditsButton" to="." method="_on_CreditsButton_pressed"]
 [connection signal="pressed" from="MainButtons/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="ModeButtons/PCButton" to="." method="_onPCButton_pressed"]
+[connection signal="pressed" from="ModeButtons/TVButton" to="." method="_onTVButton_pressed"]
+[connection signal="pressed" from="ModeButtons/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="pressed" from="Options/BackButton" to="." method="_on_BackButton_pressed"]
 [connection signal="value_changed" from="Options/MusicControl" to="Options/MusicControl" method="_onValueChanged"]
 [connection signal="value_changed" from="Options/SFXControl" to="Options/SFXControl" method="_onValueChanged"]

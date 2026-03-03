@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cowlnii2y28cm"]
 
 [ext_resource type="Script" uid="uid://cpgnsda88gxfq" path="res://scripts/pause_menu.gd" id="1_7l7mv"]
-[ext_resource type="Shader" uid="uid://dtcbr8l1yp6kt" path="res://scenes/pause_menu.gdshader" id="1_v4r4p"]
+[ext_resource type="Shader" uid="uid://dtcbr8l1yp6kt" path="res://shaders/pause_menu.gdshader" id="1_v4r4p"]
 [ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="2_v4r4p"]
 [ext_resource type="FontFile" uid="uid://bd4geqghtkj13" path="res://addons/assets/TextFontBase.ttf" id="3_1s2dm"]
 [ext_resource type="FontFile" uid="uid://crtikirivhq6o" path="res://addons/assets/TextFontBold.otf" id="4_88e76"]
@@ -9,8 +9,10 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1s2dm"]
 shader = ExtResource("1_v4r4p")
-shader_parameter/blur = 0.50000002375
+shader_parameter/lod = 2.0
 shader_parameter/brightness = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v4r4p"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_71k7c"]
 
@@ -79,23 +81,33 @@ thickness = 5
 [node name="PauseMenu" type="ColorRect" unique_id=1703583179]
 process_mode = 3
 material = SubResource("ShaderMaterial_1s2dm")
-offset_right = 1920.0
-offset_bottom = 1080.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_7l7mv")
 
-[node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=1311986995]
-stream = ExtResource("2_v4r4p")
-bus = &"SFX"
-
-[node name="FonduLayer" type="CanvasLayer" parent="." unique_id=592632005]
-
-[node name="FonduNoir" type="ColorRect" parent="FonduLayer" unique_id=900633217]
+[node name="FonduNoir" type="ColorRect" parent="." unique_id=900633217]
+layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
+
+[node name="VisuelMenu" type="Panel" parent="." unique_id=280165097]
+visible = false
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_v4r4p")
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=1311986995]
+stream = ExtResource("2_v4r4p")
+volume_db = -10.0
+bus = &"SFX"
 
 [node name="MenuButtons" type="Panel" parent="." unique_id=230394103]
 layout_mode = 0
@@ -107,10 +119,10 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_71k7c")
 
 [node name="ContinueButton" type="Button" parent="MenuButtons" unique_id=1682942179]
 layout_mode = 0
-offset_left = 183.0
-offset_top = 183.0
-offset_right = 430.0
-offset_bottom = 233.0
+offset_left = 190.0
+offset_top = 180.0
+offset_right = 437.0
+offset_bottom = 230.0
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../QuitButton")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -126,10 +138,10 @@ text = "Continuer"
 
 [node name="OptionButton" type="Button" parent="MenuButtons" unique_id=1022310421]
 layout_mode = 0
-offset_left = 180.0
-offset_top = 315.0
-offset_right = 435.0
-offset_bottom = 365.0
+offset_left = 186.0
+offset_top = 310.0
+offset_right = 441.0
+offset_bottom = 360.0
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_1s2dm")
@@ -142,12 +154,30 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_fy126")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bhxne")
 text = "Paramètres"
 
+[node name="MainMenuButton" type="Button" parent="MenuButtons" unique_id=1186445436]
+layout_mode = 0
+offset_left = 143.0
+offset_top = 440.0
+offset_right = 492.0
+offset_bottom = 490.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_1s2dm")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_avs0h")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ar2xs")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_jkjer")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_5gujb")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_fy126")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bhxne")
+text = "Menu principal"
+
 [node name="QuitButton" type="Button" parent="MenuButtons" unique_id=571888186]
 layout_mode = 0
-offset_left = 219.0
-offset_top = 447.0
-offset_right = 399.0
-offset_bottom = 497.0
+offset_left = 153.0
+offset_top = 570.0
+offset_right = 468.0
+offset_bottom = 620.0
 size_flags_vertical = 3
 focus_neighbor_bottom = NodePath("../ContinueButton")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -159,7 +189,7 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_5wegr")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_ns75t")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_s8k84")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_dmw1k")
-text = "Quitter"
+text = "Quitter le jeu"
 
 [node name="Options" type="Panel" parent="." unique_id=1888251166]
 layout_mode = 1
@@ -264,6 +294,7 @@ audio_bus_name = "SFX"
 
 [connection signal="pressed" from="MenuButtons/ContinueButton" to="." method="_onContinueButton_pressed"]
 [connection signal="pressed" from="MenuButtons/OptionButton" to="." method="_onOptionButton_pressed"]
+[connection signal="pressed" from="MenuButtons/MainMenuButton" to="." method="_onMainMenuButton_pressed"]
 [connection signal="pressed" from="MenuButtons/QuitButton" to="." method="_onQuitButton_pressed"]
 [connection signal="pressed" from="Options/BackButton" to="." method="_onBackButton_pressed"]
 [connection signal="value_changed" from="Options/MusicControl" to="Options/MusicControl" method="_onValueChanged"]

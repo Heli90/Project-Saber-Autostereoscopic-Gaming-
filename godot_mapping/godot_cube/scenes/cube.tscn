@@ -31,6 +31,9 @@ albedo_color = Color(0, 0, 1, 1)
 [sub_resource type="PlaneMesh" id="PlaneMesh_1c2mv"]
 size = Vector2(200, 200)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_04wrr"]
+albedo_color = Color(0.41960785, 0.24313726, 0.03137255, 1)
+
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_f7g2b"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_y8ul7"]
@@ -135,9 +138,11 @@ mesh = SubResource("CapsuleMesh_gojnm")
 shape = SubResource("CapsuleShape3D_f7g2b")
 
 [node name="PivotCamera" type="Node3D" parent="Joueur2" unique_id=1849517421]
+visible = false
 
 [node name="Camera" type="Camera3D" parent="Joueur2/PivotCamera" unique_id=1745006637]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+visible = false
 
 [node name="Epaule_Right" type="Node3D" parent="Joueur2" unique_id=1421719721]
 transform = Transform3D(1, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.75, 0, 0)
@@ -164,6 +169,7 @@ bus = &"SFX"
 
 [node name="Forme_Sol" type="MeshInstance3D" parent="Sol" unique_id=1535449585]
 mesh = SubResource("PlaneMesh_1c2mv")
+surface_material_override/0 = SubResource("StandardMaterial3D_04wrr")
 
 [node name="Collision_Sol" type="CollisionShape3D" parent="Sol" unique_id=1092382132]
 shape = SubResource("WorldBoundaryShape3D_f7g2b")

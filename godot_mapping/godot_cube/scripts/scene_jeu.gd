@@ -7,4 +7,4 @@ func _ready() -> void:
 	var transition = create_tween()
 	transition.tween_property(fondu_noir, "modulate:a", 0.0, 0.6)
 	await transition.finished
-	fondu_noir.get_parent().queue_free()
+	fondu_noir.visible = false

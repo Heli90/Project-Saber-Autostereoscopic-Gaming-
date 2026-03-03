@@ -8,7 +8,6 @@ extends CharacterBody3D
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var pivot_vertical = $PivotCamera
 @onready var son_marche = $Son_Marche
-@onready var pause_menu: ColorRect = $"../PauseMenu"
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():

@@ -2,8 +2,12 @@ extends Node3D
 
 @onready var screen_output = $TextureRect
 @export var nb_views : int = 8
+@onready var cube_tournant: Node3D = $CubeTournant
+
+var initialisations_joueurs: bool = false
 
 func _ready():
+	await get_tree().process_frame
 	# On récupère le monde 3D
 	var world_3d = get_viewport().world_3d
 	if has_node("CubeTournant"):
