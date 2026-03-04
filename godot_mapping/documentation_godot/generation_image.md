@@ -51,4 +51,5 @@ void fragment() {
     float b = get_subpixel_color(view_b, UV, 2);
     
     COLOR = vec4(r, g, b, 1.0);
-}```
+}
+```

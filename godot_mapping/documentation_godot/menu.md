@@ -33,4 +33,5 @@ var transition = create_tween().set_parallel(true)
 		menu_buttons.visible = false
 		options.visible = true)
 	transition.tween_property(options, "modulate:a", 1.0, 0.1)
-	await transition.finished```
+	await transition.finished
+```

@@ -46,8 +46,8 @@ if not is_on_floor():
 			velocity.z = move_toward(velocity.z, 0, player_speed2)
 
 	# Application de la vélocité et gestion des collisions
-	move_and_slide()```
-
+	move_and_slide()
+```
 - Caméra attachée au joueur permettant de suivre le jeu
 - Gravité implémentée dans la physique du joueur
 
