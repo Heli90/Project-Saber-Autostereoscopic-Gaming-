@@ -19,6 +19,8 @@
 - Retourner au menu d'entrée
 - Quitter le jeu
 
+> Un shader est réalisé sur le menu en jeu, ce qui rend flou l'ensemble du terrain en 3D qui se situe en arrière-plan.
+
 ### Notes techniques
 - Transition de texte (exemple) :
 ```gdscript

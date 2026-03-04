@@ -53,6 +53,7 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 ### Entre la séance 3 et la séance 4
 
 25/02 - **Van-Kévin** : Implémentation de l'algorithme d'entrelacement initié par Hélias. Visuel possible sur la TV avec les 8 vues, et 2 points de vue distincts par joueur. Prise en main des outils de Godot pour préparer un terrain de jeu (son, visuel de terrain...).
+04/03 - **Van-Kévin** : Implémentation d'un menu d'entrée du jeu avec transitions de texte et foncionnalités basiques, d'un menu en jeu mettant en pause le jeu. Prise en compte de paramètres de confort de jeu (musique, SFX) et ajout d'un choix de mode PC/TV pour faciliter les futurs tests.
 
 ### Séance 4 - 13/03
 
