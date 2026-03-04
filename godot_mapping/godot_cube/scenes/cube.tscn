@@ -76,7 +76,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Cube" type="AnimatableBody3D" parent="." unique_id=854079472 node_paths=PackedStringArray("perso")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 script = ExtResource("1_gojnm")
-perso = NodePath("../Joueur1")
+perso = NodePath("../J1")
 
 [node name="Forme_Cube" type="MeshInstance3D" parent="Cube" unique_id=402712482]
 mesh = SubResource("BoxMesh_1c2mv")
@@ -90,77 +90,77 @@ transform = Transform3D(1, 0, 0, 0, 0.720781, 0.69316286, 0, -0.69316286, 0.7207
 light_energy = 3.0
 shadow_enabled = true
 
-[node name="Joueur1" type="CharacterBody3D" parent="." unique_id=280829056]
+[node name="J1" type="CharacterBody3D" parent="." unique_id=280829056]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, 5)
 script = ExtResource("2_1c2mv")
 
-[node name="Forme_Joueur" type="MeshInstance3D" parent="Joueur1" unique_id=401742793]
+[node name="Forme_Joueur" type="MeshInstance3D" parent="J1" unique_id=401742793]
 mesh = SubResource("CapsuleMesh_gojnm")
 
-[node name="Collision_Joueur" type="CollisionShape3D" parent="Joueur1" unique_id=593164031]
+[node name="Collision_Joueur" type="CollisionShape3D" parent="J1" unique_id=593164031]
 shape = SubResource("CapsuleShape3D_f7g2b")
 
-[node name="PivotCamera" type="Node3D" parent="Joueur1" unique_id=1610400937]
+[node name="PivotCamera" type="Node3D" parent="J1" unique_id=1610400937]
 
-[node name="Camera" type="Camera3D" parent="Joueur1/PivotCamera" unique_id=1209157305]
+[node name="Camera" type="Camera3D" parent="J1/PivotCamera" unique_id=1209157305]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="Epaule_Right" type="Node3D" parent="Joueur1" unique_id=1305863325]
+[node name="Epaule_Right" type="Node3D" parent="J1" unique_id=1305863325]
 transform = Transform3D(1, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.75, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Joueur1/Epaule_Right" unique_id=1278431830]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="J1/Epaule_Right" unique_id=1278431830]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, 0)
 mesh = SubResource("BoxMesh_wd2d1")
 surface_material_override/0 = SubResource("StandardMaterial3D_ftslj")
 
-[node name="Epaule_Left" type="Node3D" parent="Joueur1" unique_id=2141923467]
+[node name="Epaule_Left" type="Node3D" parent="J1" unique_id=2141923467]
 transform = Transform3D(1, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.75, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Joueur1/Epaule_Left" unique_id=1876490326]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="J1/Epaule_Left" unique_id=1876490326]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, 0)
 mesh = SubResource("BoxMesh_ftslj")
 surface_material_override/0 = SubResource("StandardMaterial3D_n65sj")
 
-[node name="Son_Marche" type="AudioStreamPlayer3D" parent="Joueur1" unique_id=528068611]
+[node name="Son_Marche" type="AudioStreamPlayer3D" parent="J1" unique_id=528068611]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -5)
 stream = ExtResource("3_n65sj")
 bus = &"SFX"
 
-[node name="Joueur2" type="CharacterBody3D" parent="." unique_id=539439527]
+[node name="J2" type="CharacterBody3D" parent="." unique_id=539439527]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 5)
 script = ExtResource("2_1c2mv")
 player_id = 2
 
-[node name="Forme_Joueur" type="MeshInstance3D" parent="Joueur2" unique_id=496383840]
+[node name="Forme_Joueur" type="MeshInstance3D" parent="J2" unique_id=496383840]
 mesh = SubResource("CapsuleMesh_gojnm")
 
-[node name="Collision_Joueur" type="CollisionShape3D" parent="Joueur2" unique_id=1474288640]
+[node name="Collision_Joueur" type="CollisionShape3D" parent="J2" unique_id=1474288640]
 shape = SubResource("CapsuleShape3D_f7g2b")
 
-[node name="PivotCamera" type="Node3D" parent="Joueur2" unique_id=1849517421]
+[node name="PivotCamera" type="Node3D" parent="J2" unique_id=1849517421]
 visible = false
 
-[node name="Camera" type="Camera3D" parent="Joueur2/PivotCamera" unique_id=1745006637]
+[node name="Camera" type="Camera3D" parent="J2/PivotCamera" unique_id=1745006637]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 visible = false
 
-[node name="Epaule_Right" type="Node3D" parent="Joueur2" unique_id=1421719721]
+[node name="Epaule_Right" type="Node3D" parent="J2" unique_id=1421719721]
 transform = Transform3D(1, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0.75, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Joueur2/Epaule_Right" unique_id=657566245]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="J2/Epaule_Right" unique_id=657566245]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, 0)
 mesh = SubResource("BoxMesh_wd2d1")
 surface_material_override/0 = SubResource("StandardMaterial3D_ftslj")
 
-[node name="Epaule_Left" type="Node3D" parent="Joueur2" unique_id=1746516405]
+[node name="Epaule_Left" type="Node3D" parent="J2" unique_id=1746516405]
 transform = Transform3D(1, 0, 0, 0, 0.3, 0, 0, 0, 0.3, -0.75, 0, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Joueur2/Epaule_Left" unique_id=1939156426]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="J2/Epaule_Left" unique_id=1939156426]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, 0)
 mesh = SubResource("BoxMesh_ftslj")
 surface_material_override/0 = SubResource("StandardMaterial3D_n65sj")
 
-[node name="Son_Marche" type="AudioStreamPlayer3D" parent="Joueur2" unique_id=154977171]
+[node name="Son_Marche" type="AudioStreamPlayer3D" parent="J2" unique_id=154977171]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -5)
 stream = ExtResource("3_n65sj")
 bus = &"SFX"
@@ -175,7 +175,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_04wrr")
 shape = SubResource("WorldBoundaryShape3D_f7g2b")
 
 [node name="MurNoir" type="MeshInstance3D" parent="." unique_id=30135268]
-transform = Transform3D(10, 0, 0, 0, -4.371139e-07, -10, 0, 10, -4.371139e-07, 50, 10, 0)
+transform = Transform3D(10, 0, 0, 0, -4.371139e-07, -10, 0, 10, -4.371139e-07, 100, 10, 0)
 mesh = SubResource("PlaneMesh_y8ul7")
 surface_material_override/0 = SubResource("StandardMaterial3D_dmbnc")
 
