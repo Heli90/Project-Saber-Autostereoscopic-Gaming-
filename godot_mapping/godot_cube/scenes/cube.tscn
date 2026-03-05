@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cdssy8fdiffsx" path="res://scripts/scene_jeu.gd" id="1_fu8w0"]
 [ext_resource type="Script" uid="uid://br3hbcc04lw64" path="res://scripts/rotation_cube.gd" id="1_gojnm"]
 [ext_resource type="Script" uid="uid://c065y5voivxxf" path="res://scripts/joueur.gd" id="2_1c2mv"]
+[ext_resource type="PackedScene" uid="uid://s6n8auc020ga" path="res://scenes/game_ending.tscn" id="3_0hq27"]
 [ext_resource type="Texture2D" uid="uid://dsax0f2n5h4la" path="res://addons/assets/sky_texture.exr" id="3_ftslj"]
 [ext_resource type="AudioStream" uid="uid://bxhufoc8lqwjj" path="res://addons/sfx/son_marche_herbe.mp3" id="3_n65sj"]
 [ext_resource type="PackedScene" uid="uid://cowlnii2y28cm" path="res://scenes/pause_menu.tscn" id="6_04wrr"]
@@ -72,6 +73,8 @@ color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="PauseMenu" parent="." unique_id=1550181832 instance=ExtResource("6_04wrr")]
+
+[node name="GameEnding" parent="." unique_id=1703583179 instance=ExtResource("3_0hq27")]
 
 [node name="Cube" type="AnimatableBody3D" parent="." unique_id=854079472 node_paths=PackedStringArray("perso")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
@@ -166,6 +169,7 @@ stream = ExtResource("3_n65sj")
 bus = &"SFX"
 
 [node name="Sol" type="StaticBody3D" parent="." unique_id=144602052]
+metadata/_edit_group_ = true
 
 [node name="Forme_Sol" type="MeshInstance3D" parent="Sol" unique_id=1535449585]
 mesh = SubResource("PlaneMesh_1c2mv")
@@ -181,3 +185,10 @@ surface_material_override/0 = SubResource("StandardMaterial3D_dmbnc")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=811052800]
 environment = SubResource("Environment_n65sj")
+
+[node name="PartieTimer" type="Timer" parent="." unique_id=1292462759]
+wait_time = 10.0
+one_shot = true
+ignore_time_scale = true
+
+[connection signal="timeout" from="PartieTimer" to="." method="_onPartieTimerTimeout"]

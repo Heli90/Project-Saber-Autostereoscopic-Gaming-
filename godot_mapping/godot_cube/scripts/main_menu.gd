@@ -5,6 +5,8 @@ extends Control
 @onready var credits: Panel = $Credits
 @onready var mode_buttons: Panel = $ModeButtons
 @onready var game_name: Label = $GameName
+@onready var reset_score_page: Panel = $ResetScorePage
+@onready var validation_score_page: Panel = $ValidationScorePage
 
 @onready var option_button: Button = $MainButtons/OptionButton
 @onready var credit_button: Button = $MainButtons/OptionButton
@@ -18,9 +20,8 @@ extends Control
 @onready var click_sound: AudioStreamPlayer = $ClickSound
 @onready var main_menu_music: AudioStreamPlayer = $MainMenuMusic
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("Menu"):
-		pass
+var highest_score: int = 0
+const SAVE_PATH = "user://save_score.cfg"
 
 func _ready() -> void:
 	get_tree().paused = false
@@ -37,6 +38,8 @@ func _ready() -> void:
 	options.visible = false
 	credits.visible = false
 	mode_buttons.visible = false
+	reset_score_page.visible = false
+	validation_score_page.visible = false
 	var transition = create_tween()
 	transition.tween_property(fondu_noir, "modulate:a", 0.0, 0.6)
 	await transition.finished
@@ -46,131 +49,97 @@ func _ready() -> void:
 	Input.set_custom_mouse_cursor(cursor, Input.CURSOR_ARROW, Vector2(0, 0))
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-func _on_StartButton_pressed() -> void:
+func transition(appear_list: Array[Control], disappear_list: Array[Control], back: bool) -> void:
+	# Effectue une transition courante entre 2 pages du menu
 	click_sound.play()
+	if back:
+		# On annule le spam d'appui de boutons
+		for button in main_buttons.get_children():
+			button.disabled = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
 	var transition = create_tween().set_parallel(true)
-	transition.tween_property(main_buttons, "modulate:a", 0.0, 0.1)
-	transition.tween_property(game_name, "modulate:a", 0.0, 0.1)
+	for panel in disappear_list:
+		transition.tween_property(panel, "modulate:a", 0.0, 0.1)
 	transition.set_parallel(false)
 	transition.chain().tween_interval(0.1)
 	transition.tween_callback(func():
-		options.modulate.a = 0.0
-		main_buttons.visible = false
-		game_name.visible = false
-		mode_buttons.visible = true)
-	transition.tween_property(mode_buttons, "modulate:a", 1.0, 0.1)
+		for panel in disappear_list:
+			panel.visible = false
+		if appear_list == []:
+			fondu_noir.modulate.a = 0.0
+			fondu_noir.visible = true
+		else:
+			for panel in appear_list:
+				panel.modulate.a = 0.0
+				panel.visible = true)
+	transition.set_parallel(true)
+	if back:
+		for panel in appear_list: 
+			for button in panel.get_children():
+				button.modulate = Color.BLACK
+	if appear_list == []:
+		# Il y a un changement de scène, donc, on fait un fondu.
+		transition.set_parallel(false)
+		transition.tween_property(fondu_noir, "modulate:a", 1.0, 0.5)
+		transition.chain().tween_interval(0.3)
+	else:
+		for panel in appear_list:
+			transition.tween_property(panel, "modulate:a", 1.0, 0.1)
+		transition.set_parallel(false)
 	await transition.finished
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-
-func _on_OptionButton_pressed() -> void:
-	click_sound.play()
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
-	var transition = create_tween().set_parallel(true)
-	transition.tween_property(main_buttons, "modulate:a", 0.0, 0.1)
-	transition.tween_property(game_name, "modulate:a", 0.0, 0.1)
-	transition.set_parallel(false)
-	transition.chain().tween_interval(0.1)
-	transition.tween_callback(func():
-		options.modulate.a = 0.0
-		main_buttons.visible = false
-		game_name.visible = false
-		options.visible = true)
-	transition.tween_property(options, "modulate:a", 1.0, 0.1)
-	await transition.finished
+	if back:
+		# On annule le spam d'appui de boutons
+		for panel in appear_list:
+			for button in panel.get_children():
+				button.disabled = false
+		# On remet la couleur initiale lorsque le curseur passe sur un bouton
+			for button in panel.get_children():
+				button.modulate = Color.WHITE
+
+func _onStartButton_pressed() -> void:
+	transition([mode_buttons], [main_buttons, game_name], false)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-func _on_QuitButton_pressed() -> void:
-	click_sound.play()
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	var transition = create_tween().set_parallel(true)
-	transition.tween_property(main_buttons, "modulate:a", 0.0, 0.1)
-	transition.tween_property(game_name, "modulate:a", 0.0, 0.1)
-	transition.set_parallel(false)
-	transition.chain().tween_interval(0.1)
-	transition.tween_callback(func():
-		fondu_noir.modulate.a = 0.0
-		fondu_noir.visible = true)
-	transition.tween_property(fondu_noir, "modulate:a", 1.0, 0.5)
-	transition.chain().tween_interval(0.3)
-	await transition.finished
+func _onOptionButton_pressed() -> void:
+	transition([options], [main_buttons, game_name], false)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+func _onQuitButton_pressed() -> void:
+	await transition([], [main_buttons, game_name], false)
 	get_tree().quit()
 
-func _on_BackButton_pressed() -> void:
-	click_sound.play()
-	for button in main_buttons.get_children(): # On annule le spam d'appui de boutonss
-		button.disabled = true
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	
-	var transition = create_tween().set_parallel(true)
-	transition.tween_property(options, "modulate:a", 0.0, 0.1)
-	transition.tween_property(credits, "modulate:a", 0.0, 0.1)
-	transition.tween_property(mode_buttons, "modulate:a", 0.0, 0.1)
-	transition.set_parallel(false)
-	transition.chain().tween_interval(0.1)
-	transition.tween_callback(func():
-		main_buttons.visible = true
-		game_name.visible = true
-		options.visible = false
-		credits.visible = false
-		mode_buttons.visible = false)
-	transition.set_parallel(true)
-	
-	# On remet tous les textes en noir pour éviter un flash à l'écran
-	for button in main_buttons.get_children():
-		button.modulate = Color.BLACK
-	
-	transition.tween_property(main_buttons, "modulate:a", 1.0, 0.1)
-	transition.tween_property(game_name, "modulate:a", 1.0, 0.1)
-	transition.chain()
-	await transition.finished
-	
-	for button in main_buttons.get_children(): # On annule le spam d'appui de boutonss
-		button.disabled = false
-	# On remet la couleur initiale lorsque le curseur passe sur un bouton
-	for button in main_buttons.get_children():
-		button.modulate = Color.WHITE
+func _onBackButton_pressed() -> void:
+	transition([main_buttons, game_name], [options, credits, mode_buttons, validation_score_page], true)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-func _on_CreditsButton_pressed() -> void:
-	click_sound.play()
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	
-	var transition = create_tween().set_parallel(true)
-	transition.tween_property(main_buttons, "modulate:a", 0.0, 0.1)
-	transition.tween_property(game_name, "modulate:a", 0.0, 0.1)
-	transition.set_parallel(false)
-	transition.chain().tween_interval(0.1)
-	transition.tween_callback(func():
-		credits.modulate.a = 0.0
-		main_buttons.visible = false
-		game_name.visible = false
-		credits.visible = true)
-	transition.tween_property(credits, "modulate:a", 1.0, 0.1)
-	await transition.finished
-
+func _onCreditsButton_pressed() -> void:
+	transition([credits], [main_buttons, game_name], false)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-
-func _onModeButton_pressed() -> void:
-	click_sound.play()
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	var transition = create_tween().set_parallel(true)
-	transition.tween_property(mode_buttons, "modulate:a", 0.0, 0.1)
-	transition.set_parallel(false)
-	transition.chain().tween_interval(0.1)
-	transition.tween_callback(func():
-		fondu_noir.modulate.a = 0.0
-		fondu_noir.visible = true)
-	transition.tween_property(fondu_noir, "modulate:a", 1.0, 0.5)
-	transition.chain().tween_interval(0.3)
-	await transition.finished
 
 func _onPCButton_pressed() -> void:
-	await _onModeButton_pressed()
+	await transition([], [mode_buttons], false)
 	get_tree().change_scene_to_file("res://scenes/cube.tscn")
 
 func _onTVButton_pressed() -> void:
-	await _onModeButton_pressed()
+	await transition([], [mode_buttons], false)
 	get_tree().change_scene_to_file("res://scenes/generation_image3D.tscn")
+
+func _onResetScoreButton_pressed() -> void:
+	transition([reset_score_page], [mode_buttons], false)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+func _onNoButton_pressed() -> void:
+	transition([mode_buttons], [reset_score_page], true)
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+func _onYesButton_pressed() -> void:
+	transition([validation_score_page], [reset_score_page], false)
+	reset_highest_score()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
+func reset_highest_score() -> void:
+	var config = ConfigFile.new()
+	config.set_value("Progression", "Meilleur Score", 0)
+	config.save(SAVE_PATH)

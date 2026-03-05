@@ -110,6 +110,7 @@ volume_db = -10.0
 bus = &"SFX"
 
 [node name="MenuButtons" type="Panel" parent="." unique_id=230394103]
+visible = false
 layout_mode = 0
 offset_left = 643.0
 offset_top = 215.0
@@ -225,9 +226,9 @@ vertical_alignment = 1
 [node name="MusicTitle" type="Label" parent="Options" unique_id=1567091736]
 layout_mode = 0
 offset_left = 287.0
-offset_top = 207.5
+offset_top = 200.0
 offset_right = 525.0
-offset_bottom = 258.5
+offset_bottom = 251.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_1s2dm")
 theme_override_font_sizes/font_size = 50
@@ -236,9 +237,9 @@ text = "Musique"
 [node name="SFXTitle" type="Label" parent="Options" unique_id=1953463545]
 layout_mode = 0
 offset_left = 353.0
-offset_top = 288.5
+offset_top = 300.0
 offset_right = 446.0
-offset_bottom = 339.5
+offset_bottom = 351.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_1s2dm")
 theme_override_font_sizes/font_size = 50
@@ -280,9 +281,9 @@ audio_bus_name = "Musique"
 [node name="SFXControl" type="HSlider" parent="Options" unique_id=1708708710]
 layout_mode = 0
 offset_left = 75.0
-offset_top = 330.0
+offset_top = 350.0
 offset_right = 751.0
-offset_bottom = 360.0
+offset_bottom = 380.0
 theme_override_styles/slider = SubResource("StyleBoxLine_0rd3c")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_tye54")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_ovuwl")
