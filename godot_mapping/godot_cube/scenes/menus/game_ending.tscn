@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://s6n8auc020ga"]
 
 [ext_resource type="Shader" uid="uid://dtcbr8l1yp6kt" path="res://shaders/pause_menu.gdshader" id="1_nvk6s"]
-[ext_resource type="Script" uid="uid://c017eu1ls6xye" path="res://scripts/game_ending.gd" id="2_nvk6s"]
+[ext_resource type="Script" uid="uid://c017eu1ls6xye" path="res://scripts/menus/game_ending.gd" id="2_nvk6s"]
 [ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="3_cplju"]
 [ext_resource type="FontFile" uid="uid://crtikirivhq6o" path="res://addons/assets/TextFontBold.otf" id="4_vicg1"]
 [ext_resource type="FontFile" uid="uid://bd4geqghtkj13" path="res://addons/assets/TextFontBase.ttf" id="5_ahjpl"]

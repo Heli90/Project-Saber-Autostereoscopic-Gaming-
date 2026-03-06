@@ -40,9 +40,9 @@ func _ready() -> void:
 	mode_buttons.visible = false
 	reset_score_page.visible = false
 	validation_score_page.visible = false
-	var transition = create_tween()
-	transition.tween_property(fondu_noir, "modulate:a", 0.0, 0.6)
-	await transition.finished
+	var t = create_tween()
+	t.tween_property(fondu_noir, "modulate:a", 0.0, 0.6)
+	await t.finished
 	fondu_noir.visible = false
 	
 	var cursor = load("res://addons/assets/cursor.png")
@@ -58,12 +58,12 @@ func transition(appear_list: Array[Control], disappear_list: Array[Control], bac
 			button.disabled = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
-	var transition = create_tween().set_parallel(true)
+	var t = create_tween().set_parallel(true)
 	for panel in disappear_list:
-		transition.tween_property(panel, "modulate:a", 0.0, 0.1)
-	transition.set_parallel(false)
-	transition.chain().tween_interval(0.1)
-	transition.tween_callback(func():
+		t.tween_property(panel, "modulate:a", 0.0, 0.1)
+	t.set_parallel(false)
+	t.chain().tween_interval(0.1)
+	t.tween_callback(func():
 		for panel in disappear_list:
 			panel.visible = false
 		if appear_list == []:
@@ -73,21 +73,21 @@ func transition(appear_list: Array[Control], disappear_list: Array[Control], bac
 			for panel in appear_list:
 				panel.modulate.a = 0.0
 				panel.visible = true)
-	transition.set_parallel(true)
+	t.set_parallel(true)
 	if back:
 		for panel in appear_list: 
 			for button in panel.get_children():
 				button.modulate = Color.BLACK
 	if appear_list == []:
 		# Il y a un changement de scène, donc, on fait un fondu.
-		transition.set_parallel(false)
-		transition.tween_property(fondu_noir, "modulate:a", 1.0, 0.5)
-		transition.chain().tween_interval(0.3)
+		t.set_parallel(false)
+		t.tween_property(fondu_noir, "modulate:a", 1.0, 0.5)
+		t.chain().tween_interval(0.3)
 	else:
 		for panel in appear_list:
-			transition.tween_property(panel, "modulate:a", 1.0, 0.1)
-		transition.set_parallel(false)
-	await transition.finished
+			t.tween_property(panel, "modulate:a", 1.0, 0.1)
+		t.set_parallel(false)
+	await t.finished
 	
 	if back:
 		# On annule le spam d'appui de boutons
@@ -120,11 +120,11 @@ func _onCreditsButton_pressed() -> void:
 
 func _onPCButton_pressed() -> void:
 	await transition([], [mode_buttons], false)
-	get_tree().change_scene_to_file("res://scenes/cube.tscn")
+	get_tree().change_scene_to_file("res://scenes/game_scenes/scene_pc.tscn")
 
 func _onTVButton_pressed() -> void:
 	await transition([], [mode_buttons], false)
-	get_tree().change_scene_to_file("res://scenes/generation_image3D.tscn")
+	get_tree().change_scene_to_file("res://scenes/game_scenes/scene_TV.tscn")
 
 func _onResetScoreButton_pressed() -> void:
 	transition([reset_score_page], [mode_buttons], false)

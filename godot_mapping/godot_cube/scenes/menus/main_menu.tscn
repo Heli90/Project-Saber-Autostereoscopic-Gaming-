@@ -1,12 +1,11 @@
 [gd_scene format=3 uid="uid://dcjdygsrwf41g"]
 
-[ext_resource type="Script" uid="uid://vt8p43mvn5cs" path="res://scripts/main_menu.gd" id="1_tbmy8"]
+[ext_resource type="Script" uid="uid://vt8p43mvn5cs" path="res://scripts/menus/main_menu.gd" id="1_tbmy8"]
 [ext_resource type="Texture2D" uid="uid://b4xpo3x1n06pg" path="res://addons/assets/fond_jeu_godot.png" id="2_bqqt6"]
 [ext_resource type="FontFile" uid="uid://bd4geqghtkj13" path="res://addons/assets/TextFontBase.ttf" id="3_rtw2f"]
-[ext_resource type="Script" uid="uid://crmbnc6adwn05" path="res://scripts/audio_control.gd" id="4_8ln24"]
+[ext_resource type="Script" uid="uid://crmbnc6adwn05" path="res://scripts/sound/audio_control.gd" id="4_8ln24"]
 [ext_resource type="FontFile" uid="uid://crtikirivhq6o" path="res://addons/assets/TextFontBold.otf" id="4_oa1go"]
-[ext_resource type="Script" uid="uid://ct883kqsjhjbs" path="res://scripts/light_menu.gd" id="7_oa1go"]
-[ext_resource type="AudioStream" uid="uid://dptl0i02ypbka" path="res://addons/sfx/main_menu_music.mp3" id="8_jk1qb"]
+[ext_resource type="Script" uid="uid://ct883kqsjhjbs" path="res://scripts/menus/light_menu.gd" id="7_oa1go"]
 [ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="8_tbmy8"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fu7sn"]
@@ -153,7 +152,6 @@ volume_db = -10.0
 bus = &"SFX"
 
 [node name="MainMenuMusic" type="AudioStreamPlayer" parent="." unique_id=1460163922]
-stream = ExtResource("8_jk1qb")
 volume_db = -10.0
 autoplay = true
 bus = &"Musique"

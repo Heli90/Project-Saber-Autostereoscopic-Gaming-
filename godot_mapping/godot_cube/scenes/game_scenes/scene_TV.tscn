@@ -1,0 +1,169 @@
+[gd_scene format=3 uid="uid://5i6a24tky45k"]
+
+[ext_resource type="Script" uid="uid://v4jt0cyocs3e" path="res://scripts/game_scenes/scene_tv.gd" id="1_xlecp"]
+[ext_resource type="PackedScene" uid="uid://br2jmvjla4guc" path="res://scenes/game_scenes/joueur.tscn" id="2_rfm68"]
+[ext_resource type="Shader" uid="uid://vno46ensk36y" path="res://shaders/generation_image.gdshader" id="4_wdlj1"]
+[ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="6_qo1rj"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_fqw2t"]
+viewport_path = NodePath("J1/CameraControllerFPS/Vue1")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_6c3ax"]
+viewport_path = NodePath("J1/CameraControllerFPS/Vue2")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_gvfcn"]
+viewport_path = NodePath("Vue3")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2jldk"]
+viewport_path = NodePath("Vue4")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_nrlg5"]
+viewport_path = NodePath("J2/CameraControllerFPS/Vue5")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_wcpdv"]
+viewport_path = NodePath("J2/CameraControllerFPS/Vue6")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_6n0u1"]
+viewport_path = NodePath("Vue7")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_5cx5k"]
+viewport_path = NodePath("Vue8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6c3ax"]
+resource_local_to_scene = true
+shader = ExtResource("4_wdlj1")
+shader_parameter/vue_1 = SubResource("ViewportTexture_fqw2t")
+shader_parameter/vue_2 = SubResource("ViewportTexture_6c3ax")
+shader_parameter/vue_3 = SubResource("ViewportTexture_gvfcn")
+shader_parameter/vue_4 = SubResource("ViewportTexture_2jldk")
+shader_parameter/vue_5 = SubResource("ViewportTexture_nrlg5")
+shader_parameter/vue_6 = SubResource("ViewportTexture_wcpdv")
+shader_parameter/vue_7 = SubResource("ViewportTexture_6n0u1")
+shader_parameter/vue_8 = SubResource("ViewportTexture_5cx5k")
+shader_parameter/N = 8
+shader_parameter/decalage = -1
+
+[sub_resource type="Gradient" id="Gradient_fqw2t"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6c3ax"]
+gradient = SubResource("Gradient_fqw2t")
+width = 1920
+height = 1080
+
+[node name="ImageAutoStereo3D" type="Node3D" unique_id=1856045016]
+script = ExtResource("1_xlecp")
+
+[node name="J1" parent="." unique_id=1529862946 instance=ExtResource("2_rfm68")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 5)
+
+[node name="Camera" parent="J1/CameraControllerFPS" parent_id_path=PackedInt32Array(1529862946, 718035250) index="0" unique_id=752964199]
+visible = false
+current = false
+
+[node name="RemoteVue1" type="RemoteTransform3D" parent="J1/CameraControllerFPS" parent_id_path=PackedInt32Array(1529862946, 718035250) index="1" unique_id=1948403244]
+remote_path = NodePath("../Vue1/Camera")
+
+[node name="RemoteVue2" type="RemoteTransform3D" parent="J1/CameraControllerFPS" parent_id_path=PackedInt32Array(1529862946, 718035250) index="2" unique_id=2050802760]
+remote_path = NodePath("../Vue2/Camera")
+
+[node name="Vue1" type="SubViewport" parent="J1/CameraControllerFPS" parent_id_path=PackedInt32Array(1529862946, 718035250) index="3" unique_id=210631324]
+size = Vector2i(1920, 1080)
+
+[node name="Camera" type="Camera3D" parent="J1/CameraControllerFPS/Vue1" unique_id=642319396]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 5)
+current = true
+
+[node name="Vue2" type="SubViewport" parent="J1/CameraControllerFPS" parent_id_path=PackedInt32Array(1529862946, 718035250) index="4" unique_id=86739324]
+size = Vector2i(1920, 1080)
+
+[node name="Camera" type="Camera3D" parent="J1/CameraControllerFPS/Vue2" unique_id=130694043]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 5)
+current = true
+
+[node name="CameraControllerTPS" parent="J1" index="3" unique_id=506921349]
+visible = false
+
+[node name="CameraTarget" parent="J1/CameraControllerTPS" index="0" unique_id=2133453867]
+visible = false
+
+[node name="Camera" parent="J1/CameraControllerTPS/CameraTarget" index="0" unique_id=773504143]
+visible = false
+
+[node name="J2" parent="." unique_id=890448322 instance=ExtResource("2_rfm68")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 5)
+player_id = 2
+
+[node name="Camera" parent="J2/CameraControllerFPS" parent_id_path=PackedInt32Array(890448322, 718035250) index="0" unique_id=752964199]
+visible = false
+current = false
+
+[node name="RemoteVue5" type="RemoteTransform3D" parent="J2/CameraControllerFPS" parent_id_path=PackedInt32Array(890448322, 718035250) index="1" unique_id=865866804]
+remote_path = NodePath("../Vue5/Camera3D")
+
+[node name="RemoteVue6" type="RemoteTransform3D" parent="J2/CameraControllerFPS" parent_id_path=PackedInt32Array(890448322, 718035250) index="2" unique_id=1097339675]
+remote_path = NodePath("../Vue6/Camera3D")
+
+[node name="Vue5" type="SubViewport" parent="J2/CameraControllerFPS" parent_id_path=PackedInt32Array(890448322, 718035250) index="3" unique_id=1130869609]
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="J2/CameraControllerFPS/Vue5" unique_id=340205500]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 5)
+current = true
+
+[node name="Vue6" type="SubViewport" parent="J2/CameraControllerFPS" parent_id_path=PackedInt32Array(890448322, 718035250) index="4" unique_id=1893834835]
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="J2/CameraControllerFPS/Vue6" unique_id=1440031429]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 5)
+current = true
+
+[node name="CameraControllerTPS" parent="J2" index="3" unique_id=506921349]
+visible = false
+
+[node name="CameraTarget" parent="J2/CameraControllerTPS" index="0" unique_id=2133453867]
+visible = false
+
+[node name="Camera" parent="J2/CameraControllerTPS/CameraTarget" index="0" unique_id=773504143]
+visible = false
+
+[node name="Vue3" type="SubViewport" parent="." unique_id=1959630340]
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="Vue3" unique_id=2000948979]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10, 7)
+current = true
+
+[node name="Vue4" type="SubViewport" parent="." unique_id=1280439649]
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="Vue4" unique_id=363945270]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10, 7)
+current = true
+
+[node name="Vue7" type="SubViewport" parent="." unique_id=1553404578]
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="Vue7" unique_id=2067767426]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10, 7)
+current = true
+
+[node name="Vue8" type="SubViewport" parent="." unique_id=1011819110]
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="Vue8" unique_id=1811736440]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10, 7)
+current = true
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=520957025]
+self_modulate = Color(1, 0, 0, 1)
+texture_filter = 2
+material = SubResource("ShaderMaterial_6c3ax")
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = SubResource("GradientTexture2D_6c3ax")
+
+[node name="CubeTournant" parent="." unique_id=1026699542 instance=ExtResource("6_qo1rj")]
+
+[editable path="J1"]
+[editable path="J2"]
+[editable path="CubeTournant"]

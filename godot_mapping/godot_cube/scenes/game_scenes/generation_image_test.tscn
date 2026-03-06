@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d3ebom4rhjvgj"]
 
-[ext_resource type="Script" uid="uid://v4jt0cyocs3e" path="res://scripts/generation_image.gd" id="1_fqw2t"]
-[ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/cube.tscn" id="1_s5g30"]
+[ext_resource type="Script" uid="uid://v4jt0cyocs3e" path="res://scripts/game_scenes/scene_tv.gd" id="1_fqw2t"]
+[ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="1_s5g30"]
 [ext_resource type="Shader" uid="uid://vno46ensk36y" path="res://shaders/generation_image.gdshader" id="2_fqw2t"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_fqw2t"]

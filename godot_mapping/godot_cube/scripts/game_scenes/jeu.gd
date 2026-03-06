@@ -1,8 +1,8 @@
 extends Node3D
 
-@onready var fondu_noir: ColorRect = $FonduLayer/FonduNoir
+@onready var fondu_noir: ColorRect = $Affichage/FonduLayer/FonduNoir
 @onready var partie_timer: Timer = $PartieTimer
-@onready var game_ending: ColorRect = $GameEnding
+@onready var game_ending: ColorRect = $Affichage/GameEnding
 
 var global_score: int = 0
 
@@ -10,19 +10,15 @@ func _ready() -> void:
 	load_highest_score()
 	print(ProjectSettings.globalize_path("user://"))
 	game_ending.visible = false
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	var transition = create_tween()
 	transition.tween_property(fondu_noir, "modulate:a", 0.0, 0.6)
 	await transition.finished
 	fondu_noir.visible = false
 	partie_timer.start()
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	pass
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("StopGame"):
-		_onPartieTimerTimeout()
 
 func set_blur_intensity(value: float):
 	game_ending.material.set_shader_parameter("lod", value)

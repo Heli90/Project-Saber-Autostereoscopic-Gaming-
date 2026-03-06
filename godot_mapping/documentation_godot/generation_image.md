@@ -1,7 +1,7 @@
 # Génération des vues sur Godot
 
 ## Descriptif rapide
-> La scène **generation_image3D** sert à générer les 8 différentes vues à partir de la scène **cube.tscn**.
+> La scène **scene_TV** sert à générer les 8 différentes vues à partir de la scène **jeu.tscn**.
 
 ## Structure de la scène associée
 

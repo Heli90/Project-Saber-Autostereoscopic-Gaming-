@@ -9,43 +9,58 @@
 > Conçu comme un objet animable en 3D, sa rotation peut être contrôlée par les bras du joueur.
 > **Fonctionnalités :**
 - Collisions 3D avec le joueur
-- Rotation selon l'axe Y via le bras droit du joueur
-- Rotation selon l'axe Z via le bras gauche du joueur
+- Rotation selon l'axe Y pour des tests
 
 ### Joueurs
-> Conçus comme des personnages jouables en 3D, ils peuvent se mouvoir dans l'espace (gauche, droit, avant, arrière). Un mode en écran divisé est prochainement prévu pour les tests sur PC.
+> Conçus comme des personnages jouables en 3D, ils peuvent se mouvoir dans l'espace (gauche, droit, avant, arrière). Un mode en écran divisé est prévu pour les tests sur PC ainsi que deux modes de caméras (FPS/TPS). Ces derniers sont configurés dans une scène attitrée **joueur.tscn**.
 > **Fonctionnalités :**
 - Collisions 3D avec le cube
-- Déplacements basiques via les touches du clavier Z/Q/S/D
+- Déplacements basiques via les touches du clavier Z/Q/S/D pour le joueur 1 et les flèches du clavier pour le joueur 2
+- Saut avec Espace pour le joueur 1, Tab pour le joueur 2
+- Appui sur les touches A et E pour tourner la caméra du joueur 1, et les touches W et C pour tourner la caméra du joueur 2
+- Appui sur les touches "1" et "2" hors du pad numérique pour changer de caméra (**Uniquement en mode PC**)
 
 ```gdscript
 if not is_on_floor():
-		velocity.y -= gravity * delta
+		velocity += get_gravity() * delta
 
+	# Saut manuel du joueur.
+	if Input.is_action_just_pressed("SautJ%s"%player_id) and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+		
+	# Rotation manuelle de la caméra.
+	if Input.is_action_just_pressed("Left_CamJ%s"%player_id):
+		if camera_fps.current:
+			camera_controller_fps.rotate_y(deg_to_rad(30))
+		else:
+			camera_controller_tps.rotate_y(deg_to_rad(30))
+	if Input.is_action_just_pressed("Right_CamJ%s"%player_id):
+		if camera_fps.current:
+			camera_controller_fps.rotate_y(deg_to_rad(-30))
+		else:
+			camera_controller_tps.rotate_y(deg_to_rad(-30))
+
+	# Reçoit la direction et gère le mouvement et l'accélération.
 	var input_dir = Input.get_vector("GaucheJ%s"%player_id, "DroiteJ%s"%player_id, "AvancerJ%s"%player_id, "ReculerJ%s"%player_id)
-	var dir = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	
-	if dir:
-		if player_id == 1:
-			velocity.x = dir.x * player_speed1
-			velocity.z = dir.z * player_speed1
-		elif player_id == 2:
-			velocity.x = dir.x * player_speed2
-			velocity.z = dir.z * player_speed2
-		if not son_marche.playing:
-			son_marche.pitch_scale = randf_range(0.9, 1.1)
-			son_marche.play()
-		son_marche.volume_db = lerpf(son_marche.volume_db, 0, 10 * delta)
+	var direction
+	if camera_fps.current:
+		direction = (camera_controller_fps.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	else:
-		son_marche.volume_db = lerpf(son_marche.volume_db, -80, 0.5 * delta)
-		if player_id == 1:
-			velocity.x = move_toward(velocity.x, 0, player_speed1)
-			velocity.z = move_toward(velocity.z, 0, player_speed1)
-		elif player_id == 2:
-			velocity.x = move_toward(velocity.x, 0, player_speed2)
-			velocity.z = move_toward(velocity.z, 0, player_speed2)
+		direction = (camera_controller_tps.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
-	# Application de la vélocité et gestion des collisions
+	# Gère la rotation du modèle 3D.
+	if input_dir != Vector2(0,0):
+		if camera_fps.current:
+			forme.rotation_degrees.y = camera_controller_fps.rotation_degrees.y - rad_to_deg(input_dir.angle()) - 90
+		else:
+			forme.rotation_degrees.y = camera_controller_tps.rotation_degrees.y - rad_to_deg(input_dir.angle()) - 90
+	if direction:
+		velocity.x = direction.x * SPEED
+		velocity.z = direction.z * SPEED
+	else:
+		velocity.x = move_toward(velocity.x, 0, SPEED)
+		velocity.z = move_toward(velocity.z, 0, SPEED)
+
 	move_and_slide()
 ```
 - Caméra attachée au joueur permettant de suivre le jeu
@@ -55,3 +70,5 @@ if not is_on_floor():
 > Il s'agit des spécificités du projet qui ne sont pas nécessaires, mais qui renforcent le confort de jeu.
 - Sol et collision 3D entre le sol et tous les objets
 - Lumière de projection sur le cube pour avoir de l'ombre
+- Timer de partie égal à 60 secondes pour fixer une durée limitée de partie
+- Score final affichable à la fin de la partie et enregistrement/suppression possible du meilleur score

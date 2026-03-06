@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://dm0ymj2gw0osm"]
+
+[ext_resource type="Script" uid="uid://k24etkqcny5a" path="res://scripts/game_scenes/scene_pc.gd" id="1_4ivkf"]
+[ext_resource type="PackedScene" uid="uid://br2jmvjla4guc" path="res://scenes/game_scenes/joueur.tscn" id="2_wbbwd"]
+[ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="3_d2mly"]
+
+[node name="PC" type="Node3D" unique_id=1088143800]
+script = ExtResource("1_4ivkf")
+
+[node name="SplitScreens" type="GridContainer" parent="." unique_id=1978316299]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+columns = 2
+
+[node name="Camera1" type="SubViewportContainer" parent="SplitScreens" unique_id=1844395327]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="POV1" type="SubViewport" parent="SplitScreens/Camera1" unique_id=519810470]
+handle_input_locally = false
+size = Vector2i(958, 1080)
+render_target_update_mode = 4
+
+[node name="J1" parent="SplitScreens/Camera1/POV1" unique_id=1529862946 instance=ExtResource("2_wbbwd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1, 5)
+
+[node name="Camera2" type="SubViewportContainer" parent="SplitScreens" unique_id=859538132]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
+
+[node name="POV2" type="SubViewport" parent="SplitScreens/Camera2" unique_id=1303971595]
+handle_input_locally = false
+size = Vector2i(958, 1080)
+render_target_update_mode = 4
+
+[node name="J2" parent="SplitScreens/Camera2/POV2" unique_id=1697962834 instance=ExtResource("2_wbbwd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, 5)
+player_id = 2
+
+[node name="CubeTournant" parent="." unique_id=1026699542 instance=ExtResource("3_d2mly")]

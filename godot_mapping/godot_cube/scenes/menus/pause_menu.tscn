@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://cowlnii2y28cm"]
 
-[ext_resource type="Script" uid="uid://cpgnsda88gxfq" path="res://scripts/pause_menu.gd" id="1_7l7mv"]
+[ext_resource type="Script" uid="uid://cpgnsda88gxfq" path="res://scripts/menus/pause_menu.gd" id="1_7l7mv"]
 [ext_resource type="Shader" uid="uid://dtcbr8l1yp6kt" path="res://shaders/pause_menu.gdshader" id="1_v4r4p"]
 [ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="2_v4r4p"]
 [ext_resource type="FontFile" uid="uid://bd4geqghtkj13" path="res://addons/assets/TextFontBase.ttf" id="3_1s2dm"]
 [ext_resource type="FontFile" uid="uid://crtikirivhq6o" path="res://addons/assets/TextFontBold.otf" id="4_88e76"]
-[ext_resource type="Script" uid="uid://crmbnc6adwn05" path="res://scripts/audio_control.gd" id="5_knqa7"]
+[ext_resource type="Script" uid="uid://crmbnc6adwn05" path="res://scripts/sound/audio_control.gd" id="5_knqa7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1s2dm"]
 shader = ExtResource("1_v4r4p")
@@ -110,7 +110,6 @@ volume_db = -10.0
 bus = &"SFX"
 
 [node name="MenuButtons" type="Panel" parent="." unique_id=230394103]
-visible = false
 layout_mode = 0
 offset_left = 643.0
 offset_top = 215.0
