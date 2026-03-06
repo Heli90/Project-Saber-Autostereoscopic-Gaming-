@@ -52,8 +52,9 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 ### Entre la séance 3 et la séance 4
 
-25/02 - **Van-Kévin** : Implémentation de l'algorithme d'entrelacement initié par Hélias. Visuel possible sur la TV avec les 8 vues, et 2 points de vue distincts par joueur. Prise en main des outils de Godot pour préparer un terrain de jeu (son, visuel de terrain...).
+25/02 - **Van-Kévin** : Implémentation de l'algorithme d'entrelacement initié par Hélias. Visuel possible sur la TV avec les 8 vues, et 2 points de vue distincts par joueur, mais les images sont statiques (les caméras sont immobiles). Prise en main des outils de Godot pour préparer un terrain de jeu (son, visuel de terrain...).
 04/03 - **Van-Kévin** : Implémentation d'un menu d'entrée du jeu avec transitions de texte et foncionnalités basiques, d'un menu en jeu mettant en pause le jeu. Prise en compte de paramètres de confort de jeu (musique, SFX) et ajout d'un choix de mode PC/TV pour faciliter les futurs tests.
+06/03 - **Van-Kévin** : Implémentation d'un temps imparti pour les parties jouées et d'un score final qui peut être enregistré s'il s'agit du meilleur score. Possibilité de réinitialiser ce score dans le menu principal. Reconfiguration de l'ensemble des scènes du jeu pour faciliter la compréhension du code. Implémentation de 2 vues FPS/TPS pour le mode PC (et peut-être le mode TV, plus tard, si besoin) et correction des déplacements des joueurs, en conséquence. Correction de certains bugs liés au mode TV et ajout de caméras mobiles avec le joueur tout en conservant les vues (à confirmer avant la séance 4).
 
 ### Séance 4 - 13/03
 
