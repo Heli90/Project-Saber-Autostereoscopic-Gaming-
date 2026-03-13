@@ -60,9 +60,8 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 ### Séance 4 - 13/03
 **Hélias** : récupération des coordonées de la main dans MediaPipe et tests sur la profondeur (plutôt bien détectée par MP mais nouveau problème : si on pose la caméra sur l'écran, les joueurs sont vite trop loin !)
-
-
-**Birame** : Tests de l'affichage de la caméra, en vue d'afficher les marquers des joueurs
+**Van-Kévin** : Modification de la map. Présentation des tests effectués jusqu'à présent. Implémentation d'un texte affiché en jeu pour voir les FPS du jeu courant et le temps de rendu pris par les shaders (faux calcul actuellement).
+**Birame** : Tests de l'affichage de la caméra, en vue d'afficher les marqueurs des joueurs
 
 ### Séance 5 - 16/03
 

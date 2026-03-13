@@ -2,44 +2,13 @@
 
 [ext_resource type="Script" uid="uid://v4jt0cyocs3e" path="res://scripts/game_scenes/scene_tv.gd" id="1_xlecp"]
 [ext_resource type="PackedScene" uid="uid://br2jmvjla4guc" path="res://scenes/game_scenes/joueur.tscn" id="2_rfm68"]
+[ext_resource type="FontFile" uid="uid://bd4geqghtkj13" path="res://addons/assets/TextFontBase.ttf" id="3_llrkf"]
 [ext_resource type="Shader" uid="uid://vno46ensk36y" path="res://shaders/generation_image.gdshader" id="4_wdlj1"]
 [ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="6_qo1rj"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_fqw2t"]
-viewport_path = NodePath("J1/CameraControllerFPS/Vue1")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_6c3ax"]
-viewport_path = NodePath("J1/CameraControllerFPS/Vue2")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_gvfcn"]
-viewport_path = NodePath("Vue3")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_2jldk"]
-viewport_path = NodePath("Vue4")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_nrlg5"]
-viewport_path = NodePath("J2/CameraControllerFPS/Vue5")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_wcpdv"]
-viewport_path = NodePath("J2/CameraControllerFPS/Vue6")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_6n0u1"]
-viewport_path = NodePath("Vue7")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_5cx5k"]
-viewport_path = NodePath("Vue8")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6c3ax"]
 resource_local_to_scene = true
 shader = ExtResource("4_wdlj1")
-shader_parameter/vue_1 = SubResource("ViewportTexture_fqw2t")
-shader_parameter/vue_2 = SubResource("ViewportTexture_6c3ax")
-shader_parameter/vue_3 = SubResource("ViewportTexture_gvfcn")
-shader_parameter/vue_4 = SubResource("ViewportTexture_2jldk")
-shader_parameter/vue_5 = SubResource("ViewportTexture_nrlg5")
-shader_parameter/vue_6 = SubResource("ViewportTexture_wcpdv")
-shader_parameter/vue_7 = SubResource("ViewportTexture_6n0u1")
-shader_parameter/vue_8 = SubResource("ViewportTexture_5cx5k")
 shader_parameter/N = 8
 shader_parameter/decalage = -1
 
@@ -157,6 +126,45 @@ size = Vector2i(1920, 1080)
 [node name="Camera3D" type="Camera3D" parent="Vue8" unique_id=1811736440]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10, 7)
 current = true
+
+[node name="TechnicalInfos" type="CanvasLayer" parent="." unique_id=1621305502]
+layer = 0
+
+[node name="FPS" type="Label" parent="TechnicalInfos" unique_id=154098478]
+offset_left = 50.0
+offset_top = 1000.0
+offset_right = 90.0
+offset_bottom = 1023.0
+theme_override_colors/font_color = Color(0.5942287, 0.11192388, 0.99999994, 1)
+theme_override_fonts/font = ExtResource("3_llrkf")
+theme_override_font_sizes/font_size = 30
+
+[node name="CPU" type="Label" parent="TechnicalInfos" unique_id=2144589808]
+offset_left = 50.0
+offset_top = 950.0
+offset_right = 90.0
+offset_bottom = 973.0
+theme_override_colors/font_color = Color(0.59607846, 0.11372549, 1, 1)
+theme_override_fonts/font = ExtResource("3_llrkf")
+theme_override_font_sizes/font_size = 30
+
+[node name="GPU" type="Label" parent="TechnicalInfos" unique_id=185849556]
+offset_left = 50.0
+offset_top = 900.0
+offset_right = 90.0
+offset_bottom = 923.0
+theme_override_colors/font_color = Color(0.59607846, 0.11372549, 1, 1)
+theme_override_fonts/font = ExtResource("3_llrkf")
+theme_override_font_sizes/font_size = 30
+
+[node name="DrawCalls" type="Label" parent="TechnicalInfos" unique_id=1590461644]
+offset_left = 50.0
+offset_top = 850.0
+offset_right = 90.0
+offset_bottom = 873.0
+theme_override_colors/font_color = Color(0.59607846, 0.11372549, 1, 1)
+theme_override_fonts/font = ExtResource("3_llrkf")
+theme_override_font_sizes/font_size = 30
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=520957025]
 self_modulate = Color(1, 0, 0, 1)

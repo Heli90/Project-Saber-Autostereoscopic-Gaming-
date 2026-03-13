@@ -9,7 +9,13 @@ extends Node3D
 @onready var cam_controller_j1: Node3D = $J1/CameraControllerFPS
 @onready var cam_controller_j2: Node3D = $J2/CameraControllerFPS
 
+@onready var label_fps: Label = $TechnicalInfos/FPS
+@onready var label_cpu = $TechnicalInfos/CPU
+@onready var label_gpu = $TechnicalInfos/GPU
+@onready var label_draw_calls = $TechnicalInfos/DrawCalls
+
 var initialisations_joueurs: bool = false
+var rendu_time: float = 0.0
 
 func _ready():
 	await get_tree().process_frame
@@ -20,6 +26,7 @@ func _ready():
 	
 	var shader_mat = screen_output.material as ShaderMaterial
 	
+	var start_time = Time.get_ticks_msec()
 	# On configure chaque vue
 	for i in range(1, nb_views+1):
 		var viewport_vue
@@ -36,6 +43,25 @@ func _ready():
 			var texture_vue = vue.get_texture()
 			var shader_vue = "vue_" + str(i)
 			shader_mat.set_shader_parameter(shader_vue, texture_vue)
+	var end_time = Time.get_ticks_msec()
+	rendu_time = end_time - start_time
+
+func _process(_delta: float) -> void:
+	# Temps total d'une frame
+	var fps = Engine.get_frames_per_second()
+	var total_frame = (1.0 / fps) * 1000.0
+	
+	# Temps de rendu du CPU
+	var cpu_time = Performance.get_monitor(Performance.TIME_PROCESS) * 1000.0
+	# Temps de rendu du GPU
+	var render_time = total_frame - cpu_time
+	# Nombre d'appels du shader
+	var draw_calls = Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME)
+	
+	label_fps.text = "FPS: %d"%fps
+	label_cpu.text = "CPU: %.2f ms"%cpu_time
+	label_gpu.text = "Render (8 views + Shader): %.2f ms"%render_time
+	label_draw_calls.text = "Draw Calls: %d"%draw_calls
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("StopGame"):
