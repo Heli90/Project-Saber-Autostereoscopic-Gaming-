@@ -24,7 +24,7 @@ Légende :
 | ----------------------------  | ------------- | ----       | ----         | ----       |
 | Générer une image 3D (entrelacement de 2 vues) | Écrire un programme Python pour entrelacer plusieurs vues et l'afficher | Van-Kévin | 11/02/26 | 11/02/26 |
 |Apprendre les bases de Godot | Lire la doc, regarder des tutos pour se familiariser avec l'environnement de développement | Groupe | 11/02/26 | ... |
-|Générer un rendu 3D (2 vues) d'une image du moteur de jeu | Générer et afficher une image 3D depuis Godot | Adam, Hélias | ... | ... |
+|Générer un rendu 3D (2 vues) d'une image du moteur de jeu | Générer et afficher une image 3D depuis Godot | Adam, Hélias | 27/02 | 13/03 (merci VK) |
 |Générer l'image d'un cube tournant dans le moteur de jeu | Créer une scène dans Godot avec un cube tournant | Van-Kévin | 19/02 | 20/02 |
 |Afficher une image en mouvement en 3D | Génerer plusieurs images et les afficher pour rendre le mouvement sans stocker d'images intermédiaire dans l'espace mémoire | Adam, Hélias | ... | ... |
 |Lire la doc MédiaPipe | ... | Hugo et Birame | ... | ... |
