@@ -60,7 +60,7 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 ### Séance 4 - 13/03
 
-
+**Birame** : Tests de l'affichage de la caméra, en vue d'afficher les marquers des joueurs
 
 ### Séance 5 - 16/03
 
