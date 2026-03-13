@@ -26,7 +26,7 @@ Légende :
 |Apprendre les bases de Godot | Lire la doc, regarder des tutos pour se familiariser avec l'environnement de développement | Groupe | 11/02/26 | ... |
 |Générer un rendu 3D (2 vues) d'une image du moteur de jeu | Générer et afficher une image 3D depuis Godot | Adam, Hélias | 27/02 | 13/03 (merci VK) |
 |Générer l'image d'un cube tournant dans le moteur de jeu | Créer une scène dans Godot avec un cube tournant | Van-Kévin | 19/02 | 20/02 |
-|Afficher une image en mouvement en 3D | Génerer plusieurs images et les afficher pour rendre le mouvement sans stocker d'images intermédiaire dans l'espace mémoire | Adam, Hélias | ... | ... |
+|Afficher une image en mouvement en 3D | Génerer plusieurs images et les afficher pour rendre le mouvement sans stocker d'images intermédiaire dans l'espace mémoire | Adam, Hélias | 27/02 | 13/03 |
 |Lire la doc MédiaPipe | ... | Hugo et Birame | ... | ... |
 |Implémenter MédiaPipe dans Godot | ... | Hugo et Birame | ... | ... |
 |Savoir détecter la position de la main grâce à MédiaPipe | ... | Hugo et Birame | ... | ... |
