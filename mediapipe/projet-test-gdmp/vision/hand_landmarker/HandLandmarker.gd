@@ -44,4 +44,13 @@ func show_result(image: MediaPipeImage, result: MediaPipeHandLandmarkerResult) -
 	for categories in result.handedness:
 		for category in categories.categories:
 			handedness_text += "%s\n" % [category.display_name]
+			print(handedness_text)
+	
+	# Print les coordonnées (il y en a beaucoup donc il peut y avoir des erreurs de flot)
+	for hand_landmarks in result.hand_landmarks:
+		for landmark in hand_landmarks.landmarks:
+			print("Coordonnées: x=%f, y=%f, z=%f" % [
+			landmark.x,
+			landmark.y,
+			landmark.z])
 	lbl_handedness.call_deferred("set_text", handedness_text)
