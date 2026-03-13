@@ -56,6 +56,8 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 04/03 - **Van-Kévin** : Implémentation d'un menu d'entrée du jeu avec transitions de texte et foncionnalités basiques, d'un menu en jeu mettant en pause le jeu. Prise en compte de paramètres de confort de jeu (musique, SFX) et ajout d'un choix de mode PC/TV pour faciliter les futurs tests.
 06/03 - **Van-Kévin** : Implémentation d'un temps imparti pour les parties jouées et d'un score final qui peut être enregistré s'il s'agit du meilleur score. Possibilité de réinitialiser ce score dans le menu principal. Reconfiguration de l'ensemble des scènes du jeu pour faciliter la compréhension du code. Implémentation de 2 vues FPS/TPS pour le mode PC (et peut-être le mode TV, plus tard, si besoin) et correction des déplacements des joueurs, en conséquence. Correction de certains bugs liés au mode TV et ajout de caméras mobiles avec le joueur tout en conservant les vues (à confirmer avant la séance 4).
 
+12/03 - **Birame** : Test du projet-test mis à disposition par GDMP (https://github.com/j20001970/GDMP-demo/tree/master) et familiarisation avec les outils utilisés (HandLandmarker.gd et HAndRenderer.gd)
+
 ### Séance 4 - 13/03
 
 
