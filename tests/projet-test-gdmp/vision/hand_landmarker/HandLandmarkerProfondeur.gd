@@ -1,5 +1,4 @@
-# FICHIER DE TESTS À SUPPRIMER ENSUITE
-
+#TESTS
 extends VisionTask
 
 var task: MediaPipeHandLandmarker

@@ -59,6 +59,8 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 12/03 - **Birame** : Test du projet-test mis à disposition par GDMP (https://github.com/j20001970/GDMP-demo/tree/master) et familiarisation avec les outils utilisés (HandLandmarker.gd et HAndRenderer.gd)
 
 ### Séance 4 - 13/03
+**Hélias** : récupération des coordonées de la main dans MediaPipe et tests sur la profondeur (plutôt bien détectée par MP mais nouveau problème : si on pose la caméra sur l'écran, les joueurs sont vite trop loin !)
+
 
 **Birame** : Tests de l'affichage de la caméra, en vue d'afficher les marquers des joueurs
 
