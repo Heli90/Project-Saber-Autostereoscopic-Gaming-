@@ -94,6 +94,13 @@ Objectifs pour la prochaine séance :
 
 ### Séance 5 - 16/03
 
+***Remarques de J. Lefeuvre :***
+- Rappel : Evaluation entre pairs le 
+- Rendu : Il faut synchroniser la fréquence de rendu avec la fréquence de raffraîchissement de l'écran. Dans le GPU, il faudrait 2 buffers de générations d'image : un pour "vraiment" afficher le jeu, un autre pour calculer le rendu de la frame suivante. Pour ensuite l'afficher, il faut privilégier des swaps entre pointeurs plutôt que des copies (plus long). 
+- MediaPipe : Déterminer le temps de rendu (=temps pris pour capturer une image et donner les informations dessus). Cette information sert pour adapter la fréquence de rendu. De plus, il faut également regarder :
+  - si le traitement MediaPipe (task) s'effectue en parallèle (pas de boucle for)
+  - comment sont gérés les images en mémoire
+
 ### Séance 6 - 27/03
 
 ### Séance 7 - 03/04
