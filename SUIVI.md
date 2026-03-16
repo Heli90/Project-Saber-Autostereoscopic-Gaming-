@@ -65,6 +65,7 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 ### Séance 5 - 16/03
 
+**Birame** : Affichage des marqueurs sur un autre projet que le GDMP-test ( + les coordonnées : cf Hélias séance 4).
 
 
 ### Séance 6 - 27/03
