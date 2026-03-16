@@ -5,3 +5,9 @@ Jeux à utiliser :
 
 Pick-n-Punch : Jeu godot open source qui est un jeu de boxe avec une vue première personne avec un affrontement contre une ia. 
 https://github.com/Platymek/Pick-n-Punch/tree/master/.idea/.idea.ThirdYearFinal/.id
+
+
+Idées autres :
+
+Utiliser le template: Godot 4 Advanced Third-Person Controller __ NeonfireStudio/godot-advanced-third-person-controller
+Qui est un template qui permet la gestion d'un personnage 3D et de gerer la caméra dans l'espace.
