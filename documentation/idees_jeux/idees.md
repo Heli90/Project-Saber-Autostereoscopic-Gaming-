@@ -6,6 +6,9 @@ Jeux à utiliser :
 Pick-n-Punch : Jeu godot open source qui est un jeu de boxe avec une vue première personne avec un affrontement contre une ia. 
 https://github.com/Platymek/Pick-n-Punch/tree/master/.idea/.idea.ThirdYearFinal/.id
 
+OpenSaber : version openSource de BeatSaber pour Godot. Jeu de rythme en VR, on peut dupliquer les pistes pour que les deux joueurs s'affrontent sur le même morceau pour le meilleur score.
+https://github.com/leandrodreamer/BeepSaber/tree/godot-4-port
+
 
 Idées autres :
 
