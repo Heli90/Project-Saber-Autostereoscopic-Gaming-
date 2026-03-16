@@ -66,6 +66,7 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 ### Séance 5 - 16/03
 
 **Birame** : Affichage des marqueurs sur un autre projet que le GDMP-test ( + les coordonnées : cf Hélias séance 4).
+**Hélias** : Détection des "états" de la main avec MediaPipe et recherche de jeux OpenSource à exploiter
 
 
 ### Séance 6 - 27/03
