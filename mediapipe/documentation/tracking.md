@@ -49,7 +49,7 @@ Pour ce qui est des script, on va reprendre les scripts `LandMarksRender.gd` et 
 
 ### Script de test
 
-On peut alors écrire un tel script :
+On peut alors écrire un tel script pour afficher les marqueurs ainsi que le nombre de mains détectées:
 
 ```gdscript
 extends Node3D
@@ -66,6 +66,7 @@ var camera_feed: CameraFeed
 @onready var viewport = $SubViewportContainer/CameraViewport
 @onready var texture_rect = $SubViewportContainer/CameraViewport/TestAffichage
 @onready var debug_view = $CanvasLayer/DebugOverlay # Un TextureRect pour voir le résultat
+@export var label: Label
 
 func _ready():
 	_setup_mediapipe()
@@ -86,7 +87,7 @@ func _setup_mediapipe():
 	task = MediaPipeHandLandmarker.new()
 	
 	# Paramètres : Mode de capture (Ici 1 pour le mode vidéo) et le nombre de mains (Ici 4)
-	task.initialize(options, 1,4)
+	task.initialize(options, 1,4,0.07,0.07,0.07)
 	renderer = MediaPipeHandRenderer.new()
 	print("MediaPipe initialisé.")
 
@@ -120,7 +121,27 @@ func _start_camera():
 		texture_rect.texture = tex
 		print("Affichage réussi")
 
+func update_debug_overlay(image: Image) -> void:
+	image.convert(Image.FORMAT_RGB8)
+	if debug_view.texture == null :
+		debug_view.texture = ImageTexture.create_from_image(image)
+	else :
+		if Vector2i(debug_view.texture.get_size()) == image.get_size():
+			debug_view.texture.update(image)
+		else:
+			debug_view.texture.set_image(image)
+
+func _on_hand_data_received(hand_landmarks, hand_index):
+	# Tout ce qui concerne la gestion des données relatives aux mains se fait ici
+	print("Coordonnées: x=%f, y=%f, z=%f" % [
+	hand_landmarks.landmarks[8].x,
+	hand_landmarks.landmarks[8].y,
+	hand_landmarks.landmarks[8].z])
+	print("Main", hand_index)
+
+
 func _process(_delta):
+	label.text = ""
 	# Récupération de l'image du Viewport
 	var tex = viewport.get_texture()
 	var img = tex.get_image()
@@ -137,18 +158,13 @@ func _process(_delta):
 	if result:
 		# Dessin des marqueurs sur les mains
 		var output = renderer.render(mp_image, result.hand_landmarks)
-		debug_view.texture = ImageTexture.create_from_image(output.image)
+		update_debug_overlay(output.image)
 		
 		# Traitement des mains détectés
-		for i in range(result.hand_landmarks.size()):
+		var size = result.hand_landmarks.size()
+		for i in range(size):
+			label.text = "%d" % [size]
 			var hand_landmarks = result.hand_landmarks[i]
 			_on_hand_data_received(hand_landmarks, i) # On passe l'index de la main (0 ou 1)
 
-func _on_hand_data_received(hand_landmarks, hand_index):
-	# Tout ce qui concerne la gestion des données relatives aux mains se fait ici
-	print("Coordonnées: x=%f, y=%f, z=%f" % [
-	hand_landmarks.landmarks[8].x,
-	hand_landmarks.landmarks[8].y,
-	hand_landmarks.landmarks[8].z])
-	print("Main", hand_index)
 ```

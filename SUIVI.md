@@ -72,9 +72,10 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 ### Séance 6 - 27/03
 
 **Van-Kévin** : Tentative d'implémentation d'un "Beat Saber"-like pour avoir un premier aperçu des performances en conditions de jeu réelles.
+
 **Hélias** : Tentative d'implémentation du "Beat Saber"-like avec Van-Kévin, ajout de deux effets visuels dans le projet démo (effet de glitch et inversion des deux yeux)
 
-
+**Birame** : Ajout de la détection dans le projet `cube_godot` pour gérer la vitesse de rotation du cube. Affichage de *hand_landmarkers* colorés et du nombre de mains détectées dans `hand-tracking-project`
 
 ### Séance 7 - 03/04
 
