@@ -67,9 +67,13 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 **Birame** : Affichage des marqueurs sur un autre projet que le GDMP-test ( + les coordonnées : cf Hélias séance 4).
 **Hélias** : Détection des "états" de la main avec MediaPipe et recherche de jeux OpenSource à exploiter
+**Van-Kévin** : Premier calcul correct du temps de rendu cumulé des vues multiples - temps de rendu cumulé à 30 millisecondes. Ajustement de la résolution des vues pour gagner 33% de temps de rendu cumulé. Tentatives d'optimisation de ce calcul.
 
 
 ### Séance 6 - 27/03
+
+**Van-Kévin** : Tentative d'implémentation d'un "Beat Saber"-like pour avoir un premier aperçu des performances en conditions de jeu réelles.
+**Hélias** : Tentative d'implémentation du "Beat Sabe"-like avec Van-Kévin, ajout de deux effets visuels dans le projet démo (effet de glitch et inversion des deux yeux)
 
 
 
