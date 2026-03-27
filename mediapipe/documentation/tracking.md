@@ -8,6 +8,16 @@ On va s'inspirer de ce projet demo pour notre propre projet.
 
 ## Hand landmarkers
 
+### Documentation
+
+Voici la description générale du fonctionnement de MediaPipeHands : https://mediapipe.readthedocs.io/en/latest/solutions/hands.html
+
+![alt text](hand_landmarks_numerotation.png)
+
+N.B : Ce site ne documente que des utilisations dans Python, JavaScript, etc.. Pour une utilisation explicite dans Godot, voir
+
+### Scène Godot pour afficher les marqueurs sur les mains
+
 Pour réaliser un scène avec une fenêtre qui affiche la caméra et des traqueurs sur nos mains, ainsi que les coordonnées des noeuds dans le terminal, on peut faire la scène suivante :
 
     Node_3d (script attaché : hand_tracking_display.gd)
