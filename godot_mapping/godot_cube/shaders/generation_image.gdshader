@@ -38,10 +38,13 @@ void fragment() {
     int x = int(FRAGCOORD.x);
     int y = int(FRAGCOORD.y);
     
+	y %= 8;
+	int pix = 3 * x + decalage * y;
+	pix %= N;
     // Calcul des indices de vue pour chaque composante R, G, B
-    int view_r = ((3 * x + 0 + decalage * y) % N + N) % N;
-    int view_g = ((3 * x + 1 + decalage * y) % N + N) % N;
-    int view_b = ((3 * x + 2 + decalage * y) % N + N) % N;
+    int view_r = (pix) % N;
+    int view_g = (pix+1) % N;
+    int view_b = (pix+2) % N;
     
     float r = get_subpixel_color(view_r, UV, 0);
     float g = get_subpixel_color(view_g, UV, 1);
