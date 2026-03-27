@@ -28,7 +28,6 @@ func _ready():
 	
 	var shader_mat = screen_output.material as ShaderMaterial
 	
-	var start_time = Time.get_ticks_msec()
 	# On configure chaque vue
 	for i in range(1, nb_views+1):
 		var viewport_vue
@@ -49,22 +48,18 @@ func _ready():
 	rendu_time = end_time - start_time
 	textureRect.material.set_shader_parameter("offset", 0.0) # Initialise l'effet glitch à 0
 
-func _process(_delta: float) -> void:
-	# Temps total d'une frame
-	var fps = Engine.get_frames_per_second()
-	var total_frame = (1.0 / fps) * 1000.0
-	
-	# Temps de rendu du CPU
-	var cpu_time = Performance.get_monitor(Performance.TIME_PROCESS) * 1000.0
-	# Temps de rendu du GPU
-	var render_time = total_frame - cpu_time
-	# Nombre d'appels du shader
-	var draw_calls = Performance.get_monitor(Performance.RENDER_TOTAL_DRAW_CALLS_IN_FRAME)
+func _process(_delta):
+	# On calcule le temps final de rendu des frames en attendant que toutes les vues ont été traitées
+	var start_time = Time.get_ticks_msec()
+	await RenderingServer.frame_post_draw
+	var end_time = Time.get_ticks_msec()
+	var render_time = (end_time - start_time)
+	var fps = Performance.get_monitor(Performance.TIME_FPS)
+	var process_time = Performance.get_monitor(Performance.TIME_PROCESS) * 1000.0
 	
 	label_fps.text = "FPS: %d"%fps
-	label_cpu.text = "CPU: %.2f ms"%cpu_time
-	label_gpu.text = "Render (8 views + Shader): %.2f ms"%render_time
-	label_draw_calls.text = "Draw Calls: %d"%draw_calls
+	label_cpu.text = "Temps passé sur le CPU: %d ms"%process_time
+	label_gpu.text = "Temps passé sur le GPU pour la frame précédente: %d ms"%render_time
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("StopGame"):
