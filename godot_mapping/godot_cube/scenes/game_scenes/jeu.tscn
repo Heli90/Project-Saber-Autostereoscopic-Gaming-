@@ -19,10 +19,6 @@ background_mode = 2
 sky = SubResource("Sky_ftslj")
 ambient_light_source = 3
 reflected_light_source = 2
-ssr_enabled = true
-ssao_enabled = true
-ssil_enabled = true
-glow_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_1c2mv"]
 
@@ -36,6 +32,28 @@ albedo_color = Color(0.15686275, 1, 0.49019608, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dmbnc"]
 albedo_color = Color(0, 0, 0, 1)
 
+[sub_resource type="BoxMesh" id="BoxMesh_45xf8"]
+size = Vector3(0.1, 4, 80)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ypfyx"]
+transparency = 1
+albedo_color = Color(0.050980393, 0.019607844, 0.2, 0.6)
+metallic = 0.9
+emission_enabled = true
+emission = Color(0.3019608, 0, 1, 1)
+emission_energy_multiplier = 1.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_ypfyx"]
+size = Vector3(0.1, 4, 80)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_32rft"]
+transparency = 1
+albedo_color = Color(0.050980393, 0.019607844, 0.2, 0.6)
+metallic = 0.9
+emission_enabled = true
+emission = Color(1, 0, 0.3019608, 1)
+emission_energy_multiplier = 1.5
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_1c2mv"]
 size = Vector2(200, 200)
 
@@ -43,6 +61,15 @@ size = Vector2(200, 200)
 albedo_color = Color(0.23151973, 0.3287559, 0, 1)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_f7g2b"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_32rft"]
+size = Vector3(0.02, 0.02, 80)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nmqw8"]
+albedo_color = Color(0.5019608, 0.5019608, 1, 1)
+emission_enabled = true
+emission = Color(0.5019608, 0.5019608, 1, 1)
+emission_energy_multiplier = 2.0
 
 [node name="Game" type="Node3D" unique_id=1026699542]
 script = ExtResource("1_fu8w0")
@@ -93,107 +120,25 @@ surface_material_override/0 = SubResource("StandardMaterial3D_dmbnc")
 [node name="Map" type="Node3D" parent="." unique_id=1966754843]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1453242, 0)
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Map" unique_id=801060821]
-gi_mode = 2
-use_collision = true
+[node name="MurGaucheJ1" type="MeshInstance3D" parent="Map" unique_id=330388240]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 1, 0)
+mesh = SubResource("BoxMesh_45xf8")
+surface_material_override/0 = SubResource("StandardMaterial3D_ypfyx")
 
-[node name="Wall0" type="CSGBox3D" parent="Map/CSGCombiner3D" unique_id=1133564028]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, 5)
-size = Vector3(10, 5, 10)
+[node name="MurGaucheJ2" type="MeshInstance3D" parent="Map" unique_id=1636075451]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, 0)
+mesh = SubResource("BoxMesh_45xf8")
+surface_material_override/0 = SubResource("StandardMaterial3D_ypfyx")
 
-[node name="Rooftop0" type="CSGSphere3D" parent="Map/CSGCombiner3D" unique_id=1292077997]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.034, 4.5, 5)
-radius = 5.0
-radial_segments = 30
-rings = 20
+[node name="MurDroitJ1" type="MeshInstance3D" parent="Map" unique_id=969943501]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1, 0)
+mesh = SubResource("BoxMesh_ypfyx")
+surface_material_override/0 = SubResource("StandardMaterial3D_32rft")
 
-[node name="MiniRooftop0" type="CSGSphere3D" parent="Map/CSGCombiner3D/Rooftop0" unique_id=1007232671]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)
-radius = 2.0
-rings = 2
-
-[node name="MiniRooftop1" type="CSGSphere3D" parent="Map/CSGCombiner3D/Rooftop0" unique_id=1588902704]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)
-radius = 2.0
-rings = 2
-
-[node name="MiniRooftop2" type="CSGSphere3D" parent="Map/CSGCombiner3D/Rooftop0" unique_id=482678489]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
-radius = 2.0
-rings = 2
-
-[node name="MiniRooftop3" type="CSGSphere3D" parent="Map/CSGCombiner3D/Rooftop0" unique_id=1299660174]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5)
-radius = 2.0
-rings = 2
-
-[node name="MiniRooftop4" type="CSGSphere3D" parent="Map/CSGCombiner3D/Rooftop0" unique_id=132543594]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
-radius = 2.0
-rings = 2
-
-[node name="Room0" type="CSGCylinder3D" parent="Map/CSGCombiner3D" unique_id=1007288992]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 2, 5)
-operation = 2
-radius = 4.5
-height = 5.0
-sides = 64
-
-[node name="Door0" type="CSGCylinder3D" parent="Map/CSGCombiner3D" unique_id=845492771]
-transform = Transform3D(0.9999619, -0.008726535, 0, -3.8144898e-10, -4.3709722e-08, -1, 0.008726535, 0.9999619, -4.371139e-08, -10.207, 0, 1)
-operation = 2
-radius = 3.0
-height = 3.0
-sides = 64
-
-[node name="Wall1" type="CSGBox3D" parent="Map/CSGCombiner3D" unique_id=609395208]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2, 5)
-size = Vector3(10, 5, 10)
-
-[node name="Rooftop1" type="CSGSphere3D" parent="Map/CSGCombiner3D" unique_id=80439933]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 4.5, 5)
-radius = 5.0
-radial_segments = 30
-rings = 20
-
-[node name="MiniRooftop0" type="CSGSphere3D" parent="Map/CSGCombiner3D/Rooftop1" unique_id=350290975]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, -5)
-radius = 2.0
-rings = 2
-
-[node name="MiniRooftop1" type="CSGSphere3D" parent="Map/CSGCombiner3D/Rooftop1" unique_id=536936998]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5)
-radius = 2.0
-rings = 2
-
-[node name="MiniRooftop2" type="CSGSphere3D" parent="Map/CSGCombiner3D/Rooftop1" unique_id=2129034617]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 5)
-radius = 2.0
-rings = 2
-
-[node name="MiniRooftop3" type="CSGSphere3D" parent="Map/CSGCombiner3D/Rooftop1" unique_id=826615459]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 5)
-radius = 2.0
-rings = 2
-
-[node name="MiniRooftop4" type="CSGSphere3D" parent="Map/CSGCombiner3D/Rooftop1" unique_id=1976226149]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
-radius = 2.0
-rings = 2
-
-[node name="Room1" type="CSGCylinder3D" parent="Map/CSGCombiner3D" unique_id=23413717]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2, 5)
-operation = 2
-radius = 4.5
-height = 5.0
-sides = 64
-
-[node name="Door1" type="CSGCylinder3D" parent="Map/CSGCombiner3D" unique_id=320842749]
-transform = Transform3D(0.9999619, -0.008726535, 0, -3.8144898e-10, -4.3709722e-08, -1, 0.008726535, 0.9999619, -4.371139e-08, 10, 0, 1)
-operation = 2
-radius = 3.0
-height = 3.0
-sides = 64
+[node name="MurDroitJ2" type="MeshInstance3D" parent="Map" unique_id=1541404841]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1, 0)
+mesh = SubResource("BoxMesh_ypfyx")
+surface_material_override/0 = SubResource("StandardMaterial3D_32rft")
 
 [node name="Sol" type="StaticBody3D" parent="Map" unique_id=144602052]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
@@ -204,5 +149,15 @@ surface_material_override/0 = SubResource("StandardMaterial3D_04wrr")
 
 [node name="Collision_Sol" type="CollisionShape3D" parent="Map/Sol" unique_id=1092382132]
 shape = SubResource("WorldBoundaryShape3D_f7g2b")
+
+[node name="Rails-BGJ1" type="MeshInstance3D" parent="Map" unique_id=935753673]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.75, 0.01, 0)
+mesh = SubResource("BoxMesh_32rft")
+surface_material_override/0 = SubResource("StandardMaterial3D_nmqw8")
+
+[node name="Rails-BGJ2" type="MeshInstance3D" parent="Map" unique_id=2004436519]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.25, 0.02, 0)
+mesh = SubResource("BoxMesh_32rft")
+surface_material_override/0 = SubResource("StandardMaterial3D_nmqw8")
 
 [connection signal="timeout" from="PartieTimer" to="." method="_onPartieTimerTimeout"]
