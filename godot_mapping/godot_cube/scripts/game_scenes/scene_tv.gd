@@ -14,6 +14,8 @@ extends Node3D
 @onready var label_gpu = $TechnicalInfos/GPU
 @onready var label_draw_calls = $TechnicalInfos/DrawCalls
 
+@onready var textureRect = $TextureRect
+
 var initialisations_joueurs: bool = false
 var rendu_time: float = 0.0
 
@@ -45,6 +47,7 @@ func _ready():
 			shader_mat.set_shader_parameter(shader_vue, texture_vue)
 	var end_time = Time.get_ticks_msec()
 	rendu_time = end_time - start_time
+	textureRect.material.set_shader_parameter("offset", 0.0) # Initialise l'effet glitch à 0
 
 func _process(_delta: float) -> void:
 	# Temps total d'une frame
@@ -66,3 +69,12 @@ func _process(_delta: float) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("StopGame"):
 		cube_tournant._onPartieTimerTimeout()
+	if event.is_action_pressed("Invert_views_J1"):
+		if textureRect:
+			var invert = textureRect.material.get_shader_parameter("invertViews")
+			textureRect.material.set_shader_parameter("invertViews", not invert)
+	if event.is_action_pressed("glitchEffect"):
+		var offset = textureRect.material.get_shader_parameter("offset")
+		textureRect.material.set_shader_parameter("offset", offset+0.01)
+	if event.is_action_pressed("resetGlitchEffect"):
+		textureRect.material.set_shader_parameter("offset", 0.0)

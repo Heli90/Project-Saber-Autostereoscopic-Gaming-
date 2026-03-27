@@ -41,6 +41,7 @@ shader_parameter/vue_7 = SubResource("ViewportTexture_6n0u1")
 shader_parameter/vue_8 = SubResource("ViewportTexture_5cx5k")
 shader_parameter/N = 8
 shader_parameter/decalage = -1
+shader_parameter/invertViews = false
 
 [sub_resource type="Gradient" id="Gradient_fqw2t"]
 

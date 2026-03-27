@@ -1,16 +1,22 @@
 shader_type canvas_item;
 
-uniform sampler2D vue_1;
-uniform sampler2D vue_2;
+// Pour le moment les vues 1,2,5,6 sont utilisées pour l'affichage, le reste est noir
+uniform sampler2D vue_1; 
+uniform sampler2D vue_2; 
 uniform sampler2D vue_3;
 uniform sampler2D vue_4;
-uniform sampler2D vue_5;
-uniform sampler2D vue_6;
+uniform sampler2D vue_5; 
+uniform sampler2D vue_6; 
 uniform sampler2D vue_7;
 uniform sampler2D vue_8;
 
 uniform int N = 8;
 uniform int decalage = -1;
+
+//Variables pour effets visuels
+uniform bool invertViews = false; 
+uniform float offset = 0.000;
+
 
 // Fonction utilitaire pour récupérer la couleur du bon point de vue
 float get_subpixel_color(int view_index, vec2 uv, int channel) {
@@ -29,8 +35,22 @@ float get_subpixel_color(int view_index, vec2 uv, int channel) {
 		col = texture(vue_6, uv).rgb;
     } else if (view_index == 6) {
 		col = texture(vue_7, uv).rgb;
-    } else {col = texture(vue_8, uv).rgb;
-	} return col[channel];
+    } else {col = texture(vue_8, uv).rgb;}
+	
+	// Effet d'inversion
+	if (invertViews){
+		if (view_index == 0) {
+			col = texture(vue_2, uv).rgb;
+		} else if (view_index == 1) {
+			col = texture(vue_1, uv).rgb;
+    	} else if (view_index == 4) {
+			col = texture(vue_6, uv).rgb;
+    	} else if (view_index == 5) {
+			col = texture(vue_5, uv).rgb;
+		}
+	} 
+	
+	return col[channel];
 }
 
 void fragment() {
@@ -43,9 +63,9 @@ void fragment() {
     int view_g = ((3 * x + 1 + decalage * y) % N + N) % N;
     int view_b = ((3 * x + 2 + decalage * y) % N + N) % N;
     
-    float r = get_subpixel_color(view_r, UV, 0);
-    float g = get_subpixel_color(view_g, UV, 1);
-    float b = get_subpixel_color(view_b, UV, 2);
+    float r = get_subpixel_color(view_r, UV+vec2(offset,0), 0);
+    float g = get_subpixel_color(view_g, UV-vec2(offset,0), 1);
+    float b = get_subpixel_color(view_b, UV+vec2(0,offset), 2);
     
     COLOR = vec4(r, g, b, 1.0);
 }

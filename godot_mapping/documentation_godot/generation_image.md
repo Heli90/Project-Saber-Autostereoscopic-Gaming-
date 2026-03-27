@@ -53,3 +53,8 @@ void fragment() {
     COLOR = vec4(r, g, b, 1.0);
 }
 ```
+
+## Fonctionnalités (uniquement sur le mode TV)
+- Échange des vues des deux yeux : touche I
+- Incrémentation de l'effet glitch : touche O 
+- Reset de l'effet glitch : SHIFT + O
