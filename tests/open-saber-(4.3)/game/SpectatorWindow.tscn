@@ -1,0 +1,76 @@
+[gd_scene load_steps=10 format=3 uid="uid://iiatb07725bg"]
+
+[ext_resource type="Script" path="res://game/SpectatorWindow.gd" id="1_s3dpd"]
+[ext_resource type="Script" path="res://game/PercentIndicator.gd" id="3_be825"]
+[ext_resource type="Shader" path="res://game/PercentIndicator.gdshader" id="4_a2ftq"]
+[ext_resource type="Material" uid="uid://dqox51k4cngtf" path="res://game/Text.material" id="4_ometx"]
+
+[sub_resource type="TextMesh" id="TextMesh_shlsn"]
+text = " x 0
+ Combo 000"
+font_size = 5
+horizontal_alignment = 0
+vertical_alignment = 0
+depth = 0.0
+
+[sub_resource type="TextMesh" id="TextMesh_pr0ke"]
+text = "Score: 000000"
+font_size = 5
+horizontal_alignment = 2
+vertical_alignment = 0
+depth = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qq5ao"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("4_a2ftq")
+shader_parameter/how_full = 0.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_02xdc"]
+size = Vector2(0.25, 0.25)
+
+[sub_resource type="TextMesh" id="TextMesh_270nm"]
+resource_local_to_scene = true
+text = "0%"
+font_size = 5
+depth = 0.0
+
+[node name="SpectatorWindow" type="Window"]
+handle_input_locally = false
+title = "Spectator View"
+initial_position = 1
+size = Vector2i(960, 540)
+visible = false
+script = ExtResource("1_s3dpd")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.866025, -0.25, 0.433013, 0, 0.866025, 0.5, -0.5, -0.433013, 0.75, 2, 3, 3)
+cull_mask = 2
+
+[node name="MultiplierLabel" type="MeshInstance3D" parent="Camera3D"]
+transform = Transform3D(1, 2.98023e-08, 2.98023e-08, -2.98023e-08, 1, 0, -2.98023e-08, -5.96046e-08, 1, 0, 0, 0)
+layers = 2
+material_override = ExtResource("4_ometx")
+mesh = SubResource("TextMesh_shlsn")
+
+[node name="PointLabel" type="MeshInstance3D" parent="Camera3D"]
+layers = 2
+material_override = ExtResource("4_ometx")
+mesh = SubResource("TextMesh_pr0ke")
+
+[node name="PIPivot" type="Node3D" parent="Camera3D"]
+
+[node name="PercentIndicator" type="MeshInstance3D" parent="Camera3D/PIPivot"]
+transform = Transform3D(1, -1.49012e-08, 2.98023e-08, -1.49012e-08, 1, 0, 0, 0, 1, -0.125, 0.125, 0)
+layers = 2
+material_override = SubResource("ShaderMaterial_qq5ao")
+mesh = SubResource("QuadMesh_02xdc")
+script = ExtResource("3_be825")
+
+[node name="PercentLabel" type="MeshInstance3D" parent="Camera3D/PIPivot/PercentIndicator"]
+material_override = ExtResource("4_ometx")
+mesh = SubResource("TextMesh_270nm")
+
+[connection signal="close_requested" from="." to="." method="close"]
+[connection signal="size_changed" from="." to="." method="reposition_ui_elements"]
+[connection signal="visibility_changed" from="." to="." method="resize_to_main_window_size"]

@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://cisgyiarwaf2i"]
+
+[ext_resource type="Script" path="res://game/scripts/UIRaycast/UIRaycast.gd" id="1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6opxp"]
+shading_mode = 0
+
+[sub_resource type="BoxMesh" id="1"]
+size = Vector3(0.004, 0.004, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2jvdb"]
+shading_mode = 0
+
+[sub_resource type="SphereMesh" id="3"]
+radius = 0.01
+height = 0.02
+
+[node name="UIRaycast" type="Node3D"]
+script = ExtResource("1")
+
+[node name="RayCastPosition" type="Node3D" parent="."]
+
+[node name="RayCast3D" type="RayCast3D" parent="RayCastPosition"]
+target_position = Vector3(0, -3, 0)
+collision_mask = 524290
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCastMesh" type="MeshInstance3D" parent="RayCastPosition"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+layers = 3
+material_override = SubResource("StandardMaterial3D_6opxp")
+mesh = SubResource("1")
+
+[node name="RayCastHitMarker" type="MeshInstance3D" parent="RayCastPosition"]
+layers = 3
+material_override = SubResource("StandardMaterial3D_2jvdb")
+mesh = SubResource("3")
