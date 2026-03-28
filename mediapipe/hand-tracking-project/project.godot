@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="artishow"
+config/name="artishow_local"
 run/main_scene="uid://vr0xnvn8vmsd"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"

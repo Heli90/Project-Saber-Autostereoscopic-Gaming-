@@ -2,9 +2,8 @@
 
 [ext_resource type="Script" uid="uid://kube8penh2no" path="res://hand_tracking_display.gd" id="1_a202f"]
 
-[node name="LandMarkersProceed" type="Node3D" unique_id=980799063 node_paths=PackedStringArray("label")]
+[node name="LandMarkersProceed" type="Node3D" unique_id=980799063]
 script = ExtResource("1_a202f")
-label = NodePath("Label")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=845211963]
 offset_right = 40.0
@@ -28,10 +27,51 @@ flip_h = true
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Label" type="Label" parent="." unique_id=321432346]
-offset_left = 1550.0
-offset_top = 200.0
-offset_right = 1590.0
-offset_bottom = 473.0
-theme_override_colors/font_color = Color(0.6627451, 0.047058824, 1, 1)
-theme_override_font_sizes/font_size = 200
+[node name="CanvasLayerLabel" type="CanvasLayer" parent="." unique_id=1368820510]
+
+[node name="HandLabel" type="Label" parent="CanvasLayerLabel" unique_id=321432346]
+offset_left = 1300.0
+offset_right = 1340.0
+offset_bottom = 273.0
+theme_override_colors/font_color = Color(1, 0.80942166, 0.98748714, 1)
+theme_override_font_sizes/font_size = 100
+
+[node name="CameraFPSLabel" type="Label" parent="CanvasLayerLabel" unique_id=1754724268]
+offset_left = 1300.0
+offset_top = 273.0
+offset_right = 1340.0
+offset_bottom = 410.0
+theme_override_colors/font_color = Color(1, 0.80942166, 0.98748714, 1)
+theme_override_font_sizes/font_size = 45
+
+[node name="DetectionLabel" type="Label" parent="CanvasLayerLabel" unique_id=1743831913]
+offset_left = 1300.0
+offset_top = 410.0
+offset_right = 1340.0
+offset_bottom = 547.0
+theme_override_colors/font_color = Color(1, 0.80942166, 0.98748714, 1)
+theme_override_font_sizes/font_size = 45
+
+[node name="RenderLabel" type="Label" parent="CanvasLayerLabel" unique_id=362205235]
+offset_left = 1300.0
+offset_top = 547.0
+offset_right = 1340.0
+offset_bottom = 684.0
+theme_override_colors/font_color = Color(1, 0.80942166, 0.98748714, 1)
+theme_override_font_sizes/font_size = 38
+
+[node name="DisplayLabel" type="Label" parent="CanvasLayerLabel" unique_id=122328068]
+offset_left = 1300.0
+offset_top = 674.0
+offset_right = 1340.0
+offset_bottom = 811.0
+theme_override_colors/font_color = Color(1, 0.80942166, 0.98748714, 1)
+theme_override_font_sizes/font_size = 45
+
+[node name="CoordinatesDisplay" type="Label" parent="CanvasLayerLabel" unique_id=2033817476]
+offset_left = 1300.0
+offset_top = 780.0
+offset_right = 1301.0
+offset_bottom = 822.0
+theme_override_colors/font_color = Color(1, 0.80942166, 0.98748714, 1)
+theme_override_font_sizes/font_size = 30

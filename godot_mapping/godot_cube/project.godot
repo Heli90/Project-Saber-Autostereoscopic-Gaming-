@@ -43,6 +43,11 @@ config/icon="res://icon.svg"
 
 buses/default_bus_layout="res://addons/sfx/default_bus_layout.tres"
 
+[autoload]
+
+MediaPipeExternalFiles="*uid://dsyuq4kjrnbs4"
+GDMPAndroid="*uid://cdvhdf5dmteib"
+
 [display]
 
 window/size/viewport_width=1920
@@ -54,7 +59,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/CameraServerExtension/plugin.cfg", "res://addons/GDMP/plugin.cfg")
 
 [input]
 
