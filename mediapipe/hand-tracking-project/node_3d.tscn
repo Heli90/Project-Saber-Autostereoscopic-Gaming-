@@ -32,9 +32,9 @@ offset_bottom = 40.0
 [node name="HandLabel" type="Label" parent="CanvasLayerLabel" unique_id=321432346]
 offset_left = 1300.0
 offset_right = 1340.0
-offset_bottom = 273.0
+offset_bottom = 137.0
 theme_override_colors/font_color = Color(1, 0.80942166, 0.98748714, 1)
-theme_override_font_sizes/font_size = 100
+theme_override_font_sizes/font_size = 50
 
 [node name="CameraFPSLabel" type="Label" parent="CanvasLayerLabel" unique_id=1754724268]
 offset_left = 1300.0
@@ -75,3 +75,11 @@ offset_right = 1301.0
 offset_bottom = 822.0
 theme_override_colors/font_color = Color(1, 0.80942166, 0.98748714, 1)
 theme_override_font_sizes/font_size = 30
+
+[node name="GestureLabel" type="Label" parent="CanvasLayerLabel" unique_id=1170304723]
+offset_left = 1300.0
+offset_top = 137.0
+offset_right = 1340.0
+offset_bottom = 200.0
+theme_override_colors/font_color = Color(1, 0.80942166, 0.98748714, 1)
+theme_override_font_sizes/font_size = 40

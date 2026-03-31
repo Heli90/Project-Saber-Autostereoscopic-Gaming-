@@ -3,7 +3,10 @@ extends Node3D
 # Variables MediaPipe
 var task
 var renderer
-var model_path = "res://hand_landmarker/hand_landmarker.task"
+var model_path = "res://gesture_recognizer/gesture_recognizer.task"
+
+var running_mode = 1 # Mode Vidéo
+var num_hands = 4
 
 # Variables Caméra
 var camera_extension: CameraServerExtension
@@ -18,7 +21,7 @@ var camera_feed: CameraFeed
 @onready var render_label: Label = $CanvasLayerLabel/RenderLabel
 @onready var display_label : Label = $CanvasLayerLabel/DisplayLabel
 @onready var coordinates_display: Label = $CanvasLayerLabel/CoordinatesDisplay
-
+@onready var gesture_label: Label = $CanvasLayerLabel/GestureLabel
 func _ready():
 	_setup_mediapipe()
 	_setup_camera()
@@ -35,10 +38,10 @@ func _setup_mediapipe():
 	var options = MediaPipeTaskBaseOptions.new()
 	options.model_asset_buffer = buffer
 	
-	task = MediaPipeHandLandmarker.new()
+	task = MediaPipeGestureRecognizer.new()
 	
 	# Paramètres : Mode de capture (Ici 1 pour le mode vidéo) et le nombre de mains (Ici 4)
-	task.initialize(options, 1,4)
+	task.initialize(options, running_mode, num_hands)
 	renderer = MediaPipeHandRenderer.new()
 	print("MediaPipe initialisé.")
 
@@ -107,7 +110,20 @@ func _process(_delta):
 	
 	# Détection des mains
 	var start_detect = Time.get_ticks_usec()
-	var result = task.detect(mp_image)
+	var result = task.recognize(mp_image)
+	var gesture_text := ""
+	assert(result.gestures.size() == result.handedness.size())
+	for i in range(result.gestures.size()):
+		var gesture : MediaPipeClassifications= result.gestures[i]
+		var hand : MediaPipeClassifications = result.handedness[i]
+		var classification_gesture := gesture.categories[0]
+		var classification_hand := hand.categories[0]
+		var gesture_string: String = classification_gesture.category_name
+		var gesture_score: float = classification_gesture.score
+		var hand_string: String = classification_hand.category_name
+		var hand_score: float = classification_hand.score
+		gesture_text += "%s: %.2f|%s: %.2f\n" % [hand_string, hand_score, gesture_string, gesture_score]
+		gesture_label.text = gesture_text
 	var time_dectect = (Time.get_ticks_usec()-start_detect)/1000.0
 	detection_label.text = "Time_detect AI : %.2f ms" % [time_dectect]
 	

@@ -3,8 +3,12 @@ extends Node2D
 # Variables MediaPipe
 var task
 var renderer
-var model_path = "res://hand_landmarker/hand_landmarker.task"
+var model_path = "res://gesture_recognizer/gesture_recognizer.task"
 var modulated = 1
+
+var running_mode = 1 # Mode Vidéo
+var num_hands = 4
+var gesture_string = "None"
 
 # Variables Caméra
 var camera_extension: CameraServerExtension
@@ -31,10 +35,10 @@ func _setup_mediapipe():
 	var options = MediaPipeTaskBaseOptions.new()
 	options.model_asset_buffer = buffer
 	
-	task = MediaPipeHandLandmarker.new()
+	task = MediaPipeGestureRecognizer.new()
 	
 	# Paramètres : Mode de capture (Ici 1 pour le mode vidéo) et le nombre de mains (Ici 4)
-	task.initialize(options, 1,1)
+	task.initialize(options, running_mode, num_hands)
 	renderer = MediaPipeHandRenderer.new()
 	print("MediaPipe initialisé.")
 
@@ -91,7 +95,12 @@ func _process(_delta):
 	mp_image.set_image(img)
 	
 	# Détection des mains
-	var result = task.detect(mp_image)
+	var result = task.recognize(mp_image)
+	assert(result.gestures.size() == result.handedness.size())
+	for i in range(result.gestures.size()):
+		var gesture : MediaPipeClassifications= result.gestures[i]
+		var classification_gesture := gesture.categories[0]
+		gesture_string = classification_gesture.category_name
 	
 	if result:
 		# Dessin des marqueurs sur les mains
@@ -111,4 +120,4 @@ func _maj_speed():
 	#hand_landmarks.landmarks[8].x,
 	#hand_landmarks.landmarks[8].y,
 	#hand_landmarks.landmarks[8].z])
-	return modulated
+	return [modulated,gesture_string]

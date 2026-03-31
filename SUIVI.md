@@ -3,6 +3,9 @@
 ### Membres :
 Hugo BELLE, Birame CISSÉ, Hélias GODARD--DELONGEAS, Adam KHATIRI, Van-Kévin NGUYEN
 
+### Professeur encadrant :
+Jean Lefeuvre
+
 ## Suivi des séances
 
 ### Séance 1 - 11/02
@@ -38,8 +41,7 @@ Hugo BELLE, Birame CISSÉ, Hélias GODARD--DELONGEAS, Adam KHATIRI, Van-Kévin N
 
 ### Séance 2 - 20/02
 
-> Retour du professeur encadrant (J. Lefeuvre) sur le planning
-20/02: 
+> Retour du professeur encadrant (J. Lefeuvre) sur le planning 
 
 **Hugo** :  Lecture de la biblio de mediapipe et identification des différents type de mediapipe qui pourraient etre utiles :
 mediapipe hands (https://github.com/google-ai-edge/mediapipe/blob/master/docs/solutions/hands.md)
@@ -53,20 +55,30 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 ### Entre la séance 3 et la séance 4
 
 25/02 - **Van-Kévin** : Implémentation de l'algorithme d'entrelacement initié par Hélias. Visuel possible sur la TV avec les 8 vues, et 2 points de vue distincts par joueur, mais les images sont statiques (les caméras sont immobiles). Prise en main des outils de Godot pour préparer un terrain de jeu (son, visuel de terrain...).
+
+
 04/03 - **Van-Kévin** : Implémentation d'un menu d'entrée du jeu avec transitions de texte et foncionnalités basiques, d'un menu en jeu mettant en pause le jeu. Prise en compte de paramètres de confort de jeu (musique, SFX) et ajout d'un choix de mode PC/TV pour faciliter les futurs tests.
+
+
 06/03 - **Van-Kévin** : Implémentation d'un temps imparti pour les parties jouées et d'un score final qui peut être enregistré s'il s'agit du meilleur score. Possibilité de réinitialiser ce score dans le menu principal. Reconfiguration de l'ensemble des scènes du jeu pour faciliter la compréhension du code. Implémentation de 2 vues FPS/TPS pour le mode PC (et peut-être le mode TV, plus tard, si besoin) et correction des déplacements des joueurs, en conséquence. Correction de certains bugs liés au mode TV et ajout de caméras mobiles avec le joueur tout en conservant les vues (à confirmer avant la séance 4).
 
 12/03 - **Birame** : Test du projet-test mis à disposition par GDMP (https://github.com/j20001970/GDMP-demo/tree/master) et familiarisation avec les outils utilisés (HandLandmarker.gd et HAndRenderer.gd)
 
 ### Séance 4 - 13/03
 **Hélias** : récupération des coordonées de la main dans MediaPipe et tests sur la profondeur (plutôt bien détectée par MP mais nouveau problème : si on pose la caméra sur l'écran, les joueurs sont vite trop loin !)
+
+
 **Van-Kévin** : Modification de la map. Présentation des tests effectués jusqu'à présent. Implémentation d'un texte affiché en jeu pour voir les FPS du jeu courant et le temps de rendu pris par les shaders (faux calcul actuellement).
+
+
 **Birame** : Tests de l'affichage de la caméra, en vue d'afficher les marqueurs des joueurs
 
 ### Séance 5 - 16/03
 
 **Birame** : Affichage des marqueurs sur un autre projet que le GDMP-test ( + les coordonnées : cf Hélias séance 4).
+
 **Hélias** : Détection des "états" de la main avec MediaPipe et recherche de jeux OpenSource à exploiter
+
 **Van-Kévin** : Premier calcul correct du temps de rendu cumulé des vues multiples - temps de rendu cumulé à 30 millisecondes. Ajustement de la résolution des vues pour gagner 33% de temps de rendu cumulé. Tentatives d'optimisation de ce calcul.
 
 ### Séance 6 - 27/03
@@ -75,7 +87,14 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 **Hélias** : Tentative d'implémentation du "Beat Saber"-like avec Van-Kévin, ajout de deux effets visuels dans le projet démo (effet de glitch et inversion des deux yeux)
 
-**Birame** : Ajout de la détection dans le projet `cube_godot` pour gérer la vitesse de rotation du cube. Affichage de *hand_landmarkers* colorés et du nombre de mains détectées dans `hand-tracking-project`
+**Birame** : Ajout de la détection dans le projet `cube_godot` pour gérer la vitesse de rotation du cube (vitesse de rotation du cube modulée par l'abscisse par rapport à la caméra de l'index de la main observée). Affichage de *hand_landmarkers* colorés et du nombre de mains détectées dans `hand-tracking-project`
+
+### Entre la séance 6 et la séance 7
+
+31/03 - **Birame** :
+- `hand_tracking_project` : Ajout de la détection de mouvements dans le projet . Affichage des temps de traitement liés à MediaPipe (analyse des données et rendu) et à l'affichage de la caméra.
+- `godot_cube` : Ajout de la détection de mouvements dans le jeu : le cube arrête de tourner quand la main observée se ferme (et se remet à tourner pour n'importe quelle autre geste) .
+- Mise à jour de la documention (transition de `hand_landmarker.task` à `gesture_recognizer.task`)
 
 ### Séance 7 - 03/04
 

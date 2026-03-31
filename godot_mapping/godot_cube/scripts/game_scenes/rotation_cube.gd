@@ -10,5 +10,8 @@ var facteur_rotation = 2.0
 func _physics_process(delta: float) -> void:
 	# Rotation du cube.
 	# Prise en compte des FPS de l'ordinateur.
-	vitesse_rotation = facteur_rotation*landmarks_proceed._maj_speed()
+	if landmarks_proceed._maj_speed()[1]== "Closed_Fist" :
+		vitesse_rotation = 0
+	else :
+		vitesse_rotation = facteur_rotation*landmarks_proceed._maj_speed()[0]
 	rotate_y(vitesse_rotation * delta)
