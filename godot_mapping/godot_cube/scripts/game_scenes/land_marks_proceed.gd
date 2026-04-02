@@ -5,6 +5,11 @@ var task
 var renderer
 var model_path = "res://gesture_recognizer/gesture_recognizer.task"
 var modulated = 1
+var time_detect
+var time_render
+var time_display
+var camera_fps
+
 
 var running_mode = 1 # Mode Vidéo
 var num_hands = 4
@@ -83,6 +88,7 @@ func update_debug_overlay(image: Image) -> void:
 			debug_view.texture.set_image(image)
 
 func _process(_delta):
+	camera_fps = Engine.get_frames_per_second()
 	label.text = ""
 	# Récupération de l'image du Viewport
 	var tex = viewport.get_texture()
@@ -95,17 +101,24 @@ func _process(_delta):
 	mp_image.set_image(img)
 	
 	# Détection des mains
+	var start_detect = Time.get_ticks_usec()
 	var result = task.recognize(mp_image)
 	assert(result.gestures.size() == result.handedness.size())
 	for i in range(result.gestures.size()):
 		var gesture : MediaPipeClassifications= result.gestures[i]
 		var classification_gesture := gesture.categories[0]
 		gesture_string = classification_gesture.category_name
+	time_detect = (Time.get_ticks_usec()-start_detect)/1000.0
 	
 	if result:
 		# Dessin des marqueurs sur les mains
+		var start_render = Time.get_ticks_usec()
 		var output = renderer.render(mp_image, result.hand_landmarks)
+		time_render = (Time.get_ticks_usec()-start_render)/1000.0
+		
+		var start_display = Time.get_ticks_usec()
 		update_debug_overlay(output.image)
+		time_display = (Time.get_ticks_usec()-start_display)/1000.0
 		
 		# Traitement des mains détectées
 		for i in range(result.hand_landmarks.size()):
