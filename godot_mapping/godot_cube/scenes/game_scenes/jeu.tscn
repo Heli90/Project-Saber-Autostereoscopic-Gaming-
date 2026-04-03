@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://br3hbcc04lw64" path="res://scripts/game_scenes/rotation_cube.gd" id="1_gojnm"]
 [ext_resource type="PackedScene" uid="uid://s6n8auc020ga" path="res://scenes/menus/game_ending.tscn" id="3_0hq27"]
 [ext_resource type="PackedScene" uid="uid://cowlnii2y28cm" path="res://scenes/menus/pause_menu.tscn" id="6_04wrr"]
-[ext_resource type="Script" uid="uid://w82tvhackj2n" path="res://scripts/game_scenes/land_marks_proceed.gd" id="6_ypfyx"]
 
 [sub_resource type="Sky" id="Sky_5ea2i"]
 
@@ -209,7 +208,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.25, -0.49, 0)
 mesh = SubResource("BoxMesh_32rft")
 surface_material_override/0 = SubResource("StandardMaterial3D_nmqw8")
 
-<<<<<<< HEAD
 [node name="Rails-BGJ2" type="MeshInstance3D" parent="Map" unique_id=527533206]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.25, -0.49, 0)
 mesh = SubResource("BoxMesh_32rft")
@@ -279,38 +277,5 @@ surface_material_override/0 = SubResource("StandardMaterial3D_e41p7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1.5, -40)
 mesh = SubResource("BoxMesh_nljp5")
 surface_material_override/0 = SubResource("StandardMaterial3D_e41p7")
-=======
-[node name="LandMarksProceed" type="Node2D" parent="." unique_id=775762795]
-position = Vector2(650, 0)
-script = ExtResource("6_ypfyx")
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="LandMarksProceed" unique_id=877274248]
-offset_right = 640.0
-offset_bottom = 480.0
-
-[node name="CameraViewport" type="SubViewport" parent="LandMarksProceed/SubViewportContainer" unique_id=861650548]
-size = Vector2i(640, 480)
-
-[node name="TestAffichage" type="TextureRect" parent="LandMarksProceed/SubViewportContainer/CameraViewport" unique_id=538163506]
-offset_right = 640.0
-offset_bottom = 480.0
-expand_mode = 2
-flip_h = true
-
-[node name="CanvasLayer" type="CanvasLayer" parent="LandMarksProceed" unique_id=688860276]
-
-[node name="DebugOverlay" type="TextureRect" parent="LandMarksProceed/CanvasLayer" unique_id=1751420981]
-offset_left = 650.0
-offset_right = 690.0
-offset_bottom = 40.0
-
-[node name="CameraLabel" type="Label" parent="." unique_id=605287519]
-offset_left = 800.0
-offset_top = 480.0
-offset_right = 900.0
-offset_bottom = 617.0
-theme_override_colors/font_color = Color(0.14970946, 0.65653664, 0.97760206, 1)
-theme_override_font_sizes/font_size = 50
->>>>>>> 844b10071182ad6a33780f0c2e64c95565fdca4d
 
 [connection signal="timeout" from="PartieTimer" to="." method="_onPartieTimerTimeout"]

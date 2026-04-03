@@ -3,10 +3,7 @@ extends Node3D
 # Variables MediaPipe
 var task
 var renderer
-var model_path = "res://gesture_recognizer/gesture_recognizer.task"
-
-var running_mode = 1 # Mode Vidéo
-var num_hands = 4
+var model_path = "res://hand_landmarker/hand_landmarker.task"
 
 # Variables Caméra
 var camera_extension: CameraServerExtension
@@ -15,13 +12,7 @@ var camera_feed: CameraFeed
 @onready var viewport = $SubViewportContainer/CameraViewport
 @onready var texture_rect = $SubViewportContainer/CameraViewport/TestAffichage
 @onready var debug_view = $CanvasLayer/DebugOverlay # Un TextureRect pour voir le résultat
-@onready var hand_label : Label = $CanvasLayerLabel/HandLabel
-@onready var camera_fps_label : Label = $CanvasLayerLabel/CameraFPSLabel
-@onready var detection_label : Label = $CanvasLayerLabel/DetectionLabel
-@onready var render_label: Label = $CanvasLayerLabel/RenderLabel
-@onready var display_label : Label = $CanvasLayerLabel/DisplayLabel
-@onready var coordinates_display: Label = $CanvasLayerLabel/CoordinatesDisplay
-@onready var gesture_label: Label = $CanvasLayerLabel/GestureLabel
+
 func _ready():
 	_setup_mediapipe()
 	_setup_camera()
@@ -38,10 +29,10 @@ func _setup_mediapipe():
 	var options = MediaPipeTaskBaseOptions.new()
 	options.model_asset_buffer = buffer
 	
-	task = MediaPipeGestureRecognizer.new()
+	task = MediaPipeHandLandmarker.new()
 	
 	# Paramètres : Mode de capture (Ici 1 pour le mode vidéo) et le nombre de mains (Ici 4)
-	task.initialize(options, running_mode, num_hands)
+	task.initialize(options, 1,4)
 	renderer = MediaPipeHandRenderer.new()
 	print("MediaPipe initialisé.")
 
@@ -61,7 +52,7 @@ func _on_permission(granted):
 	if granted: _start_camera()
 
 func _start_camera():
-	# Applique ce que voit la caméra à TestAffichage (TextureReact)
+	# Applique ce que voit la caméra à TEstAffichage (TextureReact)
 	await get_tree().create_timer(0.5).timeout
 	CameraServer.monitoring_feeds = true
 	var feeds = CameraServer.feeds()
@@ -75,29 +66,7 @@ func _start_camera():
 		texture_rect.texture = tex
 		print("Affichage réussi")
 
-func update_debug_overlay(image: Image) -> void:
-	image.convert(Image.FORMAT_RGB8)
-	if debug_view.texture == null :
-		debug_view.texture = ImageTexture.create_from_image(image)
-	else :
-		if Vector2i(debug_view.texture.get_size()) == image.get_size():
-			debug_view.texture.update(image)
-		else:
-			debug_view.texture.set_image(image)
-
-func _on_hand_data_received(hand_landmarks, hand_index):
-	# Tout ce qui concerne la gestion des données relatives aux mains se fait ici
-	coordinates_display.text = "Coordonnées: x=%.3f, y=%.3f, z=%.3f\n Hand_index : %d" % [
-	hand_landmarks.landmarks[8].x,
-	hand_landmarks.landmarks[8].y,
-	hand_landmarks.landmarks[8].z, hand_index]
-
-
 func _process(_delta):
-	var current_fps = Engine.get_frames_per_second()
-	camera_fps_label.text = "Camera FPS : %d fps" % [current_fps]
-	
-	hand_label.text = "Mains : 0"
 	# Récupération de l'image du Viewport
 	var tex = viewport.get_texture()
 	var img = tex.get_image()
@@ -109,40 +78,22 @@ func _process(_delta):
 	mp_image.set_image(img)
 	
 	# Détection des mains
-	var start_detect = Time.get_ticks_usec()
-	var result = task.recognize(mp_image)
-	var gesture_text := ""
-	assert(result.gestures.size() == result.handedness.size())
-	for i in range(result.gestures.size()):
-		var gesture : MediaPipeClassifications= result.gestures[i]
-		var hand : MediaPipeClassifications = result.handedness[i]
-		var classification_gesture := gesture.categories[0]
-		var classification_hand := hand.categories[0]
-		var gesture_string: String = classification_gesture.category_name
-		var gesture_score: float = classification_gesture.score
-		var hand_string: String = classification_hand.category_name
-		var hand_score: float = classification_hand.score
-		gesture_text += "%s: %.2f|%s: %.2f\n" % [hand_string, hand_score, gesture_string, gesture_score]
-		gesture_label.text = gesture_text
-	var time_dectect = (Time.get_ticks_usec()-start_detect)/1000.0
-	detection_label.text = "Time_detect AI : %.2f ms" % [time_dectect]
-	
+	var result = task.detect(mp_image)
 	
 	if result:
 		# Dessin des marqueurs sur les mains
-		var start_render = Time.get_ticks_usec()
 		var output = renderer.render(mp_image, result.hand_landmarks)
-		var time_render = (Time.get_ticks_usec()-start_render)/1000.0
-		render_label.text = "MediaPipe Render Time : %.2f ms" % [time_render]
-		
-		var start_display = Time.get_ticks_usec()
-		update_debug_overlay(output.image)
-		var time_display = (Time.get_ticks_usec()-start_display)/1000.0
-		display_label.text = "Display Time : %.2f ms" % [time_display]
+		debug_view.texture = ImageTexture.create_from_image(output.image)
 		
 		# Traitement des mains détectés
-		var size = result.hand_landmarks.size()
-		for i in range(size):
-			hand_label.text = "Mains : %d" % [size]
+		for i in range(result.hand_landmarks.size()):
 			var hand_landmarks = result.hand_landmarks[i]
 			_on_hand_data_received(hand_landmarks, i) # On passe l'index de la main (0 ou 1)
+
+func _on_hand_data_received(hand_landmarks, hand_index):
+	# Tout ce qui concerne la gestion des données relatives aux mains se fait ici
+	print("Coordonnées: x=%f, y=%f, z=%f" % [
+	hand_landmarks.landmarks[8].x,
+	hand_landmarks.landmarks[8].y,
+	hand_landmarks.landmarks[8].z])
+	print("Main", hand_index)
