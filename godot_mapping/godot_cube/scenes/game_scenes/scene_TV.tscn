@@ -43,14 +43,14 @@ remote_path = NodePath("../Vue2/Camera")
 size = Vector2i(1920, 1080)
 
 [node name="Camera" type="Camera3D" parent="J1/CameraControllerFPS/Vue1" unique_id=642319396]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.041075, 1, 4.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.03035, 1, 4.4)
 current = true
 
 [node name="Vue2" type="SubViewport" parent="J1/CameraControllerFPS" parent_id_path=PackedInt32Array(1529862946, 718035250) index="4" unique_id=86739324]
 size = Vector2i(1920, 1080)
 
 [node name="Camera" type="Camera3D" parent="J1/CameraControllerFPS/Vue2" unique_id=130694043]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.958077, 1, 4.4000454)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.968807, 1, 4.4)
 current = true
 
 [node name="CameraControllerTPS" parent="J1" index="3" unique_id=506921349]
@@ -155,15 +155,6 @@ offset_left = 50.0
 offset_top = 900.0
 offset_right = 90.0
 offset_bottom = 923.0
-theme_override_colors/font_color = Color(0.59607846, 0.11372549, 1, 1)
-theme_override_fonts/font = ExtResource("3_llrkf")
-theme_override_font_sizes/font_size = 30
-
-[node name="DrawCalls" type="Label" parent="TechnicalInfos" unique_id=1590461644]
-offset_left = 50.0
-offset_top = 850.0
-offset_right = 90.0
-offset_bottom = 873.0
 theme_override_colors/font_color = Color(0.59607846, 0.11372549, 1, 1)
 theme_override_fonts/font = ExtResource("3_llrkf")
 theme_override_font_sizes/font_size = 30
