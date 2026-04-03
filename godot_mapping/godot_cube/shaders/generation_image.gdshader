@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-// Pour le moment les vues 1,2,5,6 sont utilisées pour l'affichage, le reste est noir
+// Pour le moment les vues 1,2,3,5,6,7 sont utilisées pour l'affichage, le reste est noir
 uniform sampler2D vue_1; 
 uniform sampler2D vue_2; 
 uniform sampler2D vue_3;
