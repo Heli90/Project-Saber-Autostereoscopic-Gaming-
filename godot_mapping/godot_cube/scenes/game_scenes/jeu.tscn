@@ -5,6 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://s6n8auc020ga" path="res://scenes/menus/game_ending.tscn" id="3_0hq27"]
 [ext_resource type="Texture2D" uid="uid://dsax0f2n5h4la" path="res://addons/assets/sky_texture.exr" id="3_ftslj"]
 [ext_resource type="PackedScene" uid="uid://cowlnii2y28cm" path="res://scenes/menus/pause_menu.tscn" id="6_04wrr"]
+[ext_resource type="Script" uid="uid://w82tvhackj2n" path="res://scripts/game_scenes/land_marks_proceed.gd" id="6_ypfyx"]
+[ext_resource type="AudioStream" uid="uid://dseksoliltjqp" path="res://addons/sfx/TimeStopSFX.mp3" id="7_32rft"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_wd2d1"]
 panorama = ExtResource("3_ftslj")
@@ -159,5 +161,46 @@ surface_material_override/0 = SubResource("StandardMaterial3D_nmqw8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.25, 0.02, 0)
 mesh = SubResource("BoxMesh_32rft")
 surface_material_override/0 = SubResource("StandardMaterial3D_nmqw8")
+
+[node name="LandMarksProceed" type="Node2D" parent="." unique_id=775762795]
+position = Vector2(650, 0)
+script = ExtResource("6_ypfyx")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="LandMarksProceed" unique_id=877274248]
+offset_right = 640.0
+offset_bottom = 480.0
+
+[node name="CameraViewport" type="SubViewport" parent="LandMarksProceed/SubViewportContainer" unique_id=861650548]
+handle_input_locally = false
+size = Vector2i(640, 480)
+render_target_update_mode = 4
+
+[node name="TestAffichage" type="TextureRect" parent="LandMarksProceed/SubViewportContainer/CameraViewport" unique_id=538163506]
+offset_right = 640.0
+offset_bottom = 480.0
+expand_mode = 2
+flip_h = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="LandMarksProceed" unique_id=688860276]
+
+[node name="DebugOverlay" type="TextureRect" parent="LandMarksProceed/CanvasLayer" unique_id=1751420981]
+offset_left = 650.0
+offset_right = 690.0
+offset_bottom = 40.0
+
+[node name="CameraLabel" type="Label" parent="." unique_id=605287519]
+offset_left = 800.0
+offset_top = 480.0
+offset_right = 900.0
+offset_bottom = 617.0
+theme_override_colors/font_color = Color(0.14970946, 0.65653664, 0.97760206, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="TimeStopSound" type="AudioStreamPlayer" parent="." unique_id=1815400477]
+stream = ExtResource("7_32rft")
+
+[node name="TestLabel" type="Label" parent="." unique_id=993775706]
+offset_right = 40.0
+offset_bottom = 23.0
 
 [connection signal="timeout" from="PartieTimer" to="." method="_onPartieTimerTimeout"]
