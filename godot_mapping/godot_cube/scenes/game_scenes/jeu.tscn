@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://s6n8auc020ga" path="res://scenes/menus/game_ending.tscn" id="3_0hq27"]
 [ext_resource type="Texture2D" uid="uid://dsax0f2n5h4la" path="res://addons/assets/sky_texture.exr" id="3_ftslj"]
 [ext_resource type="PackedScene" uid="uid://cowlnii2y28cm" path="res://scenes/menus/pause_menu.tscn" id="6_04wrr"]
-[ext_resource type="Script" uid="uid://w82tvhackj2n" path="res://scripts/game_scenes/land_marks_proceed.gd" id="6_ypfyx"]
+[ext_resource type="Script" uid="uid://da4gs88omhvbh" path="res://scripts/game_scenes/land_marks_proceed.gd" id="6_ypfyx"]
 [ext_resource type="AudioStream" uid="uid://dseksoliltjqp" path="res://addons/sfx/TimeStopSFX.mp3" id="7_32rft"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_wd2d1"]
@@ -198,9 +198,5 @@ theme_override_font_sizes/font_size = 50
 
 [node name="TimeStopSound" type="AudioStreamPlayer" parent="." unique_id=1815400477]
 stream = ExtResource("7_32rft")
-
-[node name="TestLabel" type="Label" parent="." unique_id=993775706]
-offset_right = 40.0
-offset_bottom = 23.0
 
 [connection signal="timeout" from="PartieTimer" to="." method="_onPartieTimerTimeout"]
