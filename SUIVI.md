@@ -84,7 +84,8 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 ### Séance 7 - 03/04
 
-**Van-Kévin** : Correction du calcul de temps de rendu global avec le "Profileur Visuel" de Godot (plutôt correct en sachant qu'il inclut aussi un temps d'entrelacement très faible de l'ordre d'une ms). Aide pour les tests de caméra et l'optmisation des FPS du jeu avec la caméra incluse (car c'est Mediapipe qui fait perdre le plus de FPS).
+**Van-Kévin** : Correction du calcul de temps de rendu global avec le "Profileur Visuel" de Godot (plutôt correct en sachant qu'il inclut aussi un temps d'entrelacement très faible de l'ordre d'une ms). Aide pour les tests de caméra et l'optmisation des FPS du jeu avec la caméra incluse (car c'est Mediapipe qui fait perdre le plus de FPS).  
+**Hélias** : Essai de passage à 3 vues par personnes, passage de MediaPipe dans un thread à part pour gagner en performance.
 
 ### Séance 8 - 10/04
 
