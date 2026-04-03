@@ -66,7 +66,7 @@ Il faudrait avoir une démo qui teste déjà MediaPipe, la corrélation, le sté
 
 **Proposition de test pour l'évaluation intermédiaire :** Réaliser un jeu minimaliste dans lequel on contrôle la rotation d'un cube. Lever la main stopperait le cube et la baisser le ferait tourner.
 
-***Remarques de J. Lefeuvre :***
+***Remarques du professeur encadrant :***
 - Faire le versionning dans Git (pas de copie V2, V3, V4, etc...)
 - Pour les fihiers tests, les mettre dans un dossier `src` et les documenter de telle sorte que les autres puissent les utiliser.
 
@@ -76,7 +76,7 @@ Objectifs pour la prochaine séance :
 
 > Commencer le brainstorming sur les jeux (idées potentielles, critères de gameplay, etc...)
 
-***Remarques de J. lefeuvre sur le planning :***
+***Remarques du professeur encadrant sur le planning :***
 - Rajouter des descriptions aux tâches
 - Remplir le tableau des tâches au fur et à mesure pour suivre la progression
 - Rajouter une tâche "Brainstorm d'idées de jeux" (quitte à ne pas les conserver après) qui durerait de maintenant à l'évaluation intermédiaire
@@ -94,7 +94,7 @@ Objectifs pour la prochaine séance :
 
 ### Séance 5 - 16/03
 
-***Remarques de J. Lefeuvre :***
+***Remarques du professeur encadrant :***
 - Rappel : Evaluation entre pairs en mi-mai
 - Rendu : Il faut synchroniser la fréquence de rendu avec la fréquence de raffraîchissement de l'écran. Dans le GPU, il faudrait 2 buffers de générations d'image : un pour "vraiment" afficher le jeu, un autre pour calculer le rendu de la frame suivante. Pour ensuite l'afficher, il faut privilégier des swaps entre pointeurs plutôt que des copies (plus long). 
 - MediaPipe : Déterminer le temps de rendu (=temps pris pour capturer une image et donner les informations dessus). Cette information sert pour adapter la fréquence de rendu. De plus, il faut également regarder :
@@ -102,6 +102,23 @@ Objectifs pour la prochaine séance :
   - comment sont gérés les images en mémoire
 
 ### Séance 6 - 27/03
+
+***Remarques du professeur encadrant :***
+- **Urgent** : Profondeur/Distance Caméra (Distance max actuel = 2,80m)
+- Regarder la fréquence de raffraîchissement des données traitées par MediaPipe et la comparer avec celle de la caméra
+- Regarder les différentes performances selon les PC
+- Regarder MediaPipe + pieds
+- Regarder les effets de profondeur possibles : inversion de stéréo / des vues -> Effet soit sur le jeu entier soit sur un objet qui dénote du reste. **Il faut être capable montrer plus qu'un simple jeu (perfs, technologies, ...)**
+- *Skinning* : Model 3D pour les main = T-pose + mèches = On attribue des poids à chaque partie du squelette (triangles). Regarder dans Godot l'animation de squelette et en faire un projet à part (pour une démonstration) => **Il faut couvrir tous les outils techniques qu'on pourrait utiliser**
+
+Objectifs pour la prochaine séance :
+> Régler les problèmes de détection de la caméra liés à la profondeur
+
+> Identifier un projet proposant un avatar 3D et le contrôler avec la caméra
+
+> Etudier les possibilités d'implémentations d'effets stéréo
+
+> Déterminer la fréquence de raffraîchissemnt des données MediaPipe 
 
 ### Séance 7 - 03/04
 

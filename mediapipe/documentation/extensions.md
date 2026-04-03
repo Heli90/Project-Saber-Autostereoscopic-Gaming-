@@ -14,6 +14,6 @@ https://storage.googleapis.com/mediapipe-models/"nom_du_modèle"/"nom_du_modèle
 
 Ex :
 - hand_landmarker.task : https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task
-- face_landmarker.task : https://storage.googleapis.com/ediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task
+- gesture_recognizer.task : https://storage.googleapis.com/mediapipe-models/gesture_recognizer/gesture_recognizer/float16/1/face_landmarker.task
 
 Ce sont eux qui spécifient les méthodes utilisés pour chaque type d'objet (marqueurs sur le visage / les mains, reconnaissance de mouvement, etc..)
