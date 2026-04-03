@@ -43,10 +43,9 @@ config/icon="res://icon.svg"
 
 buses/default_bus_layout="res://addons/sfx/default_bus_layout.tres"
 
-[autoload]
+[debug]
 
-MediaPipeExternalFiles="*uid://dsyuq4kjrnbs4"
-GDMPAndroid="*uid://cdvhdf5dmteib"
+settings/profiler/max_timestamp_query_elements=1024
 
 [display]
 
@@ -59,7 +58,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/CameraServerExtension/plugin.cfg", "res://addons/GDMP/plugin.cfg")
+enabled=PackedStringArray()
 
 [input]
 
