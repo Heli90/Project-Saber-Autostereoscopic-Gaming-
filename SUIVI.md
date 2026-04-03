@@ -73,12 +73,18 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 **Van-Kévin** : Tentative d'implémentation d'un "Beat Saber"-like pour avoir un premier aperçu des performances en conditions de jeu réelles.
 **Hélias** : Tentative d'implémentation du "Beat Saber"-like avec Van-Kévin, ajout de deux effets visuels dans le projet démo (effet de glitch et inversion des deux yeux)
+**Birame** : Ajout de la détection dans le projet `cube_godot` pour gérer la vitesse de rotation du cube (vitesse de rotation du cube modulée par l'abscisse par rapport à la caméra de l'index de la main observée). Affichage de *hand_landmarkers* colorés et du nombre de mains détectées dans `hand-tracking-project`
 
+### Entre la séance 6 et la séance 7
 
+31/03 - **Birame** :
+- `hand_tracking_project` : Ajout de la détection de mouvements dans le projet . Affichage des temps de traitement liés à MediaPipe (analyse des données et rendu) et à l'affichage de la caméra.
+- `godot_cube` : Ajout de la détection de mouvements dans le jeu : le cube arrête de tourner quand la main observée se ferme (et se remet à tourner pour n'importe quelle autre geste) .
+- Mise à jour de la documention (transition de `hand_landmarker.task` à `gesture_recognizer.task`)
 
 ### Séance 7 - 03/04
 
-
+**Van-Kévin** : Correction du calcul de temps de rendu global avec le "Profileur Visuel" de Godot (plutôt correct en sachant qu'il inclut aussi un temps d'entrelacement très faible de l'ordre d'une ms). Aide pour les tests de caméra et l'optmisation des FPS du jeu avec la caméra incluse (car c'est Mediapipe qui fait perdre le plus de FPS).
 
 ### Séance 8 - 10/04
 
