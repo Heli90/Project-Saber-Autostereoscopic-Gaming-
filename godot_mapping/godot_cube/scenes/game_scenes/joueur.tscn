@@ -2,26 +2,27 @@
 
 [ext_resource type="Script" uid="uid://b0rkh0yudekot" path="res://scripts/game_scenes/joueur.gd" id="1_2d0qe"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_r36ky"]
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_f4pr0"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_r36ky"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_uj1k6"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_m2kkv"]
 
 [node name="Joueur" type="CharacterBody3D" unique_id=1529862946]
 script = ExtResource("1_2d0qe")
 
 [node name="Forme" type="MeshInstance3D" parent="." unique_id=529544858]
-mesh = SubResource("BoxMesh_r36ky")
+mesh = SubResource("CapsuleMesh_f4pr0")
 
 [node name="Face" type="MeshInstance3D" parent="Forme" unique_id=1349219195]
-transform = Transform3D(0.49998096, -0.00087265356, 0, -1.9072449e-10, -4.3709725e-09, -0.5, 0.0043632677, 0.099996194, -2.1855694e-08, 0, 0, -0.5)
+transform = Transform3D(0.49998096, -0.00087265356, 0, -1.9072449e-10, -4.3709725e-09, -0.5, 0.0043632677, 0.099996194, -2.1855694e-08, 0, 0.5, -0.5)
 mesh = SubResource("CylinderMesh_r36ky")
 
 [node name="Collision" type="CollisionShape3D" parent="." unique_id=1282998192]
-shape = SubResource("BoxShape3D_uj1k6")
+shape = SubResource("CapsuleShape3D_m2kkv")
 
 [node name="CameraControllerFPS" type="Node3D" parent="." unique_id=718035250]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
 [node name="Camera" type="Camera3D" parent="CameraControllerFPS" unique_id=752964199]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.55)

@@ -12,6 +12,9 @@ var camera_fps
 var output_image : Image = null
 var last_hand_detected_time : float = -999.0
 var hand_display_duration : float = 0.05
+var hand_landmarks
+var handedness : MediaPipeClassifications
+var hand_label : String
 
 # Thread
 var thread_mp: Thread
@@ -32,6 +35,8 @@ var result_mediapipe= null
 @onready var texture_rect = $SubViewportContainer/CameraViewport/TestAffichage
 @onready var debug_view = $CanvasLayer/DebugOverlay # Un TextureRect pour voir le résultat
 @onready var cube = $".."/Cube
+@onready var main_gauche: CharacterBody3D = $"../MainGauche"
+@onready var main_droite: CharacterBody3D = $"../MainDroite"
 @onready var label: Label = $"../CameraLabel"
 
 func _ready():
@@ -178,7 +183,9 @@ func _process(_delta):
 		for i in range(result.hand_landmarks.size()):
 			last_hand_detected_time = Time.get_ticks_msec() / 1000.0
 			label.text = "Main détectée"
-			var hand_landmarks = result.hand_landmarks[i]
+			hand_landmarks = result.hand_landmarks[i]
+			handedness = result.handedness[i]
+			hand_label = handedness.categories[0].category_name
 			modulated = hand_landmarks.landmarks[8].x
 			_maj_speed()
 	
@@ -189,16 +196,31 @@ func _process(_delta):
 		label.text = ""
 
 func _maj_speed():
+	if hand_landmarks:
 	# Tout ce qui concerne la gestion des données relatives aux mains se fait ici
-	#print("Coordonnées: x=%f, y=%f, z=%f" % [
-	#hand_landmarks.landmarks[8].x,
-	#hand_landmarks.landmarks[8].y,
-	#hand_landmarks.landmarks[8].z])
+		# print("Coordonnées: x=%f, y=%f, z=%f" % [
+		# hand_landmarks.landmarks[8].x,
+		# hand_landmarks.landmarks[8].y,
+		# hand_landmarks.landmarks[8].z])
+		
+		# Les mains sont inversées pour la caméra !
+		if hand_label == "Right":
+			main_gauche_move()
+		else:
+			main_droite_move()
 	return [modulated,gesture_string]
-	
-	
+
+func main_gauche_move() -> void:
+	var lm = hand_landmarks.landmarks[8]
+	var target = Vector3(lerp(-12.0, -8.0, lm.x), lerp(4.0, 2.0, lm.y), 34.0)
+	main_gauche.position = main_gauche.position.lerp(target, 0.15)
+
+func main_droite_move() -> void:
+	var lm = hand_landmarks.landmarks[8]
+	var target = Vector3(lerp(-12.0, -8.0, lm.x), lerp(4.0, 2.0, lm.y), 34.0)
+	main_droite.position = main_droite.position.lerp(target, 0.15)
+
 func _exit_tree() -> void:
 	runThread = false
 	if thread_mp:
 		thread_mp.wait_to_finish()
-	
