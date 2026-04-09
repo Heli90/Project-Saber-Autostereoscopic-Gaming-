@@ -19,6 +19,7 @@
 - Paramètres identiques
 - Retourner au menu d'entrée
 - Quitter le jeu
+- Accéder à la zone de test ou à la zone de jeu
 
 > Un shader est réalisé sur le menu en jeu, ce qui rend flou l'ensemble du terrain en 3D qui se situe en arrière-plan.
 

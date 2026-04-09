@@ -40,6 +40,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03119278, 0, -0.5999999)
 remote_path = NodePath("../Vue2/Camera")
 
 [node name="Vue1" type="SubViewport" parent="J1/CameraControllerFPS" parent_id_path=PackedInt32Array(1529862946, 718035250) index="3" unique_id=210631324]
+handle_input_locally = false
 size = Vector2i(1920, 1080)
 
 [node name="Camera" type="Camera3D" parent="J1/CameraControllerFPS/Vue1" unique_id=642319396]
@@ -47,6 +48,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.03035, 1.5, 34.4)
 current = true
 
 [node name="Vue2" type="SubViewport" parent="J1/CameraControllerFPS" parent_id_path=PackedInt32Array(1529862946, 718035250) index="4" unique_id=86739324]
+handle_input_locally = false
 size = Vector2i(1920, 1080)
 
 [node name="Camera" type="Camera3D" parent="J1/CameraControllerFPS/Vue2" unique_id=130694043]
@@ -79,6 +81,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06956577, 0, -0.5999999)
 remote_path = NodePath("../Vue6/Camera3D")
 
 [node name="Vue5" type="SubViewport" parent="J2/CameraControllerFPS" parent_id_path=PackedInt32Array(890448322, 718035250) index="3" unique_id=1130869609]
+handle_input_locally = false
 size = Vector2i(1920, 1080)
 
 [node name="Camera3D" type="Camera3D" parent="J2/CameraControllerFPS/Vue5" unique_id=340205500]
@@ -86,6 +89,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.070146, 1.5, 34.4)
 current = true
 
 [node name="Vue6" type="SubViewport" parent="J2/CameraControllerFPS" parent_id_path=PackedInt32Array(890448322, 718035250) index="4" unique_id=1893834835]
+handle_input_locally = false
 size = Vector2i(1920, 1080)
 
 [node name="Camera3D" type="Camera3D" parent="J2/CameraControllerFPS/Vue6" unique_id=1440031429]
@@ -102,6 +106,7 @@ visible = false
 visible = false
 
 [node name="Vue3" type="SubViewport" parent="." unique_id=1959630340]
+handle_input_locally = false
 size = Vector2i(1920, 1080)
 
 [node name="Camera3D" type="Camera3D" parent="Vue3" unique_id=2000948979]
@@ -109,6 +114,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10, 7)
 current = true
 
 [node name="Vue4" type="SubViewport" parent="." unique_id=1280439649]
+handle_input_locally = false
 size = Vector2i(1920, 1080)
 
 [node name="Camera3D" type="Camera3D" parent="Vue4" unique_id=363945270]
@@ -116,6 +122,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10, 7)
 current = true
 
 [node name="Vue7" type="SubViewport" parent="." unique_id=1553404578]
+handle_input_locally = false
 size = Vector2i(1920, 1080)
 
 [node name="Camera3D" type="Camera3D" parent="Vue7" unique_id=2067767426]
@@ -123,6 +130,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10, 7)
 current = true
 
 [node name="Vue8" type="SubViewport" parent="." unique_id=1011819110]
+handle_input_locally = false
 size = Vector2i(1920, 1080)
 
 [node name="Camera3D" type="Camera3D" parent="Vue8" unique_id=1811736440]

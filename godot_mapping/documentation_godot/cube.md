@@ -10,6 +10,7 @@
 > **Fonctionnalités :**
 - Collisions 3D avec le joueur
 - Rotation selon l'axe Y pour des tests
+- Placé dans une zone de test accessible via le menu pour faciliter les tests
 
 ### Joueurs
 > Conçus comme des personnages jouables en 3D, ils peuvent se mouvoir dans l'espace (gauche, droit, avant, arrière). Un mode en écran divisé est prévu pour les tests sur PC ainsi que deux modes de caméras (FPS/TPS). Ces derniers sont configurés dans une scène attitrée **joueur.tscn**.
@@ -19,8 +20,11 @@
 - Saut avec Espace pour le joueur 1, Tab pour le joueur 2
 - Appui sur les touches A et E pour tourner la caméra du joueur 1, et les touches W et C pour tourner la caméra du joueur 2
 - Appui sur les touches "1" et "2" hors du pad numérique pour changer de caméra (**Uniquement en mode PC**)
+- Caméra attachée au joueur permettant de suivre le jeu
+- Gravité implémentée dans la physique du joueur
 
 ```gdscript
+var is_fps : bool = true
 if not is_on_floor():
 		velocity += get_gravity() * delta
 
@@ -30,12 +34,12 @@ if not is_on_floor():
 		
 	# Rotation manuelle de la caméra.
 	if Input.is_action_just_pressed("Left_CamJ%s"%player_id):
-		if camera_fps.current:
+		if is_fps:
 			camera_controller_fps.rotate_y(deg_to_rad(30))
 		else:
 			camera_controller_tps.rotate_y(deg_to_rad(30))
 	if Input.is_action_just_pressed("Right_CamJ%s"%player_id):
-		if camera_fps.current:
+		if is_fps:
 			camera_controller_fps.rotate_y(deg_to_rad(-30))
 		else:
 			camera_controller_tps.rotate_y(deg_to_rad(-30))
@@ -43,14 +47,14 @@ if not is_on_floor():
 	# Reçoit la direction et gère le mouvement et l'accélération.
 	var input_dir = Input.get_vector("GaucheJ%s"%player_id, "DroiteJ%s"%player_id, "AvancerJ%s"%player_id, "ReculerJ%s"%player_id)
 	var direction
-	if camera_fps.current:
+	if is_fps:
 		direction = (camera_controller_fps.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	else:
 		direction = (camera_controller_tps.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 	# Gère la rotation du modèle 3D.
 	if input_dir != Vector2(0,0):
-		if camera_fps.current:
+		if is_fps:
 			forme.rotation_degrees.y = camera_controller_fps.rotation_degrees.y - rad_to_deg(input_dir.angle()) - 90
 		else:
 			forme.rotation_degrees.y = camera_controller_tps.rotation_degrees.y - rad_to_deg(input_dir.angle()) - 90
@@ -63,8 +67,12 @@ if not is_on_floor():
 
 	move_and_slide()
 ```
-- Caméra attachée au joueur permettant de suivre le jeu
-- Gravité implémentée dans la physique du joueur
+
+### Connexion entre le cube et Mediapipe
+> Différentes interactions sont possibles avec les détecteurs de mains et la position des mains influe le comportement du cube.
+> **Fonctionnalités** :
+- Possibilité de réguler la vitesse de rotation du cube par rapport à la position horizontale du doigt d'une main
+- Possibilité d'arrêter la rotation du cube lorsque la main fait un signe en forme de poing et de la relancer dès qu'on arrête de faire le signe en forme de poing
 
 ### Elements annexes
 > Il s'agit des spécificités du projet qui ne sont pas nécessaires, mais qui renforcent le confort de jeu.
@@ -72,3 +80,4 @@ if not is_on_floor():
 - Lumière de projection sur le cube pour avoir de l'ombre
 - Timer de partie égal à 60 secondes pour fixer une durée limitée de partie
 - Score final affichable à la fin de la partie et enregistrement/suppression possible du meilleur score
+- Terrain inspiré du jeu Beat Saber en vue de l'évaluation finale
