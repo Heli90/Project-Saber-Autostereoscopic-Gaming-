@@ -87,6 +87,10 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 **Van-Kévin** : Correction du calcul de temps de rendu global avec le "Profileur Visuel" de Godot (plutôt correct en sachant qu'il inclut aussi un temps d'entrelacement très faible de l'ordre d'une ms). Aide pour les tests de caméra et l'optmisation des FPS du jeu avec la caméra incluse (car c'est Mediapipe qui fait perdre le plus de FPS).  
 **Hélias** : Essai de passage à 3 vues par personnes, passage de MediaPipe dans un thread à part pour gagner en performance.
 
+### Entre la séance 7 et la séance 8
+
+**Van-Kévin** : Correction de bugs liés au thread Mediapipe, modification de la map et implémentation d'une zone de test isolant le cube de test pour faciliter les tests en vue de l'évaluation intermédiaire. Modification de la documentation concernant les fonctionnalités du jeu. Tests de déplacements d'objets effectués avec les marqueurs de main (actuellement supprimés pour qu'on puisse faire la transition avec le marqueur du corps entier).
+
 ### Séance 8 - 10/04
 
 
