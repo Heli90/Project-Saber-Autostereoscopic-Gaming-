@@ -4,9 +4,15 @@ extends ColorRect
 @onready var options: Panel = $Options
 @onready var fondu_noir: ColorRect = $FonduNoir
 @onready var pause_menu: ColorRect = $"."
+@onready var test_button: Button = $MenuButtons/TestButton
+var j1_PC: CharacterBody3D
+var j2_PC: CharacterBody3D
+var j1_TV: CharacterBody3D
+var j2_TV: CharacterBody3D
 
 static var affichage: bool
 static var on_option_menu: bool
+var test_button_is_pressed : bool = false
 var latence_pause: float = 0.0
 
 func _ready() -> void:
@@ -143,3 +149,30 @@ func _onMainMenuButton_pressed() -> void:
 	transition.chain().tween_interval(0.3)
 	await transition.finished
 	get_tree().change_scene_to_file("res://scenes/menus/main_menu.tscn")
+
+func _onTestButton_pressed() -> void:
+	# On charge les joueurs selon la scène
+	j1_PC = get_node_or_null("../../../SplitScreens/Camera1/POV1/J1")
+	j2_PC = get_node_or_null("../../../SplitScreens/Camera2/POV2/J2")
+	j1_TV = get_node_or_null("../../../J1")
+	j2_TV = get_node_or_null("../../../J2")
+
+	# Téléportation en zone de test
+	if test_button.text == "Zone Test":
+		test_button.text = "Zone Jeu"
+		if j1_PC and j2_PC:
+			j1_PC.position = Vector3(-4.0, 0.75, 4.0)
+			j2_PC.position = Vector3(4.0, 0.75, 4.0)
+		else:
+			j1_TV.position = Vector3(-4.0, 0.75, 4.0)
+			j2_TV.position = Vector3(4.0, 0.75, 4.0)
+	# Téléportation hors de la zone de test
+	else:
+		test_button.text = "Zone Test"
+		if j1_PC and j2_PC:
+			j1_PC.position = Vector3(-10.0, 1.75, 35.0)
+			j2_PC.position = Vector3(10.0, 1.75, 35.0)
+		else:
+			j1_TV.position = Vector3(-10.0, 1.75, 35.0)
+			j2_TV.position = Vector3(10.0, 1.75, 35.0)
+	_onContinueButton_pressed()

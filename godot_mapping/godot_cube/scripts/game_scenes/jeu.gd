@@ -16,27 +16,7 @@ func _ready() -> void:
 	await transition.finished
 	fondu_noir.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-	await _lancer_countdown()
 	partie_timer.start()
-
-func _lancer_countdown() -> void:
-	countdown_label.visible = true
-
-	for i in range(5, 0, -1):
-		countdown_label.text = str(i)
-		# Petite animation de scale pour chaque chiffre
-		countdown_label.scale = Vector2(1.5, 1.5)
-		var tween = create_tween()
-		tween.tween_property(countdown_label, "scale", Vector2(1.0, 1.0), 0.3)
-		await get_tree().create_timer(1.0).timeout
-
-	countdown_label.text = "GO !"
-	var tween_go = create_tween()
-	tween_go.tween_property(countdown_label, "modulate:a", 0.0, 0.5)
-	await tween_go.finished
-	countdown_label.visible = false
-	countdown_label.modulate.a = 1.0
 
 func _process(_delta: float) -> void:
 	pass

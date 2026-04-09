@@ -52,6 +52,16 @@ shader_parameter/brightness = 1.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dmw1k"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eyfc8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xiui8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gqhbq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dgi6y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dqjbd"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3hsps"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vtr1r"]
@@ -125,7 +135,8 @@ offset_right = 437.0
 offset_bottom = 230.0
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../QuitButton")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_1s2dm")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_cmnsq")
@@ -143,7 +154,8 @@ offset_top = 310.0
 offset_right = 441.0
 offset_bottom = 360.0
 size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0.9490196, 0.9490196, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_1s2dm")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_avs0h")
@@ -161,7 +173,8 @@ offset_top = 440.0
 offset_right = 492.0
 offset_bottom = 490.0
 size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0.9490196, 0.9490196, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_1s2dm")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_avs0h")
@@ -180,7 +193,8 @@ offset_right = 468.0
 offset_bottom = 620.0
 size_flags_vertical = 3
 focus_neighbor_bottom = NodePath("../ContinueButton")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0.9490196, 0.9490196, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_1s2dm")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_vlav8")
@@ -190,6 +204,23 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_ns75t")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_s8k84")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_dmw1k")
 text = "Quitter le jeu"
+
+[node name="TestButton" type="Button" parent="MenuButtons" unique_id=1696057629]
+layout_mode = 0
+offset_left = 212.0
+offset_top = 749.0
+offset_right = 431.0
+offset_bottom = 789.0
+theme_override_colors/font_hover_color = Color(0, 0.9490196, 0.9490196, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_1s2dm")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_eyfc8")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_xiui8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_gqhbq")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_dgi6y")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dqjbd")
+text = "Zone Test"
 
 [node name="Options" type="Panel" parent="." unique_id=1888251166]
 layout_mode = 1
@@ -296,6 +327,7 @@ audio_bus_name = "SFX"
 [connection signal="pressed" from="MenuButtons/OptionButton" to="." method="_onOptionButton_pressed"]
 [connection signal="pressed" from="MenuButtons/MainMenuButton" to="." method="_onMainMenuButton_pressed"]
 [connection signal="pressed" from="MenuButtons/QuitButton" to="." method="_onQuitButton_pressed"]
+[connection signal="pressed" from="MenuButtons/TestButton" to="." method="_onTestButton_pressed"]
 [connection signal="pressed" from="Options/BackButton" to="." method="_onBackButton_pressed"]
 [connection signal="value_changed" from="Options/MusicControl" to="Options/MusicControl" method="_onValueChanged"]
 [connection signal="value_changed" from="Options/SFXControl" to="Options/SFXControl" method="_onValueChanged"]

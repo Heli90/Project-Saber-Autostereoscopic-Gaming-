@@ -92,19 +92,13 @@ emission = Color(0.5019608, 0.5019608, 1, 1)
 emission_energy_multiplier = 2.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_nljp5"]
-size = Vector3(10, 0.1, 20)
+size = Vector3(16, 0.1, 20)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e41p7"]
 albedo_color = Color(0, 0, 1, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ycxfq"]
-size = Vector3(10, 0.1, 20)
-
-[sub_resource type="BoxMesh" id="BoxMesh_ycxfq"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m6m3v"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_e41p7"]
+size = Vector3(16, 0.1, 20)
 
 [node name="Game" type="Node3D" unique_id=1026699542]
 script = ExtResource("1_fu8w0")
@@ -318,25 +312,5 @@ surface_material_override/0 = SubResource("StandardMaterial3D_e41p7")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SolDemo" unique_id=1851219965]
 shape = SubResource("BoxShape3D_ycxfq")
-
-[node name="MainGauche" type="CharacterBody3D" parent="." unique_id=1740397240]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11, 1, 34)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MainGauche" unique_id=59106876]
-mesh = SubResource("BoxMesh_ycxfq")
-surface_material_override/0 = SubResource("StandardMaterial3D_m6m3v")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MainGauche" unique_id=244451517]
-shape = SubResource("BoxShape3D_e41p7")
-
-[node name="MainDroite" type="CharacterBody3D" parent="." unique_id=972636110]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 1, 34)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MainDroite" unique_id=906917247]
-mesh = SubResource("BoxMesh_ycxfq")
-surface_material_override/0 = SubResource("StandardMaterial3D_m6m3v")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="MainDroite" unique_id=969729355]
-shape = SubResource("BoxShape3D_e41p7")
 
 [connection signal="timeout" from="PartieTimer" to="." method="_onPartieTimerTimeout"]

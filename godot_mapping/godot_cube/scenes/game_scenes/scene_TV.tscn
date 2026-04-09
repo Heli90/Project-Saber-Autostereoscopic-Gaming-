@@ -43,14 +43,14 @@ remote_path = NodePath("../Vue2/Camera")
 size = Vector2i(1920, 1080)
 
 [node name="Camera" type="Camera3D" parent="J1/CameraControllerFPS/Vue1" unique_id=642319396]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.03035, 1, 34.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.03035, 1.5, 34.4)
 current = true
 
 [node name="Vue2" type="SubViewport" parent="J1/CameraControllerFPS" parent_id_path=PackedInt32Array(1529862946, 718035250) index="4" unique_id=86739324]
 size = Vector2i(1920, 1080)
 
 [node name="Camera" type="Camera3D" parent="J1/CameraControllerFPS/Vue2" unique_id=130694043]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.968807, 1, 34.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.968807, 1.5, 34.4)
 current = true
 
 [node name="CameraControllerTPS" parent="J1" index="3" unique_id=506921349]
@@ -82,14 +82,14 @@ remote_path = NodePath("../Vue6/Camera3D")
 size = Vector2i(1920, 1080)
 
 [node name="Camera3D" type="Camera3D" parent="J2/CameraControllerFPS/Vue5" unique_id=340205500]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.070146, 1, 34.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.070146, 1.5, 34.4)
 current = true
 
 [node name="Vue6" type="SubViewport" parent="J2/CameraControllerFPS" parent_id_path=PackedInt32Array(890448322, 718035250) index="4" unique_id=1893834835]
 size = Vector2i(1920, 1080)
 
 [node name="Camera3D" type="Camera3D" parent="J2/CameraControllerFPS/Vue6" unique_id=1440031429]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.930434, 1, 34.4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.930434, 1.5, 34.4)
 current = true
 
 [node name="CameraControllerTPS" parent="J2" index="3" unique_id=506921349]
@@ -169,7 +169,7 @@ texture = SubResource("GradientTexture2D_6c3ax")
 
 [node name="CubeTournant" parent="." unique_id=1026699542 instance=ExtResource("6_qo1rj")]
 
-[node name="TimeStopSound" parent="CubeTournant" index="9" unique_id=1815400477]
+[node name="TimeStopSound" parent="CubeTournant" index="8" unique_id=1815400477]
 bus = &"SFX"
 
 [editable path="J1"]

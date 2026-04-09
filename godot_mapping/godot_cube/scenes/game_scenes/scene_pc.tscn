@@ -45,3 +45,5 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 35)
 player_id = 2
 
 [node name="CubeTournant" parent="." unique_id=1026699542 instance=ExtResource("3_d2mly")]
+
+[editable path="CubeTournant"]
