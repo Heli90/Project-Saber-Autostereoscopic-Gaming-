@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="artishow"
+config/name="artishow_local"
 run/main_scene="uid://vr0xnvn8vmsd"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
@@ -22,7 +22,7 @@ GDMPAndroid="*uid://cdvhdf5dmteib"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/CameraServerExtension/plugin.cfg", "res://addons/FileAccessWeb/plugin.cfg", "res://addons/GDMP/plugin.cfg", "res://addons/gut/plugin.cfg")
+enabled=PackedStringArray("res://addons/CameraServerExtension/plugin.cfg", "res://addons/GDMP/plugin.cfg")
 
 [physics]
 
@@ -31,3 +31,5 @@ enabled=PackedStringArray("res://addons/CameraServerExtension/plugin.cfg", "res:
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
