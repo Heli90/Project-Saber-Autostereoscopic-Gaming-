@@ -5,6 +5,10 @@ extends ColorRect
 @onready var fondu_noir: ColorRect = $FonduNoir
 @onready var pause_menu: ColorRect = $"."
 @onready var test_button: Button = $MenuButtons/TestButton
+@onready var camera_button: Button = $MenuButtons/CameraButton
+@onready var landmarks_proceed = $"../../LandMarksProceed"
+@onready var select_camera: ConfirmationDialog = $"../../LandMarksProceed/SelectCamera"
+
 var j1_PC: CharacterBody3D
 var j2_PC: CharacterBody3D
 var j1_TV: CharacterBody3D
@@ -176,3 +180,6 @@ func _onTestButton_pressed() -> void:
 			j1_TV.position = Vector3(-10.0, 1.75, 35.0)
 			j2_TV.position = Vector3(10.0, 1.75, 35.0)
 	_onContinueButton_pressed()
+
+func _onCameraButton_pressed() -> void :
+	landmarks_proceed.reload_camera_selection()

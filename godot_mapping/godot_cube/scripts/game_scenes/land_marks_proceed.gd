@@ -33,12 +33,16 @@ var result_mediapipe= null
 @onready var debug_view = $CanvasLayer/DebugOverlay # Un TextureRect pour voir le résultat
 @onready var cube = $".."/Cube
 @onready var label: Label = $"../CameraLabel"
+@onready var confirmation_dialog: ConfirmationDialog = $SelectCamera
+@onready var selected_feed: OptionButton = $SelectCamera/VBoxContainer/HBoxContainer/SelectedFeed
+@onready var selected_format: OptionButton = $SelectCamera/VBoxContainer/SelectedFormat
 
 func _ready():
 	thread_mp=Thread.new()
 	mutex = Mutex.new()
 	thread_mp.start(_thread_mediapipe)
-	_setup_camera()
+	_setup_camera_selection()
+	_setup_camera_permissions()
 
 func _setup_mediapipe():
 	# Récupère le modèle hand_landmarker.task et l'initialise
@@ -58,8 +62,32 @@ func _setup_mediapipe():
 	renderer = MediaPipeHandRenderer.new()
 	print("MediaPipe initialisé.")
 
-func _setup_camera():
-	# Ouverture de la caméra
+func _setup_camera_selection():
+	# Configuration du dialogue
+	confirmation_dialog.get_ok_button().disabled = true
+	
+	# Signal système pour détecter les changements de caméras
+	CameraServer.camera_feeds_updated.connect(self._update_camera_list)
+	
+func _update_camera_list():
+	selected_feed.clear()
+	var feeds = CameraServer.feeds()
+	
+	print("Taille feed : ", feeds.size())
+	
+	if feeds.size() == 0:
+		selected_feed.add_item("Aucune caméra trouvée")
+		selected_feed.disabled = true
+	else:
+		selected_feed.disabled = false
+		for feed in feeds:
+			selected_feed.add_item(feed.get_name(), feed.get_id())
+	
+	selected_feed.selected = -1
+
+func _setup_camera_permissions():
+	if camera_extension:
+		return
 	if OS.get_name() in ["Windows", "iOS"]:
 		camera_extension = CameraServerExtension.new()
 		camera_extension.permission_result.connect(self._on_permission)
@@ -73,20 +101,72 @@ func _setup_camera():
 func _on_permission(granted):
 	if granted: _start_camera()
 
-func _start_camera():
-	# Applique ce que voit la caméra à TestAffichage (TextureReact)
-	await get_tree().create_timer(0.5).timeout
+func _open_camera_selection():
 	CameraServer.monitoring_feeds = true
-	var feeds = CameraServer.feeds()
-	if feeds.size() > 0:
-		camera_feed = feeds[0]
-		camera_feed.feed_is_active = true
+	_update_camera_list()
+	confirmation_dialog.popup_centered()
+	
+func _on_camera_selected(index: int):
+	selected_format.clear()
+	# On débloque le bouton OK dès qu'une caméra est sélectionnée !
+	confirmation_dialog.get_ok_button().disabled = false
+	
+	var id = selected_feed.get_item_id(index)
+	for feed in CameraServer.feeds():
+		if feed.get_id() == id:
+			camera_feed = feed
+			break
+			
+	if camera_feed:
+		# On tente de récupérer les formats, mais on ne bloque pas si ça échoue
+		var formats = camera_feed.get_formats()
+		if formats.size() > 0:
+			for i in range(formats.size()):
+				var f = formats[i]
+				var w = f.get("width", 0)
+				var h = f.get("height", 0)
+				selected_format.add_item("%dx%d" % [w, h], i)
+		else:
+			selected_format.add_item("Format auto (Défaut)")
 		
-		var tex = CameraTexture.new()
-		tex.camera_feed_id = camera_feed.get_id()
+		selected_format.selected = 0 # On sélectionne le premier par défaut
+
+func _on_format_selected(index: int):
+	if camera_feed == null: return
+	
+	# On tente d'appliquer le format, mais on ne désactive pas le bouton OK en cas d'échec
+	if not camera_feed.set_format(index, {}):
+		print("Note : Le format spécifique n'a pas pu être forcé, Godot utilisera le mode natif.")
+
+func _start_camera():
+	if camera_feed == null:
+		CameraServer.monitoring_feeds = true
+		camera_feed = CameraServer.feeds()[0]
+	
+	# Gestion de l'effet miroir (Auto-flip si caméra frontale)
+	texture_rect.flip_h = (camera_feed.get_position() != CameraFeed.FEED_BACK)
+	
+	camera_feed.feed_is_active = true
+	
+	# Création de la texture selon le type de flux
+	var tex = CameraTexture.new()
+	tex.camera_feed_id = camera_feed.get_id()
+	
+	# Support du YUV si nécessaire (comme dans VisionTask)
+	if camera_feed.get_datatype() == CameraFeed.FEED_RGB:
 		tex.which_feed = CameraServer.FEED_RGBA_IMAGE
-		texture_rect.texture = tex
-		print("Affichage réussi")
+	else:
+		tex.which_feed = CameraServer.FEED_YCBCR_IMAGE
+		# Note: Pour un rendu parfait YUV, il faudrait appliquer le shader de VisionTask ici
+		
+	texture_rect.texture = tex
+	print("Caméra démarrée : ", camera_feed.get_name())
+
+func reload_camera_selection():
+	confirmation_dialog.get_ok_button().disabled = true
+	_setup_camera_permissions()
+	_open_camera_selection()
+	camera_feed.feed_is_active = false
 
 func update_debug_overlay(image: Image) -> void:
 	image.convert(Image.FORMAT_RGB8)
