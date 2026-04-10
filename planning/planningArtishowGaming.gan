@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="Artishow Gaming" company="" webLink="http://" view-date="2026-01-05" view-index="0" gantt-divider-location="695" resource-divider-location="300" version="3.3.3311" locale="fr_FR">
+<?xml version="1.0" encoding="UTF-8"?><project name="Artishow Gaming" company="" webLink="http://" view-date="2026-02-09" view-index="0" gantt-divider-location="668" resource-divider-location="300" version="3.3.3311" locale="fr_FR">
     <description/>
     <view zooming-state="default:7" id="gantt-chart">
-        <field id="tpd3" name="Nom" width="364" order="0"/>
-        <field id="tpd4" name="Date de début" width="156" order="1"/>
-        <field id="tpd5" name="Date de fin" width="158" order="2"/>
+        <field id="tpd3" name="Nom" width="344" order="0"/>
+        <field id="tpd4" name="Date de début" width="152" order="1"/>
+        <field id="tpd5" name="Date de fin" width="155" order="2"/>
         <field id="tpd15" name="Notes" width="20" order="3"/>
         <option id="taskLabelUp" value="coordinator"/>
         <option id="taskLabelLeft" value="name"/>
@@ -13,7 +13,7 @@
         <option id="filter.overdueTasks" value="false"/>
         <option id="filter.inProgressTodayTasks" value="false"/>
         <timeline><![CDATA[1]]></timeline>
-        <option id="color.recent"><![CDATA[#66ff33 #eeeeee #ff0000]]></option>
+        <option id="color.recent"><![CDATA[#ffff00 #66ff33 #eeeeee #ff0000]]></option>
     </view>
     <view id="resource-table">
         <field id="0" name="Nom" width="209" order="0"/>
@@ -91,19 +91,35 @@
         <task id="22" uid="92c861fc7383455891e71ba40f390756" name="Réfléchir aux possibilités de jeux" color="#66ff33" meeting="false" start="2026-02-20" duration="31" complete="0" expand="true">
             <depend id="13" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="13" uid="77137ed68e5c47fda8984db18cc95b90" name="Choisir le jeu" color="#66ff33" meeting="false" start="2026-04-06" duration="8" complete="0" expand="true">
+        <task id="13" uid="77137ed68e5c47fda8984db18cc95b90" name="Choisir le jeu" color="#66ff33" meeting="false" start="2026-04-06" duration="7" complete="0" expand="true">
             <notes><![CDATA[Chercher des jeux open source qu'on a juste à modifier
 La piste des jeux VR est une bonne idée]]></notes>
-            <depend id="14" type="2" difference="0" hardness="Strong"/>
+            <depend id="24" type="2" difference="0" hardness="Strong"/>
+            <depend id="27" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="14" uid="da0d6aefe26547f68c159128a1273763" name="Choisir les commandes" color="#66ff33" meeting="false" start="2026-04-16" duration="4" complete="0" expand="true">
-            <notes><![CDATA[Quels mouvements font quelles commandes ?]]></notes>
+        <task id="27" uid="46f50efc0c574fdd8de010c400ab042d" name="Créer deux pistes synchrones de musique" meeting="false" start="2026-04-15" duration="20" complete="0" expand="true">
+            <depend id="28" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="28" uid="f3ec07b224194e4180b9e49ef451fab1" name="Implémenter deux joueurs" meeting="false" start="2026-05-13" duration="10" complete="0" expand="true">
             <depend id="15" type="2" difference="0" hardness="Strong"/>
+            <depend id="29" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="15" uid="4d63022a419947a488ffa8599f818823" name="Implémenter le lien mouvements - MédiaPipe - Commandes" meeting="false" start="2026-04-22" duration="39" complete="0" expand="true">
+        <task id="29" uid="2671986a4e384b49bcd902b24ea686ac" name="Chaque joueur a son score" meeting="false" start="2026-05-27" duration="14" complete="0" expand="true">
+            <depend id="19" type="2" difference="0" hardness="Strong"/>
             <depend id="21" type="2" difference="0" hardness="Strong"/>
         </task>
-        <task id="16" uid="c9a93ea2f21946bab63f6cc52d94764c" name="Générer deux images 3D (une pour chaque joueur)" meeting="false" start="2026-04-15" duration="21" complete="0" expand="true">
+        <task id="24" uid="aa448fd8e4b241cd82b9391959a03d08" name="Séparer la caméra en 2" meeting="false" start="2026-04-15" duration="20" complete="0" expand="true">
+            <depend id="25" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="25" uid="25d499dd66ee422fa20b54faf0ec83cd" name="Détection corps entiers MédiaPipe" meeting="false" start="2026-05-13" duration="10" complete="0" expand="true">
+            <depend id="15" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="15" uid="4d63022a419947a488ffa8599f818823" name="Implémenter le lien mouvements - MédiaPipe - Commandes" meeting="false" start="2026-05-27" duration="14" complete="0" expand="true">
+            <notes><![CDATA[Sabres <-> Bras
+Mouvement du casque <-> Mouvement du corps]]></notes>
+            <depend id="21" type="2" difference="0" hardness="Strong"/>
+        </task>
+        <task id="16" uid="c9a93ea2f21946bab63f6cc52d94764c" name="Essayer de mettre 3 vues par joueurs [OPTIONNEL]" color="#ffff00" meeting="false" start="2026-04-15" duration="21" complete="0" expand="true">
             <depend id="17" type="2" difference="0" hardness="Strong"/>
         </task>
         <task id="17" uid="1ee1381eedff4fb891efa6281e4c7733" name="Optimisation de l'entrelacement pour l'affichage du jeu" meeting="false" start="2026-05-14" duration="10" complete="0" expand="true">
