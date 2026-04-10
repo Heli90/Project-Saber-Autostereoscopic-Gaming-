@@ -114,9 +114,32 @@ Objectifs pour la prochaine séance :
 
 ### Séance 6 - 27/03
 
+***Remarques de J. Lefeuvre :***
+- **Urgent** : Profondeur/Distance Caméra (Distance max actuel = 2,80m)
+- Regarder la fréquence de raffraîchissement des données traitées par MediaPipe et la comparer avec celle de la caméra
+- Regarder les différentes performances selon les PC
+- Regarder MediaPipe + pieds
+- Regarder les effets de profondeur possibles : inversion de stéréo / des vues -> Effet soit sur le jeu entier soit sur un objet qui dénote du reste. **Il faut être capable montrer plus qu'un simple jeu (perfs, technologies, ...)**
+- *Skinning* : Model 3D pour les main = T-pose + mèches = On attribue des poids à chaque partie du squelette (triangles). Regarder dans Godot l'animation de squelette et en faire un projet à part (pour une démonstration) => **Il faut couvrir tous les outils techniques qu'on pourrait utiliser**
+
+Objectifs pour la prochaine séance :
+> Régler les problèmes de détection de la caméra liés à la profondeur
+
+> Identifier un projet proposant un avatar 3D et le contrôler avec la caméra
+
+> Etudier les possibilités d'implémentations d'effets stéréo
+
+> Déterminer la fréquence de raffraîchissemnt des données MediaPipe 
+
+
 ### Séance 7 - 03/04
 
 ### Séance 8 - 10/04
+
+***Remarques de J. Lefeuvre :*** 
+- Implémenter le tracking de 2 corps complets (en splitant la caméra) pour la prochaine séance
+- Faire des tests d'effets stéréo (pas forcément implémenté dans le jeu)
+- Rajouet une section *How to* dans le `README.md`
 
 ### Séance 9 - 15/04
 
