@@ -32,7 +32,7 @@ Légende :
 |Savoir détecter la position de la main grâce à MédiaPipe | ... | Hugo et Birame | ... | ... |
 |Savoir détecter la profondeur de la main du joueur | ... | Hugo et Birame | ... | ... |
 |Coder une action en fonction d'un mouvement MédiaPipe | ... | Hugo et Birame | ... | ... |
-|Lien primitif MédiaPipe-Moteur | Afficher un cube tournant qui s'arrête de tourner quand l'utilisateur exécute un mouvement particulier (ouvrir ou lever la main) | Groupe | ... | ... | 
+|Lien primitif MédiaPipe-Moteur | Afficher un cube tournant qui s'arrête de tourner quand l'utilisateur exécute un mouvement particulier (ouvrir ou lever la main) | Groupe | 30/03 | 10/4 | 
 | Réfléchir aux possibilités de jeux| Noter dans un fichier toutes les idées de jeux, chercher en ligne des templates open-source (la piste des jeux VR est à explorer) | Groupe |  ... |  ... | 
 |Choisir le jeu | ... | Groupe | ... | ... |
 |Choisir les commandes | ... | ... | ... | ... |
