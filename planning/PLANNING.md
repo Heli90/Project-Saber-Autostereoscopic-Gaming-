@@ -14,7 +14,7 @@ Légende :
 - En rouge : jalons
 
 
-## Répartition des tâches pour l'évaluation intermédiaire
+## Répartition des tâches
 
 - **V0**: premiers exemples pour tester et expérimenter, sans structure bien définie
 - **V1**: code fonctionnel, structuré mais indépendant des autres tâches
@@ -53,6 +53,7 @@ Légende :
 |Choisir des features qui prennent en compte les effets visuels | ... | ... | ... | ... |
 |Implémenter des features qui prennent en compte ces effets visuels | ... | ... | ... | ... |
 |Faire tester le jeu | Phase cyclique de tests, corrections, tests, corrections... | Groupe | ... | ... |
+|Afficher les performances | Temps de génération avec/sans entrelacement, nombre de trames de la caméra/MédiaPipe... | Groupe | 16/03 | ... |
 
 
 
