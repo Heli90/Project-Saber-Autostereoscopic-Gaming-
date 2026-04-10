@@ -92,6 +92,8 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 **Van-Kévin** : Correction de bugs liés au thread Mediapipe, modification de la map et implémentation d'une zone de test isolant le cube de test pour faciliter les tests en vue de l'évaluation intermédiaire. Modification de la documentation concernant les fonctionnalités du jeu. Tests de déplacements d'objets effectués avec les marqueurs de main (actuellement supprimés pour qu'on puisse faire la transition avec le marqueur du corps entier).
 
 ### Séance 8 - 10/04
+**Groupe** Derniers tests : le projet de l'évaluation intermédiaire est foncionnel.
+**Hélias** : Actualisation du planning avec des tâches plus précises pour la deuxième phase de développement.
 
 
 
