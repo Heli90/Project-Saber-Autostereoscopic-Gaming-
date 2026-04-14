@@ -93,9 +93,12 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 ### Séance 8 - 10/04
 **Groupe** Derniers tests : le projet de l'évaluation intermédiaire est foncionnel.
+
 **Hélias** : Actualisation du planning avec des tâches plus précises pour la deuxième phase de développement.
 
+### Entre la séance 8 et la séance 9
 
+**Birame** : Mise en place du trancking de deux corps dans le projet `tracking_projet` (sans couper l'image en deux).
 
 ### Séance 9 - 15/04
 
