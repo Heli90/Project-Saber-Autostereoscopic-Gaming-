@@ -105,7 +105,9 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 ### Séance 9 - 15/04
 
+**Birame** : Ajout du tracking du corps dans le projet du jeu.
 
+**Van-Kévin** : Correction de bugs du sélecteur de caméras, début de modélisation 3D pour le jeu.
 
 ### Séance 10 - 21/04
 
