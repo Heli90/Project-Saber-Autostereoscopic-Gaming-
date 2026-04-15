@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://s6n8auc020ga" path="res://scenes/menus/game_ending.tscn" id="3_0hq27"]
 [ext_resource type="FontFile" uid="uid://bd4geqghtkj13" path="res://addons/assets/TextFontBase.ttf" id="4_nljp5"]
 [ext_resource type="PackedScene" uid="uid://cowlnii2y28cm" path="res://scenes/menus/pause_menu.tscn" id="6_04wrr"]
-[ext_resource type="Script" uid="uid://da4gs88omhvbh" path="res://scripts/game_scenes/land_marks_proceed.gd" id="6_ypfyx"]
+[ext_resource type="Script" uid="uid://p0s0y75s7ehp" path="res://scripts/game_scenes/body_land_marks_proceed.gd" id="6_32rft"]
 [ext_resource type="AudioStream" uid="uid://dseksoliltjqp" path="res://addons/sfx/TimeStopSFX.mp3" id="7_32rft"]
 
 [sub_resource type="Sky" id="Sky_ypfyx"]
@@ -268,7 +268,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_nmqw8")
 
 [node name="LandMarksProceed" type="Node2D" parent="." unique_id=775762795]
 position = Vector2(650, 0)
-script = ExtResource("6_ypfyx")
+script = ExtResource("6_32rft")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="LandMarksProceed" unique_id=877274248]
 offset_right = 640.0
@@ -335,6 +335,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_e41p7")
 shape = SubResource("BoxShape3D_ycxfq")
 
 [connection signal="timeout" from="PartieTimer" to="." method="_onPartieTimerTimeout"]
+[connection signal="canceled" from="LandMarksProceed/SelectCamera" to="LandMarksProceed" method="_start_camera"]
 [connection signal="confirmed" from="LandMarksProceed/SelectCamera" to="LandMarksProceed" method="_start_camera"]
 [connection signal="item_selected" from="LandMarksProceed/SelectCamera/VBoxContainer/HBoxContainer/SelectedFeed" to="LandMarksProceed" method="_on_camera_selected"]
 [connection signal="item_selected" from="LandMarksProceed/SelectCamera/VBoxContainer/SelectedFormat" to="LandMarksProceed" method="_on_format_selected"]

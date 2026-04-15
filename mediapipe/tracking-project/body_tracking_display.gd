@@ -165,9 +165,9 @@ func update_debug_overlay(image: Image) -> void:
 func _on_body_data_received(pose_landmarks, pose_index):
 	# Tout ce qui concerne la gestion des données relatives aux mains se fait ici
 	coordinates_display.text = "Coordonnées: x=%.3f, y=%.3f, z=%.3f\n Index : %d" % [
-	pose_landmarks.landmarks[0].x,
-	pose_landmarks.landmarks[0].y,
-	pose_landmarks.landmarks[0].z, pose_index]
+	pose_landmarks.landmarks[15].x,
+	pose_landmarks.landmarks[15].y,
+	pose_landmarks.landmarks[15].z, pose_index]
 
 
 func _process(_delta):
@@ -189,6 +189,8 @@ func _process(_delta):
 	# Détection des mains
 	var start_detect = Time.get_ticks_usec()
 	var result = task.detect(mp_image)
+	var time_detect = (Time.get_ticks_usec()-start_detect)/1000.0
+	detection_label.text = "MediaPipe task Time : %.2f ms" % [time_detect]
 	
 	if result:
 		# Dessin des marqueurs sur les mains

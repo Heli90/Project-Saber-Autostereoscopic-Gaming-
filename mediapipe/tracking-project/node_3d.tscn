@@ -50,7 +50,7 @@ offset_top = 410.0
 offset_right = 1340.0
 offset_bottom = 547.0
 theme_override_colors/font_color = Color(1, 0.80942166, 0.98748714, 1)
-theme_override_font_sizes/font_size = 45
+theme_override_font_sizes/font_size = 35
 
 [node name="RenderLabel" type="Label" parent="CanvasLayerLabel" unique_id=362205235]
 offset_left = 1300.0
