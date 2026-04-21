@@ -109,6 +109,8 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 **Van-Kévin** : Correction de bugs du sélecteur de caméras, début de modélisation 3D pour le jeu.
 
+**Hélias** : Travail sur les effets visuels et notamment de profondeur
+
 ### Séance 10 - 21/04
 
 
