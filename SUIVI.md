@@ -93,7 +93,7 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 ### Séance 8 - 10/04
 
-**Groupe** Derniers tests : le projet de l'évaluation intermédiaire est foncionnel.
+**Groupe :** Derniers tests : le projet de l'évaluation intermédiaire est foncionnel.
 
 **Hélias** : Actualisation du planning avec des tâches plus précises pour la deuxième phase de développement.
 
@@ -113,7 +113,7 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 ### Séance 10 - 21/04
 
-
+**Groupe :** Evaluation intermédiaire : Echange avec l'encadrant sur l'état actuel du projet et les évoluations à venir (cf `PLANNING.md`)
 
 ### Séance 11 - 05/05
 

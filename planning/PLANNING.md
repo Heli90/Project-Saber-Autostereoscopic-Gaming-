@@ -145,6 +145,43 @@ Objectifs pour la prochaine séance :
 
 ### Séance 10 - 21/04
 
+**Evaluation intermédiaire : *Remarques de J. Lefeuvre :***
+
+*Partie jeu (présenté lors de la séance) :*
+
+- Rajouter une touche pour régler l'interoculaire directement dans le jeu
+- Retirer la caméra de l'affichage (ou faire un truc plus discret, par exemple mettre une touche pour activer/désactiver le display)
+- Régler la focale des caméras du jeu / la profondeur perçue en jeu
+- **Pour l'évaluation finale** : Prévoir des roulements de staff sur nos stands : Tout le monde doit être capable de pouvoir vendre le projet (même sans rentrer dans les trop grandes lignes si on est pas le spécialiste) -> fiche de stand
+- **Remplaçer les vues noires par des vues avec un fond commun du jeu** (ex : on dit que les joueurs se font face, que derrière eux c'est l'infini/fond commu, et que pour chacun des joueurs, ils sont à 0).
+- Bon temps d'entrelaçement (= pas pénalisant). **Ajouter le temps de détection aux temps du CPU**.
+
+*Partie profondeur :*
+- **URGENT : Rajouter un mode *freeze*** dans le jeu pour pouvoir évaluer la qualités des effets stéréo
+- Effets dispos : Inversions des yeux (et inversion des joueurs)
+
+
+*Partie idée de jeux :*
+- Partir d'un projet existant ne pose pas de problème, il faut juste comprendre les limites imposées par le projet existant (ex : Les années précédentes, dans le projet `MarioKart`, l'infini occuliare était l'infini imposé par le jeu).
+- Si jamais on veut faire un fork, il faut bien étudier le jeu pour savoir quoi ajouter où
+- Regarder si on peut intepréter les gestes d'attaque sur le cube (notamment la partie profondeur)
+- FPS / TPS ? On passe d'un jeu mono-joueur à deux joueurs : à voir si c'est trop compliqué ?
+- **Définir précisément le gameplay (actions possibles, interactions, etc..). Ex : renvoyer un cube si on tape avec deux bâtons** et regarder si c'est jouable (niveau temps de développement). Les effets seront plus durs à implémenter sur un projet déjà existant (on subit les contraintes et ça peut être frustrant). 
+- **Refaire le jeu depuis le début est tout à fait envisageable**. Seul la partie synchronisation avec le rythme coince pourf l'instant. *Idée proposée :* utiliser des analyseurs de BPM / détecteurs d'attaques pour adapter la génération aléatoire du jeu selon le rythme de la musique (on pourrait récupérer un JSON à fournir au jeu).
+- *Rappel :* Il faut une beta la semaine du 20 juin. Préparer les questions à poser aux beta-testeurs pour que les retours nous soient le plus utiles possible (et le documenter dans un fichier à part).
+
+A faire pour la prochaine fois :
+
+> Poser les animations (mode freeze)
+
+> Changer les paramètres de caméra virtuelle (interocculaire, profondeur perçue)
+
+> Regarder les effets sur les objets
+
+> Etudier le projet sur lequel on veut partir pour savoir si c'est vraiment envisageable (ex : essayer de faire une génération stéréo du jeu) 
+
+> **Faire un descriptif détaillé du jeu** (se décider sur le gameplay et si on part du projet existant)
+
 ### Séance 11 - 05/05
 
 ### Séance 12 - 13/05
