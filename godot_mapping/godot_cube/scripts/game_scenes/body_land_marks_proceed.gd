@@ -261,7 +261,7 @@ func _process(_delta):
 	
 	# On évite de changer le texte trop vite même si on perd quelques frames à cause du thread
 	if Time.get_ticks_msec() / 1000.0 - last_body_detected_time < hand_display_duration:
-		label.text = "Corps détectée"
+		label.text = "Corps détecté"
 	else:
 		label.text = ""
 

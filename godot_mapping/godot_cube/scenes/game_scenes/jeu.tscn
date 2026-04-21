@@ -107,7 +107,7 @@ script = ExtResource("1_fu8w0")
 environment = SubResource("Environment_n65sj")
 
 [node name="PartieTimer" type="Timer" parent="." unique_id=1292462759]
-wait_time = 60.0
+wait_time = 600.0
 one_shot = true
 ignore_time_scale = true
 
@@ -267,6 +267,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_nmqw8")
 [node name="LGaucheJ1" type="MeshInstance3D" parent="Map" unique_id=619726893]
 
 [node name="LandMarksProceed" type="Node2D" parent="." unique_id=775762795]
+visible = false
 position = Vector2(650, 0)
 script = ExtResource("6_32rft")
 
@@ -277,15 +278,17 @@ offset_bottom = 480.0
 [node name="CameraViewport" type="SubViewport" parent="LandMarksProceed/SubViewportContainer" unique_id=861650548]
 handle_input_locally = false
 size = Vector2i(640, 480)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="TestAffichage" type="TextureRect" parent="LandMarksProceed/SubViewportContainer/CameraViewport" unique_id=538163506]
+visible = false
 offset_right = 640.0
 offset_bottom = 480.0
 expand_mode = 2
 flip_h = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="LandMarksProceed" unique_id=688860276]
+visible = false
 
 [node name="DebugOverlay" type="TextureRect" parent="LandMarksProceed/CanvasLayer" unique_id=1751420981]
 offset_left = 650.0
@@ -314,6 +317,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="CameraLabel" type="Label" parent="." unique_id=605287519]
+visible = false
 offset_left = 800.0
 offset_top = 480.0
 offset_right = 900.0
