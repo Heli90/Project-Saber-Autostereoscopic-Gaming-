@@ -9,6 +9,11 @@ extends Node3D
 @onready var cam_controller_j1: Node3D = $J1/CameraControllerFPS
 @onready var cam_controller_j2: Node3D = $J2/CameraControllerFPS
 
+@onready var remote1_j1: RemoteTransform3D = $J1/CameraControllerFPS/RemoteVue1
+@onready var remote2_j1: RemoteTransform3D = $J1/CameraControllerFPS/RemoteVue2
+@onready var remote1_j2: RemoteTransform3D = $J2/CameraControllerFPS/RemoteVue5
+@onready var remote2_j2: RemoteTransform3D = $J2/CameraControllerFPS/RemoteVue6
+
 @onready var label_fps: Label = $TechnicalInfos/FPS
 @onready var label_cpu = $TechnicalInfos/CPU
 @onready var label_gpu = $TechnicalInfos/GPU
@@ -85,6 +90,22 @@ func _process(_delta: float) -> void:
 	
 	# On réinitialise le temps cumulé des 8 vues
 	last_gpu_vues_ms = 0.0
+
+func _physics_process(_delta: float) -> void:
+	# On contrôle le décalage de positions entre les caméras de chacun des joueurs
+	var step : float = 0.01
+	if Input.is_action_just_pressed("BringCloserCamJ1"):
+		remote1_j1.position.x += step
+		remote2_j1.position.x -= step
+	elif Input.is_action_just_pressed("MoveAwayCamJ1"):
+		remote1_j1.position.x -= step
+		remote2_j1.position.x += step
+	elif Input.is_action_just_pressed("BringCloserCamJ2"):
+		remote1_j2.position.x += step
+		remote2_j2.position.x -= step
+	elif Input.is_action_just_pressed("MoveAwayCamJ2"):
+		remote1_j2.position.x -= step
+		remote2_j2.position.x += step
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("StopGame"):

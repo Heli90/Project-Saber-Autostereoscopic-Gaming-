@@ -17,3 +17,12 @@ Qui est un template qui permet la gestion d'un personnage 3D et de gerer la cam�
 
 Utiliser le template: Godot 4 Third-Person Combat Prototype __ Snaiel/Godot4ThirdPersonCombatPrototype ;                              
 Permet un combat leger dans un environnement 3D ainsi que des mouvements
+
+Idées de mécaniques pour le jeu :
+
+- Versus en 1v1 sur le même terrain
+- Génération des cubes sur une grille 3x1, puis 3x3 si cela n'est pas trop difficile
+- Accélération des cubes quand on frappe correctement le cube
+-Frapper le cube avec une certaine inclinaison peut forcer un coup précis pour le joueur adverse
+- Score pour chacun des joueurs (parfait/normal/malus)
+- Gérer la distance entre les joueurs, la vitesse des cubes et la distance à laquelle on frappe les cubes pour que ça soit jouable

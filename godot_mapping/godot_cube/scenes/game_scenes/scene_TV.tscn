@@ -22,6 +22,7 @@ width = 1920
 height = 1080
 
 [node name="ImageAutoStereo3D" type="Node3D" unique_id=1856045016]
+process_mode = 3
 script = ExtResource("1_xlecp")
 
 [node name="J1" parent="." unique_id=1529862946 instance=ExtResource("2_rfm68")]
@@ -55,15 +56,6 @@ size = Vector2i(1920, 1080)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.968807, 1.5, 34.4)
 current = true
 
-[node name="CameraControllerTPS" parent="J1" index="3" unique_id=506921349]
-visible = false
-
-[node name="CameraTarget" parent="J1/CameraControllerTPS" index="0" unique_id=2133453867]
-visible = false
-
-[node name="Camera" parent="J1/CameraControllerTPS/CameraTarget" index="0" unique_id=773504143]
-visible = false
-
 [node name="J2" parent="." unique_id=890448322 instance=ExtResource("2_rfm68")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 35)
 player_id = 2
@@ -74,17 +66,17 @@ current = false
 
 [node name="RemoteVue5" type="RemoteTransform3D" parent="J2/CameraControllerFPS" parent_id_path=PackedInt32Array(890448322, 718035250) index="1" unique_id=865866804]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07014561, 0, -0.5999999)
-remote_path = NodePath("../Vue5/Camera3D")
+remote_path = NodePath("../Vue5/Camera")
 
 [node name="RemoteVue6" type="RemoteTransform3D" parent="J2/CameraControllerFPS" parent_id_path=PackedInt32Array(890448322, 718035250) index="2" unique_id=1097339675]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06956577, 0, -0.5999999)
-remote_path = NodePath("../Vue6/Camera3D")
+remote_path = NodePath("../Vue6/Camera")
 
 [node name="Vue5" type="SubViewport" parent="J2/CameraControllerFPS" parent_id_path=PackedInt32Array(890448322, 718035250) index="3" unique_id=1130869609]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 
-[node name="Camera3D" type="Camera3D" parent="J2/CameraControllerFPS/Vue5" unique_id=340205500]
+[node name="Camera" type="Camera3D" parent="J2/CameraControllerFPS/Vue5" unique_id=340205500]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.070146, 1.5, 34.4)
 current = true
 
@@ -92,18 +84,9 @@ current = true
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 
-[node name="Camera3D" type="Camera3D" parent="J2/CameraControllerFPS/Vue6" unique_id=1440031429]
+[node name="Camera" type="Camera3D" parent="J2/CameraControllerFPS/Vue6" unique_id=1440031429]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.930434, 1.5, 34.4)
 current = true
-
-[node name="CameraControllerTPS" parent="J2" index="3" unique_id=506921349]
-visible = false
-
-[node name="CameraTarget" parent="J2/CameraControllerTPS" index="0" unique_id=2133453867]
-visible = false
-
-[node name="Camera" parent="J2/CameraControllerTPS/CameraTarget" index="0" unique_id=773504143]
-visible = false
 
 [node name="Vue3" type="SubViewport" parent="." unique_id=1959630340]
 handle_input_locally = false

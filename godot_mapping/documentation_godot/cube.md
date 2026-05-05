@@ -18,8 +18,7 @@
 - Collisions 3D avec le cube
 - Déplacements basiques via les touches du clavier Z/Q/S/D pour le joueur 1 et les flèches du clavier pour le joueur 2
 - Saut avec Espace pour le joueur 1, Tab pour le joueur 2
-- Appui sur les touches A et E pour tourner la caméra du joueur 1, et les touches W et C pour tourner la caméra du joueur 2
-- Appui sur les touches "1" et "2" hors du pad numérique pour changer de caméra (**Uniquement en mode PC**)
+- Appui sur les touches A et E pour modifier le décalage interoculaire pour le joueur 1, et les touches W et C pour modifier le décalager interoculaire pour le joueur 2
 - Caméra attachée au joueur permettant de suivre le jeu
 - Gravité implémentée dans la physique du joueur
 
@@ -34,30 +33,17 @@ if not is_on_floor():
 		
 	# Rotation manuelle de la caméra.
 	if Input.is_action_just_pressed("Left_CamJ%s"%player_id):
-		if is_fps:
-			camera_controller_fps.rotate_y(deg_to_rad(30))
-		else:
-			camera_controller_tps.rotate_y(deg_to_rad(30))
+		camera_controller_fps.rotate_y(deg_to_rad(30))
 	if Input.is_action_just_pressed("Right_CamJ%s"%player_id):
-		if is_fps:
-			camera_controller_fps.rotate_y(deg_to_rad(-30))
-		else:
-			camera_controller_tps.rotate_y(deg_to_rad(-30))
+		camera_controller_fps.rotate_y(deg_to_rad(-30))
 
 	# Reçoit la direction et gère le mouvement et l'accélération.
 	var input_dir = Input.get_vector("GaucheJ%s"%player_id, "DroiteJ%s"%player_id, "AvancerJ%s"%player_id, "ReculerJ%s"%player_id)
-	var direction
-	if is_fps:
-		direction = (camera_controller_fps.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	else:
-		direction = (camera_controller_tps.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction = (camera_controller_fps.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 
 	# Gère la rotation du modèle 3D.
 	if input_dir != Vector2(0,0):
-		if is_fps:
-			forme.rotation_degrees.y = camera_controller_fps.rotation_degrees.y - rad_to_deg(input_dir.angle()) - 90
-		else:
-			forme.rotation_degrees.y = camera_controller_tps.rotation_degrees.y - rad_to_deg(input_dir.angle()) - 90
+		forme.rotation_degrees.y = camera_controller_fps.rotation_degrees.y - rad_to_deg(input_dir.angle()) - 90
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
