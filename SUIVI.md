@@ -115,6 +115,10 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 **Groupe :** Evaluation intermédiaire : Echange avec l'encadrant sur l'état actuel du projet et les évoluations à venir (cf `PLANNING.md`)
 
+### Entre la séance 10 et la séance 11
+
+**Van-Kévin** : Implémentation de la correction du temps de calcul des vues via GPU dans la branche principale du projet.
+
 ### Séance 11 - 05/05
 
 
