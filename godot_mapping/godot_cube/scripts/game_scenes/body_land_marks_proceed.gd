@@ -30,7 +30,6 @@ var result_mediapipe= null
 @onready var viewport = $SubViewportContainer/CameraViewport
 @onready var texture_rect = $SubViewportContainer/CameraViewport/TestAffichage
 @onready var debug_view = $CanvasLayer/DebugOverlay # Un TextureRect pour voir le résultat
-@onready var cube = $".."/Cube
 @onready var label: Label = $"../CameraLabel"
 @onready var confirmation_dialog: ConfirmationDialog = $SelectCamera
 @onready var selected_feed: OptionButton = $SelectCamera/VBoxContainer/HBoxContainer/SelectedFeed

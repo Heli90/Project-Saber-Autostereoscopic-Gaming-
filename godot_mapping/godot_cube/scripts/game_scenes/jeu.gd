@@ -4,6 +4,7 @@ extends Node3D
 @onready var partie_timer: Timer = $PartieTimer
 @onready var game_ending: ColorRect = $HUD/GameEnding
 @onready var countdown_label: Label = $HUD/Countdown
+@onready var cube_spawner: Node3D = $CubeSpawner
 
 var global_score: int = 0
 
@@ -16,6 +17,7 @@ func _ready() -> void:
 	await transition.finished
 	fondu_noir.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	cube_spawner.activation()
 	partie_timer.start()
 
 func _process(_delta: float) -> void:

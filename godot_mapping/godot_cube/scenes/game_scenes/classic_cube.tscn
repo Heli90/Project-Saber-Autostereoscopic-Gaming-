@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cpdl5o8jume4p"]
+
+[ext_resource type="Script" uid="uid://dplpeg7io1qma" path="res://scripts/game_scenes/classic_cube.gd" id="1_kgufc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_48hwc"]
+albedo_color = Color(0, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kgufc"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_p5g2x"]
+
+[node name="Cube" type="StaticBody3D" unique_id=2049622243]
+script = ExtResource("1_kgufc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1276173051]
+material_override = SubResource("StandardMaterial3D_48hwc")
+mesh = SubResource("BoxMesh_kgufc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1442875795]
+shape = SubResource("BoxShape3D_p5g2x")

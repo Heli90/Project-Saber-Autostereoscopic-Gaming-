@@ -28,7 +28,7 @@ size = Vector2i(958, 1080)
 render_target_update_mode = 4
 
 [node name="J1" parent="SplitScreens/Camera1/POV1" unique_id=1529862946 instance=ExtResource("2_wbbwd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 1, 35)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 15)
 
 [node name="Camera2" type="SubViewportContainer" parent="SplitScreens" unique_id=859538132]
 layout_mode = 2
@@ -42,7 +42,7 @@ size = Vector2i(958, 1080)
 render_target_update_mode = 4
 
 [node name="J2" parent="SplitScreens/Camera2/POV2" unique_id=1697962834 instance=ExtResource("2_wbbwd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 1, 35)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1, -15)
 player_id = 2
 
 [node name="CubeTournant" parent="." unique_id=1026699542 instance=ExtResource("3_d2mly")]
