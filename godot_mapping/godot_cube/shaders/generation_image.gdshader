@@ -16,6 +16,8 @@ uniform int decalage = -1;
 //Variables pour effets visuels
 uniform bool invertViews = false; 
 uniform float offset = 0.000;
+uniform bool pixelisation = false;
+uniform float pixelisationPower = 200.0;
 
 
 // Fonction utilitaire pour récupérer la couleur du bon point de vue
@@ -66,6 +68,14 @@ void fragment() {
     float r = get_subpixel_color(view_r, UV+vec2(offset,0), 0);
     float g = get_subpixel_color(view_g, UV-vec2(offset,0), 1);
     float b = get_subpixel_color(view_b, UV+vec2(0,offset), 2);
+	
+	if (pixelisation){
+		vec2 pixelUV = floor(UV * vec2(pixelisationPower))/pixelisationPower;
+		r = get_subpixel_color(view_r, pixelUV, 0);
+    	g = get_subpixel_color(view_g, pixelUV, 1);
+    	b = get_subpixel_color(view_b, pixelUV, 2);
+	}
+		
     
     COLOR = vec4(r, g, b, 1.0);
 }

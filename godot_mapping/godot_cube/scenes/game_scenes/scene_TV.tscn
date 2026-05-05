@@ -13,6 +13,7 @@ shader_parameter/N = 8
 shader_parameter/decalage = -1
 shader_parameter/invertViews = false
 shader_parameter/offset = 0.01
+shader_parameter/pixelisation = false
 
 [sub_resource type="Gradient" id="Gradient_fqw2t"]
 

@@ -7,6 +7,9 @@ extends AnimatableBody3D
 var facteur_rotation = 2.0
 #var last_gesture = ""
 
+var cnt = 0 #TESTS
+var vect = Vector3.FORWARD # TESTS
+
 """!-! TACHES FAITES A CHAQUE FRAME !-!"""
 func _physics_process(delta: float) -> void:
 	# Rotation du cube.
@@ -20,3 +23,15 @@ func _physics_process(delta: float) -> void:
 		#last_gesture = ""
 	vitesse_rotation = facteur_rotation*landmarks_proceed._maj_speed()[0] # A mettre dans le else si on repasse en mode hand_landmarks
 	rotate_y(vitesse_rotation * delta)
+	
+	"""Cube qui bouge pour tester l'inversion de profondeur"""
+	if cnt>500 and vect == Vector3.FORWARD:
+		vect = Vector3.BACK
+		cnt = 0
+	elif cnt>500 and vect == Vector3.BACK:
+		vect = Vector3.FORWARD
+		cnt = 0
+	cnt = cnt + 1
+	translate(vect * 0.1)
+	
+	

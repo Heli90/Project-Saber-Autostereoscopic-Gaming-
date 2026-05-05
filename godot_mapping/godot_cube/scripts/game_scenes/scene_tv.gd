@@ -122,3 +122,12 @@ func _input(event: InputEvent) -> void:
 		textureRect.material.set_shader_parameter("offset", offset+0.01)
 	if event.is_action_pressed("resetGlitchEffect"):
 		textureRect.material.set_shader_parameter("offset", 0.0)
+	if event.is_action_pressed("pixelisation"):
+		var pixelisationPower = textureRect.material.get_shader_parameter("pixelisationPower")
+		textureRect.material.set_shader_parameter("pixelisation", true)
+		textureRect.material.set_shader_parameter("pixelisationPower", pixelisationPower-10.0)
+	if event.is_action_pressed("resetPixelisation"):
+		textureRect.material.set_shader_parameter("pixelisation", false)
+		textureRect.material.set_shader_parameter("pixelisationPower", 200.0)
+	
+		
