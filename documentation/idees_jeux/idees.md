@@ -26,3 +26,4 @@ Idées de mécaniques pour le jeu :
 -Frapper le cube avec une certaine inclinaison peut forcer un coup précis pour le joueur adverse
 - Score pour chacun des joueurs (parfait/normal/malus)
 - Gérer la distance entre les joueurs, la vitesse des cubes et la distance à laquelle on frappe les cubes pour que ça soit jouable
+- Effet de rotation de caméra pour se voir avec des points de vues inversés (se voir soi-même, par exemple)

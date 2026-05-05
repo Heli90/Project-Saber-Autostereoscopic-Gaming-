@@ -130,7 +130,7 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 ### Séance 11 - 05/05
 
-**Van-Kévin** : Ajout d'une touche pour bloquer le mouvement de tous les objets pour tester des effets visuels, et d'une touche pour modifier le décalage entre les caméras des vues pour chaque joueur. Suppression de certaines touches du joueur liées à la caméra pour mieux correspondre au jeu final.
+**Van-Kévin** : Ajout d'une touche pour bloquer le mouvement de tous les objets pour tester des effets visuels, et d'une touche pour modifier le décalage entre les caméras des vues pour chaque joueur. Suppression de certaines touches du joueur liées à la caméra pour mieux correspondre au jeu final. Affichage du temps de détection par Mediapipe des mains.
 
 ### Séance 12 - 13/05
 
