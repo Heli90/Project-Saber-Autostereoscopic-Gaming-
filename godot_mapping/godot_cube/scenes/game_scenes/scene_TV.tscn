@@ -168,6 +168,15 @@ theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_fonts/font = ExtResource("3_llrkf")
 theme_override_font_sizes/font_size = 30
 
+[node name="DetectMediapipe" type="Label" parent="TechnicalInfos" unique_id=94376191]
+offset_left = 50.0
+offset_top = 750.0
+offset_right = 51.0
+offset_bottom = 792.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_fonts/font = ExtResource("3_llrkf")
+theme_override_font_sizes/font_size = 30
+
 [node name="TextureRect" type="TextureRect" parent="." unique_id=520957025]
 self_modulate = Color(1, 0, 0, 1)
 texture_filter = 2

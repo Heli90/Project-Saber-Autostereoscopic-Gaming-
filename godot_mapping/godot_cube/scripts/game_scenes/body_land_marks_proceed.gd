@@ -5,9 +5,9 @@ var task
 var renderer
 var model_path = "res://pose_landmarker/pose_landmarker_full.task"
 var modulated = 1
-var time_detect
-var time_render
-var time_display
+var time_detect: float
+var time_render: float
+var time_display: float
 var camera_fps
 var output_image : Image = null
 var last_body_detected_time : float = -999.0

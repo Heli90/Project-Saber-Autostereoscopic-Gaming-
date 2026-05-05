@@ -20,6 +20,9 @@ extends Node3D
 @onready var label_gpu_entrelacement: Label = $TechnicalInfos/GPUEntrelacement
 @onready var label_gpu_vues: Label = $TechnicalInfos/GPUVues
 
+@onready var label_detect_mediapipe: Label = $TechnicalInfos/DetectMediapipe
+@onready var land_marks_proceed: Node2D = $CubeTournant/LandMarksProceed
+
 @onready var textureRect = $TextureRect
 
 var initialisations_joueurs: bool = false
@@ -87,7 +90,7 @@ func _process(_delta: float) -> void:
 	label_cpu.text = "CPU: %.2f ms"%cpu_time
 	label_gpu.text = "GPU (Temps total): %.2f ms"%last_gpu_time_ms
 	label_gpu_vues.text = "GPU (Temps des vues): %.2f ms"%last_gpu_vues_ms
-	
+	label_detect_mediapipe.text = "Temps de détection Mediapipe : %.2f ms"%(land_marks_proceed.time_detect)
 	# On réinitialise le temps cumulé des 8 vues
 	last_gpu_vues_ms = 0.0
 
