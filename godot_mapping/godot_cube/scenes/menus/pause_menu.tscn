@@ -62,6 +62,18 @@ shader_parameter/brightness = 1.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dqjbd"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_opdvj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pf6lc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j7gms"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oey0u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sy5ew"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w5beu"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3hsps"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vtr1r"]
@@ -222,7 +234,26 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_dgi6y")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_dqjbd")
 text = "Zone Test"
 
+[node name="CameraButton" type="Button" parent="MenuButtons" unique_id=613085586]
+layout_mode = 1
+offset_left = 226.0
+offset_top = 661.0
+offset_right = 395.0
+offset_bottom = 703.0
+theme_override_colors/font_hover_color = Color(0, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_1s2dm")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_opdvj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_pf6lc")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_j7gms")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_oey0u")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_sy5ew")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_w5beu")
+text = "Camera"
+
 [node name="Options" type="Panel" parent="." unique_id=1888251166]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -328,6 +359,7 @@ audio_bus_name = "SFX"
 [connection signal="pressed" from="MenuButtons/MainMenuButton" to="." method="_onMainMenuButton_pressed"]
 [connection signal="pressed" from="MenuButtons/QuitButton" to="." method="_onQuitButton_pressed"]
 [connection signal="pressed" from="MenuButtons/TestButton" to="." method="_onTestButton_pressed"]
+[connection signal="pressed" from="MenuButtons/CameraButton" to="." method="_onCameraButton_pressed"]
 [connection signal="pressed" from="Options/BackButton" to="." method="_onBackButton_pressed"]
 [connection signal="value_changed" from="Options/MusicControl" to="Options/MusicControl" method="_onValueChanged"]
 [connection signal="value_changed" from="Options/SFXControl" to="Options/SFXControl" method="_onValueChanged"]

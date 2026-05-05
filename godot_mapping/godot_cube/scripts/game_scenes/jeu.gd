@@ -36,8 +36,8 @@ func _onPartieTimerTimeout() -> void:
 	
 	var transition = create_tween()
 	transition.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-	transition.parallel().tween_property(game_ending, "modulate:a", 1.0, 0.1)
-	transition.parallel().tween_method(set_blur_intensity, 0.0, 2.0, 0.1)
+	transition.parallel().tween_property(game_ending, "modulate:a", 1.0, 0.5)
+	transition.parallel().tween_method(set_blur_intensity, 0.0, 2.0, 0.5)
 	await transition.finished
 	game_ending.visible = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -54,3 +54,7 @@ func load_highest_score() -> void:
 	
 	if err != OK: game_ending.highest_score = 0
 	else: game_ending.highest_score = config.get_value("Progression", "Meilleur Score", 0)
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("StopTime"):
+		get_tree().paused = not get_tree().paused

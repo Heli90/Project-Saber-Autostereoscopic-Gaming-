@@ -14,7 +14,7 @@ Légende :
 - En rouge : jalons
 
 
-## Répartition des tâches pour l'évaluation intermédiaire
+## Répartition des tâches
 
 - **V0**: premiers exemples pour tester et expérimenter, sans structure bien définie
 - **V1**: code fonctionnel, structuré mais indépendant des autres tâches
@@ -53,6 +53,7 @@ Légende :
 |Choisir des features qui prennent en compte les effets visuels | ... | ... | ... | ... |
 |Implémenter des features qui prennent en compte ces effets visuels | ... | ... | ... | ... |
 |Faire tester le jeu | Phase cyclique de tests, corrections, tests, corrections... | Groupe | ... | ... |
+|Afficher les performances | Temps de génération avec/sans entrelacement, nombre de trames de la caméra/MédiaPipe... | Groupe | 16/03 | ... |
 
 
 
@@ -113,13 +114,73 @@ Objectifs pour la prochaine séance :
 
 ### Séance 6 - 27/03
 
+***Remarques de J. Lefeuvre :***
+- **Urgent** : Profondeur/Distance Caméra (Distance max actuel = 2,80m)
+- Regarder la fréquence de raffraîchissement des données traitées par MediaPipe et la comparer avec celle de la caméra
+- Regarder les différentes performances selon les PC
+- Regarder MediaPipe + pieds
+- Regarder les effets de profondeur possibles : inversion de stéréo / des vues -> Effet soit sur le jeu entier soit sur un objet qui dénote du reste. **Il faut être capable montrer plus qu'un simple jeu (perfs, technologies, ...)**
+- *Skinning* : Model 3D pour les main = T-pose + mèches = On attribue des poids à chaque partie du squelette (triangles). Regarder dans Godot l'animation de squelette et en faire un projet à part (pour une démonstration) => **Il faut couvrir tous les outils techniques qu'on pourrait utiliser**
+
+Objectifs pour la prochaine séance :
+> Régler les problèmes de détection de la caméra liés à la profondeur
+
+> Identifier un projet proposant un avatar 3D et le contrôler avec la caméra
+
+> Etudier les possibilités d'implémentations d'effets stéréo
+
+> Déterminer la fréquence de raffraîchissemnt des données MediaPipe 
+
+
 ### Séance 7 - 03/04
 
 ### Séance 8 - 10/04
 
+***Remarques de J. Lefeuvre :*** 
+- Implémenter le tracking de 2 corps complets (en splitant la caméra) pour la prochaine séance
+- Faire des tests d'effets stéréo (pas forcément implémenté dans le jeu)
+- Rajouet une section *How to* dans le `README.md`
+
 ### Séance 9 - 15/04
 
 ### Séance 10 - 21/04
+
+**Evaluation intermédiaire : *Remarques de J. Lefeuvre :***
+
+*Partie jeu (présenté lors de la séance) :*
+
+- Rajouter une touche pour régler l'interoculaire directement dans le jeu
+- Retirer la caméra de l'affichage (ou faire un truc plus discret, par exemple mettre une touche pour activer/désactiver le display)
+- Régler la focale des caméras du jeu / la profondeur perçue en jeu
+- **Pour l'évaluation finale** : Prévoir des roulements de staff sur nos stands : Tout le monde doit être capable de pouvoir vendre le projet (même sans rentrer dans les trop grandes lignes si on est pas le spécialiste) -> fiche de stand
+- **Remplaçer les vues noires par des vues avec un fond commun du jeu** (ex : on dit que les joueurs se font face, que derrière eux c'est l'infini/fond commu, et que pour chacun des joueurs, ils sont à 0).
+- Bon temps d'entrelaçement (= pas pénalisant). **Ajouter le temps de détection aux temps du CPU**.
+
+*Partie profondeur :*
+- **URGENT : Rajouter un mode *freeze*** dans le jeu pour pouvoir évaluer la qualités des effets stéréo
+- Effets dispos : Inversions des yeux (et inversion des joueurs)
+
+
+*Partie idée de jeux :*
+- Partir d'un projet existant ne pose pas de problème, il faut juste comprendre les limites imposées par le projet existant (ex : Les années précédentes, dans le projet `MarioKart`, l'infini occuliare était l'infini imposé par le jeu).
+- Si jamais on veut faire un fork, il faut bien étudier le jeu pour savoir quoi ajouter où
+- Regarder si on peut intepréter les gestes d'attaque sur le cube (notamment la partie profondeur)
+- FPS / TPS ? On passe d'un jeu mono-joueur à deux joueurs : à voir si c'est trop compliqué ?
+- **Définir précisément le gameplay (actions possibles, interactions, etc..). Ex : renvoyer un cube si on tape avec deux bâtons** et regarder si c'est jouable (niveau temps de développement). Les effets seront plus durs à implémenter sur un projet déjà existant (on subit les contraintes et ça peut être frustrant). 
+- **Refaire le jeu depuis le début est tout à fait envisageable**. Seul la partie synchronisation avec le rythme coince pourf l'instant. *Idée proposée :* utiliser des analyseurs de BPM / détecteurs d'attaques pour adapter la génération aléatoire du jeu selon le rythme de la musique (on pourrait récupérer un JSON à fournir au jeu).
+- *Rappel :* Il faut une beta la semaine du 20 juin. Préparer les questions à poser aux beta-testeurs pour que les retours nous soient le plus utiles possible (et le documenter dans un fichier à part).
+
+A faire pour la prochaine fois :
+
+> Poser les animations (mode freeze)
+
+> Changer les paramètres de caméra virtuelle (interocculaire, profondeur perçue)
+
+> Regarder les effets sur les objets
+
+> Etudier le projet sur lequel on veut partir pour savoir si c'est vraiment envisageable (ex : essayer de faire une génération stéréo du jeu) 
+
+> **Faire un descriptif détaillé du jeu** (se décider sur le gameplay et si on part du projet existant)
 
 ### Séance 11 - 05/05
 

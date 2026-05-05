@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://s6n8auc020ga" path="res://scenes/menus/game_ending.tscn" id="3_0hq27"]
 [ext_resource type="FontFile" uid="uid://bd4geqghtkj13" path="res://addons/assets/TextFontBase.ttf" id="4_nljp5"]
 [ext_resource type="PackedScene" uid="uid://cowlnii2y28cm" path="res://scenes/menus/pause_menu.tscn" id="6_04wrr"]
-[ext_resource type="Script" uid="uid://da4gs88omhvbh" path="res://scripts/game_scenes/land_marks_proceed.gd" id="6_ypfyx"]
+[ext_resource type="Script" uid="uid://p0s0y75s7ehp" path="res://scripts/game_scenes/body_land_marks_proceed.gd" id="6_32rft"]
 [ext_resource type="AudioStream" uid="uid://dseksoliltjqp" path="res://addons/sfx/TimeStopSFX.mp3" id="7_32rft"]
 
 [sub_resource type="Sky" id="Sky_ypfyx"]
@@ -107,7 +107,7 @@ script = ExtResource("1_fu8w0")
 environment = SubResource("Environment_n65sj")
 
 [node name="PartieTimer" type="Timer" parent="." unique_id=1292462759]
-wait_time = 60.0
+wait_time = 600.0
 one_shot = true
 ignore_time_scale = true
 
@@ -267,8 +267,9 @@ surface_material_override/0 = SubResource("StandardMaterial3D_nmqw8")
 [node name="LGaucheJ1" type="MeshInstance3D" parent="Map" unique_id=619726893]
 
 [node name="LandMarksProceed" type="Node2D" parent="." unique_id=775762795]
+visible = false
 position = Vector2(650, 0)
-script = ExtResource("6_ypfyx")
+script = ExtResource("6_32rft")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="LandMarksProceed" unique_id=877274248]
 offset_right = 640.0
@@ -277,22 +278,46 @@ offset_bottom = 480.0
 [node name="CameraViewport" type="SubViewport" parent="LandMarksProceed/SubViewportContainer" unique_id=861650548]
 handle_input_locally = false
 size = Vector2i(640, 480)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="TestAffichage" type="TextureRect" parent="LandMarksProceed/SubViewportContainer/CameraViewport" unique_id=538163506]
+visible = false
 offset_right = 640.0
 offset_bottom = 480.0
 expand_mode = 2
 flip_h = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="LandMarksProceed" unique_id=688860276]
+visible = false
 
 [node name="DebugOverlay" type="TextureRect" parent="LandMarksProceed/CanvasLayer" unique_id=1751420981]
 offset_left = 650.0
 offset_right = 690.0
 offset_bottom = 40.0
 
+[node name="SelectCamera" type="ConfirmationDialog" parent="LandMarksProceed" unique_id=1072512059]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LandMarksProceed/SelectCamera" unique_id=1482468880]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LandMarksProceed/SelectCamera/VBoxContainer" unique_id=171987142]
+layout_mode = 2
+
+[node name="LabelFeed" type="Label" parent="LandMarksProceed/SelectCamera/VBoxContainer/HBoxContainer" unique_id=1347437495]
+layout_mode = 2
+
+[node name="SelectedFeed" type="OptionButton" parent="LandMarksProceed/SelectCamera/VBoxContainer/HBoxContainer" unique_id=373698306]
+layout_mode = 2
+
+[node name="LabelFormat" type="Label" parent="LandMarksProceed/SelectCamera/VBoxContainer" unique_id=1954762314]
+layout_mode = 2
+
+[node name="SelectedFormat" type="OptionButton" parent="LandMarksProceed/SelectCamera/VBoxContainer" unique_id=824078272]
+layout_mode = 2
+
 [node name="CameraLabel" type="Label" parent="." unique_id=605287519]
+visible = false
 offset_left = 800.0
 offset_top = 480.0
 offset_right = 900.0
@@ -314,3 +339,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_e41p7")
 shape = SubResource("BoxShape3D_ycxfq")
 
 [connection signal="timeout" from="PartieTimer" to="." method="_onPartieTimerTimeout"]
+[connection signal="canceled" from="LandMarksProceed/SelectCamera" to="LandMarksProceed" method="_start_camera"]
+[connection signal="confirmed" from="LandMarksProceed/SelectCamera" to="LandMarksProceed" method="_start_camera"]
+[connection signal="item_selected" from="LandMarksProceed/SelectCamera/VBoxContainer/HBoxContainer/SelectedFeed" to="LandMarksProceed" method="_on_camera_selected"]
+[connection signal="item_selected" from="LandMarksProceed/SelectCamera/VBoxContainer/SelectedFormat" to="LandMarksProceed" method="_on_format_selected"]

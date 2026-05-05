@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="3_d2mly"]
 
 [node name="PC" type="Node3D" unique_id=1088143800]
+process_mode = 3
 script = ExtResource("1_4ivkf")
 
 [node name="SplitScreens" type="GridContainer" parent="." unique_id=1978316299]
