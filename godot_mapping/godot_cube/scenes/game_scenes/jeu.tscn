@@ -247,6 +247,26 @@ theme_override_fonts/font = ExtResource("4_nljp5")
 theme_override_font_sizes/font_size = 40
 text = "Prêts ?"
 
+[node name="ScoreJ1" type="Label" parent="." unique_id=1801802429]
+offset_left = 400.0
+offset_top = 100.0
+offset_right = 659.0
+offset_bottom = 151.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_fonts/font = ExtResource("4_nljp5")
+theme_override_font_sizes/font_size = 50
+text = "Score J1 :"
+
+[node name="ScoreJ2" type="Label" parent="." unique_id=1876417994]
+offset_left = 1250.0
+offset_top = 100.0
+offset_right = 1509.0
+offset_bottom = 151.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_fonts/font = ExtResource("4_nljp5")
+theme_override_font_sizes/font_size = 50
+text = "Score J2 :"
+
 [node name="TimeStopSound" type="AudioStreamPlayer" parent="." unique_id=1815400477]
 stream = ExtResource("7_32rft")
 

@@ -13,6 +13,8 @@ shader_parameter/N = 8
 shader_parameter/decalage = -1
 shader_parameter/invertViews = false
 shader_parameter/offset = 0.01
+shader_parameter/pixelisation = false
+shader_parameter/pixelisationPower = 200.0
 
 [sub_resource type="Gradient" id="Gradient_fqw2t"]
 
@@ -22,7 +24,6 @@ width = 1920
 height = 1080
 
 [node name="ImageAutoStereo3D" type="Node3D" unique_id=1856045016]
-process_mode = 3
 script = ExtResource("1_xlecp")
 
 [node name="J1" parent="." unique_id=1529862946 instance=ExtResource("2_rfm68")]
@@ -187,7 +188,7 @@ texture = SubResource("GradientTexture2D_6c3ax")
 
 [node name="CubeTournant" parent="." unique_id=1026699542 instance=ExtResource("6_qo1rj")]
 
-[node name="TimeStopSound" parent="CubeTournant" index="8" unique_id=1815400477]
+[node name="TimeStopSound" parent="CubeTournant" index="10" unique_id=1815400477]
 bus = &"SFX"
 
 [editable path="J1"]

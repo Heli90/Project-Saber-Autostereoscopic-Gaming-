@@ -7,6 +7,7 @@ extends Node3D
 @onready var cube_spawner: Node3D = $CubeSpawner
 
 var global_score: int = 0
+var pause_blocs : bool = false
 
 func _ready() -> void:
 	load_highest_score()
@@ -28,6 +29,7 @@ func set_blur_intensity(value: float):
 
 func _onPartieTimerTimeout() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	global_score = cube_spawner.current_score
 	game_ending.add_score(global_score)
 	get_tree().paused = true
 	
@@ -59,4 +61,8 @@ func load_highest_score() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("StopTime"):
-		get_tree().paused = not get_tree().paused
+		pause_blocs = not pause_blocs
+		cube_spawner.start_spawn = not pause_blocs
+		for bloc in cube_spawner.blocs:
+			if is_instance_valid(bloc):
+				bloc.set_physics_process(not pause_blocs)
