@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://p0s0y75s7ehp" path="res://scripts/game_scenes/body_land_marks_proceed.gd" id="6_32rft"]
 [ext_resource type="PackedScene" uid="uid://cpdl5o8jume4p" path="res://scenes/game_scenes/classic_cube.tscn" id="6_nmqw8"]
 [ext_resource type="AudioStream" uid="uid://dseksoliltjqp" path="res://addons/sfx/TimeStopSFX.mp3" id="7_32rft"]
+[ext_resource type="PackedScene" uid="uid://c7o1d8sboxv2g" path="res://scenes/game_scenes/bonus_cube.tscn" id="7_gphcn"]
 
 [sub_resource type="Sky" id="Sky_ypfyx"]
 
@@ -114,6 +115,7 @@ theme_override_font_sizes/font_size = 50
 [node name="CubeSpawner" type="Node3D" parent="." unique_id=1438072240]
 script = ExtResource("5_32rft")
 classic_bloc = ExtResource("6_nmqw8")
+bonus_bloc = ExtResource("7_gphcn")
 
 [node name="Lumière" type="DirectionalLight3D" parent="." unique_id=596364777]
 transform = Transform3D(1, 0, 0, 0, 0.720781, 0.69316286, 0, -0.69316286, 0.720781, 0, 0, 0)

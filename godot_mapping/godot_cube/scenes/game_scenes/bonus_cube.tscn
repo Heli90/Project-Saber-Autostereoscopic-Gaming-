@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c7o1d8sboxv2g"]
+
+[ext_resource type="Script" uid="uid://r15a7r51dtbw" path="res://scripts/game_scenes/bonus_cube.gd" id="1_0jcwg"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_n3qk3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dy6sp"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0jcwg"]
+
+[node name="BonusCube" type="StaticBody3D" unique_id=1740089336]
+script = ExtResource("1_0jcwg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=908527859]
+mesh = SubResource("BoxMesh_n3qk3")
+surface_material_override/0 = SubResource("StandardMaterial3D_dy6sp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1481216801]
+shape = SubResource("BoxShape3D_0jcwg")
