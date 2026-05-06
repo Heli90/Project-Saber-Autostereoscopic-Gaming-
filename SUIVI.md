@@ -159,6 +159,13 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 - Incrémentation de la vitesse du cube grâce à un système de combo.
 - Apparition aléatoire des cubes parmi plusieurs positions prédéfinies à un intervalle de temps régulier.
 
+### Entre la séance 11 et la séance 12
+
+**Van-Kévin** :
+- Ajout d'un score séparé et des multiplicateurs de scores pour chaque joueur.
+- Affichage de chaque score en jeu.
+- Mécaniques de disparition des cubes en jeu sous certaines conditions, décrites dans une nouvelle documentation dédiée au jeu.
+
 ### Séance 12 - 13/05
 
 
