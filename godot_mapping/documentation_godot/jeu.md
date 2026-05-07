@@ -13,12 +13,12 @@
 
 > Différents types de cubes sont ou seront proposés au cours de la partie :
 - Cubes **classiques** valant 1000 points de score par défaut
-- Cubes **étoilés** valant 5000 points de score par défaut et multipliant les points obtenus par 2 pendant 10 secondes
-- Cubes **explosifs** faisant perdre 500 points de score par défaut
-- Cubes **"observateurs"** (avec un oeil) qui clignotent puis disparaissent quelques secondes avant de devoir être frappés valant 5 cubes classiques
+- Cubes **étoilés** valant 5000 points de score par défaut et multipliant les points obtenus de tous les cubes par 2 pendant 10 secondes
+- Cubes **explosifs** faisant perdre 500 points de score
+- Cubes **invisibles** qui clignotent 3 fois puis disparaissent quelques secondes avant de devoir être frappés valant 15000 points de score par défaut
 
 > Chacun de ces cubes a une mécanique spécifique pour la disparition :
-- Cubes classiques : **2** coups avant disparition
+- Cubes classiques : Entre **1** et **3** coups avant disparition, selon la couleur initiale du cube
 - Autres cubes : **1** coup avant disparition
 
 ## Joueurs

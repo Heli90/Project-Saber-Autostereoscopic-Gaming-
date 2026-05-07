@@ -5,6 +5,7 @@ extends Node3D
 @onready var game_ending: ColorRect = $HUD/GameEnding
 @onready var countdown_label: Label = $HUD/Countdown
 @onready var cube_spawner: Node3D = $CubeSpawner
+@onready var disappear_bloc_notif: Label = $DisappearBlocNotif
 
 var global_score: int = 0
 var pause_blocs : bool = false
@@ -13,6 +14,7 @@ func _ready() -> void:
 	load_highest_score()
 	print(ProjectSettings.globalize_path("user://"))
 	game_ending.visible = false
+	disappear_bloc_notif.visible = false
 	var transition = create_tween()
 	transition.tween_property(fondu_noir, "modulate:a", 0.0, 0.6)
 	await transition.finished

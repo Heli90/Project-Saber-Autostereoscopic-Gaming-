@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c7o1d8sboxv2g"]
 
-[ext_resource type="Script" uid="uid://r15a7r51dtbw" path="res://scripts/game_scenes/bonus_cube.gd" id="1_0jcwg"]
+[ext_resource type="Script" uid="uid://r15a7r51dtbw" path="res://scripts/game_scenes/other_cube.gd" id="1_0jcwg"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_n3qk3"]
 

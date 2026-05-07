@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cy68ifed1fagu"]
+
+[ext_resource type="Script" uid="uid://238dtje66jps" path="res://scripts/game_scenes/disappear_cube.gd" id="1_7vakl"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_u4erg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u4erg"]
+albedo_color = Color(1, 0.41568628, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7vakl"]
+
+[node name="DisappearCube" type="StaticBody3D" unique_id=472210569]
+script = ExtResource("1_7vakl")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1350322189]
+mesh = SubResource("BoxMesh_u4erg")
+surface_material_override/0 = SubResource("StandardMaterial3D_u4erg")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=500950537]
+shape = SubResource("BoxShape3D_7vakl")

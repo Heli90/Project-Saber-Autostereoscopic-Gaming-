@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://cpdl5o8jume4p" path="res://scenes/game_scenes/classic_cube.tscn" id="6_nmqw8"]
 [ext_resource type="AudioStream" uid="uid://dseksoliltjqp" path="res://addons/sfx/TimeStopSFX.mp3" id="7_32rft"]
 [ext_resource type="PackedScene" uid="uid://c7o1d8sboxv2g" path="res://scenes/game_scenes/bonus_cube.tscn" id="7_gphcn"]
+[ext_resource type="PackedScene" uid="uid://bhsti1g7ancuo" path="res://scenes/game_scenes/bomb_cube.tscn" id="8_e41p7"]
+[ext_resource type="PackedScene" uid="uid://cy68ifed1fagu" path="res://scenes/game_scenes/disappear_cube.tscn" id="9_ycxfq"]
+[ext_resource type="FontFile" uid="uid://crtikirivhq6o" path="res://addons/assets/TextFontBold.otf" id="11_ycxfq"]
 
 [sub_resource type="Sky" id="Sky_ypfyx"]
 
@@ -116,6 +119,8 @@ theme_override_font_sizes/font_size = 50
 script = ExtResource("5_32rft")
 classic_bloc = ExtResource("6_nmqw8")
 bonus_bloc = ExtResource("7_gphcn")
+bomb_bloc = ExtResource("8_e41p7")
+disappear_bloc = ExtResource("9_ycxfq")
 
 [node name="Lumière" type="DirectionalLight3D" parent="." unique_id=596364777]
 transform = Transform3D(1, 0, 0, 0, 0.720781, 0.69316286, 0, -0.69316286, 0.720781, 0, 0, 0)
@@ -248,6 +253,16 @@ theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_fonts/font = ExtResource("4_nljp5")
 theme_override_font_sizes/font_size = 40
 text = "Prêts ?"
+
+[node name="DisappearBlocNotif" type="Label" parent="." unique_id=626708433]
+offset_left = 850.0
+offset_top = 540.0
+offset_right = 1052.0
+offset_bottom = 580.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_fonts/font = ExtResource("11_ycxfq")
+theme_override_font_sizes/font_size = 40
+text = "Touché !"
 
 [node name="ScoreJ1" type="Label" parent="." unique_id=1801802429]
 offset_left = 400.0

@@ -2,20 +2,20 @@ extends Node3D
 
 @export var classic_bloc: PackedScene
 @export var bonus_bloc: PackedScene
+@export var bomb_bloc: PackedScene
+@export var disappear_bloc: PackedScene
 @onready var start_label: Label = $"../StartLabel"
-@onready var score_j1: Label = $"../ScoreJ1"
-@onready var score_j2: Label = $"../ScoreJ2"
+@onready var score_labels = [$"../ScoreJ1", $"../ScoreJ2"]
+@onready var disappear_bloc_notif: Label = $"../DisappearBlocNotif"
 
 # Booléen de départ pour lancer l'apparition des cubes après le message de départ
 var start_spawn: bool = false
-
-var vitesse_deplacement_cubes: float = 10.0
-var direction_rng = RandomNumberGenerator.new()
+# Générateur aléatoire de nombres pour tous les tirages aléatoires
+var rng = RandomNumberGenerator.new()
 
 # Temps de jeu écoulé et temps de seuil pseudo-aléatoire via une variable RNG
 var elapsed_time: float = 0.0
-var time_rng = RandomNumberGenerator.new()
-var threshold_time: float = time_rng.randf_range(3.0, 10.0)
+var threshold_time: float = rng.randf_range(3.0, 10.0)
 
 # Temps pendant lesquels chacun des joueurs aura son bonus de multiplicateur (x2)
 var bonus_time: Array[float] = [0.0, 0.0]
@@ -49,10 +49,18 @@ func start_game() -> void:
 	await transition.finished
 	start_label.visible = false
 
-func set_speed() -> void:
-	for bloc in blocs:
-		if bloc.vitesse_deplacement > 0: bloc.vitesse_deplacement = vitesse_deplacement_cubes
-		else: bloc.vitesse_deplacement = -vitesse_deplacement_cubes
+func set_speed(bloc: Node3D, direction: int, disappear: bool) -> void:
+	match disappear:
+		false: match direction:
+				0: bloc.vitesse_deplacement = rng.randf_range(5.0, 10.0)
+				1: bloc.vitesse_deplacement = rng.randf_range(-5.0, -10.0)
+		true: match direction:
+				0: bloc.vitesse_deplacement = rng.randf_range(4.0, 6.0)
+				1: bloc.vitesse_deplacement = rng.randf_range(-4.0, -6.0)
+
+# Multiplie la vitesse de tous les blocs de 25% quand un palier de combo est dépassé
+func increment_speed(bloc: Node3D) -> void:
+	bloc.vitesse_deplacement *= 1.25
 
 func _process(delta: float) -> void:
 	if start_spawn:
@@ -60,7 +68,6 @@ func _process(delta: float) -> void:
 
 		# On retire les blocs qui ont été supprimés du jeu
 		blocs = blocs.filter(func(bloc): return is_instance_valid(bloc))
-		set_speed()
 		if blocs == []:
 			generate_classic_bloc()
 			seuil = 5
@@ -71,8 +78,7 @@ func _process(delta: float) -> void:
 
 		# Si un certain combo est atteint par l'un des 2 joueurs, on incrémente la vitesse
 		if stocked_combo.min() >= seuil:
-			vitesse_deplacement_cubes *= 1.5
-			set_speed()
+			for bloc in blocs : increment_speed(bloc)
 
 		# Selon qui a incrémenté la vitesse, on incrémente son multiplicateur de score
 		for i in range(2):
@@ -84,8 +90,8 @@ func _process(delta: float) -> void:
 		# On fait apparaître un bloc bonus à chaque fois que le temps de seuil est dépassé
 		if elapsed_time >= threshold_time:
 			elapsed_time -= threshold_time
-			threshold_time = time_rng.randf_range(3.0, 10.0)
-			generate_bonus_bloc()
+			threshold_time = rng.randf_range(3.0, 10.0)
+			generate_bomb_bloc()
 		
 		# On calcule le temps de bonus pour chacun des 2 joueurs et on arrête le bonus une fois que ce temps est dépassé
 		for i in range(2):
@@ -106,7 +112,7 @@ func case_valide(case: Array) -> bool:
 		if case == [bloc.position.x, bloc.position.y]: return false
 	return true
 
-func spawn_valide(bloc: Node3D) -> void:
+func spawn_valide(bloc: Node3D, disappear: bool = false) -> void:
 	# On filtre les coordonnées restantes pour ne pas avoir des cubes qui se superposent
 	var coord_restantes = grille.filter(case_valide)
 	if coord_restantes == []: return
@@ -115,12 +121,15 @@ func spawn_valide(bloc: Node3D) -> void:
 	bloc.position = Vector3(coord[0], coord[1], 0.0)
 	bloc.rotation_degrees = Vector3(0.0, 0.0, 0.0)
 	
-	var direction_cube = direction_rng.randi_range(0, 1)
-	if direction_cube == 0: bloc.vitesse_deplacement = vitesse_deplacement_cubes
-	else: bloc.vitesse_deplacement = -vitesse_deplacement_cubes
+	var direction_cube = rng.randi_range(0, 1)
+	set_speed(bloc, direction_cube, disappear)
 
 func generate_classic_bloc():
 	var new_bloc = generate_bloc(classic_bloc)
+	
+	# On initialise de façon aléatoire la couleur du bloc
+	new_bloc.color = rng.randi_range(1, 3)
+	new_bloc.setup_color = true
 
 	# On connecte le bloc au spawner pour qu'il puisse être relié au score actuel
 	new_bloc.striked_cube_j1.connect(_onStrikedClassicCube_j1)
@@ -137,24 +146,52 @@ func generate_bonus_bloc() -> void:
 	new_bloc.striked_cube_j2.connect(_onStrikedBonusCube_j2)
 	spawn_valide(new_bloc)
 
+func generate_bomb_bloc() -> void:
+	var new_bloc = generate_bloc(bomb_bloc)
+	
+	# On connecte le bloc au spawner pour qu'il puisse être relié au score actuel
+	new_bloc.striked_cube_j1.connect(_onStrikedBombCube_j1)
+	new_bloc.striked_cube_j2.connect(_onStrikedBombCube_j2)
+	spawn_valide(new_bloc)
+
+func generate_disappear_bloc() -> void:
+	var new_bloc = generate_bloc(disappear_bloc)
+	
+	# On connecte le bloc au spawner pour qu'il puisse être relié au score actuel
+	new_bloc.striked_cube_j1.connect(_onStrikedDisappearCube_j1)
+	new_bloc.striked_cube_j2.connect(_onStrikedDisappearCube_j2)
+	spawn_valide(new_bloc, true)
+
 func StrikedClassicCube(i: int) -> void:
 	stocked_combo[i] += 1
 	current_score[i] += multiplicateur[i] * 1000
-	if i == 0: score_j1.text = "Score J1 : %d"%current_score[i]
-	else: score_j2.text = "Score J2 : %d"%current_score[i]
+	score_labels[i].text = "Score J%d : %d"%[i+1, current_score[i]]
 
 func MissedClassicCube(i: int) -> void:
 	multiplicateur[i] = 1
 	stocked_combo[i] = 0
-	vitesse_deplacement_cubes = 10.0
 
 func StrikedBonusCube(i: int) -> void:
 	stocked_combo[i] += 1
 	current_score[i] += multiplicateur[i] * 5000
 	multiplicateur[i] *= 2
 	count_bonus_time[i] = true
-	if i == 0: score_j1.text = "Score J1 : %d"%current_score[i]
-	else: score_j2.text = "Score J2 : %d"%current_score[i]
+	score_labels[i].text = "Score J%d : %d"%[i+1, current_score[i]]
+
+func StrikedBombCube(i: int) -> void:
+	stocked_combo[i] = 0
+	current_score[i] -= 500
+	multiplicateur[i] = 1
+	score_labels[i].text = "Score J%d : %d"%[i+1, current_score[i]]
+
+func StrikedDisappearCube(i: int) -> void:
+	stocked_combo[i] += 1
+	current_score[i] += multiplicateur[i] * 15000
+	multiplicateur[i] *= 2
+	score_labels[i].text = "Score J%d : %d"%[i+1, current_score[i]]
+	disappear_bloc_notif.visible = true
+	await get_tree().create_timer(1.0).timeout
+	disappear_bloc_notif.visible = false
 
 func _onStrikedClassicCube_j1() -> void:
 	StrikedClassicCube(0)
@@ -173,3 +210,15 @@ func _onStrikedBonusCube_j1() -> void:
 
 func _onStrikedBonusCube_j2() -> void:
 	StrikedBonusCube(1)
+
+func _onStrikedBombCube_j1() -> void:
+	StrikedBombCube(0)
+
+func _onStrikedBombCube_j2() -> void:
+	StrikedBombCube(1)
+
+func _onStrikedDisappearCube_j1() -> void:
+	StrikedDisappearCube(0)
+
+func _onStrikedDisappearCube_j2() -> void:
+	StrikedDisappearCube(1)
