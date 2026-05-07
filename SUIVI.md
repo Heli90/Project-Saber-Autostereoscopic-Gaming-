@@ -162,6 +162,7 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 ### Entre la séance 11 et la séance 12
 
 **Van-Kévin** :
+- Dessin de quelques croquis pour avoir une idée globale du design du jeu.
 - Ajout d'un score séparé et des multiplicateurs de scores pour chaque joueur.
 - Affichage de chaque score en jeu.
 - Mécaniques de disparition des cubes en jeu sous certaines conditions, décrites dans une nouvelle documentation dédiée au jeu.
