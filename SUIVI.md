@@ -159,6 +159,9 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 - Incrémentation de la vitesse du cube grâce à un système de combo.
 - Apparition aléatoire des cubes parmi plusieurs positions prédéfinies à un intervalle de temps régulier.
 
+**Groupe** :
+- Discussion autour du jeu choisi et des mécaniques à implémenter
+
 ### Entre la séance 11 et la séance 12
 
 **Van-Kévin** :
@@ -172,6 +175,10 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 - Notification sur l'écran du joueur en texte pour dire qu'il a touché le cube invisible.
 - Développement de la possibilité du retrait du retour caméra tout en conservant la caméra active pour le code du jeu.
 - Premier nom proposé pour le jeu (à débattre aux prochaines séances)
+
+**Birame** :
+- Implémentation des mouvements des sabres (avec Van-Kévin)
+- Commandes et cculeur individuelles individuelles par joueur
 
 ### Séance 12 - 13/05
 
