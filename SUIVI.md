@@ -164,13 +164,14 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 **Van-Kévin** :
 - Dessin de quelques croquis pour avoir une idée globale du design du jeu.
 - Ajout d'un score séparé et des multiplicateurs de scores pour chaque joueur.
-- Affichage de chaque score en jeu.
+- Affichage de chaque score en jeu via un visuel en bas à droite de l'écran du joueur.
 - Mécaniques de disparition des cubes en jeu sous certaines conditions, décrites dans une nouvelle documentation dédiée au jeu.
 - Ajout des cubes de jeu classiques, des cubes donnant un bonus de multiplicateur différenciés selon chaque joueur, des cubes explosifs donnant un malus au joueur et des cubes invisibles valant un très haut score mais qui deviennent invisibles en quelques secondes.
 - Ajout d'une seed pseudo-aléatoire pour contrôler le temps d'apparition des cubes donnant un bonus, fixer pseudo-aléatoirement la direction des cubes qui apparaissent sur le terrain, la couleur des cubes classiques et leur vitesse.
 - Vitesses individuelles pour chaque cube.
 - Notification sur l'écran du joueur en texte pour dire qu'il a touché le cube invisible.
 - Développement de la possibilité du retrait du retour caméra tout en conservant la caméra active pour le code du jeu.
+- Premier nom proposé pour le jeu (à débattre aux prochaines séances)
 
 ### Séance 12 - 13/05
 

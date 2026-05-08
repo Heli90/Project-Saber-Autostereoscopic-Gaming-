@@ -5,7 +5,6 @@ extends Node3D
 @export var bomb_bloc: PackedScene
 @export var disappear_bloc: PackedScene
 @onready var start_label: Label = $"../StartLabel"
-@onready var score_labels = [$"../ScoreJ1", $"../ScoreJ2"]
 @onready var disappear_bloc_notif: Label = $"../DisappearBlocNotif"
 
 # Booléen de départ pour lancer l'apparition des cubes après le message de départ
@@ -34,10 +33,21 @@ var combo_sucess: bool = false
 
 # Multiplicateurs de score et scores actuels pour chaque joueur
 var multiplicateur: Array[int] = [1, 1]
-var current_score: Array[int] = [0, 0]
 
-# Fonction appelée par le script du jeu pour démarrer l'apparition des cubes
+# Scores visuels des joueurs
+var score_uis : Array = []
+var j1: Node3D
+var j2: Node3D
+
+# Fonction appelée par le script du jeu pour démarrer l'apparition des cubes et charger les scores visuels
 func activation() -> void:
+	j1 = get_node_or_null("../../SplitScreens/Camera1/POV1/J1")
+	j2 = get_node_or_null("../../SplitScreens/Camera2/POV2/J2")
+	if not j1 and not j2:
+		j1 = get_node_or_null("../../J1")
+		j2 = get_node_or_null("../../J2")
+	if j1: score_uis.append(j1.score_ui)
+	if j2: score_uis.append(j2.score_ui)
 	start_spawn = true
 	start_game()
 
@@ -164,8 +174,8 @@ func generate_disappear_bloc() -> void:
 
 func StrikedClassicCube(i: int) -> void:
 	stocked_combo[i] += 1
-	current_score[i] += multiplicateur[i] * 1000
-	score_labels[i].text = "Score J%d : %d"%[i+1, current_score[i]]
+	var gain = multiplicateur[i] * 1000
+	score_uis[i].ajouter_score(gain)
 
 func MissedClassicCube(i: int) -> void:
 	multiplicateur[i] = 1
@@ -173,22 +183,22 @@ func MissedClassicCube(i: int) -> void:
 
 func StrikedBonusCube(i: int) -> void:
 	stocked_combo[i] += 1
-	current_score[i] += multiplicateur[i] * 5000
+	var gain = multiplicateur[i] * 5000
 	multiplicateur[i] *= 2
 	count_bonus_time[i] = true
-	score_labels[i].text = "Score J%d : %d"%[i+1, current_score[i]]
+	score_uis[i].ajouter_score(gain)
 
 func StrikedBombCube(i: int) -> void:
 	stocked_combo[i] = 0
-	current_score[i] -= 500
+	var gain = -500
 	multiplicateur[i] = 1
-	score_labels[i].text = "Score J%d : %d"%[i+1, current_score[i]]
+	score_uis[i].ajouter_score(gain)
 
 func StrikedDisappearCube(i: int) -> void:
 	stocked_combo[i] += 1
-	current_score[i] += multiplicateur[i] * 15000
+	var gain = multiplicateur[i] * 15000
 	multiplicateur[i] *= 2
-	score_labels[i].text = "Score J%d : %d"%[i+1, current_score[i]]
+	score_uis[i].ajouter_score(gain)
 	disappear_bloc_notif.visible = true
 	await get_tree().create_timer(1.0).timeout
 	disappear_bloc_notif.visible = false

@@ -169,7 +169,8 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 8
 theme_override_fonts/font = ExtResource("4_oa1go")
 theme_override_font_sizes/font_size = 120
-text = "Projet Artishow"
+text = "Projet Artishow
+Pong Saber"
 horizontal_alignment = 1
 vertical_alignment = 1
 

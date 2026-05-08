@@ -5,14 +5,14 @@ const JUMP_VELOCITY: float = 4.5
 @export var player_id = 1
 @onready var camera_fps: Camera3D = $CameraControllerFPS/Camera
 @onready var camera_controller_fps: Node3D = $CameraControllerFPS
+@onready var score_ui : CanvasLayer = $ScoreUI
 @onready var left_saber : Area3D = $LeftSaber
 @onready var right_saber : Area3D = $RightSaber
 
 var landmarks: Node2D
-
-const SABRE_X_RANGE : float = 1.2
-const SABRE_Y_MIN   : float = 0.4
-const SABRE_Y_MAX   : float = 1.6
+var saber_range_x : float = 1.2
+var saber_y_min : float = 0.4
+var saber_y_max : float = 1.6
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -30,11 +30,10 @@ func collision(body: Node3D) -> void:
 func _physics_process(_delta: float) -> void:
 	if not landmarks or landmarks.hand_data.is_empty(): return
 	for data in landmarks.hand_data:
-		var sabre : Area3D = left_saber if data["handedness"] == "Left" else right_saber
-		# Exemple de coordonnées pour tester (A CHANGER !!!)
-		var mapped_x : float = lerp(-SABRE_X_RANGE, SABRE_X_RANGE, data["x"])
-		var mapped_y : float = lerp(SABRE_Y_MAX, SABRE_Y_MIN, data["y"])
-		sabre.position.x = mapped_x
-		sabre.position.y = mapped_y
+		var saber : Area3D = left_saber if data["handedness"] == "Left" else right_saber
+		var pos_x : float = lerp(-saber_range_x, saber_range_x, data["x"])
+		var pos_y : float = lerp(saber_y_max, saber_y_min, data["y"])
+		saber.position.x = pos_x
+		saber.position.y = pos_y
 		# Rotation du sabre selon l'axe de l'avant-bras
-		sabre.rotation.z = atan2(0,-1)/2 - data["angle_z"]
+		saber.rotation.z = atan2(0,-1)/2 - data["angle_z"]
