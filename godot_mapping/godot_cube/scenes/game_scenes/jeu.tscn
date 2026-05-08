@@ -186,7 +186,7 @@ mesh = SubResource("BoxMesh_32rft")
 surface_material_override/0 = SubResource("StandardMaterial3D_nmqw8")
 
 [node name="LandMarksProceed" type="Node2D" parent="." unique_id=775762795]
-position = Vector2(650, 0)
+position = Vector2(810, 0)
 script = ExtResource("6_32rft")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="LandMarksProceed" unique_id=877274248]
@@ -195,22 +195,20 @@ offset_bottom = 480.0
 
 [node name="CameraViewport" type="SubViewport" parent="LandMarksProceed/SubViewportContainer" unique_id=861650548]
 handle_input_locally = false
-size = Vector2i(640, 480)
+size = Vector2i(320, 240)
 render_target_update_mode = 4
 
 [node name="TestAffichage" type="TextureRect" parent="LandMarksProceed/SubViewportContainer/CameraViewport" unique_id=538163506]
-offset_right = 640.0
-offset_bottom = 480.0
+offset_right = 320.0
+offset_bottom = 240.0
 expand_mode = 2
 flip_h = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="LandMarksProceed" unique_id=688860276]
-visible = false
 
 [node name="DebugOverlay" type="TextureRect" parent="LandMarksProceed/CanvasLayer" unique_id=1751420981]
-visible = false
-offset_left = 650.0
-offset_right = 690.0
+offset_left = 810.0
+offset_right = 850.0
 offset_bottom = 40.0
 
 [node name="SelectCamera" type="ConfirmationDialog" parent="LandMarksProceed" unique_id=1072512059]

@@ -32,9 +32,9 @@ func _physics_process(_delta: float) -> void:
 	for data in landmarks.hand_data:
 		var sabre : Area3D = left_saber if data["handedness"] == "Left" else right_saber
 		# Exemple de coordonnées pour tester (A CHANGER !!!)
-		var mapped_x : float = lerp(-SABRE_X_RANGE, SABRE_X_RANGE, 1.0 - data["x"])
+		var mapped_x : float = lerp(-SABRE_X_RANGE, SABRE_X_RANGE, data["x"])
 		var mapped_y : float = lerp(SABRE_Y_MAX, SABRE_Y_MIN, data["y"])
 		sabre.position.x = mapped_x
 		sabre.position.y = mapped_y
 		# Rotation du sabre selon l'axe de l'avant-bras
-		sabre.rotation.z = 90 - data["angle_z"]
+		sabre.rotation.z = atan2(0,-1)/2 - data["angle_z"]
