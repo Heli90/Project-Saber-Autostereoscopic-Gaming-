@@ -25,7 +25,8 @@ var camera_extension: CameraServerExtension
 var camera_feed: CameraFeed
 var mutex : Mutex
 var image_mediapipe : Image = null
-var result_mediapipe= null
+var result_mediapipe = null
+var hand_data : Array = []
 
 @onready var viewport = $SubViewportContainer/CameraViewport
 @onready var texture_rect = $SubViewportContainer/CameraViewport/TestAffichage
@@ -252,10 +253,33 @@ func _process(_delta):
 	
 	# Traitement des mains détectées
 	if result:
+		hand_data = []
 		for i in range(result.pose_landmarks.size()) :
 			last_body_detected_time = Time.get_ticks_msec() / 1000.0
 			var pose_landmarks = result.pose_landmarks[i]
 			modulated = pose_landmarks.landmarks[15].x
+			var lm = pose_landmarks.landmarks
+			
+			# A CHANGER !!!
+			var wrist_r  := Vector2(lm[15].x, lm[15].y)
+			var elbow_r  := Vector2(lm[13].x, lm[13].y)
+			var dir_r    := (wrist_r - elbow_r).normalized()
+			
+			var wrist_l  := Vector2(lm[16].x, lm[16].y)
+			var elbow_l  := Vector2(lm[14].x, lm[14].y)
+			var dir_l    := (wrist_l - elbow_l).normalized()
+			hand_data.append({
+			"x"      : lm[16].x,
+			"y"      : lm[16].y,
+			"angle_z": atan2(dir_l.y, dir_l.x),
+			"handedness": "Left"
+		})
+			hand_data.append({
+			"x"      : lm[15].x,
+			"y"      : lm[15].y,
+			"angle_z": atan2(dir_r.y, dir_r.x),
+			"handedness": "Right"
+		})
 			_maj_speed() 
 	
 	# On évite de changer le texte trop vite même si on perd quelques frames à cause du thread

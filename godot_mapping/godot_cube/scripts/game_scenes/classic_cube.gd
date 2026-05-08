@@ -16,6 +16,7 @@ func _ready() -> void:
 	# On duplique le matériau pour pouvoir modifier la couleur de ce cube uniquement
 	forme_cube.mesh = forme_cube.mesh.duplicate()
 	forme_cube.visible = false
+	add_to_group("cube")
 
 func _process(_delta) -> void:
 	if setup_color:
@@ -32,7 +33,7 @@ func _physics_process(delta: float) -> void:
 	if color == 0:
 		queue_free()
 
-	var collision = move_and_collide(Vector3(0, 0, 1).normalized() * vitesse_deplacement * delta)
+	move_and_collide(Vector3(0, 0, 1).normalized() * vitesse_deplacement * delta)
 	# On supprime le cube s'il passe derrière l'un des joueurs
 	if position.z > 20.0:
 		emit_signal("missed_cube_j1")
@@ -41,15 +42,15 @@ func _physics_process(delta: float) -> void:
 		emit_signal("missed_cube_j2")
 		queue_free()
 
-	# On inverse le sens de déplacement du cube pour le renvoyer à l'autre joueur s'il a touché le cube
-	if collision:
-		# On change la couleur du cube et on augmente légèrement la vitesse
-		color -= 1
-		setup_color = true
-		vitesse_deplacement *= 1.10
-		# On change ensuite la direction du cube
-		vitesse_deplacement = -vitesse_deplacement
-		if position.z > 0:
-			emit_signal("striked_cube_j1")
-		else:
-			emit_signal("striked_cube_j2")
+# On inverse le sens de déplacement du cube pour le renvoyer à l'autre joueur s'il a touché le cube
+func collision() -> void:
+	# On change la couleur du cube et on augmente légèrement la vitesse
+	color -= 1
+	setup_color = true
+	vitesse_deplacement *= 1.10
+	# On change ensuite la direction du cube
+	vitesse_deplacement = -vitesse_deplacement
+	if position.z > 0:
+		emit_signal("striked_cube_j1")
+	else:
+		emit_signal("striked_cube_j2")

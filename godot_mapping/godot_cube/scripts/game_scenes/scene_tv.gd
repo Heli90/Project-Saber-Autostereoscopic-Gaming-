@@ -3,8 +3,8 @@ extends Node3D
 @onready var screen_output = $TextureRect
 @export var nb_views : int = 8
 @onready var cube_tournant: Node3D = $CubeTournant
-@onready var j1: CharacterBody3D = $J1
-@onready var j2: CharacterBody3D = $J2
+@onready var j1: Node3D = $J1
+@onready var j2: Node3D = $J2
 
 @onready var cam_controller_j1: Node3D = $J1/CameraControllerFPS
 @onready var cam_controller_j2: Node3D = $J2/CameraControllerFPS

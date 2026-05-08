@@ -1,35 +1,40 @@
-extends CharacterBody3D
+extends Node3D
 
 const SPEED: float = 5.0
 const JUMP_VELOCITY: float = 4.5
 @export var player_id = 1
 @onready var camera_fps: Camera3D = $CameraControllerFPS/Camera
 @onready var camera_controller_fps: Node3D = $CameraControllerFPS
-@onready var forme: MeshInstance3D = $Forme
+@onready var left_saber : Area3D = $LeftSaber
+@onready var right_saber : Area3D = $RightSaber
+
+var landmarks: Node2D
+
+const SABRE_X_RANGE : float = 1.2
+const SABRE_Y_MIN   : float = 0.4
+const SABRE_Y_MAX   : float = 1.6
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	# On initialise les marqueurs de corps
+	landmarks = get_node_or_null("../../../../CubeTournant/LandMarksProceed")
+	if not landmarks:
+		landmarks = get_node_or_null("../CubeTournant/LandMarksProceed")
+	# On initialise un signal à chaque fois que le sabre traverse un cube
+	left_saber.body_entered.connect(collision)
+	right_saber.body_entered.connect(collision)
 
-func _physics_process(delta: float) -> void:
-	# Chute automatique du joueur par la gravité par défaut.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
+func collision(body: Node3D) -> void:
+	if body.is_in_group("cube"): body.collision()
 
-	# Saut manuel du joueur.
-	if Input.is_action_just_pressed("SautJ%s"%player_id) and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	# Reçoit la direction et gère le mouvement et l'accélération.
-	var input_dir = Input.get_vector("GaucheJ%s"%player_id, "DroiteJ%s"%player_id, "AvancerJ%s"%player_id, "ReculerJ%s"%player_id)
-	var direction = (camera_controller_fps.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	# Gère la rotation du modèle 3D.
-	if input_dir != Vector2(0,0):
-		forme.rotation_degrees.y = camera_controller_fps.rotation_degrees.y - rad_to_deg(input_dir.angle()) - 90
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-
-	move_and_slide()
+func _physics_process(_delta: float) -> void:
+	if not landmarks or landmarks.hand_data.is_empty(): return
+	for data in landmarks.hand_data:
+		var sabre : Area3D = left_saber if data["handedness"] == "Left" else right_saber
+		# Exemple de coordonnées pour tester (A CHANGER !!!)
+		var mapped_x : float = lerp(-SABRE_X_RANGE, SABRE_X_RANGE, 1.0 - data["x"])
+		var mapped_y : float = lerp(SABRE_Y_MAX, SABRE_Y_MIN, data["y"])
+		sabre.position.x = mapped_x
+		sabre.position.y = mapped_y
+		# Rotation du sabre selon l'axe de l'avant-bras
+		sabre.rotation.z = 90 - data["angle_z"]

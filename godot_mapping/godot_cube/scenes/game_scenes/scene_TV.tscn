@@ -188,7 +188,7 @@ texture = SubResource("GradientTexture2D_6c3ax")
 
 [node name="CubeTournant" parent="." unique_id=1026699542 instance=ExtResource("6_qo1rj")]
 
-[node name="TimeStopSound" parent="CubeTournant" index="10" unique_id=1815400477]
+[node name="TimeStopSound" parent="CubeTournant" index="12" unique_id=1815400477]
 bus = &"SFX"
 
 [editable path="J1"]
