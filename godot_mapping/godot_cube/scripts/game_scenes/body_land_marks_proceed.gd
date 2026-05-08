@@ -270,10 +270,10 @@ func _process(_delta):
 			var elbow_l  := Vector2(lm[14].x, lm[14].y)
 			var dir_l    := (wrist_l - elbow_l).normalized()
 			hand_data.append({"x" : lm[16].x, "y" : lm[16].y,
-			"angle_z": atan2(dir_l.y, dir_l.x), "handedness": "Left"})
+			"angle_z": atan2(dir_l.y, dir_l.x), "handedness": "Left", "index" : i+1})
 			# print("Left dir : ", (180/atan2(0, -1))*atan2(dir_l.y, dir_l.x))
 			hand_data.append({"x" : lm[15].x, "y" : lm[15].y,
-			"angle_z": atan2(dir_r.y, dir_r.x), "handedness": "Right"})
+			"angle_z": atan2(dir_r.y, dir_r.x), "handedness": "Right", "index" : i+1})
 			# print("Right dir : ", (180/atan2(0, -1))*atan2(dir_r.y, dir_r.x))
 			
 			_maj_speed() 

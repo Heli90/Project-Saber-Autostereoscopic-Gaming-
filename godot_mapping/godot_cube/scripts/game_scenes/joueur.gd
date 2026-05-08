@@ -8,6 +8,9 @@ const JUMP_VELOCITY: float = 4.5
 @onready var score_ui : CanvasLayer = $ScoreUI
 @onready var left_saber : Area3D = $LeftSaber
 @onready var right_saber : Area3D = $RightSaber
+@onready var left_saber_mesh : MeshInstance3D = $LeftSaber/MeshInstance3D
+@onready var right_saber_mesh : MeshInstance3D = $RightSaber/MeshInstance3D
+@export var blue_shader_material : ShaderMaterial
 
 var landmarks: Node2D
 var saber_range_x : float = 1.2
@@ -23,6 +26,14 @@ func _ready() -> void:
 	# On initialise un signal à chaque fois que le sabre traverse un cube
 	left_saber.body_entered.connect(collision)
 	right_saber.body_entered.connect(collision)
+	if player_id == 2:
+		_apply_blue_shader()
+		
+func _apply_blue_shader():
+	if blue_shader_material:
+		# On applique l'override sur la surface 0 (l'index par défaut de tes meshs)
+		left_saber_mesh.set_surface_override_material(0, blue_shader_material)
+		right_saber_mesh.set_surface_override_material(0, blue_shader_material)
 
 func collision(body: Node3D) -> void:
 	if body.is_in_group("cube"): body.collision()
@@ -30,10 +41,11 @@ func collision(body: Node3D) -> void:
 func _physics_process(_delta: float) -> void:
 	if not landmarks or landmarks.hand_data.is_empty(): return
 	for data in landmarks.hand_data:
-		var saber : Area3D = left_saber if data["handedness"] == "Left" else right_saber
-		var pos_x : float = lerp(-saber_range_x, saber_range_x, data["x"])
-		var pos_y : float = lerp(saber_y_max, saber_y_min, data["y"])
-		saber.position.x = pos_x
-		saber.position.y = pos_y
-		# Rotation du sabre selon l'axe de l'avant-bras
-		saber.rotation.z = atan2(0,-1)/2 - data["angle_z"]
+		if data["index"] == player_id :
+			var saber : Area3D = left_saber if data["handedness"] == "Left" else right_saber
+			var pos_x : float = lerp(-saber_range_x, saber_range_x, data["x"])
+			var pos_y : float = lerp(saber_y_max, saber_y_min, data["y"])
+			saber.position.x = pos_x
+			saber.position.y = pos_y
+			# Rotation du sabre selon l'axe de l'avant-bras
+			saber.rotation.z = atan2(0,-1)/2 - data["angle_z"]
