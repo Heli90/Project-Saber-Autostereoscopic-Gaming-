@@ -42,6 +42,7 @@ func _ready():
 	thread_mp.start(_thread_mediapipe)
 	_setup_camera_selection()
 	_setup_camera_permissions()
+	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 
 func _setup_mediapipe():
 	# Récupère le modèle hand_landmarker.task et l'initialise
@@ -268,20 +269,12 @@ func _process(_delta):
 			var wrist_l  := Vector2(lm[16].x, lm[16].y)
 			var elbow_l  := Vector2(lm[14].x, lm[14].y)
 			var dir_l    := (wrist_l - elbow_l).normalized()
-			hand_data.append({
-			"x"      : lm[16].x,
-			"y"      : lm[16].y,
-			"angle_z": atan2(dir_l.y, dir_l.x),
-			"handedness": "Left"
-		})
-			print("Left dir : ", (180/atan2(0, -1))*atan2(dir_l.y, dir_l.x))
-			hand_data.append({
-			"x"      : lm[15].x,
-			"y"      : lm[15].y,
-			"angle_z": atan2(dir_r.y, dir_r.x),
-			"handedness": "Right"
-		})
-			print("Right dir : ", (180/atan2(0, -1))*atan2(dir_r.y, dir_r.x))
+			hand_data.append({"x" : lm[16].x, "y" : lm[16].y,
+			"angle_z": atan2(dir_l.y, dir_l.x), "handedness": "Left"})
+			# print("Left dir : ", (180/atan2(0, -1))*atan2(dir_l.y, dir_l.x))
+			hand_data.append({"x" : lm[15].x, "y" : lm[15].y,
+			"angle_z": atan2(dir_r.y, dir_r.x), "handedness": "Right"})
+			# print("Right dir : ", (180/atan2(0, -1))*atan2(dir_r.y, dir_r.x))
 			
 			_maj_speed() 
 	

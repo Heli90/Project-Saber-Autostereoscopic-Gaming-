@@ -5,7 +5,6 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_m2kkv"]
 radius = 0.1
-height = 1.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f4pr0"]
 render_priority = 0
@@ -15,11 +14,9 @@ shader_parameter/center_color = Vector4(0, 0, 0, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ks3j3"]
 radius = 0.1
-height = 1.5
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ks3j3"]
 radius = 0.1
-height = 1.5
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m2kkv"]
 render_priority = 0
@@ -29,7 +26,6 @@ shader_parameter/center_color = Vector4(0, 0, 0, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_smcp5"]
 radius = 0.1
-height = 1.5
 
 [node name="Joueur" type="Node3D" unique_id=1209140079]
 script = ExtResource("1_2d0qe")

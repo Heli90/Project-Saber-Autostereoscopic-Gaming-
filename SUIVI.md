@@ -170,6 +170,7 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 - Ajout d'une seed pseudo-aléatoire pour contrôler le temps d'apparition des cubes donnant un bonus, fixer pseudo-aléatoirement la direction des cubes qui apparaissent sur le terrain, la couleur des cubes classiques et leur vitesse.
 - Vitesses individuelles pour chaque cube.
 - Notification sur l'écran du joueur en texte pour dire qu'il a touché le cube invisible.
+- Développement de la possibilité du retrait du retour caméra tout en conservant la caméra active pour le code du jeu.
 
 ### Séance 12 - 13/05
 

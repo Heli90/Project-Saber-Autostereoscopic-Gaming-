@@ -190,13 +190,14 @@ position = Vector2(810, 0)
 script = ExtResource("6_32rft")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="LandMarksProceed" unique_id=877274248]
+visible = false
 offset_right = 640.0
 offset_bottom = 480.0
 
 [node name="CameraViewport" type="SubViewport" parent="LandMarksProceed/SubViewportContainer" unique_id=861650548]
 handle_input_locally = false
 size = Vector2i(320, 240)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="TestAffichage" type="TextureRect" parent="LandMarksProceed/SubViewportContainer/CameraViewport" unique_id=538163506]
 offset_right = 320.0
@@ -205,6 +206,7 @@ expand_mode = 2
 flip_h = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="LandMarksProceed" unique_id=688860276]
+visible = false
 
 [node name="DebugOverlay" type="TextureRect" parent="LandMarksProceed/CanvasLayer" unique_id=1751420981]
 offset_left = 810.0
@@ -233,6 +235,7 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="CameraLabel" type="Label" parent="." unique_id=605287519]
+visible = false
 offset_left = 800.0
 offset_top = 480.0
 offset_right = 900.0

@@ -23,3 +23,9 @@
 
 ## Joueurs
 > Chaque joueur est doté de 2 sabres. Les fonctionnalités de ces derniers seront décrites ci-dessous plus tard lorsque les sabres seront réalisés.
+
+## Caméra
+> Une caméra est utilisée pour les contrôles des sabres de chaque joueur, qui est détecté par des marqueurs de corps. Deux possibilités de gameplay sont possibles pour les tests :
+
+- Un mode de débuggage avec l'affichage de la caméra et des marqueurs de corps - Pour l'activer, dans le Node **LandMarksProceed**, rendre le SubViewportContainer, le CanvasLayer et le CameraLabel, tous visibles.
+- Le mode de jeu classique sans affichage de la caméra - Pour l'activer, il suffit de rendre invisible les trois noeuds cités précedemment. 
