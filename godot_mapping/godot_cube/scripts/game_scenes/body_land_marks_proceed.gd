@@ -167,10 +167,19 @@ func _start_camera():
 	print("Caméra démarrée : ", camera_feed.get_name())
 
 func reload_camera_selection():
+	# On s'assure que le monitoring est actif
+	CameraServer.monitoring_feeds = true
+	
+	# On désactive le flux actuel pour libérer le périphérique
+	if camera_feed:
+		camera_feed.feed_is_active = false
+	
+	# On force la mise à jour de la liste manuellement avant d'ouvrir
+	_update_camera_list()
+	
+	# On configure le dialogue
 	confirmation_dialog.get_ok_button().disabled = true
-	_setup_camera_permissions()
-	_open_camera_selection()
-	camera_feed.feed_is_active = false
+	confirmation_dialog.popup_centered()
 
 func update_debug_overlay(image: Image) -> void:
 	image.convert(Image.FORMAT_RGB8)
@@ -262,18 +271,18 @@ func _process(_delta):
 			var lm = pose_landmarks.landmarks
 			
 			# A CHANGER !!!
-			var wrist_r  := Vector2(lm[15].x, lm[15].y)
-			var elbow_r  := Vector2(lm[13].x, lm[13].y)
+			var wrist_r  := Vector3(lm[15].x, lm[15].y,lm[15].z)
+			var elbow_r  := Vector3(lm[13].x, lm[13].y,lm[13].z)
 			var dir_r    := (wrist_r - elbow_r).normalized()
 			
-			var wrist_l  := Vector2(lm[16].x, lm[16].y)
-			var elbow_l  := Vector2(lm[14].x, lm[14].y)
+			var wrist_l  := Vector3(lm[16].x, lm[16].y,lm[16].z)
+			var elbow_l  := Vector3(lm[14].x, lm[14].y,lm[14].z)
 			var dir_l    := (wrist_l - elbow_l).normalized()
 			hand_data.append({"x" : lm[16].x, "y" : lm[16].y,
-			"angle_z": atan2(dir_l.y, dir_l.x), "handedness": "Left", "index" : i+1})
+			"angle_z": atan2(dir_l.y, dir_l.x), "handedness": "Left", "index" : i+1, "tilt" : atan2(dir_l.z,dir_l.y)})
 			# print("Left dir : ", (180/atan2(0, -1))*atan2(dir_l.y, dir_l.x))
 			hand_data.append({"x" : lm[15].x, "y" : lm[15].y,
-			"angle_z": atan2(dir_r.y, dir_r.x), "handedness": "Right", "index" : i+1})
+			"angle_z": atan2(dir_r.y, dir_r.x), "handedness": "Right", "index" : i+1, "tilt" : atan2(dir_r.z,dir_r.y)})
 			# print("Right dir : ", (180/atan2(0, -1))*atan2(dir_r.y, dir_r.x))
 			
 			_maj_speed() 

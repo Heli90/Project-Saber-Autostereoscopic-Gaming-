@@ -49,3 +49,4 @@ func _physics_process(_delta: float) -> void:
 			saber.position.y = pos_y
 			# Rotation du sabre selon l'axe de l'avant-bras
 			saber.rotation.z = atan2(0,-1)/2 - data["angle_z"]
+			#saber.rotation.y = -data["tilt"]
