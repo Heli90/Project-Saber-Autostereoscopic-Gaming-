@@ -12,6 +12,9 @@ var setup_color: bool = false
 var time_collision: float = 0.25
 var elapsed_time_since_collision: float = 0.0
 var nb_collisions: int = 0
+var spin: bool = false
+var time_spin: float = 0.5
+var elapsed_time_since_spin: float = 0.0
 
 signal striked_cube_j1
 signal missed_cube_j1
@@ -29,9 +32,9 @@ func _process(delta) -> void:
 	if setup_color:
 		var mat = forme_cube.get_active_material(0)
 		match color:
-			1: mat.albedo_color = Color(1.0, 0.0, 0.0, 1.0)
-			2: mat.albedo_color = Color(1.0, 0.431, 0.196, 1.0)
-			3: mat.albedo_color = Color(0.0, 1.0, 0.0, 1.0)
+			1: mat.albedo_color = Color("d00040")
+			2: mat.albedo_color = Color("ff7e0b")
+			3: mat.albedo_color = Color("43975d")
 		forme_cube.visible = true
 		setup_color = false
 	
@@ -46,6 +49,12 @@ func _physics_process(delta: float) -> void:
 	# On supprime le cube s'il a déjà été touché autant de fois que la couleur l'indique
 	if color == 0:
 		queue_free()
+		
+	# On retourne le cube pour qu'il ait la bonne face pour le joueur qui la reçoit
+	if vitesse_deplacement < 0:
+		rotation.y += TAU/2
+	else:
+		rotation.y -= TAU/2
 
 	move_and_collide(Vector3(0, 0, 1).normalized() * vitesse_deplacement * delta)
 	# On supprime le cube s'il passe derrière l'un des joueurs
@@ -55,6 +64,17 @@ func _physics_process(delta: float) -> void:
 	elif position.z < -20.0:
 		emit_signal("missed_cube_j2")
 		queue_free()
+	
+	if spin:
+		elapsed_time_since_spin += delta
+		var spin_speed = TAU / time_spin
+		rotation.x += spin_speed * delta
+		if elapsed_time_since_spin > time_spin:
+			# On arrondit au multiple de π le plus proche (180°)
+			var half_turns = round(rotation.x / PI)
+			rotation.x = half_turns * PI
+			elapsed_time_since_spin = 0.0
+			spin = false
 
 # On inverse le sens de déplacement du cube pour le renvoyer à l'autre joueur s'il a touché le cube
 func collision() -> void:
@@ -66,6 +86,7 @@ func collision() -> void:
 		vitesse_deplacement *= 1.10
 		# On change ensuite la direction du cube
 		vitesse_deplacement = -vitesse_deplacement
+		spin = true
 		if position.z > 0:
 			emit_signal("striked_cube_j1")
 		else:

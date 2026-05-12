@@ -5,6 +5,7 @@
 [ext_resource type="FontFile" uid="uid://bd4geqghtkj13" path="res://addons/assets/TextFontBase.ttf" id="3_rtw2f"]
 [ext_resource type="Script" uid="uid://crmbnc6adwn05" path="res://scripts/sound/audio_control.gd" id="4_8ln24"]
 [ext_resource type="FontFile" uid="uid://crtikirivhq6o" path="res://addons/assets/TextFontBold.otf" id="4_oa1go"]
+[ext_resource type="AudioStream" uid="uid://bqjkoeah1m37j" path="res://addons/sfx/main_menu_music.mp3" id="5_1hnlc"]
 [ext_resource type="Script" uid="uid://ct883kqsjhjbs" path="res://scripts/menus/light_menu.gd" id="7_oa1go"]
 [ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="8_tbmy8"]
 
@@ -152,9 +153,11 @@ volume_db = -10.0
 bus = &"SFX"
 
 [node name="MainMenuMusic" type="AudioStreamPlayer" parent="." unique_id=1460163922]
+stream = ExtResource("5_1hnlc")
 volume_db = -10.0
 autoplay = true
 bus = &"Musique"
+parameters/looping = true
 
 [node name="GameName" type="Label" parent="." unique_id=839660802]
 layout_mode = 0

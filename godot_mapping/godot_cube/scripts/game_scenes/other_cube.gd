@@ -9,6 +9,12 @@ func _ready() -> void:
 	add_to_group("cube")
 
 func _physics_process(delta: float) -> void:
+	# On retourne le cube pour qu'il ait la bonne face pour le joueur qui la reçoit
+	if vitesse_deplacement < 0:
+		rotation.y += TAU/2
+	else:
+		rotation.y -= TAU/2
+
 	move_and_collide(Vector3(0, 0, 1).normalized() * vitesse_deplacement * delta)
 	# On supprime le cube s'il passe derrière l'un des joueurs
 	if abs(position.z) > 20.0:
