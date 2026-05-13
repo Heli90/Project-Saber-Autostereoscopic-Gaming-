@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://bv2uhuy4b75u4"]
+
+[ext_resource type="Script" uid="uid://css7aee1c26g0" path="res://scripts/menus/tutoriel.gd" id="1_jklko"]
+[ext_resource type="Script" uid="uid://ct883kqsjhjbs" path="res://scripts/menus/light_menu.gd" id="2_n18sg"]
+[ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="2_nl2bs"]
+[ext_resource type="Texture2D" uid="uid://b4xpo3x1n06pg" path="res://addons/assets/fond_jeu_godot.png" id="3_b7lfr"]
+[ext_resource type="AudioStream" uid="uid://b0hxo1hgri1gb" path="res://addons/sfx/tutoriel_music.mp3" id="5_fwhch"]
+[ext_resource type="FontFile" uid="uid://crtikirivhq6o" path="res://addons/assets/TextFontBold.otf" id="6_phf8o"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n18sg"]
+texture = ExtResource("3_b7lfr")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3y8p5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h0cxi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1mkbs"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cshns"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8jpt8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vfcph"]
+
+[node name="Tutoriel" type="Control" unique_id=580013353]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_jklko")
+
+[node name="FonduLayer" type="CanvasLayer" parent="." unique_id=1263238769]
+
+[node name="FonduNoir" type="ColorRect" parent="FonduLayer" unique_id=851864433]
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="LightMenu" type="DirectionalLight2D" parent="." unique_id=1348818234]
+color = Color(0.78431374, 0.7372549, 0.7372549, 1)
+script = ExtResource("2_n18sg")
+intensite_min = 0.1
+intensite_max = 0.5
+vitesse = 0.2
+
+[node name="BGMenu" type="Panel" parent="." unique_id=1687925172]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_n18sg")
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=1928803989]
+stream = ExtResource("2_nl2bs")
+volume_db = -10.0
+bus = &"SFX"
+
+[node name="TutorielMusic" type="AudioStreamPlayer" parent="." unique_id=860492435]
+stream = ExtResource("5_fwhch")
+volume_db = -10.0
+bus = &"Musique"
+parameters/looping = true
+
+[node name="TutorielVideo" type="VideoStreamPlayer" parent="." unique_id=897146802]
+layout_mode = 0
+offset_left = 320.0
+offset_top = 180.0
+offset_right = 1600.0
+offset_bottom = 900.0
+
+[node name="StartButton" type="Button" parent="." unique_id=1486002421]
+layout_mode = 0
+offset_left = 750.0
+offset_top = 950.0
+offset_right = 1202.0
+offset_bottom = 1030.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_phf8o")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3y8p5")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_h0cxi")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_1mkbs")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_cshns")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8jpt8")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vfcph")
+text = "Démarrer"
+
+[connection signal="pressed" from="StartButton" to="." method="_onStartButton_pressed"]

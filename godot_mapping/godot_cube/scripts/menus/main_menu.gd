@@ -124,7 +124,7 @@ func _onPCButton_pressed() -> void:
 
 func _onTVButton_pressed() -> void:
 	await transition([], [mode_buttons], false)
-	get_tree().change_scene_to_file("res://scenes/game_scenes/scene_TV.tscn")
+	get_tree().change_scene_to_file("res://scenes/menus/tutoriel.tscn")
 
 func _onResetScoreButton_pressed() -> void:
 	transition([reset_score_page], [mode_buttons], false)
@@ -138,7 +138,7 @@ func _onYesButton_pressed() -> void:
 	transition([validation_score_page], [reset_score_page], false)
 	reset_highest_score()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	
+
 func reset_highest_score() -> void:
 	var config = ConfigFile.new()
 	config.set_value("Progression", "Meilleur Score", 0)
