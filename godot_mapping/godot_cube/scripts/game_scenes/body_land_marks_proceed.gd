@@ -5,10 +5,10 @@ var task
 var renderer
 var model_path = "res://pose_landmarker/pose_landmarker_full.task"
 var modulated = 1
-var time_detect: float
-var time_render: float
-var time_display: float
-var camera_fps
+var time_detect: float = 0.0
+var time_render: float = 0.0
+var time_display: float = 0.0
+var camera_fps = 0.0
 var output_image : Image = null
 var last_body_detected_time : float = -999.0
 var hand_display_duration : float = 0.05
@@ -18,7 +18,7 @@ var thread_mp: Thread
 var runThread : bool = true
 
 var running_mode = 1 # Mode Vidéo
-var num_pose = 2
+var num_pose = 1
 
 # Variables Caméra
 var camera_extension: CameraServerExtension
@@ -31,7 +31,6 @@ var hand_data : Array = []
 @onready var viewport = $SubViewportContainer/CameraViewport
 @onready var texture_rect = $SubViewportContainer/CameraViewport/TestAffichage
 @onready var debug_view = $CanvasLayer/DebugOverlay # Un TextureRect pour voir le résultat
-@onready var label: Label = $"../CameraLabel"
 @onready var confirmation_dialog: ConfirmationDialog = $SelectCamera
 @onready var selected_feed: OptionButton = $SelectCamera/VBoxContainer/HBoxContainer/SelectedFeed
 @onready var selected_format: OptionButton = $SelectCamera/VBoxContainer/SelectedFormat
@@ -45,7 +44,7 @@ func _ready():
 	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 
 func _setup_mediapipe():
-	# Récupère le modèle hand_landmarker.task et l'initialise
+	# Récupère le modèle pose_landmarker.task et l'initialise
 	if not FileAccess.file_exists(model_path):
 		print("ERREUR : Modèle .task introuvable !")
 		return
@@ -57,7 +56,7 @@ func _setup_mediapipe():
 	
 	task = MediaPipePoseLandmarker.new()
 	
-	# Paramètres : Mode de capture (Ici 1 pour le mode vidéo) et le nombre de mains (Ici 4)
+	# Paramètres : Mode de capture (Ici 1 pour le mode vidéo) et le nombre de corps (Ici 1 corps par moitié d'image)
 	task.initialize(options, running_mode, num_pose)
 	renderer = MediaPipePoseRenderer.new()
 	print("MediaPipe initialisé.")
@@ -195,44 +194,60 @@ func _thread_mediapipe():
 	_setup_mediapipe()
 	
 	while runThread:
-		var img = null
-		
-		#Récupération de l'image
+		var full_img = null
 		mutex.lock()
 		if image_mediapipe:
-			img = image_mediapipe
+			full_img = image_mediapipe
 			image_mediapipe = null
 		mutex.unlock()
 		
-		if img:
-			# Conversion pour MediaPipe
-			var mp_image = MediaPipeImage.new()
-			mp_image.set_image(img)
+		if full_img:
+			# Découpage de l'image en deux
+			var size = full_img.get_size()
+			var half_width = size.x / 2
 			
-			# Détection des mains
+			# Phase Détection
 			var start_detect = Time.get_ticks_usec()
-			var result = task.detect(mp_image)
-			time_detect = (Time.get_ticks_usec()-start_detect)/1000.0
+			# --- Détection JOUEUR 1 (Gauche) ---
 			
-			if result:
-				# Dessin des marqueurs sur les mains
+			var img_left = full_img.get_region(Rect2i(0, 0, half_width, size.y))
+			var mp_img_left = MediaPipeImage.new()
+			mp_img_left.set_image(img_left)
+			var res_left = task.detect(mp_img_left)
+			
+			# --- Détection JOUEUR 2 (Droite) ---
+			var img_right = full_img.get_region(Rect2i(half_width, 0, half_width, size.y))
+			var mp_img_right = MediaPipeImage.new()
+			mp_img_right.set_image(img_right)
+			var res_right = task.detect(mp_img_right)
+			
+			time_detect = (Time.get_ticks_usec() - start_detect)/1000.0
+
+			# On regroupe les résultats pour le process principal
+		
+			# Pour le debug, on recréer une image combinée avec les squelettes
+			if res_left or res_right:
+
 				var start_render = Time.get_ticks_usec()
-				var output = renderer.render(mp_image, result.pose_landmarks)
-				time_render = (Time.get_ticks_usec()-start_render)/1000.0
+				var out_left = renderer.render(mp_img_left, res_left.pose_landmarks if res_left else [])
+				var out_right = renderer.render(mp_img_right, res_right.pose_landmarks if res_right else [])
+				time_render = (Time.get_ticks_usec()-start_detect)/1000
 				
 				mutex.lock()
-				output_image = output.image
+				var start_combining = Time.get_ticks_usec()
+				var combined_out = Image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
+				combined_out.blit_rect(out_left.image, Rect2i(0, 0, half_width, size.y), Vector2i(0, 0))
+				combined_out.blit_rect(out_right.image, Rect2i(0, 0, half_width, size.y), Vector2i(half_width, 0))
+				output_image = combined_out
+				time_display = (Time.get_ticks_usec()-start_combining)/1000.0
 				mutex.unlock()
 				
-				# Envoie de result au main process
 				mutex.lock()
-				result_mediapipe = result
-				result = null
+				result_mediapipe = {"left": res_left, "right": res_right}
 				mutex.unlock()
 
 func _process(_delta):
 	camera_fps = Engine.get_frames_per_second()
-	label.text = ""
 
 	# Récupération et affichage de l'image de rendu MediaPipe
 	var out_img = null
@@ -255,54 +270,59 @@ func _process(_delta):
 	mutex.unlock()
 	
 	# Récupération des résultats du thread
-	var result = null
+	var results = null
 	mutex.lock()
-	result = result_mediapipe
+	results = result_mediapipe
 	result_mediapipe = null
 	mutex.unlock()
 	
-	# Traitement des mains détectées
-	if result:
+	if results:
 		hand_data = []
-		for i in range(result.pose_landmarks.size()) :
-			last_body_detected_time = Time.get_ticks_msec() / 1000.0
-			var pose_landmarks = result.pose_landmarks[i]
-			modulated = pose_landmarks.landmarks[15].x
-			var lm = pose_landmarks.landmarks
+		last_body_detected_time = Time.get_ticks_msec() / 1000.0
+		
+		# Traitement GAUCHE (Joueur 1)
+		if results.left and results.left.pose_landmarks.size() > 0:
+			_process_half_body(results.left.pose_landmarks[0], 1, false)
 			
-			# A CHANGER !!!
-			var wrist_r  := Vector3(lm[15].x, lm[15].y,lm[15].z)
-			var elbow_r  := Vector3(lm[13].x, lm[13].y,lm[13].z)
-			var dir_r    := (wrist_r - elbow_r).normalized()
-			
-			var wrist_l  := Vector3(lm[16].x, lm[16].y,lm[16].z)
-			var elbow_l  := Vector3(lm[14].x, lm[14].y,lm[14].z)
-			var dir_l    := (wrist_l - elbow_l).normalized()
-			var j = 1
-			if lm[0].x > 0.5 :
-				j = 2
-			hand_data.append({"x" : lm[16].x, "y" : lm[16].y,
-			"angle_z": atan2(dir_l.y, dir_l.x), "handedness": "Left", "index" : j, "tilt" : atan2(dir_l.z,dir_l.y)})
-			# print("Left dir : ", (180/atan2(0, -1))*atan2(dir_l.y, dir_l.x))
-			hand_data.append({"x" : lm[15].x, "y" : lm[15].y,
-			"angle_z": atan2(dir_r.y, dir_r.x), "handedness": "Right", "index" : j, "tilt" : atan2(dir_r.z,dir_r.y)})
-			# print("Right dir : ", (180/atan2(0, -1))*atan2(dir_r.y, dir_r.x))
-			
-			_maj_speed() 
-	
-	# On évite de changer le texte trop vite même si on perd quelques frames à cause du thread
-	if Time.get_ticks_msec() / 1000.0 - last_body_detected_time < hand_display_duration:
-		label.text = "Corps détecté"
-	else:
-		label.text = ""
+		# Traitement DROIT (Joueur 2)
+		if results.right and results.right.pose_landmarks.size() > 0:
+			_process_half_body(results.right.pose_landmarks[0], 2, true)
 
-func _maj_speed():
-	# Tout ce qui concerne la gestion des données relatives aux mains se fait ici
-		# print("Coordonnées: x=%f, y=%f, z=%f" % [
-		# hand_landmarks.landmarks[8].x,
-		# hand_landmarks.landmarks[8].y,
-		# hand_landmarks.landmarks[8].z])
-	return [modulated]
+func _process_half_body(pose_landmarks, player_index: int, is_right_side: bool):
+	var lm = pose_landmarks.landmarks
+	
+	# Fonction pour corriger le X
+	# Si c'est le côté droit, le X global = (X_local / 2) + 0.5
+	# Si c'est le côté gauche, le X global = (X_local / 2)
+	var fix_x = func(x_val: float):
+		return (x_val * 0.5) + (0.5 if is_right_side else 0.0)
+
+	# Calcul des vecteurs (on utilise le fix_x pour les coordonnées)
+	var wrist_r := Vector3(fix_x.call(lm[15].x), lm[15].y, lm[15].z)
+	var elbow_r := Vector3(fix_x.call(lm[13].x), lm[13].y, lm[13].z)
+	var dir_r   := (wrist_r - elbow_r).normalized()
+	
+	var wrist_l := Vector3(fix_x.call(lm[16].x), lm[16].y, lm[16].z)
+	var elbow_l := Vector3(fix_x.call(lm[14].x), lm[14].y, lm[14].z)
+	var dir_l   := (wrist_l - elbow_l).normalized()
+
+	# Ajout à hand_data
+	hand_data.append({
+		"x": fix_x.call(lm[16].x), 
+		"y": lm[16].y,
+		"angle_z": atan2(dir_l.y, dir_l.x), 
+		"handedness": "Left", 
+		"index": player_index, 
+		"tilt": atan2(dir_l.z, dir_l.y)
+	})
+	hand_data.append({
+		"x": fix_x.call(lm[15].x), 
+		"y": lm[15].y,
+		"angle_z": atan2(dir_r.y, dir_r.x), 
+		"handedness": "Right", 
+		"index": player_index, 
+		"tilt": atan2(dir_r.z, dir_r.y)
+	})
 
 func _exit_tree() -> void:
 	runThread = false
