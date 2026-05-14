@@ -18,9 +18,6 @@ func _ready() -> void:
 	Input.set_custom_mouse_cursor(cursor, Input.CURSOR_ARROW, Vector2(0, 0))
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-func _process(delta: float) -> void:
-	pass
-
 func _onStartButton_pressed() -> void:
 	click_sound.play()
 	

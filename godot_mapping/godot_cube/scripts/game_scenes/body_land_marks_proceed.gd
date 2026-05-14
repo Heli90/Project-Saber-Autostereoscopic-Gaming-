@@ -228,10 +228,9 @@ func _thread_mediapipe():
 			# Pour le debug, on recréer une image combinée avec les squelettes
 			if res_left or res_right:
 
-				var start_render = Time.get_ticks_usec()
 				var out_left = renderer.render(mp_img_left, res_left.pose_landmarks if res_left else [])
 				var out_right = renderer.render(mp_img_right, res_right.pose_landmarks if res_right else [])
-				time_render = (Time.get_ticks_usec()-start_detect)/1000
+				time_render = (Time.get_ticks_usec()-start_detect)/1000.0
 				
 				mutex.lock()
 				var start_combining = Time.get_ticks_usec()

@@ -187,6 +187,10 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 **Birame :** Séparation du flux caméra en 2 images (droite et gauche) pour gérer chaque joueur indépendamment (cela rend le tracking de chaque joueur plus précis).
 **Van-Kévin :** Implémentation d'un menu de tutoriel et correction de l'orientation des cubes.
 
+### Entre la séance 12 et la séance 13
+
+**Van-Kévin :** Calibration des sabres en adéquation avec la séparation du flux caméra.
+
 ### Séance 13 - 27/05
 
 

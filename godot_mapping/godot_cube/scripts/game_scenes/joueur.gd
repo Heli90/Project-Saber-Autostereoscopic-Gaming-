@@ -13,9 +13,9 @@ const JUMP_VELOCITY: float = 4.5
 @export var blue_shader_material : ShaderMaterial
 
 var landmarks: Node2D
-var saber_range_x : float = 1.2
-var saber_y_min : float = 0.4
-var saber_y_max : float = 1.6
+var saber_range_x : float = 1.5
+var saber_y_min : float = 0.5
+var saber_y_max : float = 2.0
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -43,7 +43,13 @@ func _physics_process(_delta: float) -> void:
 	for data in landmarks.hand_data:
 		if data["index"] == player_id :
 			var saber : Area3D = left_saber if data["handedness"] == "Left" else right_saber
-			var pos_x : float = lerp(-saber_range_x, saber_range_x, data["x"])
+			
+			# Recalibrage des sabres dans la zone de chaque joueur
+			var local_x : float
+			if player_id == 1: local_x = data["x"] / 0.5
+			else: local_x = (data["x"] - 0.5) / 0.5
+
+			var pos_x : float = lerp(-saber_range_x, saber_range_x, local_x)
 			var pos_y : float = lerp(saber_y_max, saber_y_min, data["y"])
 			saber.position.x = pos_x
 			saber.position.y = pos_y

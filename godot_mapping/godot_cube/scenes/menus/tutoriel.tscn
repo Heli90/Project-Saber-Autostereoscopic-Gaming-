@@ -70,12 +70,14 @@ offset_left = 320.0
 offset_top = 180.0
 offset_right = 1600.0
 offset_bottom = 900.0
+autoplay = true
+loop = true
 
 [node name="StartButton" type="Button" parent="." unique_id=1486002421]
 layout_mode = 0
-offset_left = 750.0
+offset_left = 734.0
 offset_top = 950.0
-offset_right = 1202.0
+offset_right = 1186.0
 offset_bottom = 1030.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("6_phf8o")
