@@ -1,13 +1,15 @@
 extends Node3D
 
-@onready var screen_output = $TextureRect
 @export var nb_views : int = 8
-@onready var cube_tournant: Node3D = $CubeTournant
+@onready var screen_output = $TextureRect
+@onready var jeu: Node3D = $Game
 @onready var j1: Node3D = $J1
 @onready var j2: Node3D = $J2
 
 @onready var cam_controller_j1: Node3D = $J1/CameraControllerFPS
 @onready var cam_controller_j2: Node3D = $J2/CameraControllerFPS
+@onready var ink_layer_j1: CanvasLayer = $Game/HUD/InkLayerJ1
+@onready var ink_layer_j2: CanvasLayer = $Game/HUD/InkLayerJ2
 
 @onready var remote1_j1: RemoteTransform3D = $J1/CameraControllerFPS/RemoteVue1
 @onready var remote2_j1: RemoteTransform3D = $J1/CameraControllerFPS/RemoteVue2
@@ -21,7 +23,7 @@ extends Node3D
 @onready var label_gpu_vues: Label = $TechnicalInfos/GPUVues
 
 @onready var label_detect_mediapipe: Label = $TechnicalInfos/DetectMediapipe
-@onready var land_marks_proceed: Node2D = $CubeTournant/LandMarksProceed
+@onready var land_marks_proceed: Node2D = $Game/LandMarksProceed
 
 @onready var textureRect = $TextureRect
 
@@ -35,8 +37,8 @@ func _ready():
 	await get_tree().process_frame
 	# On récupère le monde 3D
 	var world_3d = get_viewport().world_3d
-	if has_node("CubeTournant"):
-		world_3d = $CubeTournant.get_world_3d()
+	if has_node("Game"):
+		world_3d = jeu.get_world_3d()
 	
 	var shader_mat = screen_output.material as ShaderMaterial
 	# On configure chaque vue
@@ -55,6 +57,12 @@ func _ready():
 			var texture_vue = vue.get_texture()
 			var shader_vue = "vue_" + str(i)
 			shader_mat.set_shader_parameter(shader_vue, texture_vue)
+	
+	# On configure le viewport qui recevra l'effet d'encre
+	if has_node("J1/CameraControllerFPS/Vue1"):
+		ink_layer_j1.custom_viewport = get_node("J1/CameraControllerFPS/Vue1")
+	if has_node("J2/CameraControllerFPS/Vue5"):
+		ink_layer_j2.custom_viewport = get_node("J2/CameraControllerFPS/Vue5")
 	textureRect.material.set_shader_parameter("offset", 0.0) # Initialise l'effet glitch à 0
 
 func _process(_delta: float) -> void:
@@ -112,7 +120,7 @@ func _physics_process(_delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("StopGame"):
-		cube_tournant._onPartieTimerTimeout()
+		jeu._onPartieTimerTimeout()
 	if event.is_action_pressed("Invert_views_J1"):
 		if textureRect:
 			var invert = textureRect.material.get_shader_parameter("invertViews")
@@ -129,5 +137,3 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("resetPixelisation"):
 		textureRect.material.set_shader_parameter("pixelisation", false)
 		textureRect.material.set_shader_parameter("pixelisationPower", 200.0)
-	
-		

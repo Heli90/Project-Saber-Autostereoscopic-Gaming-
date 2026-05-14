@@ -59,14 +59,15 @@ metallic = 0.8
 script = ExtResource("1_30ywe")
 
 [node name="Cube" type="MeshInstance3D" parent="." unique_id=1325360842]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)
 mesh = SubResource("ArrayMesh_ladkf")
 surface_material_override/0 = SubResource("StandardMaterial3D_30ywe")
 
 [node name="CollisionCube" type="CollisionShape3D" parent="." unique_id=545149799]
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)
 shape = SubResource("BoxShape3D_ig410")
 
 [node name="X" type="MeshInstance3D" parent="." unique_id=705576442]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0.45)
 mesh = SubResource("TextMesh_ilpsx")
 surface_material_override/0 = SubResource("StandardMaterial3D_0ip8w")

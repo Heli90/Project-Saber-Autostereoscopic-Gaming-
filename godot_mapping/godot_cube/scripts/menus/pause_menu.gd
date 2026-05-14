@@ -4,15 +4,9 @@ extends ColorRect
 @onready var options: Panel = $Options
 @onready var fondu_noir: ColorRect = $FonduNoir
 @onready var pause_menu: ColorRect = $"."
-@onready var test_button: Button = $MenuButtons/TestButton
 @onready var camera_button: Button = $MenuButtons/CameraButton
 @onready var landmarks_proceed = $"../../LandMarksProceed"
 @onready var select_camera: ConfirmationDialog = $"../../LandMarksProceed/SelectCamera"
-
-var j1_PC: CharacterBody3D
-var j2_PC: CharacterBody3D
-var j1_TV: CharacterBody3D
-var j2_TV: CharacterBody3D
 
 static var affichage: bool
 static var on_option_menu: bool
@@ -140,6 +134,14 @@ func _onBackButton_pressed() -> void:
 	on_option_menu = false
 
 func _onMainMenuButton_pressed() -> void:
+	# On redirige les viewports d'encre pour éviter un conflit lors du changement de scène
+	var ink_j1 = get_node_or_null("../InkLayerJ1")
+	var ink_j2 = get_node_or_null("../InkLayerJ2")
+	if ink_j1 and ink_j1.custom_viewport:
+		ink_j1.custom_viewport = get_viewport()
+	if ink_j2 and ink_j2.custom_viewport:
+		ink_j2.custom_viewport = get_viewport()
+	
 	click_sound.play()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	var transition = create_tween().set_parallel(true)
@@ -153,33 +155,6 @@ func _onMainMenuButton_pressed() -> void:
 	transition.chain().tween_interval(0.3)
 	await transition.finished
 	get_tree().change_scene_to_file("res://scenes/menus/main_menu.tscn")
-
-func _onTestButton_pressed() -> void:
-	# On charge les joueurs selon la scène
-	j1_PC = get_node_or_null("../../../SplitScreens/Camera1/POV1/J1")
-	j2_PC = get_node_or_null("../../../SplitScreens/Camera2/POV2/J2")
-	j1_TV = get_node_or_null("../../../J1")
-	j2_TV = get_node_or_null("../../../J2")
-
-	# Téléportation en zone de test
-	if test_button.text == "Zone Test":
-		test_button.text = "Zone Jeu"
-		if j1_PC and j2_PC:
-			j1_PC.position = Vector3(-4.0, 0.75, 4.0)
-			j2_PC.position = Vector3(4.0, 0.75, 4.0)
-		else:
-			j1_TV.position = Vector3(-4.0, 0.75, 4.0)
-			j2_TV.position = Vector3(4.0, 0.75, 4.0)
-	# Téléportation hors de la zone de test
-	else:
-		test_button.text = "Zone Test"
-		if j1_PC and j2_PC:
-			j1_PC.position = Vector3(-10.0, 1.75, 35.0)
-			j2_PC.position = Vector3(10.0, 1.75, 35.0)
-		else:
-			j1_TV.position = Vector3(-10.0, 1.75, 35.0)
-			j2_TV.position = Vector3(10.0, 1.75, 35.0)
-	_onContinueButton_pressed()
 
 func _onCameraButton_pressed() -> void :
 	landmarks_proceed.reload_camera_selection()

@@ -1,6 +1,6 @@
-[gd_scene format=4 uid="uid://cpdl5o8jume4p"]
+[gd_scene format=4 uid="uid://d2j5tgdgelydc"]
 
-[ext_resource type="Script" uid="uid://dplpeg7io1qma" path="res://scripts/game_scenes/classic_cube.gd" id="1_kgufc"]
+[ext_resource type="Script" uid="uid://r15a7r51dtbw" path="res://scripts/game_scenes/other_cube.gd" id="1_g7kxu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3rv7k"]
 resource_name = "Material"
@@ -42,19 +42,30 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_wbrsw")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kgufc"]
-albedo_color = Color(0.2627451, 0.5921569, 0.3647059, 1)
+[sub_resource type="Gradient" id="Gradient_x0myt"]
+offsets = PackedFloat32Array(0.3045326, 0.8512748)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_p5g2x"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_b0o4m"]
+noise_type = 2
 
-[node name="ClassicCube" type="StaticBody3D" unique_id=2049622243]
-script = ExtResource("1_kgufc")
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5hspg"]
+noise = SubResource("FastNoiseLite_b0o4m")
+color_ramp = SubResource("Gradient_x0myt")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1325360842]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_itdmr"]
+albedo_color = Color(1.8247963, 1.8247963, 1.8247963, 1)
+albedo_texture = SubResource("NoiseTexture2D_5hspg")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h6frj"]
+
+[node name="BloopsCube" type="StaticBody3D" unique_id=923453408]
+script = ExtResource("1_g7kxu")
+
+[node name="Cube" type="MeshInstance3D" parent="." unique_id=1325360842]
 transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)
 mesh = SubResource("ArrayMesh_ladkf")
-surface_material_override/0 = SubResource("StandardMaterial3D_kgufc")
+surface_material_override/0 = SubResource("StandardMaterial3D_itdmr")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1442875795]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1958067322]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 0, 0, 0)
-shape = SubResource("BoxShape3D_p5g2x")
+shape = SubResource("BoxShape3D_h6frj")

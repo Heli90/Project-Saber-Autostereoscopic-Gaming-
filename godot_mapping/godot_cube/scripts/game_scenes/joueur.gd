@@ -20,9 +20,9 @@ var saber_y_max : float = 2.0
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	# On initialise les marqueurs de corps
-	landmarks = get_node_or_null("../../../../CubeTournant/LandMarksProceed")
+	landmarks = get_node_or_null("../../../../Game/LandMarksProceed")
 	if not landmarks:
-		landmarks = get_node_or_null("../CubeTournant/LandMarksProceed")
+		landmarks = get_node_or_null("../Game/LandMarksProceed")
 	# On initialise un signal à chaque fois que le sabre traverse un cube
 	left_saber.body_entered.connect(collision)
 	right_saber.body_entered.connect(collision)

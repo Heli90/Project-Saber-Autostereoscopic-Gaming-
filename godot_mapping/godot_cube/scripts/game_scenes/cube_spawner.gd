@@ -4,8 +4,10 @@ extends Node3D
 @export var bonus_bloc: PackedScene
 @export var bomb_bloc: PackedScene
 @export var disappear_bloc: PackedScene
+@export var splash_bloc: PackedScene
 @onready var start_label: Label = $"../StartLabel"
 @onready var disappear_bloc_notif: Label = $"../DisappearBlocNotif"
+@onready var ink_overlay: Array[Node2D] = [$"../HUD/InkLayerJ1/InkOverlayJ1", $"../HUD/InkLayerJ2/InkOverlayJ2"]
 
 # Booléen de départ pour lancer l'apparition des cubes après le message de départ
 var start_spawn: bool = false
@@ -21,7 +23,7 @@ var bonus_time: Array[float] = [0.0, 0.0]
 var count_bonus_time: Array[bool] = [false, false]
 
 # Grille de jeu où vont apparaître les cubes
-var grille = [[0.0, 2.0], [-2.0, 2.0], [2.0, 2.0]]
+var grille = [[0.0, 0.5], [-2.0, 0.5], [2.0, 0.5], [0.0, 1.75], [-2.0, 1.75], [2.0, 1.75], [0.0, 3.0], [-2.0, 3.0], [2.0, 3.0]]
 # Stockage des différents blocs du terrain
 var blocs: Array[Node3D]
 
@@ -79,7 +81,7 @@ func _process(delta: float) -> void:
 		# On retire les blocs qui ont été supprimés du jeu
 		blocs = blocs.filter(func(bloc): return is_instance_valid(bloc))
 		if blocs == []:
-			generate_classic_bloc()
+			generate_splash_bloc()
 			seuil = 5
 
 		# On actualise le meilleur combo de cubes
@@ -172,6 +174,14 @@ func generate_disappear_bloc() -> void:
 	new_bloc.striked_cube_j2.connect(_onStrikedDisappearCube_j2)
 	spawn_valide(new_bloc, true)
 
+func generate_splash_bloc() -> void:
+	var new_bloc = generate_bloc(splash_bloc)
+	
+	# On connecte le bloc au spawner pour qu'il puisse être relié au score actuel
+	new_bloc.striked_cube_j1.connect(_onStrikedSplashCube_j1)
+	new_bloc.striked_cube_j2.connect(_onStrikedSplashCube_j2)
+	spawn_valide(new_bloc, true)
+
 func StrikedClassicCube(i: int) -> void:
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 1000
@@ -203,6 +213,9 @@ func StrikedDisappearCube(i: int) -> void:
 	await get_tree().create_timer(1.0).timeout
 	disappear_bloc_notif.visible = false
 
+func StrikedSplashCube(i: int) -> void:
+	ink_overlay[i].trigger_ink()
+
 func _onStrikedClassicCube_j1() -> void:
 	StrikedClassicCube(0)
 
@@ -232,3 +245,9 @@ func _onStrikedDisappearCube_j1() -> void:
 
 func _onStrikedDisappearCube_j2() -> void:
 	StrikedDisappearCube(1)
+
+func _onStrikedSplashCube_j1() -> void:
+	StrikedSplashCube(0)
+
+func _onStrikedSplashCube_j2() -> void:
+	StrikedSplashCube(1)

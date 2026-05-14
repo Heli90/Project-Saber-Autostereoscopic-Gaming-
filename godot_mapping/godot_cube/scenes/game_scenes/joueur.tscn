@@ -41,14 +41,15 @@ script = ExtResource("1_2d0qe")
 blue_shader_material = SubResource("ShaderMaterial_3w8f1")
 
 [node name="CameraControllerFPS" type="Node3D" parent="." unique_id=718035250]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 
 [node name="Camera" type="Camera3D" parent="CameraControllerFPS" unique_id=752964199]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.55)
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 0, 0.3)
 current = true
+fov = 90.0
 
 [node name="LeftSaber" type="Area3D" parent="." unique_id=265445266]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.75, -2)
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, -1, 0.5, -2)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="LeftSaber" unique_id=1055556400]
 mesh = SubResource("CapsuleMesh_m2kkv")
@@ -58,7 +59,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_f4pr0")
 shape = SubResource("CapsuleShape3D_ks3j3")
 
 [node name="RightSaber" type="Area3D" parent="." unique_id=1964180286]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.75, -2)
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 1, 0.5, -2)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RightSaber" unique_id=147536879]
 mesh = SubResource("CapsuleMesh_ks3j3")

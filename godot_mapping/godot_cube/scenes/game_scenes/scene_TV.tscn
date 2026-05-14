@@ -34,11 +34,11 @@ visible = false
 current = false
 
 [node name="RemoteVue1" type="RemoteTransform3D" parent="J1/CameraControllerFPS" parent_id_path=PackedInt32Array(1529862946, 718035250) index="1" unique_id=1948403244]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.030349731, 0, -0.5999999)
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, -0.03, 0, 0.3)
 remote_path = NodePath("../Vue1/Camera")
 
 [node name="RemoteVue2" type="RemoteTransform3D" parent="J1/CameraControllerFPS" parent_id_path=PackedInt32Array(1529862946, 718035250) index="2" unique_id=2050802760]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03119278, 0, -0.5999999)
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0.03, 0, 0.3)
 remote_path = NodePath("../Vue2/Camera")
 
 [node name="Vue1" type="SubViewport" parent="J1/CameraControllerFPS" parent_id_path=PackedInt32Array(1529862946, 718035250) index="3" unique_id=210631324]
@@ -46,16 +46,18 @@ handle_input_locally = false
 size = Vector2i(1920, 1080)
 
 [node name="Camera" type="Camera3D" parent="J1/CameraControllerFPS/Vue1" unique_id=642319396]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.030349731, 1.5, 14.4)
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, -0.03, 2.25, 15.3)
 current = true
+fov = 90.0
 
 [node name="Vue2" type="SubViewport" parent="J1/CameraControllerFPS" parent_id_path=PackedInt32Array(1529862946, 718035250) index="4" unique_id=86739324]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 
 [node name="Camera" type="Camera3D" parent="J1/CameraControllerFPS/Vue2" unique_id=130694043]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.03119278, 1.5, 14.4)
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0.03, 2.25, 15.3)
 current = true
+fov = 90.0
 
 [node name="J2" parent="." unique_id=890448322 instance=ExtResource("2_rfm68")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1, -15)
@@ -66,11 +68,11 @@ visible = false
 current = false
 
 [node name="RemoteVue5" type="RemoteTransform3D" parent="J2/CameraControllerFPS" parent_id_path=PackedInt32Array(890448322, 718035250) index="1" unique_id=865866804]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07014561, 0, -0.5999999)
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0.03, 0, 0.3)
 remote_path = NodePath("../Vue5/Camera")
 
 [node name="RemoteVue6" type="RemoteTransform3D" parent="J2/CameraControllerFPS" parent_id_path=PackedInt32Array(890448322, 718035250) index="2" unique_id=1097339675]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.06956577, 0, -0.5999999)
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, -0.03, 0, 0.3)
 remote_path = NodePath("../Vue6/Camera")
 
 [node name="Vue5" type="SubViewport" parent="J2/CameraControllerFPS" parent_id_path=PackedInt32Array(890448322, 718035250) index="3" unique_id=1130869609]
@@ -78,16 +80,18 @@ handle_input_locally = false
 size = Vector2i(1920, 1080)
 
 [node name="Camera" type="Camera3D" parent="J2/CameraControllerFPS/Vue5" unique_id=340205500]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.070145555, 1.5, -14.4)
+transform = Transform3D(-1, 2.990035e-08, -8.2150535e-08, 0, 0.9396926, 0.34202012, 8.742278e-08, 0.34202012, -0.9396926, -0.030000025, 2.25, -15.3)
 current = true
+fov = 90.0
 
 [node name="Vue6" type="SubViewport" parent="J2/CameraControllerFPS" parent_id_path=PackedInt32Array(890448322, 718035250) index="4" unique_id=1893834835]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 
 [node name="Camera" type="Camera3D" parent="J2/CameraControllerFPS/Vue6" unique_id=1440031429]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.069565825, 1.5, -14.4)
+transform = Transform3D(-1, 2.990035e-08, -8.2150535e-08, 0, 0.9396926, 0.34202012, 8.742278e-08, 0.34202012, -0.9396926, 0.029999973, 2.25, -15.3)
 current = true
+fov = 90.0
 
 [node name="Vue3" type="SubViewport" parent="." unique_id=1959630340]
 handle_input_locally = false
@@ -186,11 +190,11 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 texture = SubResource("GradientTexture2D_6c3ax")
 
-[node name="CubeTournant" parent="." unique_id=1026699542 instance=ExtResource("6_qo1rj")]
+[node name="Game" parent="." unique_id=1026699542 instance=ExtResource("6_qo1rj")]
 
-[node name="TimeStopSound" parent="CubeTournant" index="12" unique_id=1815400477]
-bus = &"SFX"
+[node name="TimeStopSound" parent="Game" index="11" unique_id=1815400477]
+volume_db = -10.0
 
 [editable path="J1"]
 [editable path="J2"]
-[editable path="CubeTournant"]
+[editable path="Game"]

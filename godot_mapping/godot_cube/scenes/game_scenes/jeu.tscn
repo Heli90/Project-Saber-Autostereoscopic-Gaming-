@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://vkh3oc4hwdmv"]
 
 [ext_resource type="Script" uid="uid://cdssy8fdiffsx" path="res://scripts/game_scenes/jeu.gd" id="1_fu8w0"]
+[ext_resource type="Script" uid="uid://cx3d6alfd6nrm" path="res://scripts/game_scenes/ink_overlay.gd" id="2_m6m3v"]
 [ext_resource type="PackedScene" uid="uid://s6n8auc020ga" path="res://scenes/menus/game_ending.tscn" id="3_0hq27"]
 [ext_resource type="FontFile" uid="uid://bd4geqghtkj13" path="res://addons/assets/TextFontBase.ttf" id="4_nljp5"]
 [ext_resource type="Script" uid="uid://wefxg2pwa2m8" path="res://scripts/game_scenes/cube_spawner.gd" id="5_32rft"]
@@ -11,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://c7o1d8sboxv2g" path="res://scenes/game_scenes/bonus_cube.tscn" id="7_gphcn"]
 [ext_resource type="PackedScene" uid="uid://bhsti1g7ancuo" path="res://scenes/game_scenes/bomb_cube.tscn" id="8_e41p7"]
 [ext_resource type="PackedScene" uid="uid://cy68ifed1fagu" path="res://scenes/game_scenes/disappear_cube.tscn" id="9_ycxfq"]
+[ext_resource type="PackedScene" uid="uid://d2j5tgdgelydc" path="res://scenes/game_scenes/bloops_cube.tscn" id="11_5o4q7"]
 [ext_resource type="FontFile" uid="uid://crtikirivhq6o" path="res://addons/assets/TextFontBold.otf" id="11_ycxfq"]
 
 [sub_resource type="Sky" id="Sky_ypfyx"]
@@ -41,7 +43,7 @@ size = Vector3(8, 0.1, 80)
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_45xf8"]
-size = Vector3(0.1, 4, 80)
+size = Vector3(0.1, 6, 80)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ypfyx"]
 transparency = 1
@@ -52,7 +54,7 @@ emission = Color(0.3019608, 0, 1, 1)
 emission_energy_multiplier = 1.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_ypfyx"]
-size = Vector3(0.1, 4, 80)
+size = Vector3(0.1, 6, 80)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_32rft"]
 transparency = 1
@@ -96,6 +98,48 @@ ignore_time_scale = true
 
 [node name="HUD" type="Node3D" parent="." unique_id=2058758241]
 
+[node name="InkLayerJ1" type="CanvasLayer" parent="HUD" unique_id=1487331852]
+
+[node name="InkOverlayJ1" type="Node2D" parent="HUD/InkLayerJ1" unique_id=329622136]
+script = ExtResource("2_m6m3v")
+
+[node name="ColorRect" type="ColorRect" parent="HUD/InkLayerJ1/InkOverlayJ1" unique_id=774154362]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InkLayerJ1/InkOverlayJ1" unique_id=962560392]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="InkLayerJ2" type="CanvasLayer" parent="HUD" unique_id=1485869206]
+
+[node name="InkOverlayJ2" type="Node2D" parent="HUD/InkLayerJ2" unique_id=1323907337]
+script = ExtResource("2_m6m3v")
+
+[node name="ColorRect" type="ColorRect" parent="HUD/InkLayerJ2/InkOverlayJ2" unique_id=1926951310]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="TextureRect" type="TextureRect" parent="HUD/InkLayerJ2/InkOverlayJ2" unique_id=49252425]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="FonduLayer" type="CanvasLayer" parent="HUD" unique_id=478103391]
 
 [node name="FonduNoir" type="ColorRect" parent="HUD/FonduLayer" unique_id=1283066675]
@@ -124,6 +168,7 @@ classic_bloc = ExtResource("6_nmqw8")
 bonus_bloc = ExtResource("7_gphcn")
 bomb_bloc = ExtResource("8_e41p7")
 disappear_bloc = ExtResource("9_ycxfq")
+splash_bloc = ExtResource("11_5o4q7")
 
 [node name="LightJ1" type="DirectionalLight3D" parent="." unique_id=596364777]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
@@ -134,7 +179,6 @@ transform = Transform3D(1, 0, 0, 0, -0.70710677, 0.70710677, 0, -0.70710677, -0.
 shadow_enabled = true
 
 [node name="Map" type="Node3D" parent="." unique_id=1966754843]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1453242, 0)
 
 [node name="Sols" type="Node3D" parent="Map" unique_id=812124684]
 
@@ -155,40 +199,40 @@ transform = Transform3D(10, 0, 0, 0, -4.371139e-07, -10, 0, 10, -4.371139e-07, 1
 mesh = SubResource("PlaneMesh_y8ul7")
 surface_material_override/0 = SubResource("StandardMaterial3D_dmbnc")
 
-[node name="MurGaucheJ1" type="MeshInstance3D" parent="Map/Murs" unique_id=330388240]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.5, 0)
+[node name="MurGauche" type="MeshInstance3D" parent="Map/Murs" unique_id=330388240]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.5, 0)
 mesh = SubResource("BoxMesh_45xf8")
 surface_material_override/0 = SubResource("StandardMaterial3D_ypfyx")
 
-[node name="MurDroitJ1" type="MeshInstance3D" parent="Map/Murs" unique_id=969943501]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1.5, 0)
+[node name="MurDroit" type="MeshInstance3D" parent="Map/Murs" unique_id=969943501]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.5, 0)
 mesh = SubResource("BoxMesh_ypfyx")
 surface_material_override/0 = SubResource("StandardMaterial3D_32rft")
 
-[node name="PlafondJ1" type="MeshInstance3D" parent="Map/Murs" unique_id=1577351986]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
+[node name="Plafond" type="MeshInstance3D" parent="Map/Murs" unique_id=1577351986]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
 mesh = SubResource("BoxMesh_e41p7")
 surface_material_override/0 = SubResource("StandardMaterial3D_ycxfq")
 
 [node name="Rails" type="Node3D" parent="Map" unique_id=1147700038]
 
-[node name="Rails-BGJ1" type="MeshInstance3D" parent="Map/Rails" unique_id=111391289]
+[node name="Rails-BG" type="MeshInstance3D" parent="Map/Rails" unique_id=111391289]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -0.4, 0)
 mesh = SubResource("BoxMesh_32rft")
 surface_material_override/0 = SubResource("StandardMaterial3D_nmqw8")
 
-[node name="Rails-BDJ1" type="MeshInstance3D" parent="Map/Rails" unique_id=287041843]
+[node name="Rails-BD" type="MeshInstance3D" parent="Map/Rails" unique_id=287041843]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.4, 0)
 mesh = SubResource("BoxMesh_32rft")
 surface_material_override/0 = SubResource("StandardMaterial3D_nmqw8")
 
-[node name="Rails-HGJ1" type="MeshInstance3D" parent="Map/Rails" unique_id=567516789]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.4, 0)
+[node name="Rails-HG" type="MeshInstance3D" parent="Map/Rails" unique_id=567516789]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 5.4, 0)
 mesh = SubResource("BoxMesh_32rft")
 surface_material_override/0 = SubResource("StandardMaterial3D_nmqw8")
 
-[node name="Rails-HDJ1" type="MeshInstance3D" parent="Map/Rails" unique_id=919846233]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 3.4, 0)
+[node name="Rails-HD" type="MeshInstance3D" parent="Map/Rails" unique_id=919846233]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 5.4, 0)
 mesh = SubResource("BoxMesh_32rft")
 surface_material_override/0 = SubResource("StandardMaterial3D_nmqw8")
 
@@ -197,13 +241,14 @@ position = Vector2(810, 0)
 script = ExtResource("6_32rft")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="LandMarksProceed" unique_id=877274248]
+visible = false
 offset_right = 320.0
 offset_bottom = 240.0
 
 [node name="CameraViewport" type="SubViewport" parent="LandMarksProceed/SubViewportContainer" unique_id=861650548]
 handle_input_locally = false
 size = Vector2i(320, 240)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="TestAffichage" type="TextureRect" parent="LandMarksProceed/SubViewportContainer/CameraViewport" unique_id=538163506]
 offset_right = 320.0
@@ -212,6 +257,7 @@ expand_mode = 2
 flip_h = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="LandMarksProceed" unique_id=688860276]
+visible = false
 
 [node name="DebugOverlay" type="TextureRect" parent="LandMarksProceed/CanvasLayer" unique_id=1751420981]
 offset_left = 810.0

@@ -58,14 +58,15 @@ albedo_color = Color(4.282982, 1.2915568, 1.7735087, 1)
 script = ExtResource("1_7vakl")
 
 [node name="Cube" type="MeshInstance3D" parent="." unique_id=1325360842]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.333, 0, 0, 0, 0.333, 0, 0, 0, 0.333, 0, 0, 0)
 mesh = SubResource("ArrayMesh_ladkf")
 surface_material_override/0 = SubResource("StandardMaterial3D_7vakl")
 
 [node name="CollisionCube" type="CollisionShape3D" parent="." unique_id=500950537]
+transform = Transform3D(0.666, 0, 0, 0, 0.666, 0, 0, 0, 0.666, 0, 0, 0)
 shape = SubResource("BoxShape3D_7vakl")
 
 [node name="ExclamationPoint" type="MeshInstance3D" parent="." unique_id=1944536405]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
+transform = Transform3D(0.666, 0, 0, 0, 0.666, 0, 0, 0, 0.666, 0, 0, 0.333)
 mesh = SubResource("TextMesh_nu5y6")
 surface_material_override/0 = SubResource("StandardMaterial3D_8j8kh")
