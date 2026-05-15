@@ -16,6 +16,8 @@
 - Cubes **étoilés** valant 5000 points de score par défaut et multipliant les points obtenus de tous les cubes par 2 pendant 10 secondes
 - Cubes **explosifs** faisant perdre 500 points de score
 - Cubes **invisibles** qui clignotent 3 fois puis disparaissent quelques secondes avant de devoir être frappés valant 15000 points de score par défaut
+- Cubes **à encre** qui projettent de l'encre qui brouille la vue sur le point de vue du joueur qui a frappé le cube
+- Cubes **boucliers** qui immunisent le joueur d'une perte de multiplicateur de score de 5 cubes classiques ratés, au maximum pendant 10 secondes
 
 > Chacun de ces cubes a une mécanique spécifique pour la disparition :
 - Cubes classiques : Entre **1** et **3** coups avant disparition, selon la couleur initiale du cube

@@ -5,9 +5,11 @@ extends Node3D
 @export var bomb_bloc: PackedScene
 @export var disappear_bloc: PackedScene
 @export var splash_bloc: PackedScene
+@export var shield_bloc: PackedScene
 @onready var start_label: Label = $"../StartLabel"
 @onready var disappear_bloc_notif: Label = $"../DisappearBlocNotif"
 @onready var ink_overlay: Array[Node2D] = [$"../HUD/InkLayerJ1/InkOverlayJ1", $"../HUD/InkLayerJ2/InkOverlayJ2"]
+@onready var shields: Array[GPUParticles3D] = [$"../Map/Boucliers/ShieldJ1", $"../Map/Boucliers/ShieldJ2"]
 
 # Booléen de départ pour lancer l'apparition des cubes après le message de départ
 var start_spawn: bool = false
@@ -28,10 +30,10 @@ var grille = [[0.0, 0.5], [-2.0, 0.5], [2.0, 0.5], [0.0, 1.75], [-2.0, 1.75], [2
 var blocs: Array[Node3D]
 
 # Variables liées aux combos
-var seuil: int = 5
+var seuil: Array[int] = [2,2]
 var stocked_combo: Array[int] = [0, 0]
 var best_combo: int = 0
-var combo_sucess: bool = false
+var combo_success: bool = false
 
 # Multiplicateurs de score et scores actuels pour chaque joueur
 var multiplicateur: Array[int] = [1, 1]
@@ -40,6 +42,10 @@ var multiplicateur: Array[int] = [1, 1]
 var score_uis : Array = []
 var j1: Node3D
 var j2: Node3D
+
+# Tableau de booléens associés aux boucliers pour détecter s'ils sont actifs
+var shield_actif: Array[int] = [0, 0]
+var time_shield_actif: Array[float] = [0.0, 0.0]
 
 # Fonction appelée par le script du jeu pour démarrer l'apparition des cubes et charger les scores visuels
 func activation() -> void:
@@ -55,7 +61,7 @@ func activation() -> void:
 
 func start_game() -> void:
 	start_label.text = "GO !"
-	generate_classic_bloc()
+	generate_shield_bloc()
 	var transition = create_tween()
 	transition.tween_property(start_label, "modulate:a", 0.0, 0.5)
 	await transition.finished
@@ -77,33 +83,45 @@ func increment_speed(bloc: Node3D) -> void:
 func _process(delta: float) -> void:
 	if start_spawn:
 		elapsed_time += delta
-
+		
+		# On vérifie si les boucliers de chaque joueur doivent écourtés
+		for i in range(2):
+			if shield_actif[i] == 0 and shields[i].emitting :
+				shields[i].emitting = false
+				shields[i].speed_scale = 10.0
+			elif shields[i].emitting:
+				time_shield_actif[i] -= delta
+			
+		# Si le temps d'activité est dépassé, on réinitialise le nombre de cubes pouvant être ratés
+			if time_shield_actif[i] <= 0.0:
+				shield_actif[i] = 0
+				shields[i].emitting = false
+				shields[i].speed_scale = 10.0
+			
 		# On retire les blocs qui ont été supprimés du jeu
 		blocs = blocs.filter(func(bloc): return is_instance_valid(bloc))
 		if blocs == []:
-			generate_splash_bloc()
-			seuil = 5
+			generate_classic_bloc()
 
 		# On actualise le meilleur combo de cubes
 		if best_combo < stocked_combo.max():
 			best_combo = stocked_combo.max()
 
 		# Si un certain combo est atteint par l'un des 2 joueurs, on incrémente la vitesse
-		if stocked_combo.min() >= seuil:
+		if stocked_combo.min() >= seuil.min():
 			for bloc in blocs : increment_speed(bloc)
 
 		# Selon qui a incrémenté la vitesse, on incrémente son multiplicateur de score
 		for i in range(2):
-			if stocked_combo[i] >= seuil:
+			if stocked_combo[i] >= seuil[i]:
 				multiplicateur[i] *= 2
-				combo_sucess = true
-		if combo_sucess: seuil += 5
+				combo_success = true
+			if combo_success: seuil[i] += 2
 		
 		# On fait apparaître un bloc bonus à chaque fois que le temps de seuil est dépassé
 		if elapsed_time >= threshold_time:
 			elapsed_time -= threshold_time
 			threshold_time = rng.randf_range(3.0, 10.0)
-			generate_bomb_bloc()
 		
 		# On calcule le temps de bonus pour chacun des 2 joueurs et on arrête le bonus une fois que ce temps est dépassé
 		for i in range(2):
@@ -120,8 +138,12 @@ func generate_bloc(scene_bloc: PackedScene) -> Node3D:
 	return new_bloc
 
 func case_valide(case: Array) -> bool:
+	# On fait une disjonction de cas pour que le cube donnant un bouclier soit seul sur sa colonne
 	for bloc in blocs:
-		if case == [bloc.position.x, bloc.position.y]: return false
+		if bloc != shield_bloc:
+			if case == [bloc.position.x, bloc.position.y]: return false
+		else:
+			if case[0] == bloc.position.x: return false
 	return true
 
 func spawn_valide(bloc: Node3D, disappear: bool = false) -> void:
@@ -180,7 +202,15 @@ func generate_splash_bloc() -> void:
 	# On connecte le bloc au spawner pour qu'il puisse être relié au score actuel
 	new_bloc.striked_cube_j1.connect(_onStrikedSplashCube_j1)
 	new_bloc.striked_cube_j2.connect(_onStrikedSplashCube_j2)
-	spawn_valide(new_bloc, true)
+	spawn_valide(new_bloc)
+
+func generate_shield_bloc() -> void:
+	var new_bloc = generate_bloc(shield_bloc)
+	
+	# On connecte le bloc au spawner pour qu'il puisse être relié au score actuel
+	new_bloc.striked_cube_j1.connect(_onStrikedShieldCube_j1)
+	new_bloc.striked_cube_j2.connect(_onStrikedShieldCube_j2)
+	spawn_valide(new_bloc)
 
 func StrikedClassicCube(i: int) -> void:
 	stocked_combo[i] += 1
@@ -188,8 +218,12 @@ func StrikedClassicCube(i: int) -> void:
 	score_uis[i].ajouter_score(gain)
 
 func MissedClassicCube(i: int) -> void:
-	multiplicateur[i] = 1
-	stocked_combo[i] = 0
+	if shield_actif[i] > 0:
+		shield_actif[i] -= 1
+	else:
+		multiplicateur[i] = 1
+		stocked_combo[i] = 0
+		seuil[i] = 2
 
 func StrikedBonusCube(i: int) -> void:
 	stocked_combo[i] += 1
@@ -214,7 +248,19 @@ func StrikedDisappearCube(i: int) -> void:
 	disappear_bloc_notif.visible = false
 
 func StrikedSplashCube(i: int) -> void:
+	stocked_combo[i] += 1
+	var gain = multiplicateur[i] * 1000
+	score_uis[i].ajouter_score(gain)
 	ink_overlay[i].trigger_ink()
+
+func StrikedShieldCube(i: int) -> void:
+	shields[i].emitting = true
+	shields[i].speed_scale = 1.0
+	shield_actif[i] = 5
+	time_shield_actif[i] = 10.0
+	stocked_combo[i] += 1
+	var gain = multiplicateur[i] * 1000
+	score_uis[i].ajouter_score(gain)
 
 func _onStrikedClassicCube_j1() -> void:
 	StrikedClassicCube(0)
@@ -251,3 +297,9 @@ func _onStrikedSplashCube_j1() -> void:
 
 func _onStrikedSplashCube_j2() -> void:
 	StrikedSplashCube(1)
+
+func _onStrikedShieldCube_j1() -> void:
+	StrikedShieldCube(0)
+
+func _onStrikedShieldCube_j2() -> void:
+	StrikedShieldCube(1)

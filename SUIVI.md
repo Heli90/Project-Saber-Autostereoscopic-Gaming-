@@ -189,7 +189,9 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 ### Entre la séance 12 et la séance 13
 
-**Van-Kévin :** Calibration des sabres en adéquation avec la séparation du flux caméra.
+**Van-Kévin :**
+- Calibration des sabres en adéquation avec la séparation du flux caméra.
+- Ajout d'un cube jettant de l'encre sur la caméra du joueur qui l'a frappé et d'un cube donnant un bouclier protégeant le joueur, faisant en sorte qu'il ne perde pas de multiplicateur de score s'il rate au maximum 5 cubes classiques pendant 10 secondes. Ajout visuel du bouclier.
 
 ### Séance 13 - 27/05
 

@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://ct883kqsjhjbs" path="res://scripts/menus/light_menu.gd" id="2_n18sg"]
 [ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="2_nl2bs"]
 [ext_resource type="Texture2D" uid="uid://b4xpo3x1n06pg" path="res://addons/assets/fond_jeu_godot.png" id="3_b7lfr"]
-[ext_resource type="AudioStream" uid="uid://b0hxo1hgri1gb" path="res://addons/sfx/tutoriel_music.mp3" id="5_fwhch"]
+[ext_resource type="AudioStream" uid="uid://dtx2qu2tls0eq" path="res://addons/sfx/tutoriel_menu_music.mp3" id="5_fwhch"]
 [ext_resource type="FontFile" uid="uid://crtikirivhq6o" path="res://addons/assets/TextFontBold.otf" id="6_phf8o"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n18sg"]

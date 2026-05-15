@@ -7,13 +7,15 @@
 [ext_resource type="Script" uid="uid://wefxg2pwa2m8" path="res://scripts/game_scenes/cube_spawner.gd" id="5_32rft"]
 [ext_resource type="PackedScene" uid="uid://cowlnii2y28cm" path="res://scenes/menus/pause_menu.tscn" id="6_04wrr"]
 [ext_resource type="Script" uid="uid://p0s0y75s7ehp" path="res://scripts/game_scenes/body_land_marks_proceed.gd" id="6_32rft"]
-[ext_resource type="PackedScene" uid="uid://cpdl5o8jume4p" path="res://scenes/game_scenes/classic_cube.tscn" id="6_nmqw8"]
+[ext_resource type="PackedScene" uid="uid://cpdl5o8jume4p" path="res://scenes/game_scenes/cubes/classic_cube.tscn" id="6_nmqw8"]
 [ext_resource type="AudioStream" uid="uid://dseksoliltjqp" path="res://addons/sfx/TimeStopSFX.mp3" id="7_32rft"]
-[ext_resource type="PackedScene" uid="uid://c7o1d8sboxv2g" path="res://scenes/game_scenes/bonus_cube.tscn" id="7_gphcn"]
-[ext_resource type="PackedScene" uid="uid://bhsti1g7ancuo" path="res://scenes/game_scenes/bomb_cube.tscn" id="8_e41p7"]
-[ext_resource type="PackedScene" uid="uid://cy68ifed1fagu" path="res://scenes/game_scenes/disappear_cube.tscn" id="9_ycxfq"]
-[ext_resource type="PackedScene" uid="uid://d2j5tgdgelydc" path="res://scenes/game_scenes/bloops_cube.tscn" id="11_5o4q7"]
+[ext_resource type="PackedScene" uid="uid://c7o1d8sboxv2g" path="res://scenes/game_scenes/cubes/bonus_cube.tscn" id="7_gphcn"]
+[ext_resource type="PackedScene" uid="uid://bhsti1g7ancuo" path="res://scenes/game_scenes/cubes/bomb_cube.tscn" id="8_e41p7"]
+[ext_resource type="PackedScene" uid="uid://cy68ifed1fagu" path="res://scenes/game_scenes/cubes/disappear_cube.tscn" id="9_ycxfq"]
+[ext_resource type="PackedScene" uid="uid://d2j5tgdgelydc" path="res://scenes/game_scenes/cubes/bloops_cube.tscn" id="11_5o4q7"]
 [ext_resource type="FontFile" uid="uid://crtikirivhq6o" path="res://addons/assets/TextFontBold.otf" id="11_ycxfq"]
+[ext_resource type="PackedScene" uid="uid://b2scygnmuljbm" path="res://scenes/game_scenes/cubes/shield_cube.tscn" id="12_8x66g"]
+[ext_resource type="PackedScene" uid="uid://c4x12na4wh5mf" path="res://scenes/game_scenes/shield.tscn" id="13_wgmfl"]
 
 [sub_resource type="Sky" id="Sky_ypfyx"]
 
@@ -22,6 +24,7 @@ background_mode = 2
 sky = SubResource("Sky_ypfyx")
 ambient_light_source = 3
 reflected_light_source = 2
+glow_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_nmqw8"]
 size = Vector3(8, 0.1, 80)
@@ -169,6 +172,7 @@ bonus_bloc = ExtResource("7_gphcn")
 bomb_bloc = ExtResource("8_e41p7")
 disappear_bloc = ExtResource("9_ycxfq")
 splash_bloc = ExtResource("11_5o4q7")
+shield_bloc = ExtResource("12_8x66g")
 
 [node name="LightJ1" type="DirectionalLight3D" parent="." unique_id=596364777]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
@@ -235,6 +239,16 @@ surface_material_override/0 = SubResource("StandardMaterial3D_nmqw8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 5.4, 0)
 mesh = SubResource("BoxMesh_32rft")
 surface_material_override/0 = SubResource("StandardMaterial3D_nmqw8")
+
+[node name="Boucliers" type="Node3D" parent="Map" unique_id=694101203]
+
+[node name="ShieldJ1" parent="Map/Boucliers" unique_id=1455074640 instance=ExtResource("13_wgmfl")]
+transform = Transform3D(-1, -8.742278e-08, 3.821371e-15, 0, -4.371139e-08, -1, 8.742278e-08, -1, 4.371139e-08, 0, 2, 20)
+emitting = false
+
+[node name="ShieldJ2" parent="Map/Boucliers" unique_id=334358958 instance=ExtResource("13_wgmfl")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 2, -20)
+emitting = false
 
 [node name="LandMarksProceed" type="Node2D" parent="." unique_id=775762795]
 position = Vector2(810, 0)

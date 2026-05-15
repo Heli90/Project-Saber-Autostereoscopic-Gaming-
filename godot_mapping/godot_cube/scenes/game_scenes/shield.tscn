@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://c4x12na4wh5mf"]
+
+[ext_resource type="Shader" uid="uid://dx0oloilrq66n" path="res://shaders/shield.tres" id="1_mim72"]
+[ext_resource type="ArrayMesh" uid="uid://cojb3n55gjt5o" path="res://models/shield.obj" id="2_n20ah"]
+[ext_resource type="Texture2D" uid="uid://db3suhj4j67ku" path="res://addons/assets/shield_border.png" id="2_srkom"]
+[ext_resource type="Texture2D" uid="uid://dim7iv8ydb5o7" path="res://addons/assets/shield_texture.png" id="2_udiqq"]
+[ext_resource type="Texture2D" uid="uid://b3gh4d7lv2t0" path="res://addons/assets/noise_texture.png" id="3_udiqq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_udiqq"]
+render_priority = 0
+shader = ExtResource("1_mim72")
+shader_parameter/BorderColor = Color(0, 2.454227, 0, 1)
+shader_parameter/Border = ExtResource("2_srkom")
+shader_parameter/Vector2Parameter = Vector2(1.6, 1)
+shader_parameter/MainTex = ExtResource("2_udiqq")
+shader_parameter/NoiseSpeed = Vector2(0, 0.5)
+shader_parameter/NoiseTex = ExtResource("3_udiqq")
+shader_parameter/NoiseParameter = 1.0
+shader_parameter/MaskPower = 2.15
+
+[sub_resource type="Curve" id="Curve_lfit6"]
+_data = [Vector2(0, 0), 0.0, 22.762207, 0, 0, Vector2(0.146875, 1), 0.0, 0.0, 0, 0, Vector2(0.84687495, 1), 0.0, 0.0, 0, 0, Vector2(0.94999987, 0.50155765), -18.608446, -18.608446, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveTexture" id="CurveTexture_falr7"]
+curve = SubResource("Curve_lfit6")
+
+[sub_resource type="Curve" id="Curve_jmxbk"]
+_data = [Vector2(0.003124997, 0.49532712), 0.0, 5.6822433, 0, 0, Vector2(0.024999999, 1), 3.9875383, 3.9875383, 0, 0, Vector2(0.15937498, 1), 0.0, 0.0, 0, 0, Vector2(0.9468749, 1), 0.0, 0.0, 0, 0, Vector2(0.98437494, 1), -12.959536, -12.959536, 0, 0, Vector2(1, 0.1962617), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="CurveTexture" id="CurveTexture_gody6"]
+curve = SubResource("Curve_jmxbk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_srkom"]
+gravity = Vector3(0, 0, 0)
+scale_min = 2.25
+scale_max = 2.25
+scale_curve = SubResource("CurveTexture_gody6")
+color = Color(1.1104094, 2.5978966, 4.415934, 1)
+alpha_curve = SubResource("CurveTexture_falr7")
+
+[node name="Shield" type="GPUParticles3D" unique_id=1455074640]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 1, 0)
+material_override = SubResource("ShaderMaterial_udiqq")
+amount = 1
+lifetime = 10.0
+process_material = SubResource("ParticleProcessMaterial_srkom")
+draw_pass_1 = ExtResource("2_n20ah")
