@@ -6,9 +6,7 @@ extends Node3D
 @onready var cube_spawner: Node3D = $CubeSpawner
 @onready var disappear_bloc_notif: Label = $DisappearBlocNotif
 
-var global_score: int = 0
 var pause_blocs : bool = false
-
 const LEADERBOARD_PATH = "user://leaderboard.cfg"
 
 func _ready() -> void:
@@ -55,7 +53,6 @@ func onPartieTimerTimeout() -> void:
 	transition.parallel().tween_property(game_ending, "modulate:a", 1.0, 0.3)
 	transition.parallel().tween_method(set_blur_intensity, 0.0, 2.0, 0.3)
 	await transition.finished
-	
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func save_scores_to_leaderboard(score_j1: int, score_j2: int) -> void:
@@ -81,8 +78,7 @@ func save_scores_to_leaderboard(score_j1: int, score_j2: int) -> void:
 	
 	# Reconstruction du tableau à partir du dictionnaire
 	entrees = []
-	for nom in dict:
-		entrees.append({"nom": nom, "score": dict[nom]})
+	for nom in dict: entrees.append({"nom": nom, "score": dict[nom]})
 
 	# Tri par score décroissant et on garde les 10 meilleurs scores
 	entrees.sort_custom(func(a, b): return a["score"] > b["score"])

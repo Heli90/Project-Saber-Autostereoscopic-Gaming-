@@ -24,10 +24,13 @@
 - Autres cubes : **1** coup avant disparition
 
 ## Joueurs
-> Chaque joueur est doté de 2 sabres. Les fonctionnalités de ces derniers seront décrites ci-dessous plus tard lorsque les sabres seront réalisés.
+> Chaque joueur est doté de 2 sabres. Ils sont contrôlés par les bras du joueur qui sont détectés via une détection du corps entier du joueur via MediaPipe. 
 
 ## Caméra
 > Une caméra est utilisée pour les contrôles des sabres de chaque joueur, qui est détecté par des marqueurs de corps. Deux possibilités de gameplay sont possibles pour les tests :
 
 - Un mode de débuggage avec l'affichage de la caméra et des marqueurs de corps - Pour l'activer, dans le Node **LandMarksProceed**, rendre le SubViewportContainer, le CanvasLayer et le CameraLabel, tous visibles.
-- Le mode de jeu classique sans affichage de la caméra - Pour l'activer, il suffit de rendre invisible les trois noeuds cités précedemment. 
+- Le mode de jeu classique sans affichage de la caméra - Pour l'activer, il suffit de rendre invisible les trois noeuds cités précedemment.
+
+## Fonctionnalités additionnelles
+- **Arrêt du temps** : Avec la touche Entrée, il est possible d'arrêter tous les cubes en mouvement afin de pouvoir tester les effets visuels (pixelisation, inversion des vues...).

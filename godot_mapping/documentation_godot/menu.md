@@ -7,8 +7,8 @@
 
 ### Menu d'entrée
 > Il apparaît au démarrage du jeu et a diverses fonctionnalités :
-- Commencer le jeu avec le choix du mode 1 joueur (pour l'instant) sur son PC, ou du mode 2 joueurs sur la TV
-- Réinitialiser le meilleur score enregistré au cours de toutes les parties (trouvable dans un fichier .cfg)
+- Commencer le jeu avec le choix du mode 2 joueurs sur son PC, ou du mode 2 joueurs sur la TV
+- Dans le cas du mode 2 joueurs sur la TV, une inscription au classement peut être réalisée via des noms et les scores sont alors enregistrés dans le classement final affiché en fin de partie sur le menu de fin de jeu.
 - Paramètres : Ils permettent de régler les paramètres de musique et de SFX.
 - Crédits : Ils affichent les personnes en charge du projet.
 - Quitter le jeu
@@ -19,7 +19,7 @@
 - Paramètres identiques
 - Retourner au menu d'entrée
 - Quitter le jeu
-- Accéder à la zone de test ou à la zone de jeu
+- Ouvrir un sélecteur de caméra
 
 > Un shader est réalisé sur le menu en jeu, ce qui rend flou l'ensemble du terrain en 3D qui se situe en arrière-plan.
 

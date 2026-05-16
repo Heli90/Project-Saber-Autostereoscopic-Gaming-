@@ -196,6 +196,7 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 - Ajout d'un effet visuel de destruction progressive du bouclier à mesure que des cubes sont ratés.
 - Ajout d'un leaderboard fonctionnel enregistrant les noms et les scores associés et d'une page avant le début du jeu en mode TV permettant d'enregistrer les noms de chaque joueur. S'il n'y a pas de noms inscrits, les scores ne sont pas enregistrés.
 - Suppression de l'effet de lumière sur le menu principal, qui servait à faire des tests.
+- Mise à jour de la documentation en lien avec les tâches réalisées ci-dessus.
 
 ### Séance 13 - 27/05
 
