@@ -5,6 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="3_d2mly"]
 [ext_resource type="Script" uid="uid://c4nxreh0k2je7" path="res://scripts/game_scenes/score_ui.gd" id="3_n86lu"]
 [ext_resource type="FontFile" uid="uid://bulj5s2rcjc7b" path="res://addons/assets/BAHNSCHRIFT.TTF" id="4_6ic0p"]
+[ext_resource type="Script" uid="uid://dnfkxpf3p8gki" path="res://scripts/game_scenes/shield_bar.gd" id="5_1js1r"]
+[ext_resource type="Shader" uid="uid://dk5jixryl8es3" path="res://shaders/shield_bar.gdshader" id="5_6ic0p"]
+[ext_resource type="Script" uid="uid://cx3d6alfd6nrm" path="res://scripts/game_scenes/ink_overlay.gd" id="5_8tujb"]
+[ext_resource type="Texture2D" uid="uid://barxo14ju82s8" path="res://addons/assets/shield_icon.png" id="7_fv261"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1js1r"]
+shader = ExtResource("5_6ic0p")
 
 [node name="PC" type="Node3D" unique_id=1088143800]
 script = ExtResource("1_4ivkf")
@@ -74,6 +81,88 @@ theme_override_fonts/font = ExtResource("4_6ic0p")
 theme_override_font_sizes/font_size = 28
 text = "+0"
 
+[node name="InkLayerJ1" type="CanvasLayer" parent="SplitScreens/Camera1/POV1" unique_id=452327694]
+
+[node name="InkOverlayJ1" type="Node2D" parent="SplitScreens/Camera1/POV1/InkLayerJ1" unique_id=39505508]
+script = ExtResource("5_8tujb")
+
+[node name="ColorRect" type="ColorRect" parent="SplitScreens/Camera1/POV1/InkLayerJ1/InkOverlayJ1" unique_id=445763455]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="TextureRect" type="TextureRect" parent="SplitScreens/Camera1/POV1/InkLayerJ1/InkOverlayJ1" unique_id=633087693]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShieldBar" type="Control" parent="SplitScreens/Camera1/POV1" unique_id=491422667]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_1js1r")
+
+[node name="Contour" type="ColorRect" parent="SplitScreens/Camera1/POV1/ShieldBar" unique_id=1084313693]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 845.0
+offset_right = 355.0
+offset_bottom = 915.0
+color = Color(0, 0, 0, 1)
+
+[node name="BG" type="ColorRect" parent="SplitScreens/Camera1/POV1/ShieldBar" unique_id=2022961906]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 850.0
+offset_right = 350.0
+offset_bottom = 870.0
+grow_vertical = 2
+color = Color(0.58383155, 0.58383155, 0.58383155, 1)
+
+[node name="BarFilled" type="ColorRect" parent="SplitScreens/Camera1/POV1/ShieldBar" unique_id=877807653]
+material = SubResource("ShaderMaterial_1js1r")
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 850.0
+offset_right = 350.0
+offset_bottom = 870.0
+grow_vertical = 2
+
+[node name="ShieldIcon" type="TextureRect" parent="SplitScreens/Camera1/POV1/ShieldBar" unique_id=809709064]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 815.0
+offset_right = 465.0
+offset_bottom = 986.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_fv261")
+
+[node name="ShieldLabel" type="Label" parent="SplitScreens/Camera1/POV1/ShieldBar" unique_id=1861539933]
+custom_minimum_size = Vector2(72, 51)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 860.0
+offset_right = 122.0
+offset_bottom = 911.0
+theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
+theme_override_fonts/font = ExtResource("4_6ic0p")
+theme_override_font_sizes/font_size = 50
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Camera2" type="SubViewportContainer" parent="SplitScreens" unique_id=859538132]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -134,6 +223,89 @@ theme_override_colors/font_color = Color(0, 1, 1, 1)
 theme_override_fonts/font = ExtResource("4_6ic0p")
 theme_override_font_sizes/font_size = 28
 text = "+0"
+
+[node name="InkLayerJ2" type="CanvasLayer" parent="SplitScreens/Camera2/POV2" unique_id=2072803020]
+
+[node name="InkOverlayJ2" type="Node2D" parent="SplitScreens/Camera2/POV2/InkLayerJ2" unique_id=1754509254]
+script = ExtResource("5_8tujb")
+
+[node name="ColorRect" type="ColorRect" parent="SplitScreens/Camera2/POV2/InkLayerJ2/InkOverlayJ2" unique_id=1819862446]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="TextureRect" type="TextureRect" parent="SplitScreens/Camera2/POV2/InkLayerJ2/InkOverlayJ2" unique_id=1011816271]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShieldBar" type="Control" parent="SplitScreens/Camera2/POV2" unique_id=179942223]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 550.0
+offset_right = 590.0
+offset_bottom = 40.0
+script = ExtResource("5_1js1r")
+
+[node name="Contour" type="ColorRect" parent="SplitScreens/Camera2/POV2/ShieldBar" unique_id=1586366217]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 845.0
+offset_right = 355.0
+offset_bottom = 915.0
+color = Color(0, 0, 0, 1)
+
+[node name="BG" type="ColorRect" parent="SplitScreens/Camera2/POV2/ShieldBar" unique_id=250923183]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 850.0
+offset_right = 350.0
+offset_bottom = 870.0
+grow_vertical = 2
+color = Color(0.58383155, 0.58383155, 0.58383155, 1)
+
+[node name="BarFilled" type="ColorRect" parent="SplitScreens/Camera2/POV2/ShieldBar" unique_id=1230626434]
+material = SubResource("ShaderMaterial_1js1r")
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 850.0
+offset_right = 350.0
+offset_bottom = 870.0
+grow_vertical = 2
+
+[node name="ShieldIcon" type="TextureRect" parent="SplitScreens/Camera2/POV2/ShieldBar" unique_id=998112483]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 815.0
+offset_right = 465.0
+offset_bottom = 986.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_fv261")
+
+[node name="ShieldLabel" type="Label" parent="SplitScreens/Camera2/POV2/ShieldBar" unique_id=952532679]
+custom_minimum_size = Vector2(72, 51)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 860.0
+offset_right = 122.0
+offset_bottom = 911.0
+theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
+theme_override_fonts/font = ExtResource("4_6ic0p")
+theme_override_font_sizes/font_size = 50
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Game" parent="." unique_id=1026699542 instance=ExtResource("3_d2mly")]
 

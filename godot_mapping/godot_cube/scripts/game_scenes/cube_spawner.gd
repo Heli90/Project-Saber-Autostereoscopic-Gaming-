@@ -8,7 +8,6 @@ extends Node3D
 @export var shield_bloc: PackedScene
 @onready var start_label: Label = $"../StartLabel"
 @onready var disappear_bloc_notif: Label = $"../DisappearBlocNotif"
-@onready var ink_overlay: Array[Node2D] = [$"../HUD/InkLayerJ1/InkOverlayJ1", $"../HUD/InkLayerJ2/InkOverlayJ2"]
 @onready var shields: Array[GPUParticles3D] = [$"../Map/Boucliers/ShieldJ1", $"../Map/Boucliers/ShieldJ2"]
 
 # Booléen de départ décidant du mode de jeu lancé : false pour le PC, true pour la TV
@@ -45,32 +44,48 @@ var score_uis : Array = []
 var j1: Node3D
 var j2: Node3D
 
-# Tableau de booléens associés aux boucliers pour détecter s'ils sont actifs
+# Tableau associé à l'encre
+var ink_overlay: Array[Node2D]
+
+# Tableaux associés aux boucliers
 var shield_actif: Array[int] = [0, 0]
 var time_shield_actif: Array[float] = [0.0, 0.0]
+var shield_bars: Array[Control]
 
 # Fonction appelée par le script du jeu pour démarrer l'apparition des cubes et charger les scores visuels
 func activation() -> void:
 	j1 = get_node_or_null("../../SplitScreens/Camera1/POV1/J1")
 	j2 = get_node_or_null("../../SplitScreens/Camera2/POV2/J2")
-	var score_j1 = get_node_or_null("../../SplitScreens/Camera1/POV1/ScoreUI")
-	var score_j2 = get_node_or_null("../../SplitScreens/Camera2/POV2/ScoreUI")
-	score_uis.append(score_j1)
-	score_uis.append(score_j2)
 
+	# Ajout des scores et des barres de boucliers aux tableaux
+	score_uis.append(get_node_or_null("../../SplitScreens/Camera1/POV1/ScoreUI"))
+	score_uis.append(get_node_or_null("../../SplitScreens/Camera2/POV2/ScoreUI"))
+	shield_bars.append(get_node_or_null("../../SplitScreens/Camera1/POV1/ShieldBar"))
+	shield_bars.append(get_node_or_null("../../SplitScreens/Camera2/POV2/ShieldBar"))
+	
+	# Ajout des noeuds associés à l'encre
+	ink_overlay.append(get_node_or_null("../../SplitScreens/Camera1/POV1/InkLayerJ1/InkOverlayJ1"))
+	ink_overlay.append(get_node_or_null("../../SplitScreens/Camera2/POV2/InkLayerJ2/InkOverlayJ2"))
 	if not j1 and not j2:
 		score_uis = []
+		shield_bars = []
 		mode = true
 		j1 = get_node_or_null("../../J1")
 		j2 = get_node_or_null("../../J2")
-		var score_j1_vue_1 = get_node_or_null("../../J1/CameraControllerFPS/Vue1/ScoreUI")
-		var score_j1_vue_2 = get_node_or_null("../../J1/CameraControllerFPS/Vue2/ScoreUI")
-		var score_j2_vue_5 = get_node_or_null("../../J2/CameraControllerFPS/Vue5/ScoreUI")
-		var score_j2_vue_6 = get_node_or_null("../../J2/CameraControllerFPS/Vue6/ScoreUI")
-		score_uis.append(score_j1_vue_1)
-		score_uis.append(score_j2_vue_5)
-		score_uis.append(score_j1_vue_2)
-		score_uis.append(score_j2_vue_6)
+		score_uis.append(get_node_or_null("../../J1/CameraControllerFPS/Vue1/ScoreUI"))
+		score_uis.append(get_node_or_null("../../J2/CameraControllerFPS/Vue5/ScoreUI"))
+		score_uis.append(get_node_or_null("../../J1/CameraControllerFPS/Vue2/ScoreUI"))
+		score_uis.append(get_node_or_null("../../J2/CameraControllerFPS/Vue6/ScoreUI"))
+		shield_bars.append(get_node_or_null("../../J1/CameraControllerFPS/Vue1/ShieldBar"))
+		shield_bars.append(get_node_or_null("../../J2/CameraControllerFPS/Vue5/ShieldBar"))
+		shield_bars.append(get_node_or_null("../../J1/CameraControllerFPS/Vue2/ShieldBar"))
+		shield_bars.append(get_node_or_null("../../J2/CameraControllerFPS/Vue6/ShieldBar"))
+		ink_overlay.append(get_node_or_null("../../J1/CameraControllerFPS/Vue1/InkLayerJ1/InkOverlayJ1"))
+		ink_overlay.append(get_node_or_null("../../J2/CameraControllerFPS/Vue5/InkLayerJ2/InkOverlayJ2"))
+		ink_overlay.append(get_node_or_null("../../J1/CameraControllerFPS/Vue2/InkLayerJ1/InkOverlayJ1"))
+		ink_overlay.append(get_node_or_null("../../J2/CameraControllerFPS/Vue6/InkLayerJ2/InkOverlayJ2"))
+	for shield_bar in shield_bars:
+		shield_bar.modulate.a = 0.0
 	start_spawn = true
 	start_game()
 
@@ -104,6 +119,13 @@ func _process(delta: float) -> void:
 			if shield_actif[i] == 0 and shields[i].emitting :
 				shields[i].emitting = false
 				shields[i].speed_scale = 10.0
+
+				# Si le bouclier tombe à 0, on efface la barre associée
+				var t = create_tween().set_parallel(true)
+				t.tween_property(shield_bars[i], "modulate:a", 0.0, 0.01)
+				if mode: t.tween_property(shield_bars[i+2], "modulate:a", 0.0, 0.01)
+				await t.finished
+
 			elif shields[i].emitting:
 				time_shield_actif[i] -= delta
 			
@@ -112,6 +134,12 @@ func _process(delta: float) -> void:
 				shield_actif[i] = 0
 				shields[i].emitting = false
 				shields[i].speed_scale = 10.0
+				
+				# On efface les barres des boucliers sur l'écran
+				var t = create_tween().set_parallel(true)
+				t.tween_property(shield_bars[i], "modulate:a", 0.0, 0.01)
+				if mode: t.tween_property(shield_bars[i+2], "modulate:a", 0.0, 0.01)
+				await t.finished
 			
 		# On retire les blocs qui ont été supprimés du jeu
 		blocs = blocs.filter(func(bloc): return is_instance_valid(bloc))
@@ -238,6 +266,8 @@ func MissedClassicCube(i: int) -> void:
 		shield_actif[i] -= 1
 		var current = shields[i].material_override.get_shader_parameter("MaskPower")
 		shields[i].material_override.set_shader_parameter("MaskPower", current + 2.0)
+		shield_bars[i].update_shield(shield_actif[i])
+		if mode : shield_bars[i+2].update_shield(shield_actif[i])
 	else:
 		multiplicateur[i] = 1
 		stocked_combo[i] = 0
@@ -282,6 +312,14 @@ func StrikedShieldCube(i: int) -> void:
 	shields[i].material_override.set_shader_parameter("MaskPower", -5.0)
 	shield_actif[i] = 5
 	time_shield_actif[i] = 10.0
+	
+	shield_bars[i].visible = true
+	if mode: shield_bars[i+2].visible = true
+	
+	var t = create_tween().set_parallel(true)
+	t.tween_property(shield_bars[i], "modulate:a", 1.0, 0.1)
+	if mode: t.tween_property(shield_bars[i+2], "modulate:a", 1.0, 0.1)
+	await t.finished
 
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 1000

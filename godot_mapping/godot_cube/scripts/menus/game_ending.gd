@@ -15,14 +15,6 @@ func _ready() -> void:
 	fondu_noir.visible = false
 
 func _onBackToMenuButton_pressed() -> void:
-	# On redirige les viewports d'encre pour éviter un conflit lors du changement de scène
-	var ink_j1 = get_node_or_null("../InkLayerJ1")
-	var ink_j2 = get_node_or_null("../InkLayerJ2")
-	if ink_j1 and ink_j1.custom_viewport:
-		ink_j1.custom_viewport = get_viewport()
-	if ink_j2 and ink_j2.custom_viewport:
-		ink_j2.custom_viewport = get_viewport()
-
 	click_sound.play()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	var transition = create_tween().set_parallel(true)

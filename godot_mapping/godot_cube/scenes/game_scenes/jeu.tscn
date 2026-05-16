@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://vkh3oc4hwdmv"]
 
 [ext_resource type="Script" uid="uid://cdssy8fdiffsx" path="res://scripts/game_scenes/jeu.gd" id="1_fu8w0"]
-[ext_resource type="Script" uid="uid://cx3d6alfd6nrm" path="res://scripts/game_scenes/ink_overlay.gd" id="2_m6m3v"]
 [ext_resource type="PackedScene" uid="uid://s6n8auc020ga" path="res://scenes/menus/game_ending.tscn" id="3_0hq27"]
 [ext_resource type="FontFile" uid="uid://bd4geqghtkj13" path="res://addons/assets/TextFontBase.ttf" id="4_nljp5"]
 [ext_resource type="Script" uid="uid://wefxg2pwa2m8" path="res://scripts/game_scenes/cube_spawner.gd" id="5_32rft"]
@@ -100,48 +99,6 @@ one_shot = true
 ignore_time_scale = true
 
 [node name="HUD" type="Node3D" parent="." unique_id=2058758241]
-
-[node name="InkLayerJ1" type="CanvasLayer" parent="HUD" unique_id=1487331852]
-
-[node name="InkOverlayJ1" type="Node2D" parent="HUD/InkLayerJ1" unique_id=329622136]
-script = ExtResource("2_m6m3v")
-
-[node name="ColorRect" type="ColorRect" parent="HUD/InkLayerJ1/InkOverlayJ1" unique_id=774154362]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.5019608)
-
-[node name="TextureRect" type="TextureRect" parent="HUD/InkLayerJ1/InkOverlayJ1" unique_id=962560392]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="InkLayerJ2" type="CanvasLayer" parent="HUD" unique_id=1485869206]
-
-[node name="InkOverlayJ2" type="Node2D" parent="HUD/InkLayerJ2" unique_id=1323907337]
-script = ExtResource("2_m6m3v")
-
-[node name="ColorRect" type="ColorRect" parent="HUD/InkLayerJ2/InkOverlayJ2" unique_id=1926951310]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.5019608)
-
-[node name="TextureRect" type="TextureRect" parent="HUD/InkLayerJ2/InkOverlayJ2" unique_id=49252425]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="FonduLayer" type="CanvasLayer" parent="HUD" unique_id=478103391]
 

@@ -210,9 +210,9 @@ text = "Quitter le jeu"
 [node name="CameraButton" type="Button" parent="MenuButtons" unique_id=613085586]
 layout_mode = 1
 offset_left = 226.0
-offset_top = 661.0
+offset_top = 700.0
 offset_right = 395.0
-offset_bottom = 703.0
+offset_bottom = 742.0
 theme_override_colors/font_hover_color = Color(0, 1, 1, 1)
 theme_override_colors/font_hover_pressed_color = Color(0, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_1s2dm")

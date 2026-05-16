@@ -6,7 +6,14 @@
 [ext_resource type="FontFile" uid="uid://bd4geqghtkj13" path="res://addons/assets/TextFontBase.ttf" id="3_llrkf"]
 [ext_resource type="Shader" uid="uid://vno46ensk36y" path="res://shaders/generation_image.gdshader" id="4_wdlj1"]
 [ext_resource type="FontFile" uid="uid://bulj5s2rcjc7b" path="res://addons/assets/BAHNSCHRIFT.TTF" id="4_yqxl7"]
+[ext_resource type="Script" uid="uid://dnfkxpf3p8gki" path="res://scripts/game_scenes/shield_bar.gd" id="5_3cheo"]
+[ext_resource type="Script" uid="uid://cx3d6alfd6nrm" path="res://scripts/game_scenes/ink_overlay.gd" id="5_hrdja"]
+[ext_resource type="Shader" uid="uid://dk5jixryl8es3" path="res://shaders/shield_bar.gdshader" id="6_hrdja"]
 [ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="6_qo1rj"]
+[ext_resource type="Texture2D" uid="uid://barxo14ju82s8" path="res://addons/assets/shield_icon.png" id="7_4s8qw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8081n"]
+shader = ExtResource("6_hrdja")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6c3ax"]
 resource_local_to_scene = true
@@ -62,9 +69,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -195.0
+offset_left = -1870.0
 offset_top = -130.0
-offset_right = -108.0
+offset_right = -1783.0
 offset_bottom = -53.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -98,6 +105,88 @@ theme_override_fonts/font = ExtResource("4_yqxl7")
 theme_override_font_sizes/font_size = 28
 text = "+0"
 
+[node name="InkLayerJ1" type="CanvasLayer" parent="J1/CameraControllerFPS/Vue1" unique_id=2010441029]
+
+[node name="InkOverlayJ1" type="Node2D" parent="J1/CameraControllerFPS/Vue1/InkLayerJ1" unique_id=201163911]
+script = ExtResource("5_hrdja")
+
+[node name="ColorRect" type="ColorRect" parent="J1/CameraControllerFPS/Vue1/InkLayerJ1/InkOverlayJ1" unique_id=729862279]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="TextureRect" type="TextureRect" parent="J1/CameraControllerFPS/Vue1/InkLayerJ1/InkOverlayJ1" unique_id=224094187]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShieldBar" type="Control" parent="J1/CameraControllerFPS/Vue1" unique_id=860087554]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_3cheo")
+
+[node name="Contour" type="ColorRect" parent="J1/CameraControllerFPS/Vue1/ShieldBar" unique_id=12313358]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 845.0
+offset_right = 355.0
+offset_bottom = 915.0
+color = Color(0, 0, 0, 1)
+
+[node name="BG" type="ColorRect" parent="J1/CameraControllerFPS/Vue1/ShieldBar" unique_id=1591758448]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 850.0
+offset_right = 350.0
+offset_bottom = 870.0
+grow_vertical = 2
+color = Color(0.58383155, 0.58383155, 0.58383155, 1)
+
+[node name="BarFilled" type="ColorRect" parent="J1/CameraControllerFPS/Vue1/ShieldBar" unique_id=520261708]
+material = SubResource("ShaderMaterial_8081n")
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 850.0
+offset_right = 350.0
+offset_bottom = 870.0
+grow_vertical = 2
+
+[node name="ShieldIcon" type="TextureRect" parent="J1/CameraControllerFPS/Vue1/ShieldBar" unique_id=279217528]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 815.0
+offset_right = 465.0
+offset_bottom = 986.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_4s8qw")
+
+[node name="ShieldLabel" type="Label" parent="J1/CameraControllerFPS/Vue1/ShieldBar" unique_id=1899313079]
+custom_minimum_size = Vector2(72, 51)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 860.0
+offset_right = 122.0
+offset_bottom = 911.0
+theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
+theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_font_sizes/font_size = 50
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Vue2" type="SubViewport" parent="J1/CameraControllerFPS" parent_id_path=PackedInt32Array(1529862946, 718035250) index="4" unique_id=86739324]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
@@ -117,9 +206,9 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -195.0
+offset_left = -1870.0
 offset_top = -130.0
-offset_right = -108.0
+offset_right = -1783.0
 offset_bottom = -53.0
 grow_horizontal = 0
 grow_vertical = 0
@@ -152,6 +241,88 @@ theme_override_colors/font_color = Color(0, 1, 1, 1)
 theme_override_fonts/font = ExtResource("4_yqxl7")
 theme_override_font_sizes/font_size = 28
 text = "+0"
+
+[node name="InkLayerJ1" type="CanvasLayer" parent="J1/CameraControllerFPS/Vue2" unique_id=707128034]
+
+[node name="InkOverlayJ1" type="Node2D" parent="J1/CameraControllerFPS/Vue2/InkLayerJ1" unique_id=375163239]
+script = ExtResource("5_hrdja")
+
+[node name="ColorRect" type="ColorRect" parent="J1/CameraControllerFPS/Vue2/InkLayerJ1/InkOverlayJ1" unique_id=1072416176]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="TextureRect" type="TextureRect" parent="J1/CameraControllerFPS/Vue2/InkLayerJ1/InkOverlayJ1" unique_id=1442283023]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShieldBar" type="Control" parent="J1/CameraControllerFPS/Vue2" unique_id=593417086]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_3cheo")
+
+[node name="Contour" type="ColorRect" parent="J1/CameraControllerFPS/Vue2/ShieldBar" unique_id=899103513]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 845.0
+offset_right = 355.0
+offset_bottom = 915.0
+color = Color(0, 0, 0, 1)
+
+[node name="BG" type="ColorRect" parent="J1/CameraControllerFPS/Vue2/ShieldBar" unique_id=1344524136]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 850.0
+offset_right = 350.0
+offset_bottom = 870.0
+grow_vertical = 2
+color = Color(0.58383155, 0.58383155, 0.58383155, 1)
+
+[node name="BarFilled" type="ColorRect" parent="J1/CameraControllerFPS/Vue2/ShieldBar" unique_id=1914924084]
+material = SubResource("ShaderMaterial_8081n")
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 850.0
+offset_right = 350.0
+offset_bottom = 870.0
+grow_vertical = 2
+
+[node name="ShieldIcon" type="TextureRect" parent="J1/CameraControllerFPS/Vue2/ShieldBar" unique_id=837890771]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 815.0
+offset_right = 465.0
+offset_bottom = 986.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_4s8qw")
+
+[node name="ShieldLabel" type="Label" parent="J1/CameraControllerFPS/Vue2/ShieldBar" unique_id=18941228]
+custom_minimum_size = Vector2(72, 51)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 860.0
+offset_right = 122.0
+offset_bottom = 911.0
+theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
+theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_font_sizes/font_size = 50
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="J2" parent="." unique_id=890448322 instance=ExtResource("2_rfm68")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1, -15)
@@ -224,6 +395,89 @@ theme_override_fonts/font = ExtResource("4_yqxl7")
 theme_override_font_sizes/font_size = 28
 text = "+0"
 
+[node name="InkLayerJ2" type="CanvasLayer" parent="J2/CameraControllerFPS/Vue5" unique_id=2098669961]
+
+[node name="InkOverlayJ2" type="Node2D" parent="J2/CameraControllerFPS/Vue5/InkLayerJ2" unique_id=1252254646]
+script = ExtResource("5_hrdja")
+
+[node name="ColorRect" type="ColorRect" parent="J2/CameraControllerFPS/Vue5/InkLayerJ2/InkOverlayJ2" unique_id=1316885456]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="TextureRect" type="TextureRect" parent="J2/CameraControllerFPS/Vue5/InkLayerJ2/InkOverlayJ2" unique_id=2010786171]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShieldBar" type="Control" parent="J2/CameraControllerFPS/Vue5" unique_id=437336744]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1500.0
+offset_right = 1540.0
+offset_bottom = 40.0
+script = ExtResource("5_3cheo")
+
+[node name="Contour" type="ColorRect" parent="J2/CameraControllerFPS/Vue5/ShieldBar" unique_id=1879837218]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 845.0
+offset_right = 355.0
+offset_bottom = 915.0
+color = Color(0, 0, 0, 1)
+
+[node name="BG" type="ColorRect" parent="J2/CameraControllerFPS/Vue5/ShieldBar" unique_id=953616322]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 850.0
+offset_right = 350.0
+offset_bottom = 870.0
+grow_vertical = 2
+color = Color(0.58383155, 0.58383155, 0.58383155, 1)
+
+[node name="BarFilled" type="ColorRect" parent="J2/CameraControllerFPS/Vue5/ShieldBar" unique_id=115434452]
+material = SubResource("ShaderMaterial_8081n")
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 850.0
+offset_right = 350.0
+offset_bottom = 870.0
+grow_vertical = 2
+
+[node name="ShieldIcon" type="TextureRect" parent="J2/CameraControllerFPS/Vue5/ShieldBar" unique_id=778954432]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 815.0
+offset_right = 465.0
+offset_bottom = 986.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_4s8qw")
+
+[node name="ShieldLabel" type="Label" parent="J2/CameraControllerFPS/Vue5/ShieldBar" unique_id=2022956065]
+custom_minimum_size = Vector2(72, 51)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 860.0
+offset_right = 122.0
+offset_bottom = 911.0
+theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
+theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_font_sizes/font_size = 50
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Vue6" type="SubViewport" parent="J2/CameraControllerFPS" parent_id_path=PackedInt32Array(890448322, 718035250) index="4" unique_id=1893834835]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
@@ -278,6 +532,89 @@ theme_override_colors/font_color = Color(0, 1, 1, 1)
 theme_override_fonts/font = ExtResource("4_yqxl7")
 theme_override_font_sizes/font_size = 28
 text = "+0"
+
+[node name="InkLayerJ2" type="CanvasLayer" parent="J2/CameraControllerFPS/Vue6" unique_id=1092914798]
+
+[node name="InkOverlayJ2" type="Node2D" parent="J2/CameraControllerFPS/Vue6/InkLayerJ2" unique_id=1981482544]
+script = ExtResource("5_hrdja")
+
+[node name="ColorRect" type="ColorRect" parent="J2/CameraControllerFPS/Vue6/InkLayerJ2/InkOverlayJ2" unique_id=1328232733]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="TextureRect" type="TextureRect" parent="J2/CameraControllerFPS/Vue6/InkLayerJ2/InkOverlayJ2" unique_id=1956587796]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShieldBar" type="Control" parent="J2/CameraControllerFPS/Vue6" unique_id=2135384770]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1500.0
+offset_right = 1540.0
+offset_bottom = 40.0
+script = ExtResource("5_3cheo")
+
+[node name="Contour" type="ColorRect" parent="J2/CameraControllerFPS/Vue6/ShieldBar" unique_id=666231494]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 845.0
+offset_right = 355.0
+offset_bottom = 915.0
+color = Color(0, 0, 0, 1)
+
+[node name="BG" type="ColorRect" parent="J2/CameraControllerFPS/Vue6/ShieldBar" unique_id=1685608509]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 850.0
+offset_right = 350.0
+offset_bottom = 870.0
+grow_vertical = 2
+color = Color(0.58383155, 0.58383155, 0.58383155, 1)
+
+[node name="BarFilled" type="ColorRect" parent="J2/CameraControllerFPS/Vue6/ShieldBar" unique_id=845578438]
+material = SubResource("ShaderMaterial_8081n")
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 850.0
+offset_right = 350.0
+offset_bottom = 870.0
+grow_vertical = 2
+
+[node name="ShieldIcon" type="TextureRect" parent="J2/CameraControllerFPS/Vue6/ShieldBar" unique_id=1583122327]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 815.0
+offset_right = 465.0
+offset_bottom = 986.0
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_4s8qw")
+
+[node name="ShieldLabel" type="Label" parent="J2/CameraControllerFPS/Vue6/ShieldBar" unique_id=1454153508]
+custom_minimum_size = Vector2(72, 51)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 860.0
+offset_right = 122.0
+offset_bottom = 911.0
+theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
+theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_font_sizes/font_size = 50
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Vue3" type="SubViewport" parent="." unique_id=1959630340]
 handle_input_locally = false

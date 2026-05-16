@@ -8,8 +8,6 @@ extends Node3D
 
 @onready var cam_controller_j1: Node3D = $J1/CameraControllerFPS
 @onready var cam_controller_j2: Node3D = $J2/CameraControllerFPS
-@onready var ink_layer_j1: CanvasLayer = $Game/HUD/InkLayerJ1
-@onready var ink_layer_j2: CanvasLayer = $Game/HUD/InkLayerJ2
 
 @onready var remote1_j1: RemoteTransform3D = $J1/CameraControllerFPS/RemoteVue1
 @onready var remote2_j1: RemoteTransform3D = $J1/CameraControllerFPS/RemoteVue2
@@ -57,12 +55,6 @@ func _ready():
 			var texture_vue = vue.get_texture()
 			var shader_vue = "vue_" + str(i)
 			shader_mat.set_shader_parameter(shader_vue, texture_vue)
-	
-	# On configure le viewport qui recevra l'effet d'encre
-	if has_node("J1/CameraControllerFPS/Vue1"):
-		ink_layer_j1.custom_viewport = get_node("J1/CameraControllerFPS/Vue1")
-	if has_node("J2/CameraControllerFPS/Vue5"):
-		ink_layer_j2.custom_viewport = get_node("J2/CameraControllerFPS/Vue5")
 	textureRect.material.set_shader_parameter("offset", 0.0) # Initialise l'effet glitch à 0
 
 func _process(_delta: float) -> void:
