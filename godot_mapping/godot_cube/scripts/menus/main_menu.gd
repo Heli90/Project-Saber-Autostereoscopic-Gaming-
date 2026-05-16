@@ -5,8 +5,7 @@ extends Control
 @onready var credits: Panel = $Credits
 @onready var mode_buttons: Panel = $ModeButtons
 @onready var game_name: Label = $GameName
-@onready var reset_score_page: Panel = $ResetScorePage
-@onready var validation_score_page: Panel = $ValidationScorePage
+@onready var name_input_page: Panel = $NameInputPage
 
 @onready var option_button: Button = $MainButtons/OptionButton
 @onready var credit_button: Button = $MainButtons/OptionButton
@@ -20,8 +19,11 @@ extends Control
 @onready var click_sound: AudioStreamPlayer = $ClickSound
 @onready var main_menu_music: AudioStreamPlayer = $MainMenuMusic
 
+@onready var nom_j1: LineEdit = $NameInputPage/NomJ1
+@onready var nom_j2: LineEdit = $NameInputPage/NomJ2
+
 var highest_score: int = 0
-const SAVE_PATH = "user://save_score.cfg"
+const LEADERBOARD_PATH = "user://leaderboard.cfg"
 
 func _ready() -> void:
 	get_tree().paused = false
@@ -38,8 +40,8 @@ func _ready() -> void:
 	options.visible = false
 	credits.visible = false
 	mode_buttons.visible = false
-	reset_score_page.visible = false
-	validation_score_page.visible = false
+	name_input_page.visible = false
+	
 	var t = create_tween()
 	t.tween_property(fondu_noir, "modulate:a", 0.0, 0.6)
 	await t.finished
@@ -111,7 +113,7 @@ func _onQuitButton_pressed() -> void:
 	get_tree().quit()
 
 func _onBackButton_pressed() -> void:
-	transition([main_buttons, game_name], [options, credits, mode_buttons, validation_score_page], true)
+	transition([main_buttons, game_name], [options, credits, mode_buttons], true)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _onCreditsButton_pressed() -> void:
@@ -123,23 +125,22 @@ func _onPCButton_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/game_scenes/scene_pc.tscn")
 
 func _onTVButton_pressed() -> void:
-	await transition([], [mode_buttons], false)
-	get_tree().change_scene_to_file("res://scenes/menus/tutoriel.tscn")
-
-func _onResetScoreButton_pressed() -> void:
-	transition([reset_score_page], [mode_buttons], false)
+	transition([name_input_page], [mode_buttons], false)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-func _onNoButton_pressed() -> void:
-	transition([mode_buttons], [reset_score_page], true)
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-
-func _onYesButton_pressed() -> void:
-	transition([validation_score_page], [reset_score_page], false)
-	reset_highest_score()
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-
-func reset_highest_score() -> void:
+func _onInscriptionButton_pressed() -> void:
+	var nom1 = nom_j1.text.strip_edges()
+	var nom2 = nom_j2.text.strip_edges()
+	
+	# Noms par défaut
+	if nom1 == "": nom1 = "Joueur 1"
+	if nom2 == "": nom2 = "Joueur 2"
+	
 	var config = ConfigFile.new()
-	config.set_value("Progression", "Meilleur Score", 0)
-	config.save(SAVE_PATH)
+	config.load(LEADERBOARD_PATH)
+	config.set_value("Joueurs", "Nom_J1", nom1)
+	config.set_value("Joueurs", "Nom_J2", nom2)
+	config.save(LEADERBOARD_PATH)
+	
+	await transition([], [name_input_page], false)
+	get_tree().change_scene_to_file("res://scenes/menus/tutoriel.tscn")

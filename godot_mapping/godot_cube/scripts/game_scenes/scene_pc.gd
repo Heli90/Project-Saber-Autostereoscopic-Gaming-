@@ -6,6 +6,8 @@ extends Node3D
 @onready var pause_menu: ColorRect = $Game/HUD/PauseMenu
 @onready var ink_layer_j1: CanvasLayer = $Game/HUD/InkLayerJ1
 @onready var ink_layer_j2: CanvasLayer = $Game/HUD/InkLayerJ2
+@onready var start_label: Label = $Game/StartLabel
+@onready var disappear_bloc_notif: Label = $Game/DisappearBlocNotif
 
 func _ready() -> void:
 	ink_layer_j1.custom_viewport = get_node("SplitScreens/Camera1/POV1")
@@ -13,4 +15,6 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("StopGame"):
-		jeu._onPartieTimerTimeout()
+		start_label.visible = false
+		disappear_bloc_notif.visible = false
+		jeu.onPartieTimerTimeout()

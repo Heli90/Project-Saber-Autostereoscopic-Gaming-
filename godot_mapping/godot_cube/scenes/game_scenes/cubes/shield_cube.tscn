@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://b2scygnmuljbm"]
 
-[ext_resource type="Script" uid="uid://bd8ommpqd8om2" path="res://scripts/game_scenes/shield_cube.gd" id="1_uyaws"]
+[ext_resource type="Script" uid="uid://bd8ommpqd8om2" path="res://scripts/game_scenes/cubes/shield_cube.gd" id="1_uyaws"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3rv7k"]
 resource_name = "Material"

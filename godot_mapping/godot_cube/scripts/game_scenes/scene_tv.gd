@@ -120,7 +120,7 @@ func _physics_process(_delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("StopGame"):
-		jeu._onPartieTimerTimeout()
+		jeu.onPartieTimerTimeout()
 	if event.is_action_pressed("Invert_views_J1"):
 		if textureRect:
 			var invert = textureRect.material.get_shader_parameter("invertViews")

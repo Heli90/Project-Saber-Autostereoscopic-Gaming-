@@ -6,7 +6,6 @@
 [ext_resource type="Script" uid="uid://crmbnc6adwn05" path="res://scripts/sound/audio_control.gd" id="4_8ln24"]
 [ext_resource type="FontFile" uid="uid://crtikirivhq6o" path="res://addons/assets/TextFontBold.otf" id="4_oa1go"]
 [ext_resource type="AudioStream" uid="uid://bqjkoeah1m37j" path="res://addons/sfx/main_menu_music.mp3" id="5_1hnlc"]
-[ext_resource type="Script" uid="uid://ct883kqsjhjbs" path="res://scripts/menus/light_menu.gd" id="7_oa1go"]
 [ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="8_tbmy8"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fu7sn"]
@@ -48,18 +47,6 @@ texture = ExtResource("2_bqqt6")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3wgol"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_engjn"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6h3lr"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dj67d"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6vcge"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ip0br"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xyero"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5pajh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1acrt"]
@@ -70,33 +57,15 @@ texture = ExtResource("2_bqqt6")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vr8o3"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tcusk"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1hnlc"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4puye"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_euy4r"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q13xq"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bre17"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u43bj"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bh4e2"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jvjdd"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yxnar"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eku7s"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c6nra"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qw82i"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1468l"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_01xyg"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_764ux"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wadof"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b4jiv"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3w8rc"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tbmy8"]
 
@@ -130,13 +99,6 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
-
-[node name="LightMenu" type="DirectionalLight2D" parent="." unique_id=1067246271]
-color = Color(0.78431374, 0.7372549, 0.7372549, 1)
-script = ExtResource("7_oa1go")
-intensite_min = 0.1
-intensite_max = 0.5
-vitesse = 0.2
 
 [node name="BGMenu" type="Panel" parent="." unique_id=1631550041]
 layout_mode = 1
@@ -315,23 +277,6 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_1dfpl")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
 text = "2 Joueurs (TV)"
 
-[node name="ResetScoreButton" type="Button" parent="ModeButtons" unique_id=239439523]
-layout_mode = 0
-offset_left = 243.0
-offset_top = 180.0
-offset_right = 943.0
-offset_bottom = 220.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_rtw2f")
-theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxEmpty_engjn")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_6h3lr")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_dj67d")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_6vcge")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_ip0br")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_xyero")
-text = "Réinitialiser le meilleur score"
-
 [node name="BackButton" type="Button" parent="ModeButtons" unique_id=673599691]
 custom_minimum_size = Vector2(0, 127)
 layout_mode = 0
@@ -350,99 +295,71 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_vr8o3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
 text = "Menu Principal"
 
-[node name="ResetScorePage" type="Panel" parent="." unique_id=1707576962]
-layout_mode = 0
-offset_left = 350.0
-offset_top = 400.0
-offset_right = 1550.0
-offset_bottom = 1000.0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_tcusk")
-
-[node name="Message" type="Label" parent="ResetScorePage" unique_id=449690581]
-layout_mode = 0
-offset_left = 12.0
-offset_top = -30.0
-offset_right = 1215.0
-offset_bottom = 93.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_rtw2f")
-theme_override_font_sizes/font_size = 60
-text = "Voulez-vous vraiment réinitialiser
-le meilleur score ?"
-horizontal_alignment = 1
-
-[node name="NoButton" type="Button" parent="ResetScorePage" unique_id=1655383089]
-layout_mode = 0
-offset_left = 80.0
-offset_top = 200.0
-offset_right = 284.0
-offset_bottom = 280.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_rtw2f")
-theme_override_font_sizes/font_size = 80
-theme_override_styles/normal = SubResource("StyleBoxEmpty_4puye")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_q13xq")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_u43bj")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_jvjdd")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_yxnar")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_eku7s")
-text = "Non"
-
-[node name="YesButton" type="Button" parent="ResetScorePage" unique_id=1015754109]
-layout_mode = 0
-offset_left = 960.0
-offset_top = 200.0
-offset_right = 1123.0
-offset_bottom = 280.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_rtw2f")
-theme_override_font_sizes/font_size = 80
-theme_override_styles/normal = SubResource("StyleBoxEmpty_c6nra")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_qw82i")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_1468l")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_01xyg")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_764ux")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_wadof")
-text = "Oui"
-
-[node name="ValidationScorePage" type="Panel" parent="." unique_id=610365997]
+[node name="NameInputPage" type="Panel" parent="." unique_id=1209436454]
 layout_mode = 0
 offset_left = 359.0
-offset_top = 294.0
-offset_right = 1615.0
-offset_bottom = 1042.0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_b4jiv")
+offset_top = 254.0
+offset_right = 1559.0
+offset_bottom = 1010.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_1hnlc")
 
-[node name="Message" type="Label" parent="ValidationScorePage" unique_id=1200760520]
+[node name="Message" type="Label" parent="NameInputPage" unique_id=88871952]
 layout_mode = 0
-offset_left = 204.0
-offset_top = 209.0
-offset_right = 1015.0
-offset_bottom = 332.0
+offset_left = 217.5
+offset_right = 984.5
+offset_bottom = 51.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_oa1go")
+theme_override_font_sizes/font_size = 50
+text = "Inscription au classement"
+
+[node name="NomJ1" type="LineEdit" parent="NameInputPage" unique_id=1965329947]
+layout_mode = 0
+offset_left = 397.5
+offset_top = 200.0
+offset_right = 790.5
+offset_bottom = 248.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_rtw2f")
-theme_override_font_sizes/font_size = 60
-text = "Le meilleur score a bien
-été réinitialisé."
-horizontal_alignment = 1
+theme_override_font_sizes/font_size = 40
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_euy4r")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bre17")
+placeholder_text = "Nom du joueur 1"
+alignment = 1
+expand_to_text_length = true
 
-[node name="BackButton" type="Button" parent="ValidationScorePage" unique_id=1647429323]
-custom_minimum_size = Vector2(0, 127)
+[node name="NomJ2" type="LineEdit" parent="NameInputPage" unique_id=1924475648]
 layout_mode = 0
-offset_left = 199.0
-offset_top = 430.0
-offset_right = 999.0
-offset_bottom = 557.0
+offset_left = 397.5
+offset_top = 400.0
+offset_right = 782.5
+offset_bottom = 440.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_rtw2f")
-theme_override_font_sizes/font_size = 60
-theme_override_styles/normal = SubResource("StyleBoxEmpty_5pajh")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_1acrt")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_j7ex8")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_a8gd2")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_vr8o3")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_bh4e2")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_3w8rc")
+placeholder_text = "Nom du joueur 2"
+alignment = 1
+expand_to_text_length = true
+
+[node name="InscriptionButton" type="Button" parent="NameInputPage" unique_id=1360852244]
+layout_mode = 0
+offset_left = 365.5
+offset_top = 600.0
+offset_right = 817.5
+offset_bottom = 680.0
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("4_oa1go")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5dd4i")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_svtp6")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_lgwnu")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_flqon")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_1dfpl")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
-text = "Continuer"
+text = "S'inscrire"
 
 [node name="Options" type="Panel" parent="." unique_id=708263686]
 layout_mode = 1
@@ -693,11 +610,8 @@ text = "Menu Principal"
 [connection signal="pressed" from="MainButtons/QuitButton" to="." method="_onQuitButton_pressed"]
 [connection signal="pressed" from="ModeButtons/PCButton" to="." method="_onPCButton_pressed"]
 [connection signal="pressed" from="ModeButtons/TVButton" to="." method="_onTVButton_pressed"]
-[connection signal="pressed" from="ModeButtons/ResetScoreButton" to="." method="_onResetScoreButton_pressed"]
 [connection signal="pressed" from="ModeButtons/BackButton" to="." method="_onBackButton_pressed"]
-[connection signal="pressed" from="ResetScorePage/NoButton" to="." method="_onNoButton_pressed"]
-[connection signal="pressed" from="ResetScorePage/YesButton" to="." method="_onYesButton_pressed"]
-[connection signal="pressed" from="ValidationScorePage/BackButton" to="." method="_onBackButton_pressed"]
+[connection signal="pressed" from="NameInputPage/InscriptionButton" to="." method="_onInscriptionButton_pressed"]
 [connection signal="pressed" from="Options/BackButton" to="." method="_onBackButton_pressed"]
 [connection signal="value_changed" from="Options/MusicControl" to="Options/MusicControl" method="_onValueChanged"]
 [connection signal="value_changed" from="Options/SFXControl" to="Options/SFXControl" method="_onValueChanged"]

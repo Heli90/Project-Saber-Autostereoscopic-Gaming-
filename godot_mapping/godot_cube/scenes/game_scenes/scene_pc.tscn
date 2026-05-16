@@ -36,16 +36,13 @@ script = ExtResource("3_n86lu")
 
 [node name="ScoresPanel" type="Control" parent="SplitScreens/Camera1/POV1/ScoreUI" unique_id=404103565]
 layout_mode = 3
-anchors_preset = 3
-anchor_left = 1.0
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -195.0
+offset_left = 50.0
 offset_top = -130.0
-offset_right = -108.0
+offset_right = 137.0
 offset_bottom = -53.0
-grow_horizontal = 0
 grow_vertical = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="SplitScreens/Camera1/POV1/ScoreUI/ScoresPanel" unique_id=369112171]

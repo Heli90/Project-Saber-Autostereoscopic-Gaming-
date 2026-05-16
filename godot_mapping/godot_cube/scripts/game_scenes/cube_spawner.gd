@@ -231,7 +231,7 @@ func StrikedClassicCube(i: int) -> void:
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 1000
 	score_uis[i].ajouter_score(gain)
-	score_uis[i+2].ajouter_score(gain)
+	if mode: score_uis[i+2].ajouter_score(gain)
 
 func MissedClassicCube(i: int) -> void:
 	if shield_actif[i] > 0:
@@ -249,21 +249,21 @@ func StrikedBonusCube(i: int) -> void:
 	multiplicateur[i] *= 2
 	count_bonus_time[i] = true
 	score_uis[i].ajouter_score(gain)
-	score_uis[i+2].ajouter_score(gain)
+	if mode: score_uis[i+2].ajouter_score(gain)
 
 func StrikedBombCube(i: int) -> void:
 	stocked_combo[i] = 0
 	var gain = -500
 	multiplicateur[i] = 1
 	score_uis[i].ajouter_score(gain)
-	score_uis[i+2].ajouter_score(gain)
+	if mode: score_uis[i+2].ajouter_score(gain)
 
 func StrikedDisappearCube(i: int) -> void:
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 15000
 	multiplicateur[i] *= 2
 	score_uis[i].ajouter_score(gain)
-	score_uis[i+2].ajouter_score(gain)
+	if mode: score_uis[i+2].ajouter_score(gain)
 	disappear_bloc_notif.visible = true
 	await get_tree().create_timer(1.0).timeout
 	disappear_bloc_notif.visible = false
@@ -272,7 +272,7 @@ func StrikedSplashCube(i: int) -> void:
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 1000
 	score_uis[i].ajouter_score(gain)
-	score_uis[i+2].ajouter_score(gain)
+	if mode: score_uis[i+2].ajouter_score(gain)
 	ink_overlay[i].trigger_ink()
 
 func StrikedShieldCube(i: int) -> void:
@@ -286,7 +286,7 @@ func StrikedShieldCube(i: int) -> void:
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 1000
 	score_uis[i].ajouter_score(gain)
-	score_uis[i+2].ajouter_score(gain)
+	if mode: score_uis[i+2].ajouter_score(gain)
 
 func _onStrikedClassicCube_j1() -> void:
 	StrikedClassicCube(0)

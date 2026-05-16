@@ -54,14 +54,14 @@ static func split_landmarks(builder: MediaPipeGraphBuilder, splits: Array) -> Me
 	var node := builder.add_node("SplitNormalizedLandmarkListCalculator")
 	var options := MediaPipeProto.new()
 	options.initialize("mediapipe.SplitVectorCalculatorOptions")
-	var ranges: Array[MediaPipeProto] = []
-	for range: Array in splits:
+	var mediapipe_ranges: Array[MediaPipeProto] = []
+	for mediapipe_range: Array in splits:
 		var proto := MediaPipeProto.new()
 		proto.initialize("mediapipe.Range")
-		proto.set_field("begin", range[0])
-		proto.set_field("end", range[1])
-		ranges.push_back(proto)
-	options.set_field("ranges", ranges)
+		proto.set_field("begin", mediapipe_range[0])
+		proto.set_field("end", mediapipe_range[1])
+		mediapipe_ranges.push_back(proto)
+	options.set_field("ranges", mediapipe_ranges)
 	options.set_field("combine_outputs", true)
 	node.set_options(options)
 	return node

@@ -156,15 +156,6 @@ metadata/_edit_use_anchors_ = true
 
 [node name="GameEnding" parent="HUD" unique_id=1703583179 instance=ExtResource("3_0hq27")]
 
-[node name="Countdown" type="Label" parent="HUD" unique_id=358459756]
-offset_left = 940.0
-offset_top = 500.0
-offset_right = 980.0
-offset_bottom = 551.0
-theme_override_colors/font_color = Color(0, 1, 0, 1)
-theme_override_fonts/font = ExtResource("4_nljp5")
-theme_override_font_sizes/font_size = 50
-
 [node name="CubeSpawner" type="Node3D" parent="." unique_id=1438072240]
 script = ExtResource("5_32rft")
 classic_bloc = ExtResource("6_nmqw8")

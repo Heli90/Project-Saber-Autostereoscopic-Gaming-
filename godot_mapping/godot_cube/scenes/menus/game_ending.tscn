@@ -13,6 +13,10 @@ shader_parameter/brightness = 1.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v4r4p"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nvk6s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_03p8x"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vtr1r"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a1ndm"]
@@ -24,8 +28,6 @@ shader_parameter/brightness = 1.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_reqs4"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7s4e5"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nvk6s"]
 
 [node name="GameEnding" type="ColorRect" unique_id=1703583179]
 process_mode = 3
@@ -58,15 +60,94 @@ stream = ExtResource("3_cplju")
 volume_db = -10.0
 bus = &"SFX"
 
+[node name="TextContent" type="Panel" parent="." unique_id=1345494473]
+layout_mode = 0
+offset_right = 960.0
+offset_bottom = 1080.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_nvk6s")
+
+[node name="EndingTitle" type="Label" parent="TextContent" unique_id=1247116286]
+layout_mode = 0
+offset_left = 40.5
+offset_top = 100.0
+offset_right = 919.5
+offset_bottom = 260.0
+size_flags_horizontal = 4
+size_flags_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 5
+theme_override_fonts/font = ExtResource("4_vicg1")
+theme_override_font_sizes/font_size = 100
+text = "Fin de la partie"
+vertical_alignment = 1
+
+[node name="EndingMessage" type="Label" parent="TextContent" unique_id=62404960]
+layout_mode = 0
+offset_left = 55.0
+offset_top = 350.0
+offset_right = 905.0
+offset_bottom = 473.0
+theme_override_fonts/font = ExtResource("5_ahjpl")
+theme_override_font_sizes/font_size = 60
+text = "Merci à vous
+d'avoir joué à notre jeu !"
+horizontal_alignment = 1
+
+[node name="BestPlayerMessage" type="Label" parent="TextContent" unique_id=1497782220]
+layout_mode = 0
+offset_left = 166.0
+offset_top = 650.0
+offset_right = 794.0
+offset_bottom = 701.0
+theme_override_fonts/font = ExtResource("5_ahjpl")
+theme_override_font_sizes/font_size = 50
+text = "Gagnant de la partie :"
+
+[node name="BestPlayerText" type="Label" parent="TextContent" unique_id=1640638100]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 725.0
+offset_right = 880.0
+offset_bottom = 785.0
+theme_override_fonts/font = ExtResource("5_ahjpl")
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Leaderboard" type="Panel" parent="." unique_id=894185344]
+layout_mode = 0
+offset_left = 960.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_03p8x")
+
+[node name="Label" type="Label" parent="Leaderboard" unique_id=531535979]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_ahjpl")
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="BackToMenuButton" type="Button" parent="." unique_id=1809133203]
+process_mode = 3
 custom_minimum_size = Vector2(0, 127)
 layout_mode = 0
-offset_left = 580.0
-offset_top = 833.5
-offset_right = 1380.0
-offset_bottom = 960.5
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("5_ahjpl")
+offset_left = 212.5
+offset_top = 850.0
+offset_right = 747.5
+offset_bottom = 977.0
+theme_override_fonts/font = ExtResource("4_vicg1")
 theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxEmpty_vtr1r")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_a1ndm")
@@ -76,60 +157,4 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_reqs4")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_7s4e5")
 text = "Menu Principal"
 
-[node name="TextContent" type="Panel" parent="." unique_id=1345494473]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_nvk6s")
-
-[node name="EndingTitle" type="Label" parent="TextContent" unique_id=1247116286]
-layout_mode = 0
-offset_left = 270.0
-offset_top = 150.0
-offset_right = 1678.0
-offset_bottom = 310.0
-size_flags_horizontal = 4
-size_flags_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-theme_override_constants/shadow_offset_y = 5
-theme_override_fonts/font = ExtResource("4_vicg1")
-theme_override_font_sizes/font_size = 160
-text = "Fin de la partie"
-vertical_alignment = 1
-
-[node name="EndingMessage" type="Label" parent="TextContent" unique_id=62404960]
-layout_mode = 0
-offset_left = 314.0
-offset_top = 414.0
-offset_right = 1625.0
-offset_bottom = 474.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("5_ahjpl")
-theme_override_font_sizes/font_size = 60
-text = "Merci à vous d'avoir joué à notre jeu !"
-
-[node name="EndingScore" type="Label" parent="TextContent" unique_id=1497782220]
-layout_mode = 0
-offset_left = 580.0
-offset_top = 600.0
-offset_right = 1222.0
-offset_bottom = 660.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("5_ahjpl")
-theme_override_font_sizes/font_size = 60
-text = "Score Final :         0"
-
-[node name="EndingBestScore" type="Label" parent="TextContent" unique_id=1640638100]
-layout_mode = 0
-offset_left = 215.0
-offset_top = 720.0
-offset_right = 1222.0
-offset_bottom = 780.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("5_ahjpl")
-theme_override_font_sizes/font_size = 60
-text = "Meilleur score actuel :         0"
-
-[connection signal="pressed" from="BackToMenuButton" to="." method="_onBackButton_pressed"]
 [connection signal="pressed" from="BackToMenuButton" to="." method="_onBackToMenuButton_pressed"]

@@ -192,6 +192,10 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 **Van-Kévin :**
 - Calibration des sabres en adéquation avec la séparation du flux caméra.
 - Ajout d'un cube jettant de l'encre sur la caméra du joueur qui l'a frappé et d'un cube donnant un bouclier protégeant le joueur, faisant en sorte qu'il ne perde pas de multiplicateur de score s'il rate au maximum 5 cubes classiques pendant 10 secondes. Ajout visuel du bouclier.
+- Correction du bug de superposition des scores de chaque joueur en mode TV.
+- Ajout d'un effet visuel de destruction progressive du bouclier à mesure que des cubes sont ratés.
+- Ajout d'un leaderboard fonctionnel enregistrant les noms et les scores associés et d'une page avant le début du jeu en mode TV permettant d'enregistrer les noms de chaque joueur. S'il n'y a pas de noms inscrits, les scores ne sont pas enregistrés.
+- Suppression de l'effet de lumière sur le menu principal, qui servait à faire des tests.
 
 ### Séance 13 - 27/05
 
