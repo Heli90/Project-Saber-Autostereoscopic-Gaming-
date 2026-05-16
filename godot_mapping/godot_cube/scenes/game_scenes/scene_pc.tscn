@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://k24etkqcny5a" path="res://scripts/game_scenes/scene_pc.gd" id="1_4ivkf"]
 [ext_resource type="PackedScene" uid="uid://br2jmvjla4guc" path="res://scenes/game_scenes/joueur.tscn" id="2_wbbwd"]
 [ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="3_d2mly"]
+[ext_resource type="Script" uid="uid://c4nxreh0k2je7" path="res://scripts/game_scenes/score_ui.gd" id="3_n86lu"]
+[ext_resource type="FontFile" uid="uid://bulj5s2rcjc7b" path="res://addons/assets/BAHNSCHRIFT.TTF" id="4_6ic0p"]
 
 [node name="PC" type="Node3D" unique_id=1088143800]
 script = ExtResource("1_4ivkf")
@@ -29,6 +31,52 @@ render_target_update_mode = 4
 [node name="J1" parent="SplitScreens/Camera1/POV1" unique_id=1529862946 instance=ExtResource("2_wbbwd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 15)
 
+[node name="ScoreUI" type="CanvasLayer" parent="SplitScreens/Camera1/POV1" unique_id=663973903]
+script = ExtResource("3_n86lu")
+
+[node name="ScoresPanel" type="Control" parent="SplitScreens/Camera1/POV1/ScoreUI" unique_id=404103565]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -195.0
+offset_top = -130.0
+offset_right = -108.0
+offset_bottom = -53.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SplitScreens/Camera1/POV1/ScoreUI/ScoresPanel" unique_id=369112171]
+layout_mode = 0
+offset_right = 87.0
+offset_bottom = 77.0
+
+[node name="Titre" type="Label" parent="SplitScreens/Camera1/POV1/ScoreUI/ScoresPanel/VBoxContainer" unique_id=1976530660]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_6ic0p")
+theme_override_font_sizes/font_size = 18
+text = "♢ Score total ♢"
+
+[node name="Score" type="Label" parent="SplitScreens/Camera1/POV1/ScoreUI/ScoresPanel/VBoxContainer" unique_id=1344968888]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_6ic0p")
+theme_override_font_sizes/font_size = 52
+text = "0"
+
+[node name="GainScore" type="Label" parent="SplitScreens/Camera1/POV1/ScoreUI/ScoresPanel" unique_id=686905897]
+visible = false
+layout_mode = 0
+offset_top = 80.0
+offset_right = 87.0
+offset_bottom = 109.0
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_6ic0p")
+theme_override_font_sizes/font_size = 28
+text = "+0"
+
 [node name="Camera2" type="SubViewportContainer" parent="SplitScreens" unique_id=859538132]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -43,6 +91,52 @@ render_target_update_mode = 4
 [node name="J2" parent="SplitScreens/Camera2/POV2" unique_id=1697962834 instance=ExtResource("2_wbbwd")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1, -15)
 player_id = 2
+
+[node name="ScoreUI" type="CanvasLayer" parent="SplitScreens/Camera2/POV2" unique_id=411637049]
+script = ExtResource("3_n86lu")
+
+[node name="ScoresPanel" type="Control" parent="SplitScreens/Camera2/POV2/ScoreUI" unique_id=237952816]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -195.0
+offset_top = -130.0
+offset_right = -108.0
+offset_bottom = -53.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SplitScreens/Camera2/POV2/ScoreUI/ScoresPanel" unique_id=1190591869]
+layout_mode = 0
+offset_right = 87.0
+offset_bottom = 77.0
+
+[node name="Titre" type="Label" parent="SplitScreens/Camera2/POV2/ScoreUI/ScoresPanel/VBoxContainer" unique_id=197113311]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_6ic0p")
+theme_override_font_sizes/font_size = 18
+text = "♢ Score total ♢"
+
+[node name="Score" type="Label" parent="SplitScreens/Camera2/POV2/ScoreUI/ScoresPanel/VBoxContainer" unique_id=854144098]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_6ic0p")
+theme_override_font_sizes/font_size = 52
+text = "0"
+
+[node name="GainScore" type="Label" parent="SplitScreens/Camera2/POV2/ScoreUI/ScoresPanel" unique_id=199450583]
+visible = false
+layout_mode = 0
+offset_top = 80.0
+offset_right = 87.0
+offset_bottom = 109.0
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_6ic0p")
+theme_override_font_sizes/font_size = 28
+text = "+0"
 
 [node name="Game" parent="." unique_id=1026699542 instance=ExtResource("3_d2mly")]
 

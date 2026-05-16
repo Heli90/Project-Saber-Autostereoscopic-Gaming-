@@ -2,8 +2,10 @@
 
 [ext_resource type="Script" uid="uid://v4jt0cyocs3e" path="res://scripts/game_scenes/scene_tv.gd" id="1_xlecp"]
 [ext_resource type="PackedScene" uid="uid://br2jmvjla4guc" path="res://scenes/game_scenes/joueur.tscn" id="2_rfm68"]
+[ext_resource type="Script" uid="uid://c4nxreh0k2je7" path="res://scripts/game_scenes/score_ui.gd" id="3_k5d3u"]
 [ext_resource type="FontFile" uid="uid://bd4geqghtkj13" path="res://addons/assets/TextFontBase.ttf" id="3_llrkf"]
 [ext_resource type="Shader" uid="uid://vno46ensk36y" path="res://shaders/generation_image.gdshader" id="4_wdlj1"]
+[ext_resource type="FontFile" uid="uid://bulj5s2rcjc7b" path="res://addons/assets/BAHNSCHRIFT.TTF" id="4_yqxl7"]
 [ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="6_qo1rj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6c3ax"]
@@ -50,6 +52,52 @@ transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.939
 current = true
 fov = 90.0
 
+[node name="ScoreUI" type="CanvasLayer" parent="J1/CameraControllerFPS/Vue1" unique_id=1310535311]
+script = ExtResource("3_k5d3u")
+
+[node name="ScoresPanel" type="Control" parent="J1/CameraControllerFPS/Vue1/ScoreUI" unique_id=717564841]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -195.0
+offset_top = -130.0
+offset_right = -108.0
+offset_bottom = -53.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="J1/CameraControllerFPS/Vue1/ScoreUI/ScoresPanel" unique_id=1225288847]
+layout_mode = 0
+offset_right = 87.0
+offset_bottom = 77.0
+
+[node name="Titre" type="Label" parent="J1/CameraControllerFPS/Vue1/ScoreUI/ScoresPanel/VBoxContainer" unique_id=507906096]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_font_sizes/font_size = 18
+text = "♢ Score total ♢"
+
+[node name="Score" type="Label" parent="J1/CameraControllerFPS/Vue1/ScoreUI/ScoresPanel/VBoxContainer" unique_id=425971154]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_font_sizes/font_size = 52
+text = "0"
+
+[node name="GainScore" type="Label" parent="J1/CameraControllerFPS/Vue1/ScoreUI/ScoresPanel" unique_id=747343459]
+visible = false
+layout_mode = 0
+offset_top = 80.0
+offset_right = 87.0
+offset_bottom = 109.0
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_font_sizes/font_size = 28
+text = "+0"
+
 [node name="Vue2" type="SubViewport" parent="J1/CameraControllerFPS" parent_id_path=PackedInt32Array(1529862946, 718035250) index="4" unique_id=86739324]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
@@ -58,6 +106,52 @@ size = Vector2i(1920, 1080)
 transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0.03, 2.25, 15.3)
 current = true
 fov = 90.0
+
+[node name="ScoreUI" type="CanvasLayer" parent="J1/CameraControllerFPS/Vue2" unique_id=1098010347]
+script = ExtResource("3_k5d3u")
+
+[node name="ScoresPanel" type="Control" parent="J1/CameraControllerFPS/Vue2/ScoreUI" unique_id=1521300480]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -195.0
+offset_top = -130.0
+offset_right = -108.0
+offset_bottom = -53.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="J1/CameraControllerFPS/Vue2/ScoreUI/ScoresPanel" unique_id=416247984]
+layout_mode = 0
+offset_right = 87.0
+offset_bottom = 77.0
+
+[node name="Titre" type="Label" parent="J1/CameraControllerFPS/Vue2/ScoreUI/ScoresPanel/VBoxContainer" unique_id=1409903511]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_font_sizes/font_size = 18
+text = "♢ Score total ♢"
+
+[node name="Score" type="Label" parent="J1/CameraControllerFPS/Vue2/ScoreUI/ScoresPanel/VBoxContainer" unique_id=1387099689]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_font_sizes/font_size = 52
+text = "0"
+
+[node name="GainScore" type="Label" parent="J1/CameraControllerFPS/Vue2/ScoreUI/ScoresPanel" unique_id=277623904]
+visible = false
+layout_mode = 0
+offset_top = 80.0
+offset_right = 87.0
+offset_bottom = 109.0
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_font_sizes/font_size = 28
+text = "+0"
 
 [node name="J2" parent="." unique_id=890448322 instance=ExtResource("2_rfm68")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1, -15)
@@ -84,6 +178,52 @@ transform = Transform3D(-1, 2.990035e-08, -8.2150535e-08, 0, 0.9396926, 0.342020
 current = true
 fov = 90.0
 
+[node name="ScoreUI" type="CanvasLayer" parent="J2/CameraControllerFPS/Vue5" unique_id=422092659]
+script = ExtResource("3_k5d3u")
+
+[node name="ScoresPanel" type="Control" parent="J2/CameraControllerFPS/Vue5/ScoreUI" unique_id=219782711]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -195.0
+offset_top = -130.0
+offset_right = -108.0
+offset_bottom = -53.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="J2/CameraControllerFPS/Vue5/ScoreUI/ScoresPanel" unique_id=1518533787]
+layout_mode = 0
+offset_right = 87.0
+offset_bottom = 77.0
+
+[node name="Titre" type="Label" parent="J2/CameraControllerFPS/Vue5/ScoreUI/ScoresPanel/VBoxContainer" unique_id=210582099]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_font_sizes/font_size = 18
+text = "♢ Score total ♢"
+
+[node name="Score" type="Label" parent="J2/CameraControllerFPS/Vue5/ScoreUI/ScoresPanel/VBoxContainer" unique_id=473311429]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_font_sizes/font_size = 52
+text = "0"
+
+[node name="GainScore" type="Label" parent="J2/CameraControllerFPS/Vue5/ScoreUI/ScoresPanel" unique_id=2095187334]
+visible = false
+layout_mode = 0
+offset_top = 80.0
+offset_right = 87.0
+offset_bottom = 109.0
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_font_sizes/font_size = 28
+text = "+0"
+
 [node name="Vue6" type="SubViewport" parent="J2/CameraControllerFPS" parent_id_path=PackedInt32Array(890448322, 718035250) index="4" unique_id=1893834835]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
@@ -92,6 +232,52 @@ size = Vector2i(1920, 1080)
 transform = Transform3D(-1, 2.990035e-08, -8.2150535e-08, 0, 0.9396926, 0.34202012, 8.742278e-08, 0.34202012, -0.9396926, 0.029999973, 2.25, -15.3)
 current = true
 fov = 90.0
+
+[node name="ScoreUI" type="CanvasLayer" parent="J2/CameraControllerFPS/Vue6" unique_id=580929518]
+script = ExtResource("3_k5d3u")
+
+[node name="ScoresPanel" type="Control" parent="J2/CameraControllerFPS/Vue6/ScoreUI" unique_id=753238388]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -195.0
+offset_top = -130.0
+offset_right = -108.0
+offset_bottom = -53.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="J2/CameraControllerFPS/Vue6/ScoreUI/ScoresPanel" unique_id=1777893473]
+layout_mode = 0
+offset_right = 87.0
+offset_bottom = 77.0
+
+[node name="Titre" type="Label" parent="J2/CameraControllerFPS/Vue6/ScoreUI/ScoresPanel/VBoxContainer" unique_id=672996639]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_font_sizes/font_size = 18
+text = "♢ Score total ♢"
+
+[node name="Score" type="Label" parent="J2/CameraControllerFPS/Vue6/ScoreUI/ScoresPanel/VBoxContainer" unique_id=1071463258]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_font_sizes/font_size = 52
+text = "0"
+
+[node name="GainScore" type="Label" parent="J2/CameraControllerFPS/Vue6/ScoreUI/ScoresPanel" unique_id=1883996998]
+visible = false
+layout_mode = 0
+offset_top = 80.0
+offset_right = 87.0
+offset_bottom = 109.0
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_font_sizes/font_size = 28
+text = "+0"
 
 [node name="Vue3" type="SubViewport" parent="." unique_id=1959630340]
 handle_input_locally = false

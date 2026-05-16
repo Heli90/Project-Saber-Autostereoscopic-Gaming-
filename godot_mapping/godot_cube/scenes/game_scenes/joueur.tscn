@@ -3,8 +3,6 @@
 [ext_resource type="Script" uid="uid://b0rkh0yudekot" path="res://scripts/game_scenes/joueur.gd" id="1_2d0qe"]
 [ext_resource type="Shader" uid="uid://16x0vyqccqsm" path="res://shaders/RedLightSaber.gdshader" id="2_m2kkv"]
 [ext_resource type="Shader" uid="uid://btaca6t73joba" path="res://shaders/BlueLightSaber.gdshader" id="2_smcp5"]
-[ext_resource type="FontFile" uid="uid://bulj5s2rcjc7b" path="res://addons/assets/BAHNSCHRIFT.TTF" id="3_ks3j3"]
-[ext_resource type="Script" uid="uid://c4nxreh0k2je7" path="res://scripts/game_scenes/score_ui.gd" id="3_sii43"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3w8f1"]
 render_priority = 0
@@ -67,49 +65,3 @@ surface_material_override/0 = SubResource("ShaderMaterial_m2kkv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RightSaber" unique_id=43584893]
 shape = SubResource("CapsuleShape3D_smcp5")
-
-[node name="ScoreUI" type="CanvasLayer" parent="." unique_id=726584586]
-script = ExtResource("3_sii43")
-
-[node name="ScoresPanel" type="Control" parent="ScoreUI" unique_id=1616546555]
-layout_mode = 3
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -195.0
-offset_top = -130.0
-offset_right = -108.0
-offset_bottom = -53.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ScoreUI/ScoresPanel" unique_id=672042821]
-layout_mode = 0
-offset_right = 87.0
-offset_bottom = 77.0
-
-[node name="Titre" type="Label" parent="ScoreUI/ScoresPanel/VBoxContainer" unique_id=681095785]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_ks3j3")
-theme_override_font_sizes/font_size = 18
-text = "♢ Score total ♢"
-
-[node name="Score" type="Label" parent="ScoreUI/ScoresPanel/VBoxContainer" unique_id=1882216061]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_ks3j3")
-theme_override_font_sizes/font_size = 52
-text = "0"
-
-[node name="GainScore" type="Label" parent="ScoreUI/ScoresPanel" unique_id=1349928299]
-visible = false
-layout_mode = 0
-offset_top = 80.0
-offset_right = 87.0
-offset_bottom = 109.0
-theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_ks3j3")
-theme_override_font_sizes/font_size = 28
-text = "+0"

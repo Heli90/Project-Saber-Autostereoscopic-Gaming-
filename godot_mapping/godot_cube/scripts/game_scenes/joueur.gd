@@ -5,7 +5,6 @@ const JUMP_VELOCITY: float = 4.5
 @export var player_id = 1
 @onready var camera_fps: Camera3D = $CameraControllerFPS/Camera
 @onready var camera_controller_fps: Node3D = $CameraControllerFPS
-@onready var score_ui : CanvasLayer = $ScoreUI
 @onready var left_saber : Area3D = $LeftSaber
 @onready var right_saber : Area3D = $RightSaber
 @onready var left_saber_mesh : MeshInstance3D = $LeftSaber/MeshInstance3D

@@ -16,7 +16,7 @@ shader_parameter/MainTex = ExtResource("2_udiqq")
 shader_parameter/NoiseSpeed = Vector2(0, 0.5)
 shader_parameter/NoiseTex = ExtResource("3_udiqq")
 shader_parameter/NoiseParameter = 1.0
-shader_parameter/MaskPower = 2.15
+shader_parameter/MaskPower = -5.0
 
 [sub_resource type="Curve" id="Curve_lfit6"]
 _data = [Vector2(0, 0), 0.0, 22.762207, 0, 0, Vector2(0.146875, 1), 0.0, 0.0, 0, 0, Vector2(0.84687495, 1), 0.0, 0.0, 0, 0, Vector2(0.94999987, 0.50155765), -18.608446, -18.608446, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]

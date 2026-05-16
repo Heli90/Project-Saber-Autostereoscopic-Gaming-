@@ -11,6 +11,8 @@ extends Node3D
 @onready var ink_overlay: Array[Node2D] = [$"../HUD/InkLayerJ1/InkOverlayJ1", $"../HUD/InkLayerJ2/InkOverlayJ2"]
 @onready var shields: Array[GPUParticles3D] = [$"../Map/Boucliers/ShieldJ1", $"../Map/Boucliers/ShieldJ2"]
 
+# Booléen de départ décidant du mode de jeu lancé : false pour le PC, true pour la TV
+var mode: bool = false
 # Booléen de départ pour lancer l'apparition des cubes après le message de départ
 var start_spawn: bool = false
 # Générateur aléatoire de nombres pour tous les tirages aléatoires
@@ -51,11 +53,24 @@ var time_shield_actif: Array[float] = [0.0, 0.0]
 func activation() -> void:
 	j1 = get_node_or_null("../../SplitScreens/Camera1/POV1/J1")
 	j2 = get_node_or_null("../../SplitScreens/Camera2/POV2/J2")
+	var score_j1 = get_node_or_null("../../SplitScreens/Camera1/POV1/ScoreUI")
+	var score_j2 = get_node_or_null("../../SplitScreens/Camera2/POV2/ScoreUI")
+	score_uis.append(score_j1)
+	score_uis.append(score_j2)
+
 	if not j1 and not j2:
+		score_uis = []
+		mode = true
 		j1 = get_node_or_null("../../J1")
 		j2 = get_node_or_null("../../J2")
-	if j1: score_uis.append(j1.score_ui)
-	if j2: score_uis.append(j2.score_ui)
+		var score_j1_vue_1 = get_node_or_null("../../J1/CameraControllerFPS/Vue1/ScoreUI")
+		var score_j1_vue_2 = get_node_or_null("../../J1/CameraControllerFPS/Vue2/ScoreUI")
+		var score_j2_vue_5 = get_node_or_null("../../J2/CameraControllerFPS/Vue5/ScoreUI")
+		var score_j2_vue_6 = get_node_or_null("../../J2/CameraControllerFPS/Vue6/ScoreUI")
+		score_uis.append(score_j1_vue_1)
+		score_uis.append(score_j2_vue_5)
+		score_uis.append(score_j1_vue_2)
+		score_uis.append(score_j2_vue_6)
 	start_spawn = true
 	start_game()
 
@@ -216,10 +231,13 @@ func StrikedClassicCube(i: int) -> void:
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 1000
 	score_uis[i].ajouter_score(gain)
+	score_uis[i+2].ajouter_score(gain)
 
 func MissedClassicCube(i: int) -> void:
 	if shield_actif[i] > 0:
 		shield_actif[i] -= 1
+		var current = shields[i].material_override.get_shader_parameter("MaskPower")
+		shields[i].material_override.set_shader_parameter("MaskPower", current + 2.0)
 	else:
 		multiplicateur[i] = 1
 		stocked_combo[i] = 0
@@ -231,18 +249,21 @@ func StrikedBonusCube(i: int) -> void:
 	multiplicateur[i] *= 2
 	count_bonus_time[i] = true
 	score_uis[i].ajouter_score(gain)
+	score_uis[i+2].ajouter_score(gain)
 
 func StrikedBombCube(i: int) -> void:
 	stocked_combo[i] = 0
 	var gain = -500
 	multiplicateur[i] = 1
 	score_uis[i].ajouter_score(gain)
+	score_uis[i+2].ajouter_score(gain)
 
 func StrikedDisappearCube(i: int) -> void:
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 15000
 	multiplicateur[i] *= 2
 	score_uis[i].ajouter_score(gain)
+	score_uis[i+2].ajouter_score(gain)
 	disappear_bloc_notif.visible = true
 	await get_tree().create_timer(1.0).timeout
 	disappear_bloc_notif.visible = false
@@ -251,16 +272,21 @@ func StrikedSplashCube(i: int) -> void:
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 1000
 	score_uis[i].ajouter_score(gain)
+	score_uis[i+2].ajouter_score(gain)
 	ink_overlay[i].trigger_ink()
 
 func StrikedShieldCube(i: int) -> void:
+	# On initialise la barre de vie, la durée et le visuel du bouclier
 	shields[i].emitting = true
 	shields[i].speed_scale = 1.0
+	shields[i].material_override.set_shader_parameter("MaskPower", -5.0)
 	shield_actif[i] = 5
 	time_shield_actif[i] = 10.0
+
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 1000
 	score_uis[i].ajouter_score(gain)
+	score_uis[i+2].ajouter_score(gain)
 
 func _onStrikedClassicCube_j1() -> void:
 	StrikedClassicCube(0)
