@@ -4,7 +4,7 @@
 > **Pong Saber** est inspiré du jeu en réalité virtuelle Beat Saber. Il se joue à 2 joueurs et l'objectif pour chacun des deux est d'acquérir le meilleur score en jouant une partie d'environ 2 minutes. Au cours de la partie, ils contrôlent chacun 2 sabres via leurs bras et ils doivent frapper le plus de cubes valides possibles qui arrivent sur leur vue respective.
 
 ## Déroulé du jeu
-> On lance une partie en mode PC ou TV selon le périphérique utilisé. Au cours de la partie, voici les mécaniques présentes :
+> On lance une partie en mode TV. Au cours de la partie, voici les mécaniques présentes :
 - Un **spawner de cubes** en format 3x1 au milieu de l'arène entre les 2 joueurs pour faire apparaître les cubes pour qu'ils se dirigent vers l'un des 2 joueurs
 - Un **renvoi de cubes** via l'utilisation de collisions entre les sabres du joueur et les cubes vers l'autre joueur
 - Une **destruction des cubes** à partir d'un certain nombre de bons coups donnés selon certaines conditions

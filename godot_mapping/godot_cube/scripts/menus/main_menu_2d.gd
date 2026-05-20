@@ -3,9 +3,7 @@ extends Control
 @onready var main_buttons: Panel = $MainButtons
 @onready var options: Panel = $Options
 @onready var credits: Panel = $Credits
-@onready var mode_buttons: Panel = $ModeButtons
 @onready var game_name: Label = $GameName
-@onready var name_input_page: Panel = $NameInputPage
 
 @onready var option_button: Button = $MainButtons/OptionButton
 @onready var credit_button: Button = $MainButtons/OptionButton
@@ -17,17 +15,11 @@ extends Control
 @onready var sfx_title: Label = $Options/SFXTitle
 
 @onready var click_sound: AudioStreamPlayer = $ClickSound
-@onready var main_menu_music: AudioStreamPlayer = $MainMenuMusic
-
-@onready var nom_j1: LineEdit = $NameInputPage/NomJ1
-@onready var nom_j2: LineEdit = $NameInputPage/NomJ2
 
 var highest_score: int = 0
-const LEADERBOARD_PATH = "user://leaderboard.cfg"
 
 func _ready() -> void:
 	get_tree().paused = false
-	main_menu_music.play()
 	
 	fondu_noir.modulate.a = 1.0
 	main_buttons.modulate.a = 1.0
@@ -39,8 +31,6 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	options.visible = false
 	credits.visible = false
-	mode_buttons.visible = false
-	name_input_page.visible = false
 	
 	var t = create_tween()
 	t.tween_property(fondu_noir, "modulate:a", 0.0, 0.6)
@@ -101,8 +91,8 @@ func transition(appear_list: Array[Control], disappear_list: Array[Control], bac
 				button.modulate = Color.WHITE
 
 func _onStartButton_pressed() -> void:
-	transition([mode_buttons], [main_buttons, game_name], false)
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	await transition([], [main_buttons, game_name], false)
+	get_tree().change_scene_to_file("res://scenes/menus/tutoriel.tscn")
 
 func _onOptionButton_pressed() -> void:
 	transition([options], [main_buttons, game_name], false)
@@ -113,34 +103,9 @@ func _onQuitButton_pressed() -> void:
 	get_tree().quit()
 
 func _onBackButton_pressed() -> void:
-	transition([main_buttons, game_name], [options, credits, mode_buttons], true)
+	transition([main_buttons, game_name], [options, credits], true)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _onCreditsButton_pressed() -> void:
 	transition([credits], [main_buttons, game_name], false)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-
-func _onPCButton_pressed() -> void:
-	await transition([], [mode_buttons], false)
-	get_tree().change_scene_to_file("res://scenes/game_scenes/scene_pc.tscn")
-
-func _onTVButton_pressed() -> void:
-	transition([name_input_page], [mode_buttons], false)
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-
-func _onInscriptionButton_pressed() -> void:
-	var nom1 = nom_j1.text.strip_edges()
-	var nom2 = nom_j2.text.strip_edges()
-	
-	# Noms par défaut
-	if nom1 == "": nom1 = "Joueur 1"
-	if nom2 == "": nom2 = "Joueur 2"
-	
-	var config = ConfigFile.new()
-	config.load(LEADERBOARD_PATH)
-	config.set_value("Joueurs", "Nom_J1", nom1)
-	config.set_value("Joueurs", "Nom_J2", nom2)
-	config.save(LEADERBOARD_PATH)
-	
-	await transition([], [name_input_page], false)
-	get_tree().change_scene_to_file("res://scenes/menus/tutoriel.tscn")

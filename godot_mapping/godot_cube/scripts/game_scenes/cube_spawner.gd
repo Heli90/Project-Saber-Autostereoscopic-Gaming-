@@ -10,7 +10,7 @@ extends Node3D
 @onready var disappear_bloc_notif: Label = $"../DisappearBlocNotif"
 @onready var shields: Array[GPUParticles3D] = [$"../Map/Boucliers/ShieldJ1", $"../Map/Boucliers/ShieldJ2"]
 
-# Booléen de départ décidant du mode de jeu lancé : false pour le PC, true pour la TV
+# Booléen de départ décidant du mode de jeu lancé : false pour le menu, true pour la TV
 var mode: bool = false
 # Booléen de départ pour lancer l'apparition des cubes après le message de départ
 var start_spawn: bool = false
@@ -86,16 +86,19 @@ func activation() -> void:
 		ink_overlay.append(get_node_or_null("../../J2/CameraControllerFPS/Vue6/InkLayerJ2/InkOverlayJ2"))
 	for shield_bar in shield_bars:
 		shield_bar.modulate.a = 0.0
-	start_spawn = true
 	start_game()
 
 func start_game() -> void:
-	start_label.text = "GO !"
+	if mode:
+		start_label.visible = true
+		await get_tree().create_timer(0.5).timeout
+		start_label.text = "GO !"
+		var transition = create_tween()
+		transition.tween_property(start_label, "modulate:a", 0.0, 0.5)
+		await transition.finished
+		start_label.visible = false
+	start_spawn = true
 	generate_shield_bloc()
-	var transition = create_tween()
-	transition.tween_property(start_label, "modulate:a", 0.0, 0.5)
-	await transition.finished
-	start_label.visible = false
 
 func set_speed(bloc: Node3D, direction: int, disappear: bool) -> void:
 	match disappear:

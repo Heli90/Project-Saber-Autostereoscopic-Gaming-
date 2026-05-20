@@ -14,7 +14,7 @@ const TEX_SMALL_MIN = 40
 const TEX_SMALL_MAX = 120
 
 func _ready():
-	# 10 éclaboussures d'encre générées
+	# 30 éclaboussures d'encre générées
 	for i in range(10):
 		var tex_size = randi_range(TEX_MIN, TEX_MAX)
 		ink_texture_list.append(create_ink_texture(tex_size))

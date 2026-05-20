@@ -1,20 +1,21 @@
 [gd_scene format=3 uid="uid://dm0ymj2gw0osm"]
 
-[ext_resource type="Script" uid="uid://k24etkqcny5a" path="res://scripts/game_scenes/scene_pc.gd" id="1_4ivkf"]
-[ext_resource type="PackedScene" uid="uid://br2jmvjla4guc" path="res://scenes/game_scenes/joueur.tscn" id="2_wbbwd"]
-[ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="3_d2mly"]
-[ext_resource type="Script" uid="uid://c4nxreh0k2je7" path="res://scripts/game_scenes/score_ui.gd" id="3_n86lu"]
-[ext_resource type="FontFile" uid="uid://bulj5s2rcjc7b" path="res://addons/assets/BAHNSCHRIFT.TTF" id="4_6ic0p"]
-[ext_resource type="Script" uid="uid://dnfkxpf3p8gki" path="res://scripts/game_scenes/shield_bar.gd" id="5_1js1r"]
-[ext_resource type="Shader" uid="uid://dk5jixryl8es3" path="res://shaders/shield_bar.gdshader" id="5_6ic0p"]
-[ext_resource type="Script" uid="uid://cx3d6alfd6nrm" path="res://scripts/game_scenes/ink_overlay.gd" id="5_8tujb"]
-[ext_resource type="Texture2D" uid="uid://barxo14ju82s8" path="res://addons/assets/shield_icon.png" id="7_fv261"]
+[ext_resource type="Script" uid="uid://k24etkqcny5a" path="res://scripts/menus/main_menu_3d.gd" id="1_l64ht"]
+[ext_resource type="PackedScene" uid="uid://br2jmvjla4guc" path="res://scenes/game_scenes/joueur.tscn" id="2_ohtsu"]
+[ext_resource type="Script" uid="uid://c4nxreh0k2je7" path="res://scripts/game_scenes/score_ui.gd" id="3_hp5ot"]
+[ext_resource type="FontFile" uid="uid://bulj5s2rcjc7b" path="res://addons/assets/BAHNSCHRIFT.TTF" id="4_q7bwt"]
+[ext_resource type="Script" uid="uid://cx3d6alfd6nrm" path="res://scripts/game_scenes/ink_overlay.gd" id="5_dg8ca"]
+[ext_resource type="Script" uid="uid://dnfkxpf3p8gki" path="res://scripts/game_scenes/shield_bar.gd" id="6_tqn45"]
+[ext_resource type="Shader" uid="uid://dk5jixryl8es3" path="res://shaders/shield_bar.gdshader" id="7_favsk"]
+[ext_resource type="Texture2D" uid="uid://barxo14ju82s8" path="res://addons/assets/shield_icon.png" id="8_52ohd"]
+[ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="9_uud71"]
+[ext_resource type="PackedScene" uid="uid://dcjdygsrwf41g" path="res://scenes/menus/main_menu_2d.tscn" id="10_2j4hv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1js1r"]
-shader = ExtResource("5_6ic0p")
+shader = ExtResource("7_favsk")
 
-[node name="PC" type="Node3D" unique_id=1088143800]
-script = ExtResource("1_4ivkf")
+[node name="Menu3D" type="Node3D" unique_id=1088143800]
+script = ExtResource("1_l64ht")
 
 [node name="SplitScreens" type="GridContainer" parent="." unique_id=1978316299]
 anchors_preset = 15
@@ -35,11 +36,11 @@ handle_input_locally = false
 size = Vector2i(958, 1080)
 render_target_update_mode = 4
 
-[node name="J1" parent="SplitScreens/Camera1/POV1" unique_id=1529862946 instance=ExtResource("2_wbbwd")]
+[node name="J1" parent="SplitScreens/Camera1/POV1" unique_id=1529862946 instance=ExtResource("2_ohtsu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 15)
 
 [node name="ScoreUI" type="CanvasLayer" parent="SplitScreens/Camera1/POV1" unique_id=663973903]
-script = ExtResource("3_n86lu")
+script = ExtResource("3_hp5ot")
 
 [node name="ScoresPanel" type="Control" parent="SplitScreens/Camera1/POV1/ScoreUI" unique_id=404103565]
 layout_mode = 3
@@ -59,14 +60,14 @@ offset_bottom = 77.0
 
 [node name="Titre" type="Label" parent="SplitScreens/Camera1/POV1/ScoreUI/ScoresPanel/VBoxContainer" unique_id=1976530660]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_6ic0p")
+theme_override_fonts/font = ExtResource("4_q7bwt")
 theme_override_font_sizes/font_size = 18
 text = "♢ Score total ♢"
 
 [node name="Score" type="Label" parent="SplitScreens/Camera1/POV1/ScoreUI/ScoresPanel/VBoxContainer" unique_id=1344968888]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_fonts/font = ExtResource("4_6ic0p")
+theme_override_fonts/font = ExtResource("4_q7bwt")
 theme_override_font_sizes/font_size = 52
 text = "0"
 
@@ -77,14 +78,14 @@ offset_top = 80.0
 offset_right = 87.0
 offset_bottom = 109.0
 theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_fonts/font = ExtResource("4_6ic0p")
+theme_override_fonts/font = ExtResource("4_q7bwt")
 theme_override_font_sizes/font_size = 28
 text = "+0"
 
 [node name="InkLayerJ1" type="CanvasLayer" parent="SplitScreens/Camera1/POV1" unique_id=452327694]
 
 [node name="InkOverlayJ1" type="Node2D" parent="SplitScreens/Camera1/POV1/InkLayerJ1" unique_id=39505508]
-script = ExtResource("5_8tujb")
+script = ExtResource("5_dg8ca")
 
 [node name="ColorRect" type="ColorRect" parent="SplitScreens/Camera1/POV1/InkLayerJ1/InkOverlayJ1" unique_id=445763455]
 visible = false
@@ -108,7 +109,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("5_1js1r")
+script = ExtResource("6_tqn45")
 
 [node name="Contour" type="ColorRect" parent="SplitScreens/Camera1/POV1/ShieldBar" unique_id=1084313693]
 layout_mode = 0
@@ -147,7 +148,7 @@ offset_top = 815.0
 offset_right = 465.0
 offset_bottom = 986.0
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_fv261")
+texture = ExtResource("8_52ohd")
 
 [node name="ShieldLabel" type="Label" parent="SplitScreens/Camera1/POV1/ShieldBar" unique_id=1861539933]
 custom_minimum_size = Vector2(72, 51)
@@ -157,7 +158,7 @@ offset_top = 860.0
 offset_right = 122.0
 offset_bottom = 911.0
 theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
-theme_override_fonts/font = ExtResource("4_6ic0p")
+theme_override_fonts/font = ExtResource("4_q7bwt")
 theme_override_font_sizes/font_size = 50
 text = "100"
 horizontal_alignment = 1
@@ -174,12 +175,12 @@ handle_input_locally = false
 size = Vector2i(958, 1080)
 render_target_update_mode = 4
 
-[node name="J2" parent="SplitScreens/Camera2/POV2" unique_id=1697962834 instance=ExtResource("2_wbbwd")]
+[node name="J2" parent="SplitScreens/Camera2/POV2" unique_id=1697962834 instance=ExtResource("2_ohtsu")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1, -15)
 player_id = 2
 
 [node name="ScoreUI" type="CanvasLayer" parent="SplitScreens/Camera2/POV2" unique_id=411637049]
-script = ExtResource("3_n86lu")
+script = ExtResource("3_hp5ot")
 
 [node name="ScoresPanel" type="Control" parent="SplitScreens/Camera2/POV2/ScoreUI" unique_id=237952816]
 layout_mode = 3
@@ -202,14 +203,14 @@ offset_bottom = 77.0
 
 [node name="Titre" type="Label" parent="SplitScreens/Camera2/POV2/ScoreUI/ScoresPanel/VBoxContainer" unique_id=197113311]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_6ic0p")
+theme_override_fonts/font = ExtResource("4_q7bwt")
 theme_override_font_sizes/font_size = 18
 text = "♢ Score total ♢"
 
 [node name="Score" type="Label" parent="SplitScreens/Camera2/POV2/ScoreUI/ScoresPanel/VBoxContainer" unique_id=854144098]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_fonts/font = ExtResource("4_6ic0p")
+theme_override_fonts/font = ExtResource("4_q7bwt")
 theme_override_font_sizes/font_size = 52
 text = "0"
 
@@ -220,14 +221,14 @@ offset_top = 80.0
 offset_right = 87.0
 offset_bottom = 109.0
 theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_fonts/font = ExtResource("4_6ic0p")
+theme_override_fonts/font = ExtResource("4_q7bwt")
 theme_override_font_sizes/font_size = 28
 text = "+0"
 
 [node name="InkLayerJ2" type="CanvasLayer" parent="SplitScreens/Camera2/POV2" unique_id=2072803020]
 
 [node name="InkOverlayJ2" type="Node2D" parent="SplitScreens/Camera2/POV2/InkLayerJ2" unique_id=1754509254]
-script = ExtResource("5_8tujb")
+script = ExtResource("5_dg8ca")
 
 [node name="ColorRect" type="ColorRect" parent="SplitScreens/Camera2/POV2/InkLayerJ2/InkOverlayJ2" unique_id=1819862446]
 visible = false
@@ -252,7 +253,7 @@ anchors_preset = 0
 offset_left = 550.0
 offset_right = 590.0
 offset_bottom = 40.0
-script = ExtResource("5_1js1r")
+script = ExtResource("6_tqn45")
 
 [node name="Contour" type="ColorRect" parent="SplitScreens/Camera2/POV2/ShieldBar" unique_id=1586366217]
 layout_mode = 0
@@ -291,7 +292,7 @@ offset_top = 815.0
 offset_right = 465.0
 offset_bottom = 986.0
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_fv261")
+texture = ExtResource("8_52ohd")
 
 [node name="ShieldLabel" type="Label" parent="SplitScreens/Camera2/POV2/ShieldBar" unique_id=952532679]
 custom_minimum_size = Vector2(72, 51)
@@ -301,12 +302,18 @@ offset_top = 860.0
 offset_right = 122.0
 offset_bottom = 911.0
 theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
-theme_override_fonts/font = ExtResource("4_6ic0p")
+theme_override_fonts/font = ExtResource("4_q7bwt")
 theme_override_font_sizes/font_size = 50
 text = "100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Game" parent="." unique_id=1026699542 instance=ExtResource("3_d2mly")]
+[node name="Game" parent="." unique_id=1026699542 instance=ExtResource("9_uud71")]
+
+[node name="StartLabel" parent="Game" index="9" unique_id=40376002]
+visible = false
+
+[node name="Menu" parent="." unique_id=505296238 instance=ExtResource("10_2j4hv")]
 
 [editable path="Game"]
+[editable path="Menu"]

@@ -2,7 +2,9 @@ extends Node3D
 
 @export var nb_views : int = 8
 @onready var screen_output = $TextureRect
-@onready var jeu: Node3D = $Game
+@onready var game: Node3D = $Game
+@onready var pause_menu: ColorRect = $Game/HUD/PauseMenu
+@onready var cube_spawner: Node3D = $Game/CubeSpawner
 @onready var j1: Node3D = $J1
 @onready var j2: Node3D = $J2
 
@@ -36,7 +38,7 @@ func _ready():
 	# On récupère le monde 3D
 	var world_3d = get_viewport().world_3d
 	if has_node("Game"):
-		world_3d = jeu.get_world_3d()
+		world_3d = game.get_world_3d()
 	
 	var shader_mat = screen_output.material as ShaderMaterial
 	# On configure chaque vue
@@ -56,6 +58,9 @@ func _ready():
 			var shader_vue = "vue_" + str(i)
 			shader_mat.set_shader_parameter(shader_vue, texture_vue)
 	textureRect.material.set_shader_parameter("offset", 0.0) # Initialise l'effet glitch à 0
+	pause_menu.mode = true
+	cube_spawner.mode = true
+	game.mode = true
 
 func _process(_delta: float) -> void:
 	# Temps total d'une frame
@@ -112,7 +117,7 @@ func _physics_process(_delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("StopGame"):
-		jeu.onPartieTimerTimeout()
+		game.onPartieTimerTimeout()
 	if event.is_action_pressed("Invert_views_J1"):
 		if textureRect:
 			var invert = textureRect.material.get_shader_parameter("invertViews")

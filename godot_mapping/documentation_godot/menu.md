@@ -7,8 +7,8 @@
 
 ### Menu d'entrée
 > Il apparaît au démarrage du jeu et a diverses fonctionnalités :
-- Commencer le jeu avec le choix du mode 2 joueurs sur son PC, ou du mode 2 joueurs sur la TV
-- Dans le cas du mode 2 joueurs sur la TV, une inscription au classement peut être réalisée via des noms et les scores sont alors enregistrés dans le classement final affiché en fin de partie sur le menu de fin de jeu.
+- Possibilité de jouer à un mode PC en arrière-plan des boutons du menu, qui sont cachés au bout de cinq secondes si aucune action n'est effectuée
+- Commencer le jeu en mode TV grâce à une inscription au classement qui peut être réalisée via des noms sur une page de tutoriel explicative. Les scores sont alors enregistrés dans le classement final affiché en fin de partie sur le menu de fin de jeu.
 - Paramètres : Ils permettent de régler les paramètres de musique et de SFX.
 - Crédits : Ils affichent les personnes en charge du projet.
 - Quitter le jeu

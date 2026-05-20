@@ -1,15 +1,11 @@
 [gd_scene format=3 uid="uid://dcjdygsrwf41g"]
 
-[ext_resource type="Script" uid="uid://vt8p43mvn5cs" path="res://scripts/menus/main_menu.gd" id="1_tbmy8"]
-[ext_resource type="Texture2D" uid="uid://b4xpo3x1n06pg" path="res://addons/assets/fond_jeu_godot.png" id="2_bqqt6"]
+[ext_resource type="Script" uid="uid://vt8p43mvn5cs" path="res://scripts/menus/main_menu_2d.gd" id="1_tbmy8"]
 [ext_resource type="FontFile" uid="uid://bd4geqghtkj13" path="res://addons/assets/TextFontBase.ttf" id="3_rtw2f"]
 [ext_resource type="Script" uid="uid://crmbnc6adwn05" path="res://scripts/sound/audio_control.gd" id="4_8ln24"]
 [ext_resource type="FontFile" uid="uid://crtikirivhq6o" path="res://addons/assets/TextFontBold.otf" id="4_oa1go"]
 [ext_resource type="AudioStream" uid="uid://bqjkoeah1m37j" path="res://addons/sfx/main_menu_music.mp3" id="5_1hnlc"]
 [ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="8_tbmy8"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fu7sn"]
-texture = ExtResource("2_bqqt6")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hl5e0"]
 
@@ -47,6 +43,8 @@ texture = ExtResource("2_bqqt6")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3wgol"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tbmy8"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5pajh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1acrt"]
@@ -56,18 +54,6 @@ texture = ExtResource("2_bqqt6")
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a8gd2"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vr8o3"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1hnlc"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_euy4r"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bre17"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bh4e2"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3w8rc"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tbmy8"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_wu84c"]
 color = Color(1, 1, 1, 1)
@@ -100,15 +86,6 @@ offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="BGMenu" type="Panel" parent="." unique_id=1631550041]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_fu7sn")
-
 [node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=53466756]
 stream = ExtResource("8_tbmy8")
 volume_db = -10.0
@@ -117,7 +94,6 @@ bus = &"SFX"
 [node name="MainMenuMusic" type="AudioStreamPlayer" parent="." unique_id=1460163922]
 stream = ExtResource("5_1hnlc")
 volume_db = -10.0
-autoplay = true
 bus = &"Musique"
 parameters/looping = true
 
@@ -129,7 +105,6 @@ offset_right = 1534.0
 offset_bottom = 270.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 8
 theme_override_fonts/font = ExtResource("4_oa1go")
@@ -161,7 +136,6 @@ offset_right = 756.0
 offset_bottom = 50.0
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../QuitButton")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_rtw2f")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_rtw2f")
@@ -179,7 +153,6 @@ offset_top = 150.0
 offset_right = 704.0
 offset_bottom = 200.0
 size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_rtw2f")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_5dd4i")
@@ -197,7 +170,6 @@ offset_top = 300.0
 offset_right = 667.0
 offset_bottom = 350.0
 size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_rtw2f")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_5dd4i")
@@ -216,7 +188,6 @@ offset_right = 670.0
 offset_bottom = 500.0
 size_flags_vertical = 3
 focus_neighbor_bottom = NodePath("../StartButton")
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_rtw2f")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_rcqid")
@@ -226,140 +197,6 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_7b55j")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_3wgol")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
 text = "Quitter"
-
-[node name="ModeButtons" type="Panel" parent="." unique_id=845327797]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -574.0
-offset_top = -568.0
-offset_right = 574.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_hl5e0")
-
-[node name="PCButton" type="Button" parent="ModeButtons" unique_id=1019566275]
-layout_mode = 0
-offset_left = 398.0
-offset_top = -100.0
-offset_right = 756.0
-offset_bottom = -50.0
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_rtw2f")
-theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxEmpty_rtw2f")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_hstxw")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_oa1go")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_jk1qb")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_8egab")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_gw5y6")
-text = "1 Joueur (PC)"
-
-[node name="TVButton" type="Button" parent="ModeButtons" unique_id=2076503452]
-layout_mode = 0
-offset_left = 422.0
-offset_top = 30.0
-offset_right = 735.0
-offset_bottom = 80.0
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_rtw2f")
-theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxEmpty_5dd4i")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_svtp6")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_lgwnu")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_flqon")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_1dfpl")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
-text = "2 Joueurs (TV)"
-
-[node name="BackButton" type="Button" parent="ModeButtons" unique_id=673599691]
-custom_minimum_size = Vector2(0, 127)
-layout_mode = 0
-offset_left = 194.0
-offset_top = 322.0
-offset_right = 994.0
-offset_bottom = 449.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_rtw2f")
-theme_override_font_sizes/font_size = 60
-theme_override_styles/normal = SubResource("StyleBoxEmpty_5pajh")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_1acrt")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_j7ex8")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_a8gd2")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_vr8o3")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
-text = "Menu Principal"
-
-[node name="NameInputPage" type="Panel" parent="." unique_id=1209436454]
-layout_mode = 0
-offset_left = 359.0
-offset_top = 254.0
-offset_right = 1559.0
-offset_bottom = 1010.0
-theme_override_styles/panel = SubResource("StyleBoxEmpty_1hnlc")
-
-[node name="Message" type="Label" parent="NameInputPage" unique_id=88871952]
-layout_mode = 0
-offset_left = 217.5
-offset_right = 984.5
-offset_bottom = 51.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_oa1go")
-theme_override_font_sizes/font_size = 50
-text = "Inscription au classement"
-
-[node name="NomJ1" type="LineEdit" parent="NameInputPage" unique_id=1965329947]
-layout_mode = 0
-offset_left = 397.5
-offset_top = 200.0
-offset_right = 790.5
-offset_bottom = 248.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_rtw2f")
-theme_override_font_sizes/font_size = 40
-theme_override_styles/read_only = SubResource("StyleBoxEmpty_euy4r")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_bre17")
-placeholder_text = "Nom du joueur 1"
-alignment = 1
-expand_to_text_length = true
-
-[node name="NomJ2" type="LineEdit" parent="NameInputPage" unique_id=1924475648]
-layout_mode = 0
-offset_left = 397.5
-offset_top = 400.0
-offset_right = 782.5
-offset_bottom = 440.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_rtw2f")
-theme_override_font_sizes/font_size = 40
-theme_override_styles/read_only = SubResource("StyleBoxEmpty_bh4e2")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_3w8rc")
-placeholder_text = "Nom du joueur 2"
-alignment = 1
-expand_to_text_length = true
-
-[node name="InscriptionButton" type="Button" parent="NameInputPage" unique_id=1360852244]
-layout_mode = 0
-offset_left = 365.5
-offset_top = 600.0
-offset_right = 817.5
-offset_bottom = 680.0
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("4_oa1go")
-theme_override_font_sizes/font_size = 80
-theme_override_styles/normal = SubResource("StyleBoxEmpty_5dd4i")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_svtp6")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_lgwnu")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_flqon")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_1dfpl")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
-text = "S'inscrire"
 
 [node name="Options" type="Panel" parent="." unique_id=708263686]
 layout_mode = 1
@@ -384,7 +221,6 @@ offset_right = 679.0
 offset_bottom = 83.5
 size_flags_horizontal = 4
 size_flags_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 5
 theme_override_fonts/font = ExtResource("4_oa1go")
@@ -398,7 +234,6 @@ offset_left = 287.0
 offset_top = 200.0
 offset_right = 525.0
 offset_bottom = 251.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_rtw2f")
 theme_override_font_sizes/font_size = 50
 text = "Musique"
@@ -409,7 +244,6 @@ offset_left = 353.0
 offset_top = 300.0
 offset_right = 446.0
 offset_bottom = 351.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_rtw2f")
 theme_override_font_sizes/font_size = 50
 text = "SFX"
@@ -421,7 +255,6 @@ offset_left = 20.0
 offset_top = 650.0
 offset_right = 820.0
 offset_bottom = 777.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_rtw2f")
 theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxEmpty_5pajh")
@@ -488,7 +321,6 @@ offset_bottom = 60.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 5
 theme_override_fonts/font = ExtResource("4_oa1go")
@@ -508,7 +340,6 @@ offset_bottom = 220.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_rtw2f")
 theme_override_font_sizes/font_size = 40
 text = "NGUYEN Van-Kévin"
@@ -526,7 +357,6 @@ offset_bottom = 340.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_rtw2f")
 theme_override_font_sizes/font_size = 40
 text = "BELLE Hugo"
@@ -544,7 +374,6 @@ offset_bottom = 580.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_rtw2f")
 theme_override_font_sizes/font_size = 40
 text = "CISSÉ Birame"
@@ -562,7 +391,6 @@ offset_bottom = 700.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_rtw2f")
 theme_override_font_sizes/font_size = 40
 text = "KHATIRI Adam"
@@ -580,7 +408,6 @@ offset_bottom = 460.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_rtw2f")
 theme_override_font_sizes/font_size = 40
 text = "GODARD Hélias"
@@ -593,7 +420,6 @@ offset_left = -100.0
 offset_top = 740.0
 offset_right = 700.0
 offset_bottom = 867.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_rtw2f")
 theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxEmpty_5pajh")
@@ -608,10 +434,6 @@ text = "Menu Principal"
 [connection signal="pressed" from="MainButtons/OptionButton" to="." method="_onOptionButton_pressed"]
 [connection signal="pressed" from="MainButtons/CreditsButton" to="." method="_onCreditsButton_pressed"]
 [connection signal="pressed" from="MainButtons/QuitButton" to="." method="_onQuitButton_pressed"]
-[connection signal="pressed" from="ModeButtons/PCButton" to="." method="_onPCButton_pressed"]
-[connection signal="pressed" from="ModeButtons/TVButton" to="." method="_onTVButton_pressed"]
-[connection signal="pressed" from="ModeButtons/BackButton" to="." method="_onBackButton_pressed"]
-[connection signal="pressed" from="NameInputPage/InscriptionButton" to="." method="_onInscriptionButton_pressed"]
 [connection signal="pressed" from="Options/BackButton" to="." method="_onBackButton_pressed"]
 [connection signal="value_changed" from="Options/MusicControl" to="Options/MusicControl" method="_onValueChanged"]
 [connection signal="value_changed" from="Options/SFXControl" to="Options/SFXControl" method="_onValueChanged"]

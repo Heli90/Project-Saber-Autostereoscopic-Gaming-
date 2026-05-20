@@ -35,7 +35,7 @@ density_decrement=Object(Shortcut,"resource_local_to_scene":false,"resource_name
 [application]
 
 config/name="Test_Godot"
-run/main_scene="uid://dcjdygsrwf41g"
+run/main_scene="uid://dm0ymj2gw0osm"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
