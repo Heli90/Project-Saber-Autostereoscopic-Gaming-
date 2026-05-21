@@ -32,7 +32,11 @@ var rd: RenderingDevice
 var last_gpu_time_ms: float = 0.0
 var last_gpu_vues_ms: float = 0.0
 
-func _ready():
+func _ready() -> void:
+	pause_menu.mode = true
+	cube_spawner.mode = true
+	game.mode = true
+
 	rd = RenderingServer.get_rendering_device()
 	await get_tree().process_frame
 	# On récupère le monde 3D
@@ -58,9 +62,6 @@ func _ready():
 			var shader_vue = "vue_" + str(i)
 			shader_mat.set_shader_parameter(shader_vue, texture_vue)
 	textureRect.material.set_shader_parameter("offset", 0.0) # Initialise l'effet glitch à 0
-	pause_menu.mode = true
-	cube_spawner.mode = true
-	game.mode = true
 
 func _process(_delta: float) -> void:
 	# Temps total d'une frame

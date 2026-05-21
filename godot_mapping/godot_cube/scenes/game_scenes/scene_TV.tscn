@@ -715,6 +715,9 @@ texture = SubResource("GradientTexture2D_6c3ax")
 
 [node name="Game" parent="." unique_id=1026699542 instance=ExtResource("6_qo1rj")]
 
+[node name="FonduLayer" parent="Game/HUD" parent_id_path=PackedInt32Array(1026699542, 2058758241) index="0" unique_id=478103391]
+visible = false
+
 [node name="TimeStopSound" parent="Game" index="11" unique_id=1815400477]
 volume_db = -10.0
 
