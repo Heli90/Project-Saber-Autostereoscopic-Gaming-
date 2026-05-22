@@ -11,8 +11,8 @@
 [ext_resource type="Shader" uid="uid://dk5jixryl8es3" path="res://shaders/shield_bar.gdshader" id="6_hrdja"]
 [ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="6_qo1rj"]
 [ext_resource type="Texture2D" uid="uid://barxo14ju82s8" path="res://addons/assets/shield_icon.png" id="7_4s8qw"]
-[ext_resource type="Texture2D" uid="uid://j4humcwamka0" path="res://addons/assets/combo_bar_empty.png" id="9_k3crr"]
-[ext_resource type="Texture2D" uid="uid://bb8bqlhdhu8yv" path="res://addons/assets/combo_bar.png" id="10_sgwr3"]
+[ext_resource type="Texture2D" uid="uid://c7vtx5e2brkk1" path="res://addons/assets/combo_bar_empty.png" id="9_k3crr"]
+[ext_resource type="Texture2D" uid="uid://lj6bxsd50fjh" path="res://addons/assets/combo_bar.png" id="10_sgwr3"]
 [ext_resource type="AudioStream" uid="uid://dk8rg1cdygmea" path="res://addons/sfx/level_music.mp3" id="12_4s8qw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8081n"]
@@ -574,7 +574,6 @@ layout_mode = 2
 [node name="TextureProgressBar" type="TextureProgressBar" parent="J2/CameraController/Vue5/ComboBar/MarginContainer/VBoxContainer" unique_id=820599314]
 layout_mode = 2
 step = 0.1
-value = 100.0
 fill_mode = 4
 radial_fill_degrees = 310.0
 texture_under = ExtResource("9_k3crr")

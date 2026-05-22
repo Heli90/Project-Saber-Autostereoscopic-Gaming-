@@ -285,7 +285,7 @@ text = "Touché !"
 [node name="TimeStopSound" type="AudioStreamPlayer" parent="." unique_id=1815400477]
 stream = ExtResource("7_32rft")
 
-[connection signal="timeout" from="PartieTimer" to="." method="_onPartieTimerTimeout"]
+[connection signal="timeout" from="PartieTimer" to="." method="onPartieTimerTimeout"]
 [connection signal="canceled" from="LandMarksProceed/SelectCamera" to="LandMarksProceed" method="_start_camera"]
 [connection signal="confirmed" from="LandMarksProceed/SelectCamera" to="LandMarksProceed" method="_start_camera"]
 [connection signal="item_selected" from="LandMarksProceed/SelectCamera/VBoxContainer/HBoxContainer/SelectedFeed" to="LandMarksProceed" method="_on_camera_selected"]

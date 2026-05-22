@@ -42,9 +42,10 @@ blue_shader_material = SubResource("ShaderMaterial_3w8f1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 
 [node name="Camera" type="Camera3D" parent="CameraController" unique_id=752964199]
-transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 0, 0.3)
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 0.1, 0.4)
 current = true
-fov = 90.0
+fov = 100.0
+near = 0.01
 
 [node name="LeftSaber" type="Area3D" parent="." unique_id=265445266]
 transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, -1, 0.5, -2)

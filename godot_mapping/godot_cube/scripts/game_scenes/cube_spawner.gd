@@ -184,11 +184,12 @@ func menu_loop() -> void:
 
 func game_loop() -> void:
 	# On lance la musique avec un retard de 3 secondes pour permettre aux premiers cubes d'arriver
-	if elapsed_time > 1.25 and (not level_music.is_playing()): level_music.play()
+	if elapsed_time > 1.25 and (not level_music.playing): level_music.play()
+	
 	# On actualise la barre de combo visuelle
 	for i in range(2):
-		texture_progress_bars[i].value = stocked_combo[i]
-		texture_progress_bars[i+2].value = stocked_combo[i]
+		texture_progress_bars[i].value = snapped(stocked_combo[i], texture_progress_bars[i].step)
+		texture_progress_bars[i+2].value = snapped(stocked_combo[i], texture_progress_bars[i].step)
 
 	# Si un palier a été dépassé, on passe au suivant et on incrémente le multiplicateur
 	for i in range(2):
@@ -210,10 +211,29 @@ func game_loop() -> void:
 		is_generated = true
 
 		# Pré-génération du niveau de la partie
-		scheduled_bloc(classic_bloc, 5.0, 0, 2, [0.0, 2.0], 4.0)
+		scheduled_bloc(classic_bloc, 4.75, 0, [0.0, 2.0], 4.0, 1)
+		scheduled_bloc(classic_bloc, 5.0, 0, [0.0, 2.0], 4.0, 3)
+		scheduled_bloc(classic_bloc, 4.75, 1, [-2.0, 2.0], 4.0, 1)
+		scheduled_bloc(classic_bloc, 4.75, 1, [2.0, 2.0], 4.0, 1)
+
+		scheduled_bloc(classic_bloc, 7.25, 0, [-2.0, 0.5], 4.0, 1)
+		scheduled_bloc(classic_bloc, 7.25, 1, [-2.0, 2.0], 4.0, 2)
+
+		scheduled_bloc(bonus_bloc, 10.0, 0, [0.0, 3.5], 8.0)
+		scheduled_bloc(bonus_bloc, 10.0, 1, [-2.0, 0.5], 8.0)
+
+		scheduled_bloc(bomb_bloc, 12.5, 0, [-2.0, 0.5], 6.0)
+		scheduled_bloc(bomb_bloc, 12.5, 1, [2.0, 0.5], 6.0)
+		scheduled_bloc(bomb_bloc, 12.5, 0, [2.0, 3.5], 6.0)
+		scheduled_bloc(bomb_bloc, 12.5, 1, [-2.0, 3.5], 6.0)
+		
+		scheduled_bloc(classic_bloc, 14.75, 0, [-2.0, 2.0], 4.0, 1)
+		scheduled_bloc(classic_bloc, 14.75, 0, [2.0, 2.0], 4.0, 1)
+		scheduled_bloc(classic_bloc, 14.75, 1, [-2.0, 0.5], 4.0, 1)
+		scheduled_bloc(classic_bloc, 14.75, 1, [2.0, 0.5], 4.0, 3)
 
 func scheduled_bloc(scene_bloc: PackedScene, arrival_time: float, direction: int = rng.randi_range(0, 1),
-color: int = rng.randi_range(1, 3), spawn: Array[float] = [0.0, -1.0], absolute_speed: float = -1.0) -> void:
+spawn: Array[float] = [0.0, -1.0], absolute_speed: float = -1.0, color: int = rng.randi_range(1, 3)) -> void:
 	if absolute_speed < 0: absolute_speed = rng.randf_range(5.0, 10.0)
 	var travel_time = 15.0 / absolute_speed
 	# Délai avant d'apparaître
