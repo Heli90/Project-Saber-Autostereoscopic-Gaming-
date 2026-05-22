@@ -8,13 +8,13 @@ extends Node3D
 @onready var j1: Node3D = $J1
 @onready var j2: Node3D = $J2
 
-@onready var cam_controller_j1: Node3D = $J1/CameraControllerFPS
-@onready var cam_controller_j2: Node3D = $J2/CameraControllerFPS
+@onready var cam_controller_j1: Node3D = $J1/CameraController
+@onready var cam_controller_j2: Node3D = $J2/CameraController
 
-@onready var remote1_j1: RemoteTransform3D = $J1/CameraControllerFPS/RemoteVue1
-@onready var remote2_j1: RemoteTransform3D = $J1/CameraControllerFPS/RemoteVue2
-@onready var remote1_j2: RemoteTransform3D = $J2/CameraControllerFPS/RemoteVue5
-@onready var remote2_j2: RemoteTransform3D = $J2/CameraControllerFPS/RemoteVue6
+@onready var remote1_j1: RemoteTransform3D = $J1/CameraController/RemoteVue1
+@onready var remote2_j1: RemoteTransform3D = $J1/CameraController/RemoteVue2
+@onready var remote1_j2: RemoteTransform3D = $J2/CameraController/RemoteVue5
+@onready var remote2_j2: RemoteTransform3D = $J2/CameraController/RemoteVue6
 
 @onready var label_fps: Label = $TechnicalInfos/FPS
 @onready var label_cpu = $TechnicalInfos/CPU
@@ -49,9 +49,9 @@ func _ready() -> void:
 	for i in range(1, nb_views+1):
 		var viewport_vue
 		if i == 1 or i == 2 :
-			viewport_vue = "J1/CameraControllerFPS/Vue" + str(i)
+			viewport_vue = "J1/CameraController/Vue" + str(i)
 		elif i == 5 or i == 6:
-			viewport_vue = "J2/CameraControllerFPS/Vue" + str(i)
+			viewport_vue = "J2/CameraController/Vue" + str(i)
 		else:
 			viewport_vue = "Vue" + str(i)
 		if has_node(viewport_vue):

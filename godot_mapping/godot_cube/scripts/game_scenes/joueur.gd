@@ -3,8 +3,8 @@ extends Node3D
 const SPEED: float = 5.0
 const JUMP_VELOCITY: float = 4.5
 @export var player_id = 1
-@onready var camera_fps: Camera3D = $CameraControllerFPS/Camera
-@onready var camera_controller_fps: Node3D = $CameraControllerFPS
+@onready var camera_fps: Camera3D = $CameraController/Camera
+@onready var camera_controller_fps: Node3D = $CameraController
 @onready var left_saber : Area3D = $LeftSaber
 @onready var right_saber : Area3D = $RightSaber
 @onready var left_saber_mesh : MeshInstance3D = $LeftSaber/MeshInstance3D
@@ -20,8 +20,7 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	# On initialise les marqueurs de corps
 	landmarks = get_node_or_null("../../../../Game/LandMarksProceed")
-	if not landmarks:
-		landmarks = get_node_or_null("../Game/LandMarksProceed")
+	if not landmarks: landmarks = get_node_or_null("../Game/LandMarksProceed")
 	# On initialise un signal à chaque fois que le sabre traverse un cube
 	left_saber.body_entered.connect(collision)
 	right_saber.body_entered.connect(collision)

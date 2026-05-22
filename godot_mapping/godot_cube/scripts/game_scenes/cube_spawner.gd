@@ -6,6 +6,8 @@ extends Node3D
 @export var disappear_bloc: PackedScene
 @export var splash_bloc: PackedScene
 @export var shield_bloc: PackedScene
+@onready var level_music: AudioStreamPlayer
+
 @onready var start_label: Label = $"../StartLabel"
 @onready var disappear_bloc_notif: Label = $"../DisappearBlocNotif"
 @onready var shields: Array[GPUParticles3D] = [$"../Map/Boucliers/ShieldJ1", $"../Map/Boucliers/ShieldJ2"]
@@ -35,11 +37,16 @@ var grille = [[0.0, 0.5], [-2.0, 0.5], [2.0, 0.5], [0.0, 1.75], [-2.0, 1.75], [2
 var blocs: Array[Node3D]
 
 # Variables liées aux combos
-var seuil: Array[int] = [2,2]
 var increment_seuil: Array[int] = [2,2]
 var stocked_combo: Array[int] = [0, 0]
 var best_combo: int = 0
 var combo_success: bool = false
+
+# Variables liées au combo visuel
+var texture_progress_bars: Array[TextureProgressBar]
+var progress_bar_labels: Array[Label]
+var letters: Array[String] = ["D", "C", "B", "A", "S"]
+var paliers: Array[int] = [2, 5, 10, 20, 30]
 
 # Multiplicateurs de score et scores actuels pour chaque joueur
 var multiplicateur: Array[int] = [1, 1]
@@ -60,39 +67,52 @@ var shield_bars: Array[Control]
 # Fonction appelée par le script du jeu pour démarrer l'apparition des cubes et charger les scores visuels
 func activation() -> void:
 	cube_list = [classic_bloc, bonus_bloc, bomb_bloc, disappear_bloc, splash_bloc, shield_bloc]
-	match mode:
-		false:
-			score_uis = []
-			shield_bars = []
-			ink_overlay = []
-			j1 = get_node_or_null("../../SplitScreens/Camera1/POV1/J1")
-			j2 = get_node_or_null("../../SplitScreens/Camera2/POV2/J2")
-			# Ajout des scores et des barres de boucliers aux tableaux
-			score_uis.append(get_node_or_null("../../SplitScreens/Camera1/POV1/ScoreUI"))
-			score_uis.append(get_node_or_null("../../SplitScreens/Camera2/POV2/ScoreUI"))
-			shield_bars.append(get_node_or_null("../../SplitScreens/Camera1/POV1/ShieldBar"))
-			shield_bars.append(get_node_or_null("../../SplitScreens/Camera2/POV2/ShieldBar"))
-			# Ajout des noeuds associés à l'encre
-			ink_overlay.append(get_node_or_null("../../SplitScreens/Camera1/POV1/InkLayerJ1/InkOverlayJ1"))
-			ink_overlay.append(get_node_or_null("../../SplitScreens/Camera2/POV2/InkLayerJ2/InkOverlayJ2"))
-		true:
-			score_uis = []
-			shield_bars = []
-			ink_overlay = []
-			j1 = get_node_or_null("../../J1")
-			j2 = get_node_or_null("../../J2")
-			score_uis.append(get_node_or_null("../../J1/CameraControllerFPS/Vue1/ScoreUI"))
-			score_uis.append(get_node_or_null("../../J2/CameraControllerFPS/Vue5/ScoreUI"))
-			score_uis.append(get_node_or_null("../../J1/CameraControllerFPS/Vue2/ScoreUI"))
-			score_uis.append(get_node_or_null("../../J2/CameraControllerFPS/Vue6/ScoreUI"))
-			shield_bars.append(get_node_or_null("../../J1/CameraControllerFPS/Vue1/ShieldBar"))
-			shield_bars.append(get_node_or_null("../../J2/CameraControllerFPS/Vue5/ShieldBar"))
-			shield_bars.append(get_node_or_null("../../J1/CameraControllerFPS/Vue2/ShieldBar"))
-			shield_bars.append(get_node_or_null("../../J2/CameraControllerFPS/Vue6/ShieldBar"))
-			ink_overlay.append(get_node_or_null("../../J1/CameraControllerFPS/Vue1/InkLayerJ1/InkOverlayJ1"))
-			ink_overlay.append(get_node_or_null("../../J2/CameraControllerFPS/Vue5/InkLayerJ2/InkOverlayJ2"))
-			ink_overlay.append(get_node_or_null("../../J1/CameraControllerFPS/Vue2/InkLayerJ1/InkOverlayJ1"))
-			ink_overlay.append(get_node_or_null("../../J2/CameraControllerFPS/Vue6/InkLayerJ2/InkOverlayJ2"))
+	score_uis = []
+	shield_bars = []
+	ink_overlay = []
+	if not mode:
+		j1 = get_node("../../SplitScreens/Camera1/POV1/J1")
+		j2 = get_node("../../SplitScreens/Camera2/POV2/J2")
+		# Ajout des scores et des barres de boucliers aux tableaux
+		score_uis.append(get_node("../../SplitScreens/Camera1/POV1/ScoreUI"))
+		score_uis.append(get_node("../../SplitScreens/Camera2/POV2/ScoreUI"))
+		shield_bars.append(get_node("../../SplitScreens/Camera1/POV1/ShieldBar"))
+		shield_bars.append(get_node("../../SplitScreens/Camera2/POV2/ShieldBar"))
+		# Ajout des noeuds associés à l'encre
+		ink_overlay.append(get_node("../../SplitScreens/Camera1/POV1/InkLayerJ1/InkOverlayJ1"))
+		ink_overlay.append(get_node("../../SplitScreens/Camera2/POV2/InkLayerJ2/InkOverlayJ2"))
+	else:
+		j1 = get_node("../../J1")
+		j2 = get_node("../../J2")
+		level_music = get_node("../../LevelMusic")
+
+		score_uis.append(get_node("../../J1/CameraController/Vue1/ScoreUI"))
+		score_uis.append(get_node("../../J2/CameraController/Vue5/ScoreUI"))
+		score_uis.append(get_node("../../J1/CameraController/Vue2/ScoreUI"))
+		score_uis.append(get_node("../../J2/CameraController/Vue6/ScoreUI"))
+
+		shield_bars.append(get_node("../../J1/CameraController/Vue1/ShieldBar"))
+		shield_bars.append(get_node("../../J2/CameraController/Vue5/ShieldBar"))
+		shield_bars.append(get_node("../../J1/CameraController/Vue2/ShieldBar"))
+		shield_bars.append(get_node("../../J2/CameraController/Vue6/ShieldBar"))
+
+		ink_overlay.append(get_node("../../J1/CameraController/Vue1/InkLayerJ1/InkOverlayJ1"))
+		ink_overlay.append(get_node("../../J2/CameraController/Vue5/InkLayerJ2/InkOverlayJ2"))
+		ink_overlay.append(get_node("../../J1/CameraController/Vue2/InkLayerJ1/InkOverlayJ1"))
+		ink_overlay.append(get_node("../../J2/CameraController/Vue6/InkLayerJ2/InkOverlayJ2"))
+
+		texture_progress_bars.append(get_node("../../J1/CameraController/Vue1/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar"))
+		texture_progress_bars.append(get_node("../../J2/CameraController/Vue5/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar"))
+		texture_progress_bars.append(get_node("../../J1/CameraController/Vue2/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar"))
+		texture_progress_bars.append(get_node("../../J2/CameraController/Vue6/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar"))
+
+		progress_bar_labels.append(get_node("../../J1/CameraController/Vue1/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar/ProgressBarLabel"))
+		progress_bar_labels.append(get_node("../../J2/CameraController/Vue5/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar/ProgressBarLabel"))
+		progress_bar_labels.append(get_node("../../J1/CameraController/Vue2/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar/ProgressBarLabel"))
+		progress_bar_labels.append(get_node("../../J2/CameraController/Vue6/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar/ProgressBarLabel"))
+		
+		for progress_bar in texture_progress_bars:
+			progress_bar.max_value = paliers[0]
 	for shield_bar in shield_bars:
 		shield_bar.modulate.a = 0.0
 	start_game()
@@ -107,10 +127,6 @@ func start_game() -> void:
 		await transition.finished
 		start_label.visible = false
 	start_spawn = true
-
-# Multiplie la vitesse de tous les blocs de 25% quand un palier de combo est dépassé
-func increment_speed(bloc: Node3D) -> void:
-	bloc.vitesse_deplacement *= 1.25
 
 func _process(delta: float) -> void:
 	if start_spawn:
@@ -133,40 +149,28 @@ func _process(delta: float) -> void:
 
 			elif shields[i].emitting:
 				time_shield_actif[i] -= delta
-		
+
 			# Si le temps d'activité est dépassé, on réinitialise le nombre de cubes pouvant être ratés
 			if time_shield_actif[i] <= 0.0:
 				shield_actif[i] = 0
 				shields[i].emitting = false
 				shields[i].speed_scale = 10.0
-				
+
 				# On efface les barres des boucliers sur l'écran
 				var t = create_tween().set_parallel(true)
 				t.tween_property(shield_bars[i], "modulate:a", 0.0, 0.01)
 				if mode: t.tween_property(shield_bars[i+2], "modulate:a", 0.0, 0.01)
 				await t.finished
-				
+
 			# On calcule le temps de bonus pour chacun des 2 joueurs et on arrête le bonus une fois que ce temps est dépassé
 			if count_bonus_time[i]: bonus_time[i] += delta
 			if bonus_time[i] >= 10.0 and multiplicateur[i] > 1:
 				bonus_time[i] = 0.0
 				multiplicateur[i] /= 2
-		
+
 		# On actualise le meilleur combo de cubes
 		if best_combo < stocked_combo.max():
 			best_combo = stocked_combo.max()
-
-		# Si un certain combo est atteint par l'un des 2 joueurs, on incrémente la vitesse
-		if stocked_combo.min() >= seuil.min():
-			for bloc in blocs : increment_speed(bloc)
-
-		# Selon qui a incrémenté la vitesse, on incrémente son multiplicateur de score
-		for i in range(2):
-			if stocked_combo[i] >= seuil[i]:
-				multiplicateur[i] *= 2
-				combo_success = true
-			if combo_success: seuil[i] += 2
-
 		match mode:
 			# Boucle de jeu du jeu dans le menu
 			false: menu_loop()
@@ -179,19 +183,42 @@ func menu_loop() -> void:
 		spawn_cube(cube_list[n])
 
 func game_loop() -> void:
+	# On lance la musique avec un retard de 3 secondes pour permettre aux premiers cubes d'arriver
+	if elapsed_time > 1.25 and (not level_music.is_playing()): level_music.play()
+	# On actualise la barre de combo visuelle
+	for i in range(2):
+		texture_progress_bars[i].value = stocked_combo[i]
+		texture_progress_bars[i+2].value = stocked_combo[i]
+
+	# Si un palier a été dépassé, on passe au suivant et on incrémente le multiplicateur
+	for i in range(2):
+		if texture_progress_bars[i].value >= texture_progress_bars[i].max_value:
+			texture_progress_bars[i].value = 0
+			texture_progress_bars[i+2].value = 0
+			multiplicateur[i] *= 2
+
+			var current_index = letters.find(progress_bar_labels[i].text)
+			var letter_index = clamp(current_index + 1, 0, paliers.size() - 1)
+			progress_bar_labels[i].text = letters[letter_index]
+			progress_bar_labels[i+2].text = letters[letter_index]
+			
+			if letter_index < paliers.size():
+				texture_progress_bars[i].max_value = paliers[letter_index]
+				texture_progress_bars[i+2].max_value = paliers[letter_index]
+
 	if not is_generated:
 		is_generated = true
-		
+
 		# Pré-génération du niveau de la partie
-		scheduled_bloc(classic_bloc, 5.0, 0, 2, [0.0, 2.0], 5.0)
+		scheduled_bloc(classic_bloc, 5.0, 0, 2, [0.0, 2.0], 4.0)
 
 func scheduled_bloc(scene_bloc: PackedScene, arrival_time: float, direction: int = rng.randi_range(0, 1),
 color: int = rng.randi_range(1, 3), spawn: Array[float] = [0.0, -1.0], absolute_speed: float = -1.0) -> void:
 	if absolute_speed < 0: absolute_speed = rng.randf_range(5.0, 10.0)
-	var travel_time = 20.0 / absolute_speed
+	var travel_time = 15.0 / absolute_speed
 	# Délai avant d'apparaître
 	var delay_spawn_time = arrival_time - elapsed_time - travel_time
-	if delay_spawn_time <= 0: return
+	if delay_spawn_time < 0: return
 	else:
 		spawn_cube_after_delay(scene_bloc, absolute_speed, direction, color, spawn, delay_spawn_time)
 
@@ -314,7 +341,11 @@ func MissedClassicCube(i: int) -> void:
 	else:
 		multiplicateur[i] = 1
 		stocked_combo[i] = 0
-		seuil[i] = 2
+		if mode:
+			texture_progress_bars[i].value = 0
+			texture_progress_bars[i+2].value = 0
+			progress_bar_labels[i].text = letters[0]
+			progress_bar_labels[i+2].text = letters[0]
 
 func StrikedBonusCube(i: int) -> void:
 	stocked_combo[i] += 1
@@ -337,6 +368,7 @@ func StrikedDisappearCube(i: int) -> void:
 	multiplicateur[i] *= 2
 	score_uis[i].ajouter_score(gain)
 	if mode: score_uis[i+2].ajouter_score(gain)
+	# On montre une notification au joueur pour lui dire qu'il a frappé le cube
 	disappear_bloc_notif.visible = true
 	await get_tree().create_timer(1.0).timeout
 	disappear_bloc_notif.visible = false
@@ -346,6 +378,7 @@ func StrikedSplashCube(i: int) -> void:
 	var gain = multiplicateur[i] * 1000
 	score_uis[i].ajouter_score(gain)
 	if mode: score_uis[i+2].ajouter_score(gain)
+	# On déclenche le visuel d'encre
 	ink_overlay[i].trigger_ink()
 
 func StrikedShieldCube(i: int) -> void:
@@ -355,10 +388,10 @@ func StrikedShieldCube(i: int) -> void:
 	shields[i].material_override.set_shader_parameter("MaskPower", -5.0)
 	shield_actif[i] = 5
 	time_shield_actif[i] = 10.0
-	
+
 	shield_bars[i].visible = true
 	if mode: shield_bars[i+2].visible = true
-	
+
 	var t = create_tween().set_parallel(true)
 	t.tween_property(shield_bars[i], "modulate:a", 1.0, 0.1)
 	if mode: t.tween_property(shield_bars[i+2], "modulate:a", 1.0, 0.1)

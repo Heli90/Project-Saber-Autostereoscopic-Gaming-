@@ -38,10 +38,10 @@ radius = 0.1
 script = ExtResource("1_2d0qe")
 blue_shader_material = SubResource("ShaderMaterial_3w8f1")
 
-[node name="CameraControllerFPS" type="Node3D" parent="." unique_id=718035250]
+[node name="CameraController" type="Node3D" parent="." unique_id=718035250]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 
-[node name="Camera" type="Camera3D" parent="CameraControllerFPS" unique_id=752964199]
+[node name="Camera" type="Camera3D" parent="CameraController" unique_id=752964199]
 transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 0, 0.3)
 current = true
 fov = 90.0

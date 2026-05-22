@@ -11,6 +11,9 @@
 [ext_resource type="Shader" uid="uid://dk5jixryl8es3" path="res://shaders/shield_bar.gdshader" id="6_hrdja"]
 [ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="6_qo1rj"]
 [ext_resource type="Texture2D" uid="uid://barxo14ju82s8" path="res://addons/assets/shield_icon.png" id="7_4s8qw"]
+[ext_resource type="Texture2D" uid="uid://j4humcwamka0" path="res://addons/assets/combo_bar_empty.png" id="9_k3crr"]
+[ext_resource type="Texture2D" uid="uid://bb8bqlhdhu8yv" path="res://addons/assets/combo_bar.png" id="10_sgwr3"]
+[ext_resource type="AudioStream" uid="uid://dk8rg1cdygmea" path="res://addons/sfx/level_music.mp3" id="12_4s8qw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8081n"]
 shader = ExtResource("6_hrdja")
@@ -38,31 +41,31 @@ script = ExtResource("1_xlecp")
 [node name="J1" parent="." unique_id=1529862946 instance=ExtResource("2_rfm68")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 15)
 
-[node name="Camera" parent="J1/CameraControllerFPS" parent_id_path=PackedInt32Array(1529862946, 718035250) index="0" unique_id=752964199]
+[node name="Camera" parent="J1/CameraController" parent_id_path=PackedInt32Array(1529862946, 718035250) index="0" unique_id=752964199]
 visible = false
 current = false
 
-[node name="RemoteVue1" type="RemoteTransform3D" parent="J1/CameraControllerFPS" parent_id_path=PackedInt32Array(1529862946, 718035250) index="1" unique_id=1948403244]
+[node name="RemoteVue1" type="RemoteTransform3D" parent="J1/CameraController" parent_id_path=PackedInt32Array(1529862946, 718035250) index="1" unique_id=1948403244]
 transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, -0.03, 0, 0.3)
 remote_path = NodePath("../Vue1/Camera")
 
-[node name="RemoteVue2" type="RemoteTransform3D" parent="J1/CameraControllerFPS" parent_id_path=PackedInt32Array(1529862946, 718035250) index="2" unique_id=2050802760]
+[node name="RemoteVue2" type="RemoteTransform3D" parent="J1/CameraController" parent_id_path=PackedInt32Array(1529862946, 718035250) index="2" unique_id=2050802760]
 transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0.03, 0, 0.3)
 remote_path = NodePath("../Vue2/Camera")
 
-[node name="Vue1" type="SubViewport" parent="J1/CameraControllerFPS" parent_id_path=PackedInt32Array(1529862946, 718035250) index="3" unique_id=210631324]
+[node name="Vue1" type="SubViewport" parent="J1/CameraController" parent_id_path=PackedInt32Array(1529862946, 718035250) index="3" unique_id=210631324]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 
-[node name="Camera" type="Camera3D" parent="J1/CameraControllerFPS/Vue1" unique_id=642319396]
+[node name="Camera" type="Camera3D" parent="J1/CameraController/Vue1" unique_id=642319396]
 transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, -0.03, 2.25, 15.3)
 current = true
 fov = 90.0
 
-[node name="ScoreUI" type="CanvasLayer" parent="J1/CameraControllerFPS/Vue1" unique_id=1310535311]
+[node name="ScoreUI" type="CanvasLayer" parent="J1/CameraController/Vue1" unique_id=1310535311]
 script = ExtResource("3_k5d3u")
 
-[node name="ScoresPanel" type="Control" parent="J1/CameraControllerFPS/Vue1/ScoreUI" unique_id=717564841]
+[node name="ScoresPanel" type="Control" parent="J1/CameraController/Vue1/ScoreUI" unique_id=717564841]
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
@@ -76,25 +79,25 @@ offset_bottom = -53.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="J1/CameraControllerFPS/Vue1/ScoreUI/ScoresPanel" unique_id=1225288847]
+[node name="VBoxContainer" type="VBoxContainer" parent="J1/CameraController/Vue1/ScoreUI/ScoresPanel" unique_id=1225288847]
 layout_mode = 0
 offset_right = 87.0
 offset_bottom = 77.0
 
-[node name="Titre" type="Label" parent="J1/CameraControllerFPS/Vue1/ScoreUI/ScoresPanel/VBoxContainer" unique_id=507906096]
+[node name="Titre" type="Label" parent="J1/CameraController/Vue1/ScoreUI/ScoresPanel/VBoxContainer" unique_id=507906096]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_yqxl7")
 theme_override_font_sizes/font_size = 18
 text = "♢ Score total ♢"
 
-[node name="Score" type="Label" parent="J1/CameraControllerFPS/Vue1/ScoreUI/ScoresPanel/VBoxContainer" unique_id=425971154]
+[node name="Score" type="Label" parent="J1/CameraController/Vue1/ScoreUI/ScoresPanel/VBoxContainer" unique_id=425971154]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 1, 1, 1)
 theme_override_fonts/font = ExtResource("4_yqxl7")
 theme_override_font_sizes/font_size = 52
 text = "0"
 
-[node name="GainScore" type="Label" parent="J1/CameraControllerFPS/Vue1/ScoreUI/ScoresPanel" unique_id=747343459]
+[node name="GainScore" type="Label" parent="J1/CameraController/Vue1/ScoreUI/ScoresPanel" unique_id=747343459]
 visible = false
 layout_mode = 0
 offset_top = 80.0
@@ -105,12 +108,12 @@ theme_override_fonts/font = ExtResource("4_yqxl7")
 theme_override_font_sizes/font_size = 28
 text = "+0"
 
-[node name="InkLayerJ1" type="CanvasLayer" parent="J1/CameraControllerFPS/Vue1" unique_id=2010441029]
+[node name="InkLayerJ1" type="CanvasLayer" parent="J1/CameraController/Vue1" unique_id=2010441029]
 
-[node name="InkOverlayJ1" type="Node2D" parent="J1/CameraControllerFPS/Vue1/InkLayerJ1" unique_id=201163911]
+[node name="InkOverlayJ1" type="Node2D" parent="J1/CameraController/Vue1/InkLayerJ1" unique_id=201163911]
 script = ExtResource("5_hrdja")
 
-[node name="ColorRect" type="ColorRect" parent="J1/CameraControllerFPS/Vue1/InkLayerJ1/InkOverlayJ1" unique_id=729862279]
+[node name="ColorRect" type="ColorRect" parent="J1/CameraController/Vue1/InkLayerJ1/InkOverlayJ1" unique_id=729862279]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -119,14 +122,14 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.5019608)
 
-[node name="TextureRect" type="TextureRect" parent="J1/CameraControllerFPS/Vue1/InkLayerJ1/InkOverlayJ1" unique_id=224094187]
+[node name="TextureRect" type="TextureRect" parent="J1/CameraController/Vue1/InkLayerJ1/InkOverlayJ1" unique_id=224094187]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ShieldBar" type="Control" parent="J1/CameraControllerFPS/Vue1" unique_id=860087554]
+[node name="ShieldBar" type="Control" parent="J1/CameraController/Vue1" unique_id=860087554]
 visible = false
 layout_mode = 3
 anchors_preset = 0
@@ -134,7 +137,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("5_3cheo")
 
-[node name="Contour" type="ColorRect" parent="J1/CameraControllerFPS/Vue1/ShieldBar" unique_id=12313358]
+[node name="Contour" type="ColorRect" parent="J1/CameraController/Vue1/ShieldBar" unique_id=12313358]
 layout_mode = 0
 offset_left = 145.0
 offset_top = 845.0
@@ -142,7 +145,7 @@ offset_right = 355.0
 offset_bottom = 915.0
 color = Color(0, 0, 0, 1)
 
-[node name="BG" type="ColorRect" parent="J1/CameraControllerFPS/Vue1/ShieldBar" unique_id=1591758448]
+[node name="BG" type="ColorRect" parent="J1/CameraController/Vue1/ShieldBar" unique_id=1591758448]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -153,7 +156,7 @@ offset_bottom = 870.0
 grow_vertical = 2
 color = Color(0.58383155, 0.58383155, 0.58383155, 1)
 
-[node name="BarFilled" type="ColorRect" parent="J1/CameraControllerFPS/Vue1/ShieldBar" unique_id=520261708]
+[node name="BarFilled" type="ColorRect" parent="J1/CameraController/Vue1/ShieldBar" unique_id=520261708]
 material = SubResource("ShaderMaterial_8081n")
 layout_mode = 1
 anchors_preset = 9
@@ -164,7 +167,7 @@ offset_right = 350.0
 offset_bottom = 870.0
 grow_vertical = 2
 
-[node name="ShieldIcon" type="TextureRect" parent="J1/CameraControllerFPS/Vue1/ShieldBar" unique_id=279217528]
+[node name="ShieldIcon" type="TextureRect" parent="J1/CameraController/Vue1/ShieldBar" unique_id=279217528]
 layout_mode = 0
 offset_left = 315.0
 offset_top = 815.0
@@ -173,7 +176,7 @@ offset_bottom = 986.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_4s8qw")
 
-[node name="ShieldLabel" type="Label" parent="J1/CameraControllerFPS/Vue1/ShieldBar" unique_id=1899313079]
+[node name="ShieldLabel" type="Label" parent="J1/CameraController/Vue1/ShieldBar" unique_id=1899313079]
 custom_minimum_size = Vector2(72, 51)
 layout_mode = 0
 offset_left = 50.0
@@ -187,19 +190,56 @@ text = "100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Vue2" type="SubViewport" parent="J1/CameraControllerFPS" parent_id_path=PackedInt32Array(1529862946, 718035250) index="4" unique_id=86739324]
+[node name="ComboBar" type="Control" parent="J1/CameraController/Vue1" unique_id=736233044]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="J1/CameraController/Vue1/ComboBar" unique_id=319402346]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.1, 1.1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="J1/CameraController/Vue1/ComboBar/MarginContainer" unique_id=343129200]
+layout_mode = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="J1/CameraController/Vue1/ComboBar/MarginContainer/VBoxContainer" unique_id=1095683218]
+layout_mode = 2
+step = 0.1
+fill_mode = 4
+radial_fill_degrees = 310.0
+texture_under = ExtResource("9_k3crr")
+texture_over = ExtResource("10_sgwr3")
+texture_progress = ExtResource("10_sgwr3")
+tint_over = Color(1, 1, 1, 0)
+
+[node name="ProgressBarLabel" type="Label" parent="J1/CameraController/Vue1/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar" unique_id=1537636016]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 45.0
+offset_right = 201.0
+offset_bottom = 246.0
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_font_sizes/font_size = 195
+text = "D"
+horizontal_alignment = 1
+
+[node name="Vue2" type="SubViewport" parent="J1/CameraController" parent_id_path=PackedInt32Array(1529862946, 718035250) index="4" unique_id=86739324]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 
-[node name="Camera" type="Camera3D" parent="J1/CameraControllerFPS/Vue2" unique_id=130694043]
+[node name="Camera" type="Camera3D" parent="J1/CameraController/Vue2" unique_id=130694043]
 transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0.03, 2.25, 15.3)
 current = true
 fov = 90.0
 
-[node name="ScoreUI" type="CanvasLayer" parent="J1/CameraControllerFPS/Vue2" unique_id=1098010347]
+[node name="ScoreUI" type="CanvasLayer" parent="J1/CameraController/Vue2" unique_id=1098010347]
 script = ExtResource("3_k5d3u")
 
-[node name="ScoresPanel" type="Control" parent="J1/CameraControllerFPS/Vue2/ScoreUI" unique_id=1521300480]
+[node name="ScoresPanel" type="Control" parent="J1/CameraController/Vue2/ScoreUI" unique_id=1521300480]
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
@@ -213,25 +253,25 @@ offset_bottom = -53.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="J1/CameraControllerFPS/Vue2/ScoreUI/ScoresPanel" unique_id=416247984]
+[node name="VBoxContainer" type="VBoxContainer" parent="J1/CameraController/Vue2/ScoreUI/ScoresPanel" unique_id=416247984]
 layout_mode = 0
 offset_right = 87.0
 offset_bottom = 77.0
 
-[node name="Titre" type="Label" parent="J1/CameraControllerFPS/Vue2/ScoreUI/ScoresPanel/VBoxContainer" unique_id=1409903511]
+[node name="Titre" type="Label" parent="J1/CameraController/Vue2/ScoreUI/ScoresPanel/VBoxContainer" unique_id=1409903511]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_yqxl7")
 theme_override_font_sizes/font_size = 18
 text = "♢ Score total ♢"
 
-[node name="Score" type="Label" parent="J1/CameraControllerFPS/Vue2/ScoreUI/ScoresPanel/VBoxContainer" unique_id=1387099689]
+[node name="Score" type="Label" parent="J1/CameraController/Vue2/ScoreUI/ScoresPanel/VBoxContainer" unique_id=1387099689]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 1, 1, 1)
 theme_override_fonts/font = ExtResource("4_yqxl7")
 theme_override_font_sizes/font_size = 52
 text = "0"
 
-[node name="GainScore" type="Label" parent="J1/CameraControllerFPS/Vue2/ScoreUI/ScoresPanel" unique_id=277623904]
+[node name="GainScore" type="Label" parent="J1/CameraController/Vue2/ScoreUI/ScoresPanel" unique_id=277623904]
 visible = false
 layout_mode = 0
 offset_top = 80.0
@@ -242,12 +282,12 @@ theme_override_fonts/font = ExtResource("4_yqxl7")
 theme_override_font_sizes/font_size = 28
 text = "+0"
 
-[node name="InkLayerJ1" type="CanvasLayer" parent="J1/CameraControllerFPS/Vue2" unique_id=707128034]
+[node name="InkLayerJ1" type="CanvasLayer" parent="J1/CameraController/Vue2" unique_id=707128034]
 
-[node name="InkOverlayJ1" type="Node2D" parent="J1/CameraControllerFPS/Vue2/InkLayerJ1" unique_id=375163239]
+[node name="InkOverlayJ1" type="Node2D" parent="J1/CameraController/Vue2/InkLayerJ1" unique_id=375163239]
 script = ExtResource("5_hrdja")
 
-[node name="ColorRect" type="ColorRect" parent="J1/CameraControllerFPS/Vue2/InkLayerJ1/InkOverlayJ1" unique_id=1072416176]
+[node name="ColorRect" type="ColorRect" parent="J1/CameraController/Vue2/InkLayerJ1/InkOverlayJ1" unique_id=1072416176]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -256,14 +296,14 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.5019608)
 
-[node name="TextureRect" type="TextureRect" parent="J1/CameraControllerFPS/Vue2/InkLayerJ1/InkOverlayJ1" unique_id=1442283023]
+[node name="TextureRect" type="TextureRect" parent="J1/CameraController/Vue2/InkLayerJ1/InkOverlayJ1" unique_id=1442283023]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ShieldBar" type="Control" parent="J1/CameraControllerFPS/Vue2" unique_id=593417086]
+[node name="ShieldBar" type="Control" parent="J1/CameraController/Vue2" unique_id=593417086]
 visible = false
 layout_mode = 3
 anchors_preset = 0
@@ -271,7 +311,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("5_3cheo")
 
-[node name="Contour" type="ColorRect" parent="J1/CameraControllerFPS/Vue2/ShieldBar" unique_id=899103513]
+[node name="Contour" type="ColorRect" parent="J1/CameraController/Vue2/ShieldBar" unique_id=899103513]
 layout_mode = 0
 offset_left = 145.0
 offset_top = 845.0
@@ -279,7 +319,7 @@ offset_right = 355.0
 offset_bottom = 915.0
 color = Color(0, 0, 0, 1)
 
-[node name="BG" type="ColorRect" parent="J1/CameraControllerFPS/Vue2/ShieldBar" unique_id=1344524136]
+[node name="BG" type="ColorRect" parent="J1/CameraController/Vue2/ShieldBar" unique_id=1344524136]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -290,7 +330,7 @@ offset_bottom = 870.0
 grow_vertical = 2
 color = Color(0.58383155, 0.58383155, 0.58383155, 1)
 
-[node name="BarFilled" type="ColorRect" parent="J1/CameraControllerFPS/Vue2/ShieldBar" unique_id=1914924084]
+[node name="BarFilled" type="ColorRect" parent="J1/CameraController/Vue2/ShieldBar" unique_id=1914924084]
 material = SubResource("ShaderMaterial_8081n")
 layout_mode = 1
 anchors_preset = 9
@@ -301,7 +341,7 @@ offset_right = 350.0
 offset_bottom = 870.0
 grow_vertical = 2
 
-[node name="ShieldIcon" type="TextureRect" parent="J1/CameraControllerFPS/Vue2/ShieldBar" unique_id=837890771]
+[node name="ShieldIcon" type="TextureRect" parent="J1/CameraController/Vue2/ShieldBar" unique_id=837890771]
 layout_mode = 0
 offset_left = 315.0
 offset_top = 815.0
@@ -310,7 +350,7 @@ offset_bottom = 986.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_4s8qw")
 
-[node name="ShieldLabel" type="Label" parent="J1/CameraControllerFPS/Vue2/ShieldBar" unique_id=18941228]
+[node name="ShieldLabel" type="Label" parent="J1/CameraController/Vue2/ShieldBar" unique_id=18941228]
 custom_minimum_size = Vector2(72, 51)
 layout_mode = 0
 offset_left = 50.0
@@ -323,36 +363,73 @@ theme_override_font_sizes/font_size = 50
 text = "100"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ComboBar" type="Control" parent="J1/CameraController/Vue2" unique_id=1341029711]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="J1/CameraController/Vue2/ComboBar" unique_id=1567589489]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.1, 1.1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="J1/CameraController/Vue2/ComboBar/MarginContainer" unique_id=1049081256]
+layout_mode = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="J1/CameraController/Vue2/ComboBar/MarginContainer/VBoxContainer" unique_id=206224277]
+layout_mode = 2
+step = 0.1
+fill_mode = 4
+radial_fill_degrees = 310.0
+texture_under = ExtResource("9_k3crr")
+texture_over = ExtResource("10_sgwr3")
+texture_progress = ExtResource("10_sgwr3")
+tint_over = Color(1, 1, 1, 0)
+
+[node name="ProgressBarLabel" type="Label" parent="J1/CameraController/Vue2/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar" unique_id=1641198802]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 45.0
+offset_right = 201.0
+offset_bottom = 246.0
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_font_sizes/font_size = 195
+text = "D"
+horizontal_alignment = 1
 
 [node name="J2" parent="." unique_id=890448322 instance=ExtResource("2_rfm68")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1, -15)
 player_id = 2
 
-[node name="Camera" parent="J2/CameraControllerFPS" parent_id_path=PackedInt32Array(890448322, 718035250) index="0" unique_id=752964199]
+[node name="Camera" parent="J2/CameraController" parent_id_path=PackedInt32Array(890448322, 718035250) index="0" unique_id=752964199]
 visible = false
 current = false
 
-[node name="RemoteVue5" type="RemoteTransform3D" parent="J2/CameraControllerFPS" parent_id_path=PackedInt32Array(890448322, 718035250) index="1" unique_id=865866804]
+[node name="RemoteVue5" type="RemoteTransform3D" parent="J2/CameraController" parent_id_path=PackedInt32Array(890448322, 718035250) index="1" unique_id=865866804]
 transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0.03, 0, 0.3)
 remote_path = NodePath("../Vue5/Camera")
 
-[node name="RemoteVue6" type="RemoteTransform3D" parent="J2/CameraControllerFPS" parent_id_path=PackedInt32Array(890448322, 718035250) index="2" unique_id=1097339675]
+[node name="RemoteVue6" type="RemoteTransform3D" parent="J2/CameraController" parent_id_path=PackedInt32Array(890448322, 718035250) index="2" unique_id=1097339675]
 transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, -0.03, 0, 0.3)
 remote_path = NodePath("../Vue6/Camera")
 
-[node name="Vue5" type="SubViewport" parent="J2/CameraControllerFPS" parent_id_path=PackedInt32Array(890448322, 718035250) index="3" unique_id=1130869609]
+[node name="Vue5" type="SubViewport" parent="J2/CameraController" parent_id_path=PackedInt32Array(890448322, 718035250) index="3" unique_id=1130869609]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 
-[node name="Camera" type="Camera3D" parent="J2/CameraControllerFPS/Vue5" unique_id=340205500]
+[node name="Camera" type="Camera3D" parent="J2/CameraController/Vue5" unique_id=340205500]
 transform = Transform3D(-1, 2.990035e-08, -8.2150535e-08, 0, 0.9396926, 0.34202012, 8.742278e-08, 0.34202012, -0.9396926, -0.030000025, 2.25, -15.3)
 current = true
 fov = 90.0
 
-[node name="ScoreUI" type="CanvasLayer" parent="J2/CameraControllerFPS/Vue5" unique_id=422092659]
+[node name="ScoreUI" type="CanvasLayer" parent="J2/CameraController/Vue5" unique_id=422092659]
 script = ExtResource("3_k5d3u")
 
-[node name="ScoresPanel" type="Control" parent="J2/CameraControllerFPS/Vue5/ScoreUI" unique_id=219782711]
+[node name="ScoresPanel" type="Control" parent="J2/CameraController/Vue5/ScoreUI" unique_id=219782711]
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
@@ -366,25 +443,25 @@ offset_bottom = -53.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="J2/CameraControllerFPS/Vue5/ScoreUI/ScoresPanel" unique_id=1518533787]
+[node name="VBoxContainer" type="VBoxContainer" parent="J2/CameraController/Vue5/ScoreUI/ScoresPanel" unique_id=1518533787]
 layout_mode = 0
 offset_right = 87.0
 offset_bottom = 77.0
 
-[node name="Titre" type="Label" parent="J2/CameraControllerFPS/Vue5/ScoreUI/ScoresPanel/VBoxContainer" unique_id=210582099]
+[node name="Titre" type="Label" parent="J2/CameraController/Vue5/ScoreUI/ScoresPanel/VBoxContainer" unique_id=210582099]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_yqxl7")
 theme_override_font_sizes/font_size = 18
 text = "♢ Score total ♢"
 
-[node name="Score" type="Label" parent="J2/CameraControllerFPS/Vue5/ScoreUI/ScoresPanel/VBoxContainer" unique_id=473311429]
+[node name="Score" type="Label" parent="J2/CameraController/Vue5/ScoreUI/ScoresPanel/VBoxContainer" unique_id=473311429]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 1, 1, 1)
 theme_override_fonts/font = ExtResource("4_yqxl7")
 theme_override_font_sizes/font_size = 52
 text = "0"
 
-[node name="GainScore" type="Label" parent="J2/CameraControllerFPS/Vue5/ScoreUI/ScoresPanel" unique_id=2095187334]
+[node name="GainScore" type="Label" parent="J2/CameraController/Vue5/ScoreUI/ScoresPanel" unique_id=2095187334]
 visible = false
 layout_mode = 0
 offset_top = 80.0
@@ -395,12 +472,12 @@ theme_override_fonts/font = ExtResource("4_yqxl7")
 theme_override_font_sizes/font_size = 28
 text = "+0"
 
-[node name="InkLayerJ2" type="CanvasLayer" parent="J2/CameraControllerFPS/Vue5" unique_id=2098669961]
+[node name="InkLayerJ2" type="CanvasLayer" parent="J2/CameraController/Vue5" unique_id=2098669961]
 
-[node name="InkOverlayJ2" type="Node2D" parent="J2/CameraControllerFPS/Vue5/InkLayerJ2" unique_id=1252254646]
+[node name="InkOverlayJ2" type="Node2D" parent="J2/CameraController/Vue5/InkLayerJ2" unique_id=1252254646]
 script = ExtResource("5_hrdja")
 
-[node name="ColorRect" type="ColorRect" parent="J2/CameraControllerFPS/Vue5/InkLayerJ2/InkOverlayJ2" unique_id=1316885456]
+[node name="ColorRect" type="ColorRect" parent="J2/CameraController/Vue5/InkLayerJ2/InkOverlayJ2" unique_id=1316885456]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -409,14 +486,14 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.5019608)
 
-[node name="TextureRect" type="TextureRect" parent="J2/CameraControllerFPS/Vue5/InkLayerJ2/InkOverlayJ2" unique_id=2010786171]
+[node name="TextureRect" type="TextureRect" parent="J2/CameraController/Vue5/InkLayerJ2/InkOverlayJ2" unique_id=2010786171]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ShieldBar" type="Control" parent="J2/CameraControllerFPS/Vue5" unique_id=437336744]
+[node name="ShieldBar" type="Control" parent="J2/CameraController/Vue5" unique_id=437336744]
 visible = false
 layout_mode = 3
 anchors_preset = 0
@@ -425,7 +502,7 @@ offset_right = 1540.0
 offset_bottom = 40.0
 script = ExtResource("5_3cheo")
 
-[node name="Contour" type="ColorRect" parent="J2/CameraControllerFPS/Vue5/ShieldBar" unique_id=1879837218]
+[node name="Contour" type="ColorRect" parent="J2/CameraController/Vue5/ShieldBar" unique_id=1879837218]
 layout_mode = 0
 offset_left = 145.0
 offset_top = 845.0
@@ -433,7 +510,7 @@ offset_right = 355.0
 offset_bottom = 915.0
 color = Color(0, 0, 0, 1)
 
-[node name="BG" type="ColorRect" parent="J2/CameraControllerFPS/Vue5/ShieldBar" unique_id=953616322]
+[node name="BG" type="ColorRect" parent="J2/CameraController/Vue5/ShieldBar" unique_id=953616322]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -444,7 +521,7 @@ offset_bottom = 870.0
 grow_vertical = 2
 color = Color(0.58383155, 0.58383155, 0.58383155, 1)
 
-[node name="BarFilled" type="ColorRect" parent="J2/CameraControllerFPS/Vue5/ShieldBar" unique_id=115434452]
+[node name="BarFilled" type="ColorRect" parent="J2/CameraController/Vue5/ShieldBar" unique_id=115434452]
 material = SubResource("ShaderMaterial_8081n")
 layout_mode = 1
 anchors_preset = 9
@@ -455,7 +532,7 @@ offset_right = 350.0
 offset_bottom = 870.0
 grow_vertical = 2
 
-[node name="ShieldIcon" type="TextureRect" parent="J2/CameraControllerFPS/Vue5/ShieldBar" unique_id=778954432]
+[node name="ShieldIcon" type="TextureRect" parent="J2/CameraController/Vue5/ShieldBar" unique_id=778954432]
 layout_mode = 0
 offset_left = 315.0
 offset_top = 815.0
@@ -464,7 +541,7 @@ offset_bottom = 986.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_4s8qw")
 
-[node name="ShieldLabel" type="Label" parent="J2/CameraControllerFPS/Vue5/ShieldBar" unique_id=2022956065]
+[node name="ShieldLabel" type="Label" parent="J2/CameraController/Vue5/ShieldBar" unique_id=2022956065]
 custom_minimum_size = Vector2(72, 51)
 layout_mode = 0
 offset_left = 50.0
@@ -478,19 +555,58 @@ text = "100"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Vue6" type="SubViewport" parent="J2/CameraControllerFPS" parent_id_path=PackedInt32Array(890448322, 718035250) index="4" unique_id=1893834835]
+[node name="ComboBar" type="Control" parent="J2/CameraController/Vue5" unique_id=1701730914]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1600.0
+offset_right = 1640.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="J2/CameraController/Vue5/ComboBar" unique_id=94379451]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.1, 1.1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="J2/CameraController/Vue5/ComboBar/MarginContainer" unique_id=1765363536]
+layout_mode = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="J2/CameraController/Vue5/ComboBar/MarginContainer/VBoxContainer" unique_id=820599314]
+layout_mode = 2
+step = 0.1
+value = 100.0
+fill_mode = 4
+radial_fill_degrees = 310.0
+texture_under = ExtResource("9_k3crr")
+texture_over = ExtResource("10_sgwr3")
+texture_progress = ExtResource("10_sgwr3")
+tint_over = Color(1, 1, 1, 0)
+
+[node name="ProgressBarLabel" type="Label" parent="J2/CameraController/Vue5/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar" unique_id=769496626]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 45.0
+offset_right = 201.0
+offset_bottom = 246.0
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_font_sizes/font_size = 195
+text = "D"
+horizontal_alignment = 1
+
+[node name="Vue6" type="SubViewport" parent="J2/CameraController" parent_id_path=PackedInt32Array(890448322, 718035250) index="4" unique_id=1893834835]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 
-[node name="Camera" type="Camera3D" parent="J2/CameraControllerFPS/Vue6" unique_id=1440031429]
+[node name="Camera" type="Camera3D" parent="J2/CameraController/Vue6" unique_id=1440031429]
 transform = Transform3D(-1, 2.990035e-08, -8.2150535e-08, 0, 0.9396926, 0.34202012, 8.742278e-08, 0.34202012, -0.9396926, 0.029999973, 2.25, -15.3)
 current = true
 fov = 90.0
 
-[node name="ScoreUI" type="CanvasLayer" parent="J2/CameraControllerFPS/Vue6" unique_id=580929518]
+[node name="ScoreUI" type="CanvasLayer" parent="J2/CameraController/Vue6" unique_id=580929518]
 script = ExtResource("3_k5d3u")
 
-[node name="ScoresPanel" type="Control" parent="J2/CameraControllerFPS/Vue6/ScoreUI" unique_id=753238388]
+[node name="ScoresPanel" type="Control" parent="J2/CameraController/Vue6/ScoreUI" unique_id=753238388]
 layout_mode = 3
 anchors_preset = 3
 anchor_left = 1.0
@@ -504,25 +620,25 @@ offset_bottom = -53.0
 grow_horizontal = 0
 grow_vertical = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="J2/CameraControllerFPS/Vue6/ScoreUI/ScoresPanel" unique_id=1777893473]
+[node name="VBoxContainer" type="VBoxContainer" parent="J2/CameraController/Vue6/ScoreUI/ScoresPanel" unique_id=1777893473]
 layout_mode = 0
 offset_right = 87.0
 offset_bottom = 77.0
 
-[node name="Titre" type="Label" parent="J2/CameraControllerFPS/Vue6/ScoreUI/ScoresPanel/VBoxContainer" unique_id=672996639]
+[node name="Titre" type="Label" parent="J2/CameraController/Vue6/ScoreUI/ScoresPanel/VBoxContainer" unique_id=672996639]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_yqxl7")
 theme_override_font_sizes/font_size = 18
 text = "♢ Score total ♢"
 
-[node name="Score" type="Label" parent="J2/CameraControllerFPS/Vue6/ScoreUI/ScoresPanel/VBoxContainer" unique_id=1071463258]
+[node name="Score" type="Label" parent="J2/CameraController/Vue6/ScoreUI/ScoresPanel/VBoxContainer" unique_id=1071463258]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 1, 1, 1)
 theme_override_fonts/font = ExtResource("4_yqxl7")
 theme_override_font_sizes/font_size = 52
 text = "0"
 
-[node name="GainScore" type="Label" parent="J2/CameraControllerFPS/Vue6/ScoreUI/ScoresPanel" unique_id=1883996998]
+[node name="GainScore" type="Label" parent="J2/CameraController/Vue6/ScoreUI/ScoresPanel" unique_id=1883996998]
 visible = false
 layout_mode = 0
 offset_top = 80.0
@@ -533,12 +649,12 @@ theme_override_fonts/font = ExtResource("4_yqxl7")
 theme_override_font_sizes/font_size = 28
 text = "+0"
 
-[node name="InkLayerJ2" type="CanvasLayer" parent="J2/CameraControllerFPS/Vue6" unique_id=1092914798]
+[node name="InkLayerJ2" type="CanvasLayer" parent="J2/CameraController/Vue6" unique_id=1092914798]
 
-[node name="InkOverlayJ2" type="Node2D" parent="J2/CameraControllerFPS/Vue6/InkLayerJ2" unique_id=1981482544]
+[node name="InkOverlayJ2" type="Node2D" parent="J2/CameraController/Vue6/InkLayerJ2" unique_id=1981482544]
 script = ExtResource("5_hrdja")
 
-[node name="ColorRect" type="ColorRect" parent="J2/CameraControllerFPS/Vue6/InkLayerJ2/InkOverlayJ2" unique_id=1328232733]
+[node name="ColorRect" type="ColorRect" parent="J2/CameraController/Vue6/InkLayerJ2/InkOverlayJ2" unique_id=1328232733]
 visible = false
 anchors_preset = 15
 anchor_right = 1.0
@@ -547,14 +663,14 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0.5019608)
 
-[node name="TextureRect" type="TextureRect" parent="J2/CameraControllerFPS/Vue6/InkLayerJ2/InkOverlayJ2" unique_id=1956587796]
+[node name="TextureRect" type="TextureRect" parent="J2/CameraController/Vue6/InkLayerJ2/InkOverlayJ2" unique_id=1956587796]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ShieldBar" type="Control" parent="J2/CameraControllerFPS/Vue6" unique_id=2135384770]
+[node name="ShieldBar" type="Control" parent="J2/CameraController/Vue6" unique_id=2135384770]
 visible = false
 layout_mode = 3
 anchors_preset = 0
@@ -563,7 +679,7 @@ offset_right = 1540.0
 offset_bottom = 40.0
 script = ExtResource("5_3cheo")
 
-[node name="Contour" type="ColorRect" parent="J2/CameraControllerFPS/Vue6/ShieldBar" unique_id=666231494]
+[node name="Contour" type="ColorRect" parent="J2/CameraController/Vue6/ShieldBar" unique_id=666231494]
 layout_mode = 0
 offset_left = 145.0
 offset_top = 845.0
@@ -571,7 +687,7 @@ offset_right = 355.0
 offset_bottom = 915.0
 color = Color(0, 0, 0, 1)
 
-[node name="BG" type="ColorRect" parent="J2/CameraControllerFPS/Vue6/ShieldBar" unique_id=1685608509]
+[node name="BG" type="ColorRect" parent="J2/CameraController/Vue6/ShieldBar" unique_id=1685608509]
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
@@ -582,7 +698,7 @@ offset_bottom = 870.0
 grow_vertical = 2
 color = Color(0.58383155, 0.58383155, 0.58383155, 1)
 
-[node name="BarFilled" type="ColorRect" parent="J2/CameraControllerFPS/Vue6/ShieldBar" unique_id=845578438]
+[node name="BarFilled" type="ColorRect" parent="J2/CameraController/Vue6/ShieldBar" unique_id=845578438]
 material = SubResource("ShaderMaterial_8081n")
 layout_mode = 1
 anchors_preset = 9
@@ -593,7 +709,7 @@ offset_right = 350.0
 offset_bottom = 870.0
 grow_vertical = 2
 
-[node name="ShieldIcon" type="TextureRect" parent="J2/CameraControllerFPS/Vue6/ShieldBar" unique_id=1583122327]
+[node name="ShieldIcon" type="TextureRect" parent="J2/CameraController/Vue6/ShieldBar" unique_id=1583122327]
 layout_mode = 0
 offset_left = 315.0
 offset_top = 815.0
@@ -602,7 +718,7 @@ offset_bottom = 986.0
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("7_4s8qw")
 
-[node name="ShieldLabel" type="Label" parent="J2/CameraControllerFPS/Vue6/ShieldBar" unique_id=1454153508]
+[node name="ShieldLabel" type="Label" parent="J2/CameraController/Vue6/ShieldBar" unique_id=1454153508]
 custom_minimum_size = Vector2(72, 51)
 layout_mode = 0
 offset_left = 50.0
@@ -615,6 +731,44 @@ theme_override_font_sizes/font_size = 50
 text = "100"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ComboBar" type="Control" parent="J2/CameraController/Vue6" unique_id=270179136]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1600.0
+offset_right = 1640.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="J2/CameraController/Vue6/ComboBar" unique_id=609816880]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.1, 1.1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="J2/CameraController/Vue6/ComboBar/MarginContainer" unique_id=1064636415]
+layout_mode = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="J2/CameraController/Vue6/ComboBar/MarginContainer/VBoxContainer" unique_id=1446966594]
+layout_mode = 2
+step = 0.1
+fill_mode = 4
+radial_fill_degrees = 310.0
+texture_under = ExtResource("9_k3crr")
+texture_over = ExtResource("10_sgwr3")
+texture_progress = ExtResource("10_sgwr3")
+tint_over = Color(1, 1, 1, 0)
+
+[node name="ProgressBarLabel" type="Label" parent="J2/CameraController/Vue6/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar" unique_id=1731928316]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 45.0
+offset_right = 201.0
+offset_bottom = 246.0
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_font_sizes/font_size = 195
+text = "D"
+horizontal_alignment = 1
 
 [node name="Vue3" type="SubViewport" parent="." unique_id=1959630340]
 handle_input_locally = false
@@ -720,6 +874,11 @@ visible = false
 
 [node name="TimeStopSound" parent="Game" index="11" unique_id=1815400477]
 volume_db = -10.0
+
+[node name="LevelMusic" type="AudioStreamPlayer" parent="." unique_id=751945284]
+stream = ExtResource("12_4s8qw")
+volume_db = -10.0
+bus = &"Musique"
 
 [editable path="J1"]
 [editable path="J2"]
