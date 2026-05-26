@@ -62,6 +62,7 @@ func _ready() -> void:
 			var shader_vue = "vue_" + str(i)
 			shader_mat.set_shader_parameter(shader_vue, texture_vue)
 	textureRect.material.set_shader_parameter("offset", 0.0) # Initialise l'effet glitch à 0
+	textureRect.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, true, true, false, false]) # Initialise les vues qui auront l'effet de pixelisation
 
 func _process(_delta: float) -> void:
 	# Temps total d'une frame

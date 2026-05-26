@@ -6,14 +6,20 @@ extends Node3D
 @export var disappear_bloc: PackedScene
 @export var splash_bloc: PackedScene
 @export var shield_bloc: PackedScene
+@export var heal_bloc: PackedScene
 @onready var level_music: AudioStreamPlayer
 
 @onready var start_label: Label = $"../StartLabel"
 @onready var disappear_bloc_notif: Label = $"../DisappearBlocNotif"
 @onready var shields: Array[GPUParticles3D] = [$"../Map/Boucliers/ShieldJ1", $"../Map/Boucliers/ShieldJ2"]
 
+# Menu de tutoriel utilisé pour déterminer les modes supplémentaires activés
+@onready var tutoriel_menu: Control = $"../HUD/Tutoriel"
+
 # Booléen de départ décidant du mode de jeu lancé : false pour le menu, true pour la TV
 var mode: bool = false
+# Booléen de départ associé au mode difficile : vie et soins
+var healing: bool = false
 # Booléen de départ pour lancer l'apparition des cubes après le message de départ
 var start_spawn: bool = false
 # Booléen permettant de pré-générer les cubes, une seule fois, dans toute la partie
@@ -67,6 +73,7 @@ var shield_bars: Array[Control]
 # Fonction appelée par le script du jeu pour démarrer l'apparition des cubes et charger les scores visuels
 func activation() -> void:
 	cube_list = [classic_bloc, bonus_bloc, bomb_bloc, disappear_bloc, splash_bloc, shield_bloc]
+	if healing: cube_list.append(heal_bloc)
 	score_uis = []
 	shield_bars = []
 	ink_overlay = []
@@ -85,6 +92,7 @@ func activation() -> void:
 		j1 = get_node("../../J1")
 		j2 = get_node("../../J2")
 		level_music = get_node("../../LevelMusic")
+		healing = tutoriel_menu.healing
 
 		score_uis.append(get_node("../../J1/CameraController/Vue1/ScoreUI"))
 		score_uis.append(get_node("../../J2/CameraController/Vue5/ScoreUI"))
@@ -179,7 +187,11 @@ func _process(delta: float) -> void:
 
 func menu_loop() -> void:
 	if blocs == []:
-		var n = rng.randi_range(0, 5)
+		var n: int
+		if healing:
+			n = rng.randi_range(0, 6)
+		else:
+			n = rng.randi_range(0, 5)
 		spawn_cube(cube_list[n])
 
 func game_loop() -> void:
@@ -206,6 +218,8 @@ func game_loop() -> void:
 			if letter_index < paliers.size():
 				texture_progress_bars[i].max_value = paliers[letter_index]
 				texture_progress_bars[i+2].max_value = paliers[letter_index]
+	
+	# Tant que le palier B est atteint par l'un des deux joueurs, l'autre subit un effet de pixelisation
 
 	if not is_generated:
 		is_generated = true
@@ -345,6 +359,12 @@ func setup_shield_bloc(bloc: Node3D, absolute_speed: float, direction: int, spaw
 	bloc.striked_cube_j2.connect(_onStrikedShieldCube_j2)
 	spawn_valide(bloc, absolute_speed, direction, spawn)
 
+func setup_heal_bloc(bloc: Node3D, absolute_speed: float, direction: int, spawn: Array[float]) -> void:
+	# On connecte le bloc au spawner pour qu'il puisse être relié au score actuel
+	bloc.striked_cube_j1.connect(_onStrikedHealCube_j1)
+	bloc.striked_cube_j2.connect(_onStrikedHealCube_j2)
+	spawn_valide(bloc, absolute_speed, direction, spawn)
+
 func StrikedClassicCube(i: int) -> void:
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 1000
@@ -422,6 +442,9 @@ func StrikedShieldCube(i: int) -> void:
 	score_uis[i].ajouter_score(gain)
 	if mode: score_uis[i+2].ajouter_score(gain)
 
+func StrikedHealCube(i: int) -> void:
+	pass
+
 func _onStrikedClassicCube_j1() -> void:
 	StrikedClassicCube(0)
 
@@ -463,3 +486,9 @@ func _onStrikedShieldCube_j1() -> void:
 
 func _onStrikedShieldCube_j2() -> void:
 	StrikedShieldCube(1)
+
+func _onStrikedHealCube_j1() -> void:
+	StrikedHealCube(0)
+
+func _onStrikedHealCube_j2() -> void:
+	StrikedHealCube(1)

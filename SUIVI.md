@@ -198,6 +198,7 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 - Suppression de l'effet de lumière sur le menu principal, qui servait à faire des tests.
 - Transfert du mode PC dans le menu du jeu pour pouvoir faire directement des tests sur le menu sans lancer de partie et avoir un menu plus réaliste en vue de la version finale.
 - Implémentation d'une barre de progression visuelle montrant le combo de chaque joueur.
+- Ajout d'un mode optionnel en vie limitée (seulement, visuellement) et modification du shader pour les vues pour pouvoir appliquer les effets individuellement, à chaque joueur.
 - Mise à jour de la documentation en lien avec les tâches réalisées ci-dessus.
 
 ### Séance 13 - 27/05

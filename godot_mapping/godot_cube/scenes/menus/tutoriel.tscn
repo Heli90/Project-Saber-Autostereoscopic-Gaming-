@@ -6,6 +6,9 @@
 [ext_resource type="AudioStream" uid="uid://dtx2qu2tls0eq" path="res://addons/sfx/tutoriel_menu_music.mp3" id="5_fwhch"]
 [ext_resource type="FontFile" uid="uid://bd4geqghtkj13" path="res://addons/assets/TextFontBase.ttf" id="6_n18sg"]
 [ext_resource type="FontFile" uid="uid://crtikirivhq6o" path="res://addons/assets/TextFontBold.otf" id="6_phf8o"]
+[ext_resource type="Texture2D" uid="uid://diskainxotx1a" path="res://addons/assets/heart.png" id="7_b7lfr"]
+[ext_resource type="Script" uid="uid://drtrabk7fho4t" path="res://scripts/menus/heal_mode_button.gd" id="8_fwhch"]
+[ext_resource type="Texture2D" uid="uid://drwaudsbjgws2" path="res://addons/assets/empty_heart.png" id="9_phf8o"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n18sg"]
 texture = ExtResource("3_b7lfr")
@@ -143,4 +146,27 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_8jpt8")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_vfcph")
 text = "Démarrer"
 
+[node name="HealModeButton" type="TextureButton" parent="." unique_id=1423390101]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 780.0
+offset_right = 100.0
+offset_bottom = 780.0
+script = ExtResource("8_fwhch")
+full_heart = ExtResource("7_b7lfr")
+empty_heart = ExtResource("9_phf8o")
+
+[node name="HealLabel" type="Label" parent="." unique_id=1978504200]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 830.0
+offset_right = 418.0
+offset_bottom = 861.0
+theme_override_fonts/font = ExtResource("6_n18sg")
+theme_override_font_sizes/font_size = 30
+text = "Vie limitée"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="StartButton" to="." method="_onStartButton_pressed"]
+[connection signal="pressed" from="HealModeButton" to="." method="_onHealModeButton_pressed"]

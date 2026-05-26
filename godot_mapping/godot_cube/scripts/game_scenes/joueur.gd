@@ -12,9 +12,9 @@ const JUMP_VELOCITY: float = 4.5
 @export var blue_shader_material : ShaderMaterial
 
 var landmarks: Node2D
-var saber_range_x : float = 2.5
-var saber_y_min : float = 1.0
-var saber_y_max : float = 3.0
+var saber_range_x : float = 1.5
+var saber_y_min : float = 0.5
+var saber_y_max : float = 2.0
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

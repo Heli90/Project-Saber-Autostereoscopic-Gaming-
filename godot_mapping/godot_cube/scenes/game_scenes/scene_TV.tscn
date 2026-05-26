@@ -27,6 +27,7 @@ shader_parameter/invertViews = false
 shader_parameter/offset = 0.01
 shader_parameter/pixelisation = false
 shader_parameter/pixelisationPower = 200.0
+shader_parameter/pixelisation_mask = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0)
 
 [sub_resource type="Gradient" id="Gradient_fqw2t"]
 
@@ -39,7 +40,7 @@ height = 1080
 script = ExtResource("1_xlecp")
 
 [node name="J1" parent="." unique_id=1529862946 instance=ExtResource("2_rfm68")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 15)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 20)
 
 [node name="Camera" parent="J1/CameraController" parent_id_path=PackedInt32Array(1529862946, 718035250) index="0" unique_id=752964199]
 visible = false
@@ -58,7 +59,7 @@ handle_input_locally = false
 size = Vector2i(1920, 1080)
 
 [node name="Camera" type="Camera3D" parent="J1/CameraController/Vue1" unique_id=642319396]
-transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, -0.03, 2.25, 15.3)
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, -0.03, 2.25, 20.3)
 current = true
 fov = 90.0
 
@@ -232,7 +233,7 @@ handle_input_locally = false
 size = Vector2i(1920, 1080)
 
 [node name="Camera" type="Camera3D" parent="J1/CameraController/Vue2" unique_id=130694043]
-transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0.03, 2.25, 15.3)
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0.03, 2.25, 20.3)
 current = true
 fov = 90.0
 
@@ -402,7 +403,7 @@ text = "D"
 horizontal_alignment = 1
 
 [node name="J2" parent="." unique_id=890448322 instance=ExtResource("2_rfm68")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1, -15)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1, -20)
 player_id = 2
 
 [node name="Camera" parent="J2/CameraController" parent_id_path=PackedInt32Array(890448322, 718035250) index="0" unique_id=752964199]
@@ -422,7 +423,7 @@ handle_input_locally = false
 size = Vector2i(1920, 1080)
 
 [node name="Camera" type="Camera3D" parent="J2/CameraController/Vue5" unique_id=340205500]
-transform = Transform3D(-1, 2.990035e-08, -8.2150535e-08, 0, 0.9396926, 0.34202012, 8.742278e-08, 0.34202012, -0.9396926, -0.030000025, 2.25, -15.3)
+transform = Transform3D(-1, 2.990035e-08, -8.2150535e-08, 0, 0.9396926, 0.34202012, 8.742278e-08, 0.34202012, -0.9396926, -0.030000025, 2.25, -20.3)
 current = true
 fov = 90.0
 
@@ -598,7 +599,7 @@ handle_input_locally = false
 size = Vector2i(1920, 1080)
 
 [node name="Camera" type="Camera3D" parent="J2/CameraController/Vue6" unique_id=1440031429]
-transform = Transform3D(-1, 2.990035e-08, -8.2150535e-08, 0, 0.9396926, 0.34202012, 8.742278e-08, 0.34202012, -0.9396926, 0.029999973, 2.25, -15.3)
+transform = Transform3D(-1, 2.990035e-08, -8.2150535e-08, 0, 0.9396926, 0.34202012, 8.742278e-08, 0.34202012, -0.9396926, 0.029999973, 2.25, -20.3)
 current = true
 fov = 90.0
 
