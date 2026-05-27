@@ -208,7 +208,7 @@ emitting = false
 [node name="Anneaux" type="Node3D" parent="Map" unique_id=1036560845]
 
 [node name="AnneauxJ1" type="Node3D" parent="Map/Anneaux" unique_id=1938559002]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
 
 [node name="Ring1" type="CSGBox3D" parent="Map/Anneaux/AnneauxJ1" unique_id=212780911]
 size = Vector3(20, 20, 2)
@@ -265,7 +265,7 @@ size = Vector3(17, 17, 2)
 material = SubResource("StandardMaterial3D_qmffw")
 
 [node name="AnneauxJ2" type="Node3D" parent="Map/Anneaux" unique_id=1856325245]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -30)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
 
 [node name="Ring1" type="CSGBox3D" parent="Map/Anneaux/AnneauxJ2" unique_id=2057862987]
 size = Vector3(20, 20, 2)

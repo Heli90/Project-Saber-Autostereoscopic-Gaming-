@@ -33,12 +33,12 @@ func set_blur_intensity(value: float):
 func _process(_delta: float) -> void:
 	if mode:
 		# On vérifie si un des joueurs a perdu tous ses points de vie
-		if cube_spawner.health[0] < 0:
-			if cube_spawner.health[1] < 0:
+		if cube_spawner.health[0] == 0:
+			if cube_spawner.health[1] == 0:
 				onPartieTimerTimeout()
 			else:
 				onPartieTimerTimeout(true, 2)
-		elif cube_spawner.health[1] < 0:
+		elif cube_spawner.health[1] == 0:
 			onPartieTimerTimeout(true, 1)
 		if not level_music: level_music = get_node("../LevelMusic")
 		if (not level_music.playing) and cube_spawner.is_generated and cube_spawner.elapsed_time > 5.0: onPartieTimerTimeout()

@@ -3,6 +3,7 @@ extends StaticBody3D
 var vitesse_deplacement: float = 0.0
 var temps_oscillation: float = 0.0
 var all_meshes: Array[Node]
+var all_polygons: Array[Node]
 
 # Variables associées au fade-in, au fade-out et sa durée
 var fading_in: bool = false
@@ -15,21 +16,23 @@ signal striked_cube_j1
 signal striked_cube_j2
 
 func _ready() -> void:
-	all_meshes = find_children("*", "", true, false)
+	all_meshes = find_children("*", "MeshInstance3D", true, false)
+	all_polygons = find_children("*", "CSGPolygon3D", true, false)
 	for mesh in all_meshes:
-		var mat: Material
-		match mesh:
-			CollisionShape3D: pass
-			MeshInstance3D:
-				mesh.mesh = mesh.mesh.duplicate()
-				mat = mesh.get_active_material(0)
-			CSGPolygon3D:
-				mat = mesh.material
+		mesh.mesh = mesh.mesh.duplicate()
+		var mat = mesh.get_active_material(0)
 		if mat:
 			mat = mat.duplicate()
 			mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 			mat.albedo_color.a = 0.0
 			mesh.set_surface_override_material(0, mat)
+	for polygon in all_polygons:
+		var mat = polygon.material
+		if mat:
+			mat = mat.duplicate()
+			mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+			mat.albedo_color.a = 0.0
+			polygon.material = mat
 	fading_in = true
 	add_to_group("cube")
 
@@ -67,14 +70,12 @@ func _physics_process(delta: float) -> void:
 
 func set_all_alpha(alpha: float) -> void:
 	for mesh in all_meshes:
-		var mat: Material
-		match mesh:
-			CollisionShape3D: pass
-			MeshInstance3D:
-				mesh.mesh = mesh.mesh.duplicate()
-				mat = mesh.get_active_material(0)
-			CSGPolygon3D:
-				mat = mesh.material
+		mesh.mesh = mesh.mesh.duplicate()
+		var mat = mesh.get_active_material(0)
+		if mat:
+			mat.albedo_color.a = clamp(alpha, 0.0, 1.0)
+	for polygon in all_polygons:
+		var mat = polygon.material
 		if mat:
 			mat.albedo_color.a = clamp(alpha, 0.0, 1.0)
 

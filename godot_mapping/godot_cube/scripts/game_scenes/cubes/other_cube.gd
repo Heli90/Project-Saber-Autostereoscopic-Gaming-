@@ -14,16 +14,10 @@ signal striked_cube_j1
 signal striked_cube_j2
 
 func _ready() -> void:
-	all_meshes = find_children("*", "", true, false)
+	all_meshes = find_children("*", "MeshInstance3D", true, false)
 	for mesh in all_meshes:
-		var mat: Material
-		match mesh:
-			CollisionShape3D: pass
-			MeshInstance3D:
-				mesh.mesh = mesh.mesh.duplicate()
-				mat = mesh.get_active_material(0)
-			CSGPolygon3D:
-				mat = mesh.material
+		mesh.mesh = mesh.mesh.duplicate()
+		var mat = mesh.get_active_material(0)
 		if mat:
 			mat = mat.duplicate()
 			mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
@@ -45,6 +39,7 @@ func _process(delta: float) -> void:
 	# On fait le fade-out si nécessaire
 	if fading_out:
 		elapsed_fade_out += delta
+		all_meshes.reverse()
 		set_all_alpha(1.0 - (elapsed_fade_out / fade_duration))
 		if elapsed_fade_out >= fade_duration:
 			queue_free()
@@ -63,14 +58,8 @@ func _physics_process(delta: float) -> void:
 
 func set_all_alpha(alpha: float) -> void:
 	for mesh in all_meshes:
-		var mat: Material
-		match mesh:
-			CollisionShape3D: pass
-			MeshInstance3D:
-				mesh.mesh = mesh.mesh.duplicate()
-				mat = mesh.get_active_material(0)
-			CSGPolygon3D:
-				mat = mesh.material
+		mesh.mesh = mesh.mesh.duplicate()
+		var mat = mesh.get_active_material(0)
 		if mat:
 			mat.albedo_color.a = clamp(alpha, 0.0, 1.0)
 

@@ -314,10 +314,10 @@ func set_speed(bloc: Node3D, direction: int, absolute_speed: float, disappear: b
 					else: bloc.vitesse_deplacement = -absolute_speed
 		true: match direction:
 				0:
-					if absolute_speed < 0 : bloc.vitesse_deplacement = rng.randf_range(4.0, 6.0)
+					if absolute_speed < 0 : bloc.vitesse_deplacement = rng.randf_range(2.0, 4.0)
 					else: bloc.vitesse_deplacement = absolute_speed
 				1:
-					if absolute_speed < 0 : bloc.vitesse_deplacement = rng.randf_range(-4.0, -6.0)
+					if absolute_speed < 0 : bloc.vitesse_deplacement = rng.randf_range(-2.0, -4.0)
 					else: bloc.vitesse_deplacement = -absolute_speed
 
 func generate_bloc(scene_bloc: PackedScene) -> Node3D:
