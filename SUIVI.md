@@ -205,7 +205,13 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 ### Séance 13 - 27/05
 
+- Présentation du projet Artishow lors de l'audit.
 
+### Entre la séance 13 et la séance 14
+
+**Van-Kévin**:
+- Ajout fonctionnel du cube de soin et de la barre de soin.
+- Modification de l'affichage du classement en fin de partie si un joueur a perdu tous ses points de vie.
 
 ### Séance 14 - 10/06
 
