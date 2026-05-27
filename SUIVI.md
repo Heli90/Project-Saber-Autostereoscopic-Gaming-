@@ -212,6 +212,8 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 **Van-Kévin**:
 - Ajout fonctionnel du cube de soin et de la barre de soin.
 - Modification de l'affichage du classement en fin de partie si un joueur a perdu tous ses points de vie.
+- Ajout d'un fade-in et d'un fade-out pour tous les cubes.
+- Ajout d'anneaux dans le terrain pour le rendre plus vivant.
 
 ### Séance 14 - 10/06
 

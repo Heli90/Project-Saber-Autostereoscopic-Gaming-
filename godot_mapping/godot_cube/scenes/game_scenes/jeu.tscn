@@ -3,11 +3,10 @@
 [ext_resource type="Script" uid="uid://cdssy8fdiffsx" path="res://scripts/game_scenes/jeu.gd" id="1_fu8w0"]
 [ext_resource type="PackedScene" uid="uid://s6n8auc020ga" path="res://scenes/menus/game_ending.tscn" id="3_0hq27"]
 [ext_resource type="FontFile" uid="uid://bd4geqghtkj13" path="res://addons/assets/TextFontBase.ttf" id="4_nljp5"]
-[ext_resource type="Script" uid="uid://wefxg2pwa2m8" path="res://scripts/game_scenes/cube_spawner.gd" id="5_32rft"]
+[ext_resource type="Script" uid="uid://wefxg2pwa2m8" path="res://scripts/game_scenes/map/cube_spawner.gd" id="5_32rft"]
 [ext_resource type="PackedScene" uid="uid://cowlnii2y28cm" path="res://scenes/menus/pause_menu.tscn" id="6_04wrr"]
 [ext_resource type="Script" uid="uid://p0s0y75s7ehp" path="res://scripts/game_scenes/body_land_marks_proceed.gd" id="6_32rft"]
 [ext_resource type="PackedScene" uid="uid://cpdl5o8jume4p" path="res://scenes/game_scenes/cubes/classic_cube.tscn" id="6_nmqw8"]
-[ext_resource type="AudioStream" uid="uid://dseksoliltjqp" path="res://addons/sfx/TimeStopSFX.mp3" id="7_32rft"]
 [ext_resource type="PackedScene" uid="uid://c7o1d8sboxv2g" path="res://scenes/game_scenes/cubes/bonus_cube.tscn" id="7_gphcn"]
 [ext_resource type="PackedScene" uid="uid://bhsti1g7ancuo" path="res://scenes/game_scenes/cubes/bomb_cube.tscn" id="8_e41p7"]
 [ext_resource type="PackedScene" uid="uid://cy68ifed1fagu" path="res://scenes/game_scenes/cubes/disappear_cube.tscn" id="9_ycxfq"]
@@ -15,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://djmp5mtek83sy" path="res://scenes/game_scenes/cubes/heal_cube.tscn" id="11_wgmfl"]
 [ext_resource type="FontFile" uid="uid://crtikirivhq6o" path="res://addons/assets/TextFontBold.otf" id="11_ycxfq"]
 [ext_resource type="PackedScene" uid="uid://b2scygnmuljbm" path="res://scenes/game_scenes/cubes/shield_cube.tscn" id="12_8x66g"]
+[ext_resource type="Script" uid="uid://b8hvntdiwpe0p" path="res://scripts/game_scenes/map/ring.gd" id="13_qmffw"]
 [ext_resource type="PackedScene" uid="uid://c4x12na4wh5mf" path="res://scenes/game_scenes/shield.tscn" id="13_wgmfl"]
 
 [sub_resource type="Sky" id="Sky_ypfyx"]
@@ -27,7 +27,7 @@ reflected_light_source = 2
 glow_enabled = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_nmqw8"]
-size = Vector3(8, 0.1, 80)
+size = Vector3(8, 0.1, 120)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gphcn"]
 albedo_color = Color(0.050980393, 0.050980393, 0.14901961, 1)
@@ -38,7 +38,7 @@ emission = Color(0.101960786, 0.101960786, 0.5019608, 1)
 emission_energy_multiplier = 0.5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_nljp5"]
-size = Vector3(8, 0.1, 80)
+size = Vector3(8, 0.1, 120)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_y8ul7"]
 
@@ -46,7 +46,7 @@ size = Vector3(8, 0.1, 80)
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_45xf8"]
-size = Vector3(0.1, 6, 80)
+size = Vector3(0.1, 6, 120)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ypfyx"]
 transparency = 1
@@ -57,7 +57,7 @@ emission = Color(0.3019608, 0, 1, 1)
 emission_energy_multiplier = 1.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_ypfyx"]
-size = Vector3(0.1, 6, 80)
+size = Vector3(0.1, 6, 120)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_32rft"]
 transparency = 1
@@ -68,7 +68,7 @@ emission = Color(1, 0, 0.3019608, 1)
 emission_energy_multiplier = 1.5
 
 [sub_resource type="BoxMesh" id="BoxMesh_e41p7"]
-size = Vector3(8, 0.1, 80)
+size = Vector3(8, 0.1, 120)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ycxfq"]
 transparency = 1
@@ -77,13 +77,20 @@ metallic = 0.7
 roughness = 0.1
 
 [sub_resource type="BoxMesh" id="BoxMesh_32rft"]
-size = Vector3(0.02, 0.02, 80)
+size = Vector3(0.02, 0.02, 120)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nmqw8"]
 albedo_color = Color(0.5019608, 0.5019608, 1, 1)
 emission_enabled = true
 emission = Color(0.5019608, 0.5019608, 1, 1)
 emission_energy_multiplier = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wgmfl"]
+albedo_color = Color(0.19215687, 0.2627451, 0.45490196, 1)
+metallic = 0.5
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qmffw"]
 
 [sub_resource type="Theme" id="Theme_ycxfq"]
 default_font = ExtResource("4_nljp5")
@@ -134,16 +141,14 @@ shadow_enabled = true
 
 [node name="Map" type="Node3D" parent="." unique_id=1966754843]
 
-[node name="Sols" type="Node3D" parent="Map" unique_id=812124684]
-
-[node name="SolJ1" type="StaticBody3D" parent="Map/Sols" unique_id=220032303]
+[node name="Sol" type="StaticBody3D" parent="Map" unique_id=220032303]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/Sols/SolJ1" unique_id=13708150]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Map/Sol" unique_id=13708150]
 mesh = SubResource("BoxMesh_nmqw8")
 surface_material_override/0 = SubResource("StandardMaterial3D_gphcn")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Sols/SolJ1" unique_id=616806096]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Sol" unique_id=616806096]
 shape = SubResource("BoxShape3D_nljp5")
 
 [node name="Murs" type="Node3D" parent="Map" unique_id=212341838]
@@ -199,6 +204,122 @@ emitting = false
 [node name="ShieldJ2" parent="Map/Boucliers" unique_id=334358958 instance=ExtResource("13_wgmfl")]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 2, -25)
 emitting = false
+
+[node name="Anneaux" type="Node3D" parent="Map" unique_id=1036560845]
+
+[node name="AnneauxJ1" type="Node3D" parent="Map/Anneaux" unique_id=1938559002]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 30)
+
+[node name="Ring1" type="CSGBox3D" parent="Map/Anneaux/AnneauxJ1" unique_id=212780911]
+size = Vector3(20, 20, 2)
+material = SubResource("StandardMaterial3D_wgmfl")
+script = ExtResource("13_qmffw")
+
+[node name="Intérieur" type="CSGBox3D" parent="Map/Anneaux/AnneauxJ1/Ring1" unique_id=914287992]
+operation = 2
+size = Vector3(15, 15, 2)
+material = SubResource("StandardMaterial3D_qmffw")
+
+[node name="Ring2" type="CSGBox3D" parent="Map/Anneaux/AnneauxJ1" unique_id=941371402]
+transform = Transform3D(0.9396926, -0.34202012, 0, 0.34202012, 0.9396926, 0, 0, 0, 1, 0, 0, -5)
+size = Vector3(21, 21, 2)
+material = SubResource("StandardMaterial3D_wgmfl")
+script = ExtResource("13_qmffw")
+
+[node name="Intérieur" type="CSGBox3D" parent="Map/Anneaux/AnneauxJ1/Ring2" unique_id=330991433]
+operation = 2
+size = Vector3(16, 16, 2)
+material = SubResource("StandardMaterial3D_qmffw")
+
+[node name="Ring3" type="CSGBox3D" parent="Map/Anneaux/AnneauxJ1" unique_id=767556994]
+transform = Transform3D(0.7660444, -0.6427875, 0, 0.6427875, 0.7660444, 0, 0, 0, 1, 0, 0, -10)
+size = Vector3(22, 22, 2)
+material = SubResource("StandardMaterial3D_wgmfl")
+script = ExtResource("13_qmffw")
+
+[node name="Intérieur" type="CSGBox3D" parent="Map/Anneaux/AnneauxJ1/Ring3" unique_id=298892183]
+operation = 2
+size = Vector3(17, 17, 2)
+material = SubResource("StandardMaterial3D_qmffw")
+
+[node name="Ring4" type="CSGBox3D" parent="Map/Anneaux/AnneauxJ1" unique_id=236869830]
+transform = Transform3D(0.93969256, 0.3420201, 0, -0.3420201, 0.93969256, 0, 0, 0, 1, 0, 0, 5)
+size = Vector3(21, 21, 2)
+material = SubResource("StandardMaterial3D_wgmfl")
+script = ExtResource("13_qmffw")
+
+[node name="Intérieur1" type="CSGBox3D" parent="Map/Anneaux/AnneauxJ1/Ring4" unique_id=461876435]
+operation = 2
+size = Vector3(16, 16, 2)
+material = SubResource("StandardMaterial3D_qmffw")
+
+[node name="Ring5" type="CSGBox3D" parent="Map/Anneaux/AnneauxJ1" unique_id=1824984277]
+transform = Transform3D(0.7660444, 0.6427875, 0, -0.6427875, 0.7660444, 0, 0, 0, 1, 0, 0, 10)
+size = Vector3(22, 22, 2)
+material = SubResource("StandardMaterial3D_wgmfl")
+script = ExtResource("13_qmffw")
+
+[node name="Intérieur" type="CSGBox3D" parent="Map/Anneaux/AnneauxJ1/Ring5" unique_id=28715997]
+operation = 2
+size = Vector3(17, 17, 2)
+material = SubResource("StandardMaterial3D_qmffw")
+
+[node name="AnneauxJ2" type="Node3D" parent="Map/Anneaux" unique_id=1856325245]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -30)
+
+[node name="Ring1" type="CSGBox3D" parent="Map/Anneaux/AnneauxJ2" unique_id=2057862987]
+size = Vector3(20, 20, 2)
+material = SubResource("StandardMaterial3D_wgmfl")
+script = ExtResource("13_qmffw")
+
+[node name="Intérieur" type="CSGBox3D" parent="Map/Anneaux/AnneauxJ2/Ring1" unique_id=1247317814]
+operation = 2
+size = Vector3(15, 15, 2)
+material = SubResource("StandardMaterial3D_qmffw")
+
+[node name="Ring2" type="CSGBox3D" parent="Map/Anneaux/AnneauxJ2" unique_id=2069303297]
+transform = Transform3D(0.9396926, -0.34202012, 0, 0.34202012, 0.9396926, 0, 0, 0, 1, 0, 0, -5)
+size = Vector3(21, 21, 2)
+material = SubResource("StandardMaterial3D_wgmfl")
+script = ExtResource("13_qmffw")
+
+[node name="Intérieur" type="CSGBox3D" parent="Map/Anneaux/AnneauxJ2/Ring2" unique_id=1147927050]
+operation = 2
+size = Vector3(16, 16, 2)
+material = SubResource("StandardMaterial3D_qmffw")
+
+[node name="Ring3" type="CSGBox3D" parent="Map/Anneaux/AnneauxJ2" unique_id=943000364]
+transform = Transform3D(0.7660444, -0.6427875, 0, 0.6427875, 0.7660444, 0, 0, 0, 1, 0, 0, -10)
+size = Vector3(22, 22, 2)
+material = SubResource("StandardMaterial3D_wgmfl")
+script = ExtResource("13_qmffw")
+
+[node name="Intérieur" type="CSGBox3D" parent="Map/Anneaux/AnneauxJ2/Ring3" unique_id=1703909163]
+operation = 2
+size = Vector3(17, 17, 2)
+material = SubResource("StandardMaterial3D_qmffw")
+
+[node name="Ring4" type="CSGBox3D" parent="Map/Anneaux/AnneauxJ2" unique_id=48472457]
+transform = Transform3D(0.93969256, 0.3420201, 0, -0.3420201, 0.93969256, 0, 0, 0, 1, 0, 0, 5)
+size = Vector3(21, 21, 2)
+material = SubResource("StandardMaterial3D_wgmfl")
+script = ExtResource("13_qmffw")
+
+[node name="Intérieur1" type="CSGBox3D" parent="Map/Anneaux/AnneauxJ2/Ring4" unique_id=411388834]
+operation = 2
+size = Vector3(16, 16, 2)
+material = SubResource("StandardMaterial3D_qmffw")
+
+[node name="Ring5" type="CSGBox3D" parent="Map/Anneaux/AnneauxJ2" unique_id=1717699350]
+transform = Transform3D(0.7660444, 0.6427875, 0, -0.6427875, 0.7660444, 0, 0, 0, 1, 0, 0, 10)
+size = Vector3(22, 22, 2)
+material = SubResource("StandardMaterial3D_wgmfl")
+script = ExtResource("13_qmffw")
+
+[node name="Intérieur" type="CSGBox3D" parent="Map/Anneaux/AnneauxJ2/Ring5" unique_id=1526799392]
+operation = 2
+size = Vector3(17, 17, 2)
+material = SubResource("StandardMaterial3D_qmffw")
 
 [node name="LandMarksProceed" type="Node2D" parent="." unique_id=775762795]
 position = Vector2(810, 0)
@@ -283,9 +404,6 @@ theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_fonts/font = ExtResource("11_ycxfq")
 theme_override_font_sizes/font_size = 40
 text = "Touché !"
-
-[node name="TimeStopSound" type="AudioStreamPlayer" parent="." unique_id=1815400477]
-stream = ExtResource("7_32rft")
 
 [connection signal="timeout" from="PartieTimer" to="." method="onPartieTimerTimeout"]
 [connection signal="canceled" from="LandMarksProceed/SelectCamera" to="LandMarksProceed" method="_start_camera"]

@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://v4jt0cyocs3e" path="res://scripts/game_scenes/scene_tv.gd" id="1_xlecp"]
 [ext_resource type="PackedScene" uid="uid://br2jmvjla4guc" path="res://scenes/game_scenes/joueur.tscn" id="2_rfm68"]
-[ext_resource type="Script" uid="uid://c4nxreh0k2je7" path="res://scripts/game_scenes/score_ui.gd" id="3_k5d3u"]
+[ext_resource type="Script" uid="uid://c4nxreh0k2je7" path="res://scripts/game_scenes/visuals/score_ui.gd" id="3_k5d3u"]
 [ext_resource type="FontFile" uid="uid://bd4geqghtkj13" path="res://addons/assets/TextFontBase.ttf" id="3_llrkf"]
 [ext_resource type="Shader" uid="uid://vno46ensk36y" path="res://shaders/generation_image.gdshader" id="4_wdlj1"]
 [ext_resource type="FontFile" uid="uid://bulj5s2rcjc7b" path="res://addons/assets/BAHNSCHRIFT.TTF" id="4_yqxl7"]
-[ext_resource type="Script" uid="uid://dnfkxpf3p8gki" path="res://scripts/game_scenes/shield_bar.gd" id="5_3cheo"]
-[ext_resource type="Script" uid="uid://cx3d6alfd6nrm" path="res://scripts/game_scenes/ink_overlay.gd" id="5_hrdja"]
-[ext_resource type="Script" uid="uid://b488bjxdcwo2m" path="res://scripts/game_scenes/health_bar.gd" id="6_af46e"]
+[ext_resource type="Script" uid="uid://dnfkxpf3p8gki" path="res://scripts/game_scenes/visuals/shield_bar.gd" id="5_3cheo"]
+[ext_resource type="Script" uid="uid://cx3d6alfd6nrm" path="res://scripts/game_scenes/visuals/ink_overlay.gd" id="5_hrdja"]
+[ext_resource type="Script" uid="uid://b488bjxdcwo2m" path="res://scripts/game_scenes/visuals/health_bar.gd" id="6_af46e"]
 [ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="6_qo1rj"]
 [ext_resource type="Texture2D" uid="uid://barxo14ju82s8" path="res://addons/assets/shield_icon.png" id="7_4s8qw"]
 [ext_resource type="Shader" uid="uid://bws066256p50k" path="res://shaders/health_bar.gdshader" id="7_k3crr"]
@@ -1123,9 +1123,6 @@ texture = SubResource("GradientTexture2D_6c3ax")
 
 [node name="FonduLayer" parent="Game/HUD" parent_id_path=PackedInt32Array(1026699542, 2058758241) index="0" unique_id=478103391]
 visible = false
-
-[node name="TimeStopSound" parent="Game" index="11" unique_id=1815400477]
-volume_db = -10.0
 
 [node name="LevelMusic" type="AudioStreamPlayer" parent="." unique_id=751945284]
 stream = ExtResource("12_4s8qw")

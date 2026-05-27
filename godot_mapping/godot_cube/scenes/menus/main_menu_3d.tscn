@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" uid="uid://k24etkqcny5a" path="res://scripts/menus/main_menu_3d.gd" id="1_l64ht"]
 [ext_resource type="PackedScene" uid="uid://br2jmvjla4guc" path="res://scenes/game_scenes/joueur.tscn" id="2_ohtsu"]
-[ext_resource type="Script" uid="uid://c4nxreh0k2je7" path="res://scripts/game_scenes/score_ui.gd" id="3_hp5ot"]
+[ext_resource type="Script" uid="uid://c4nxreh0k2je7" path="res://scripts/game_scenes/visuals/score_ui.gd" id="3_hp5ot"]
 [ext_resource type="FontFile" uid="uid://bulj5s2rcjc7b" path="res://addons/assets/BAHNSCHRIFT.TTF" id="4_q7bwt"]
-[ext_resource type="Script" uid="uid://cx3d6alfd6nrm" path="res://scripts/game_scenes/ink_overlay.gd" id="5_dg8ca"]
-[ext_resource type="Script" uid="uid://dnfkxpf3p8gki" path="res://scripts/game_scenes/shield_bar.gd" id="6_tqn45"]
+[ext_resource type="Script" uid="uid://cx3d6alfd6nrm" path="res://scripts/game_scenes/visuals/ink_overlay.gd" id="5_dg8ca"]
+[ext_resource type="Script" uid="uid://dnfkxpf3p8gki" path="res://scripts/game_scenes/visuals/shield_bar.gd" id="6_tqn45"]
 [ext_resource type="Shader" uid="uid://dk5jixryl8es3" path="res://shaders/shield_bar.gdshader" id="7_favsk"]
 [ext_resource type="Texture2D" uid="uid://barxo14ju82s8" path="res://addons/assets/shield_icon.png" id="8_52ohd"]
 [ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="9_uud71"]
