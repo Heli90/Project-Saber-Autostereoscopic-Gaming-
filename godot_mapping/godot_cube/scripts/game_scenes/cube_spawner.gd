@@ -30,6 +30,8 @@ var rng = RandomNumberGenerator.new()
 # Liste de tous les types de cubes
 var cube_list: Array[PackedScene]
 
+var texture: TextureRect
+
 # Temps de jeu écoulé
 var elapsed_time: float = 0.0
 
@@ -93,6 +95,7 @@ func activation() -> void:
 		j2 = get_node("../../J2")
 		level_music = get_node("../../LevelMusic")
 		healing = tutoriel_menu.healing
+		texture = get_node("../../TextureRect")
 
 		score_uis.append(get_node("../../J1/CameraController/Vue1/ScoreUI"))
 		score_uis.append(get_node("../../J2/CameraController/Vue5/ScoreUI"))
@@ -179,6 +182,7 @@ func _process(delta: float) -> void:
 		# On actualise le meilleur combo de cubes
 		if best_combo < stocked_combo.max():
 			best_combo = stocked_combo.max()
+		
 		match mode:
 			# Boucle de jeu du jeu dans le menu
 			false: menu_loop()
@@ -219,32 +223,33 @@ func game_loop() -> void:
 				texture_progress_bars[i].max_value = paliers[letter_index]
 				texture_progress_bars[i+2].max_value = paliers[letter_index]
 	
-	# Tant que le palier B est atteint par l'un des deux joueurs, l'autre subit un effet de pixelisation
+	# A chaque palier passé par l'un des deux joueurs, l'autre subit un effet de pixelisation
 
-	if not is_generated:
-		is_generated = true
+	menu_loop()
+	# if not is_generated:
+		# is_generated = true
 
 		# Pré-génération du niveau de la partie
-		scheduled_bloc(classic_bloc, 4.75, 0, [0.0, 2.0], 4.0, 1)
-		scheduled_bloc(classic_bloc, 5.0, 0, [0.0, 2.0], 4.0, 3)
-		scheduled_bloc(classic_bloc, 4.75, 1, [-2.0, 2.0], 4.0, 1)
-		scheduled_bloc(classic_bloc, 4.75, 1, [2.0, 2.0], 4.0, 1)
+		# scheduled_bloc(classic_bloc, 4.75, 0, [0.0, 2.0], 4.0, 1)
+		# scheduled_bloc(classic_bloc, 5.0, 0, [0.0, 2.0], 4.0, 3)
+		# scheduled_bloc(classic_bloc, 4.75, 1, [-2.0, 2.0], 4.0, 1)
+		# scheduled_bloc(classic_bloc, 4.75, 1, [2.0, 2.0], 4.0, 1)
 
-		scheduled_bloc(classic_bloc, 7.25, 0, [-2.0, 0.5], 4.0, 1)
-		scheduled_bloc(classic_bloc, 7.25, 1, [-2.0, 2.0], 4.0, 2)
+		# scheduled_bloc(classic_bloc, 7.25, 0, [-2.0, 0.5], 4.0, 1)
+		# scheduled_bloc(classic_bloc, 7.25, 1, [-2.0, 2.0], 4.0, 2)
 
-		scheduled_bloc(bonus_bloc, 10.0, 0, [0.0, 3.5], 8.0)
-		scheduled_bloc(bonus_bloc, 10.0, 1, [-2.0, 0.5], 8.0)
+		# scheduled_bloc(bonus_bloc, 10.0, 0, [0.0, 3.5], 8.0)
+		# scheduled_bloc(bonus_bloc, 10.0, 1, [-2.0, 0.5], 8.0)
 
-		scheduled_bloc(bomb_bloc, 12.5, 0, [-2.0, 0.5], 6.0)
-		scheduled_bloc(bomb_bloc, 12.5, 1, [2.0, 0.5], 6.0)
-		scheduled_bloc(bomb_bloc, 12.5, 0, [2.0, 3.5], 6.0)
-		scheduled_bloc(bomb_bloc, 12.5, 1, [-2.0, 3.5], 6.0)
+		# scheduled_bloc(bomb_bloc, 12.5, 0, [-2.0, 0.5], 6.0)
+		# scheduled_bloc(bomb_bloc, 12.5, 1, [2.0, 0.5], 6.0)
+		# scheduled_bloc(bomb_bloc, 12.5, 0, [2.0, 3.5], 6.0)
+		# scheduled_bloc(bomb_bloc, 12.5, 1, [-2.0, 3.5], 6.0)
 		
-		scheduled_bloc(classic_bloc, 14.75, 0, [-2.0, 2.0], 4.0, 1)
-		scheduled_bloc(classic_bloc, 14.75, 0, [2.0, 2.0], 4.0, 1)
-		scheduled_bloc(classic_bloc, 14.75, 1, [-2.0, 0.5], 4.0, 1)
-		scheduled_bloc(classic_bloc, 14.75, 1, [2.0, 0.5], 4.0, 3)
+		# scheduled_bloc(classic_bloc, 14.75, 0, [-2.0, 2.0], 4.0, 1)
+		# scheduled_bloc(classic_bloc, 14.75, 0, [2.0, 2.0], 4.0, 1)
+		# scheduled_bloc(classic_bloc, 14.75, 1, [-2.0, 0.5], 4.0, 1)
+		# scheduled_bloc(classic_bloc, 14.75, 1, [2.0, 0.5], 4.0, 3)
 
 func scheduled_bloc(scene_bloc: PackedScene, arrival_time: float, direction: int = rng.randi_range(0, 1),
 spawn: Array[float] = [0.0, -1.0], absolute_speed: float = -1.0, color: int = rng.randi_range(1, 3)) -> void:

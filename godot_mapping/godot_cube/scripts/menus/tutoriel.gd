@@ -52,4 +52,5 @@ func _onStartButton_pressed() -> void:
 
 func _onHealModeButton_pressed() -> void:
 	heal_mode_button.activated = !heal_mode_button.activated
-	heal_mode_button.texture_normal = heal_mode_button.full_heart if heal_mode_button.activated else heal_mode_button.empty_heart
+	healing = heal_mode_button.activated
+	heal_mode_button.texture_normal = heal_mode_button.full_heart if healing else heal_mode_button.empty_heart
