@@ -8,15 +8,17 @@
 [ext_resource type="FontFile" uid="uid://bulj5s2rcjc7b" path="res://addons/assets/BAHNSCHRIFT.TTF" id="4_yqxl7"]
 [ext_resource type="Script" uid="uid://dnfkxpf3p8gki" path="res://scripts/game_scenes/shield_bar.gd" id="5_3cheo"]
 [ext_resource type="Script" uid="uid://cx3d6alfd6nrm" path="res://scripts/game_scenes/ink_overlay.gd" id="5_hrdja"]
-[ext_resource type="Shader" uid="uid://dk5jixryl8es3" path="res://shaders/shield_bar.gdshader" id="6_hrdja"]
+[ext_resource type="Script" uid="uid://b488bjxdcwo2m" path="res://scripts/game_scenes/health_bar.gd" id="6_af46e"]
 [ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="6_qo1rj"]
 [ext_resource type="Texture2D" uid="uid://barxo14ju82s8" path="res://addons/assets/shield_icon.png" id="7_4s8qw"]
+[ext_resource type="Shader" uid="uid://bws066256p50k" path="res://shaders/health_bar.gdshader" id="7_k3crr"]
+[ext_resource type="Texture2D" uid="uid://diskainxotx1a" path="res://addons/assets/heart.png" id="8_wc6ee"]
 [ext_resource type="Texture2D" uid="uid://c7vtx5e2brkk1" path="res://addons/assets/combo_bar_empty.png" id="9_k3crr"]
 [ext_resource type="Texture2D" uid="uid://lj6bxsd50fjh" path="res://addons/assets/combo_bar.png" id="10_sgwr3"]
 [ext_resource type="AudioStream" uid="uid://dk8rg1cdygmea" path="res://addons/sfx/level_music.mp3" id="12_4s8qw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8081n"]
-shader = ExtResource("6_hrdja")
+shader = ExtResource("7_k3crr")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6c3ax"]
 resource_local_to_scene = true
@@ -129,6 +131,68 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="HealthBar" type="Control" parent="J1/CameraController/Vue1" unique_id=710018228]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_top = 65.0
+offset_right = 40.0
+offset_bottom = 105.0
+script = ExtResource("6_af46e")
+
+[node name="Contour" type="ColorRect" parent="J1/CameraController/Vue1/HealthBar" unique_id=1827105709]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 645.0
+offset_right = 355.0
+offset_bottom = 715.0
+color = Color(0, 0, 0, 1)
+
+[node name="BG" type="ColorRect" parent="J1/CameraController/Vue1/HealthBar" unique_id=2054633597]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 650.0
+offset_right = 350.0
+offset_bottom = 670.0
+grow_vertical = 2
+color = Color(0.58383155, 0.58383155, 0.58383155, 1)
+
+[node name="BarFilled" type="ColorRect" parent="J1/CameraController/Vue1/HealthBar" unique_id=1320127291]
+material = SubResource("ShaderMaterial_8081n")
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 650.0
+offset_right = 350.0
+offset_bottom = 670.0
+grow_vertical = 2
+
+[node name="HeartIcon" type="TextureRect" parent="J1/CameraController/Vue1/HealthBar" unique_id=1077554327]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 600.0
+offset_right = 450.0
+offset_bottom = 771.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("8_wc6ee")
+
+[node name="HeartLabel" type="Label" parent="J1/CameraController/Vue1/HealthBar" unique_id=1681797250]
+custom_minimum_size = Vector2(72, 51)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 660.0
+offset_right = 122.0
+offset_bottom = 711.0
+theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
+theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_font_sizes/font_size = 50
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ShieldBar" type="Control" parent="J1/CameraController/Vue1" unique_id=860087554]
 visible = false
@@ -303,6 +367,68 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="HealthBar" type="Control" parent="J1/CameraController/Vue2" unique_id=1782109962]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_top = 65.0
+offset_right = 40.0
+offset_bottom = 105.0
+script = ExtResource("6_af46e")
+
+[node name="Contour" type="ColorRect" parent="J1/CameraController/Vue2/HealthBar" unique_id=1507467580]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 645.0
+offset_right = 355.0
+offset_bottom = 715.0
+color = Color(0, 0, 0, 1)
+
+[node name="BG" type="ColorRect" parent="J1/CameraController/Vue2/HealthBar" unique_id=828100146]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 650.0
+offset_right = 350.0
+offset_bottom = 670.0
+grow_vertical = 2
+color = Color(0.58383155, 0.58383155, 0.58383155, 1)
+
+[node name="BarFilled" type="ColorRect" parent="J1/CameraController/Vue2/HealthBar" unique_id=2122342861]
+material = SubResource("ShaderMaterial_8081n")
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 650.0
+offset_right = 350.0
+offset_bottom = 670.0
+grow_vertical = 2
+
+[node name="HeartIcon" type="TextureRect" parent="J1/CameraController/Vue2/HealthBar" unique_id=1000776391]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 600.0
+offset_right = 450.0
+offset_bottom = 771.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("8_wc6ee")
+
+[node name="HeartLabel" type="Label" parent="J1/CameraController/Vue2/HealthBar" unique_id=2138022231]
+custom_minimum_size = Vector2(72, 51)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 660.0
+offset_right = 122.0
+offset_bottom = 711.0
+theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
+theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_font_sizes/font_size = 50
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ShieldBar" type="Control" parent="J1/CameraController/Vue2" unique_id=593417086]
 visible = false
@@ -494,6 +620,69 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="HealthBar" type="Control" parent="J2/CameraController/Vue5" unique_id=985969449]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1500.0
+offset_top = 65.0
+offset_right = 1540.0
+offset_bottom = 105.0
+script = ExtResource("6_af46e")
+
+[node name="Contour" type="ColorRect" parent="J2/CameraController/Vue5/HealthBar" unique_id=524626917]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 645.0
+offset_right = 355.0
+offset_bottom = 715.0
+color = Color(0, 0, 0, 1)
+
+[node name="BG" type="ColorRect" parent="J2/CameraController/Vue5/HealthBar" unique_id=887341262]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 650.0
+offset_right = 350.0
+offset_bottom = 670.0
+grow_vertical = 2
+color = Color(0.58383155, 0.58383155, 0.58383155, 1)
+
+[node name="BarFilled" type="ColorRect" parent="J2/CameraController/Vue5/HealthBar" unique_id=1929434752]
+material = SubResource("ShaderMaterial_8081n")
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 650.0
+offset_right = 350.0
+offset_bottom = 670.0
+grow_vertical = 2
+
+[node name="HeartIcon" type="TextureRect" parent="J2/CameraController/Vue5/HealthBar" unique_id=454220038]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 600.0
+offset_right = 450.0
+offset_bottom = 771.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("8_wc6ee")
+
+[node name="HeartLabel" type="Label" parent="J2/CameraController/Vue5/HealthBar" unique_id=1634374768]
+custom_minimum_size = Vector2(72, 51)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 660.0
+offset_right = 122.0
+offset_bottom = 711.0
+theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
+theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_font_sizes/font_size = 50
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="ShieldBar" type="Control" parent="J2/CameraController/Vue5" unique_id=437336744]
 visible = false
 layout_mode = 3
@@ -669,6 +858,69 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="HealthBar" type="Control" parent="J2/CameraController/Vue6" unique_id=441252352]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1500.0
+offset_top = 65.0
+offset_right = 1540.0
+offset_bottom = 105.0
+script = ExtResource("6_af46e")
+
+[node name="Contour" type="ColorRect" parent="J2/CameraController/Vue6/HealthBar" unique_id=426882588]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 645.0
+offset_right = 355.0
+offset_bottom = 715.0
+color = Color(0, 0, 0, 1)
+
+[node name="BG" type="ColorRect" parent="J2/CameraController/Vue6/HealthBar" unique_id=217625263]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 650.0
+offset_right = 350.0
+offset_bottom = 670.0
+grow_vertical = 2
+color = Color(0.58383155, 0.58383155, 0.58383155, 1)
+
+[node name="BarFilled" type="ColorRect" parent="J2/CameraController/Vue6/HealthBar" unique_id=1092286646]
+material = SubResource("ShaderMaterial_8081n")
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 650.0
+offset_right = 350.0
+offset_bottom = 670.0
+grow_vertical = 2
+
+[node name="HeartIcon" type="TextureRect" parent="J2/CameraController/Vue6/HealthBar" unique_id=532731395]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 600.0
+offset_right = 450.0
+offset_bottom = 771.0
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("8_wc6ee")
+
+[node name="HeartLabel" type="Label" parent="J2/CameraController/Vue6/HealthBar" unique_id=310534487]
+custom_minimum_size = Vector2(72, 51)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 660.0
+offset_right = 122.0
+offset_bottom = 711.0
+theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
+theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_font_sizes/font_size = 50
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ShieldBar" type="Control" parent="J2/CameraController/Vue6" unique_id=2135384770]
 visible = false

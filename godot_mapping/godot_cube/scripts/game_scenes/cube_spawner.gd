@@ -15,8 +15,6 @@ extends Node3D
 
 # Booléen de départ décidant du mode de jeu lancé : false pour le menu, true pour la TV
 var mode: bool = false
-# Booléen de départ associé au mode difficile : vie et soins
-var healing: bool = false
 # Booléen de départ pour lancer l'apparition des cubes après le message de départ
 var start_spawn: bool = false
 # Booléen permettant de pré-générer les cubes, une seule fois, dans toute la partie
@@ -27,6 +25,7 @@ var rng = RandomNumberGenerator.new()
 # Liste de tous les types de cubes
 var cube_list: Array[PackedScene]
 
+# Texture sur lesquelles sont projetées les vues
 var texture: TextureRect
 
 # Temps de jeu écoulé
@@ -70,6 +69,11 @@ var shield_actif: Array[int] = [0, 0]
 var time_shield_actif: Array[float] = [0.0, 0.0]
 var shield_bars: Array[Control]
 
+# Variables associées à la vie limitée
+var healing: bool = false
+var health_bars: Array[Control]
+var health: Array[int] = [10, 10]
+
 # Fonction appelée par le script du jeu pour démarrer l'apparition des cubes et charger les scores visuels
 func activation() -> void:
 	cube_list = [classic_bloc, bonus_bloc, bomb_bloc, disappear_bloc, splash_bloc, shield_bloc]
@@ -105,6 +109,11 @@ func activation() -> void:
 		shield_bars.append(get_node("../../J1/CameraController/Vue2/ShieldBar"))
 		shield_bars.append(get_node("../../J2/CameraController/Vue6/ShieldBar"))
 
+		health_bars.append(get_node("../../J1/CameraController/Vue1/HealthBar"))
+		health_bars.append(get_node("../../J2/CameraController/Vue5/HealthBar"))
+		health_bars.append(get_node("../../J1/CameraController/Vue2/HealthBar"))
+		health_bars.append(get_node("../../J2/CameraController/Vue6/HealthBar"))
+
 		ink_overlay.append(get_node("../../J1/CameraController/Vue1/InkLayerJ1/InkOverlayJ1"))
 		ink_overlay.append(get_node("../../J2/CameraController/Vue5/InkLayerJ2/InkOverlayJ2"))
 		ink_overlay.append(get_node("../../J1/CameraController/Vue2/InkLayerJ1/InkOverlayJ1"))
@@ -124,6 +133,14 @@ func activation() -> void:
 			progress_bar.max_value = paliers[0]
 	for shield_bar in shield_bars:
 		shield_bar.modulate.a = 0.0
+	
+	for health_bar in health_bars:
+		if healing:
+			health_bar.visible = true
+			health_bar.modulate.a = 1.0
+		else:
+			health_bar.visible = false
+			health_bar.modulate.a = 0.0
 	start_game()
 
 func start_game() -> void:
@@ -235,31 +252,30 @@ func game_loop() -> void:
 			passage_paliers = [false, false]
 			texture.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, true, true, false, false])
 
-	menu_loop()
-	# if not is_generated:
-		# is_generated = true
+	if not is_generated:
+		is_generated = true
 
 		# Pré-génération du niveau de la partie
-		# scheduled_bloc(classic_bloc, 4.75, 0, [0.0, 2.0], 4.0, 1)
-		# scheduled_bloc(classic_bloc, 5.0, 0, [0.0, 2.0], 4.0, 3)
-		# scheduled_bloc(classic_bloc, 4.75, 1, [-2.0, 2.0], 4.0, 1)
-		# scheduled_bloc(classic_bloc, 4.75, 1, [2.0, 2.0], 4.0, 1)
+		scheduled_bloc(classic_bloc, 4.75, 0, [0.0, 2.0], 4.0, 1)
+		scheduled_bloc(classic_bloc, 5.0, 0, [0.0, 2.0], 4.0, 3)
+		scheduled_bloc(classic_bloc, 4.75, 1, [-2.0, 2.0], 4.0, 1)
+		scheduled_bloc(classic_bloc, 4.75, 1, [2.0, 2.0], 4.0, 1)
 
-		# scheduled_bloc(classic_bloc, 7.25, 0, [-2.0, 0.5], 4.0, 1)
-		# scheduled_bloc(classic_bloc, 7.25, 1, [-2.0, 2.0], 4.0, 2)
+		scheduled_bloc(classic_bloc, 7.25, 0, [-2.0, 0.5], 4.0, 1)
+		scheduled_bloc(classic_bloc, 7.25, 1, [-2.0, 2.0], 4.0, 2)
 
-		# scheduled_bloc(bonus_bloc, 10.0, 0, [0.0, 3.5], 8.0)
-		# scheduled_bloc(bonus_bloc, 10.0, 1, [-2.0, 0.5], 8.0)
+		scheduled_bloc(bonus_bloc, 10.0, 0, [0.0, 3.5], 8.0)
+		scheduled_bloc(bonus_bloc, 10.0, 1, [-2.0, 0.5], 8.0)
 
-		# scheduled_bloc(bomb_bloc, 12.5, 0, [-2.0, 0.5], 6.0)
-		# scheduled_bloc(bomb_bloc, 12.5, 1, [2.0, 0.5], 6.0)
-		# scheduled_bloc(bomb_bloc, 12.5, 0, [2.0, 3.5], 6.0)
-		# scheduled_bloc(bomb_bloc, 12.5, 1, [-2.0, 3.5], 6.0)
+		scheduled_bloc(bomb_bloc, 12.5, 0, [-2.0, 0.5], 6.0)
+		scheduled_bloc(bomb_bloc, 12.5, 1, [2.0, 0.5], 6.0)
+		scheduled_bloc(bomb_bloc, 12.5, 0, [2.0, 3.5], 6.0)
+		scheduled_bloc(bomb_bloc, 12.5, 1, [-2.0, 3.5], 6.0)
 		
-		# scheduled_bloc(classic_bloc, 14.75, 0, [-2.0, 2.0], 4.0, 1)
-		# scheduled_bloc(classic_bloc, 14.75, 0, [2.0, 2.0], 4.0, 1)
-		# scheduled_bloc(classic_bloc, 14.75, 1, [-2.0, 0.5], 4.0, 1)
-		# scheduled_bloc(classic_bloc, 14.75, 1, [2.0, 0.5], 4.0, 3)
+		scheduled_bloc(classic_bloc, 14.75, 0, [-2.0, 2.0], 4.0, 1)
+		scheduled_bloc(classic_bloc, 14.75, 0, [2.0, 2.0], 4.0, 1)
+		scheduled_bloc(classic_bloc, 14.75, 1, [-2.0, 0.5], 4.0, 1)
+		scheduled_bloc(classic_bloc, 14.75, 1, [2.0, 0.5], 4.0, 3)
 
 func scheduled_bloc(scene_bloc: PackedScene, arrival_time: float, direction: int = rng.randi_range(0, 1),
 spawn: Array[float] = [0.0, -1.0], absolute_speed: float = -1.0, color: int = rng.randi_range(1, 3)) -> void:
@@ -401,6 +417,10 @@ func MissedClassicCube(i: int) -> void:
 			texture_progress_bars[i+2].value = 0
 			progress_bar_labels[i].text = letters[0]
 			progress_bar_labels[i+2].text = letters[0]
+		if healing:
+			health[i] -= 1
+			health_bars[i].update_health(health[i])
+			health_bars[i+2].update_health(health[i])
 
 func StrikedBonusCube(i: int) -> void:
 	stocked_combo[i] += 1
@@ -458,7 +478,9 @@ func StrikedShieldCube(i: int) -> void:
 	if mode: score_uis[i+2].ajouter_score(gain)
 
 func StrikedHealCube(i: int) -> void:
-	pass
+	health[i] += 1
+	health_bars[i].update_health(health[i])
+	health_bars[i+2].update_health(health[i])
 
 func _onStrikedClassicCube_j1() -> void:
 	StrikedClassicCube(0)

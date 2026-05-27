@@ -193,11 +193,11 @@ surface_material_override/0 = SubResource("StandardMaterial3D_nmqw8")
 [node name="Boucliers" type="Node3D" parent="Map" unique_id=694101203]
 
 [node name="ShieldJ1" parent="Map/Boucliers" unique_id=1455074640 instance=ExtResource("13_wgmfl")]
-transform = Transform3D(-1, -8.742278e-08, 3.821371e-15, 0, -4.371139e-08, -1, 8.742278e-08, -1, 4.371139e-08, 0, 2, 22)
+transform = Transform3D(-1, -8.742278e-08, 3.821371e-15, 0, -4.371139e-08, -1, 8.742278e-08, -1, 4.371139e-08, 0, 2, 25)
 emitting = false
 
 [node name="ShieldJ2" parent="Map/Boucliers" unique_id=334358958 instance=ExtResource("13_wgmfl")]
-transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 2, -22)
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 2, -25)
 emitting = false
 
 [node name="LandMarksProceed" type="Node2D" parent="." unique_id=775762795]
