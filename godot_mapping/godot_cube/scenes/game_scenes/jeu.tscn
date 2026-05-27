@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://cdssy8fdiffsx" path="res://scripts/game_scenes/jeu.gd" id="1_fu8w0"]
 [ext_resource type="PackedScene" uid="uid://s6n8auc020ga" path="res://scenes/menus/game_ending.tscn" id="3_0hq27"]
 [ext_resource type="FontFile" uid="uid://bd4geqghtkj13" path="res://addons/assets/TextFontBase.ttf" id="4_nljp5"]
-[ext_resource type="PackedScene" uid="uid://bv2uhuy4b75u4" path="res://scenes/menus/tutoriel.tscn" id="4_qmffw"]
 [ext_resource type="Script" uid="uid://wefxg2pwa2m8" path="res://scripts/game_scenes/cube_spawner.gd" id="5_32rft"]
 [ext_resource type="PackedScene" uid="uid://cowlnii2y28cm" path="res://scenes/menus/pause_menu.tscn" id="6_04wrr"]
 [ext_resource type="Script" uid="uid://p0s0y75s7ehp" path="res://scripts/game_scenes/body_land_marks_proceed.gd" id="6_32rft"]
@@ -114,10 +113,6 @@ metadata/_edit_use_anchors_ = true
 [node name="PauseMenu" parent="HUD" unique_id=1550181832 instance=ExtResource("6_04wrr")]
 
 [node name="GameEnding" parent="HUD" unique_id=1703583179 instance=ExtResource("3_0hq27")]
-
-[node name="Tutoriel" parent="HUD" unique_id=580013353 instance=ExtResource("4_qmffw")]
-visible = false
-in_game = true
 
 [node name="CubeSpawner" type="Node3D" parent="." unique_id=1438072240]
 script = ExtResource("5_32rft")

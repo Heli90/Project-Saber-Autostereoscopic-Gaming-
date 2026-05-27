@@ -39,6 +39,7 @@ texture = ExtResource("3_b7lfr")
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_jklko")
+in_game = null
 
 [node name="FonduLayer" type="CanvasLayer" parent="." unique_id=1263238769]
 

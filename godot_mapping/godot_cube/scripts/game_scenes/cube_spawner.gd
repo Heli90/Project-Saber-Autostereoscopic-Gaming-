@@ -13,9 +13,6 @@ extends Node3D
 @onready var disappear_bloc_notif: Label = $"../DisappearBlocNotif"
 @onready var shields: Array[GPUParticles3D] = [$"../Map/Boucliers/ShieldJ1", $"../Map/Boucliers/ShieldJ2"]
 
-# Menu de tutoriel utilisé pour déterminer les modes supplémentaires activés
-@onready var tutoriel_menu: Control = $"../HUD/Tutoriel"
-
 # Booléen de départ décidant du mode de jeu lancé : false pour le menu, true pour la TV
 var mode: bool = false
 # Booléen de départ associé au mode difficile : vie et soins
@@ -55,6 +52,7 @@ var texture_progress_bars: Array[TextureProgressBar]
 var progress_bar_labels: Array[Label]
 var letters: Array[String] = ["D", "C", "B", "A", "S"]
 var paliers: Array[int] = [2, 5, 10, 20, 30]
+var passage_paliers: Array[bool] = [false, false]
 
 # Multiplicateurs de score et scores actuels pour chaque joueur
 var multiplicateur: Array[int] = [1, 1]
@@ -75,7 +73,7 @@ var shield_bars: Array[Control]
 # Fonction appelée par le script du jeu pour démarrer l'apparition des cubes et charger les scores visuels
 func activation() -> void:
 	cube_list = [classic_bloc, bonus_bloc, bomb_bloc, disappear_bloc, splash_bloc, shield_bloc]
-	if healing: cube_list.append(heal_bloc)
+	if Global.healing: cube_list.append(heal_bloc)
 	score_uis = []
 	shield_bars = []
 	ink_overlay = []
@@ -94,7 +92,7 @@ func activation() -> void:
 		j1 = get_node("../../J1")
 		j2 = get_node("../../J2")
 		level_music = get_node("../../LevelMusic")
-		healing = tutoriel_menu.healing
+		healing = Global.healing
 		texture = get_node("../../TextureRect")
 
 		score_uis.append(get_node("../../J1/CameraController/Vue1/ScoreUI"))
@@ -220,10 +218,22 @@ func game_loop() -> void:
 			progress_bar_labels[i+2].text = letters[letter_index]
 			
 			if letter_index < paliers.size():
+				passage_paliers[i] = true
 				texture_progress_bars[i].max_value = paliers[letter_index]
 				texture_progress_bars[i+2].max_value = paliers[letter_index]
 	
 	# A chaque palier passé par l'un des deux joueurs, l'autre subit un effet de pixelisation
+	match passage_paliers:
+		[false, false]: pass
+		[false, true]:
+			passage_paliers[1] = false
+			texture.material.set_shader_parameter("pixelisation_mask", [false, false, false, false, true, true, false, false])
+		[true, false]:
+			passage_paliers[0] = false
+			texture.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, false, false, false, false])
+		[true, true]:
+			passage_paliers = [false, false]
+			texture.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, true, true, false, false])
 
 	menu_loop()
 	# if not is_generated:

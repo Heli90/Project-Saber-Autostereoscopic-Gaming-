@@ -6,13 +6,10 @@ extends Control
 @onready var nom_j2: LineEdit = $NameInput/NomJ2
 @onready var heal_mode_button: TextureButton = $HealModeButton
 
-@export var in_game: bool = false
-
 const LEADERBOARD_PATH = "user://leaderboard.cfg"
-var healing: bool = false
 
 func _ready() -> void:
-	if not in_game: tutoriel_music.play()
+	tutoriel_music.play()
 	fondu_noir.modulate.a = 1.0
 	fondu_noir.visible = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -27,7 +24,6 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _onStartButton_pressed() -> void:
-	if heal_mode_button.activated: healing = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	var nom1 = nom_j1.text.strip_edges()
 	var nom2 = nom_j2.text.strip_edges()
@@ -52,5 +48,5 @@ func _onStartButton_pressed() -> void:
 
 func _onHealModeButton_pressed() -> void:
 	heal_mode_button.activated = !heal_mode_button.activated
-	healing = heal_mode_button.activated
-	heal_mode_button.texture_normal = heal_mode_button.full_heart if healing else heal_mode_button.empty_heart
+	Global.healing = heal_mode_button.activated
+	heal_mode_button.texture_normal = heal_mode_button.full_heart if heal_mode_button.activated else heal_mode_button.empty_heart
