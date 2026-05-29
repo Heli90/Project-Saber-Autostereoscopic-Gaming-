@@ -314,7 +314,6 @@ func _process_half_body(pose_landmarks, player_index: int, is_right_side: bool):
 		"angle_x": atan2(dir_l.y, dir_l.z),
 		"angle_z": atan2(dir_l.y, dir_l.x) 
 	})
-	camera_label.text = "x = %.2f, y=%.2f, z=%.2f" % [fix_x.call(lm[15].x), lm[15].y, lm[15].z]
 	hand_data.append({
 		"x": fix_x.call(lm[15].x), 
 		"y": lm[15].y,
