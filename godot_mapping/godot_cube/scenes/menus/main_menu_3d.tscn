@@ -310,7 +310,10 @@ vertical_alignment = 1
 
 [node name="Game" parent="." unique_id=1026699542 instance=ExtResource("9_uud71")]
 
-[node name="StartLabel" parent="Game" index="9" unique_id=40376002]
+[node name="CameraLabel" parent="Game" index="8" unique_id=605287519]
+visible = false
+
+[node name="StartLabel" parent="Game" index="11" unique_id=40376002]
 visible = false
 
 [node name="Menu" parent="." unique_id=505296238 instance=ExtResource("10_2j4hv")]

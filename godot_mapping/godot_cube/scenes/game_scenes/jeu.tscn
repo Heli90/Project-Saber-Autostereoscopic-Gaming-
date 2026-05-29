@@ -262,6 +262,22 @@ offset_bottom = 617.0
 theme_override_colors/font_color = Color(0.14970946, 0.65653664, 0.97760206, 1)
 theme_override_font_sizes/font_size = 50
 
+[node name="J1Label" type="Label" parent="." unique_id=83790061]
+offset_left = 130.0
+offset_top = 493.0
+offset_right = 522.0
+offset_bottom = 662.0
+theme_override_colors/font_color = Color(1, 0.3254902, 0.29803923, 1)
+theme_override_font_sizes/font_size = 50
+
+[node name="J2Label" type="Label" parent="." unique_id=587375142]
+offset_left = 1374.0
+offset_top = 409.0
+offset_right = 1782.0
+offset_bottom = 655.0
+theme_override_colors/font_color = Color(0.29803923, 0.4862745, 1, 1)
+theme_override_font_sizes/font_size = 50
+
 [node name="StartLabel" type="Label" parent="." unique_id=40376002]
 offset_left = 900.0
 offset_top = 540.0

@@ -10,10 +10,14 @@ const JUMP_VELOCITY: float = 4.5
 @onready var left_saber_mesh : MeshInstance3D = $LeftSaber/MeshInstance3D
 @onready var right_saber_mesh : MeshInstance3D = $RightSaber/MeshInstance3D
 @export var blue_shader_material : ShaderMaterial
+@onready var j_1_label: Label = $"../../../../Game/J1Label"
+@onready var j_2_label: Label = $"../../../../Game/J2Label"
+
+
 
 var landmarks: Node2D
 var saber_range_x : float = 2.5
-var saber_y_min : float = 1.0
+var saber_y_min : float = 0.0
 var saber_y_max : float = 3.0
 
 func _ready() -> void:
@@ -36,6 +40,15 @@ func _apply_blue_shader():
 func collision(body: Node3D) -> void:
 	if body.is_in_group("cube"): body.collision()
 
+func dilatate_y(f : float) -> float :
+	return 0.509259*f*f -0.52778*f
+	
+func dilatate_x(f : float) -> float :
+	if f > 0 :
+		return 0.5*f*f
+	else :
+		return -0.5*f*f
+
 func _physics_process(_delta: float) -> void:
 	if not landmarks or landmarks.hand_data.is_empty(): return
 	for data in landmarks.hand_data:
@@ -46,11 +59,22 @@ func _physics_process(_delta: float) -> void:
 			var local_x : float
 			if player_id == 1: local_x = data["x"] / 0.5
 			else: local_x = (data["x"] - 0.5) / 0.5
-
+			var local_y = data["y"]      
+			
 			var pos_x : float = lerp(-saber_range_x, saber_range_x, local_x)
-			var pos_y : float = lerp(saber_y_max, saber_y_min, data["y"])
+			var pos_y : float = lerp(saber_y_max, saber_y_min, local_y)
+			pos_x = dilatate_x(pos_x)
+			pos_y = dilatate_y(pos_y)
 			saber.position.x = pos_x
 			saber.position.y = pos_y
 			# Rotation du sabre selon l'axe de l'avant-bras
 			saber.rotation.z = atan2(0,-1)/2 - data["angle_z"]
-			#saber.rotation.y = -data["tilt"]
+			if data["handedness"] == "Right" :
+				if player_id == 1 :
+					j_1_label.text = "x = %.2f, y = %.2f, angle = %.2f" % [pos_x, pos_y,atan2(0,-1)/2 - data["angle_z"]]
+				elif player_id == 2:
+					j_2_label.text = "x = %.2f, y = %.2f, angle = %.2f" % [pos_x, pos_y,atan2(0,-1)/2 - data["angle_z"]]
+			#if data["handedness"]=="Right":
+			#	saber.rotation.x = data["angle_x"]
+			#else :
+			#	saber.rotation.x = -data["angle_x"]

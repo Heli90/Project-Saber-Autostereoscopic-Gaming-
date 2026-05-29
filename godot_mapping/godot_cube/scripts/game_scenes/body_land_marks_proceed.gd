@@ -309,18 +309,19 @@ func _process_half_body(pose_landmarks, player_index: int, is_right_side: bool):
 	hand_data.append({
 		"x": fix_x.call(lm[16].x), 
 		"y": lm[16].y,
-		"angle_z": atan2(dir_l.y, dir_l.x), 
 		"handedness": "Left", 
 		"index": player_index, 
-		"tilt": atan2(dir_l.z, dir_l.y)
+		"angle_x": atan2(dir_l.y, dir_l.z),
+		"angle_z": atan2(dir_l.y, dir_l.x) 
 	})
+	camera_label.text = "x = %.2f, y=%.2f, z=%.2f" % [fix_x.call(lm[15].x), lm[15].y, lm[15].z]
 	hand_data.append({
 		"x": fix_x.call(lm[15].x), 
 		"y": lm[15].y,
-		"angle_z": atan2(dir_r.y, dir_r.x), 
 		"handedness": "Right", 
 		"index": player_index, 
-		"tilt": atan2(dir_r.z, dir_r.y)
+		"angle_x": atan2(dir_r.y, dir_r.z),
+		"angle_z": atan2(dir_r.y, dir_r.x)
 	})
 
 func _exit_tree() -> void:
