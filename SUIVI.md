@@ -216,6 +216,11 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 - Ajout d'anneaux dans le terrain pour le rendre plus vivant.
 - Modification graphique du jeu.
 
+
+**Birame :**
+- Ajustement de l'amplitude déplacement des bras
+- Annulation du traçage des noeuds lorsque l'image n'est pas affichée
+
 ### Séance 14 - 10/06
 
 

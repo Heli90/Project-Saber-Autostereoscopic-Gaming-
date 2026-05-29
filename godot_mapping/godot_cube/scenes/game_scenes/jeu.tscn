@@ -1069,9 +1069,9 @@ expand_mode = 2
 flip_h = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="LandMarksProceed" unique_id=688860276]
-visible = false
 
 [node name="DebugOverlay" type="TextureRect" parent="LandMarksProceed/CanvasLayer" unique_id=1751420981]
+visible = false
 offset_left = 810.0
 offset_right = 850.0
 offset_bottom = 40.0
@@ -1114,6 +1114,7 @@ theme_override_fonts/font = ExtResource("16_qmffw")
 theme_override_font_sizes/font_size = 50
 
 [node name="J1Label" type="Label" parent="." unique_id=83790061]
+visible = false
 offset_left = 130.0
 offset_top = 493.0
 offset_right = 522.0
@@ -1122,6 +1123,7 @@ theme_override_colors/font_color = Color(1, 0.3254902, 0.29803923, 1)
 theme_override_font_sizes/font_size = 50
 
 [node name="J2Label" type="Label" parent="." unique_id=587375142]
+visible = false
 offset_left = 1374.0
 offset_top = 409.0
 offset_right = 1782.0

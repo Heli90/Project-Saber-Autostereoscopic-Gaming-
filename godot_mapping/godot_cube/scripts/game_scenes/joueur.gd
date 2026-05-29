@@ -45,9 +45,9 @@ func dilatate_y(f : float) -> float :
 	
 func dilatate_x(f : float) -> float :
 	if f > 0 :
-		return 0.5*f*f
+		return 0.4*f*f
 	else :
-		return -0.5*f*f
+		return -0.4*f*f
 
 func _physics_process(_delta: float) -> void:
 	if not landmarks or landmarks.hand_data.is_empty(): return

@@ -27,6 +27,7 @@ var mutex : Mutex
 var image_mediapipe : Image = null
 var result_mediapipe = null
 var hand_data : Array = []
+var is_debug_visible : bool = false
 
 @onready var viewport = $SubViewportContainer/CameraViewport
 @onready var texture_rect = $SubViewportContainer/CameraViewport/TestAffichage
@@ -227,19 +228,20 @@ func _thread_mediapipe():
 		
 			# Pour le debug, on recréer une image combinée avec les squelettes
 			if res_left or res_right:
-
-				var out_left = renderer.render(mp_img_left, res_left.pose_landmarks if res_left else [])
-				var out_right = renderer.render(mp_img_right, res_right.pose_landmarks if res_right else [])
-				time_render = (Time.get_ticks_usec()-start_detect)/1000.0
+				if is_debug_visible :
+					var start_render = Time.get_ticks_usec()
+					var out_left = renderer.render(mp_img_left, res_left.pose_landmarks if res_left else [])
+					var out_right = renderer.render(mp_img_right, res_right.pose_landmarks if res_right else [])
+					time_render = (Time.get_ticks_usec()-start_render)/1000.0
 				
-				mutex.lock()
-				var start_combining = Time.get_ticks_usec()
-				var combined_out = Image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
-				combined_out.blit_rect(out_left.image, Rect2i(0, 0, half_width, size.y), Vector2i(0, 0))
-				combined_out.blit_rect(out_right.image, Rect2i(0, 0, half_width, size.y), Vector2i(half_width, 0))
-				output_image = combined_out
-				time_display = (Time.get_ticks_usec()-start_combining)/1000.0
-				mutex.unlock()
+					mutex.lock()
+					var start_combining = Time.get_ticks_usec()
+					var combined_out = Image.create(size.x, size.y, false, Image.FORMAT_RGBA8)
+					combined_out.blit_rect(out_left.image, Rect2i(0, 0, half_width, size.y), Vector2i(0, 0))
+					combined_out.blit_rect(out_right.image, Rect2i(0, 0, half_width, size.y), Vector2i(half_width, 0))
+					output_image = combined_out
+					time_display = (Time.get_ticks_usec()-start_combining)/1000.0
+					mutex.unlock()
 				
 				mutex.lock()
 				result_mediapipe = {"left": res_left, "right": res_right}
@@ -247,7 +249,9 @@ func _thread_mediapipe():
 
 func _process(_delta):
 	camera_fps = Engine.get_frames_per_second()
-
+	
+	is_debug_visible = debug_view.visible
+	
 	# Récupération et affichage de l'image de rendu MediaPipe
 	var out_img = null
 	mutex.lock()
