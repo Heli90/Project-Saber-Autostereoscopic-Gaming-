@@ -3,8 +3,7 @@
 [ext_resource type="Shader" uid="uid://dtcbr8l1yp6kt" path="res://shaders/pause_menu.gdshader" id="1_nvk6s"]
 [ext_resource type="Script" uid="uid://c017eu1ls6xye" path="res://scripts/menus/game_ending.gd" id="2_nvk6s"]
 [ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="3_cplju"]
-[ext_resource type="FontFile" uid="uid://crtikirivhq6o" path="res://addons/assets/TextFontBold.otf" id="4_vicg1"]
-[ext_resource type="FontFile" uid="uid://bd4geqghtkj13" path="res://addons/assets/TextFontBase.ttf" id="5_ahjpl"]
+[ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/Minecraft.ttf" id="4_ko6y7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1s2dm"]
 shader = ExtResource("1_nvk6s")
@@ -76,9 +75,10 @@ size_flags_horizontal = 4
 size_flags_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 5
-theme_override_fonts/font = ExtResource("4_vicg1")
+theme_override_fonts/font = ExtResource("4_ko6y7")
 theme_override_font_sizes/font_size = 100
-text = "Fin de la partie"
+text = "Game Ending"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="EndingMessage" type="Label" parent="TextContent" unique_id=62404960]
@@ -87,10 +87,10 @@ offset_left = 55.0
 offset_top = 350.0
 offset_right = 905.0
 offset_bottom = 473.0
-theme_override_fonts/font = ExtResource("5_ahjpl")
+theme_override_fonts/font = ExtResource("4_ko6y7")
 theme_override_font_sizes/font_size = 60
-text = "Merci à vous
-d'avoir joué à notre jeu !"
+text = "Thank you for playing
+our game !"
 horizontal_alignment = 1
 
 [node name="BestPlayerMessage" type="Label" parent="TextContent" unique_id=1497782220]
@@ -99,9 +99,10 @@ offset_left = 166.0
 offset_top = 650.0
 offset_right = 794.0
 offset_bottom = 701.0
-theme_override_fonts/font = ExtResource("5_ahjpl")
+theme_override_fonts/font = ExtResource("4_ko6y7")
 theme_override_font_sizes/font_size = 50
-text = "Gagnant de la partie :"
+text = "Winner :"
+horizontal_alignment = 1
 
 [node name="BestPlayerText" type="Label" parent="TextContent" unique_id=1640638100]
 layout_mode = 0
@@ -109,7 +110,7 @@ offset_left = 80.0
 offset_top = 725.0
 offset_right = 880.0
 offset_bottom = 785.0
-theme_override_fonts/font = ExtResource("5_ahjpl")
+theme_override_fonts/font = ExtResource("4_ko6y7")
 theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -134,7 +135,7 @@ offset_right = 20.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("5_ahjpl")
+theme_override_fonts/font = ExtResource("4_ko6y7")
 theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -143,11 +144,11 @@ vertical_alignment = 1
 process_mode = 3
 custom_minimum_size = Vector2(0, 127)
 layout_mode = 0
-offset_left = 212.5
+offset_left = 280.0
 offset_top = 850.0
-offset_right = 747.5
+offset_right = 700.0
 offset_bottom = 977.0
-theme_override_fonts/font = ExtResource("4_vicg1")
+theme_override_fonts/font = ExtResource("4_ko6y7")
 theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxEmpty_vtr1r")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_a1ndm")

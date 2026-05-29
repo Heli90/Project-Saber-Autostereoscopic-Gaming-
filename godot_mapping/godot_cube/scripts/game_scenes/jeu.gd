@@ -68,8 +68,7 @@ func onPartieTimerTimeout(death: bool = false, winner: int = 1) -> void:
 	elif score_j2 > score_j1:
 		game_ending.best_player_text.text = config.get_value("Joueurs", "Nom_J2", "Joueur 2")
 	else:
-		game_ending.best_player_message.text = "Il y a égalité !"
-		game_ending.best_player_message.position = Vector2(285.0, 650.0)
+		game_ending.best_player_message.text = "It is a tie !"
 
 	game_ending.visible = true
 	var transition = create_tween().set_parallel(true)

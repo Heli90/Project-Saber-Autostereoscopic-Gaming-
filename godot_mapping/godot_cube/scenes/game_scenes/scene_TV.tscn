@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://v4jt0cyocs3e" path="res://scripts/game_scenes/scene_tv.gd" id="1_xlecp"]
 [ext_resource type="PackedScene" uid="uid://br2jmvjla4guc" path="res://scenes/game_scenes/joueur.tscn" id="2_rfm68"]
 [ext_resource type="Script" uid="uid://c4nxreh0k2je7" path="res://scripts/game_scenes/visuals/score_ui.gd" id="3_k5d3u"]
-[ext_resource type="FontFile" uid="uid://bd4geqghtkj13" path="res://addons/assets/TextFontBase.ttf" id="3_llrkf"]
 [ext_resource type="Shader" uid="uid://vno46ensk36y" path="res://shaders/generation_image.gdshader" id="4_wdlj1"]
 [ext_resource type="FontFile" uid="uid://bulj5s2rcjc7b" path="res://addons/assets/BAHNSCHRIFT.TTF" id="4_yqxl7"]
 [ext_resource type="Script" uid="uid://dnfkxpf3p8gki" path="res://scripts/game_scenes/visuals/shield_bar.gd" id="5_3cheo"]
@@ -12,13 +11,16 @@
 [ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="6_qo1rj"]
 [ext_resource type="Texture2D" uid="uid://barxo14ju82s8" path="res://addons/assets/shield_icon.png" id="7_4s8qw"]
 [ext_resource type="Shader" uid="uid://bws066256p50k" path="res://shaders/health_bar.gdshader" id="7_k3crr"]
-[ext_resource type="Texture2D" uid="uid://diskainxotx1a" path="res://addons/assets/heart.png" id="8_wc6ee"]
 [ext_resource type="Texture2D" uid="uid://c7vtx5e2brkk1" path="res://addons/assets/combo_bar_empty.png" id="9_k3crr"]
 [ext_resource type="Texture2D" uid="uid://lj6bxsd50fjh" path="res://addons/assets/combo_bar.png" id="10_sgwr3"]
 [ext_resource type="AudioStream" uid="uid://dk8rg1cdygmea" path="res://addons/sfx/level_music.mp3" id="12_4s8qw"]
+[ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/Minecraft.ttf" id="12_af46e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8081n"]
 shader = ExtResource("7_k3crr")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wc6ee"]
+load_path = "res://.godot/imported/heart.png-faf08471e88d2969ee3fbf1815ae1802.ctex"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6c3ax"]
 resource_local_to_scene = true
@@ -178,7 +180,7 @@ offset_top = 600.0
 offset_right = 450.0
 offset_bottom = 771.0
 scale = Vector2(0.7, 0.7)
-texture = ExtResource("8_wc6ee")
+texture = SubResource("CompressedTexture2D_wc6ee")
 
 [node name="HeartLabel" type="Label" parent="J1/CameraController/Vue1/HealthBar" unique_id=1681797250]
 custom_minimum_size = Vector2(72, 51)
@@ -414,7 +416,7 @@ offset_top = 600.0
 offset_right = 450.0
 offset_bottom = 771.0
 scale = Vector2(0.7, 0.7)
-texture = ExtResource("8_wc6ee")
+texture = SubResource("CompressedTexture2D_wc6ee")
 
 [node name="HeartLabel" type="Label" parent="J1/CameraController/Vue2/HealthBar" unique_id=2138022231]
 custom_minimum_size = Vector2(72, 51)
@@ -667,7 +669,7 @@ offset_top = 600.0
 offset_right = 450.0
 offset_bottom = 771.0
 scale = Vector2(0.7, 0.7)
-texture = ExtResource("8_wc6ee")
+texture = SubResource("CompressedTexture2D_wc6ee")
 
 [node name="HeartLabel" type="Label" parent="J2/CameraController/Vue5/HealthBar" unique_id=1634374768]
 custom_minimum_size = Vector2(72, 51)
@@ -906,7 +908,7 @@ offset_top = 600.0
 offset_right = 450.0
 offset_bottom = 771.0
 scale = Vector2(0.7, 0.7)
-texture = ExtResource("8_wc6ee")
+texture = SubResource("CompressedTexture2D_wc6ee")
 
 [node name="HeartLabel" type="Label" parent="J2/CameraController/Vue6/HealthBar" unique_id=310534487]
 custom_minimum_size = Vector2(72, 51)
@@ -1063,8 +1065,9 @@ offset_top = 1000.0
 offset_right = 90.0
 offset_bottom = 1023.0
 theme_override_colors/font_color = Color(0, 1, 0, 1)
-theme_override_fonts/font = ExtResource("3_llrkf")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
 
 [node name="CPU" type="Label" parent="TechnicalInfos" unique_id=2144589808]
 offset_left = 50.0
@@ -1072,8 +1075,9 @@ offset_top = 950.0
 offset_right = 90.0
 offset_bottom = 973.0
 theme_override_colors/font_color = Color(0, 1, 0, 1)
-theme_override_fonts/font = ExtResource("3_llrkf")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
 
 [node name="GPU" type="Label" parent="TechnicalInfos" unique_id=185849556]
 offset_left = 50.0
@@ -1081,8 +1085,9 @@ offset_top = 900.0
 offset_right = 90.0
 offset_bottom = 923.0
 theme_override_colors/font_color = Color(0, 1, 0, 1)
-theme_override_fonts/font = ExtResource("3_llrkf")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
 
 [node name="GPUEntrelacement" type="Label" parent="TechnicalInfos" unique_id=1493023434]
 offset_left = 50.0
@@ -1090,8 +1095,9 @@ offset_top = 850.0
 offset_right = 90.0
 offset_bottom = 881.0
 theme_override_colors/font_color = Color(0, 1, 0, 1)
-theme_override_fonts/font = ExtResource("3_llrkf")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
 
 [node name="GPUVues" type="Label" parent="TechnicalInfos" unique_id=173082368]
 offset_left = 50.0
@@ -1099,8 +1105,9 @@ offset_top = 800.0
 offset_right = 90.0
 offset_bottom = 831.0
 theme_override_colors/font_color = Color(0, 1, 0, 1)
-theme_override_fonts/font = ExtResource("3_llrkf")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
 
 [node name="DetectMediapipe" type="Label" parent="TechnicalInfos" unique_id=94376191]
 offset_left = 50.0
@@ -1108,8 +1115,9 @@ offset_top = 750.0
 offset_right = 51.0
 offset_bottom = 792.0
 theme_override_colors/font_color = Color(0, 1, 0, 1)
-theme_override_fonts/font = ExtResource("3_llrkf")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=520957025]
 self_modulate = Color(1, 0, 0, 1)

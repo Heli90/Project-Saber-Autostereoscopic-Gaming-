@@ -214,6 +214,7 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 - Modification de l'affichage du classement en fin de partie si un joueur a perdu tous ses points de vie.
 - Ajout d'un fade-in et d'un fade-out pour tous les cubes.
 - Ajout d'anneaux dans le terrain pour le rendre plus vivant.
+- Modification graphique du jeu.
 
 ### Séance 14 - 10/06
 
