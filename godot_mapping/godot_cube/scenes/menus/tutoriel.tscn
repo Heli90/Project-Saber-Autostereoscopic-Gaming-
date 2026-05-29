@@ -2,13 +2,16 @@
 
 [ext_resource type="Script" uid="uid://css7aee1c26g0" path="res://scripts/menus/tutoriel.gd" id="1_jklko"]
 [ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="2_nl2bs"]
-[ext_resource type="Texture2D" uid="uid://b4xpo3x1n06pg" path="res://addons/assets/fond_jeu_godot.png" id="3_b7lfr"]
+[ext_resource type="Texture2D" uid="uid://bhmpdhsd2gua0" path="res://addons/assets/tutoriel_menu_bg.png" id="2_phf8o"]
 [ext_resource type="AudioStream" uid="uid://dtx2qu2tls0eq" path="res://addons/sfx/tutoriel_menu_music.mp3" id="5_fwhch"]
-[ext_resource type="FontFile" uid="uid://bd4geqghtkj13" path="res://addons/assets/TextFontBase.ttf" id="6_n18sg"]
-[ext_resource type="FontFile" uid="uid://crtikirivhq6o" path="res://addons/assets/TextFontBold.otf" id="6_phf8o"]
+[ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/Minecraft.ttf" id="5_phf8o"]
+[ext_resource type="Texture2D" uid="uid://cy5no81nhebpm" path="res://addons/assets/sign_name_panel.png" id="6_gjwrx"]
+[ext_resource type="Texture2D" uid="uid://8osrrw63mu7p" path="res://addons/assets/heart.png" id="7_b7lfr"]
+[ext_resource type="Script" uid="uid://drtrabk7fho4t" path="res://scripts/menus/heal_mode_button.gd" id="8_fwhch"]
+[ext_resource type="Texture2D" uid="uid://c700kg3wk8oe2" path="res://addons/assets/empty_heart.png" id="9_phf8o"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n18sg"]
-texture = ExtResource("3_b7lfr")
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gjwrx"]
+texture = ExtResource("2_phf8o")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b7lfr"]
 
@@ -40,6 +43,7 @@ script = ExtResource("1_jklko")
 [node name="FonduLayer" type="CanvasLayer" parent="." unique_id=1263238769]
 
 [node name="FonduNoir" type="ColorRect" parent="FonduLayer" unique_id=851864433]
+visible = false
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
@@ -54,7 +58,7 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_n18sg")
+theme_override_styles/panel = SubResource("StyleBoxTexture_gjwrx")
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=1928803989]
 stream = ExtResource("2_nl2bs")
@@ -84,18 +88,32 @@ offset_right = 538.0
 offset_bottom = 928.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_b7lfr")
 
+[node name="SignMessage" type="Sprite2D" parent="NameInput" unique_id=1919033069]
+position = Vector2(275.5, 125)
+scale = Vector2(2.609, 1.75)
+texture = ExtResource("6_gjwrx")
+
 [node name="Message" type="Label" parent="NameInput" unique_id=2144418585]
 layout_mode = 0
 offset_left = 75.0
 offset_top = 75.0
 offset_right = 483.0
 offset_bottom = 180.0
-theme_override_fonts/font = ExtResource("6_phf8o")
+theme_override_fonts/font = ExtResource("5_phf8o")
 theme_override_font_sizes/font_size = 50
-text = "Inscription
-au classement"
+text = "Inscription"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="SignJ1" type="Sprite2D" parent="NameInput" unique_id=1803780766]
+position = Vector2(275.49997, 322.75)
+scale = Vector2(2.608974, 1.1043956)
+texture = ExtResource("6_gjwrx")
+
+[node name="SignJ2" type="Sprite2D" parent="NameInput" unique_id=966764718]
+position = Vector2(275.5, 522.75)
+scale = Vector2(2.608974, 1.1043956)
+texture = ExtResource("6_gjwrx")
 
 [node name="NomJ1" type="LineEdit" parent="NameInput" unique_id=1239737311]
 layout_mode = 0
@@ -103,12 +121,11 @@ offset_left = 80.0
 offset_top = 300.0
 offset_right = 473.0
 offset_bottom = 348.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_n18sg")
+theme_override_fonts/font = ExtResource("5_phf8o")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/read_only = SubResource("StyleBoxEmpty_fwhch")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_phf8o")
-placeholder_text = "Nom du joueur 1"
+placeholder_text = "Player 1"
 alignment = 1
 expand_to_text_length = true
 
@@ -118,14 +135,18 @@ offset_left = 80.0
 offset_top = 500.0
 offset_right = 473.0
 offset_bottom = 548.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("6_n18sg")
+theme_override_fonts/font = ExtResource("5_phf8o")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/read_only = SubResource("StyleBoxEmpty_gjwrx")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_0stj3")
-placeholder_text = "Nom du joueur 2"
+placeholder_text = "Player 2"
 alignment = 1
 expand_to_text_length = true
+
+[node name="SignStart" type="Sprite2D" parent="." unique_id=11834707]
+position = Vector2(1175, 935)
+scale = Vector2(2.608974, 1.1043956)
+texture = ExtResource("6_gjwrx")
 
 [node name="StartButton" type="Button" parent="." unique_id=1486002421]
 layout_mode = 0
@@ -133,7 +154,7 @@ offset_left = 950.0
 offset_top = 900.0
 offset_right = 1402.0
 offset_bottom = 980.0
-theme_override_fonts/font = ExtResource("6_phf8o")
+theme_override_fonts/font = ExtResource("5_phf8o")
 theme_override_font_sizes/font_size = 80
 theme_override_styles/normal = SubResource("StyleBoxEmpty_3y8p5")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_h0cxi")
@@ -141,6 +162,30 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_1mkbs")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_cshns")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_8jpt8")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_vfcph")
-text = "Démarrer"
+text = "Start"
+
+[node name="HealModeButton" type="TextureButton" parent="." unique_id=1423390101]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 800.0
+offset_right = 564.0
+offset_bottom = 1218.0
+scale = Vector2(0.25, 0.25)
+script = ExtResource("8_fwhch")
+full_heart = ExtResource("7_b7lfr")
+empty_heart = ExtResource("9_phf8o")
+
+[node name="HealLabel" type="Label" parent="." unique_id=1978504200]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 830.0
+offset_right = 418.0
+offset_bottom = 861.0
+theme_override_fonts/font = ExtResource("5_phf8o")
+theme_override_font_sizes/font_size = 30
+text = "Limited Life"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="StartButton" to="." method="_onStartButton_pressed"]
+[connection signal="pressed" from="HealModeButton" to="." method="_onHealModeButton_pressed"]

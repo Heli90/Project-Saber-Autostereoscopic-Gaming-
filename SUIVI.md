@@ -198,11 +198,23 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 - Suppression de l'effet de lumière sur le menu principal, qui servait à faire des tests.
 - Transfert du mode PC dans le menu du jeu pour pouvoir faire directement des tests sur le menu sans lancer de partie et avoir un menu plus réaliste en vue de la version finale.
 - Implémentation d'une barre de progression visuelle montrant le combo de chaque joueur.
+- Ajout d'un mode optionnel en vie limitée (seulement, visuellement) et modification du shader pour les vues pour pouvoir appliquer les effets individuellement, à chaque joueur.
+- Ajout d'un cube de soin associé à l'implémentation précédente.
+- Ajout d'un script global pour contrôler l'activation du mode avec vie limitée.
 - Mise à jour de la documentation en lien avec les tâches réalisées ci-dessus.
 
 ### Séance 13 - 27/05
 
+- Présentation du projet Artishow lors de l'audit.
 
+### Entre la séance 13 et la séance 14
+
+**Van-Kévin**:
+- Ajout fonctionnel du cube de soin et de la barre de soin.
+- Modification de l'affichage du classement en fin de partie si un joueur a perdu tous ses points de vie.
+- Ajout d'un fade-in et d'un fade-out pour tous les cubes.
+- Ajout d'anneaux dans le terrain pour le rendre plus vivant.
+- Modification graphique du jeu.
 
 ### Séance 14 - 10/06
 

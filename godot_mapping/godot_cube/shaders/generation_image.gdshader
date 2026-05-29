@@ -1,6 +1,6 @@
 shader_type canvas_item;
 
-// Pour le moment les vues 1,2,3,5,6,7 sont utilisées pour l'affichage, le reste est noir
+// Pour le moment, les vues 1,2,5,6 sont utilisées pour l'affichage, le reste est noir
 uniform sampler2D vue_1; 
 uniform sampler2D vue_2; 
 uniform sampler2D vue_3;
@@ -13,16 +13,19 @@ uniform sampler2D vue_8;
 uniform int N = 8;
 uniform int decalage = -1;
 
-//Variables pour effets visuels
+//Variables pour les effets visuels
 uniform bool invertViews = false; 
 uniform float offset = 0.000;
 uniform bool pixelisation = false;
 uniform float pixelisationPower = 200.0;
-
+uniform bool pixelisation_mask[8];
 
 // Fonction utilitaire pour récupérer la couleur du bon point de vue
 float get_subpixel_color(int view_index, vec2 uv, int channel) {
-    vec3 col;
+	// On applique la pixelisation dès le départ sur les vues concernées
+    if (pixelisation && pixelisation_mask[view_index]) {
+        uv = floor(uv * vec2(pixelisationPower)) / pixelisationPower;
+    } vec3 col;
     if (view_index == 0) {
 		col = texture(vue_1, uv).rgb;
 	} else if (view_index == 1) {
@@ -69,12 +72,12 @@ void fragment() {
     float g = get_subpixel_color(view_g, UV-vec2(offset,0), 1);
     float b = get_subpixel_color(view_b, UV+vec2(0,offset), 2);
 	
-	if (pixelisation){
-		vec2 pixelUV = floor(UV * vec2(pixelisationPower))/pixelisationPower;
-		r = get_subpixel_color(view_r, pixelUV, 0);
-    	g = get_subpixel_color(view_g, pixelUV, 1);
-    	b = get_subpixel_color(view_b, pixelUV, 2);
-	}
+	// if (pixelisation){
+		//vec2 pixelUV = floor(UV * vec2(pixelisationPower))/pixelisationPower;
+		//r = get_subpixel_color(view_r, pixelUV, 0);
+    	//g = get_subpixel_color(view_g, pixelUV, 1);
+    	//b = get_subpixel_color(view_b, pixelUV, 2);
+	//}
 		
     
     COLOR = vec4(r, g, b, 1.0);

@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://jtm1okvkvobu"]
+
+[ext_resource type="Texture2D" uid="uid://c0e25ymfw03kq" path="res://addons/assets/select_level_bg.png" id="1_eiguw"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8ow2l"]
+texture = ExtResource("1_eiguw")
+
+[node name="SelectLevel" type="Control" unique_id=877177698]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="BG" type="Panel" parent="." unique_id=721447811]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_8ow2l")

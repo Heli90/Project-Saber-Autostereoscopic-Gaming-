@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://crtikirivhq6o"
-path="res://.godot/imported/TextFontBold.otf-04d9fbfb1fe17979a512abce308e7d0f.fontdata"
+uid="uid://2elnyaxgt7d7"
+path="res://.godot/imported/Minecraft.ttf-1e8ce3818f63ce1dd6a0f9de54830654.fontdata"
 
 [deps]
 
-source_file="res://addons/assets/TextFontBold.otf"
-dest_files=["res://.godot/imported/TextFontBold.otf-04d9fbfb1fe17979a512abce308e7d0f.fontdata"]
+source_file="res://addons/assets/Minecraft.ttf"
+dest_files=["res://.godot/imported/Minecraft.ttf-1e8ce3818f63ce1dd6a0f9de54830654.fontdata"]
 
 [params]
 

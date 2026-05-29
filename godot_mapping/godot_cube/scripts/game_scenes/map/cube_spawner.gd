@@ -6,6 +6,7 @@ extends Node3D
 @export var disappear_bloc: PackedScene
 @export var splash_bloc: PackedScene
 @export var shield_bloc: PackedScene
+@export var heal_bloc: PackedScene
 @onready var level_music: AudioStreamPlayer
 
 @onready var start_label: Label = $"../StartLabel"
@@ -23,6 +24,9 @@ var rng = RandomNumberGenerator.new()
 
 # Liste de tous les types de cubes
 var cube_list: Array[PackedScene]
+
+# Texture sur lesquelles sont projetées les vues
+var texture: TextureRect
 
 # Temps de jeu écoulé
 var elapsed_time: float = 0.0
@@ -47,6 +51,7 @@ var texture_progress_bars: Array[TextureProgressBar]
 var progress_bar_labels: Array[Label]
 var letters: Array[String] = ["D", "C", "B", "A", "S"]
 var paliers: Array[int] = [2, 5, 10, 20, 30]
+var passage_paliers: Array[bool] = [false, false]
 
 # Multiplicateurs de score et scores actuels pour chaque joueur
 var multiplicateur: Array[int] = [1, 1]
@@ -64,9 +69,15 @@ var shield_actif: Array[int] = [0, 0]
 var time_shield_actif: Array[float] = [0.0, 0.0]
 var shield_bars: Array[Control]
 
+# Variables associées à la vie limitée
+var healing: bool = false
+var health_bars: Array[Control]
+var health: Array[int] = [10, 10]
+
 # Fonction appelée par le script du jeu pour démarrer l'apparition des cubes et charger les scores visuels
 func activation() -> void:
 	cube_list = [classic_bloc, bonus_bloc, bomb_bloc, disappear_bloc, splash_bloc, shield_bloc]
+	if Global.healing: cube_list.append(heal_bloc)
 	score_uis = []
 	shield_bars = []
 	ink_overlay = []
@@ -85,6 +96,8 @@ func activation() -> void:
 		j1 = get_node("../../J1")
 		j2 = get_node("../../J2")
 		level_music = get_node("../../LevelMusic")
+		healing = Global.healing
+		texture = get_node("../../TextureRect")
 
 		score_uis.append(get_node("../../J1/CameraController/Vue1/ScoreUI"))
 		score_uis.append(get_node("../../J2/CameraController/Vue5/ScoreUI"))
@@ -95,6 +108,11 @@ func activation() -> void:
 		shield_bars.append(get_node("../../J2/CameraController/Vue5/ShieldBar"))
 		shield_bars.append(get_node("../../J1/CameraController/Vue2/ShieldBar"))
 		shield_bars.append(get_node("../../J2/CameraController/Vue6/ShieldBar"))
+
+		health_bars.append(get_node("../../J1/CameraController/Vue1/HealthBar"))
+		health_bars.append(get_node("../../J2/CameraController/Vue5/HealthBar"))
+		health_bars.append(get_node("../../J1/CameraController/Vue2/HealthBar"))
+		health_bars.append(get_node("../../J2/CameraController/Vue6/HealthBar"))
 
 		ink_overlay.append(get_node("../../J1/CameraController/Vue1/InkLayerJ1/InkOverlayJ1"))
 		ink_overlay.append(get_node("../../J2/CameraController/Vue5/InkLayerJ2/InkOverlayJ2"))
@@ -115,6 +133,14 @@ func activation() -> void:
 			progress_bar.max_value = paliers[0]
 	for shield_bar in shield_bars:
 		shield_bar.modulate.a = 0.0
+	
+	for health_bar in health_bars:
+		if healing:
+			health_bar.visible = true
+			health_bar.modulate.a = 1.0
+		else:
+			health_bar.visible = false
+			health_bar.modulate.a = 0.0
 	start_game()
 
 func start_game() -> void:
@@ -171,6 +197,7 @@ func _process(delta: float) -> void:
 		# On actualise le meilleur combo de cubes
 		if best_combo < stocked_combo.max():
 			best_combo = stocked_combo.max()
+		
 		match mode:
 			# Boucle de jeu du jeu dans le menu
 			false: menu_loop()
@@ -179,7 +206,11 @@ func _process(delta: float) -> void:
 
 func menu_loop() -> void:
 	if blocs == []:
-		var n = rng.randi_range(0, 5)
+		var n: int
+		if healing:
+			n = rng.randi_range(0, 6)
+		else:
+			n = rng.randi_range(0, 5)
 		spawn_cube(cube_list[n])
 
 func game_loop() -> void:
@@ -204,8 +235,22 @@ func game_loop() -> void:
 			progress_bar_labels[i+2].text = letters[letter_index]
 			
 			if letter_index < paliers.size():
+				passage_paliers[i] = true
 				texture_progress_bars[i].max_value = paliers[letter_index]
 				texture_progress_bars[i+2].max_value = paliers[letter_index]
+	
+	# A chaque palier passé par l'un des deux joueurs, l'autre subit un effet de pixelisation
+	match passage_paliers:
+		[false, false]: pass
+		[false, true]:
+			passage_paliers[1] = false
+			texture.material.set_shader_parameter("pixelisation_mask", [false, false, false, false, true, true, false, false])
+		[true, false]:
+			passage_paliers[0] = false
+			texture.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, false, false, false, false])
+		[true, true]:
+			passage_paliers = [false, false]
+			texture.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, true, true, false, false])
 
 	if not is_generated:
 		is_generated = true
@@ -269,10 +314,10 @@ func set_speed(bloc: Node3D, direction: int, absolute_speed: float, disappear: b
 					else: bloc.vitesse_deplacement = -absolute_speed
 		true: match direction:
 				0:
-					if absolute_speed < 0 : bloc.vitesse_deplacement = rng.randf_range(4.0, 6.0)
+					if absolute_speed < 0 : bloc.vitesse_deplacement = rng.randf_range(2.0, 4.0)
 					else: bloc.vitesse_deplacement = absolute_speed
 				1:
-					if absolute_speed < 0 : bloc.vitesse_deplacement = rng.randf_range(-4.0, -6.0)
+					if absolute_speed < 0 : bloc.vitesse_deplacement = rng.randf_range(-2.0, -4.0)
 					else: bloc.vitesse_deplacement = -absolute_speed
 
 func generate_bloc(scene_bloc: PackedScene) -> Node3D:
@@ -345,6 +390,12 @@ func setup_shield_bloc(bloc: Node3D, absolute_speed: float, direction: int, spaw
 	bloc.striked_cube_j2.connect(_onStrikedShieldCube_j2)
 	spawn_valide(bloc, absolute_speed, direction, spawn)
 
+func setup_heal_bloc(bloc: Node3D, absolute_speed: float, direction: int, spawn: Array[float]) -> void:
+	# On connecte le bloc au spawner pour qu'il puisse être relié au score actuel
+	bloc.striked_cube_j1.connect(_onStrikedHealCube_j1)
+	bloc.striked_cube_j2.connect(_onStrikedHealCube_j2)
+	spawn_valide(bloc, absolute_speed, direction, spawn)
+
 func StrikedClassicCube(i: int) -> void:
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 1000
@@ -366,6 +417,10 @@ func MissedClassicCube(i: int) -> void:
 			texture_progress_bars[i+2].value = 0
 			progress_bar_labels[i].text = letters[0]
 			progress_bar_labels[i+2].text = letters[0]
+		if healing:
+			health[i] -= 1
+			health_bars[i].update_health(health[i])
+			health_bars[i+2].update_health(health[i])
 
 func StrikedBonusCube(i: int) -> void:
 	stocked_combo[i] += 1
@@ -422,6 +477,11 @@ func StrikedShieldCube(i: int) -> void:
 	score_uis[i].ajouter_score(gain)
 	if mode: score_uis[i+2].ajouter_score(gain)
 
+func StrikedHealCube(i: int) -> void:
+	health[i] += 1
+	health_bars[i].update_health(health[i])
+	health_bars[i+2].update_health(health[i])
+
 func _onStrikedClassicCube_j1() -> void:
 	StrikedClassicCube(0)
 
@@ -463,3 +523,9 @@ func _onStrikedShieldCube_j1() -> void:
 
 func _onStrikedShieldCube_j2() -> void:
 	StrikedShieldCube(1)
+
+func _onStrikedHealCube_j1() -> void:
+	StrikedHealCube(0)
+
+func _onStrikedHealCube_j2() -> void:
+	StrikedHealCube(1)

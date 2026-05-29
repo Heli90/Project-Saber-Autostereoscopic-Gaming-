@@ -1,9 +1,8 @@
 [gd_scene format=3 uid="uid://dcjdygsrwf41g"]
 
 [ext_resource type="Script" uid="uid://vt8p43mvn5cs" path="res://scripts/menus/main_menu_2d.gd" id="1_tbmy8"]
-[ext_resource type="FontFile" uid="uid://bd4geqghtkj13" path="res://addons/assets/TextFontBase.ttf" id="3_rtw2f"]
+[ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/Minecraft.ttf" id="4_5epmy"]
 [ext_resource type="Script" uid="uid://crmbnc6adwn05" path="res://scripts/sound/audio_control.gd" id="4_8ln24"]
-[ext_resource type="FontFile" uid="uid://crtikirivhq6o" path="res://addons/assets/TextFontBold.otf" id="4_oa1go"]
 [ext_resource type="AudioStream" uid="uid://bqjkoeah1m37j" path="res://addons/sfx/main_menu_music.mp3" id="5_1hnlc"]
 [ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="8_tbmy8"]
 
@@ -81,6 +80,7 @@ script = ExtResource("1_tbmy8")
 [node name="FonduLayer" type="CanvasLayer" parent="." unique_id=1999669690]
 
 [node name="FonduNoir" type="ColorRect" parent="FonduLayer" unique_id=2057717224]
+visible = false
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
@@ -107,10 +107,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 8
-theme_override_fonts/font = ExtResource("4_oa1go")
+theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 120
-text = "Projet Artishow
-Pong Saber"
+text = "Project Saber"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -136,7 +135,7 @@ offset_right = 756.0
 offset_bottom = 50.0
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../QuitButton")
-theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_rtw2f")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_hstxw")
@@ -144,7 +143,7 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_oa1go")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_jk1qb")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_8egab")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_gw5y6")
-text = "Nouvelle partie"
+text = "New Game"
 
 [node name="OptionButton" type="Button" parent="MainButtons" unique_id=356391253]
 layout_mode = 0
@@ -153,7 +152,7 @@ offset_top = 150.0
 offset_right = 704.0
 offset_bottom = 200.0
 size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_5dd4i")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_svtp6")
@@ -161,7 +160,7 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_lgwnu")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_flqon")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_1dfpl")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
-text = "Paramètres"
+text = "Parameters"
 
 [node name="CreditsButton" type="Button" parent="MainButtons" unique_id=1201192951]
 layout_mode = 0
@@ -170,7 +169,7 @@ offset_top = 300.0
 offset_right = 667.0
 offset_bottom = 350.0
 size_flags_vertical = 3
-theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_5dd4i")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_svtp6")
@@ -178,7 +177,7 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_lgwnu")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_flqon")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_1dfpl")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
-text = "Crédits"
+text = "Credits"
 
 [node name="QuitButton" type="Button" parent="MainButtons" unique_id=1683743182]
 layout_mode = 0
@@ -188,7 +187,7 @@ offset_right = 670.0
 offset_bottom = 500.0
 size_flags_vertical = 3
 focus_neighbor_bottom = NodePath("../StartButton")
-theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_rcqid")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_qywvv")
@@ -196,7 +195,7 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_1ajci")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_7b55j")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_3wgol")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
-text = "Quitter"
+text = "Quit"
 
 [node name="Options" type="Panel" parent="." unique_id=708263686]
 layout_mode = 1
@@ -223,9 +222,9 @@ size_flags_horizontal = 4
 size_flags_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 5
-theme_override_fonts/font = ExtResource("4_oa1go")
+theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 80
-text = "Paramètres"
+text = "Parameters"
 vertical_alignment = 1
 
 [node name="MusicTitle" type="Label" parent="Options" unique_id=767801421]
@@ -234,9 +233,10 @@ offset_left = 287.0
 offset_top = 200.0
 offset_right = 525.0
 offset_bottom = 251.0
-theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 50
 text = "Musique"
+horizontal_alignment = 1
 
 [node name="SFXTitle" type="Label" parent="Options" unique_id=1942812459]
 layout_mode = 0
@@ -244,7 +244,7 @@ offset_left = 353.0
 offset_top = 300.0
 offset_right = 446.0
 offset_bottom = 351.0
-theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 50
 text = "SFX"
 
@@ -255,7 +255,7 @@ offset_left = 20.0
 offset_top = 650.0
 offset_right = 820.0
 offset_bottom = 777.0
-theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxEmpty_5pajh")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_1acrt")
@@ -263,7 +263,7 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_j7ex8")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_a8gd2")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_vr8o3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
-text = "Menu Principal"
+text = "Main Menu"
 
 [node name="MusicControl" type="HSlider" parent="Options" unique_id=874942043]
 layout_mode = 0
@@ -323,9 +323,10 @@ size_flags_horizontal = 4
 size_flags_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 5
-theme_override_fonts/font = ExtResource("4_oa1go")
+theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 80
-text = "Crédits"
+text = "Credits"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Dev1" type="Label" parent="Credits" unique_id=1890204029]
@@ -340,9 +341,10 @@ offset_bottom = 220.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
-theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 40
-text = "NGUYEN Van-Kévin"
+text = "NGUYEN Van-Kevin"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Dev2" type="Label" parent="Credits" unique_id=1290517817]
@@ -357,9 +359,10 @@ offset_bottom = 340.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
-theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 40
 text = "BELLE Hugo"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Dev3" type="Label" parent="Credits" unique_id=2079672177]
@@ -374,9 +377,10 @@ offset_bottom = 580.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
-theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 40
-text = "CISSÉ Birame"
+text = "CISSE Birame"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Dev4" type="Label" parent="Credits" unique_id=1948316752]
@@ -391,9 +395,10 @@ offset_bottom = 700.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
-theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 40
 text = "KHATIRI Adam"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Dev5" type="Label" parent="Credits" unique_id=1491688908]
@@ -408,9 +413,10 @@ offset_bottom = 460.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
-theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 40
-text = "GODARD Hélias"
+text = "GODARD Helias"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="BackButton" type="Button" parent="Credits" unique_id=193427243]
@@ -420,7 +426,7 @@ offset_left = -100.0
 offset_top = 740.0
 offset_right = 700.0
 offset_bottom = 867.0
-theme_override_fonts/font = ExtResource("3_rtw2f")
+theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxEmpty_5pajh")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_1acrt")

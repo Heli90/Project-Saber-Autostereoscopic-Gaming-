@@ -32,28 +32,43 @@ func set_blur_intensity(value: float):
 
 func _process(_delta: float) -> void:
 	if mode:
+		# On vérifie si un des joueurs a perdu tous ses points de vie
+		if cube_spawner.health[0] == 0:
+			if cube_spawner.health[1] == 0:
+				onPartieTimerTimeout()
+			else:
+				onPartieTimerTimeout(true, 2)
+		elif cube_spawner.health[1] == 0:
+			onPartieTimerTimeout(true, 1)
 		if not level_music: level_music = get_node("../LevelMusic")
 		if (not level_music.playing) and cube_spawner.is_generated and cube_spawner.elapsed_time > 5.0: onPartieTimerTimeout()
 
-func onPartieTimerTimeout() -> void:
+func onPartieTimerTimeout(death: bool = false, winner: int = 1) -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	get_tree().paused = true
 
 	# On charge les scores de chacun des joueurs et on les affiche dans le classement
 	var score_j1 = int(cube_spawner.score_uis[0].score.text)
 	var score_j2 = int(cube_spawner.score_uis[1].score.text)
-	save_scores_to_leaderboard(score_j1, score_j2)
+	
+	# Si un des joueurs a perdu tous ses points de vie, son score n'est pas enregistré
+	if death: match winner:
+		1: save_scores_to_leaderboard(0, score_j2)
+		2: save_scores_to_leaderboard(score_j1, 0)
+	else: save_scores_to_leaderboard(score_j1, score_j2)
 	afficher_leaderboard(load_leaderboard())
 	
 	var config = ConfigFile.new()
 	config.load(LEADERBOARD_PATH)
+	
+	# Si un joueur a perdu tous ses points de vie, l'autre joueur gagne la partie
+	if death: game_ending.best_player_text.text = config.get_value("Joueurs", "Nom_J%d"%(winner), "Joueur %d"%(winner))
 	if score_j1 > score_j2:
 		game_ending.best_player_text.text = config.get_value("Joueurs", "Nom_J1", "Joueur 1")
 	elif score_j2 > score_j1:
 		game_ending.best_player_text.text = config.get_value("Joueurs", "Nom_J2", "Joueur 2")
 	else:
-		game_ending.best_player_message.text = "Il y a égalité !"
-		game_ending.best_player_message.position = Vector2(285.0, 650.0)
+		game_ending.best_player_message.text = "It is a tie !"
 
 	game_ending.visible = true
 	var transition = create_tween().set_parallel(true)

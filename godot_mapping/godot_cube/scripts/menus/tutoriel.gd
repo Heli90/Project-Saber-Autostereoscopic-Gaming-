@@ -4,6 +4,7 @@ extends Control
 @onready var tutoriel_music: AudioStreamPlayer = $TutorielMusic
 @onready var nom_j1: LineEdit = $NameInput/NomJ1
 @onready var nom_j2: LineEdit = $NameInput/NomJ2
+@onready var heal_mode_button: TextureButton = $HealModeButton
 
 const LEADERBOARD_PATH = "user://leaderboard.cfg"
 
@@ -44,3 +45,8 @@ func _onStartButton_pressed() -> void:
 	t.chain().tween_interval(0.3)
 	await t.finished
 	get_tree().change_scene_to_file("res://scenes/game_scenes/scene_TV.tscn")
+
+func _onHealModeButton_pressed() -> void:
+	heal_mode_button.activated = !heal_mode_button.activated
+	Global.healing = heal_mode_button.activated
+	heal_mode_button.texture_normal = heal_mode_button.full_heart if heal_mode_button.activated else heal_mode_button.empty_heart
