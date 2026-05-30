@@ -14,7 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://b2scygnmuljbm" path="res://scenes/game_scenes/cubes/shield_cube.tscn" id="12_8x66g"]
 [ext_resource type="Script" uid="uid://b8hvntdiwpe0p" path="res://scripts/game_scenes/map/ring.gd" id="13_qmffw"]
 [ext_resource type="PackedScene" uid="uid://c4x12na4wh5mf" path="res://scenes/game_scenes/shield.tscn" id="13_wgmfl"]
-[ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/Minecraft.ttf" id="16_qmffw"]
+[ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/pixel_art_typeface.ttf" id="16_qmffw"]
 
 [sub_resource type="Sky" id="Sky_ypfyx"]
 

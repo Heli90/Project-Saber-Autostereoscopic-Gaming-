@@ -214,8 +214,8 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 - Modification de l'affichage du classement en fin de partie si un joueur a perdu tous ses points de vie.
 - Ajout d'un fade-in et d'un fade-out pour tous les cubes.
 - Ajout d'anneaux dans le terrain pour le rendre plus vivant.
-- Ajout d'une page de sélection de niveaux (tutoriel, vraie partie).
-- Modification graphique du jeu.
+- Ajout d'une page de sélection de niveaux (tutoriel, vraie partie) via des animations basiques de cassettes.
+- Modification graphique du jeu : police d'écriture, visuels, images en jeu, fond d'écrans des menus.
 
 
 **Birame :**

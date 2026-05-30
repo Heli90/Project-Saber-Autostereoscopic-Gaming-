@@ -3,7 +3,7 @@
 [ext_resource type="Shader" uid="uid://dtcbr8l1yp6kt" path="res://shaders/pause_menu.gdshader" id="1_nvk6s"]
 [ext_resource type="Script" uid="uid://c017eu1ls6xye" path="res://scripts/menus/game_ending.gd" id="2_nvk6s"]
 [ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="3_cplju"]
-[ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/Minecraft.ttf" id="4_ko6y7"]
+[ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/pixel_art_typeface.ttf" id="4_ko6y7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1s2dm"]
 shader = ExtResource("1_nvk6s")
@@ -144,9 +144,9 @@ vertical_alignment = 1
 process_mode = 3
 custom_minimum_size = Vector2(0, 127)
 layout_mode = 0
-offset_left = 280.0
+offset_left = 325.0
 offset_top = 850.0
-offset_right = 700.0
+offset_right = 618.0
 offset_bottom = 977.0
 theme_override_fonts/font = ExtResource("4_ko6y7")
 theme_override_font_sizes/font_size = 60
@@ -156,6 +156,6 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_etf8b")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_ndks8")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_reqs4")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_7s4e5")
-text = "Menu Principal"
+text = "Main Menu"
 
 [connection signal="pressed" from="BackToMenuButton" to="." method="_onBackToMenuButton_pressed"]

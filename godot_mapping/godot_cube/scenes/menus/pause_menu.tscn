@@ -4,7 +4,7 @@
 [ext_resource type="Shader" uid="uid://dtcbr8l1yp6kt" path="res://shaders/pause_menu.gdshader" id="1_v4r4p"]
 [ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="2_v4r4p"]
 [ext_resource type="Script" uid="uid://crmbnc6adwn05" path="res://scripts/sound/audio_control.gd" id="5_knqa7"]
-[ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/Minecraft.ttf" id="5_xiui8"]
+[ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/pixel_art_typeface.ttf" id="5_xiui8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1s2dm"]
 shader = ExtResource("1_v4r4p")
@@ -150,9 +150,9 @@ text = "Continue"
 
 [node name="OptionButton" type="Button" parent="MenuButtons" unique_id=1022310421]
 layout_mode = 0
-offset_left = 200.0
+offset_left = 240.0
 offset_top = 310.0
-offset_right = 435.0
+offset_right = 393.0
 offset_bottom = 365.0
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("5_xiui8")
@@ -163,7 +163,7 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_jkjer")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_5gujb")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_fy126")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bhxne")
-text = "Parameters"
+text = "Settings"
 
 [node name="MainMenuButton" type="Button" parent="MenuButtons" unique_id=1186445436]
 layout_mode = 0
@@ -246,7 +246,8 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 5
 theme_override_fonts/font = ExtResource("5_xiui8")
 theme_override_font_sizes/font_size = 80
-text = "Parameters"
+text = "Settings"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MusicTitle" type="Label" parent="Options" unique_id=1567091736]

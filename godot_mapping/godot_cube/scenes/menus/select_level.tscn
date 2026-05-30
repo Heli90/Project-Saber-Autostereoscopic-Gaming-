@@ -3,10 +3,32 @@
 [ext_resource type="Texture2D" uid="uid://c0e25ymfw03kq" path="res://addons/assets/select_level_bg.png" id="1_eiguw"]
 [ext_resource type="Texture2D" uid="uid://bb3qi1rcog3jl" path="res://addons/assets/cassette_tuto.png" id="2_6xr6w"]
 [ext_resource type="Texture2D" uid="uid://cy5no81nhebpm" path="res://addons/assets/sign_name_panel.png" id="2_v1pdx"]
-[ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/Minecraft.ttf" id="3_8s4k5"]
+[ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/pixel_art_typeface.ttf" id="3_8s4k5"]
+[ext_resource type="Script" uid="uid://3dc3450r8v4v" path="res://scripts/menus/cassette.gd" id="5_8s4k5"]
+[ext_resource type="Texture2D" uid="uid://bxm2srr4rf0ps" path="res://addons/assets/arrows.png" id="6_562s2"]
+[ext_resource type="Texture2D" uid="uid://x3qv3e1v08e6" path="res://addons/assets/cassette_hexagon_force.png" id="6_tdgyk"]
+[ext_resource type="Script" uid="uid://8msptkcdmu7b" path="res://scripts/menus/arrows.gd" id="7_0vyn2"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8ow2l"]
 texture = ExtResource("1_eiguw")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_honup"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6oaro"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8s4k5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_562s2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0vyn2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tdgyk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a7w0q"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_axkwj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xgvxu"]
 
 [node name="SelectLevel" type="Control" unique_id=877177698]
 layout_mode = 3
@@ -18,12 +40,18 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_8ow2l")
 
-[node name="LevelTitleSign" type="Sprite2D" parent="." unique_id=431505168]
+[node name="Titles" type="Panel" parent="." unique_id=1021010872]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_honup")
+
+[node name="TutoLevelSign" type="Sprite2D" parent="Titles" unique_id=431505168]
 position = Vector2(951.99994, 199)
 scale = Vector2(2.5, 1.5)
 texture = ExtResource("2_v1pdx")
 
-[node name="LevelTitle" type="Label" parent="." unique_id=622795816]
+[node name="TutoLevel" type="Label" parent="Titles" unique_id=622795816]
 layout_mode = 0
 offset_left = 808.0
 offset_top = 167.0
@@ -34,13 +62,104 @@ theme_override_font_sizes/font_size = 80
 text = "Tutoriel"
 horizontal_alignment = 1
 
-[node name="CassetteTuto" type="TextureButton" parent="." unique_id=373743379]
-layout_mode = 0
-offset_left = 724.0
-offset_top = 325.0
-offset_right = 1660.0
-offset_bottom = 946.0
-scale = Vector2(0.5, 0.5)
-texture_normal = ExtResource("2_6xr6w")
+[node name="GameLevelSign" type="Sprite2D" parent="Titles" unique_id=562926996]
+visible = false
+position = Vector2(940, 199)
+scale = Vector2(5, 1.5)
+texture = ExtResource("2_v1pdx")
 
-[node name="InsertCassetteSound" type="AudioStreamPlayer2D" parent="." unique_id=1880057536]
+[node name="GameLevel" type="Label" parent="Titles" unique_id=685861881]
+visible = false
+layout_mode = 0
+offset_left = 650.0
+offset_top = 167.0
+offset_right = 1250.0
+offset_bottom = 247.0
+theme_override_fonts/font = ExtResource("3_8s4k5")
+theme_override_font_sizes/font_size = 80
+text = "Hexagon Force"
+horizontal_alignment = 1
+
+[node name="Cassettes" type="Panel" parent="." unique_id=1347945102]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_6oaro")
+
+[node name="CassetteTuto" type="TextureButton" parent="Cassettes" unique_id=373743379]
+layout_mode = 0
+offset_left = 480.0
+offset_top = 280.0
+offset_right = 1416.0
+offset_bottom = 901.0
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(478, 310.5)
+texture_normal = ExtResource("2_6xr6w")
+script = ExtResource("5_8s4k5")
+
+[node name="CassetteGame" type="TextureButton" parent="Cassettes" unique_id=2076187809]
+visible = false
+layout_mode = 0
+offset_left = 606.0
+offset_top = 369.0
+offset_right = 1299.0
+offset_bottom = 807.0
+scale = Vector2(0.715, 0.715)
+pivot_offset = Vector2(347.5, 219)
+texture_normal = ExtResource("6_tdgyk")
+script = ExtResource("5_8s4k5")
+
+[node name="Menu" type="Panel" parent="." unique_id=151927955]
+layout_mode = 0
+offset_left = 675.0
+offset_top = 850.0
+offset_right = 715.0
+offset_bottom = 890.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_8s4k5")
+
+[node name="SignStart" type="Sprite2D" parent="Menu" unique_id=202693642]
+position = Vector2(280, 110)
+scale = Vector2(3, 1.5)
+texture = ExtResource("2_v1pdx")
+
+[node name="BackButton" type="Button" parent="Menu" unique_id=36464370]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 75.0
+offset_right = 420.0
+offset_bottom = 155.0
+theme_override_fonts/font = ExtResource("3_8s4k5")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxEmpty_562s2")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_0vyn2")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_tdgyk")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_a7w0q")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_axkwj")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_xgvxu")
+text = "Return"
+
+[node name="CassetteSound" type="AudioStreamPlayer2D" parent="." unique_id=1880057536]
+
+[node name="LeftArrows" type="TextureButton" parent="." unique_id=1158951805]
+layout_mode = 0
+offset_left = 325.0
+offset_top = 550.0
+offset_right = 421.0
+offset_bottom = 616.0
+rotation = -3.1415925
+scale = Vector2(2, 2)
+pivot_offset = Vector2(48, 33)
+texture_normal = ExtResource("6_562s2")
+script = ExtResource("7_0vyn2")
+
+[node name="RightArrows" type="TextureButton" parent="." unique_id=1622325449]
+layout_mode = 0
+offset_left = 1500.0
+offset_top = 550.0
+offset_right = 1596.0
+offset_bottom = 616.0
+scale = Vector2(2, 2)
+pivot_offset = Vector2(48, 33)
+texture_normal = ExtResource("6_562s2")
+script = ExtResource("7_0vyn2")
+direction = 2

@@ -4,7 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="2_nl2bs"]
 [ext_resource type="Texture2D" uid="uid://dt002k6ldkdhi" path="res://addons/assets/tutoriel_menu_bg.png" id="2_phf8o"]
 [ext_resource type="AudioStream" uid="uid://dtx2qu2tls0eq" path="res://addons/sfx/tutoriel_menu_music.mp3" id="5_fwhch"]
-[ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/Minecraft.ttf" id="5_phf8o"]
+[ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/pixel_art_typeface.ttf" id="5_phf8o"]
 [ext_resource type="Texture2D" uid="uid://cy5no81nhebpm" path="res://addons/assets/sign_name_panel.png" id="6_gjwrx"]
 [ext_resource type="Texture2D" uid="uid://8osrrw63mu7p" path="res://addons/assets/heart.png" id="7_b7lfr"]
 [ext_resource type="Script" uid="uid://drtrabk7fho4t" path="res://scripts/menus/heal_mode_button.gd" id="8_fwhch"]
@@ -28,6 +28,8 @@ texture = ExtResource("2_phf8o")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0stj3"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gs0rj"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3y8p5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h0cxi"]
@@ -39,6 +41,22 @@ texture = ExtResource("2_phf8o")
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8jpt8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vfcph"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q35cj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3o3ya"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xkyhx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s2aud"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0mgn0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1b1is"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yuc1k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_imcix"]
 
 [node name="Tutoriel" type="Control" unique_id=580013353]
 layout_mode = 3
@@ -151,12 +169,18 @@ placeholder_text = "Player 2"
 alignment = 1
 expand_to_text_length = true
 
-[node name="SignStart" type="Sprite2D" parent="." unique_id=11834707]
+[node name="Start" type="Panel" parent="." unique_id=146466681]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_gs0rj")
+
+[node name="SignStart" type="Sprite2D" parent="Start" unique_id=11834707]
 position = Vector2(1175, 935)
 scale = Vector2(2.608974, 1.1043956)
 texture = ExtResource("6_gjwrx")
 
-[node name="StartButton" type="Button" parent="." unique_id=1486002421]
+[node name="StartButton" type="Button" parent="Start" unique_id=1486002421]
 layout_mode = 0
 offset_left = 950.0
 offset_top = 900.0
@@ -172,7 +196,40 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_8jpt8")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_vfcph")
 text = "Start"
 
-[node name="HealModeButton" type="TextureButton" parent="." unique_id=1423390101]
+[node name="Menu" type="Panel" parent="." unique_id=831305918]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_q35cj")
+
+[node name="SignStart" type="Sprite2D" parent="Menu" unique_id=1179866710]
+position = Vector2(280, 110)
+scale = Vector2(3, 1.5)
+texture = ExtResource("6_gjwrx")
+
+[node name="MenuButton" type="Button" parent="Menu" unique_id=139261608]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 75.0
+offset_right = 475.0
+offset_bottom = 155.0
+theme_override_fonts/font = ExtResource("5_phf8o")
+theme_override_font_sizes/font_size = 80
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3o3ya")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_xkyhx")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_s2aud")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_0mgn0")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_1b1is")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yuc1k")
+text = "Main Menu"
+
+[node name="Modes" type="Panel" parent="." unique_id=485838638]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_imcix")
+
+[node name="HealModeButton" type="TextureButton" parent="Modes" unique_id=1423390101]
 layout_mode = 0
 offset_left = 100.0
 offset_top = 800.0
@@ -183,7 +240,7 @@ script = ExtResource("8_fwhch")
 full_heart = ExtResource("7_b7lfr")
 empty_heart = ExtResource("9_phf8o")
 
-[node name="HealLabel" type="Label" parent="." unique_id=1978504200]
+[node name="HealLabel" type="Label" parent="Modes" unique_id=1978504200]
 layout_mode = 0
 offset_left = 240.0
 offset_top = 830.0
@@ -199,8 +256,13 @@ vertical_alignment = 1
 visible = false
 layout_mode = 0
 
-[connection signal="pressed" from="StartButton" to="." method="_onStartButton_pressed"]
-[connection signal="pressed" from="HealModeButton" to="." method="_onHealModeButton_pressed"]
-[connection signal="pressed" from="SelectLevel/CassetteTuto" to="." method="_onTutoCassette_pressed"]
+[connection signal="pressed" from="Start/StartButton" to="." method="_onStartButton_pressed"]
+[connection signal="pressed" from="Menu/MenuButton" to="." method="_onMenuButton_pressed"]
+[connection signal="pressed" from="Modes/HealModeButton" to="." method="_onHealModeButton_pressed"]
+[connection signal="pressed" from="SelectLevel/Menu/BackButton" to="." method="_onBackButton_pressed"]
+[connection signal="pressed" from="SelectLevel/Cassettes/CassetteTuto" to="." method="_onTutoCassette_pressed"]
+[connection signal="pressed" from="SelectLevel/Cassettes/CassetteGame" to="." method="_onCassetteGame_pressed"]
+[connection signal="pressed" from="SelectLevel/LeftArrows" to="." method="_onLeftArrows_pressed"]
+[connection signal="pressed" from="SelectLevel/RightArrows" to="." method="_onRightArrows_pressed"]
 
 [editable path="SelectLevel"]

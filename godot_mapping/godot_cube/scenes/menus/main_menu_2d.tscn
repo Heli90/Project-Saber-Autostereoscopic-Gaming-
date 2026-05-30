@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dcjdygsrwf41g"]
 
 [ext_resource type="Script" uid="uid://vt8p43mvn5cs" path="res://scripts/menus/main_menu_2d.gd" id="1_tbmy8"]
-[ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/Minecraft.ttf" id="4_5epmy"]
+[ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/pixel_art_typeface.ttf" id="4_5epmy"]
 [ext_resource type="Script" uid="uid://crmbnc6adwn05" path="res://scripts/sound/audio_control.gd" id="4_8ln24"]
 [ext_resource type="AudioStream" uid="uid://bqjkoeah1m37j" path="res://addons/sfx/main_menu_music.mp3" id="5_1hnlc"]
 [ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="8_tbmy8"]

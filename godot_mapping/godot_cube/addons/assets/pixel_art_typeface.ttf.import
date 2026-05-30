@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://bulj5s2rcjc7b"
-path="res://.godot/imported/BAHNSCHRIFT.TTF-0825f21b89253eb629043c74a3285158.fontdata"
+uid="uid://2elnyaxgt7d7"
+path="res://.godot/imported/pixel_art_typeface.ttf-bf72c33c40b71d71bf56258cb4e7be5c.fontdata"
 
 [deps]
 
-source_file="res://addons/assets/BAHNSCHRIFT.TTF"
-dest_files=["res://.godot/imported/BAHNSCHRIFT.TTF-0825f21b89253eb629043c74a3285158.fontdata"]
+source_file="res://addons/assets/pixel_art_typeface.ttf"
+dest_files=["res://.godot/imported/pixel_art_typeface.ttf-bf72c33c40b71d71bf56258cb4e7be5c.fontdata"]
 
 [params]
 

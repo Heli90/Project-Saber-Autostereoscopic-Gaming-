@@ -4,23 +4,35 @@
 [ext_resource type="PackedScene" uid="uid://br2jmvjla4guc" path="res://scenes/game_scenes/joueur.tscn" id="2_rfm68"]
 [ext_resource type="Script" uid="uid://c4nxreh0k2je7" path="res://scripts/game_scenes/visuals/score_ui.gd" id="3_k5d3u"]
 [ext_resource type="Shader" uid="uid://vno46ensk36y" path="res://shaders/generation_image.gdshader" id="4_wdlj1"]
-[ext_resource type="FontFile" uid="uid://bulj5s2rcjc7b" path="res://addons/assets/BAHNSCHRIFT.TTF" id="4_yqxl7"]
 [ext_resource type="Script" uid="uid://dnfkxpf3p8gki" path="res://scripts/game_scenes/visuals/shield_bar.gd" id="5_3cheo"]
 [ext_resource type="Script" uid="uid://cx3d6alfd6nrm" path="res://scripts/game_scenes/visuals/ink_overlay.gd" id="5_hrdja"]
 [ext_resource type="Script" uid="uid://b488bjxdcwo2m" path="res://scripts/game_scenes/visuals/health_bar.gd" id="6_af46e"]
 [ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="6_qo1rj"]
-[ext_resource type="Texture2D" uid="uid://barxo14ju82s8" path="res://addons/assets/shield_icon.png" id="7_4s8qw"]
+[ext_resource type="Shader" uid="uid://dk5jixryl8es3" path="res://shaders/shield_bar.gdshader" id="7_af46e"]
 [ext_resource type="Shader" uid="uid://bws066256p50k" path="res://shaders/health_bar.gdshader" id="7_k3crr"]
+[ext_resource type="Texture2D" uid="uid://cwgkhf1f7wdtp" path="res://addons/assets/shield_icon_v2.png" id="9_af46e"]
 [ext_resource type="Texture2D" uid="uid://c7vtx5e2brkk1" path="res://addons/assets/combo_bar_empty.png" id="9_k3crr"]
 [ext_resource type="Texture2D" uid="uid://lj6bxsd50fjh" path="res://addons/assets/combo_bar.png" id="10_sgwr3"]
 [ext_resource type="AudioStream" uid="uid://dk8rg1cdygmea" path="res://addons/sfx/level_music.mp3" id="12_4s8qw"]
-[ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/Minecraft.ttf" id="12_af46e"]
+[ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/pixel_art_typeface.ttf" id="12_af46e"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8081n"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wc6ee"]
 shader = ExtResource("7_k3crr")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wc6ee"]
 load_path = "res://.godot/imported/heart.png-faf08471e88d2969ee3fbf1815ae1802.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8081n"]
+shader = ExtResource("7_af46e")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tivul"]
+shader = ExtResource("7_k3crr")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lqoxa"]
+shader = ExtResource("7_k3crr")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2befi"]
+shader = ExtResource("7_k3crr")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6c3ax"]
 resource_local_to_scene = true
@@ -91,14 +103,14 @@ offset_bottom = 77.0
 
 [node name="Titre" type="Label" parent="J1/CameraController/Vue1/ScoreUI/ScoresPanel/VBoxContainer" unique_id=507906096]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 18
 text = "♢ Score total ♢"
 
 [node name="Score" type="Label" parent="J1/CameraController/Vue1/ScoreUI/ScoresPanel/VBoxContainer" unique_id=425971154]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 52
 text = "0"
 
@@ -109,7 +121,7 @@ offset_top = 80.0
 offset_right = 87.0
 offset_bottom = 109.0
 theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 28
 text = "+0"
 
@@ -146,9 +158,9 @@ script = ExtResource("6_af46e")
 [node name="Contour" type="ColorRect" parent="J1/CameraController/Vue1/HealthBar" unique_id=1827105709]
 layout_mode = 0
 offset_left = 145.0
-offset_top = 645.0
+offset_top = 644.0
 offset_right = 355.0
-offset_bottom = 715.0
+offset_bottom = 714.0
 color = Color(0, 0, 0, 1)
 
 [node name="BG" type="ColorRect" parent="J1/CameraController/Vue1/HealthBar" unique_id=2054633597]
@@ -162,24 +174,21 @@ offset_bottom = 670.0
 grow_vertical = 2
 color = Color(0.58383155, 0.58383155, 0.58383155, 1)
 
-[node name="BarFilled" type="ColorRect" parent="J1/CameraController/Vue1/HealthBar" unique_id=1320127291]
-material = SubResource("ShaderMaterial_8081n")
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
+[node name="BarFilled" type="ColorRect" parent="J1/CameraController/Vue1/HealthBar" unique_id=1667176439]
+material = SubResource("ShaderMaterial_wc6ee")
+layout_mode = 0
 offset_left = 150.0
 offset_top = 650.0
 offset_right = 350.0
-offset_bottom = 670.0
-grow_vertical = 2
+offset_bottom = 710.0
 
 [node name="HeartIcon" type="TextureRect" parent="J1/CameraController/Vue1/HealthBar" unique_id=1077554327]
 layout_mode = 0
-offset_left = 300.0
+offset_left = 306.0
 offset_top = 600.0
-offset_right = 450.0
-offset_bottom = 771.0
-scale = Vector2(0.7, 0.7)
+offset_right = 770.0
+offset_bottom = 1034.0
+scale = Vector2(0.2, 0.2)
 texture = SubResource("CompressedTexture2D_wc6ee")
 
 [node name="HeartLabel" type="Label" parent="J1/CameraController/Vue1/HealthBar" unique_id=1681797250]
@@ -190,7 +199,7 @@ offset_top = 660.0
 offset_right = 122.0
 offset_bottom = 711.0
 theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
-theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 50
 text = "100"
 horizontal_alignment = 1
@@ -240,8 +249,8 @@ offset_left = 315.0
 offset_top = 815.0
 offset_right = 465.0
 offset_bottom = 986.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_4s8qw")
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_af46e")
 
 [node name="ShieldLabel" type="Label" parent="J1/CameraController/Vue1/ShieldBar" unique_id=1899313079]
 custom_minimum_size = Vector2(72, 51)
@@ -251,7 +260,7 @@ offset_top = 860.0
 offset_right = 122.0
 offset_bottom = 911.0
 theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
-theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 50
 text = "100"
 horizontal_alignment = 1
@@ -289,7 +298,7 @@ offset_top = 45.0
 offset_right = 201.0
 offset_bottom = 246.0
 theme_override_constants/outline_size = 30
-theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 195
 text = "D"
 horizontal_alignment = 1
@@ -327,14 +336,14 @@ offset_bottom = 77.0
 
 [node name="Titre" type="Label" parent="J1/CameraController/Vue2/ScoreUI/ScoresPanel/VBoxContainer" unique_id=1409903511]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 18
 text = "♢ Score total ♢"
 
 [node name="Score" type="Label" parent="J1/CameraController/Vue2/ScoreUI/ScoresPanel/VBoxContainer" unique_id=1387099689]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 52
 text = "0"
 
@@ -345,7 +354,7 @@ offset_top = 80.0
 offset_right = 87.0
 offset_bottom = 109.0
 theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 28
 text = "+0"
 
@@ -382,9 +391,9 @@ script = ExtResource("6_af46e")
 [node name="Contour" type="ColorRect" parent="J1/CameraController/Vue2/HealthBar" unique_id=1507467580]
 layout_mode = 0
 offset_left = 145.0
-offset_top = 645.0
+offset_top = 644.0
 offset_right = 355.0
-offset_bottom = 715.0
+offset_bottom = 714.0
 color = Color(0, 0, 0, 1)
 
 [node name="BG" type="ColorRect" parent="J1/CameraController/Vue2/HealthBar" unique_id=828100146]
@@ -398,24 +407,21 @@ offset_bottom = 670.0
 grow_vertical = 2
 color = Color(0.58383155, 0.58383155, 0.58383155, 1)
 
-[node name="BarFilled" type="ColorRect" parent="J1/CameraController/Vue2/HealthBar" unique_id=2122342861]
-material = SubResource("ShaderMaterial_8081n")
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
+[node name="BarFilled" type="ColorRect" parent="J1/CameraController/Vue2/HealthBar" unique_id=1337863478]
+material = SubResource("ShaderMaterial_tivul")
+layout_mode = 0
 offset_left = 150.0
 offset_top = 650.0
 offset_right = 350.0
-offset_bottom = 670.0
-grow_vertical = 2
+offset_bottom = 710.0
 
 [node name="HeartIcon" type="TextureRect" parent="J1/CameraController/Vue2/HealthBar" unique_id=1000776391]
 layout_mode = 0
-offset_left = 300.0
+offset_left = 305.0
 offset_top = 600.0
-offset_right = 450.0
-offset_bottom = 771.0
-scale = Vector2(0.7, 0.7)
+offset_right = 769.0
+offset_bottom = 1034.0
+scale = Vector2(0.2, 0.2)
 texture = SubResource("CompressedTexture2D_wc6ee")
 
 [node name="HeartLabel" type="Label" parent="J1/CameraController/Vue2/HealthBar" unique_id=2138022231]
@@ -426,7 +432,7 @@ offset_top = 660.0
 offset_right = 122.0
 offset_bottom = 711.0
 theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
-theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 50
 text = "100"
 horizontal_alignment = 1
@@ -476,8 +482,8 @@ offset_left = 315.0
 offset_top = 815.0
 offset_right = 465.0
 offset_bottom = 986.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_4s8qw")
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_af46e")
 
 [node name="ShieldLabel" type="Label" parent="J1/CameraController/Vue2/ShieldBar" unique_id=18941228]
 custom_minimum_size = Vector2(72, 51)
@@ -487,7 +493,7 @@ offset_top = 860.0
 offset_right = 122.0
 offset_bottom = 911.0
 theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
-theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 50
 text = "100"
 horizontal_alignment = 1
@@ -525,7 +531,7 @@ offset_top = 45.0
 offset_right = 201.0
 offset_bottom = 246.0
 theme_override_constants/outline_size = 30
-theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 195
 text = "D"
 horizontal_alignment = 1
@@ -579,14 +585,14 @@ offset_bottom = 77.0
 
 [node name="Titre" type="Label" parent="J2/CameraController/Vue5/ScoreUI/ScoresPanel/VBoxContainer" unique_id=210582099]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 18
 text = "♢ Score total ♢"
 
 [node name="Score" type="Label" parent="J2/CameraController/Vue5/ScoreUI/ScoresPanel/VBoxContainer" unique_id=473311429]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 52
 text = "0"
 
@@ -597,7 +603,7 @@ offset_top = 80.0
 offset_right = 87.0
 offset_bottom = 109.0
 theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 28
 text = "+0"
 
@@ -635,9 +641,9 @@ script = ExtResource("6_af46e")
 [node name="Contour" type="ColorRect" parent="J2/CameraController/Vue5/HealthBar" unique_id=524626917]
 layout_mode = 0
 offset_left = 145.0
-offset_top = 645.0
+offset_top = 644.0
 offset_right = 355.0
-offset_bottom = 715.0
+offset_bottom = 714.0
 color = Color(0, 0, 0, 1)
 
 [node name="BG" type="ColorRect" parent="J2/CameraController/Vue5/HealthBar" unique_id=887341262]
@@ -651,24 +657,21 @@ offset_bottom = 670.0
 grow_vertical = 2
 color = Color(0.58383155, 0.58383155, 0.58383155, 1)
 
-[node name="BarFilled" type="ColorRect" parent="J2/CameraController/Vue5/HealthBar" unique_id=1929434752]
-material = SubResource("ShaderMaterial_8081n")
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
+[node name="BarFilled" type="ColorRect" parent="J2/CameraController/Vue5/HealthBar" unique_id=1360533635]
+material = SubResource("ShaderMaterial_lqoxa")
+layout_mode = 0
 offset_left = 150.0
 offset_top = 650.0
 offset_right = 350.0
-offset_bottom = 670.0
-grow_vertical = 2
+offset_bottom = 710.0
 
 [node name="HeartIcon" type="TextureRect" parent="J2/CameraController/Vue5/HealthBar" unique_id=454220038]
 layout_mode = 0
-offset_left = 300.0
+offset_left = 305.0
 offset_top = 600.0
-offset_right = 450.0
-offset_bottom = 771.0
-scale = Vector2(0.7, 0.7)
+offset_right = 769.0
+offset_bottom = 1034.0
+scale = Vector2(0.2, 0.2)
 texture = SubResource("CompressedTexture2D_wc6ee")
 
 [node name="HeartLabel" type="Label" parent="J2/CameraController/Vue5/HealthBar" unique_id=1634374768]
@@ -679,7 +682,7 @@ offset_top = 660.0
 offset_right = 122.0
 offset_bottom = 711.0
 theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
-theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 50
 text = "100"
 horizontal_alignment = 1
@@ -730,8 +733,8 @@ offset_left = 315.0
 offset_top = 815.0
 offset_right = 465.0
 offset_bottom = 986.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_4s8qw")
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_af46e")
 
 [node name="ShieldLabel" type="Label" parent="J2/CameraController/Vue5/ShieldBar" unique_id=2022956065]
 custom_minimum_size = Vector2(72, 51)
@@ -741,7 +744,7 @@ offset_top = 860.0
 offset_right = 122.0
 offset_bottom = 911.0
 theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
-theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 50
 text = "100"
 horizontal_alignment = 1
@@ -780,7 +783,7 @@ offset_top = 45.0
 offset_right = 201.0
 offset_bottom = 246.0
 theme_override_constants/outline_size = 30
-theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 195
 text = "D"
 horizontal_alignment = 1
@@ -818,14 +821,14 @@ offset_bottom = 77.0
 
 [node name="Titre" type="Label" parent="J2/CameraController/Vue6/ScoreUI/ScoresPanel/VBoxContainer" unique_id=672996639]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 18
 text = "♢ Score total ♢"
 
 [node name="Score" type="Label" parent="J2/CameraController/Vue6/ScoreUI/ScoresPanel/VBoxContainer" unique_id=1071463258]
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 52
 text = "0"
 
@@ -836,7 +839,7 @@ offset_top = 80.0
 offset_right = 87.0
 offset_bottom = 109.0
 theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 28
 text = "+0"
 
@@ -874,9 +877,9 @@ script = ExtResource("6_af46e")
 [node name="Contour" type="ColorRect" parent="J2/CameraController/Vue6/HealthBar" unique_id=426882588]
 layout_mode = 0
 offset_left = 145.0
-offset_top = 645.0
+offset_top = 644.0
 offset_right = 355.0
-offset_bottom = 715.0
+offset_bottom = 714.0
 color = Color(0, 0, 0, 1)
 
 [node name="BG" type="ColorRect" parent="J2/CameraController/Vue6/HealthBar" unique_id=217625263]
@@ -890,24 +893,21 @@ offset_bottom = 670.0
 grow_vertical = 2
 color = Color(0.58383155, 0.58383155, 0.58383155, 1)
 
-[node name="BarFilled" type="ColorRect" parent="J2/CameraController/Vue6/HealthBar" unique_id=1092286646]
-material = SubResource("ShaderMaterial_8081n")
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
+[node name="BarFilled" type="ColorRect" parent="J2/CameraController/Vue6/HealthBar" unique_id=2109477607]
+material = SubResource("ShaderMaterial_2befi")
+layout_mode = 0
 offset_left = 150.0
 offset_top = 650.0
 offset_right = 350.0
-offset_bottom = 670.0
-grow_vertical = 2
+offset_bottom = 710.0
 
 [node name="HeartIcon" type="TextureRect" parent="J2/CameraController/Vue6/HealthBar" unique_id=532731395]
 layout_mode = 0
-offset_left = 300.0
+offset_left = 305.0
 offset_top = 600.0
-offset_right = 450.0
-offset_bottom = 771.0
-scale = Vector2(0.7, 0.7)
+offset_right = 769.0
+offset_bottom = 1034.0
+scale = Vector2(0.2, 0.2)
 texture = SubResource("CompressedTexture2D_wc6ee")
 
 [node name="HeartLabel" type="Label" parent="J2/CameraController/Vue6/HealthBar" unique_id=310534487]
@@ -918,7 +918,7 @@ offset_top = 660.0
 offset_right = 122.0
 offset_bottom = 711.0
 theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
-theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 50
 text = "100"
 horizontal_alignment = 1
@@ -969,8 +969,8 @@ offset_left = 315.0
 offset_top = 815.0
 offset_right = 465.0
 offset_bottom = 986.0
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("7_4s8qw")
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_af46e")
 
 [node name="ShieldLabel" type="Label" parent="J2/CameraController/Vue6/ShieldBar" unique_id=1454153508]
 custom_minimum_size = Vector2(72, 51)
@@ -980,7 +980,7 @@ offset_top = 860.0
 offset_right = 122.0
 offset_bottom = 911.0
 theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
-theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 50
 text = "100"
 horizontal_alignment = 1
@@ -1019,7 +1019,7 @@ offset_top = 45.0
 offset_right = 201.0
 offset_bottom = 246.0
 theme_override_constants/outline_size = 30
-theme_override_fonts/font = ExtResource("4_yqxl7")
+theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 195
 text = "D"
 horizontal_alignment = 1
