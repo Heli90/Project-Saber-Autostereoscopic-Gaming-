@@ -5,10 +5,11 @@ extends Control
 @onready var nom_j1: LineEdit = $NameInput/NomJ1
 @onready var nom_j2: LineEdit = $NameInput/NomJ2
 @onready var heal_mode_button: TextureButton = $HealModeButton
-
+@onready var select_level: Control = $SelectLevel
 const LEADERBOARD_PATH = "user://leaderboard.cfg"
 
 func _ready() -> void:
+	select_level.visible = false
 	tutoriel_music.play()
 	fondu_noir.modulate.a = 1.0
 	fondu_noir.visible = true
@@ -39,14 +40,33 @@ func _onStartButton_pressed() -> void:
 	config.save(LEADERBOARD_PATH)
 	
 	click_sound.play()
-	var t = create_tween()
+	# Apparition du fondu
+	var t1 = create_tween()
 	fondu_noir.visible = true
-	t.tween_property(fondu_noir, "modulate:a", 1.0, 0.5)
-	t.chain().tween_interval(0.3)
-	await t.finished
-	get_tree().change_scene_to_file("res://scenes/game_scenes/scene_TV.tscn")
+	t1.tween_property(fondu_noir, "modulate:a", 1.0, 0.5)
+	t1.chain().tween_interval(0.3)
+	await t1.finished
+	
+	# On change de page de sélection
+	select_level.visible = true
+
+	var t2 = create_tween()
+	t2.tween_property(fondu_noir, "modulate:a", 0.0, 0.5)
+	t2.chain().tween_interval(0.3)
+	await t2.finished
+	fondu_noir.visible = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _onHealModeButton_pressed() -> void:
 	heal_mode_button.activated = !heal_mode_button.activated
 	Global.healing = heal_mode_button.activated
 	heal_mode_button.texture_normal = heal_mode_button.full_heart if heal_mode_button.activated else heal_mode_button.empty_heart
+
+func _onTutoCassette_pressed() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	var t = create_tween().set_parallel(true)
+	fondu_noir.visible = true
+	t.tween_property(fondu_noir, "modulate:a", 1.0, 0.5)
+	t.chain().tween_interval(0.3)
+	await t.finished
+	get_tree().change_scene_to_file("res://scenes/game_scenes/scene_TV.tscn")

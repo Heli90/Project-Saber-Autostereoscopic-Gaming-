@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dt002k6ldkdhi"
-path="res://.godot/imported/tutoriel_menu_bg.png-be0914f5fa754e1b75e314696ecc3b2f.ctex"
+uid="uid://bb3qi1rcog3jl"
+path="res://.godot/imported/cassette_tuto.png-c965bbe0e7fef1fd42f0df6e57816fc2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/assets/tutoriel_menu_bg.png"
-dest_files=["res://.godot/imported/tutoriel_menu_bg.png-be0914f5fa754e1b75e314696ecc3b2f.ctex"]
+source_file="res://addons/assets/cassette_tuto.png"
+dest_files=["res://.godot/imported/cassette_tuto.png-c965bbe0e7fef1fd42f0df6e57816fc2.ctex"]
 
 [params]
 

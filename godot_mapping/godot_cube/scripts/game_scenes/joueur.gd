@@ -10,10 +10,8 @@ const JUMP_VELOCITY: float = 4.5
 @onready var left_saber_mesh : MeshInstance3D = $LeftSaber/MeshInstance3D
 @onready var right_saber_mesh : MeshInstance3D = $RightSaber/MeshInstance3D
 @export var blue_shader_material : ShaderMaterial
-@onready var j_1_label: Label = $"../../../../Game/J1Label"
-@onready var j_2_label: Label = $"../../../../Game/J2Label"
-
-
+@onready var j1_label: Label
+@onready var j2_label: Label
 
 var landmarks: Node2D
 var saber_range_x : float = 2.5
@@ -24,7 +22,12 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	# On initialise les marqueurs de corps
 	landmarks = get_node_or_null("../../../../Game/LandMarksProceed")
-	if not landmarks: landmarks = get_node_or_null("../Game/LandMarksProceed")
+	j1_label = get_node_or_null("../../../../Game/J1Label")
+	j2_label = get_node_or_null("../../../../Game/J2Label")
+	if not landmarks:
+		landmarks = get_node("../Game/LandMarksProceed")
+		j1_label = get_node("../Game/J1Label")
+		j2_label = get_node("../Game/J2Label")
 	# On initialise un signal à chaque fois que le sabre traverse un cube
 	left_saber.body_entered.connect(collision)
 	right_saber.body_entered.connect(collision)
@@ -71,9 +74,9 @@ func _physics_process(_delta: float) -> void:
 			saber.rotation.z = atan2(0,-1)/2 - data["angle_z"]
 			if data["handedness"] == "Right" :
 				if player_id == 1 :
-					j_1_label.text = "x = %.2f, y = %.2f, angle = %.2f" % [pos_x, pos_y,atan2(0,-1)/2 - data["angle_z"]]
+					j1_label.text = "x = %.2f, y = %.2f, angle = %.2f" % [pos_x, pos_y,atan2(0,-1)/2 - data["angle_z"]]
 				elif player_id == 2:
-					j_2_label.text = "x = %.2f, y = %.2f, angle = %.2f" % [pos_x, pos_y,atan2(0,-1)/2 - data["angle_z"]]
+					j2_label.text = "x = %.2f, y = %.2f, angle = %.2f" % [pos_x, pos_y,atan2(0,-1)/2 - data["angle_z"]]
 			#if data["handedness"]=="Right":
 			#	saber.rotation.x = data["angle_x"]
 			#else :

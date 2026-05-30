@@ -130,8 +130,8 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_hl5e0")
 
 [node name="StartButton" type="Button" parent="MainButtons" unique_id=811078081]
 layout_mode = 0
-offset_left = 398.0
-offset_right = 756.0
+offset_left = 465.0
+offset_right = 673.0
 offset_bottom = 50.0
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../QuitButton")
@@ -147,9 +147,9 @@ text = "New Game"
 
 [node name="OptionButton" type="Button" parent="MainButtons" unique_id=356391253]
 layout_mode = 0
-offset_left = 449.0
+offset_left = 495.0
 offset_top = 150.0
-offset_right = 704.0
+offset_right = 648.0
 offset_bottom = 200.0
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("4_5epmy")
@@ -160,13 +160,13 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_lgwnu")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_flqon")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_1dfpl")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
-text = "Parameters"
+text = "Settings"
 
 [node name="CreditsButton" type="Button" parent="MainButtons" unique_id=1201192951]
 layout_mode = 0
-offset_left = 493.0
+offset_left = 500.0
 offset_top = 300.0
-offset_right = 667.0
+offset_right = 638.0
 offset_bottom = 350.0
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("4_5epmy")
@@ -181,9 +181,9 @@ text = "Credits"
 
 [node name="QuitButton" type="Button" parent="MainButtons" unique_id=1683743182]
 layout_mode = 0
-offset_left = 490.0
+offset_left = 530.0
 offset_top = 450.0
-offset_right = 670.0
+offset_right = 608.0
 offset_bottom = 500.0
 size_flags_vertical = 3
 focus_neighbor_bottom = NodePath("../StartButton")
@@ -224,7 +224,8 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 5
 theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 80
-text = "Parameters"
+text = "Settings"
+horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MusicTitle" type="Label" parent="Options" unique_id=767801421]
@@ -251,9 +252,9 @@ text = "SFX"
 [node name="BackButton" type="Button" parent="Options" unique_id=1551915793]
 custom_minimum_size = Vector2(0, 127)
 layout_mode = 0
-offset_left = 20.0
+offset_left = 265.0
 offset_top = 650.0
-offset_right = 820.0
+offset_right = 558.0
 offset_bottom = 777.0
 theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 60
@@ -422,9 +423,9 @@ vertical_alignment = 1
 [node name="BackButton" type="Button" parent="Credits" unique_id=193427243]
 custom_minimum_size = Vector2(0, 127)
 layout_mode = 0
-offset_left = -100.0
+offset_left = 100.0
 offset_top = 740.0
-offset_right = 700.0
+offset_right = 520.0
 offset_bottom = 867.0
 theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 60

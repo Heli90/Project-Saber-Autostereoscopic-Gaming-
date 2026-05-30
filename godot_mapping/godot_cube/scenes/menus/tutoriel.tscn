@@ -2,22 +2,27 @@
 
 [ext_resource type="Script" uid="uid://css7aee1c26g0" path="res://scripts/menus/tutoriel.gd" id="1_jklko"]
 [ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="2_nl2bs"]
-[ext_resource type="Texture2D" uid="uid://bhmpdhsd2gua0" path="res://addons/assets/tutoriel_menu_bg.png" id="2_phf8o"]
+[ext_resource type="Texture2D" uid="uid://dt002k6ldkdhi" path="res://addons/assets/tutoriel_menu_bg.png" id="2_phf8o"]
 [ext_resource type="AudioStream" uid="uid://dtx2qu2tls0eq" path="res://addons/sfx/tutoriel_menu_music.mp3" id="5_fwhch"]
 [ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/Minecraft.ttf" id="5_phf8o"]
 [ext_resource type="Texture2D" uid="uid://cy5no81nhebpm" path="res://addons/assets/sign_name_panel.png" id="6_gjwrx"]
 [ext_resource type="Texture2D" uid="uid://8osrrw63mu7p" path="res://addons/assets/heart.png" id="7_b7lfr"]
 [ext_resource type="Script" uid="uid://drtrabk7fho4t" path="res://scripts/menus/heal_mode_button.gd" id="8_fwhch"]
 [ext_resource type="Texture2D" uid="uid://c700kg3wk8oe2" path="res://addons/assets/empty_heart.png" id="9_phf8o"]
+[ext_resource type="PackedScene" uid="uid://jtm1okvkvobu" path="res://scenes/menus/select_level.tscn" id="10_gjwrx"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gjwrx"]
 texture = ExtResource("2_phf8o")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b7lfr"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g040c"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fwhch"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_phf8o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xpqqk"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gjwrx"]
 
@@ -41,6 +46,7 @@ anchors_preset = 0
 script = ExtResource("1_jklko")
 
 [node name="FonduLayer" type="CanvasLayer" parent="." unique_id=1263238769]
+layer = 2
 
 [node name="FonduNoir" type="ColorRect" parent="FonduLayer" unique_id=851864433]
 visible = false
@@ -117,12 +123,13 @@ texture = ExtResource("6_gjwrx")
 
 [node name="NomJ1" type="LineEdit" parent="NameInput" unique_id=1239737311]
 layout_mode = 0
-offset_left = 80.0
+offset_left = 90.0
 offset_top = 300.0
-offset_right = 473.0
+offset_right = 462.0
 offset_bottom = 348.0
 theme_override_fonts/font = ExtResource("5_phf8o")
 theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_g040c")
 theme_override_styles/read_only = SubResource("StyleBoxEmpty_fwhch")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_phf8o")
 placeholder_text = "Player 1"
@@ -131,12 +138,13 @@ expand_to_text_length = true
 
 [node name="NomJ2" type="LineEdit" parent="NameInput" unique_id=1929328475]
 layout_mode = 0
-offset_left = 80.0
+offset_left = 91.0
 offset_top = 500.0
-offset_right = 473.0
+offset_right = 463.0
 offset_bottom = 548.0
 theme_override_fonts/font = ExtResource("5_phf8o")
 theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_xpqqk")
 theme_override_styles/read_only = SubResource("StyleBoxEmpty_gjwrx")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_0stj3")
 placeholder_text = "Player 2"
@@ -187,5 +195,12 @@ text = "Limited Life"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="SelectLevel" parent="." unique_id=877177698 instance=ExtResource("10_gjwrx")]
+visible = false
+layout_mode = 0
+
 [connection signal="pressed" from="StartButton" to="." method="_onStartButton_pressed"]
 [connection signal="pressed" from="HealModeButton" to="." method="_onHealModeButton_pressed"]
+[connection signal="pressed" from="SelectLevel/CassetteTuto" to="." method="_onTutoCassette_pressed"]
+
+[editable path="SelectLevel"]

@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://jtm1okvkvobu"]
 
 [ext_resource type="Texture2D" uid="uid://c0e25ymfw03kq" path="res://addons/assets/select_level_bg.png" id="1_eiguw"]
+[ext_resource type="Texture2D" uid="uid://bb3qi1rcog3jl" path="res://addons/assets/cassette_tuto.png" id="2_6xr6w"]
+[ext_resource type="Texture2D" uid="uid://cy5no81nhebpm" path="res://addons/assets/sign_name_panel.png" id="2_v1pdx"]
+[ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/Minecraft.ttf" id="3_8s4k5"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8ow2l"]
 texture = ExtResource("1_eiguw")
@@ -14,3 +17,30 @@ layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_8ow2l")
+
+[node name="LevelTitleSign" type="Sprite2D" parent="." unique_id=431505168]
+position = Vector2(951.99994, 199)
+scale = Vector2(2.5, 1.5)
+texture = ExtResource("2_v1pdx")
+
+[node name="LevelTitle" type="Label" parent="." unique_id=622795816]
+layout_mode = 0
+offset_left = 808.0
+offset_top = 167.0
+offset_right = 1098.0
+offset_bottom = 247.0
+theme_override_fonts/font = ExtResource("3_8s4k5")
+theme_override_font_sizes/font_size = 80
+text = "Tutoriel"
+horizontal_alignment = 1
+
+[node name="CassetteTuto" type="TextureButton" parent="." unique_id=373743379]
+layout_mode = 0
+offset_left = 724.0
+offset_top = 325.0
+offset_right = 1660.0
+offset_bottom = 946.0
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("2_6xr6w")
+
+[node name="InsertCassetteSound" type="AudioStreamPlayer2D" parent="." unique_id=1880057536]
