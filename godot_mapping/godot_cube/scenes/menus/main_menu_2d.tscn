@@ -88,12 +88,12 @@ metadata/_edit_use_anchors_ = true
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=53466756]
 stream = ExtResource("8_tbmy8")
-volume_db = -10.0
+volume_db = -15.0
 bus = &"SFX"
 
 [node name="MainMenuMusic" type="AudioStreamPlayer" parent="." unique_id=1460163922]
 stream = ExtResource("5_1hnlc")
-volume_db = -10.0
+volume_db = -15.0
 bus = &"Musique"
 parameters/looping = true
 

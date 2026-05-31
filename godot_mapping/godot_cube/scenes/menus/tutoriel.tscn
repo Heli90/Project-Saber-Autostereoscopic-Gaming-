@@ -86,12 +86,12 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_gjwrx")
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=1928803989]
 stream = ExtResource("2_nl2bs")
-volume_db = -10.0
+volume_db = -15.0
 bus = &"SFX"
 
 [node name="TutorielMusic" type="AudioStreamPlayer" parent="." unique_id=860492435]
 stream = ExtResource("5_fwhch")
-volume_db = -10.0
+volume_db = -15.0
 bus = &"Musique"
 parameters/looping = true
 
@@ -259,9 +259,9 @@ layout_mode = 0
 [connection signal="pressed" from="Start/StartButton" to="." method="_onStartButton_pressed"]
 [connection signal="pressed" from="Menu/MenuButton" to="." method="_onMenuButton_pressed"]
 [connection signal="pressed" from="Modes/HealModeButton" to="." method="_onHealModeButton_pressed"]
-[connection signal="pressed" from="SelectLevel/Menu/BackButton" to="." method="_onBackButton_pressed"]
 [connection signal="pressed" from="SelectLevel/Cassettes/CassetteTuto" to="." method="_onTutoCassette_pressed"]
 [connection signal="pressed" from="SelectLevel/Cassettes/CassetteGame" to="." method="_onCassetteGame_pressed"]
+[connection signal="pressed" from="SelectLevel/Menu/BackButton" to="." method="_onBackButton_pressed"]
 [connection signal="pressed" from="SelectLevel/LeftArrows" to="." method="_onLeftArrows_pressed"]
 [connection signal="pressed" from="SelectLevel/RightArrows" to="." method="_onRightArrows_pressed"]
 

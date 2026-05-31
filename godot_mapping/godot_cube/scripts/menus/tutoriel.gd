@@ -13,6 +13,7 @@ extends Control
 @onready var game_level: Label = $SelectLevel/Titles/GameLevel
 @onready var cassette_tuto: TextureButton = $SelectLevel/Cassettes/CassetteTuto
 @onready var cassette_game: TextureButton = $SelectLevel/Cassettes/CassetteGame
+@onready var cassette_sound: AudioStreamPlayer2D = $SelectLevel/CassetteSound
 
 const LEADERBOARD_PATH = "user://leaderboard.cfg"
 
@@ -21,6 +22,7 @@ func _ready() -> void:
 	game_level.modulate.a = 0.0
 	cassette_game.modulate.a = 0.0
 	
+	tutoriel_music.volume_db = -15.0
 	tutoriel_music.play()
 	fondu_noir.modulate.a = 1.0
 	fondu_noir.visible = true
@@ -74,21 +76,23 @@ func _onHealModeButton_pressed() -> void:
 	heal_mode_button.texture_normal = heal_mode_button.full_heart if heal_mode_button.activated else heal_mode_button.empty_heart
 
 func _onTutoCassette_pressed() -> void:
-	click_sound.play()
+	cassette_sound.play()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	var t = create_tween().set_parallel(true)
 	fondu_noir.visible = true
 	t.tween_property(fondu_noir, "modulate:a", 1.0, 0.5)
+	t.chain().tween_property(tutoriel_music, "volume_db", -80.0, 0.5)
 	t.chain().tween_interval(0.3)
 	await t.finished
 	get_tree().change_scene_to_file("res://scenes/game_scenes/scene_TV.tscn")
 
 func _onCassetteGame_pressed() -> void:
-	click_sound.play()
+	cassette_sound.play()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	var t = create_tween().set_parallel(true)
 	fondu_noir.visible = true
 	t.tween_property(fondu_noir, "modulate:a", 1.0, 0.5)
+	t.chain().tween_property(tutoriel_music, "volume_db", -80.0, 0.5)
 	t.chain().tween_interval(0.3)
 	await t.finished
 	get_tree().change_scene_to_file("res://scenes/game_scenes/scene_TV.tscn")
@@ -99,6 +103,7 @@ func _onMenuButton_pressed() -> void:
 	var t = create_tween().set_parallel(true)
 	fondu_noir.visible = true
 	t.tween_property(fondu_noir, "modulate:a", 1.0, 0.5)
+	t.chain().tween_property(tutoriel_music, "volume_db", -80.0, 0.5)
 	t.chain().tween_interval(0.3)
 	await t.finished
 	get_tree().change_scene_to_file("res://scenes/menus/main_menu_3d.tscn")

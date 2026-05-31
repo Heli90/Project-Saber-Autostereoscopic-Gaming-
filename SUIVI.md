@@ -215,7 +215,8 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 - Ajout d'un fade-in et d'un fade-out pour tous les cubes.
 - Ajout d'anneaux dans le terrain pour le rendre plus vivant.
 - Ajout d'une page de sélection de niveaux (tutoriel, vraie partie) via des animations basiques de cassettes.
-- Modification graphique du jeu : police d'écriture, visuels, images en jeu, fond d'écrans des menus.
+- Ajout du SFX associé à la tâche ci-dessus.
+- Modification graphique du jeu : police d'écriture, visuels, images en jeu, fonds d'écran des menus.
 
 
 **Birame :**

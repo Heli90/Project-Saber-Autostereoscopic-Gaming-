@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bxm2srr4rf0ps" path="res://addons/assets/arrows.png" id="6_562s2"]
 [ext_resource type="Texture2D" uid="uid://x3qv3e1v08e6" path="res://addons/assets/cassette_hexagon_force.png" id="6_tdgyk"]
 [ext_resource type="Script" uid="uid://8msptkcdmu7b" path="res://scripts/menus/arrows.gd" id="7_0vyn2"]
+[ext_resource type="AudioStream" uid="uid://myrda2i0e3y4" path="res://addons/assets/insert_cassette.mp3" id="7_a7w0q"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8ow2l"]
 texture = ExtResource("1_eiguw")
@@ -139,6 +140,9 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_xgvxu")
 text = "Return"
 
 [node name="CassetteSound" type="AudioStreamPlayer2D" parent="." unique_id=1880057536]
+stream = ExtResource("7_a7w0q")
+volume_db = 5.0
+bus = &"SFX"
 
 [node name="LeftArrows" type="TextureButton" parent="." unique_id=1158951805]
 layout_mode = 0

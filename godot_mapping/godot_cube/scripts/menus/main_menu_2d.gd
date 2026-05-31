@@ -14,13 +14,13 @@ extends Control
 @onready var music_title: Label = $Options/MusicTitle
 @onready var sfx_title: Label = $Options/SFXTitle
 
+@onready var main_menu_music: AudioStreamPlayer = $MainMenuMusic
 @onready var click_sound: AudioStreamPlayer = $ClickSound
-
-var highest_score: int = 0
 
 func _ready() -> void:
 	get_tree().paused = false
-	
+	main_menu_music.volume_db = -15.0
+
 	fondu_noir.modulate.a = 1.0
 	main_buttons.modulate.a = 1.0
 	game_name.modulate.a = 1.0
@@ -74,6 +74,7 @@ func transition(appear_list: Array[Control], disappear_list: Array[Control], bac
 		# Il y a un changement de scène, donc, on fait un fondu.
 		t.set_parallel(false)
 		t.tween_property(fondu_noir, "modulate:a", 1.0, 0.5)
+		t.tween_property(main_menu_music, "volume_db", -80.0, 0.8)
 		t.chain().tween_interval(0.3)
 	else:
 		for panel in appear_list:

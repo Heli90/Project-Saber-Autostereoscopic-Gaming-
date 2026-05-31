@@ -1060,30 +1060,30 @@ current = true
 layer = 0
 
 [node name="FPS" type="Label" parent="TechnicalInfos" unique_id=154098478]
-offset_left = 50.0
-offset_top = 1000.0
-offset_right = 90.0
-offset_bottom = 1023.0
+offset_left = 1550.0
+offset_top = 50.0
+offset_right = 1590.0
+offset_bottom = 81.0
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 
 [node name="CPU" type="Label" parent="TechnicalInfos" unique_id=2144589808]
-offset_left = 50.0
-offset_top = 950.0
-offset_right = 90.0
-offset_bottom = 973.0
+offset_left = 1550.0
+offset_top = 100.0
+offset_right = 1590.0
+offset_bottom = 131.0
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 
 [node name="GPU" type="Label" parent="TechnicalInfos" unique_id=185849556]
-offset_left = 50.0
-offset_top = 900.0
-offset_right = 90.0
-offset_bottom = 923.0
+offset_left = 1550.0
+offset_top = 150.0
+offset_right = 1590.0
+offset_bottom = 181.0
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 30
@@ -1091,9 +1091,9 @@ horizontal_alignment = 1
 
 [node name="GPUEntrelacement" type="Label" parent="TechnicalInfos" unique_id=1493023434]
 offset_left = 50.0
-offset_top = 850.0
+offset_top = 150.0
 offset_right = 90.0
-offset_bottom = 881.0
+offset_bottom = 181.0
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 30
@@ -1101,9 +1101,9 @@ horizontal_alignment = 1
 
 [node name="GPUVues" type="Label" parent="TechnicalInfos" unique_id=173082368]
 offset_left = 50.0
-offset_top = 800.0
+offset_top = 100.0
 offset_right = 90.0
-offset_bottom = 831.0
+offset_bottom = 131.0
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 30
@@ -1111,9 +1111,9 @@ horizontal_alignment = 1
 
 [node name="DetectMediapipe" type="Label" parent="TechnicalInfos" unique_id=94376191]
 offset_left = 50.0
-offset_top = 750.0
+offset_top = 50.0
 offset_right = 51.0
-offset_bottom = 792.0
+offset_bottom = 92.0
 theme_override_colors/font_color = Color(0, 1, 0, 1)
 theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 30
@@ -1134,7 +1134,7 @@ visible = false
 
 [node name="LevelMusic" type="AudioStreamPlayer" parent="." unique_id=751945284]
 stream = ExtResource("12_4s8qw")
-volume_db = -10.0
+volume_db = -15.0
 bus = &"Musique"
 
 [editable path="J1"]
