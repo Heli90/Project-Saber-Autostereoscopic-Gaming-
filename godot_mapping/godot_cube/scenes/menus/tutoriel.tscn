@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://dtx2qu2tls0eq" path="res://addons/sfx/tutoriel_menu_music.mp3" id="5_fwhch"]
 [ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/pixel_art_typeface.ttf" id="5_phf8o"]
 [ext_resource type="Texture2D" uid="uid://cy5no81nhebpm" path="res://addons/assets/sign_name_panel.png" id="6_gjwrx"]
+[ext_resource type="Texture2D" uid="uid://ch0ut7tu3syf4" path="res://addons/assets/video_frame.png" id="6_h0cxi"]
 [ext_resource type="Texture2D" uid="uid://8osrrw63mu7p" path="res://addons/assets/heart.png" id="7_b7lfr"]
 [ext_resource type="Script" uid="uid://drtrabk7fho4t" path="res://scripts/menus/heal_mode_button.gd" id="8_fwhch"]
 [ext_resource type="Texture2D" uid="uid://c700kg3wk8oe2" path="res://addons/assets/empty_heart.png" id="9_phf8o"]
@@ -101,12 +102,18 @@ volume_db = -15.0
 bus = &"Musique"
 parameters/looping = true
 
+[node name="VideoFrame" type="Sprite2D" parent="." unique_id=412137103]
+position = Vector2(1215, 460)
+scale = Vector2(1.05, 1.05)
+texture = ExtResource("6_h0cxi")
+
 [node name="TutorielVideo" type="VideoStreamPlayer" parent="." unique_id=897146802]
 layout_mode = 0
-offset_left = 550.0
+offset_left = 575.0
 offset_top = 100.0
-offset_right = 1830.0
+offset_right = 1855.0
 offset_bottom = 820.0
+pivot_offset = Vector2(640, 360)
 autoplay = true
 loop = true
 
@@ -182,15 +189,15 @@ offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_gs0rj")
 
 [node name="SignStart" type="Sprite2D" parent="Start" unique_id=11834707]
-position = Vector2(1175, 935)
+position = Vector2(1675, 935)
 scale = Vector2(2.608974, 1.1043956)
 texture = ExtResource("6_gjwrx")
 
 [node name="StartButton" type="Button" parent="Start" unique_id=1486002421]
 layout_mode = 0
-offset_left = 983.0
+offset_left = 1493.0
 offset_top = 892.0
-offset_right = 1369.0
+offset_right = 1879.0
 offset_bottom = 980.0
 pivot_offset = Vector2(193, 44)
 theme_override_fonts/font = ExtResource("5_phf8o")
@@ -210,16 +217,16 @@ offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_q35cj")
 
 [node name="SignMenu" type="Sprite2D" parent="Menu" unique_id=1179866710]
-position = Vector2(280, 110)
+position = Vector2(980, 935)
 scale = Vector2(3, 1.5)
 texture = ExtResource("6_gjwrx")
 
 [node name="MenuButton" type="Button" parent="Menu" unique_id=139261608]
 layout_mode = 0
-offset_left = 60.0
-offset_top = 50.0
-offset_right = 502.0
-offset_bottom = 172.0
+offset_left = 760.0
+offset_top = 878.0
+offset_right = 1202.0
+offset_bottom = 1000.0
 pivot_offset = Vector2(221, 61)
 theme_override_fonts/font = ExtResource("5_phf8o")
 theme_override_font_sizes/font_size = 80

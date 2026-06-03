@@ -332,7 +332,7 @@ func ButtonEnter(button, button_scale: Vector2, life = false, sign_sprite: Sprit
 		loop_scale_transition_sign.tween_property(sign_sprite, "scale", sign_scale / (BUTTON_SCALE_FACTOR ** 2), SCALE_DURATION / 2)
 		loop_scale_transition_sign.tween_property(sign_sprite, "scale", sign_scale * (BUTTON_SCALE_FACTOR ** 2), SCALE_DURATION * 2)
 
-func ButtonExit(button, button_scale: Vector2, life = false, sign_sprite: Sprite2D = null, sign_scale: Vector2 = Vector2(0, 0)) -> void:
+func ButtonExit(button, button_scale: Vector2, sign_sprite: Sprite2D = null, sign_scale: Vector2 = Vector2(0, 0)) -> void:
 	if first_scale_transition: first_scale_transition.kill()
 	if loop_scale_transition_button: loop_scale_transition_button.kill()
 	if loop_scale_transition_sign: loop_scale_transition_sign.kill()
@@ -348,22 +348,22 @@ func _onMenuButtonEnter() -> void:
 	ButtonEnter(menu_button, menu_scale, false, sign_menu, sign_menu_scale)
 
 func _onMenuButtonExit() -> void:
-	ButtonExit(menu_button, menu_scale, false, sign_menu, sign_menu_scale)
+	ButtonExit(menu_button, menu_scale, sign_menu, sign_menu_scale)
 
 func _onStartButtonEnter() -> void:
 	ButtonEnter(start_button, start_scale, false, sign_start, sign_start_scale)
 
 func _onStartButtonExit() -> void:
-	ButtonExit(start_button, start_scale, false, sign_start, sign_start_scale)
+	ButtonExit(start_button, start_scale, sign_start, sign_start_scale)
 
 func _onBackButtonEnter() -> void:
 	ButtonEnter(back_button, back_scale, false, sign_back, sign_back_scale)
 
 func _onBackButtonExit() -> void:
-	ButtonExit(back_button, back_scale, false, sign_back, sign_back_scale)
+	ButtonExit(back_button, back_scale, sign_back, sign_back_scale)
 
 func _onHealMouseEnter() -> void:
 	ButtonEnter(heal_mode_button, heal_scale, true)
 
 func _onHealMouseExit() -> void:
-	ButtonExit(heal_mode_button, heal_scale, true)
+	ButtonExit(heal_mode_button, heal_scale)

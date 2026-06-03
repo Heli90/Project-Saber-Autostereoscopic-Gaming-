@@ -169,6 +169,10 @@ texture_normal = ExtResource("6_562s2")
 script = ExtResource("7_0vyn2")
 direction = 2
 
+[connection signal="mouse_entered" from="Cassettes/CassetteTuto" to="Cassettes/CassetteTuto" method="_onMouseEnter"]
+[connection signal="mouse_exited" from="Cassettes/CassetteTuto" to="Cassettes/CassetteTuto" method="_onMouseExit"]
+[connection signal="mouse_entered" from="Cassettes/CassetteGame" to="Cassettes/CassetteGame" method="_onMouseEnter"]
+[connection signal="mouse_exited" from="Cassettes/CassetteGame" to="Cassettes/CassetteGame" method="_onMouseExit"]
 [connection signal="mouse_entered" from="LeftArrows" to="LeftArrows" method="_onMouseEnter"]
 [connection signal="mouse_exited" from="LeftArrows" to="LeftArrows" method="_onMouseExit"]
 [connection signal="mouse_entered" from="RightArrows" to="RightArrows" method="_onMouseEnter"]

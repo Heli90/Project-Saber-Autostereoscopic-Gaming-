@@ -217,6 +217,7 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 - Ajout d'une page de sélection de niveaux (tutoriel, vraie partie) via des animations basiques de cassettes.
 - Ajout du SFX associé à la tâche ci-dessus et pour le bouton du mode de vie.
 - Ajout de VFX pour tous les boutons du menu.
+- Ajout d'un cadre de vidéo pour le menu d'inscription.
 - Modification graphique du jeu : police d'écriture, visuels, images en jeu, fonds d'écran des menus.
 
 **Birame :**

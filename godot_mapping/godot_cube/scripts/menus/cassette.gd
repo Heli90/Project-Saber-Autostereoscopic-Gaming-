@@ -13,10 +13,8 @@ var base_scale: Vector2
 func _ready() -> void:
 	await get_tree().process_frame
 	base_scale = scale
-	mouse_entered.connect(_onHoverEnter)
-	mouse_exited.connect(_onHoverExit)
 
-func _onHoverEnter() -> void:
+func _onMouseEnter() -> void:
 	if scale_transition: scale_transition.kill()
 	if first_rotation_transition: first_rotation_transition.kill()
 	if loop_rotation_transition: loop_rotation_transition.kill()
@@ -39,7 +37,7 @@ func _onHoverEnter() -> void:
 	loop_rotation_transition.tween_property(self, "rotation_degrees", -ANGLE_DEG, ROTATION_DURATION * 2)
 	loop_rotation_transition.tween_property(self, "rotation_degrees", ANGLE_DEG, ROTATION_DURATION * 2)
 
-func _onHoverExit() -> void:
+func _onMouseExit() -> void:
 	if scale_transition: scale_transition.kill()
 	if first_rotation_transition: first_rotation_transition.kill()
 	if loop_rotation_transition: loop_rotation_transition.kill()
