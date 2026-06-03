@@ -118,17 +118,18 @@ offset_right = 715.0
 offset_bottom = 890.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_8s4k5")
 
-[node name="SignStart" type="Sprite2D" parent="Menu" unique_id=202693642]
+[node name="SignBack" type="Sprite2D" parent="Menu" unique_id=202693642]
 position = Vector2(280, 110)
 scale = Vector2(3, 1.5)
 texture = ExtResource("2_v1pdx")
 
 [node name="BackButton" type="Button" parent="Menu" unique_id=36464370]
 layout_mode = 0
-offset_left = 145.0
-offset_top = 75.0
-offset_right = 420.0
-offset_bottom = 155.0
+offset_left = 61.0
+offset_top = 50.0
+offset_right = 500.0
+offset_bottom = 171.0
+pivot_offset = Vector2(219.5, 60.5)
 theme_override_fonts/font = ExtResource("3_8s4k5")
 theme_override_font_sizes/font_size = 80
 theme_override_styles/normal = SubResource("StyleBoxEmpty_562s2")
@@ -167,3 +168,8 @@ pivot_offset = Vector2(48, 33)
 texture_normal = ExtResource("6_562s2")
 script = ExtResource("7_0vyn2")
 direction = 2
+
+[connection signal="mouse_entered" from="LeftArrows" to="LeftArrows" method="_onMouseEnter"]
+[connection signal="mouse_exited" from="LeftArrows" to="LeftArrows" method="_onMouseExit"]
+[connection signal="mouse_entered" from="RightArrows" to="RightArrows" method="_onMouseEnter"]
+[connection signal="mouse_exited" from="RightArrows" to="RightArrows" method="_onMouseExit"]

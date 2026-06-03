@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://css7aee1c26g0" path="res://scripts/menus/tutoriel.gd" id="1_jklko"]
 [ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="2_nl2bs"]
 [ext_resource type="Texture2D" uid="uid://dt002k6ldkdhi" path="res://addons/assets/tutoriel_menu_bg.png" id="2_phf8o"]
+[ext_resource type="AudioStream" uid="uid://lwj4qq0yk7ow" path="res://addons/sfx/heal_sound.mp3" id="4_3y8p5"]
 [ext_resource type="AudioStream" uid="uid://dtx2qu2tls0eq" path="res://addons/sfx/tutoriel_menu_music.mp3" id="5_fwhch"]
 [ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/pixel_art_typeface.ttf" id="5_phf8o"]
 [ext_resource type="Texture2D" uid="uid://cy5no81nhebpm" path="res://addons/assets/sign_name_panel.png" id="6_gjwrx"]
@@ -86,6 +87,11 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_gjwrx")
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=1928803989]
 stream = ExtResource("2_nl2bs")
+volume_db = -15.0
+bus = &"SFX"
+
+[node name="HealSound" type="AudioStreamPlayer" parent="." unique_id=168927212]
+stream = ExtResource("4_3y8p5")
 volume_db = -15.0
 bus = &"SFX"
 
@@ -182,10 +188,11 @@ texture = ExtResource("6_gjwrx")
 
 [node name="StartButton" type="Button" parent="Start" unique_id=1486002421]
 layout_mode = 0
-offset_left = 950.0
-offset_top = 900.0
-offset_right = 1402.0
+offset_left = 983.0
+offset_top = 892.0
+offset_right = 1369.0
 offset_bottom = 980.0
+pivot_offset = Vector2(193, 44)
 theme_override_fonts/font = ExtResource("5_phf8o")
 theme_override_font_sizes/font_size = 80
 theme_override_styles/normal = SubResource("StyleBoxEmpty_3y8p5")
@@ -202,17 +209,18 @@ offset_right = 40.0
 offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_q35cj")
 
-[node name="SignStart" type="Sprite2D" parent="Menu" unique_id=1179866710]
+[node name="SignMenu" type="Sprite2D" parent="Menu" unique_id=1179866710]
 position = Vector2(280, 110)
 scale = Vector2(3, 1.5)
 texture = ExtResource("6_gjwrx")
 
 [node name="MenuButton" type="Button" parent="Menu" unique_id=139261608]
 layout_mode = 0
-offset_left = 85.0
-offset_top = 75.0
-offset_right = 475.0
-offset_bottom = 155.0
+offset_left = 60.0
+offset_top = 50.0
+offset_right = 502.0
+offset_bottom = 172.0
+pivot_offset = Vector2(221, 61)
 theme_override_fonts/font = ExtResource("5_phf8o")
 theme_override_font_sizes/font_size = 80
 theme_override_styles/normal = SubResource("StyleBoxEmpty_3o3ya")
@@ -231,11 +239,12 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_imcix")
 
 [node name="HealModeButton" type="TextureButton" parent="Modes" unique_id=1423390101]
 layout_mode = 0
-offset_left = 100.0
-offset_top = 800.0
-offset_right = 564.0
-offset_bottom = 1218.0
+offset_left = -90.0
+offset_top = 640.0
+offset_right = 374.0
+offset_bottom = 1058.0
 scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(232, 209)
 script = ExtResource("8_fwhch")
 full_heart = ExtResource("7_b7lfr")
 empty_heart = ExtResource("9_phf8o")
@@ -256,11 +265,19 @@ vertical_alignment = 1
 visible = false
 layout_mode = 0
 
+[connection signal="mouse_entered" from="Start/StartButton" to="." method="_onStartButtonEnter"]
+[connection signal="mouse_exited" from="Start/StartButton" to="." method="_onStartButtonExit"]
 [connection signal="pressed" from="Start/StartButton" to="." method="_onStartButton_pressed"]
+[connection signal="mouse_entered" from="Menu/MenuButton" to="." method="_onMenuButtonEnter"]
+[connection signal="mouse_exited" from="Menu/MenuButton" to="." method="_onMenuButtonExit"]
 [connection signal="pressed" from="Menu/MenuButton" to="." method="_onMenuButton_pressed"]
+[connection signal="mouse_entered" from="Modes/HealModeButton" to="." method="_onHealMouseEnter"]
+[connection signal="mouse_exited" from="Modes/HealModeButton" to="." method="_onHealMouseExit"]
 [connection signal="pressed" from="Modes/HealModeButton" to="." method="_onHealModeButton_pressed"]
 [connection signal="pressed" from="SelectLevel/Cassettes/CassetteTuto" to="." method="_onTutoCassette_pressed"]
 [connection signal="pressed" from="SelectLevel/Cassettes/CassetteGame" to="." method="_onCassetteGame_pressed"]
+[connection signal="mouse_entered" from="SelectLevel/Menu/BackButton" to="." method="_onBackButtonEnter"]
+[connection signal="mouse_exited" from="SelectLevel/Menu/BackButton" to="." method="_onBackButtonExit"]
 [connection signal="pressed" from="SelectLevel/Menu/BackButton" to="." method="_onBackButton_pressed"]
 [connection signal="pressed" from="SelectLevel/LeftArrows" to="." method="_onLeftArrows_pressed"]
 [connection signal="pressed" from="SelectLevel/RightArrows" to="." method="_onRightArrows_pressed"]

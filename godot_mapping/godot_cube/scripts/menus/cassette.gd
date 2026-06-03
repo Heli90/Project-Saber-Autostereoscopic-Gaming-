@@ -1,9 +1,9 @@
 extends TextureButton
 
-const SCALE_FACTOR = 1.15
-const SCALE_DURATION = 0.2
-const ANGLE_DEG = 25.0
-const ROTATION_DURATION = 0.25
+const SCALE_FACTOR: float = 1.15
+const SCALE_DURATION: float = 0.2
+const ANGLE_DEG: float = 25.0
+const ROTATION_DURATION: float = 0.25
 
 var scale_transition: Tween
 var loop_rotation_transition: Tween
