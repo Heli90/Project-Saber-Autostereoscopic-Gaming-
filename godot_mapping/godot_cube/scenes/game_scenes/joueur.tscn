@@ -22,6 +22,11 @@ shader_parameter/center_color = Vector4(0, 0, 0, 1)
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ks3j3"]
 radius = 0.1
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_ks3j3"]
+top_radius = 0.12
+bottom_radius = 0.12
+height = 0.4
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_ks3j3"]
 radius = 0.1
 
@@ -33,6 +38,14 @@ shader_parameter/center_color = Vector4(0, 0, 0, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_smcp5"]
 radius = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ks3j3"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_sii43"]
+material = SubResource("StandardMaterial3D_ks3j3")
+top_radius = 0.12
+bottom_radius = 0.12
+height = 0.4
 
 [node name="Joueur" type="Node3D" unique_id=1209140079]
 script = ExtResource("1_2d0qe")
@@ -57,6 +70,10 @@ surface_material_override/0 = SubResource("ShaderMaterial_f4pr0")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LeftSaber" unique_id=2123422374]
 shape = SubResource("CapsuleShape3D_ks3j3")
 
+[node name="LeftGrip" type="MeshInstance3D" parent="LeftSaber" unique_id=684452874]
+transform = Transform3D(1, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000001, 0.003, -0.8, -0.005)
+mesh = SubResource("CylinderMesh_ks3j3")
+
 [node name="RightSaber" type="Area3D" parent="." unique_id=1964180286]
 transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 1, 0.5, -2)
 
@@ -66,3 +83,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_m2kkv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="RightSaber" unique_id=43584893]
 shape = SubResource("CapsuleShape3D_smcp5")
+
+[node name="RightGrip" type="MeshInstance3D" parent="RightSaber" unique_id=1267084415]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
+mesh = SubResource("CylinderMesh_sii43")
