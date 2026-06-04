@@ -307,22 +307,22 @@ func _onMenuButtonEnter() -> void:
 	Global.ButtonEnter(menu_button, menu_scale, false, sign_menu, sign_menu_scale)
 
 func _onMenuButtonExit() -> void:
-	Global.ButtonExit(menu_button, menu_scale, sign_menu, sign_menu_scale)
+	Global.ButtonExit(menu_button, menu_scale, false, sign_menu, sign_menu_scale)
 
 func _onStartButtonEnter() -> void:
 	Global.ButtonEnter(start_button, start_scale, false, sign_start, sign_start_scale)
 
 func _onStartButtonExit() -> void:
-	Global.ButtonExit(start_button, start_scale, sign_start, sign_start_scale)
+	Global.ButtonExit(start_button, start_scale, false, sign_start, sign_start_scale)
 
 func _onBackButtonEnter() -> void:
 	Global.ButtonEnter(back_button, back_scale, false, sign_back, sign_back_scale)
 
 func _onBackButtonExit() -> void:
-	Global.ButtonExit(back_button, back_scale, sign_back, sign_back_scale)
+	Global.ButtonExit(back_button, back_scale, false, sign_back, sign_back_scale)
 
 func _onHealMouseEnter() -> void:
 	Global.ButtonEnter(heal_mode_button, heal_scale, true)
 
 func _onHealMouseExit() -> void:
-	Global.ButtonExit(heal_mode_button, heal_scale)
+	Global.ButtonExit(heal_mode_button, heal_scale, true)

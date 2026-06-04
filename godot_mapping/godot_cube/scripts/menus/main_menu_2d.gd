@@ -163,34 +163,34 @@ func _onStartButtonEnter() -> void:
 	Global.ButtonEnter(start_button, start_scale, false, sign_start, sign_start_scale)
 
 func _onStartButtonExit() -> void:
-	Global.ButtonExit(start_button, start_scale, sign_start, sign_start_scale)
+	Global.ButtonExit(start_button, start_scale, false, sign_start, sign_start_scale)
 
 func _onOptionButtonEnter() -> void:
 	Global.ButtonEnter(option_button, setting_scale, false, sign_setting, sign_setting_scale)
 
 func _onOptionButtonExit() -> void:
-	Global.ButtonExit(option_button, setting_scale, sign_setting, sign_setting_scale)
+	Global.ButtonExit(option_button, setting_scale, false, sign_setting, sign_setting_scale)
 
 func _onCreditsButtonEnter() -> void:
 	Global.ButtonEnter(credit_button, credits_scale, false, sign_credits, sign_credits_scale)
 
 func _onCreditsButtonExit() -> void:
-	Global.ButtonExit(credit_button, credits_scale, sign_credits, sign_credits_scale)
+	Global.ButtonExit(credit_button, credits_scale, false, sign_credits, sign_credits_scale)
 
 func _onQuitButtonEnter() -> void:
 	Global.ButtonEnter(quit_button, quit_scale, false, sign_quit, sign_quit_scale)
 
 func _onQuitButtonExit() -> void:
-	Global.ButtonExit(quit_button, quit_scale, sign_quit, sign_quit_scale)
+	Global.ButtonExit(quit_button, quit_scale, false, sign_quit, sign_quit_scale)
 
 func _onBackButtonSettingEnter() -> void:
 	Global.ButtonEnter(back_setting_button, back_setting_scale, false, sign_back_setting, sign_back_setting_scale)
 
 func _onBackButtonSettingExit() -> void:
-	Global.ButtonExit(back_setting_button, back_setting_scale, sign_back_setting, sign_back_setting_scale)
+	Global.ButtonExit(back_setting_button, back_setting_scale, false, sign_back_setting, sign_back_setting_scale)
 
 func _onBackButtonCreditEnter() -> void:
 	Global.ButtonEnter(back_credits_button, back_credits_scale, false, sign_back_credit, sign_back_credits_scale)
 
 func _onBackButtonCreditExit() -> void:
-	Global.ButtonExit(back_credits_button, back_credits_scale, sign_back_credit, sign_back_credits_scale)
+	Global.ButtonExit(back_credits_button, back_credits_scale, false, sign_back_credit, sign_back_credits_scale)

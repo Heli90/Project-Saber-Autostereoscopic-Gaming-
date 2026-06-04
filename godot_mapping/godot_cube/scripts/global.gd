@@ -18,7 +18,7 @@ func ButtonEnter(button, button_scale: Vector2, life = false, sign_sprite: Sprit
 	if loop_scale_transition_button: loop_scale_transition_button.kill()
 	if loop_scale_transition_sign: loop_scale_transition_sign.kill()
 	
-	button.material.set_shader_parameter("is_hovered", true)
+	if not life: button.material.set_shader_parameter("is_hovered", true)
 	first_scale_transition = create_tween().set_parallel(true)
 	first_scale_transition.set_ease(Tween.EASE_OUT)
 	first_scale_transition.set_trans(Tween.TRANS_BACK)
@@ -43,12 +43,12 @@ func ButtonEnter(button, button_scale: Vector2, life = false, sign_sprite: Sprit
 		loop_scale_transition_sign.tween_property(sign_sprite, "scale", sign_scale / (BUTTON_SCALE_FACTOR ** 2), SCALE_DURATION / 2)
 		loop_scale_transition_sign.tween_property(sign_sprite, "scale", sign_scale * (BUTTON_SCALE_FACTOR ** 2), SCALE_DURATION * 2)
 
-func ButtonExit(button, button_scale: Vector2, sign_sprite: Sprite2D = null, sign_scale: Vector2 = Vector2(0, 0)) -> void:
+func ButtonExit(button, button_scale: Vector2, life: bool = false, sign_sprite: Sprite2D = null, sign_scale: Vector2 = Vector2(0, 0)) -> void:
 	if first_scale_transition: first_scale_transition.kill()
 	if loop_scale_transition_button: loop_scale_transition_button.kill()
 	if loop_scale_transition_sign: loop_scale_transition_sign.kill()
 	
-	button.material.set_shader_parameter("is_hovered", false)
+	if not life: button.material.set_shader_parameter("is_hovered", false)
 	var out = create_tween()
 	out.set_ease(Tween.EASE_OUT)
 	out.set_trans(Tween.TRANS_SINE)
