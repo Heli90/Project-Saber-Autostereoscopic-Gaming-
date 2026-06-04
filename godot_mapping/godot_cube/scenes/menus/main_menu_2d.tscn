@@ -4,9 +4,18 @@
 [ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/pixel_art_typeface.ttf" id="4_5epmy"]
 [ext_resource type="Script" uid="uid://crmbnc6adwn05" path="res://scripts/sound/audio_control.gd" id="4_8ln24"]
 [ext_resource type="AudioStream" uid="uid://bqjkoeah1m37j" path="res://addons/sfx/main_menu_music.mp3" id="5_1hnlc"]
+[ext_resource type="Texture2D" uid="uid://cy5no81nhebpm" path="res://addons/assets/sign_name_panel.png" id="5_7gh3y"]
+[ext_resource type="Shader" uid="uid://crf7jc6x8vo3h" path="res://shaders/button.gdshader" id="6_myaa2"]
 [ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="8_tbmy8"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hl5e0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ymobg"]
+shader = ExtResource("6_myaa2")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rtw2f"]
 
@@ -20,6 +29,13 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gw5y6"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_myaa2"]
+shader = ExtResource("6_myaa2")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5dd4i"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_svtp6"]
@@ -32,6 +48,20 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bqqt6"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sfpvq"]
+shader = ExtResource("6_myaa2")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r2olw"]
+shader = ExtResource("6_myaa2")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rcqid"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qywvv"]
@@ -42,7 +72,21 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3wgol"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sp26u"]
+shader = ExtResource("6_myaa2")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tbmy8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r1foq"]
+shader = ExtResource("6_myaa2")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5pajh"]
 
@@ -67,6 +111,15 @@ color = Color(0, 1, 0, 1)
 thickness = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1a85y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4l4x5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_434c8"]
+shader = ExtResource("6_myaa2")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
 
 [node name="Menu" type="Control" unique_id=505296238]
 layout_mode = 3
@@ -128,11 +181,18 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_hl5e0")
 
+[node name="SignStart" type="Sprite2D" parent="MainButtons" unique_id=567143716]
+position = Vector2(570, 25)
+scale = Vector2(1.75, 1)
+texture = ExtResource("5_7gh3y")
+
 [node name="StartButton" type="Button" parent="MainButtons" unique_id=811078081]
+material = SubResource("ShaderMaterial_ymobg")
 layout_mode = 0
-offset_left = 465.0
-offset_right = 673.0
+offset_left = 470.0
+offset_right = 678.0
 offset_bottom = 50.0
+pivot_offset = Vector2(104, 25)
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../QuitButton")
 theme_override_fonts/font = ExtResource("4_5epmy")
@@ -145,12 +205,19 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_8egab")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_gw5y6")
 text = "New Game"
 
+[node name="SignSettings" type="Sprite2D" parent="MainButtons" unique_id=251373423]
+position = Vector2(572.5, 172.5)
+scale = Vector2(1.25, 1)
+texture = ExtResource("5_7gh3y")
+
 [node name="OptionButton" type="Button" parent="MainButtons" unique_id=356391253]
+material = SubResource("ShaderMaterial_myaa2")
 layout_mode = 0
-offset_left = 495.0
+offset_left = 500.0
 offset_top = 150.0
-offset_right = 648.0
+offset_right = 653.0
 offset_bottom = 200.0
+pivot_offset = Vector2(76.5, 25)
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 40
@@ -162,12 +229,19 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_1dfpl")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
 text = "Settings"
 
+[node name="SignCredits" type="Sprite2D" parent="MainButtons" unique_id=1504689892]
+position = Vector2(572.5, 320)
+scale = Vector2(1.25, 1)
+texture = ExtResource("5_7gh3y")
+
 [node name="CreditsButton" type="Button" parent="MainButtons" unique_id=1201192951]
+material = SubResource("ShaderMaterial_sfpvq")
 layout_mode = 0
-offset_left = 500.0
+offset_left = 505.0
 offset_top = 300.0
-offset_right = 638.0
+offset_right = 643.0
 offset_bottom = 350.0
+pivot_offset = Vector2(69, 25)
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 40
@@ -179,12 +253,19 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_1dfpl")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
 text = "Credits"
 
+[node name="SignQuit" type="Sprite2D" parent="MainButtons" unique_id=1440173188]
+position = Vector2(570, 462.5)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("5_7gh3y")
+
 [node name="QuitButton" type="Button" parent="MainButtons" unique_id=1683743182]
+material = SubResource("ShaderMaterial_r2olw")
 layout_mode = 0
-offset_left = 530.0
-offset_top = 450.0
-offset_right = 608.0
-offset_bottom = 500.0
+offset_left = 532.5
+offset_top = 440.0
+offset_right = 610.5
+offset_bottom = 490.0
+pivot_offset = Vector2(34, 25)
 size_flags_vertical = 3
 focus_neighbor_bottom = NodePath("../StartButton")
 theme_override_fonts/font = ExtResource("4_5epmy")
@@ -196,8 +277,10 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_7b55j")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_3wgol")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
 text = "Quit"
+metadata/_edit_use_anchors_ = true
 
 [node name="Options" type="Panel" parent="." unique_id=708263686]
+material = SubResource("ShaderMaterial_sp26u")
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -249,13 +332,20 @@ theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 50
 text = "SFX"
 
+[node name="SignBack" type="Sprite2D" parent="Options" unique_id=2036190015]
+position = Vector2(397.5, 710.5)
+scale = Vector2(1.75, 1.5)
+texture = ExtResource("5_7gh3y")
+
 [node name="BackButton" type="Button" parent="Options" unique_id=1551915793]
+material = SubResource("ShaderMaterial_r1foq")
 custom_minimum_size = Vector2(0, 127)
 layout_mode = 0
-offset_left = 265.0
+offset_left = 300.0
 offset_top = 650.0
-offset_right = 558.0
+offset_right = 506.0
 offset_bottom = 777.0
+pivot_offset = Vector2(103, 63.5)
 theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxEmpty_5pajh")
@@ -264,7 +354,7 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_j7ex8")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_a8gd2")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_vr8o3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
-text = "Main Menu"
+text = "Return"
 
 [node name="MusicControl" type="HSlider" parent="Options" unique_id=874942043]
 layout_mode = 0
@@ -420,13 +510,21 @@ text = "GODARD Helias"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="SignBack" type="Sprite2D" parent="Credits" unique_id=1903232362]
+material = SubResource("ShaderMaterial_4l4x5")
+position = Vector2(297.5, 805)
+scale = Vector2(1.75, 1.5)
+texture = ExtResource("5_7gh3y")
+
 [node name="BackButton" type="Button" parent="Credits" unique_id=193427243]
+material = SubResource("ShaderMaterial_434c8")
 custom_minimum_size = Vector2(0, 127)
 layout_mode = 0
-offset_left = 100.0
-offset_top = 740.0
-offset_right = 520.0
-offset_bottom = 867.0
+offset_left = 200.0
+offset_top = 743.5
+offset_right = 406.0
+offset_bottom = 870.5
+pivot_offset = Vector2(103, 63.5)
 theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxEmpty_5pajh")
@@ -435,13 +533,25 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_j7ex8")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_a8gd2")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_vr8o3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
-text = "Menu Principal"
+text = "Return"
 
+[connection signal="mouse_entered" from="MainButtons/StartButton" to="." method="_onStartButtonEnter"]
+[connection signal="mouse_exited" from="MainButtons/StartButton" to="." method="_onStartButtonExit"]
 [connection signal="pressed" from="MainButtons/StartButton" to="." method="_onStartButton_pressed"]
+[connection signal="mouse_entered" from="MainButtons/OptionButton" to="." method="_onOptionButtonEnter"]
+[connection signal="mouse_exited" from="MainButtons/OptionButton" to="." method="_onOptionButtonExit"]
 [connection signal="pressed" from="MainButtons/OptionButton" to="." method="_onOptionButton_pressed"]
+[connection signal="mouse_entered" from="MainButtons/CreditsButton" to="." method="_onCreditsButtonEnter"]
+[connection signal="mouse_exited" from="MainButtons/CreditsButton" to="." method="_onCreditsButtonExit"]
 [connection signal="pressed" from="MainButtons/CreditsButton" to="." method="_onCreditsButton_pressed"]
+[connection signal="mouse_entered" from="MainButtons/QuitButton" to="." method="_onQuitButtonEnter"]
+[connection signal="mouse_exited" from="MainButtons/QuitButton" to="." method="_onQuitButtonExit"]
 [connection signal="pressed" from="MainButtons/QuitButton" to="." method="_onQuitButton_pressed"]
+[connection signal="mouse_entered" from="Options/BackButton" to="." method="_onBackButtonSettingEnter"]
+[connection signal="mouse_exited" from="Options/BackButton" to="." method="_onBackButtonSettingExit"]
 [connection signal="pressed" from="Options/BackButton" to="." method="_onBackButton_pressed"]
 [connection signal="value_changed" from="Options/MusicControl" to="Options/MusicControl" method="_onValueChanged"]
 [connection signal="value_changed" from="Options/SFXControl" to="Options/SFXControl" method="_onValueChanged"]
+[connection signal="mouse_entered" from="Credits/BackButton" to="." method="_onBackButtonCreditEnter"]
+[connection signal="mouse_exited" from="Credits/BackButton" to="." method="_onBackButtonCreditExit"]
 [connection signal="pressed" from="Credits/BackButton" to="." method="_onBackButton_pressed"]

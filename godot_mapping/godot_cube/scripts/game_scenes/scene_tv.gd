@@ -3,13 +3,8 @@ extends Node3D
 @export var nb_views : int = 8
 @onready var screen_output = $TextureRect
 @onready var game: Node3D = $Game
-@onready var pause_menu: ColorRect = $Game/HUD/PauseMenu
-@onready var cube_spawner: Node3D = $Game/CubeSpawner
 @onready var j1: Node3D = $J1
 @onready var j2: Node3D = $J2
-
-@onready var cam_controller_j1: Node3D = $J1/CameraController
-@onready var cam_controller_j2: Node3D = $J2/CameraController
 
 @onready var remote1_j1: RemoteTransform3D = $J1/CameraController/RemoteVue1
 @onready var remote2_j1: RemoteTransform3D = $J1/CameraController/RemoteVue2
@@ -25,17 +20,12 @@ extends Node3D
 @onready var label_detect_mediapipe: Label = $TechnicalInfos/DetectMediapipe
 @onready var land_marks_proceed: Node2D = $Game/LandMarksProceed
 
-@onready var textureRect = $TextureRect
-
-var initialisations_joueurs: bool = false
 var rd: RenderingDevice
 var last_gpu_time_ms: float = 0.0
 var last_gpu_vues_ms: float = 0.0
 
 func _ready() -> void:
-	pause_menu.mode = true
-	cube_spawner.mode = true
-	game.mode = true
+	Global.launched_mode = 2
 
 	rd = RenderingServer.get_rendering_device()
 	await get_tree().process_frame
@@ -61,8 +51,8 @@ func _ready() -> void:
 			var texture_vue = vue.get_texture()
 			var shader_vue = "vue_" + str(i)
 			shader_mat.set_shader_parameter(shader_vue, texture_vue)
-	textureRect.material.set_shader_parameter("offset", 0.0) # Initialise l'effet glitch à 0
-	textureRect.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, true, true, false, false]) # Initialise les vues qui auront l'effet de pixelisation
+	screen_output.material.set_shader_parameter("offset", 0.0) # Initialise l'effet glitch à 0
+	screen_output.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, true, true, false, false]) # Initialise les vues qui auront l'effet de pixelisation
 
 func _process(_delta: float) -> void:
 	# Temps total d'une frame
@@ -121,18 +111,18 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("StopGame"):
 		game.onPartieTimerTimeout()
 	if event.is_action_pressed("Invert_views_J1"):
-		if textureRect:
-			var invert = textureRect.material.get_shader_parameter("invertViews")
-			textureRect.material.set_shader_parameter("invertViews", not invert)
+		if screen_output:
+			var invert = screen_output.material.get_shader_parameter("invertViews")
+			screen_output.material.set_shader_parameter("invertViews", not invert)
 	if event.is_action_pressed("glitchEffect"):
-		var offset = textureRect.material.get_shader_parameter("offset")
-		textureRect.material.set_shader_parameter("offset", offset+0.01)
+		var offset = screen_output.material.get_shader_parameter("offset")
+		screen_output.material.set_shader_parameter("offset", offset+0.01)
 	if event.is_action_pressed("resetGlitchEffect"):
-		textureRect.material.set_shader_parameter("offset", 0.0)
+		screen_output.material.set_shader_parameter("offset", 0.0)
 	if event.is_action_pressed("pixelisation"):
-		var pixelisationPower = textureRect.material.get_shader_parameter("pixelisationPower")
-		textureRect.material.set_shader_parameter("pixelisation", true)
-		textureRect.material.set_shader_parameter("pixelisationPower", pixelisationPower-10.0)
+		var pixelisationPower = screen_output.material.get_shader_parameter("pixelisationPower")
+		screen_output.set_shader_parameter("pixelisation", true)
+		screen_output.set_shader_parameter("pixelisationPower", pixelisationPower-10.0)
 	if event.is_action_pressed("resetPixelisation"):
-		textureRect.material.set_shader_parameter("pixelisation", false)
-		textureRect.material.set_shader_parameter("pixelisationPower", 200.0)
+		screen_output.set_shader_parameter("pixelisation", false)
+		screen_output.set_shader_parameter("pixelisationPower", 200.0)

@@ -36,19 +36,13 @@ var heal_scale: Vector2
 var heal_sound_transition: bool
 
 const LEADERBOARD_PATH: String = "user://leaderboard.cfg"
-const BUTTON_SCALE_FACTOR: float = 1.025
-const HEART_SCALE_FACTOR: float = 1.075
-const SCALE_DURATION: float = 0.2
-
-var first_scale_transition: Tween
-var loop_scale_transition_button: Tween
-var loop_scale_transition_sign: Tween
 
 func _ready() -> void:
 	game_level_sign.modulate.a = 0.0
 	game_level.modulate.a = 0.0
 	cassette_game.modulate.a = 0.0
 	
+	# Définition de la taille de tous les boutons et de tous les panneaux
 	menu_scale = menu_button.scale
 	sign_menu_scale = sign_menu.scale
 	start_scale = start_button.scale
@@ -57,6 +51,12 @@ func _ready() -> void:
 	sign_back_scale = sign_back.scale
 	heal_scale = heal_mode_button.scale
 	
+	# On cache les degradés de tous les boutons
+	start_button.material.set_shader_parameter("is_hovered", false)
+	back_button.material.set_shader_parameter("is_hovered", false)
+	menu_button.material.set_shader_parameter("is_hovered", false)
+	
+	# Mise en place de l'enlèvement du fondu
 	tutoriel_music.volume_db = -15.0
 	tutoriel_music.play()
 	fondu_noir.modulate.a = 1.0
@@ -126,7 +126,7 @@ func _onTutoCassette_pressed() -> void:
 	t.chain().tween_property(tutoriel_music, "volume_db", -80.0, 0.5)
 	t.chain().tween_interval(0.3)
 	await t.finished
-	get_tree().change_scene_to_file("res://scenes/game_scenes/scene_TV.tscn")
+	get_tree().change_scene_to_file("res://scenes/game_scenes/tutoriel_3d.tscn")
 
 func _onCassetteGame_pressed() -> void:
 	cassette_sound.play()
@@ -303,67 +303,26 @@ func onArrows_pressed(direction: int) -> void:
 			t_in.tween_property(tuto_level, "modulate:a", 1.0, 0.2)
 			await t_in.finished
 
-func ButtonEnter(button, button_scale: Vector2, life = false, sign_sprite: Sprite2D = null,  sign_scale: Vector2 = Vector2(0, 0)) -> void:
-	if first_scale_transition: first_scale_transition.kill()
-	if loop_scale_transition_button: loop_scale_transition_button.kill()
-	if loop_scale_transition_sign: loop_scale_transition_sign.kill()
-
-	first_scale_transition = create_tween().set_parallel(true)
-	first_scale_transition.set_ease(Tween.EASE_OUT)
-	first_scale_transition.set_trans(Tween.TRANS_BACK)
-	if life: first_scale_transition.tween_property(button, "scale", button_scale * HEART_SCALE_FACTOR, SCALE_DURATION)
-	else: first_scale_transition.tween_property(button, "scale", button_scale * BUTTON_SCALE_FACTOR, SCALE_DURATION)
-	if sign_sprite: first_scale_transition.tween_property(sign_sprite, "scale", sign_scale * (BUTTON_SCALE_FACTOR), SCALE_DURATION)
-	await first_scale_transition.finished
-	
-	loop_scale_transition_button = create_tween().set_loops()
-	loop_scale_transition_button.set_ease(Tween.EASE_OUT)
-	loop_scale_transition_button.set_trans(Tween.TRANS_BACK)
-	if life:
-		loop_scale_transition_button.tween_property(button, "scale", button_scale / (HEART_SCALE_FACTOR ** 2), SCALE_DURATION / 2)
-		loop_scale_transition_button.tween_property(button, "scale", button_scale * (HEART_SCALE_FACTOR ** 2), SCALE_DURATION * 2)
-	else:
-		loop_scale_transition_button.tween_property(button, "scale", button_scale / (BUTTON_SCALE_FACTOR ** 2), SCALE_DURATION / 2)
-		loop_scale_transition_button.tween_property(button, "scale", button_scale * (BUTTON_SCALE_FACTOR ** 2), SCALE_DURATION * 2)
-	if sign_sprite:
-		loop_scale_transition_sign = create_tween().set_loops()
-		loop_scale_transition_sign.set_ease(Tween.EASE_OUT)
-		loop_scale_transition_sign.set_trans(Tween.TRANS_BACK)
-		loop_scale_transition_sign.tween_property(sign_sprite, "scale", sign_scale / (BUTTON_SCALE_FACTOR ** 2), SCALE_DURATION / 2)
-		loop_scale_transition_sign.tween_property(sign_sprite, "scale", sign_scale * (BUTTON_SCALE_FACTOR ** 2), SCALE_DURATION * 2)
-
-func ButtonExit(button, button_scale: Vector2, sign_sprite: Sprite2D = null, sign_scale: Vector2 = Vector2(0, 0)) -> void:
-	if first_scale_transition: first_scale_transition.kill()
-	if loop_scale_transition_button: loop_scale_transition_button.kill()
-	if loop_scale_transition_sign: loop_scale_transition_sign.kill()
-
-	var out = create_tween()
-	out.set_ease(Tween.EASE_OUT)
-	out.set_trans(Tween.TRANS_SINE)
-	out.set_parallel(true)
-	out.tween_property(button, "scale", button_scale, SCALE_DURATION)
-	if sign_sprite: out.tween_property(sign_sprite, "scale", sign_scale, SCALE_DURATION)
-
 func _onMenuButtonEnter() -> void:
-	ButtonEnter(menu_button, menu_scale, false, sign_menu, sign_menu_scale)
+	Global.ButtonEnter(menu_button, menu_scale, false, sign_menu, sign_menu_scale)
 
 func _onMenuButtonExit() -> void:
-	ButtonExit(menu_button, menu_scale, sign_menu, sign_menu_scale)
+	Global.ButtonExit(menu_button, menu_scale, sign_menu, sign_menu_scale)
 
 func _onStartButtonEnter() -> void:
-	ButtonEnter(start_button, start_scale, false, sign_start, sign_start_scale)
+	Global.ButtonEnter(start_button, start_scale, false, sign_start, sign_start_scale)
 
 func _onStartButtonExit() -> void:
-	ButtonExit(start_button, start_scale, sign_start, sign_start_scale)
+	Global.ButtonExit(start_button, start_scale, sign_start, sign_start_scale)
 
 func _onBackButtonEnter() -> void:
-	ButtonEnter(back_button, back_scale, false, sign_back, sign_back_scale)
+	Global.ButtonEnter(back_button, back_scale, false, sign_back, sign_back_scale)
 
 func _onBackButtonExit() -> void:
-	ButtonExit(back_button, back_scale, sign_back, sign_back_scale)
+	Global.ButtonExit(back_button, back_scale, sign_back, sign_back_scale)
 
 func _onHealMouseEnter() -> void:
-	ButtonEnter(heal_mode_button, heal_scale, true)
+	Global.ButtonEnter(heal_mode_button, heal_scale, true)
 
 func _onHealMouseExit() -> void:
-	ButtonExit(heal_mode_button, heal_scale)
+	Global.ButtonExit(heal_mode_button, heal_scale)

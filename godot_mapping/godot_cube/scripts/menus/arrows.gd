@@ -2,8 +2,8 @@ extends TextureButton
 
 @export var direction: int = 1
 
-const SCALE_FACTOR: float = 1.1
-const SCALE_DURATION: float = 0.2
+const SCALE_FACTOR: float = 1.05
+const SCALE_DURATION: float = 0.4
 const ANGLE_DEG: float = 25.0
 const ROTATION_DURATION: float = 0.25
 

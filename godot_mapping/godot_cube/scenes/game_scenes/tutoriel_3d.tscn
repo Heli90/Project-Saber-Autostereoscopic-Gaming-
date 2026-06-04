@@ -1,0 +1,1082 @@
+[gd_scene format=3 uid="uid://dnqom5l3in6i2"]
+
+[ext_resource type="PackedScene" uid="uid://br2jmvjla4guc" path="res://scenes/game_scenes/joueur.tscn" id="1_s6t0h"]
+[ext_resource type="Script" uid="uid://gbqve6l7n8xu" path="res://scripts/game_scenes/tutoriel_3d.gd" id="1_yd0b7"]
+[ext_resource type="Script" uid="uid://c4nxreh0k2je7" path="res://scripts/game_scenes/visuals/score_ui.gd" id="2_yd0b7"]
+[ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/pixel_art_typeface.ttf" id="3_24kdc"]
+[ext_resource type="Script" uid="uid://cx3d6alfd6nrm" path="res://scripts/game_scenes/visuals/ink_overlay.gd" id="4_aonxi"]
+[ext_resource type="Script" uid="uid://b488bjxdcwo2m" path="res://scripts/game_scenes/visuals/health_bar.gd" id="5_j2wie"]
+[ext_resource type="Shader" uid="uid://bws066256p50k" path="res://shaders/health_bar.gdshader" id="6_2peqq"]
+[ext_resource type="Script" uid="uid://dnfkxpf3p8gki" path="res://scripts/game_scenes/visuals/shield_bar.gd" id="7_270lb"]
+[ext_resource type="Shader" uid="uid://dk5jixryl8es3" path="res://shaders/shield_bar.gdshader" id="8_hp6y6"]
+[ext_resource type="Texture2D" uid="uid://cwgkhf1f7wdtp" path="res://addons/assets/shield_icon_v2.png" id="9_jqnbp"]
+[ext_resource type="Texture2D" uid="uid://c7vtx5e2brkk1" path="res://addons/assets/combo_bar_empty.png" id="10_myxsx"]
+[ext_resource type="Texture2D" uid="uid://lj6bxsd50fjh" path="res://addons/assets/combo_bar.png" id="11_r1cjm"]
+[ext_resource type="Shader" uid="uid://vno46ensk36y" path="res://shaders/generation_image.gdshader" id="12_vtjlb"]
+[ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="13_nru1m"]
+[ext_resource type="AudioStream" uid="uid://dk8rg1cdygmea" path="res://addons/sfx/level_music.mp3" id="14_l8vux"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2lerv"]
+shader = ExtResource("6_2peqq")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1hxlk"]
+load_path = "res://.godot/imported/heart.png-faf08471e88d2969ee3fbf1815ae1802.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_40u3p"]
+shader = ExtResource("8_hp6y6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eet1y"]
+shader = ExtResource("6_2peqq")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xnotu"]
+shader = ExtResource("6_2peqq")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_saufc"]
+load_path = "res://.godot/imported/heart.png-faf08471e88d2969ee3fbf1815ae1802.ctex"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wcl46"]
+shader = ExtResource("8_hp6y6")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ql20w"]
+shader = ExtResource("6_2peqq")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tx1ok"]
+resource_local_to_scene = true
+shader = ExtResource("12_vtjlb")
+shader_parameter/N = 8
+shader_parameter/decalage = -1
+shader_parameter/invertViews = false
+shader_parameter/offset = 0.01
+shader_parameter/pixelisation = false
+shader_parameter/pixelisationPower = 200.0
+shader_parameter/pixelisation_mask = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_fqw2t"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qp0uc"]
+gradient = SubResource("Gradient_fqw2t")
+width = 1920
+height = 1080
+
+[node name="Tutoriel" type="Node3D" unique_id=1499953583]
+script = ExtResource("1_yd0b7")
+
+[node name="J1" parent="." unique_id=1209140079 instance=ExtResource("1_s6t0h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 20)
+
+[node name="Camera" parent="J1/CameraController" parent_id_path=PackedInt32Array(1209140079, 718035250) index="0" unique_id=752964199]
+visible = false
+current = false
+
+[node name="RemoteVue1" type="RemoteTransform3D" parent="J1/CameraController" parent_id_path=PackedInt32Array(1209140079, 718035250) index="1" unique_id=172709209]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, -0.03, 0, 0.3)
+remote_path = NodePath("../Vue1/Camera")
+
+[node name="RemoteVue2" type="RemoteTransform3D" parent="J1/CameraController" parent_id_path=PackedInt32Array(1209140079, 718035250) index="2" unique_id=542118658]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0.03, 0, 0.3)
+remote_path = NodePath("../Vue2/Camera")
+
+[node name="Vue1" type="SubViewport" parent="J1/CameraController" parent_id_path=PackedInt32Array(1209140079, 718035250) index="3" unique_id=727514978]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+
+[node name="Camera" type="Camera3D" parent="J1/CameraController/Vue1" unique_id=336928624]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, -0.03, 2.25, 20.3)
+current = true
+fov = 90.0
+
+[node name="ScoreUI" type="CanvasLayer" parent="J1/CameraController/Vue1" unique_id=1759934461]
+script = ExtResource("2_yd0b7")
+
+[node name="ScoresPanel" type="Control" parent="J1/CameraController/Vue1/ScoreUI" unique_id=418957984]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1870.0
+offset_top = -130.0
+offset_right = -1783.0
+offset_bottom = -53.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="J1/CameraController/Vue1/ScoreUI/ScoresPanel" unique_id=203927449]
+layout_mode = 0
+offset_right = 87.0
+offset_bottom = 77.0
+
+[node name="Titre" type="Label" parent="J1/CameraController/Vue1/ScoreUI/ScoresPanel/VBoxContainer" unique_id=812730287]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 18
+text = "♢ Score total ♢"
+
+[node name="Score" type="Label" parent="J1/CameraController/Vue1/ScoreUI/ScoresPanel/VBoxContainer" unique_id=723807008]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 52
+text = "0"
+
+[node name="GainScore" type="Label" parent="J1/CameraController/Vue1/ScoreUI/ScoresPanel" unique_id=2070020486]
+visible = false
+layout_mode = 0
+offset_top = 80.0
+offset_right = 87.0
+offset_bottom = 109.0
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 28
+text = "+0"
+
+[node name="InkLayerJ1" type="CanvasLayer" parent="J1/CameraController/Vue1" unique_id=314575274]
+
+[node name="InkOverlayJ1" type="Node2D" parent="J1/CameraController/Vue1/InkLayerJ1" unique_id=341275626]
+script = ExtResource("4_aonxi")
+
+[node name="ColorRect" type="ColorRect" parent="J1/CameraController/Vue1/InkLayerJ1/InkOverlayJ1" unique_id=259744632]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="TextureRect" type="TextureRect" parent="J1/CameraController/Vue1/InkLayerJ1/InkOverlayJ1" unique_id=1511785557]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthBar" type="Control" parent="J1/CameraController/Vue1" unique_id=938652267]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_top = 65.0
+offset_right = 40.0
+offset_bottom = 105.0
+script = ExtResource("5_j2wie")
+
+[node name="Contour" type="ColorRect" parent="J1/CameraController/Vue1/HealthBar" unique_id=1255538505]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 644.0
+offset_right = 355.0
+offset_bottom = 714.0
+color = Color(0, 0, 0, 1)
+
+[node name="BG" type="ColorRect" parent="J1/CameraController/Vue1/HealthBar" unique_id=1454842584]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 650.0
+offset_right = 350.0
+offset_bottom = 670.0
+grow_vertical = 2
+color = Color(0.58383155, 0.58383155, 0.58383155, 1)
+
+[node name="BarFilled" type="ColorRect" parent="J1/CameraController/Vue1/HealthBar" unique_id=1916318337]
+material = SubResource("ShaderMaterial_2lerv")
+layout_mode = 0
+offset_left = 150.0
+offset_top = 650.0
+offset_right = 350.0
+offset_bottom = 710.0
+
+[node name="HeartIcon" type="TextureRect" parent="J1/CameraController/Vue1/HealthBar" unique_id=203342892]
+layout_mode = 0
+offset_left = 306.0
+offset_top = 600.0
+offset_right = 770.0
+offset_bottom = 1034.0
+scale = Vector2(0.2, 0.2)
+texture = SubResource("CompressedTexture2D_1hxlk")
+
+[node name="HeartLabel" type="Label" parent="J1/CameraController/Vue1/HealthBar" unique_id=593984433]
+custom_minimum_size = Vector2(72, 51)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 660.0
+offset_right = 122.0
+offset_bottom = 711.0
+theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 50
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShieldBar" type="Control" parent="J1/CameraController/Vue1" unique_id=1130849997]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_270lb")
+
+[node name="Contour" type="ColorRect" parent="J1/CameraController/Vue1/ShieldBar" unique_id=642610642]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 845.0
+offset_right = 355.0
+offset_bottom = 915.0
+color = Color(0, 0, 0, 1)
+
+[node name="BG" type="ColorRect" parent="J1/CameraController/Vue1/ShieldBar" unique_id=765343950]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 850.0
+offset_right = 350.0
+offset_bottom = 870.0
+grow_vertical = 2
+color = Color(0.58383155, 0.58383155, 0.58383155, 1)
+
+[node name="BarFilled" type="ColorRect" parent="J1/CameraController/Vue1/ShieldBar" unique_id=1436965358]
+material = SubResource("ShaderMaterial_40u3p")
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 850.0
+offset_right = 350.0
+offset_bottom = 870.0
+grow_vertical = 2
+
+[node name="ShieldIcon" type="TextureRect" parent="J1/CameraController/Vue1/ShieldBar" unique_id=646755259]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 815.0
+offset_right = 465.0
+offset_bottom = 986.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_jqnbp")
+
+[node name="ShieldLabel" type="Label" parent="J1/CameraController/Vue1/ShieldBar" unique_id=1011441918]
+custom_minimum_size = Vector2(72, 51)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 860.0
+offset_right = 122.0
+offset_bottom = 911.0
+theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 50
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ComboBar" type="Control" parent="J1/CameraController/Vue1" unique_id=2018523128]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="J1/CameraController/Vue1/ComboBar" unique_id=1721530822]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.1, 1.1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="J1/CameraController/Vue1/ComboBar/MarginContainer" unique_id=975849490]
+layout_mode = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="J1/CameraController/Vue1/ComboBar/MarginContainer/VBoxContainer" unique_id=2037670259]
+layout_mode = 2
+step = 0.1
+fill_mode = 4
+radial_fill_degrees = 310.0
+texture_under = ExtResource("10_myxsx")
+texture_over = ExtResource("11_r1cjm")
+texture_progress = ExtResource("11_r1cjm")
+tint_over = Color(1, 1, 1, 0)
+
+[node name="ProgressBarLabel" type="Label" parent="J1/CameraController/Vue1/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar" unique_id=548208771]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 45.0
+offset_right = 201.0
+offset_bottom = 246.0
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 195
+text = "D"
+horizontal_alignment = 1
+
+[node name="Vue2" type="SubViewport" parent="J1/CameraController" parent_id_path=PackedInt32Array(1209140079, 718035250) index="4" unique_id=1553406840]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+
+[node name="Camera" type="Camera3D" parent="J1/CameraController/Vue2" unique_id=419526002]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0.03, 2.25, 20.3)
+current = true
+fov = 90.0
+
+[node name="ScoreUI" type="CanvasLayer" parent="J1/CameraController/Vue2" unique_id=1547045947]
+script = ExtResource("2_yd0b7")
+
+[node name="ScoresPanel" type="Control" parent="J1/CameraController/Vue2/ScoreUI" unique_id=195439744]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1870.0
+offset_top = -130.0
+offset_right = -1783.0
+offset_bottom = -53.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="J1/CameraController/Vue2/ScoreUI/ScoresPanel" unique_id=940548247]
+layout_mode = 0
+offset_right = 87.0
+offset_bottom = 77.0
+
+[node name="Titre" type="Label" parent="J1/CameraController/Vue2/ScoreUI/ScoresPanel/VBoxContainer" unique_id=2014558932]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 18
+text = "♢ Score total ♢"
+
+[node name="Score" type="Label" parent="J1/CameraController/Vue2/ScoreUI/ScoresPanel/VBoxContainer" unique_id=1459796177]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 52
+text = "0"
+
+[node name="GainScore" type="Label" parent="J1/CameraController/Vue2/ScoreUI/ScoresPanel" unique_id=1359079793]
+visible = false
+layout_mode = 0
+offset_top = 80.0
+offset_right = 87.0
+offset_bottom = 109.0
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 28
+text = "+0"
+
+[node name="InkLayerJ1" type="CanvasLayer" parent="J1/CameraController/Vue2" unique_id=1342648812]
+
+[node name="InkOverlayJ1" type="Node2D" parent="J1/CameraController/Vue2/InkLayerJ1" unique_id=652001444]
+script = ExtResource("4_aonxi")
+
+[node name="ColorRect" type="ColorRect" parent="J1/CameraController/Vue2/InkLayerJ1/InkOverlayJ1" unique_id=1129638248]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="TextureRect" type="TextureRect" parent="J1/CameraController/Vue2/InkLayerJ1/InkOverlayJ1" unique_id=538153703]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthBar" type="Control" parent="J1/CameraController/Vue2" unique_id=200916280]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_top = 65.0
+offset_right = 40.0
+offset_bottom = 105.0
+script = ExtResource("5_j2wie")
+
+[node name="Contour" type="ColorRect" parent="J1/CameraController/Vue2/HealthBar" unique_id=2060221700]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 644.0
+offset_right = 355.0
+offset_bottom = 714.0
+color = Color(0, 0, 0, 1)
+
+[node name="BG" type="ColorRect" parent="J1/CameraController/Vue2/HealthBar" unique_id=331910646]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 650.0
+offset_right = 350.0
+offset_bottom = 670.0
+grow_vertical = 2
+color = Color(0.58383155, 0.58383155, 0.58383155, 1)
+
+[node name="BarFilled" type="ColorRect" parent="J1/CameraController/Vue2/HealthBar" unique_id=303744991]
+material = SubResource("ShaderMaterial_eet1y")
+layout_mode = 0
+offset_left = 150.0
+offset_top = 650.0
+offset_right = 350.0
+offset_bottom = 710.0
+
+[node name="HeartIcon" type="TextureRect" parent="J1/CameraController/Vue2/HealthBar" unique_id=590302499]
+layout_mode = 0
+offset_left = 305.0
+offset_top = 600.0
+offset_right = 769.0
+offset_bottom = 1034.0
+scale = Vector2(0.2, 0.2)
+texture = SubResource("CompressedTexture2D_1hxlk")
+
+[node name="HeartLabel" type="Label" parent="J1/CameraController/Vue2/HealthBar" unique_id=1298842458]
+custom_minimum_size = Vector2(72, 51)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 660.0
+offset_right = 122.0
+offset_bottom = 711.0
+theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 50
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShieldBar" type="Control" parent="J1/CameraController/Vue2" unique_id=1908636261]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("7_270lb")
+
+[node name="Contour" type="ColorRect" parent="J1/CameraController/Vue2/ShieldBar" unique_id=1406288061]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 845.0
+offset_right = 355.0
+offset_bottom = 915.0
+color = Color(0, 0, 0, 1)
+
+[node name="BG" type="ColorRect" parent="J1/CameraController/Vue2/ShieldBar" unique_id=1590432694]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 850.0
+offset_right = 350.0
+offset_bottom = 870.0
+grow_vertical = 2
+color = Color(0.58383155, 0.58383155, 0.58383155, 1)
+
+[node name="BarFilled" type="ColorRect" parent="J1/CameraController/Vue2/ShieldBar" unique_id=970225456]
+material = SubResource("ShaderMaterial_40u3p")
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 850.0
+offset_right = 350.0
+offset_bottom = 870.0
+grow_vertical = 2
+
+[node name="ShieldIcon" type="TextureRect" parent="J1/CameraController/Vue2/ShieldBar" unique_id=1631475082]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 815.0
+offset_right = 465.0
+offset_bottom = 986.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_jqnbp")
+
+[node name="ShieldLabel" type="Label" parent="J1/CameraController/Vue2/ShieldBar" unique_id=2009297244]
+custom_minimum_size = Vector2(72, 51)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 860.0
+offset_right = 122.0
+offset_bottom = 911.0
+theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 50
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ComboBar" type="Control" parent="J1/CameraController/Vue2" unique_id=1615561380]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="J1/CameraController/Vue2/ComboBar" unique_id=1623180521]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.1, 1.1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="J1/CameraController/Vue2/ComboBar/MarginContainer" unique_id=23270341]
+layout_mode = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="J1/CameraController/Vue2/ComboBar/MarginContainer/VBoxContainer" unique_id=85421705]
+layout_mode = 2
+step = 0.1
+fill_mode = 4
+radial_fill_degrees = 310.0
+texture_under = ExtResource("10_myxsx")
+texture_over = ExtResource("11_r1cjm")
+texture_progress = ExtResource("11_r1cjm")
+tint_over = Color(1, 1, 1, 0)
+
+[node name="ProgressBarLabel" type="Label" parent="J1/CameraController/Vue2/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar" unique_id=1169930553]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 45.0
+offset_right = 201.0
+offset_bottom = 246.0
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 195
+text = "D"
+horizontal_alignment = 1
+
+[node name="J2" parent="." unique_id=1843577101 instance=ExtResource("1_s6t0h")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1, -20)
+player_id = 2
+
+[node name="Camera" parent="J2/CameraController" parent_id_path=PackedInt32Array(1843577101, 718035250) index="0" unique_id=752964199]
+visible = false
+current = false
+
+[node name="RemoteVue5" type="RemoteTransform3D" parent="J2/CameraController" parent_id_path=PackedInt32Array(1843577101, 718035250) index="1" unique_id=592077372]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0.03, 0, 0.3)
+remote_path = NodePath("../Vue5/Camera")
+
+[node name="RemoteVue6" type="RemoteTransform3D" parent="J2/CameraController" parent_id_path=PackedInt32Array(1843577101, 718035250) index="2" unique_id=1527275705]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, -0.03, 0, 0.3)
+remote_path = NodePath("../Vue6/Camera")
+
+[node name="Vue5" type="SubViewport" parent="J2/CameraController" parent_id_path=PackedInt32Array(1843577101, 718035250) index="3" unique_id=897745510]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+
+[node name="Camera" type="Camera3D" parent="J2/CameraController/Vue5" unique_id=1057586389]
+transform = Transform3D(-1, 2.990035e-08, -8.2150535e-08, 0, 0.9396926, 0.34202012, 8.742278e-08, 0.34202012, -0.9396926, -0.030000025, 2.25, -20.3)
+current = true
+fov = 90.0
+
+[node name="ScoreUI" type="CanvasLayer" parent="J2/CameraController/Vue5" unique_id=437167711]
+script = ExtResource("2_yd0b7")
+
+[node name="ScoresPanel" type="Control" parent="J2/CameraController/Vue5/ScoreUI" unique_id=626875075]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -195.0
+offset_top = -130.0
+offset_right = -108.0
+offset_bottom = -53.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="J2/CameraController/Vue5/ScoreUI/ScoresPanel" unique_id=1352949936]
+layout_mode = 0
+offset_right = 87.0
+offset_bottom = 77.0
+
+[node name="Titre" type="Label" parent="J2/CameraController/Vue5/ScoreUI/ScoresPanel/VBoxContainer" unique_id=121709134]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 18
+text = "♢ Score total ♢"
+
+[node name="Score" type="Label" parent="J2/CameraController/Vue5/ScoreUI/ScoresPanel/VBoxContainer" unique_id=1764799273]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 52
+text = "0"
+
+[node name="GainScore" type="Label" parent="J2/CameraController/Vue5/ScoreUI/ScoresPanel" unique_id=1482525002]
+visible = false
+layout_mode = 0
+offset_top = 80.0
+offset_right = 87.0
+offset_bottom = 109.0
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 28
+text = "+0"
+
+[node name="InkLayerJ2" type="CanvasLayer" parent="J2/CameraController/Vue5" unique_id=1598338628]
+
+[node name="InkOverlayJ2" type="Node2D" parent="J2/CameraController/Vue5/InkLayerJ2" unique_id=1095103892]
+script = ExtResource("4_aonxi")
+
+[node name="ColorRect" type="ColorRect" parent="J2/CameraController/Vue5/InkLayerJ2/InkOverlayJ2" unique_id=673336332]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="TextureRect" type="TextureRect" parent="J2/CameraController/Vue5/InkLayerJ2/InkOverlayJ2" unique_id=2015215142]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthBar" type="Control" parent="J2/CameraController/Vue5" unique_id=1018460487]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1500.0
+offset_top = 65.0
+offset_right = 1540.0
+offset_bottom = 105.0
+script = ExtResource("5_j2wie")
+
+[node name="Contour" type="ColorRect" parent="J2/CameraController/Vue5/HealthBar" unique_id=1216254964]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 644.0
+offset_right = 355.0
+offset_bottom = 714.0
+color = Color(0, 0, 0, 1)
+
+[node name="BG" type="ColorRect" parent="J2/CameraController/Vue5/HealthBar" unique_id=1038856763]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 650.0
+offset_right = 350.0
+offset_bottom = 670.0
+grow_vertical = 2
+color = Color(0.58383155, 0.58383155, 0.58383155, 1)
+
+[node name="BarFilled" type="ColorRect" parent="J2/CameraController/Vue5/HealthBar" unique_id=1099186258]
+material = SubResource("ShaderMaterial_xnotu")
+layout_mode = 0
+offset_left = 150.0
+offset_top = 650.0
+offset_right = 350.0
+offset_bottom = 710.0
+
+[node name="HeartIcon" type="TextureRect" parent="J2/CameraController/Vue5/HealthBar" unique_id=440841120]
+layout_mode = 0
+offset_left = 305.0
+offset_top = 600.0
+offset_right = 769.0
+offset_bottom = 1034.0
+scale = Vector2(0.2, 0.2)
+texture = SubResource("CompressedTexture2D_saufc")
+
+[node name="HeartLabel" type="Label" parent="J2/CameraController/Vue5/HealthBar" unique_id=1194176189]
+custom_minimum_size = Vector2(72, 51)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 660.0
+offset_right = 122.0
+offset_bottom = 711.0
+theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 50
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShieldBar" type="Control" parent="J2/CameraController/Vue5" unique_id=199541854]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1500.0
+offset_right = 1540.0
+offset_bottom = 40.0
+script = ExtResource("7_270lb")
+
+[node name="Contour" type="ColorRect" parent="J2/CameraController/Vue5/ShieldBar" unique_id=1064709329]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 845.0
+offset_right = 355.0
+offset_bottom = 915.0
+color = Color(0, 0, 0, 1)
+
+[node name="BG" type="ColorRect" parent="J2/CameraController/Vue5/ShieldBar" unique_id=840324640]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 850.0
+offset_right = 350.0
+offset_bottom = 870.0
+grow_vertical = 2
+color = Color(0.58383155, 0.58383155, 0.58383155, 1)
+
+[node name="BarFilled" type="ColorRect" parent="J2/CameraController/Vue5/ShieldBar" unique_id=1971355877]
+material = SubResource("ShaderMaterial_wcl46")
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 850.0
+offset_right = 350.0
+offset_bottom = 870.0
+grow_vertical = 2
+
+[node name="ShieldIcon" type="TextureRect" parent="J2/CameraController/Vue5/ShieldBar" unique_id=1223094591]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 815.0
+offset_right = 465.0
+offset_bottom = 986.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_jqnbp")
+
+[node name="ShieldLabel" type="Label" parent="J2/CameraController/Vue5/ShieldBar" unique_id=711204785]
+custom_minimum_size = Vector2(72, 51)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 860.0
+offset_right = 122.0
+offset_bottom = 911.0
+theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 50
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ComboBar" type="Control" parent="J2/CameraController/Vue5" unique_id=1197422237]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1600.0
+offset_right = 1640.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="J2/CameraController/Vue5/ComboBar" unique_id=615364425]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.1, 1.1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="J2/CameraController/Vue5/ComboBar/MarginContainer" unique_id=856142529]
+layout_mode = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="J2/CameraController/Vue5/ComboBar/MarginContainer/VBoxContainer" unique_id=524350143]
+layout_mode = 2
+step = 0.1
+fill_mode = 4
+radial_fill_degrees = 310.0
+texture_under = ExtResource("10_myxsx")
+texture_over = ExtResource("11_r1cjm")
+texture_progress = ExtResource("11_r1cjm")
+tint_over = Color(1, 1, 1, 0)
+
+[node name="ProgressBarLabel" type="Label" parent="J2/CameraController/Vue5/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar" unique_id=1344535152]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 45.0
+offset_right = 201.0
+offset_bottom = 246.0
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 195
+text = "D"
+horizontal_alignment = 1
+
+[node name="Vue6" type="SubViewport" parent="J2/CameraController" parent_id_path=PackedInt32Array(1843577101, 718035250) index="4" unique_id=1336178168]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+
+[node name="Camera" type="Camera3D" parent="J2/CameraController/Vue6" unique_id=945823543]
+transform = Transform3D(-1, 2.990035e-08, -8.2150535e-08, 0, 0.9396926, 0.34202012, 8.742278e-08, 0.34202012, -0.9396926, 0.029999973, 2.25, -20.3)
+current = true
+fov = 90.0
+
+[node name="ScoreUI" type="CanvasLayer" parent="J2/CameraController/Vue6" unique_id=108111696]
+script = ExtResource("2_yd0b7")
+
+[node name="ScoresPanel" type="Control" parent="J2/CameraController/Vue6/ScoreUI" unique_id=1998553050]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -195.0
+offset_top = -130.0
+offset_right = -108.0
+offset_bottom = -53.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="J2/CameraController/Vue6/ScoreUI/ScoresPanel" unique_id=1263009613]
+layout_mode = 0
+offset_right = 87.0
+offset_bottom = 77.0
+
+[node name="Titre" type="Label" parent="J2/CameraController/Vue6/ScoreUI/ScoresPanel/VBoxContainer" unique_id=1122122779]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 18
+text = "♢ Score total ♢"
+
+[node name="Score" type="Label" parent="J2/CameraController/Vue6/ScoreUI/ScoresPanel/VBoxContainer" unique_id=1231789521]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 52
+text = "0"
+
+[node name="GainScore" type="Label" parent="J2/CameraController/Vue6/ScoreUI/ScoresPanel" unique_id=1371671416]
+visible = false
+layout_mode = 0
+offset_top = 80.0
+offset_right = 87.0
+offset_bottom = 109.0
+theme_override_colors/font_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 28
+text = "+0"
+
+[node name="InkLayerJ2" type="CanvasLayer" parent="J2/CameraController/Vue6" unique_id=681911223]
+
+[node name="InkOverlayJ2" type="Node2D" parent="J2/CameraController/Vue6/InkLayerJ2" unique_id=1227110621]
+script = ExtResource("4_aonxi")
+
+[node name="ColorRect" type="ColorRect" parent="J2/CameraController/Vue6/InkLayerJ2/InkOverlayJ2" unique_id=1206959879]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5019608)
+
+[node name="TextureRect" type="TextureRect" parent="J2/CameraController/Vue6/InkLayerJ2/InkOverlayJ2" unique_id=2088456296]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HealthBar" type="Control" parent="J2/CameraController/Vue6" unique_id=951317512]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1500.0
+offset_top = 65.0
+offset_right = 1540.0
+offset_bottom = 105.0
+script = ExtResource("5_j2wie")
+
+[node name="Contour" type="ColorRect" parent="J2/CameraController/Vue6/HealthBar" unique_id=1244196776]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 644.0
+offset_right = 355.0
+offset_bottom = 714.0
+color = Color(0, 0, 0, 1)
+
+[node name="BG" type="ColorRect" parent="J2/CameraController/Vue6/HealthBar" unique_id=1482128559]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 650.0
+offset_right = 350.0
+offset_bottom = 670.0
+grow_vertical = 2
+color = Color(0.58383155, 0.58383155, 0.58383155, 1)
+
+[node name="BarFilled" type="ColorRect" parent="J2/CameraController/Vue6/HealthBar" unique_id=36616430]
+material = SubResource("ShaderMaterial_ql20w")
+layout_mode = 0
+offset_left = 150.0
+offset_top = 650.0
+offset_right = 350.0
+offset_bottom = 710.0
+
+[node name="HeartIcon" type="TextureRect" parent="J2/CameraController/Vue6/HealthBar" unique_id=637126610]
+layout_mode = 0
+offset_left = 305.0
+offset_top = 600.0
+offset_right = 769.0
+offset_bottom = 1034.0
+scale = Vector2(0.2, 0.2)
+texture = SubResource("CompressedTexture2D_saufc")
+
+[node name="HeartLabel" type="Label" parent="J2/CameraController/Vue6/HealthBar" unique_id=1970043695]
+custom_minimum_size = Vector2(72, 51)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 660.0
+offset_right = 122.0
+offset_bottom = 711.0
+theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 50
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShieldBar" type="Control" parent="J2/CameraController/Vue6" unique_id=1292425546]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1500.0
+offset_right = 1540.0
+offset_bottom = 40.0
+script = ExtResource("7_270lb")
+
+[node name="Contour" type="ColorRect" parent="J2/CameraController/Vue6/ShieldBar" unique_id=1071603146]
+layout_mode = 0
+offset_left = 145.0
+offset_top = 845.0
+offset_right = 355.0
+offset_bottom = 915.0
+color = Color(0, 0, 0, 1)
+
+[node name="BG" type="ColorRect" parent="J2/CameraController/Vue6/ShieldBar" unique_id=359668183]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 850.0
+offset_right = 350.0
+offset_bottom = 870.0
+grow_vertical = 2
+color = Color(0.58383155, 0.58383155, 0.58383155, 1)
+
+[node name="BarFilled" type="ColorRect" parent="J2/CameraController/Vue6/ShieldBar" unique_id=666810341]
+material = SubResource("ShaderMaterial_wcl46")
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = 150.0
+offset_top = 850.0
+offset_right = 350.0
+offset_bottom = 870.0
+grow_vertical = 2
+
+[node name="ShieldIcon" type="TextureRect" parent="J2/CameraController/Vue6/ShieldBar" unique_id=1793861679]
+layout_mode = 0
+offset_left = 315.0
+offset_top = 815.0
+offset_right = 465.0
+offset_bottom = 986.0
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("9_jqnbp")
+
+[node name="ShieldLabel" type="Label" parent="J2/CameraController/Vue6/ShieldBar" unique_id=1520725351]
+custom_minimum_size = Vector2(72, 51)
+layout_mode = 0
+offset_left = 50.0
+offset_top = 860.0
+offset_right = 122.0
+offset_bottom = 911.0
+theme_override_colors/font_color = Color(0, 0.9309246, 0.9063318, 1)
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 50
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ComboBar" type="Control" parent="J2/CameraController/Vue6" unique_id=1012842962]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1600.0
+offset_right = 1640.0
+offset_bottom = 40.0
+
+[node name="MarginContainer" type="MarginContainer" parent="J2/CameraController/Vue6/ComboBar" unique_id=210184955]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1.1, 1.1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="J2/CameraController/Vue6/ComboBar/MarginContainer" unique_id=1055621648]
+layout_mode = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="J2/CameraController/Vue6/ComboBar/MarginContainer/VBoxContainer" unique_id=945734427]
+layout_mode = 2
+step = 0.1
+fill_mode = 4
+radial_fill_degrees = 310.0
+texture_under = ExtResource("10_myxsx")
+texture_over = ExtResource("11_r1cjm")
+texture_progress = ExtResource("11_r1cjm")
+tint_over = Color(1, 1, 1, 0)
+
+[node name="ProgressBarLabel" type="Label" parent="J2/CameraController/Vue6/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar" unique_id=1447743019]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 45.0
+offset_right = 201.0
+offset_bottom = 246.0
+theme_override_constants/outline_size = 30
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 195
+text = "D"
+horizontal_alignment = 1
+
+[node name="Vue3" type="SubViewport" parent="." unique_id=847612608]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="Vue3" unique_id=1080132850]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10, 7)
+current = true
+
+[node name="Vue4" type="SubViewport" parent="." unique_id=911353287]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="Vue4" unique_id=174074939]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10, 7)
+current = true
+
+[node name="Vue7" type="SubViewport" parent="." unique_id=1943796633]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="Vue7" unique_id=1691671232]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10, 7)
+current = true
+
+[node name="Vue8" type="SubViewport" parent="." unique_id=478991490]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="Vue8" unique_id=821320837]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10, 7)
+current = true
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1319693531]
+self_modulate = Color(1, 0, 0, 1)
+texture_filter = 2
+material = SubResource("ShaderMaterial_tx1ok")
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = SubResource("GradientTexture2D_qp0uc")
+
+[node name="Game" parent="." unique_id=1026699542 instance=ExtResource("13_nru1m")]
+
+[node name="LevelMusic" type="AudioStreamPlayer" parent="." unique_id=1901964057]
+stream = ExtResource("14_l8vux")
+volume_db = -15.0
+bus = &"Musique"
+
+[editable path="J1"]
+[editable path="J2"]
+[editable path="Game"]

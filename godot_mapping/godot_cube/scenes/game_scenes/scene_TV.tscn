@@ -45,10 +45,10 @@ shader_parameter/pixelisation = false
 shader_parameter/pixelisationPower = 200.0
 shader_parameter/pixelisation_mask = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0)
 
-[sub_resource type="Gradient" id="Gradient_fqw2t"]
+[sub_resource type="Gradient" id="Gradient_sgwr3"]
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_6c3ax"]
-gradient = SubResource("Gradient_fqw2t")
+gradient = SubResource("Gradient_sgwr3")
 width = 1920
 height = 1080
 

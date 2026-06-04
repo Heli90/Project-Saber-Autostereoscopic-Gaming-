@@ -12,7 +12,6 @@ static var affichage: bool
 static var on_option_menu: bool
 var test_button_is_pressed : bool = false
 var latence_pause: float = 0.0
-var mode: bool = false
 
 func _ready() -> void:
 	# On s'assure que tous les boutons sont invisibles au début du jeu
@@ -30,7 +29,8 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	# On vérifie l'appui de Echap ainsi que le respect du temps de latence et d'animation
-	if event.is_action_pressed("Menu") and latence_pause > 0.75 and (not on_option_menu) and mode:
+	var appui_synchro: bool = event.is_action_pressed("Menu") and latence_pause > 0.75 and (not on_option_menu)
+	if appui_synchro and Global.launched_mode > 0:
 		latence_pause = 0.0
 		get_viewport().set_input_as_handled()
 		toggle_pause()

@@ -13,8 +13,6 @@ extends Node3D
 @onready var disappear_bloc_notif: Label = $"../DisappearBlocNotif"
 @onready var shields: Array[GPUParticles3D] = [$"../Map/Boucliers/ShieldJ1", $"../Map/Boucliers/ShieldJ2"]
 
-# Booléen de départ décidant du mode de jeu lancé : false pour le menu, true pour la TV
-var mode: bool = false
 # Booléen de départ pour lancer l'apparition des cubes après le message de départ
 var start_spawn: bool = false
 # Booléen permettant de pré-générer les cubes, une seule fois, dans toute la partie
@@ -81,14 +79,16 @@ func activation() -> void:
 	score_uis = []
 	shield_bars = []
 	ink_overlay = []
-	if not mode:
+	if Global.launched_mode == 0:
 		j1 = get_node("../../SplitScreens/Camera1/POV1/J1")
 		j2 = get_node("../../SplitScreens/Camera2/POV2/J2")
+
 		# Ajout des scores et des barres de boucliers aux tableaux
 		score_uis.append(get_node("../../SplitScreens/Camera1/POV1/ScoreUI"))
 		score_uis.append(get_node("../../SplitScreens/Camera2/POV2/ScoreUI"))
 		shield_bars.append(get_node("../../SplitScreens/Camera1/POV1/ShieldBar"))
 		shield_bars.append(get_node("../../SplitScreens/Camera2/POV2/ShieldBar"))
+
 		# Ajout des noeuds associés à l'encre
 		ink_overlay.append(get_node("../../SplitScreens/Camera1/POV1/InkLayerJ1/InkOverlayJ1"))
 		ink_overlay.append(get_node("../../SplitScreens/Camera2/POV2/InkLayerJ2/InkOverlayJ2"))
@@ -144,7 +144,7 @@ func activation() -> void:
 	start_game()
 
 func start_game() -> void:
-	if mode:
+	if Global.launched_mode == 2:
 		start_label.visible = true
 		await get_tree().create_timer(0.5).timeout
 		start_label.text = "GO !"
@@ -170,7 +170,7 @@ func _process(delta: float) -> void:
 				# Si le bouclier tombe à 0, on efface la barre associée
 				var t = create_tween().set_parallel(true)
 				t.tween_property(shield_bars[i], "modulate:a", 0.0, 0.01)
-				if mode: t.tween_property(shield_bars[i+2], "modulate:a", 0.0, 0.01)
+				if Global.launched_mode > 0: t.tween_property(shield_bars[i+2], "modulate:a", 0.0, 0.01)
 				await t.finished
 
 			elif shields[i].emitting:
@@ -185,7 +185,7 @@ func _process(delta: float) -> void:
 				# On efface les barres des boucliers sur l'écran
 				var t = create_tween().set_parallel(true)
 				t.tween_property(shield_bars[i], "modulate:a", 0.0, 0.01)
-				if mode: t.tween_property(shield_bars[i+2], "modulate:a", 0.0, 0.01)
+				if Global.launched_mode > 0: t.tween_property(shield_bars[i+2], "modulate:a", 0.0, 0.01)
 				await t.finished
 
 			# On calcule le temps de bonus pour chacun des 2 joueurs et on arrête le bonus une fois que ce temps est dépassé
@@ -198,11 +198,13 @@ func _process(delta: float) -> void:
 		if best_combo < stocked_combo.max():
 			best_combo = stocked_combo.max()
 		
-		match mode:
+		match Global.launched_mode:
 			# Boucle de jeu du jeu dans le menu
-			false: menu_loop()
+			0: menu_loop()
+			# Boucle de jeu dans le tutoriel
+			1: tutoriel_loop()
 			# Boucle de jeu dans la partie
-			true: game_loop()
+			2: game_loop()
 
 func menu_loop() -> void:
 	if blocs == []:
@@ -212,6 +214,9 @@ func menu_loop() -> void:
 		else:
 			n = rng.randi_range(0, 5)
 		spawn_cube(cube_list[n])
+
+func tutoriel_loop() -> void:
+	pass
 
 func game_loop() -> void:
 	# On lance la musique avec un retard de 3 secondes pour permettre aux premiers cubes d'arriver
@@ -400,7 +405,7 @@ func StrikedClassicCube(i: int) -> void:
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 1000
 	score_uis[i].ajouter_score(gain)
-	if mode: score_uis[i+2].ajouter_score(gain)
+	if Global.launched_mode > 0: score_uis[i+2].ajouter_score(gain)
 
 func MissedClassicCube(i: int) -> void:
 	if shield_actif[i] > 0:
@@ -408,11 +413,11 @@ func MissedClassicCube(i: int) -> void:
 		var current = shields[i].material_override.get_shader_parameter("MaskPower")
 		shields[i].material_override.set_shader_parameter("MaskPower", current + 2.0)
 		shield_bars[i].update_shield(shield_actif[i])
-		if mode : shield_bars[i+2].update_shield(shield_actif[i])
+		if Global.launched_mode > 0: shield_bars[i+2].update_shield(shield_actif[i])
 	else:
 		multiplicateur[i] = 1
 		stocked_combo[i] = 0
-		if mode:
+		if Global.launched_mode > 0:
 			texture_progress_bars[i].value = 0
 			texture_progress_bars[i+2].value = 0
 			progress_bar_labels[i].text = letters[0]
@@ -428,21 +433,21 @@ func StrikedBonusCube(i: int) -> void:
 	multiplicateur[i] *= 2
 	count_bonus_time[i] = true
 	score_uis[i].ajouter_score(gain)
-	if mode: score_uis[i+2].ajouter_score(gain)
+	if Global.launched_mode > 0: score_uis[i+2].ajouter_score(gain)
 
 func StrikedBombCube(i: int) -> void:
 	stocked_combo[i] = 0
 	var gain = -500
 	multiplicateur[i] = 1
 	score_uis[i].ajouter_score(gain)
-	if mode: score_uis[i+2].ajouter_score(gain)
+	if Global.launched_mode > 0: score_uis[i+2].ajouter_score(gain)
 
 func StrikedDisappearCube(i: int) -> void:
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 15000
 	multiplicateur[i] *= 2
 	score_uis[i].ajouter_score(gain)
-	if mode: score_uis[i+2].ajouter_score(gain)
+	if Global.launched_mode > 0: score_uis[i+2].ajouter_score(gain)
 	# On montre une notification au joueur pour lui dire qu'il a frappé le cube
 	disappear_bloc_notif.visible = true
 	await get_tree().create_timer(1.0).timeout
@@ -452,7 +457,7 @@ func StrikedSplashCube(i: int) -> void:
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 1000
 	score_uis[i].ajouter_score(gain)
-	if mode: score_uis[i+2].ajouter_score(gain)
+	if Global.launched_mode: score_uis[i+2].ajouter_score(gain)
 	# On déclenche le visuel d'encre
 	ink_overlay[i].trigger_ink()
 
@@ -465,17 +470,17 @@ func StrikedShieldCube(i: int) -> void:
 	time_shield_actif[i] = 10.0
 
 	shield_bars[i].visible = true
-	if mode: shield_bars[i+2].visible = true
+	if Global.launched_mode: shield_bars[i+2].visible = true
 
 	var t = create_tween().set_parallel(true)
 	t.tween_property(shield_bars[i], "modulate:a", 1.0, 0.1)
-	if mode: t.tween_property(shield_bars[i+2], "modulate:a", 1.0, 0.1)
+	if Global.launched_mode: t.tween_property(shield_bars[i+2], "modulate:a", 1.0, 0.1)
 	await t.finished
 
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 1000
 	score_uis[i].ajouter_score(gain)
-	if mode: score_uis[i+2].ajouter_score(gain)
+	if Global.launched_mode: score_uis[i+2].ajouter_score(gain)
 
 func StrikedHealCube(i: int) -> void:
 	health[i] += 1

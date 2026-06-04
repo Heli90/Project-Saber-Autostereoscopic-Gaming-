@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://ch0ut7tu3syf4" path="res://addons/assets/video_frame.png" id="6_h0cxi"]
 [ext_resource type="Texture2D" uid="uid://8osrrw63mu7p" path="res://addons/assets/heart.png" id="7_b7lfr"]
 [ext_resource type="Script" uid="uid://drtrabk7fho4t" path="res://scripts/menus/heal_mode_button.gd" id="8_fwhch"]
+[ext_resource type="Shader" uid="uid://crf7jc6x8vo3h" path="res://shaders/button.gdshader" id="9_1mkbs"]
 [ext_resource type="Texture2D" uid="uid://c700kg3wk8oe2" path="res://addons/assets/empty_heart.png" id="9_phf8o"]
 [ext_resource type="PackedScene" uid="uid://jtm1okvkvobu" path="res://scenes/menus/select_level.tscn" id="10_gjwrx"]
 
@@ -32,6 +33,13 @@ texture = ExtResource("2_phf8o")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gs0rj"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cshns"]
+shader = ExtResource("9_1mkbs")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3y8p5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h0cxi"]
@@ -45,6 +53,13 @@ texture = ExtResource("2_phf8o")
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vfcph"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q35cj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8jpt8"]
+shader = ExtResource("9_1mkbs")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3o3ya"]
 
@@ -194,6 +209,7 @@ scale = Vector2(2.608974, 1.1043956)
 texture = ExtResource("6_gjwrx")
 
 [node name="StartButton" type="Button" parent="Start" unique_id=1486002421]
+material = SubResource("ShaderMaterial_cshns")
 layout_mode = 0
 offset_left = 1493.0
 offset_top = 892.0
@@ -222,9 +238,10 @@ scale = Vector2(3, 1.5)
 texture = ExtResource("6_gjwrx")
 
 [node name="MenuButton" type="Button" parent="Menu" unique_id=139261608]
+material = SubResource("ShaderMaterial_8jpt8")
 layout_mode = 0
 offset_left = 760.0
-offset_top = 878.0
+offset_top = 874.0
 offset_right = 1202.0
 offset_bottom = 1000.0
 pivot_offset = Vector2(221, 61)

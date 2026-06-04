@@ -14,6 +14,7 @@ var idle_timer: float = 0.0
 var is_hidden: bool = false
 
 func _ready() -> void:
+	Global.launched_mode = 0
 	main_menu_music.play()
 
 func _process(delta: float) -> void:
@@ -22,6 +23,7 @@ func _process(delta: float) -> void:
 		is_hidden = true
 		var t = create_tween()
 		t.tween_property(menu, "modulate:a", 0.0, 0.5)
+		await t.finished
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion or event is InputEventKey or event is InputEventMouseButton:
@@ -30,3 +32,4 @@ func _input(event: InputEvent) -> void:
 			is_hidden = false
 			var t = create_tween()
 			t.tween_property(menu, "modulate:a", 1.0, 0.5)
+			await t.finished

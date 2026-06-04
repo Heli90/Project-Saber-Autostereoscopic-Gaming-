@@ -8,8 +8,6 @@ extends Node3D
 
 var level_music: AudioStreamPlayer
 var pause_blocs : bool = false
-# Booléen de départ décidant du mode de jeu lancé : false pour le menu, true pour la TV
-var mode: bool = false
 const LEADERBOARD_PATH = "user://leaderboard.cfg"
 
 func _ready() -> void:
@@ -25,13 +23,13 @@ func _ready() -> void:
 	fondu_noir.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	cube_spawner.activation()
-	if mode : partie_timer.start()
+	if Global.launched_mode == 2: partie_timer.start()
 
 func set_blur_intensity(value: float):
 	game_ending.material.set_shader_parameter("lod", value)
 
 func _process(_delta: float) -> void:
-	if mode:
+	if Global.launched_mode == 2:
 		# On vérifie si un des joueurs a perdu tous ses points de vie
 		if cube_spawner.health[0] == 0:
 			if cube_spawner.health[1] == 0:
@@ -121,7 +119,7 @@ func afficher_leaderboard(entrees: Array) -> void:
 		game_ending.leaderboard_label.text += "%d. %s — %d pts\n"%[i+1, e["nom"], e["score"]]
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("StopTime") and mode:
+	if event.is_action_pressed("StopTime") and (Global.launched_mode > 0):
 		pause_blocs = not pause_blocs
 		cube_spawner.start_spawn = not pause_blocs
 		for bloc in cube_spawner.blocs:
