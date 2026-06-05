@@ -60,12 +60,12 @@ var j1: Node3D
 var j2: Node3D
 
 # Tableau associé à l'encre
-var ink_overlay: Array[Node2D]
+var ink_overlay: Array[Node2D] = []
 
 # Tableaux associés aux boucliers
 var shield_actif: Array[int] = [0, 0]
 var time_shield_actif: Array[float] = [0.0, 0.0]
-var shield_bars: Array[Control]
+var shield_bars: Array[Control] = []
 
 # Variables associées à la vie limitée
 var healing: bool = false
@@ -76,9 +76,6 @@ var health: Array[int] = [10, 10]
 func activation() -> void:
 	cube_list = [classic_bloc, bonus_bloc, bomb_bloc, disappear_bloc, splash_bloc, shield_bloc]
 	if Global.healing: cube_list.append(heal_bloc)
-	score_uis = []
-	shield_bars = []
-	ink_overlay = []
 	if Global.launched_mode == 0:
 		j1 = get_node("../../SplitScreens/Camera1/POV1/J1")
 		j2 = get_node("../../SplitScreens/Camera2/POV2/J2")
@@ -98,11 +95,13 @@ func activation() -> void:
 		level_music = get_node("../../LevelMusic")
 		healing = Global.healing
 		texture = get_node("../../TextureRect")
-
-		score_uis.append(get_node("../../J1/CameraController/Vue1/ScoreUI"))
-		score_uis.append(get_node("../../J2/CameraController/Vue5/ScoreUI"))
-		score_uis.append(get_node("../../J1/CameraController/Vue2/ScoreUI"))
-		score_uis.append(get_node("../../J2/CameraController/Vue6/ScoreUI"))
+		
+		if Global.launched_mode == 2:
+			score_uis.append(get_node("../../J1/CameraController/Vue1/ScoreUI"))
+			score_uis.append(get_node("../../J2/CameraController/Vue5/ScoreUI"))
+			score_uis.append(get_node("../../J1/CameraController/Vue2/ScoreUI"))
+			score_uis.append(get_node("../../J2/CameraController/Vue6/ScoreUI"))
+			start_label.text = "Ready ?"
 
 		shield_bars.append(get_node("../../J1/CameraController/Vue1/ShieldBar"))
 		shield_bars.append(get_node("../../J2/CameraController/Vue5/ShieldBar"))
@@ -209,14 +208,38 @@ func _process(delta: float) -> void:
 func menu_loop() -> void:
 	if blocs == []:
 		var n: int
-		if healing:
-			n = rng.randi_range(0, 6)
-		else:
-			n = rng.randi_range(0, 5)
+		if healing: n = rng.randi_range(0, 6)
+		else: n = rng.randi_range(0, 5)
+		if not Global.setup_tutoriel:
+			match Global.tutoriel_played_mode:
+				0: n = 0
+				1: n = 0
+				2: n = rng.randi_range(0, 1)
+				3: pass
 		spawn_cube(cube_list[n])
 
 func tutoriel_loop() -> void:
-	pass
+	match Global.tutoriel_played_mode:
+		0:
+			if Global.setup_tutoriel:
+				Global.setup_tutoriel = false
+				cube_list = [classic_bloc]
+			menu_loop()
+		1:
+			if Global.setup_tutoriel:
+				Global.setup_tutoriel = false
+				cube_list = [bonus_bloc]
+			menu_loop()
+		2:
+			if Global.setup_tutoriel:
+				Global.setup_tutoriel = false
+				cube_list = [classic_bloc, bonus_bloc]
+			menu_loop()
+		3:
+			if Global.setup_tutoriel:
+				Global.setup_tutoriel = false
+				cube_list = [classic_bloc, bonus_bloc, bomb_bloc, disappear_bloc, splash_bloc, shield_bloc]
+			menu_loop()
 
 func game_loop() -> void:
 	# On lance la musique avec un retard de 3 secondes pour permettre aux premiers cubes d'arriver
@@ -404,8 +427,9 @@ func setup_heal_bloc(bloc: Node3D, absolute_speed: float, direction: int, spawn:
 func StrikedClassicCube(i: int) -> void:
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 1000
-	score_uis[i].ajouter_score(gain)
-	if Global.launched_mode > 0: score_uis[i+2].ajouter_score(gain)
+	if Global.launched_mode == 2:
+		score_uis[i].ajouter_score(gain)
+		score_uis[i+2].ajouter_score(gain)
 
 func MissedClassicCube(i: int) -> void:
 	if shield_actif[i] > 0:
@@ -432,22 +456,25 @@ func StrikedBonusCube(i: int) -> void:
 	var gain = multiplicateur[i] * 5000
 	multiplicateur[i] *= 2
 	count_bonus_time[i] = true
-	score_uis[i].ajouter_score(gain)
-	if Global.launched_mode > 0: score_uis[i+2].ajouter_score(gain)
+	if Global.launched_mode == 2:
+		score_uis[i].ajouter_score(gain)
+		score_uis[i+2].ajouter_score(gain)
 
 func StrikedBombCube(i: int) -> void:
 	stocked_combo[i] = 0
 	var gain = -500
 	multiplicateur[i] = 1
-	score_uis[i].ajouter_score(gain)
-	if Global.launched_mode > 0: score_uis[i+2].ajouter_score(gain)
+	if Global.launched_mode == 2:
+		score_uis[i].ajouter_score(gain)
+		score_uis[i+2].ajouter_score(gain)
 
 func StrikedDisappearCube(i: int) -> void:
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 15000
 	multiplicateur[i] *= 2
-	score_uis[i].ajouter_score(gain)
-	if Global.launched_mode > 0: score_uis[i+2].ajouter_score(gain)
+	if Global.launched_mode == 2:
+		score_uis[i].ajouter_score(gain)
+		score_uis[i+2].ajouter_score(gain)
 	# On montre une notification au joueur pour lui dire qu'il a frappé le cube
 	disappear_bloc_notif.visible = true
 	await get_tree().create_timer(1.0).timeout
@@ -456,8 +483,9 @@ func StrikedDisappearCube(i: int) -> void:
 func StrikedSplashCube(i: int) -> void:
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 1000
-	score_uis[i].ajouter_score(gain)
-	if Global.launched_mode: score_uis[i+2].ajouter_score(gain)
+	if Global.launched_mode == 2:
+		score_uis[i].ajouter_score(gain)
+		score_uis[i+2].ajouter_score(gain)
 	# On déclenche le visuel d'encre
 	ink_overlay[i].trigger_ink()
 
@@ -479,8 +507,9 @@ func StrikedShieldCube(i: int) -> void:
 
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 1000
-	score_uis[i].ajouter_score(gain)
-	if Global.launched_mode: score_uis[i+2].ajouter_score(gain)
+	if Global.launched_mode == 2:
+		score_uis[i].ajouter_score(gain)
+		score_uis[i+2].ajouter_score(gain)
 
 func StrikedHealCube(i: int) -> void:
 	health[i] += 1

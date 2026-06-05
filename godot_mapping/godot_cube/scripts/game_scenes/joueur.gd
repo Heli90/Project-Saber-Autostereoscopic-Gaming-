@@ -31,12 +31,11 @@ func _ready() -> void:
 	# On initialise un signal à chaque fois que le sabre traverse un cube
 	left_saber.body_entered.connect(collision)
 	right_saber.body_entered.connect(collision)
-	if player_id == 2:
-		_apply_blue_shader()
+	if player_id == 2: apply_blue_shader()
 		
-func _apply_blue_shader():
+func apply_blue_shader():
 	if blue_shader_material:
-		# On applique l'override sur la surface 0 (l'index par défaut de tes meshs)
+		# On applique l'override sur la surface 0 (l'index par défaut des formes)
 		left_saber_mesh.set_surface_override_material(0, blue_shader_material)
 		right_saber_mesh.set_surface_override_material(0, blue_shader_material)
 

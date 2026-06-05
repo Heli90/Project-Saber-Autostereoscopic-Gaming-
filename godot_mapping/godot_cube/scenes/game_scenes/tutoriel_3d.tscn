@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://br2jmvjla4guc" path="res://scenes/game_scenes/joueur.tscn" id="1_s6t0h"]
 [ext_resource type="Script" uid="uid://gbqve6l7n8xu" path="res://scripts/game_scenes/tutoriel_3d.gd" id="1_yd0b7"]
-[ext_resource type="Script" uid="uid://c4nxreh0k2je7" path="res://scripts/game_scenes/visuals/score_ui.gd" id="2_yd0b7"]
 [ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/pixel_art_typeface.ttf" id="3_24kdc"]
 [ext_resource type="Script" uid="uid://cx3d6alfd6nrm" path="res://scripts/game_scenes/visuals/ink_overlay.gd" id="4_aonxi"]
 [ext_resource type="Script" uid="uid://b488bjxdcwo2m" path="res://scripts/game_scenes/visuals/health_bar.gd" id="5_j2wie"]
@@ -15,6 +14,11 @@
 [ext_resource type="Shader" uid="uid://vno46ensk36y" path="res://shaders/generation_image.gdshader" id="12_vtjlb"]
 [ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="13_nru1m"]
 [ext_resource type="AudioStream" uid="uid://dk8rg1cdygmea" path="res://addons/sfx/level_music.mp3" id="14_l8vux"]
+[ext_resource type="Texture2D" uid="uid://c0mapru3i8pig" path="res://addons/assets/chain.png" id="16_aonxi"]
+[ext_resource type="Texture2D" uid="uid://ddg7sw25opsrs" path="res://addons/assets/classic_cube_icon.png" id="17_2peqq"]
+[ext_resource type="Texture2D" uid="uid://gch2s1q47g2m" path="res://addons/assets/bonus_cube_icon.jpg" id="17_aonxi"]
+[ext_resource type="Texture2D" uid="uid://vtvfwglow2to" path="res://addons/assets/tuto_game_panel.png" id="17_j2wie"]
+[ext_resource type="Texture2D" uid="uid://e6nor5h5kfpp" path="res://addons/assets/all_cube_icon.png" id="19_270lb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2lerv"]
 shader = ExtResource("6_2peqq")
@@ -58,6 +62,28 @@ gradient = SubResource("Gradient_fqw2t")
 width = 1920
 height = 1080
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2peqq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_270lb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hp6y6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jqnbp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1hxlk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_myxsx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r1cjm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vtjlb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nru1m"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l8vux"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2lerv"]
+
 [node name="Tutoriel" type="Node3D" unique_id=1499953583]
 script = ExtResource("1_yd0b7")
 
@@ -84,52 +110,6 @@ size = Vector2i(1920, 1080)
 transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, -0.03, 2.25, 20.3)
 current = true
 fov = 90.0
-
-[node name="ScoreUI" type="CanvasLayer" parent="J1/CameraController/Vue1" unique_id=1759934461]
-script = ExtResource("2_yd0b7")
-
-[node name="ScoresPanel" type="Control" parent="J1/CameraController/Vue1/ScoreUI" unique_id=418957984]
-layout_mode = 3
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -1870.0
-offset_top = -130.0
-offset_right = -1783.0
-offset_bottom = -53.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="J1/CameraController/Vue1/ScoreUI/ScoresPanel" unique_id=203927449]
-layout_mode = 0
-offset_right = 87.0
-offset_bottom = 77.0
-
-[node name="Titre" type="Label" parent="J1/CameraController/Vue1/ScoreUI/ScoresPanel/VBoxContainer" unique_id=812730287]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_24kdc")
-theme_override_font_sizes/font_size = 18
-text = "♢ Score total ♢"
-
-[node name="Score" type="Label" parent="J1/CameraController/Vue1/ScoreUI/ScoresPanel/VBoxContainer" unique_id=723807008]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_24kdc")
-theme_override_font_sizes/font_size = 52
-text = "0"
-
-[node name="GainScore" type="Label" parent="J1/CameraController/Vue1/ScoreUI/ScoresPanel" unique_id=2070020486]
-visible = false
-layout_mode = 0
-offset_top = 80.0
-offset_right = 87.0
-offset_bottom = 109.0
-theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_24kdc")
-theme_override_font_sizes/font_size = 28
-text = "+0"
 
 [node name="InkLayerJ1" type="CanvasLayer" parent="J1/CameraController/Vue1" unique_id=314575274]
 
@@ -317,52 +297,6 @@ size = Vector2i(1920, 1080)
 transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0.03, 2.25, 20.3)
 current = true
 fov = 90.0
-
-[node name="ScoreUI" type="CanvasLayer" parent="J1/CameraController/Vue2" unique_id=1547045947]
-script = ExtResource("2_yd0b7")
-
-[node name="ScoresPanel" type="Control" parent="J1/CameraController/Vue2/ScoreUI" unique_id=195439744]
-layout_mode = 3
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -1870.0
-offset_top = -130.0
-offset_right = -1783.0
-offset_bottom = -53.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="J1/CameraController/Vue2/ScoreUI/ScoresPanel" unique_id=940548247]
-layout_mode = 0
-offset_right = 87.0
-offset_bottom = 77.0
-
-[node name="Titre" type="Label" parent="J1/CameraController/Vue2/ScoreUI/ScoresPanel/VBoxContainer" unique_id=2014558932]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_24kdc")
-theme_override_font_sizes/font_size = 18
-text = "♢ Score total ♢"
-
-[node name="Score" type="Label" parent="J1/CameraController/Vue2/ScoreUI/ScoresPanel/VBoxContainer" unique_id=1459796177]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_24kdc")
-theme_override_font_sizes/font_size = 52
-text = "0"
-
-[node name="GainScore" type="Label" parent="J1/CameraController/Vue2/ScoreUI/ScoresPanel" unique_id=1359079793]
-visible = false
-layout_mode = 0
-offset_top = 80.0
-offset_right = 87.0
-offset_bottom = 109.0
-theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_24kdc")
-theme_override_font_sizes/font_size = 28
-text = "+0"
 
 [node name="InkLayerJ1" type="CanvasLayer" parent="J1/CameraController/Vue2" unique_id=1342648812]
 
@@ -567,52 +501,6 @@ transform = Transform3D(-1, 2.990035e-08, -8.2150535e-08, 0, 0.9396926, 0.342020
 current = true
 fov = 90.0
 
-[node name="ScoreUI" type="CanvasLayer" parent="J2/CameraController/Vue5" unique_id=437167711]
-script = ExtResource("2_yd0b7")
-
-[node name="ScoresPanel" type="Control" parent="J2/CameraController/Vue5/ScoreUI" unique_id=626875075]
-layout_mode = 3
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -195.0
-offset_top = -130.0
-offset_right = -108.0
-offset_bottom = -53.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="J2/CameraController/Vue5/ScoreUI/ScoresPanel" unique_id=1352949936]
-layout_mode = 0
-offset_right = 87.0
-offset_bottom = 77.0
-
-[node name="Titre" type="Label" parent="J2/CameraController/Vue5/ScoreUI/ScoresPanel/VBoxContainer" unique_id=121709134]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_24kdc")
-theme_override_font_sizes/font_size = 18
-text = "♢ Score total ♢"
-
-[node name="Score" type="Label" parent="J2/CameraController/Vue5/ScoreUI/ScoresPanel/VBoxContainer" unique_id=1764799273]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_24kdc")
-theme_override_font_sizes/font_size = 52
-text = "0"
-
-[node name="GainScore" type="Label" parent="J2/CameraController/Vue5/ScoreUI/ScoresPanel" unique_id=1482525002]
-visible = false
-layout_mode = 0
-offset_top = 80.0
-offset_right = 87.0
-offset_bottom = 109.0
-theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_24kdc")
-theme_override_font_sizes/font_size = 28
-text = "+0"
-
 [node name="InkLayerJ2" type="CanvasLayer" parent="J2/CameraController/Vue5" unique_id=1598338628]
 
 [node name="InkOverlayJ2" type="Node2D" parent="J2/CameraController/Vue5/InkLayerJ2" unique_id=1095103892]
@@ -802,52 +690,6 @@ size = Vector2i(1920, 1080)
 transform = Transform3D(-1, 2.990035e-08, -8.2150535e-08, 0, 0.9396926, 0.34202012, 8.742278e-08, 0.34202012, -0.9396926, 0.029999973, 2.25, -20.3)
 current = true
 fov = 90.0
-
-[node name="ScoreUI" type="CanvasLayer" parent="J2/CameraController/Vue6" unique_id=108111696]
-script = ExtResource("2_yd0b7")
-
-[node name="ScoresPanel" type="Control" parent="J2/CameraController/Vue6/ScoreUI" unique_id=1998553050]
-layout_mode = 3
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -195.0
-offset_top = -130.0
-offset_right = -108.0
-offset_bottom = -53.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="VBoxContainer" type="VBoxContainer" parent="J2/CameraController/Vue6/ScoreUI/ScoresPanel" unique_id=1263009613]
-layout_mode = 0
-offset_right = 87.0
-offset_bottom = 77.0
-
-[node name="Titre" type="Label" parent="J2/CameraController/Vue6/ScoreUI/ScoresPanel/VBoxContainer" unique_id=1122122779]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_24kdc")
-theme_override_font_sizes/font_size = 18
-text = "♢ Score total ♢"
-
-[node name="Score" type="Label" parent="J2/CameraController/Vue6/ScoreUI/ScoresPanel/VBoxContainer" unique_id=1231789521]
-layout_mode = 2
-theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_24kdc")
-theme_override_font_sizes/font_size = 52
-text = "0"
-
-[node name="GainScore" type="Label" parent="J2/CameraController/Vue6/ScoreUI/ScoresPanel" unique_id=1371671416]
-visible = false
-layout_mode = 0
-offset_top = 80.0
-offset_right = 87.0
-offset_bottom = 109.0
-theme_override_colors/font_color = Color(0, 1, 1, 1)
-theme_override_fonts/font = ExtResource("3_24kdc")
-theme_override_font_sizes/font_size = 28
-text = "+0"
 
 [node name="InkLayerJ2" type="CanvasLayer" parent="J2/CameraController/Vue6" unique_id=681911223]
 
@@ -1063,7 +905,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10, 7)
 current = true
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1319693531]
-self_modulate = Color(1, 0, 0, 1)
 texture_filter = 2
 material = SubResource("ShaderMaterial_tx1ok")
 offset_right = 1920.0
@@ -1072,11 +913,217 @@ texture = SubResource("GradientTexture2D_qp0uc")
 
 [node name="Game" parent="." unique_id=1026699542 instance=ExtResource("13_nru1m")]
 
+[node name="FonduNoir" parent="Game/HUD/FonduLayer" parent_id_path=PackedInt32Array(1026699542, 478103391) index="0" unique_id=1283066675]
+visible = false
+
+[node name="StartLabel" parent="Game" index="11" unique_id=40376002]
+visible = false
+text = ""
+
+[node name="DisappearBlocNotif" parent="Game" index="12" unique_id=626708433]
+visible = false
+
+[node name="Cadres" type="Panel" parent="." unique_id=932704625]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2peqq")
+
+[node name="Chains" type="Panel" parent="Cadres" unique_id=1138474746]
+layout_mode = 0
+offset_left = 30.0
+offset_right = 70.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_270lb")
+
+[node name="Chain1" type="Sprite2D" parent="Cadres/Chains" unique_id=457031889]
+position = Vector2(120, -680)
+scale = Vector2(1.4, 2)
+texture = ExtResource("16_aonxi")
+
+[node name="Chain2" type="Sprite2D" parent="Cadres/Chains" unique_id=432997139]
+position = Vector2(330, -680)
+scale = Vector2(1.4, 2)
+texture = ExtResource("16_aonxi")
+
+[node name="Chain3" type="Sprite2D" parent="Cadres/Chains" unique_id=886431175]
+position = Vector2(570, -680)
+scale = Vector2(1.4, 2)
+texture = ExtResource("16_aonxi")
+
+[node name="Chain4" type="Sprite2D" parent="Cadres/Chains" unique_id=344842472]
+position = Vector2(780, -680)
+scale = Vector2(1.4, 2)
+texture = ExtResource("16_aonxi")
+
+[node name="Chain5" type="Sprite2D" parent="Cadres/Chains" unique_id=1946925136]
+position = Vector2(1090, -680)
+scale = Vector2(1.4, 2)
+texture = ExtResource("16_aonxi")
+
+[node name="Chain6" type="Sprite2D" parent="Cadres/Chains" unique_id=1497006251]
+position = Vector2(1300, -680)
+scale = Vector2(1.4, 2)
+texture = ExtResource("16_aonxi")
+
+[node name="Chain7" type="Sprite2D" parent="Cadres/Chains" unique_id=892227546]
+position = Vector2(1540, -680)
+scale = Vector2(1.4, 2)
+texture = ExtResource("16_aonxi")
+
+[node name="Chain8" type="Sprite2D" parent="Cadres/Chains" unique_id=1941643963]
+position = Vector2(1750, -680)
+scale = Vector2(1.4, 2)
+texture = ExtResource("16_aonxi")
+
+[node name="Frames" type="Panel" parent="Cadres" unique_id=1552512880]
+layout_mode = 0
+offset_left = 30.0
+offset_right = 70.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_hp6y6")
+
+[node name="Frame1" type="Sprite2D" parent="Cadres/Frames" unique_id=2090551779]
+position = Vector2(225, -198)
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("17_j2wie")
+
+[node name="Frame2" type="Sprite2D" parent="Cadres/Frames" unique_id=2103366291]
+position = Vector2(675, -200)
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("17_j2wie")
+
+[node name="Frame3" type="Sprite2D" parent="Cadres/Frames" unique_id=496228593]
+position = Vector2(1195, -200)
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("17_j2wie")
+
+[node name="Frame4" type="Sprite2D" parent="Cadres/Frames" unique_id=1788869533]
+position = Vector2(1645, -200)
+scale = Vector2(1.4, 1.4)
+texture = ExtResource("17_j2wie")
+
+[node name="Icons" type="Panel" parent="Cadres" unique_id=655413631]
+layout_mode = 0
+offset_left = 30.0
+offset_right = 70.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_jqnbp")
+
+[node name="ClassicOnly" type="Sprite2D" parent="Cadres/Icons" unique_id=2082622885]
+position = Vector2(225, -185)
+scale = Vector2(1.01, 1.1)
+texture = ExtResource("17_2peqq")
+
+[node name="BonusOnly" type="Sprite2D" parent="Cadres/Icons" unique_id=850201537]
+position = Vector2(675, -185)
+scale = Vector2(1.01, 1.1)
+texture = ExtResource("17_aonxi")
+
+[node name="C&B1" type="Sprite2D" parent="Cadres/Icons" unique_id=335411196]
+position = Vector2(1260, -112)
+scale = Vector2(0.505, 0.55)
+texture = ExtResource("17_aonxi")
+
+[node name="C&B2" type="Sprite2D" parent="Cadres/Icons" unique_id=1433675379]
+position = Vector2(1130, -111)
+scale = Vector2(0.505, 0.55)
+texture = ExtResource("17_2peqq")
+
+[node name="C&B3" type="Sprite2D" parent="Cadres/Icons" unique_id=340423578]
+position = Vector2(1260, -290)
+rotation = 3.1415927
+scale = Vector2(0.505, 0.55)
+texture = ExtResource("17_2peqq")
+
+[node name="C&B4" type="Sprite2D" parent="Cadres/Icons" unique_id=1951629580]
+position = Vector2(1130, -290)
+rotation = -3.1415925
+scale = Vector2(0.505, 0.55)
+texture = ExtResource("17_aonxi")
+
+[node name="All" type="Sprite2D" parent="Cadres/Icons" unique_id=1962677295]
+position = Vector2(1645, -177.5)
+scale = Vector2(1.01, 1.05)
+texture = ExtResource("19_270lb")
+
+[node name="Buttons" type="Panel" parent="Cadres" unique_id=1282302100]
+layout_mode = 0
+offset_left = 30.0
+offset_right = 70.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_1hxlk")
+
+[node name="ClassicButton" type="Button" parent="Cadres/Buttons" unique_id=1224599341]
+process_mode = 3
+layout_mode = 0
+offset_left = 45.0
+offset_top = -378.0
+offset_right = 403.0
+offset_bottom = -20.0
+pivot_offset = Vector2(179, 179)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_myxsx")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_r1cjm")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_vtjlb")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_nru1m")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_l8vux")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2lerv")
+
+[node name="BonusButton" type="Button" parent="Cadres/Buttons" unique_id=512315282]
+process_mode = 3
+layout_mode = 0
+offset_left = 495.0
+offset_top = -378.0
+offset_right = 853.0
+offset_bottom = -20.0
+pivot_offset = Vector2(179, 179)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_myxsx")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_r1cjm")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_vtjlb")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_nru1m")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_l8vux")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2lerv")
+
+[node name="C&BButton" type="Button" parent="Cadres/Buttons" unique_id=514731884]
+process_mode = 3
+layout_mode = 0
+offset_left = 1015.0
+offset_top = -378.0
+offset_right = 1373.0
+offset_bottom = -20.0
+pivot_offset = Vector2(179, 179)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_myxsx")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_r1cjm")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_vtjlb")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_nru1m")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_l8vux")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2lerv")
+
+[node name="AllButton" type="Button" parent="Cadres/Buttons" unique_id=378900264]
+process_mode = 3
+layout_mode = 0
+offset_left = 1465.0
+offset_top = -378.0
+offset_right = 1823.0
+offset_bottom = -20.0
+pivot_offset = Vector2(179, 179)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_myxsx")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_r1cjm")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_vtjlb")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_nru1m")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_l8vux")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2lerv")
+
 [node name="LevelMusic" type="AudioStreamPlayer" parent="." unique_id=1901964057]
 stream = ExtResource("14_l8vux")
 volume_db = -15.0
 bus = &"Musique"
 
+[connection signal="pressed" from="Cadres/Buttons/ClassicButton" to="." method="_onClassicButton_pressed"]
+[connection signal="pressed" from="Cadres/Buttons/BonusButton" to="." method="_onBonusButton_pressed"]
+[connection signal="pressed" from="Cadres/Buttons/C&BButton" to="." method="_onCBButton_pressed"]
+[connection signal="pressed" from="Cadres/Buttons/AllButton" to="." method="_onAllButton_pressed"]
+
 [editable path="J1"]
 [editable path="J2"]
 [editable path="Game"]
+[editable path="Game/HUD/PauseMenu"]

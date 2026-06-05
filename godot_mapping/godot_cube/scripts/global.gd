@@ -4,6 +4,10 @@ extends Node
 var healing: bool = false
 # Menu : 0 / Tutoriel : 1 / Partie : 2
 var launched_mode: int = 0
+# Cubes classiques : 0 / Cubes bonus : 1 / Cubes classiques et bonus : 2 / Tous les cubes : 3
+var tutoriel_played_mode: int = -1
+# Booléen décidant s'il faut préparer des cubes bien précis pour le tutoriel
+var setup_tutoriel: bool = true
 
 # Transitions associées au hover des boutons du menu
 const BUTTON_SCALE_FACTOR: float = 1.01
@@ -17,9 +21,10 @@ func ButtonEnter(button, button_scale: Vector2, life = false, sign_sprite: Sprit
 	if first_scale_transition: first_scale_transition.kill()
 	if loop_scale_transition_button: loop_scale_transition_button.kill()
 	if loop_scale_transition_sign: loop_scale_transition_sign.kill()
-	
 	if not life: button.material.set_shader_parameter("is_hovered", true)
+	
 	first_scale_transition = create_tween().set_parallel(true)
+	first_scale_transition.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	first_scale_transition.set_ease(Tween.EASE_OUT)
 	first_scale_transition.set_trans(Tween.TRANS_BACK)
 	if life: first_scale_transition.tween_property(button, "scale", button_scale * HEART_SCALE_FACTOR, SCALE_DURATION)
@@ -28,6 +33,7 @@ func ButtonEnter(button, button_scale: Vector2, life = false, sign_sprite: Sprit
 	await first_scale_transition.finished
 	
 	loop_scale_transition_button = create_tween().set_loops()
+	loop_scale_transition_button.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	loop_scale_transition_button.set_ease(Tween.EASE_OUT)
 	loop_scale_transition_button.set_trans(Tween.TRANS_BACK)
 	if life:
@@ -38,6 +44,7 @@ func ButtonEnter(button, button_scale: Vector2, life = false, sign_sprite: Sprit
 		loop_scale_transition_button.tween_property(button, "scale", button_scale * (BUTTON_SCALE_FACTOR ** 2), SCALE_DURATION * 2)
 	if sign_sprite:
 		loop_scale_transition_sign = create_tween().set_loops()
+		loop_scale_transition_sign.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 		loop_scale_transition_sign.set_ease(Tween.EASE_OUT)
 		loop_scale_transition_sign.set_trans(Tween.TRANS_BACK)
 		loop_scale_transition_sign.tween_property(sign_sprite, "scale", sign_scale / (BUTTON_SCALE_FACTOR ** 2), SCALE_DURATION / 2)
@@ -47,9 +54,9 @@ func ButtonExit(button, button_scale: Vector2, life: bool = false, sign_sprite: 
 	if first_scale_transition: first_scale_transition.kill()
 	if loop_scale_transition_button: loop_scale_transition_button.kill()
 	if loop_scale_transition_sign: loop_scale_transition_sign.kill()
-	
 	if not life: button.material.set_shader_parameter("is_hovered", false)
-	var out = create_tween()
+	
+	var out = create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	out.set_ease(Tween.EASE_OUT)
 	out.set_trans(Tween.TRANS_SINE)
 	out.set_parallel(true)

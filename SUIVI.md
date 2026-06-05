@@ -216,12 +216,13 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 - Ajout d'anneaux dans le terrain pour le rendre plus vivant.
 - Ajout d'une page de sélection de niveaux (tutoriel, vraie partie) via des animations basiques de cassettes.
 - Ajout du SFX associé à la tâche ci-dessus et pour le bouton du mode de vie.
-- Ajout de VFX pour tous les boutons du menu.
+- Ajout de VFX pour tous les boutons des menus.
 - Ajout d'un cadre de vidéo pour le menu d'inscription.
+- Ajout d'une interface de tutoriel en jeu : sélection des cubes avec lesquels on souhaite s'entraîner via des panneaux, adaptation de la scène de jeu selon les cubes choisis et changement des menus pour changer les cubes en cours d'entraînement dans le tutoriel interactif.
 - Modification graphique du jeu : police d'écriture, visuels, images en jeu, fonds d'écran des menus.
 
 **Birame :**
-- Ajustement de l'amplitude déplacement des bras
+- Ajustement de l'amplitude de déplacement des bras
 - Annulation du traçage des noeuds lorsque l'image n'est pas affichée
 
 ### Séance 14 - 10/06

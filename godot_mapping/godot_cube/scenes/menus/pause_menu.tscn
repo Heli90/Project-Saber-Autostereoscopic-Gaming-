@@ -3,8 +3,10 @@
 [ext_resource type="Script" uid="uid://cpgnsda88gxfq" path="res://scripts/menus/pause_menu.gd" id="1_7l7mv"]
 [ext_resource type="Shader" uid="uid://dtcbr8l1yp6kt" path="res://shaders/pause_menu.gdshader" id="1_v4r4p"]
 [ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="2_v4r4p"]
+[ext_resource type="Texture2D" uid="uid://cy5no81nhebpm" path="res://addons/assets/sign_name_panel.png" id="4_eyfc8"]
 [ext_resource type="Script" uid="uid://crmbnc6adwn05" path="res://scripts/sound/audio_control.gd" id="5_knqa7"]
 [ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/pixel_art_typeface.ttf" id="5_xiui8"]
+[ext_resource type="Shader" uid="uid://crf7jc6x8vo3h" path="res://shaders/button.gdshader" id="6_xiui8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1s2dm"]
 shader = ExtResource("1_v4r4p")
@@ -14,6 +16,13 @@ shader_parameter/brightness = 1.0
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v4r4p"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_71k7c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dqjbd"]
+shader = ExtResource("6_xiui8")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cmnsq"]
 
@@ -27,6 +36,13 @@ shader_parameter/brightness = 1.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h5b1d"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_opdvj"]
+shader = ExtResource("6_xiui8")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_avs0h"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ar2xs"]
@@ -38,6 +54,39 @@ shader_parameter/brightness = 1.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fy126"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bhxne"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j7gms"]
+shader = ExtResource("6_xiui8")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ty7ml"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1onjl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h4mgr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_umr50"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0f518"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_70i7w"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pf6lc"]
+shader = ExtResource("6_xiui8")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xiui8"]
+shader = ExtResource("6_xiui8")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vlav8"]
 
@@ -51,19 +100,14 @@ shader_parameter/brightness = 1.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dmw1k"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_opdvj"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pf6lc"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j7gms"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oey0u"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sy5ew"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w5beu"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3hsps"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gqhbq"]
+shader = ExtResource("6_xiui8")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vtr1r"]
 
@@ -76,6 +120,25 @@ shader_parameter/brightness = 1.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_reqs4"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7s4e5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dgi6y"]
+shader = ExtResource("6_xiui8")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_opdvj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pf6lc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j7gms"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oey0u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sy5ew"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w5beu"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_0rd3c"]
 color = Color(1, 1, 1, 1)
@@ -128,12 +191,19 @@ offset_right = 1300.0
 offset_bottom = 826.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_71k7c")
 
+[node name="SignContinue" type="Sprite2D" parent="MenuButtons" unique_id=1376595215]
+position = Vector2(310, 200)
+scale = Vector2(1.5, 1)
+texture = ExtResource("4_eyfc8")
+
 [node name="ContinueButton" type="Button" parent="MenuButtons" unique_id=1682942179]
+material = SubResource("ShaderMaterial_dqjbd")
 layout_mode = 0
 offset_left = 230.0
 offset_top = 180.0
 offset_right = 400.0
 offset_bottom = 230.0
+pivot_offset = Vector2(85, 25)
 size_flags_vertical = 3
 focus_neighbor_top = NodePath("../QuitButton")
 theme_override_colors/font_hover_color = Color(0, 1, 1, 1)
@@ -148,12 +218,19 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_3o3g3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_h5b1d")
 text = "Continue"
 
+[node name="SignOption" type="Sprite2D" parent="MenuButtons" unique_id=172043077]
+position = Vector2(312.5, 340)
+scale = Vector2(1.3, 1)
+texture = ExtResource("4_eyfc8")
+
 [node name="OptionButton" type="Button" parent="MenuButtons" unique_id=1022310421]
+material = SubResource("ShaderMaterial_opdvj")
 layout_mode = 0
 offset_left = 240.0
 offset_top = 310.0
 offset_right = 393.0
 offset_bottom = 365.0
+pivot_offset = Vector2(76.5, 27.5)
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("5_xiui8")
 theme_override_font_sizes/font_size = 40
@@ -165,12 +242,44 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_fy126")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bhxne")
 text = "Settings"
 
+[node name="SignMode" type="Sprite2D" parent="MenuButtons" unique_id=56161942]
+visible = false
+position = Vector2(312.5, 460)
+scale = Vector2(2, 1)
+texture = ExtResource("4_eyfc8")
+
+[node name="ModeButton" type="Button" parent="MenuButtons" unique_id=1043843847]
+visible = false
+material = SubResource("ShaderMaterial_j7gms")
+layout_mode = 0
+offset_left = 186.0
+offset_top = 445.0
+offset_right = 442.0
+offset_bottom = 485.0
+pivot_offset = Vector2(128, 20)
+theme_override_fonts/font = ExtResource("5_xiui8")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ty7ml")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_1onjl")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_h4mgr")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_umr50")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_0f518")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_70i7w")
+text = "Change Mode"
+
+[node name="SignMenu" type="Sprite2D" parent="MenuButtons" unique_id=1791184727]
+position = Vector2(310, 590)
+scale = Vector2(1.6, 1)
+texture = ExtResource("4_eyfc8")
+
 [node name="MainMenuButton" type="Button" parent="MenuButtons" unique_id=1186445436]
+material = SubResource("ShaderMaterial_pf6lc")
 layout_mode = 0
 offset_left = 220.0
-offset_top = 440.0
+offset_top = 570.0
 offset_right = 415.0
-offset_bottom = 480.0
+offset_bottom = 610.0
+pivot_offset = Vector2(97.5, 20)
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("5_xiui8")
 theme_override_font_sizes/font_size = 40
@@ -182,12 +291,18 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_fy126")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bhxne")
 text = "Main Menu"
 
+[node name="SignQuit" type="Sprite2D" parent="MenuButtons" unique_id=850132344]
+position = Vector2(310, 720)
+texture = ExtResource("4_eyfc8")
+
 [node name="QuitButton" type="Button" parent="MenuButtons" unique_id=571888186]
+material = SubResource("ShaderMaterial_xiui8")
 layout_mode = 0
-offset_left = 280.0
-offset_top = 570.0
-offset_right = 358.0
-offset_bottom = 620.0
+offset_left = 272.5
+offset_top = 700.0
+offset_right = 350.5
+offset_bottom = 750.0
+pivot_offset = Vector2(39, 25)
 size_flags_vertical = 3
 focus_neighbor_bottom = NodePath("../ContinueButton")
 theme_override_fonts/font = ExtResource("5_xiui8")
@@ -200,26 +315,7 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_s8k84")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_dmw1k")
 text = "Quit"
 
-[node name="CameraButton" type="Button" parent="MenuButtons" unique_id=613085586]
-layout_mode = 1
-offset_left = 235.0
-offset_top = 700.0
-offset_right = 395.0
-offset_bottom = 742.0
-theme_override_colors/font_hover_color = Color(0, 1, 1, 1)
-theme_override_colors/font_hover_pressed_color = Color(0, 1, 1, 1)
-theme_override_fonts/font = ExtResource("5_xiui8")
-theme_override_font_sizes/font_size = 40
-theme_override_styles/normal = SubResource("StyleBoxEmpty_opdvj")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_pf6lc")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_j7gms")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_oey0u")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_sy5ew")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_w5beu")
-text = "Camera"
-
 [node name="Options" type="Panel" parent="." unique_id=1888251166]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -272,13 +368,20 @@ theme_override_font_sizes/font_size = 50
 text = "SFX"
 horizontal_alignment = 1
 
+[node name="SignBack" type="Sprite2D" parent="Options" unique_id=1788317128]
+position = Vector2(390, 710)
+scale = Vector2(2, 1.5)
+texture = ExtResource("4_eyfc8")
+
 [node name="BackButton" type="Button" parent="Options" unique_id=1809133203]
+material = SubResource("ShaderMaterial_gqhbq")
 custom_minimum_size = Vector2(0, 127)
 layout_mode = 0
-offset_left = 200.0
+offset_left = 290.0
 offset_top = 650.0
-offset_right = 620.0
+offset_right = 496.0
 offset_bottom = 777.0
+pivot_offset = Vector2(103, 63.5)
 theme_override_fonts/font = ExtResource("5_xiui8")
 theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxEmpty_vtr1r")
@@ -287,7 +390,32 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_etf8b")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_ndks8")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_reqs4")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_7s4e5")
-text = "Menu Principal"
+text = "Return"
+
+[node name="SignCamera" type="Sprite2D" parent="Options" unique_id=1368138276]
+position = Vector2(393, 500)
+scale = Vector2(1.3, 1)
+texture = ExtResource("4_eyfc8")
+
+[node name="CameraButton" type="Button" parent="Options" unique_id=613085586]
+material = SubResource("ShaderMaterial_dgi6y")
+layout_mode = 1
+offset_left = 318.0
+offset_top = 480.0
+offset_right = 478.0
+offset_bottom = 522.0
+pivot_offset = Vector2(80, 21)
+theme_override_colors/font_hover_color = Color(0, 1, 1, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 1, 1, 1)
+theme_override_fonts/font = ExtResource("5_xiui8")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_opdvj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_pf6lc")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_j7gms")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_oey0u")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_sy5ew")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_w5beu")
+text = "Camera"
 
 [node name="MusicControl" type="HSlider" parent="Options" unique_id=1086393853]
 layout_mode = 0
@@ -319,11 +447,26 @@ value = 1.0
 script = ExtResource("5_knqa7")
 audio_bus_name = "SFX"
 
+[connection signal="mouse_entered" from="MenuButtons/ContinueButton" to="." method="_onContinueButtonEnter"]
+[connection signal="mouse_exited" from="MenuButtons/ContinueButton" to="." method="_onContinueButtonExit"]
 [connection signal="pressed" from="MenuButtons/ContinueButton" to="." method="_onContinueButton_pressed"]
+[connection signal="mouse_entered" from="MenuButtons/OptionButton" to="." method="_onOptionButtonEnter"]
+[connection signal="mouse_exited" from="MenuButtons/OptionButton" to="." method="_onOptionButtonExit"]
 [connection signal="pressed" from="MenuButtons/OptionButton" to="." method="_onOptionButton_pressed"]
+[connection signal="mouse_entered" from="MenuButtons/ModeButton" to="." method="_onModeButtonEnter"]
+[connection signal="mouse_exited" from="MenuButtons/ModeButton" to="." method="_onModeButtonExit"]
+[connection signal="pressed" from="MenuButtons/ModeButton" to="." method="_onModeButton_pressed"]
+[connection signal="mouse_entered" from="MenuButtons/MainMenuButton" to="." method="_onMenuButtonEnter"]
+[connection signal="mouse_exited" from="MenuButtons/MainMenuButton" to="." method="_onMenuButtonExit"]
 [connection signal="pressed" from="MenuButtons/MainMenuButton" to="." method="_onMainMenuButton_pressed"]
+[connection signal="mouse_entered" from="MenuButtons/QuitButton" to="." method="_onQuitButtonEnter"]
+[connection signal="mouse_exited" from="MenuButtons/QuitButton" to="." method="_onQuitButtonExit"]
 [connection signal="pressed" from="MenuButtons/QuitButton" to="." method="_onQuitButton_pressed"]
-[connection signal="pressed" from="MenuButtons/CameraButton" to="." method="_onCameraButton_pressed"]
+[connection signal="mouse_entered" from="Options/BackButton" to="." method="_onBackButtonEnter"]
+[connection signal="mouse_exited" from="Options/BackButton" to="." method="_onBackButtonExit"]
 [connection signal="pressed" from="Options/BackButton" to="." method="_onBackButton_pressed"]
+[connection signal="mouse_entered" from="Options/CameraButton" to="." method="_onCameraButtonEnter"]
+[connection signal="mouse_exited" from="Options/CameraButton" to="." method="_onCameraButtonExit"]
+[connection signal="pressed" from="Options/CameraButton" to="." method="_onCameraButton_pressed"]
 [connection signal="value_changed" from="Options/MusicControl" to="Options/MusicControl" method="_onValueChanged"]
 [connection signal="value_changed" from="Options/SFXControl" to="Options/SFXControl" method="_onValueChanged"]

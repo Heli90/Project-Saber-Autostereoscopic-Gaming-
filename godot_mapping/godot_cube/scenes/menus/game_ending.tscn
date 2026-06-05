@@ -4,17 +4,24 @@
 [ext_resource type="Script" uid="uid://c017eu1ls6xye" path="res://scripts/menus/game_ending.gd" id="2_nvk6s"]
 [ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="3_cplju"]
 [ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/pixel_art_typeface.ttf" id="4_ko6y7"]
+[ext_resource type="Texture2D" uid="uid://cy5no81nhebpm" path="res://addons/assets/sign_name_panel.png" id="5_ko6y7"]
+[ext_resource type="Shader" uid="uid://crf7jc6x8vo3h" path="res://shaders/button.gdshader" id="6_acqe6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1s2dm"]
 shader = ExtResource("1_nvk6s")
 shader_parameter/lod = 2.0
 shader_parameter/brightness = 1.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v4r4p"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nvk6s"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_03p8x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yyuai"]
+shader = ExtResource("6_acqe6")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vtr1r"]
 
@@ -46,13 +53,6 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
 metadata/_edit_use_anchors_ = true
-
-[node name="VisuelMenu" type="Panel" parent="." unique_id=280165097]
-visible = false
-layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_v4r4p")
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=1311986995]
 stream = ExtResource("3_cplju")
@@ -140,8 +140,14 @@ theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="SignBack" type="Sprite2D" parent="." unique_id=162490582]
+position = Vector2(475, 910)
+scale = Vector2(2.5, 1.75)
+texture = ExtResource("5_ko6y7")
+
 [node name="BackToMenuButton" type="Button" parent="." unique_id=1809133203]
 process_mode = 3
+material = SubResource("ShaderMaterial_yyuai")
 custom_minimum_size = Vector2(0, 127)
 layout_mode = 0
 offset_left = 325.0
@@ -158,4 +164,6 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_reqs4")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_7s4e5")
 text = "Main Menu"
 
+[connection signal="mouse_entered" from="BackToMenuButton" to="." method="_onBackButtonEnter"]
+[connection signal="mouse_exited" from="BackToMenuButton" to="." method="_onBackButtonExit"]
 [connection signal="pressed" from="BackToMenuButton" to="." method="_onBackToMenuButton_pressed"]
