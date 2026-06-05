@@ -14,7 +14,6 @@ var idle_timer: float = 0.0
 var is_hidden: bool = false
 
 func _ready() -> void:
-	Global.launched_mode = 0
 	main_menu_music.play()
 
 func _process(delta: float) -> void:

@@ -25,8 +25,6 @@ var last_gpu_time_ms: float = 0.0
 var last_gpu_vues_ms: float = 0.0
 
 func _ready() -> void:
-	Global.launched_mode = 2
-
 	rd = RenderingServer.get_rendering_device()
 	await get_tree().process_frame
 	# On récupère le monde 3D

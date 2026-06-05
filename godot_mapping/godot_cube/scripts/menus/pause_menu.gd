@@ -109,6 +109,7 @@ func _input(event: InputEvent) -> void:
 	var appui_synchro: bool = event.is_action_pressed("Menu") and latence_pause > 0.75 and (not on_option_menu)
 	if appui_synchro and Global.launched_mode > 0:
 		latence_pause = 0.0
+		landmarks_proceed.camera_feed.feed_is_active = false
 		get_viewport().set_input_as_handled()
 		toggle_pause()
 
@@ -127,10 +128,11 @@ func toggle_pause():
 		transition.parallel().tween_property(menu_buttons, "modulate:a", 1.0, 0.1)
 		
 		# On fait monter les panneaux
-		if cadres.visible:
-			transition.set_ease(Tween.EASE_OUT)
-			transition.set_trans(Tween.TRANS_BACK)
-			transition.parallel().tween_property(cadres, "position", Vector2(0.0, 0.0), 0.8)
+		if cadres:
+			if cadres.visible:
+				transition.set_ease(Tween.EASE_OUT)
+				transition.set_trans(Tween.TRANS_BACK)
+				transition.parallel().tween_property(cadres, "position", Vector2(0.0, 0.0), 0.8)
 		transition.set_ease(Tween.EASE_IN_OUT)
 		transition.parallel().tween_method(set_blur_intensity, 0.0, 2.0, 0.1)
 		await transition.finished
@@ -148,18 +150,23 @@ func _onContinueButton_pressed() -> void:
 	transition.parallel().tween_method(set_blur_intensity, 2.0, 0.0, 0.1)
 	
 	# On fait redescendre les panneaux
-	if cadres.visible:
-		transition.set_ease(Tween.EASE_OUT)
-		transition.set_trans(Tween.TRANS_BACK)
-		transition.parallel().tween_property(cadres, "position", Vector2(0.0, 700.0), 0.8)
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	if cadres:
+		if cadres.visible:
+			transition.set_ease(Tween.EASE_OUT)
+			transition.set_trans(Tween.TRANS_BACK)
+			transition.parallel().tween_property(cadres, "position", Vector2(0.0, 700.0), 0.8)
+			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	await transition.finished
 	
 	latence_pause = 0.0
 	menu_buttons.visible = false
 	on_option_menu = false
 	affichage = false
-	if not cadres.visible: get_tree().paused = false
+	landmarks_proceed.camera_feed.feed_is_active = true
+	if cadres:
+		if not cadres.visible: get_tree().paused = false
+	else:
+		get_tree().paused = false
 
 func _onOptionButton_pressed() -> void:
 	on_option_menu = true
@@ -261,6 +268,7 @@ func _onMainMenuButton_pressed() -> void:
 	transition.tween_property(fondu_noir, "modulate:a", 1.0, 0.5)
 	transition.chain().tween_interval(0.3)
 	await transition.finished
+	Global.launched_mode = 0
 	get_tree().change_scene_to_file("res://scenes/menus/main_menu_3d.tscn")
 
 func _onCameraButton_pressed() -> void :

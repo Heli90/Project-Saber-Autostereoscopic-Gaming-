@@ -15,6 +15,7 @@ extends Node3D
 @onready var combo_bar_vue6 = $J2/CameraController/Vue6/ComboBar
 var combo_bar_list: Array[Control] = []
 
+@onready var landmarks_proceed: Node2D = $Game/LandMarksProceed
 @onready var cadres: Panel = $Cadres
 @onready var pause_menu: ColorRect = $Game/HUD/PauseMenu
 @onready var click_sound: AudioStreamPlayer = $Game/HUD/PauseMenu/ClickSound
@@ -24,11 +25,13 @@ var last_gpu_time_ms: float = 0.0
 var last_gpu_vues_ms: float = 0.0
 
 func _ready() -> void:
-	Global.launched_mode = 1
 	# On masque les barres de combo hors du jeu
 	combo_bar_list = [combo_bar_vue1, combo_bar_vue2, combo_bar_vue5, combo_bar_vue6]
 	for combo_bar in combo_bar_list:
 		combo_bar.modulate.a = 0.0
+	
+	# On ne lance pas le thread de caméra au début pour optimiser les FPS
+	landmarks_proceed.camera_feed.feed_is_active = false
 
 	rd = RenderingServer.get_rendering_device()
 	await get_tree().process_frame
@@ -110,6 +113,7 @@ func _onClassicButton_pressed() -> void:
 	Global.tutoriel_played_mode = 0
 	appear_combos()
 	get_tree().paused = false
+	landmarks_proceed.camera_feed.feed_is_active = true
 
 func _onBonusButton_pressed() -> void:
 	click_sound.play()
@@ -118,6 +122,7 @@ func _onBonusButton_pressed() -> void:
 	Global.tutoriel_played_mode = 1
 	appear_combos()
 	get_tree().paused = false
+	landmarks_proceed.camera_feed.feed_is_active = true
 
 func _onCBButton_pressed() -> void:
 	click_sound.play()
@@ -126,6 +131,7 @@ func _onCBButton_pressed() -> void:
 	Global.tutoriel_played_mode = 2
 	appear_combos()
 	get_tree().paused = false
+	landmarks_proceed.camera_feed.feed_is_active = true
 
 func _onAllButton_pressed() -> void:
 	click_sound.play()
@@ -134,3 +140,4 @@ func _onAllButton_pressed() -> void:
 	Global.tutoriel_played_mode = 3
 	appear_combos()
 	get_tree().paused = false
+	landmarks_proceed.camera_feed.feed_is_active = true

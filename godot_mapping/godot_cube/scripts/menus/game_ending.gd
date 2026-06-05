@@ -37,6 +37,7 @@ func _onBackToMenuButton_pressed() -> void:
 	transition.tween_property(fondu_noir, "modulate:a", 1.0, 0.5)
 	transition.chain().tween_interval(0.3)
 	await transition.finished
+	Global.launched_mode = 0
 	get_tree().change_scene_to_file("res://scenes/menus/main_menu_3d.tscn")
 
 func _onBackButtonEnter() -> void:

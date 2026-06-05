@@ -220,6 +220,7 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 - Ajout d'un cadre de vidéo pour le menu d'inscription.
 - Ajout d'une interface de tutoriel en jeu : sélection des cubes avec lesquels on souhaite s'entraîner via des panneaux, adaptation de la scène de jeu selon les cubes choisis et changement des menus pour changer les cubes en cours d'entraînement dans le tutoriel interactif.
 - Modification graphique du jeu : police d'écriture, visuels, images en jeu, fonds d'écran des menus.
+- Optimisation de l'utilisation de la caméra : déclenchement uniquement dans les scènes du menu principal et de la partie hors tutoriel.
 
 **Birame :**
 - Ajustement de l'amplitude de déplacement des bras

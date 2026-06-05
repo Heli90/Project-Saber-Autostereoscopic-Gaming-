@@ -47,13 +47,6 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("2_nvk6s")
 
-[node name="FonduNoir" type="ColorRect" parent="." unique_id=900633217]
-layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
-color = Color(0, 0, 0, 1)
-metadata/_edit_use_anchors_ = true
-
 [node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=1311986995]
 stream = ExtResource("3_cplju")
 volume_db = -10.0
@@ -154,6 +147,7 @@ offset_left = 325.0
 offset_top = 850.0
 offset_right = 618.0
 offset_bottom = 977.0
+pivot_offset = Vector2(147.5, 63.5)
 theme_override_fonts/font = ExtResource("4_ko6y7")
 theme_override_font_sizes/font_size = 60
 theme_override_styles/normal = SubResource("StyleBoxEmpty_vtr1r")
@@ -163,6 +157,13 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_ndks8")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_reqs4")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_7s4e5")
 text = "Main Menu"
+
+[node name="FonduNoir" type="ColorRect" parent="." unique_id=900633217]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
 
 [connection signal="mouse_entered" from="BackToMenuButton" to="." method="_onBackButtonEnter"]
 [connection signal="mouse_exited" from="BackToMenuButton" to="." method="_onBackButtonExit"]

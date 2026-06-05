@@ -126,6 +126,7 @@ func _onTutoCassette_pressed() -> void:
 	t.chain().tween_property(tutoriel_music, "volume_db", -80.0, 0.5)
 	t.chain().tween_interval(0.3)
 	await t.finished
+	Global.launched_mode = 1
 	get_tree().change_scene_to_file("res://scenes/game_scenes/tutoriel_3d.tscn")
 
 func _onCassetteGame_pressed() -> void:
@@ -137,6 +138,7 @@ func _onCassetteGame_pressed() -> void:
 	t.chain().tween_property(tutoriel_music, "volume_db", -80.0, 0.5)
 	t.chain().tween_interval(0.3)
 	await t.finished
+	Global.launched_mode = 2
 	get_tree().change_scene_to_file("res://scenes/game_scenes/scene_TV.tscn")
 
 func _onMenuButton_pressed() -> void:

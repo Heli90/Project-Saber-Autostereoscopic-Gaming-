@@ -150,7 +150,10 @@ func _start_camera():
 	# Gestion de l'effet miroir (Auto-flip si caméra frontale)
 	texture_rect.flip_h = (camera_feed.get_position() != CameraFeed.FEED_BACK)
 	
-	camera_feed.feed_is_active = true
+	if Global.launched_mode == 1: 
+		print("hi")
+		camera_feed.feed_is_active = false
+	else: camera_feed.feed_is_active = true
 	
 	# Création de la texture selon le type de flux
 	var tex = CameraTexture.new()
@@ -171,8 +174,7 @@ func reload_camera_selection():
 	CameraServer.monitoring_feeds = true
 	
 	# On désactive le flux actuel pour libérer le périphérique
-	if camera_feed:
-		camera_feed.feed_is_active = false
+	if camera_feed: camera_feed.feed_is_active = false
 	
 	# On force la mise à jour de la liste manuellement avant d'ouvrir
 	_update_camera_list()
