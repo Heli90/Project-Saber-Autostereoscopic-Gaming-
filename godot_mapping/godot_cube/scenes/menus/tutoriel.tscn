@@ -75,6 +75,18 @@ shader_parameter/angle = 0.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_imcix"]
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_1mkbs"]
+color = Color(1, 1, 1, 1)
+thickness = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_cshns"]
+color = Color(0.58971274, 0.003682195, 0.933948, 1)
+thickness = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_8jpt8"]
+color = Color(0.5882353, 0.003921569, 0.93333334, 1)
+thickness = 5
+
 [node name="Tutoriel" type="Control" unique_id=580013353]
 layout_mode = 3
 anchors_preset = 0
@@ -285,6 +297,28 @@ text = "Limited Life"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="DifficultySlider" type="HSlider" parent="Modes" unique_id=1369382338]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 950.0
+offset_right = 200.0
+offset_bottom = 981.0
+theme_override_styles/slider = SubResource("StyleBoxLine_1mkbs")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_cshns")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_8jpt8")
+max_value = 2.0
+value = 1.0
+
+[node name="DifficultyLabel" type="Label" parent="Modes" unique_id=1627231384]
+layout_mode = 0
+offset_left = 260.0
+offset_top = 950.0
+offset_right = 395.0
+offset_bottom = 981.0
+theme_override_fonts/font = ExtResource("5_phf8o")
+theme_override_font_sizes/font_size = 30
+text = "Difficulty"
+
 [node name="SelectLevel" parent="." unique_id=877177698 instance=ExtResource("10_gjwrx")]
 visible = false
 layout_mode = 0
@@ -298,6 +332,7 @@ layout_mode = 0
 [connection signal="mouse_entered" from="Modes/HealModeButton" to="." method="_onHealMouseEnter"]
 [connection signal="mouse_exited" from="Modes/HealModeButton" to="." method="_onHealMouseExit"]
 [connection signal="pressed" from="Modes/HealModeButton" to="." method="_onHealModeButton_pressed"]
+[connection signal="value_changed" from="Modes/DifficultySlider" to="." method="_onValueChanged"]
 [connection signal="pressed" from="SelectLevel/Cassettes/CassetteTuto" to="." method="_onTutoCassette_pressed"]
 [connection signal="pressed" from="SelectLevel/Cassettes/CassetteGame" to="." method="_onCassetteGame_pressed"]
 [connection signal="mouse_entered" from="SelectLevel/Menu/BackButton" to="." method="_onBackButtonEnter"]

@@ -134,6 +134,8 @@ func toggle_pause():
 				transition.set_trans(Tween.TRANS_BACK)
 				transition.parallel().tween_property(cadres, "position", Vector2(0.0, 0.0), 0.8)
 		transition.set_ease(Tween.EASE_IN_OUT)
+		for combo_bar in combo_bar_list:
+			transition.parallel().tween_property(combo_bar, "modulate:a", 0.0, 0.1)
 		transition.parallel().tween_method(set_blur_intensity, 0.0, 2.0, 0.1)
 		await transition.finished
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -156,17 +158,23 @@ func _onContinueButton_pressed() -> void:
 			transition.set_trans(Tween.TRANS_BACK)
 			transition.parallel().tween_property(cadres, "position", Vector2(0.0, 700.0), 0.8)
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			landmarks_proceed.camera_feed.feed_is_active = false
+		else:
+			for combo_bar in combo_bar_list:
+				transition.parallel().tween_property(combo_bar, "modulate:a", 1.0, 0.1)
 	await transition.finished
 	
 	latence_pause = 0.0
 	menu_buttons.visible = false
 	on_option_menu = false
 	affichage = false
-	landmarks_proceed.camera_feed.feed_is_active = true
 	if cadres:
-		if not cadres.visible: get_tree().paused = false
+		if not cadres.visible:
+			get_tree().paused = false
+			landmarks_proceed.camera_feed.feed_is_active = true
 	else:
 		get_tree().paused = false
+		landmarks_proceed.camera_feed.feed_is_active = true
 
 func _onOptionButton_pressed() -> void:
 	on_option_menu = true
@@ -191,8 +199,6 @@ func _onModeButton_pressed() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	var transition = create_tween().set_parallel(true)
 	transition.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-	for combo_bar in combo_bar_list:
-		transition.tween_property(combo_bar, "modulate:a", 0.0, 0.1)
 	transition.tween_property(menu_buttons, "modulate:a", 0.0, 0.1)
 	transition.set_parallel(false)
 	transition.chain().tween_interval(0.3)

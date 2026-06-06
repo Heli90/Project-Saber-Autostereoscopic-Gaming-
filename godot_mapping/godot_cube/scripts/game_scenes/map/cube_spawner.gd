@@ -45,8 +45,8 @@ var best_combo: int = 0
 var combo_success: bool = false
 
 # Variables liées au combo visuel
-var texture_progress_bars: Array[TextureProgressBar]
-var progress_bar_labels: Array[Label]
+var texture_progress_bars: Array[TextureProgressBar] = []
+var progress_bar_labels: Array[Label] = []
 var letters: Array[String] = ["D", "C", "B", "A", "S"]
 var paliers: Array[int] = [2, 5, 10, 20, 30]
 var passage_paliers: Array[bool] = [false, false]
@@ -69,7 +69,7 @@ var shield_bars: Array[Control] = []
 
 # Variables associées à la vie limitée
 var healing: bool = false
-var health_bars: Array[Control]
+var health_bars: Array[Control] = []
 var health: Array[int] = [10, 10]
 
 # Fonction appelée par le script du jeu pour démarrer l'apparition des cubes et charger les scores visuels
@@ -101,17 +101,17 @@ func activation() -> void:
 			score_uis.append(get_node("../../J2/CameraController/Vue5/ScoreUI"))
 			score_uis.append(get_node("../../J1/CameraController/Vue2/ScoreUI"))
 			score_uis.append(get_node("../../J2/CameraController/Vue6/ScoreUI"))
+
+			health_bars.append(get_node("../../J1/CameraController/Vue1/HealthBar"))
+			health_bars.append(get_node("../../J2/CameraController/Vue5/HealthBar"))
+			health_bars.append(get_node("../../J1/CameraController/Vue2/HealthBar"))
+			health_bars.append(get_node("../../J2/CameraController/Vue6/HealthBar"))
 			start_label.text = "Ready ?"
 
 		shield_bars.append(get_node("../../J1/CameraController/Vue1/ShieldBar"))
 		shield_bars.append(get_node("../../J2/CameraController/Vue5/ShieldBar"))
 		shield_bars.append(get_node("../../J1/CameraController/Vue2/ShieldBar"))
 		shield_bars.append(get_node("../../J2/CameraController/Vue6/ShieldBar"))
-
-		health_bars.append(get_node("../../J1/CameraController/Vue1/HealthBar"))
-		health_bars.append(get_node("../../J2/CameraController/Vue5/HealthBar"))
-		health_bars.append(get_node("../../J1/CameraController/Vue2/HealthBar"))
-		health_bars.append(get_node("../../J2/CameraController/Vue6/HealthBar"))
 
 		ink_overlay.append(get_node("../../J1/CameraController/Vue1/InkLayerJ1/InkOverlayJ1"))
 		ink_overlay.append(get_node("../../J2/CameraController/Vue5/InkLayerJ2/InkOverlayJ2"))
@@ -128,13 +128,12 @@ func activation() -> void:
 		progress_bar_labels.append(get_node("../../J1/CameraController/Vue2/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar/ProgressBarLabel"))
 		progress_bar_labels.append(get_node("../../J2/CameraController/Vue6/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar/ProgressBarLabel"))
 		
-		for progress_bar in texture_progress_bars:
-			progress_bar.max_value = paliers[0]
+	for progress_bar in texture_progress_bars:
+		progress_bar.max_value = paliers[0]
 	for shield_bar in shield_bars:
 		shield_bar.modulate.a = 0.0
-	
 	for health_bar in health_bars:
-		if healing:
+		if healing and Global.launched_mode == 2:
 			health_bar.visible = true
 			health_bar.modulate.a = 1.0
 		else:
@@ -446,7 +445,7 @@ func MissedClassicCube(i: int) -> void:
 			texture_progress_bars[i+2].value = 0
 			progress_bar_labels[i].text = letters[0]
 			progress_bar_labels[i+2].text = letters[0]
-		if healing:
+		if healing and Global.launched_mode == 2:
 			health[i] -= 1
 			health_bars[i].update_health(health[i])
 			health_bars[i+2].update_health(health[i])
