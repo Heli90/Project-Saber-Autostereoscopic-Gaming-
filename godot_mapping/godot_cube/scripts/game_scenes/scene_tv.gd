@@ -65,7 +65,7 @@ func _process(_delta: float) -> void:
 		if count >= 2:
 			# Durée totale utilisée par le GPU
 			var t_start = rd.get_captured_timestamp_gpu_time(0)
-			var t_end   = rd.get_captured_timestamp_gpu_time(count - 1)
+			var t_end = rd.get_captured_timestamp_gpu_time(count - 1)
 			last_gpu_time_ms = max(0.0, (t_end - t_start) / 1_000_000.0)
 			
 			# Durée spécifique pour chaque viewport et l'entrelacement

@@ -73,8 +73,10 @@ var health_bars: Array[Control] = []
 var health: Array[int] = [10, 10]
 
 # Variables de pixelisation
-var pixelisation_active: bool = false
-var pixelisation_time: float = 0.0
+var pixelisation_active_j1: bool = false
+var pixelisation_active_j2: bool = false
+var pixelisation_time_j1: float = 0.0
+var pixelisation_time_j2: float = 0.0
 
 # Fonction appelée par le script du jeu pour démarrer l'apparition des cubes et charger les scores visuels
 func activation() -> void:
@@ -160,7 +162,8 @@ func _process(delta: float) -> void:
 	if start_spawn:
 		elapsed_time += delta
 		
-		if pixelisation_active: pixelisation_time += delta
+		if pixelisation_active_j1: pixelisation_time_j1 += delta
+		if pixelisation_active_j2: pixelisation_time_j2 += delta
 
 		# On retire les blocs qui ont été supprimés du jeu
 		blocs = blocs.filter(func(bloc): return is_instance_valid(bloc))
@@ -215,6 +218,7 @@ func menu_loop() -> void:
 		var n: int
 		if healing: n = rng.randi_range(0, 6)
 		else: n = rng.randi_range(0, 5)
+		# Si on est en phase de tutoriel, on peut avoir une liste de taille plus petite, donc, on change l'indice
 		if not Global.setup_tutoriel:
 			match Global.tutoriel_played_mode:
 				0: n = 0
@@ -223,7 +227,63 @@ func menu_loop() -> void:
 				3: pass
 		spawn_cube(cube_list[n])
 
+# On actualise la barre de combo visuelle et on vérifie si un palier a été dépassé
+func check_progress_bars() -> void:
+	for i in range(2):
+		texture_progress_bars[i].value = snapped(stocked_combo[i], texture_progress_bars[i].step)
+		texture_progress_bars[i+2].value = snapped(stocked_combo[i], texture_progress_bars[i].step)
+
+	# Si un palier a été dépassé, on passe au suivant et on incrémente le multiplicateur
+	for i in range(2):
+		if texture_progress_bars[i].value >= texture_progress_bars[i].max_value:
+			texture_progress_bars[i].value = 0
+			texture_progress_bars[i+2].value = 0
+			multiplicateur[i] *= 2
+
+			var current_index = letters.find(progress_bar_labels[i].text)
+			var letter_index = clamp(current_index + 1, 0, paliers.size() - 1)
+			progress_bar_labels[i].text = letters[letter_index]
+			progress_bar_labels[i+2].text = letters[letter_index]
+			
+			if letter_index < paliers.size():
+				passage_paliers[i] = true
+				texture_progress_bars[i].max_value = paliers[letter_index]
+				texture_progress_bars[i+2].max_value = paliers[letter_index]
+	
+	# A chaque palier passé par l'un des deux joueurs, l'autre subit un effet de pixelisation
+	match passage_paliers:
+		[false, false]: pass
+		[false, true]:
+			texture.material.set_shader_parameter("pixelisation_mask", [false, false, false, false, true, true, false, false])
+			if not pixelisation_active_j2:
+				pixelisation_active_j2 = true
+				var pixelisationPower = texture.material.get_shader_parameter("pixelisationPower")
+				texture.material.set_shader_parameter("pixelisation", true)
+				texture.material.set_shader_parameter("pixelisationPower", pixelisationPower - 10.0)
+		[true, false]:
+			texture.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, false, false, false, false])
+			if not pixelisation_active_j1:
+				pixelisation_active_j1 = true
+				var pixelisationPower = texture.material.get_shader_parameter("pixelisationPower")
+				texture.material.set_shader_parameter("pixelisation", true)
+				texture.material.set_shader_parameter("pixelisationPower", pixelisationPower - 10.0)
+		[true, true]:
+			texture.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, true, true, false, false])
+			if (not pixelisation_active_j1) or (not pixelisation_active_j2):
+				pixelisation_active_j1 = true
+				pixelisation_active_j2 = true
+				var pixelisationPower = texture.material.get_shader_parameter("pixelisationPower")
+				texture.material.set_shader_parameter("pixelisation", true)
+				texture.material.set_shader_parameter("pixelisationPower", pixelisationPower - 10.0)
+	if pixelisation_time_j1 > 5.0:
+		passage_paliers[0] = false
+		pixelisation_active_j1 = false
+	if pixelisation_time_j2 > 5.0:
+		passage_paliers[1] = false
+		pixelisation_active_j2 = false
+
 func tutoriel_loop() -> void:
+	check_progress_bars()
 	match Global.tutoriel_played_mode:
 		0:
 			if Global.setup_tutoriel:
@@ -249,59 +309,8 @@ func tutoriel_loop() -> void:
 func game_loop() -> void:
 	# On lance la musique avec un retard de 3 secondes pour permettre aux premiers cubes d'arriver
 	if elapsed_time > 1.25 and (not level_music.playing): level_music.play()
+	check_progress_bars()
 	
-	# On actualise la barre de combo visuelle
-	for i in range(2):
-		texture_progress_bars[i].value = snapped(stocked_combo[i], texture_progress_bars[i].step)
-		texture_progress_bars[i+2].value = snapped(stocked_combo[i], texture_progress_bars[i].step)
-
-	# Si un palier a été dépassé, on passe au suivant et on incrémente le multiplicateur
-	for i in range(2):
-		if texture_progress_bars[i].value >= texture_progress_bars[i].max_value:
-			texture_progress_bars[i].value = 0
-			texture_progress_bars[i+2].value = 0
-			multiplicateur[i] *= 2
-
-			var current_index = letters.find(progress_bar_labels[i].text)
-			var letter_index = clamp(current_index + 1, 0, paliers.size() - 1)
-			progress_bar_labels[i].text = letters[letter_index]
-			progress_bar_labels[i+2].text = letters[letter_index]
-			
-			if letter_index < paliers.size():
-				passage_paliers[i] = true
-				texture_progress_bars[i].max_value = paliers[letter_index]
-				texture_progress_bars[i+2].max_value = paliers[letter_index]
-	
-	# A chaque palier passé par l'un des deux joueurs, l'autre subit un effet de pixelisation
-	match passage_paliers:
-		[false, false]:
-			if pixelisation_time > 5.0 :
-				pixelisation_active = false
-				pixelisation_time = 0.0
-				texture.material.set_shader_parameter("pixelisation", false)
-				texture.material.set_shader_parameter("pixelisationPower", 200.0)
-		[false, true]:
-			passage_paliers[1] = false
-			texture.material.set_shader_parameter("pixelisation_mask", [false, false, false, false, true, true, false, false])
-			var pixelisationPower = texture.material.get_shader_parameter("pixelisationPower")
-			pixelisation_active = true
-			texture.material.set_shader_parameter("pixelisation", true)
-			texture.material.set_shader_parameter("pixelisationPower", pixelisationPower - 10.0)
-		[true, false]:
-			passage_paliers[0] = false
-			texture.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, false, false, false, false])
-			var pixelisationPower = texture.material.get_shader_parameter("pixelisationPower")
-			pixelisation_active = true
-			texture.material.set_shader_parameter("pixelisation", true)
-			texture.material.set_shader_parameter("pixelisationPower", pixelisationPower - 10.0)
-		[true, true]:
-			passage_paliers = [false, false]
-			texture.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, true, true, false, false])
-			var pixelisationPower = texture.material.get_shader_parameter("pixelisationPower")
-			pixelisation_active = true
-			texture.material.set_shader_parameter("pixelisation", true)
-			texture.material.set_shader_parameter("pixelisationPower", pixelisationPower - 10.0)
-
 	if not is_generated:
 		is_generated = true
 

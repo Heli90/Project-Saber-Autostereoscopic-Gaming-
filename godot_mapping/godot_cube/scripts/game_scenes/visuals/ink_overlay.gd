@@ -8,17 +8,17 @@ var ink_duration : float = 3.0
 # Tableau de textures d'encre
 var ink_texture_list : Array = []
 var ink_small_texture_list : Array = []
-const TEX_MIN = 250
-const TEX_MAX = 400
-const TEX_SMALL_MIN = 30
+const TEX_MIN = 400
+const TEX_MAX = 750
+const TEX_SMALL_MIN = 20
 const TEX_SMALL_MAX = 100
 
 func _ready():
-	# 24 éclaboussures d'encre générées
-	for i in range(8):
+	# 30 éclaboussures d'encre générées
+	for i in range(15):
 		var tex_size = randi_range(TEX_MIN, TEX_MAX)
 		ink_texture_list.append(create_ink_texture(tex_size))
-	for i in range(16):
+	for i in range(15):
 		var tex_size = randi_range(TEX_SMALL_MIN, TEX_SMALL_MAX)
 		ink_small_texture_list.append(create_ink_texture(tex_size))
 
