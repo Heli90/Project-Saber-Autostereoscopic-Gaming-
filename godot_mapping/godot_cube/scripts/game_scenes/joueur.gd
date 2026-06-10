@@ -21,10 +21,10 @@ var d1_x : float
 var d2_x : float
 var d1_y : float
 var d2_y : float
-var max_x_1 : float = 0.1
-var max_y_1 : float = 0.1
-var max_x_2 : float = 0.1
-var max_y_2 : float = 0.1
+var max_x_1 : float = 0.5
+var max_y_1 : float = 0.5
+var max_x_2 : float = 0.5
+var max_y_2 : float = 0.5
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -54,6 +54,15 @@ func apply_blue_shader():
 
 func collision(body: Node3D) -> void:
 	if body.is_in_group("cube"): body.collision()
+
+func transform_data_x(f : float) -> float :
+	if f < 0.5 :
+		return 0.5 - sqrt(0.5)*sqrt(0.5-f)
+	else :
+		return 0.5 + sqrt(0.5)*sqrt(f-0.5)
+		
+func transform_data_y(f :float) -> float :
+	return sqrt(f)
 
 func dilatate_y(f : float) -> float :
 	var s = f
@@ -86,40 +95,41 @@ func _physics_process(_delta: float) -> void:
 			var saber : Area3D = left_saber if data["handedness"] == "Left" else right_saber
 			
 			# Recalibrage des sabres dans la zone de chaque joueur
-			var local_x : float
-			if player_id == 1: local_x = data["x"] / 0.5
-			else: local_x = (data["x"] - 0.5) / 0.5
-			var local_y = data["y"]      
+			
+			var local_x = transform_data_x(data["x"])
+			var local_y = transform_data_y(data["y"])      
 			
 			var pos_x : float = lerp(-saber_range_x, saber_range_x, local_x)
 			var pos_y : float = lerp(saber_y_max, saber_y_min, local_y)
 			if Global.launched_mode <= 1 :
 				if player_id == 1 :
-					if pos_x > max_x_1 :
-						max_x_1 = pos_x
+					if pos_x > max_x_1 and pos_x < 1 :
+						max_x_1 = (pos_x+max_x_1)/2
 						var d =  saber_range_x/max_x_1 
 						if d < d1_x and d >= 1:
-							Global.d1_x = saber_range_x/max_x_1
-							d1_x = saber_range_x/max_x_1
-					if pos_y > max_y_1 :
-						max_y_1 = pos_y
+							Global.d1_x = d
+							d1_x = d
+					if pos_y > max_y_1 and pos_y < 1 :
+						max_y_1 = (pos_y+max_y_1)/2
 						var d =  saber_range_x/max_y_1
 						if d < d1_y and d >= 1:
-							Global.d1_y = saber_range_x/max_y_1
-							d1_y = saber_range_x/max_y_1
+							Global.d1_y = d
+							d1_y = d
 				else :
-					if pos_x > max_x_2 :
-						max_x_2 = pos_x
+					if pos_x > max_x_2 and pos_x < 1:
+						max_x_2 = (pos_x+max_x_2)/2
 						var d = saber_range_x/max_x_2
 						if d < d2_x and d >= 1 :
-							Global.d2_x = saber_range_x/max_x_2
-							d2_x = saber_range_x/max_x_2
-					if pos_y > max_y_2 :
-						max_y_2 = pos_y
+							Global.d2_x = d
+							d2_x = d
+					if pos_y > max_y_2 and pos_y < 1:
+						max_y_2 = (pos_y+max_y_2)/2
 						var d = saber_range_x/max_y_2
 						if d < d2_y and d >= 1 :
-							Global.d2_y =saber_range_x/max_y_2
-							d2_y = saber_range_x/max_y_2
+							Global.d2_y =d
+							d2_y = d
+			
+			
 							
 			saber.position.x = dilatate_x(pos_x)
 			saber.position.y = dilatate_y(pos_y)
@@ -128,9 +138,9 @@ func _physics_process(_delta: float) -> void:
 			saber.rotation.z = -atan2(0,-1)/2 - data["angle_z"]
 			if data["handedness"] == "Right" :
 				if player_id == 1 :
-					j1_label.text = "x = %.2f, y = %.2f, angle = %.2f\n Max x : %.2f, y : %.2f, Dilatation x : %.2f, y : %.2f" % [data["x"], data["y"],-atan2(0,-1)/2 - data["angle_z"], max_x_1,max_y_1,d1_x,d1_y]
+					j1_label.text = "x = %.2f, y = %.2f, angle = %.2f\n Max x : %.2f, y : %.2f, Dilatation x : %.2f, y : %.2f" % [local_x, local_y,-atan2(0,-1)/2 - data["angle_z"], max_x_1,max_y_1,d1_x,d1_y]
 				elif player_id == 2:
-					j2_label.text = "x = %.2f, y = %.2f, angle = %.2f\n Max x : %.2f, y : %.2f, Dilatation x : %.2f, y : %.2f" % [data["x"], data["y"],-atan2(0,-1)/2 - data["angle_z"],max_x_2, max_y_2,d2_x,d2_y]
+					j2_label.text = "x = %.2f, y = %.2f, angle = %.2f\n Max x : %.2f, y : %.2f, Dilatation x : %.2f, y : %.2f" % [local_x, local_y,-atan2(0,-1)/2 - data["angle_z"],max_x_2, max_y_2,d2_x,d2_y]
 			#if data["handedness"]=="Right":
 			#	saber.rotation.x = data["angle_x"]
 			#else :

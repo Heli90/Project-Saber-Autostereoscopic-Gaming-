@@ -285,21 +285,18 @@ func _process(_delta):
 		
 		# Traitement GAUCHE (Joueur 1)
 		if results.left and results.left.pose_landmarks.size() > 0:
-			_process_half_body(results.left.pose_landmarks[0], 1, false)
+			_process_half_body(results.left.pose_landmarks[0], 1)
 			
 		# Traitement DROIT (Joueur 2)
 		if results.right and results.right.pose_landmarks.size() > 0:
-			_process_half_body(results.right.pose_landmarks[0], 2, true)
+			_process_half_body(results.right.pose_landmarks[0], 2)
 
-func _process_half_body(pose_landmarks, player_index: int, is_right_side: bool):
+func _process_half_body(pose_landmarks, player_index: int):
 	var lm = pose_landmarks.landmarks
 	
 	# Fonction pour corriger le X
 	# Si c'est le côté droit, le X global = (X_local / 2) + 0.5
 	# Si c'est le côté gauche, le X global = (X_local / 2)
-	var fix_x = func(x_val: float):
-		return (x_val * 0.5) + (0.5 if is_right_side else 0.0)
-
 	# Calcul des vecteurs (on utilise le fix_x pour les coordonnées)
 	var wrist_r := Vector3(lm[15].x, lm[15].y, lm[15].z)
 	var elbow_r := Vector3(lm[13].x, lm[13].y, lm[13].z)
