@@ -74,6 +74,25 @@ shader_parameter/angle = 0.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_70i7w"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oey0u"]
+shader = ExtResource("6_xiui8")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_whvs6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ggww6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oxlqh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o3i0y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xw7u3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gu2kb"]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pf6lc"]
 shader = ExtResource("6_xiui8")
 shader_parameter/is_hovered = false
@@ -267,6 +286,31 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_0f518")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_70i7w")
 text = "Change Mode"
 
+[node name="SignSwitchGame" type="Sprite2D" parent="MenuButtons" unique_id=1937940466]
+visible = false
+position = Vector2(310, 460)
+scale = Vector2(1.6, 1)
+texture = ExtResource("4_eyfc8")
+
+[node name="SwitchGameButton" type="Button" parent="MenuButtons" unique_id=1260214297]
+visible = false
+material = SubResource("ShaderMaterial_oey0u")
+layout_mode = 0
+offset_left = 210.0
+offset_top = 445.0
+offset_right = 411.0
+offset_bottom = 485.0
+pivot_offset = Vector2(100.5, 20)
+theme_override_fonts/font = ExtResource("5_xiui8")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_whvs6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ggww6")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_oxlqh")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_o3i0y")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_xw7u3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gu2kb")
+text = "Play Level"
+
 [node name="SignMenu" type="Sprite2D" parent="MenuButtons" unique_id=1791184727]
 position = Vector2(310, 590)
 scale = Vector2(1.6, 1)
@@ -316,6 +360,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_dmw1k")
 text = "Quit"
 
 [node name="Options" type="Panel" parent="." unique_id=1888251166]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -456,6 +501,9 @@ audio_bus_name = "SFX"
 [connection signal="mouse_entered" from="MenuButtons/ModeButton" to="." method="_onModeButtonEnter"]
 [connection signal="mouse_exited" from="MenuButtons/ModeButton" to="." method="_onModeButtonExit"]
 [connection signal="pressed" from="MenuButtons/ModeButton" to="." method="_onModeButton_pressed"]
+[connection signal="mouse_entered" from="MenuButtons/SwitchGameButton" to="." method="_onSwitchGameButtonEnter"]
+[connection signal="mouse_exited" from="MenuButtons/SwitchGameButton" to="." method="_onSwitchGameButtonExit"]
+[connection signal="pressed" from="MenuButtons/SwitchGameButton" to="." method="_onSwitchGameButton_pressed"]
 [connection signal="mouse_entered" from="MenuButtons/MainMenuButton" to="." method="_onMenuButtonEnter"]
 [connection signal="mouse_exited" from="MenuButtons/MainMenuButton" to="." method="_onMenuButtonExit"]
 [connection signal="pressed" from="MenuButtons/MainMenuButton" to="." method="_onMainMenuButton_pressed"]

@@ -41,6 +41,11 @@ var sign_camera_scale: Vector2
 var back_scale: Vector2
 var sign_back_scale: Vector2
 
+@onready var switch_game_button: Button = $MenuButtons/SwitchGameButton
+@onready var sign_switch_game: Sprite2D = $MenuButtons/SignSwitchGame
+var switch_scale: Vector2
+var sign_switch_scale: Vector2
+
 # Cadres du tutoriel
 var cadres: Panel
 # Liste des barres de combo visuelles
@@ -76,6 +81,8 @@ func _ready() -> void:
 	sign_camera_scale = sign_camera.scale
 	back_scale = back_button.scale
 	sign_back_scale = sign_back.scale
+	switch_scale = switch_game_button.scale
+	sign_switch_scale = sign_switch_game.scale
 	
 	# Récupération de toutes les barres de combo visuelles dans le cas du tutoriel
 	var combo_bar_vue1 = get_node_or_null("../../../J1/CameraController/Vue1/ComboBar")
@@ -87,18 +94,22 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	latence_pause += delta
-	if not Global.setup_tutoriel:
-		sign_mode.visible = true
-		mode_button.visible = true
-		
-		sign_menu.position = Vector2(310.0, 590.0)
-		main_menu_button.position = Vector2(220.0, 570.0)
-		sign_quit.position = Vector2(310.0, 720.0)
-		quit_button.position = Vector2(272.5, 700.0)
+	if Global.launched_mode == 1:
+		if not Global.setup_tutoriel:
+			sign_switch_game.visible = false
+			switch_game_button.visible = false
+			sign_mode.visible = true
+			mode_button.visible = true
+		else:
+			sign_mode.visible = false
+			mode_button.visible = false
+			sign_switch_game.visible = true
+			switch_game_button.visible = true
 	else:
+		sign_switch_game.visible = false
+		switch_game_button.visible = false
 		sign_mode.visible = false
 		mode_button.visible = false
-		
 		sign_menu.position = Vector2(310.0, 460.0)
 		main_menu_button.position = Vector2(220.0, 440.0)
 		sign_quit.position = Vector2(310.0, 590.0)
@@ -277,6 +288,23 @@ func _onMainMenuButton_pressed() -> void:
 	Global.launched_mode = 0
 	get_tree().change_scene_to_file("res://scenes/menus/main_menu_3d.tscn")
 
+func _onSwitchGameButton_pressed() -> void:
+	click_sound.play()
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	var transition = create_tween().set_parallel(true)
+	transition.tween_property(menu_buttons, "modulate:a", 0.0, 0.1)
+	transition.set_parallel(false)
+	transition.chain().tween_interval(0.1)
+	transition.tween_callback(func():
+		fondu_noir.modulate.a = 0.0
+		fondu_noir.visible = true)
+	transition.tween_property(fondu_noir, "modulate:a", 1.0, 0.5)
+	transition.chain().tween_interval(0.3)
+	await transition.finished
+	Global.launched_mode = 2
+	get_tree().paused = false
+	get_tree().change_scene_to_file("res://scenes/game_scenes/scene_TV.tscn")
+
 func _onCameraButton_pressed() -> void :
 	landmarks_proceed.reload_camera_selection()
 
@@ -321,3 +349,9 @@ func _onModeButtonEnter() -> void:
 
 func _onModeButtonExit() -> void:
 	Global.ButtonExit(mode_button, mode_scale)
+
+func _onSwitchGameButtonEnter() -> void:
+	Global.ButtonEnter(switch_game_button, switch_scale, false, sign_switch_game, sign_switch_scale)
+
+func _onSwitchGameButtonExit() -> void:
+	Global.ButtonExit(switch_game_button, switch_scale)

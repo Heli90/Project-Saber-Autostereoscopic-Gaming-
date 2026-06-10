@@ -65,6 +65,10 @@ func ButtonExit(button, button_scale: Vector2, life: bool = false, sign_sprite: 
 	out.tween_property(button, "scale", button_scale, SCALE_DURATION)
 	if sign_sprite: out.tween_property(sign_sprite, "scale", sign_scale, SCALE_DURATION)
 
+# Tableau de textures d'encre globaux
+var ink_texture_list : Array = []
+var ink_small_texture_list : Array = []
+
 # Variables associées à l'amplitude des bras de chaque joueur
 var d1_x: float = 1.0
 var d2_x : float = 1.0

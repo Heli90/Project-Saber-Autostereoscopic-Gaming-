@@ -8,19 +8,25 @@ var ink_duration : float = 3.0
 # Tableau de textures d'encre
 var ink_texture_list : Array = []
 var ink_small_texture_list : Array = []
-const TEX_MIN = 250
-const TEX_MAX = 400
-const TEX_SMALL_MIN = 30
+const TEX_MIN = 400
+const TEX_MAX = 800
+const TEX_SMALL_MIN = 20
 const TEX_SMALL_MAX = 100
 
 func _ready():
-	# 24 éclaboussures d'encre générées
-	for i in range(8):
-		var tex_size = randi_range(TEX_MIN, TEX_MAX)
-		ink_texture_list.append(create_ink_texture(tex_size))
-	for i in range(16):
-		var tex_size = randi_range(TEX_SMALL_MIN, TEX_SMALL_MAX)
-		ink_small_texture_list.append(create_ink_texture(tex_size))
+	# 30 éclaboussures d'encre générées
+	if Global.ink_texture_list == []:
+		for i in range(15):
+			var tex_size = randi_range(TEX_MIN, TEX_MAX)
+			ink_texture_list.append(create_ink_texture(tex_size))
+		for i in range(15):
+			var tex_size = randi_range(TEX_SMALL_MIN, TEX_SMALL_MAX)
+			ink_small_texture_list.append(create_ink_texture(tex_size))
+		Global.ink_texture_list = ink_texture_list
+		Global.ink_small_texture_list = ink_small_texture_list
+	else:
+		ink_texture_list = Global.ink_texture_list
+		ink_small_texture_list = Global.ink_small_texture_list
 
 func create_ink_texture(size: int) -> ImageTexture:
 	var noise = FastNoiseLite.new()
