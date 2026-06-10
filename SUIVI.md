@@ -233,6 +233,10 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 **Van-Kévin :**
 - Vérification du bon fonctionnement de la pixelisation et correction des bugs liés à l'effet de pixelisation pendant les combos.
 
+**Hélias :**
+- Contact pour avoir l'emplacement devant Thévenin le jour de la présentation
+- Mise en commun des tâches à accomplir, répartition des tâches et actualisation en conséquence du planning 
+- Création du form pour les bêta-testeurs
 
 ### Séance 15 - 15/06
 
