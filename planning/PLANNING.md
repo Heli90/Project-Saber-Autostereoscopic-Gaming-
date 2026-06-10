@@ -190,6 +190,12 @@ A faire pour la prochaine fois :
 
 ### Séance 14 - 10/06
 
+***Remarques de J.Lefeuvre :***
+- Prévoir un planning de questions à poser à des beta-testeurs
+- Pour l'affiche : mettre les perfs (entrelacement selon les machines, ...), laisser du vide pour parler des tests utilisateurs, parler de l'organisation du gameplay (sfx, vfx) => diagramme d'architecture, présentations des effets "originaux" (même ceux qui ne sont pas finalement dans le jeu, ne pas hésiter à les mettre dans une version beta)
+- Prévoir un mode "automatique" : le jeu tourne en boucle tout seul et présente tous les effets qu'on envisage dans le gameplay
+- Envoyer un mail au copil Artishow pour lui demander de se mettre devant un mur avec 4-5 mètres de profondeur
+
 ### Séance 15 - 15/06 
 
 ### Séance 16-20 - Semaine du 22/06

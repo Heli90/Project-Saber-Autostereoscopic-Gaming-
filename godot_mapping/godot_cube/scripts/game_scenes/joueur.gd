@@ -43,13 +43,10 @@ func collision(body: Node3D) -> void:
 	if body.is_in_group("cube"): body.collision()
 
 func dilatate_y(f : float) -> float :
-	return 0.509259*f*f -0.52778*f
+	return 2*f
 	
 func dilatate_x(f : float) -> float :
-	if f > 0 :
-		return 0.4*f*f
-	else :
-		return -0.4*f*f
+	return 3*f
 
 func _physics_process(_delta: float) -> void:
 	if not landmarks or landmarks.hand_data.is_empty(): return

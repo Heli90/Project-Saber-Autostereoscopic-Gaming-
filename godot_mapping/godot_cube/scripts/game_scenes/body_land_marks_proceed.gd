@@ -311,16 +311,16 @@ func _process_half_body(pose_landmarks, player_index: int, is_right_side: bool):
 
 	# Ajout à hand_data
 	hand_data.append({
-		"x": fix_x.call(lm[16].x), 
-		"y": lm[16].y,
+		"x": fix_x.call(lm[14].x), 
+		"y": lm[14].y,
 		"handedness": "Left", 
 		"index": player_index, 
 		"angle_x": atan2(dir_l.y, dir_l.z),
 		"angle_z": atan2(dir_l.y, dir_l.x) 
 	})
 	hand_data.append({
-		"x": fix_x.call(lm[15].x), 
-		"y": lm[15].y,
+		"x": fix_x.call(lm[13].x), 
+		"y": lm[13].y,
 		"handedness": "Right", 
 		"index": player_index, 
 		"angle_x": atan2(dir_r.y, dir_r.z),
