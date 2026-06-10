@@ -64,3 +64,9 @@ func ButtonExit(button, button_scale: Vector2, life: bool = false, sign_sprite: 
 	out.set_parallel(true)
 	out.tween_property(button, "scale", button_scale, SCALE_DURATION)
 	if sign_sprite: out.tween_property(sign_sprite, "scale", sign_scale, SCALE_DURATION)
+
+# Variables associées à l'amplitude des bras de chaque joueur
+var d1_x: float = 2.5
+var d2_x : float = 2.5
+var d1_y : float = 1.0
+var d2_y : float = 1.0
