@@ -230,6 +230,8 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 ### Séance 14 - 10/06
 
+**Van-Kévin :**
+- Vérification du bon fonctionnement de la pixelisation et correction des bugs liés à l'effet de pixelisation pendant les combos.
 
 
 ### Séance 15 - 15/06

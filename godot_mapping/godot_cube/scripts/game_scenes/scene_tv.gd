@@ -119,8 +119,9 @@ func _input(event: InputEvent) -> void:
 		screen_output.material.set_shader_parameter("offset", 0.0)
 	if event.is_action_pressed("pixelisation"):
 		var pixelisationPower = screen_output.material.get_shader_parameter("pixelisationPower")
-		screen_output.set_shader_parameter("pixelisation", true)
-		screen_output.set_shader_parameter("pixelisationPower", pixelisationPower-10.0)
+		screen_output.material.set_shader_parameter("pixelisation", true)
+		screen_output.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, true, true, false, false])
+		screen_output.material.set_shader_parameter("pixelisationPower", pixelisationPower-10.0)
 	if event.is_action_pressed("resetPixelisation"):
-		screen_output.set_shader_parameter("pixelisation", false)
-		screen_output.set_shader_parameter("pixelisationPower", 200.0)
+		screen_output.material.set_shader_parameter("pixelisation", false)
+		screen_output.material.set_shader_parameter("pixelisationPower", 200.0)
