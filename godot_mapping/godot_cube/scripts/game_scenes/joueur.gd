@@ -56,16 +56,28 @@ func collision(body: Node3D) -> void:
 	if body.is_in_group("cube"): body.collision()
 
 func dilatate_y(f : float) -> float :
+	var s = f
 	if player_id == 1:
-		return d1_y * (f-1.5) + 1.5
+		s = d1_y * (f-1.5) + 1.5
 	else :
-		return d2_y * (f-1.5) + 1.5
+		s = d2_y * (f-1.5) + 1.5
+	if s >= saber_y_max :
+		return saber_y_max
+	if s<=saber_y_min :
+		return saber_y_min
+	return s
 	
 func dilatate_x(f : float) -> float :
+	var s = f
 	if player_id == 1:
-		return d1_x * f
+		s = d1_x * f
 	else :
-		return d2_x * f
+		s = d2_x * f
+	if s >= saber_range_x :
+		return saber_range_x
+	if s<=-saber_range_x :
+		return -saber_range_x
+	return s
 
 func _physics_process(_delta: float) -> void:
 	if not landmarks or landmarks.hand_data.is_empty(): return
@@ -85,17 +97,29 @@ func _physics_process(_delta: float) -> void:
 				if player_id == 1 :
 					if pos_x > max_x_1 :
 						max_x_1 = pos_x
-						Global.d1_x = saber_range_x/max_x_1
+						var d =  saber_range_x/max_x_1 
+						if d < d1_x and d >= 1:
+							Global.d1_x = saber_range_x/max_x_1
+							d1_x = saber_range_x/max_x_1
 					if pos_y > max_y_1 :
 						max_y_1 = pos_y
-						Global.d1_y = saber_range_x/max_x_1
-						
+						var d =  saber_range_x/max_y_1
+						if d < d1_y and d >= 1:
+							Global.d1_y = saber_range_x/max_y_1
+							d1_y = saber_range_x/max_y_1
 				else :
-					if pos_x != 0 :
-						var d2_x_p = abs(saber_range_x/pos_x)
-						if d2_x_p > d2_x and d2_x_p >=1.2:
-							Global.d2_x = d2_x_p
-							d2_x = d2_x_p
+					if pos_x > max_x_2 :
+						max_x_2 = pos_x
+						var d = saber_range_x/max_x_2
+						if d < d2_x and d >= 1 :
+							Global.d2_x = saber_range_x/max_x_2
+							d2_x = saber_range_x/max_x_2
+					if pos_y > max_y_2 :
+						max_y_2 = pos_y
+						var d = saber_range_x/max_y_2
+						if d < d2_y and d >= 1 :
+							Global.d2_y =saber_range_x/max_y_2
+							d2_y = saber_range_x/max_y_2
 							
 			saber.position.x = dilatate_x(pos_x)
 			saber.position.y = dilatate_y(pos_y)
@@ -104,11 +128,9 @@ func _physics_process(_delta: float) -> void:
 			saber.rotation.z = -atan2(0,-1)/2 - data["angle_z"]
 			if data["handedness"] == "Right" :
 				if player_id == 1 :
-					j1_label.text = "x = %.2f, y = %.2f, angle = %.2f" % [pos_x, pos_y,atan2(0,-1)/2 - data["angle_z"]]
+					j1_label.text = "x = %.2f, y = %.2f, angle = %.2f\n Max x : %.2f, y : %.2f, Dilatation x : %.2f, y : %.2f" % [data["x"], data["y"],-atan2(0,-1)/2 - data["angle_z"], max_x_1,max_y_1,d1_x,d1_y]
 				elif player_id == 2:
-					j2_label.text = "x = %.2f, y = %.2f, angle = %.2f" % [pos_x, pos_y,atan2(0,-1)/2 - data["angle_z"]]
-			if player_id == 1 :
-				print("Dilation J1 x : %.2f, y : %.2f" %[d1_x,d1_y])
+					j2_label.text = "x = %.2f, y = %.2f, angle = %.2f\n Max x : %.2f, y : %.2f, Dilatation x : %.2f, y : %.2f" % [data["x"], data["y"],-atan2(0,-1)/2 - data["angle_z"],max_x_2, max_y_2,d2_x,d2_y]
 			#if data["handedness"]=="Right":
 			#	saber.rotation.x = data["angle_x"]
 			#else :

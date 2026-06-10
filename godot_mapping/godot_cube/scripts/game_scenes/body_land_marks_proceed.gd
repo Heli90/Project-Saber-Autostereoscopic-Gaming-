@@ -301,17 +301,17 @@ func _process_half_body(pose_landmarks, player_index: int, is_right_side: bool):
 		return (x_val * 0.5) + (0.5 if is_right_side else 0.0)
 
 	# Calcul des vecteurs (on utilise le fix_x pour les coordonnées)
-	var wrist_r := Vector3(fix_x.call(lm[15].x), lm[15].y, lm[15].z)
-	var elbow_r := Vector3(fix_x.call(lm[13].x), lm[13].y, lm[13].z)
+	var wrist_r := Vector3(lm[15].x, lm[15].y, lm[15].z)
+	var elbow_r := Vector3(lm[13].x, lm[13].y, lm[13].z)
 	var dir_r   := (wrist_r - elbow_r).normalized()
 	
-	var wrist_l := Vector3(fix_x.call(lm[16].x), lm[16].y, lm[16].z)
-	var elbow_l := Vector3(fix_x.call(lm[14].x), lm[14].y, lm[14].z)
+	var wrist_l := Vector3(lm[16].x, lm[16].y, lm[16].z)
+	var elbow_l := Vector3(lm[14].x, lm[14].y, lm[14].z)
 	var dir_l   := (wrist_l - elbow_l).normalized()
 
 	# Ajout à hand_data
 	hand_data.append({
-		"x": fix_x.call(lm[16].x), 
+		"x": lm[16].x, 
 		"y": lm[16].y,
 		"handedness": "Left", 
 		"index": player_index, 
@@ -319,7 +319,7 @@ func _process_half_body(pose_landmarks, player_index: int, is_right_side: bool):
 		"angle_z": atan2(dir_l.y, dir_l.x) 
 	})
 	hand_data.append({
-		"x": fix_x.call(lm[15].x), 
+		"x": lm[15].x, 
 		"y": lm[15].y,
 		"handedness": "Right", 
 		"index": player_index, 
