@@ -21,6 +21,10 @@ var d1_x : float
 var d2_x : float
 var d1_y : float
 var d2_y : float
+var max_x_1 : float = 0.1
+var max_y_1 : float = 0.1
+var max_x_2 : float = 0.1
+var max_y_2 : float = 0.1
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -52,26 +56,16 @@ func collision(body: Node3D) -> void:
 	if body.is_in_group("cube"): body.collision()
 
 func dilatate_y(f : float) -> float :
-	if f > saber_y_max :
-		return saber_y_max
-	elif f < saber_y_min :
-		return saber_y_min
+	if player_id == 1:
+		return d1_y * (f-1.5) + 1.5
 	else :
-		if player_id == 1:
-			return d1_y * f
-		else :
-			return d2_y * f
+		return d2_y * (f-1.5) + 1.5
 	
 func dilatate_x(f : float) -> float :
-	if f > saber_range_x :
-		return saber_range_x
-	elif f < -saber_range_x :
-		return -saber_range_x
+	if player_id == 1:
+		return d1_x * f
 	else :
-		if player_id == 1:
-			return d1_x * f
-		else :
-			return d2_x * f
+		return d2_x * f
 
 func _physics_process(_delta: float) -> void:
 	if not landmarks or landmarks.hand_data.is_empty(): return
@@ -87,13 +81,15 @@ func _physics_process(_delta: float) -> void:
 			
 			var pos_x : float = lerp(-saber_range_x, saber_range_x, local_x)
 			var pos_y : float = lerp(saber_y_max, saber_y_min, local_y)
-			if Global.launched_mode ==1 :
+			if Global.launched_mode <= 1 :
 				if player_id == 1 :
-					if pos_x != 0 :
-						var d1_x_p = abs(saber_range_x/pos_x)
-						if d1_x_p < d1_x and d1_x_p >= 1.2:
-							Global.d1_x = d1_x_p
-							d1_x = d1_x_p
+					if pos_x > max_x_1 :
+						max_x_1 = pos_x
+						Global.d1_x = saber_range_x/max_x_1
+					if pos_y > max_y_1 :
+						max_y_1 = pos_y
+						Global.d1_y = saber_range_x/max_x_1
+						
 				else :
 					if pos_x != 0 :
 						var d2_x_p = abs(saber_range_x/pos_x)
