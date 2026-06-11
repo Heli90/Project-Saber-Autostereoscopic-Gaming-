@@ -19,7 +19,6 @@ var start_spawn: bool = false
 var is_generated: bool = false
 # Générateur aléatoire de nombres pour tous les tirages aléatoires
 var rng = RandomNumberGenerator.new()
-
 # Liste de tous les types de cubes
 var cube_list: Array[PackedScene]
 
@@ -37,6 +36,15 @@ var count_bonus_time: Array[bool] = [false, false]
 var grille = [[0.0, 0.5], [-2.0, 0.5], [2.0, 0.5], [0.0, 1.75], [-2.0, 1.75], [2.0, 1.75], [0.0, 3.0], [-2.0, 3.0], [2.0, 3.0]]
 # Stockage des différents blocs du terrain
 var blocs: Array[Node3D]
+
+# Nombre de cubes à faire apparaître dans la zone d'effets
+var to_show_cubes: int = 10
+# Nombre de cubes montrés dans la zone d'effets
+var showed_cubes: int = 0
+# Booléen de départ pour décider quand il faut commencer la boucle d'effets dans la zone d'effets
+var start_loop_in_effect_map: bool = false
+# Booléen de départ pour décider quand il faut arrêter la boucle d'effets dans la zone d'effets
+var stop_loop_in_effect_map: bool = false
 
 # Variables liées aux combos
 var increment_seuil: Array[int] = [2,2]
@@ -97,11 +105,12 @@ func activation() -> void:
 		ink_overlay.append(get_node("../../SplitScreens/Camera2/POV2/InkLayerJ2/InkOverlayJ2"))
 	else:
 		level_music = get_node("../../LevelMusic")
+		texture = get_node("../../TextureRect")
+		# Dans la zone à effets, il n'y a pas de joueurs, donc, on retire ce cas
 		if Global.launched_mode != 3:
 			j1 = get_node("../../J1")
 			j2 = get_node("../../J2")
 			healing = Global.healing
-			texture = get_node("../../TextureRect")
 			
 			if Global.launched_mode == 2:
 				score_uis.append(get_node("../../J1/CameraController/Vue1/ScoreUI"))
@@ -113,7 +122,6 @@ func activation() -> void:
 				health_bars.append(get_node("../../J2/CameraController/Vue5/HealthBar"))
 				health_bars.append(get_node("../../J1/CameraController/Vue2/HealthBar"))
 				health_bars.append(get_node("../../J2/CameraController/Vue6/HealthBar"))
-				start_label.text = "Ready ?"
 
 			shield_bars.append(get_node("../../J1/CameraController/Vue1/ShieldBar"))
 			shield_bars.append(get_node("../../J2/CameraController/Vue5/ShieldBar"))
@@ -160,16 +168,19 @@ func start_game() -> void:
 	start_spawn = true
 
 func _process(delta: float) -> void:
-	if Global.launched_mode == 3: effect_loop()
+	# On retire les blocs qui ont été supprimés du jeu
+	blocs = blocs.filter(func(bloc): return is_instance_valid(bloc))
+
+	# Une boucle à part est dédiée à la zone de test des effets
+	if Global.launched_mode == 3:
+		if start_loop_in_effect_map: effect_loop()
+		else: pass
 	else:
 		if start_spawn:
 			elapsed_time += delta
 			
 			if pixelisation_active_j1: pixelisation_time_j1 += delta
 			if pixelisation_active_j2: pixelisation_time_j2 += delta
-
-			# On retire les blocs qui ont été supprimés du jeu
-			blocs = blocs.filter(func(bloc): return is_instance_valid(bloc))
 
 			for i in range(2):
 				# On vérifie si les boucliers de chaque joueur doivent écourtés
@@ -180,7 +191,7 @@ func _process(delta: float) -> void:
 					# Si le bouclier tombe à 0, on efface la barre associée
 					var t = create_tween().set_parallel(true)
 					t.tween_property(shield_bars[i], "modulate:a", 0.0, 0.01)
-					if Global.launched_mode > 0: t.tween_property(shield_bars[i+2], "modulate:a", 0.0, 0.01)
+					if mode_with_sabers(): t.tween_property(shield_bars[i+2], "modulate:a", 0.0, 0.01)
 					await t.finished
 
 				elif shields[i].emitting:
@@ -195,7 +206,7 @@ func _process(delta: float) -> void:
 					# On efface les barres des boucliers sur l'écran
 					var t = create_tween().set_parallel(true)
 					t.tween_property(shield_bars[i], "modulate:a", 0.0, 0.01)
-					if Global.launched_mode > 0: t.tween_property(shield_bars[i+2], "modulate:a", 0.0, 0.01)
+					if mode_with_sabers(): t.tween_property(shield_bars[i+2], "modulate:a", 0.0, 0.01)
 					await t.finished
 
 				# On calcule le temps de bonus pour chacun des 2 joueurs et on arrête le bonus une fois que ce temps est dépassé
@@ -230,8 +241,59 @@ func menu_loop() -> void:
 				3: pass
 		spawn_cube(cube_list[n])
 
+func spawn_cubes_in_effect_map() -> void:
+	spawn_cube(classic_bloc, 10.0, 0, 3, [0.0, 2.0])
+	await get_tree().create_timer(0.5).timeout
+	spawn_cube(classic_bloc, 10.0, 1, 3, [0.0, 2.0])
+	showed_cubes += 1
+
+func increase_pixelisation() -> void:
+	var pixelisationPower = texture.material.get_shader_parameter("pixelisationPower")
+	texture.material.set_shader_parameter("pixelisation", true)
+	texture.material.set_shader_parameter("pixelisationPower", pixelisationPower - 10.0)
+
+func reset_pixelisation() -> void:
+	texture.material.set_shader_parameter("pixelisation", false)
+	texture.material.set_shader_parameter("pixelisationPower", 200.0)
+
+func increase_pixelisation_in_effect_map() -> void:
+	texture.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, true, true, false, false])
+	increase_pixelisation()
+	spawn_cubes_in_effect_map()
+
+func increase_glitch() -> void:
+	var offset = texture.material.get_shader_parameter("offset")
+	texture.material.set_shader_parameter("offset", offset+0.01)
+	
+func reset_glitch() -> void:
+	texture.material.set_shader_parameter("offset", 0.0)
+
+func increase_glitch_in_effect_map() -> void:
+	increase_glitch()
+	spawn_cubes_in_effect_map()
+
 func effect_loop() -> void:
-	pass
+	# De 1 à 5, on teste l'effet de pixelisation
+	# De 7 à 9, on teste l'effet de "glitch"
+	# A 10, on a fini la boucle et on demande aux joueurs s'ils veulent répéter la séquence d'effets
+	if blocs == []:
+		match showed_cubes:
+			0: spawn_cubes_in_effect_map()
+			1: increase_pixelisation_in_effect_map()
+			2: increase_pixelisation_in_effect_map()
+			3: increase_pixelisation_in_effect_map()
+			4: increase_pixelisation_in_effect_map()
+			5: increase_pixelisation_in_effect_map()
+			6:
+				reset_pixelisation()
+				spawn_cubes_in_effect_map()
+			7: increase_glitch_in_effect_map()
+			8: increase_glitch_in_effect_map()
+			9: increase_glitch_in_effect_map()
+			10:
+				reset_glitch()
+				start_loop_in_effect_map = false
+				stop_loop_in_effect_map = true
 
 # On actualise la barre de combo visuelle et on vérifie si un palier a été dépassé
 func check_progress_bars() -> void:
@@ -258,29 +320,26 @@ func check_progress_bars() -> void:
 	
 	# A chaque palier passé par l'un des deux joueurs, l'autre subit un effet de pixelisation
 	match passage_paliers:
-		[false, false]: pass
+		[false, false]:
+			texture.material.set_shader_parameter("pixelisation_mask", [false, false, false, false, false, false, false, false])
+			reset_pixelisation()
 		[false, true]:
 			texture.material.set_shader_parameter("pixelisation_mask", [false, false, false, false, true, true, false, false])
 			if not pixelisation_active_j2:
 				pixelisation_active_j2 = true
-				var pixelisationPower = texture.material.get_shader_parameter("pixelisationPower")
-				texture.material.set_shader_parameter("pixelisation", true)
-				texture.material.set_shader_parameter("pixelisationPower", pixelisationPower - 10.0)
+				increase_pixelisation()
 		[true, false]:
 			texture.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, false, false, false, false])
 			if not pixelisation_active_j1:
 				pixelisation_active_j1 = true
-				var pixelisationPower = texture.material.get_shader_parameter("pixelisationPower")
-				texture.material.set_shader_parameter("pixelisation", true)
-				texture.material.set_shader_parameter("pixelisationPower", pixelisationPower - 10.0)
+				increase_pixelisation()
 		[true, true]:
 			texture.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, true, true, false, false])
 			if (not pixelisation_active_j1) or (not pixelisation_active_j2):
 				pixelisation_active_j1 = true
 				pixelisation_active_j2 = true
-				var pixelisationPower = texture.material.get_shader_parameter("pixelisationPower")
-				texture.material.set_shader_parameter("pixelisation", true)
-				texture.material.set_shader_parameter("pixelisationPower", pixelisationPower - 10.0)
+				increase_pixelisation()
+
 	if pixelisation_time_j1 > 5.0:
 		passage_paliers[0] = false
 		pixelisation_active_j1 = false
@@ -290,6 +349,7 @@ func check_progress_bars() -> void:
 
 func tutoriel_loop() -> void:
 	check_progress_bars()
+	# On définit les cubes qui apparaissent selon le mode choisi
 	match Global.tutoriel_played_mode:
 		0:
 			if Global.setup_tutoriel:
@@ -461,6 +521,9 @@ func setup_heal_bloc(bloc: Node3D, absolute_speed: float, direction: int, spawn:
 	bloc.striked_cube_j2.connect(_onStrikedHealCube_j2)
 	spawn_valide(bloc, absolute_speed, direction, spawn)
 
+func mode_with_sabers() -> bool:
+	return (Global.launched_mode == 1) or (Global.launched_mode == 2)
+
 func StrikedClassicCube(i: int) -> void:
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 1000
@@ -474,11 +537,11 @@ func MissedClassicCube(i: int) -> void:
 		var current = shields[i].material_override.get_shader_parameter("MaskPower")
 		shields[i].material_override.set_shader_parameter("MaskPower", current + 2.0)
 		shield_bars[i].update_shield(shield_actif[i])
-		if Global.launched_mode > 0: shield_bars[i+2].update_shield(shield_actif[i])
+		if mode_with_sabers(): shield_bars[i+2].update_shield(shield_actif[i])
 	else:
 		multiplicateur[i] = 1
 		stocked_combo[i] = 0
-		if Global.launched_mode > 0:
+		if mode_with_sabers():
 			texture_progress_bars[i].value = 0
 			texture_progress_bars[i+2].value = 0
 			progress_bar_labels[i].text = letters[0]

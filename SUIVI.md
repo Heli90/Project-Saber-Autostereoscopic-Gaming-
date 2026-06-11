@@ -246,7 +246,7 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 ### Entre la séance 14 et la séance 15
 
 **Van-Kévin :**
-- Ajout d'une zone de tests (partielle) de tous les effets créés au cours du projet, même s'ils ne sont pas retenus dans la version finale, pour faire office de démonstration technique
+- Ajout d'une zone de tests de tous les effets créés au cours du projet, même s'ils ne sont pas retenus dans la version finale, pour faire office de démonstration technique
 
 ### Séance 15 - 15/06
 

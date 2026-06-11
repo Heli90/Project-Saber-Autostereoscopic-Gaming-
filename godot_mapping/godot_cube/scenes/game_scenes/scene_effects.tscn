@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://b5jcoe2bhj7hl" path="res://addons/sfx/effect_level_music.mp3" id="4_c5uaf"]
 [ext_resource type="Texture2D" uid="uid://vtvfwglow2to" path="res://addons/assets/tuto_game_panel.png" id="5_j5h06"]
 [ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/pixel_art_typeface.ttf" id="6_fauai"]
+[ext_resource type="Shader" uid="uid://rpaw715m64rd" path="res://scenes/game_scenes/rainbow.gdshader" id="6_j5h06"]
 [ext_resource type="Shader" uid="uid://crf7jc6x8vo3h" path="res://shaders/button.gdshader" id="7_7m7xu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rap8m"]
@@ -30,6 +31,12 @@ height = 1080
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_27sum"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gnijy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7m7xu"]
+shader = ExtResource("6_j5h06")
+shader_parameter/strength = 0.50000002375
+shader_parameter/speed = 0.250000011875
+shader_parameter/angle = 0.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_euogu"]
 
@@ -196,6 +203,12 @@ texture = ExtResource("4_8qt6g")
 position = Vector2(960, -250)
 scale = Vector2(2.5, 1.75)
 texture = ExtResource("5_j5h06")
+
+[node name="Line2D" type="Line2D" parent="Cadre" unique_id=125556076]
+visible = false
+material = SubResource("ShaderMaterial_7m7xu")
+position = Vector2(710, -180)
+points = PackedVector2Array(0, 0, 500, 0)
 
 [node name="Label" type="Label" parent="Cadre" unique_id=1556424997]
 layout_mode = 0

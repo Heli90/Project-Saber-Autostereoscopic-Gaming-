@@ -3,6 +3,7 @@ extends Node3D
 @export var nb_views : int = 8
 @onready var screen_output = $TextureRect
 @onready var game: Node3D = $Game
+@onready var cube_spawner: Node3D = $Game/CubeSpawner
 @onready var fondu_noir: ColorRect = $Game/HUD/FonduLayer/FonduNoir
 @onready var landmarks_proceed: Node2D = $Game/LandMarksProceed
 @onready var pause_menu: ColorRect = $Game/HUD/PauseMenu
@@ -10,6 +11,7 @@ extends Node3D
 
 @onready var cadre: Panel = $Cadre
 @onready var label: Label = $Cadre/Label
+@onready var line: Line2D = $Cadre/Line2D
 @onready var ok_button: Button = $Cadre/Buttons/OKButton
 @onready var continue_button: Button = $Cadre/Buttons/ContinueButton
 @onready var stop_button: Button = $Cadre/Buttons/StopButton
@@ -60,14 +62,29 @@ func welcoming_effects() -> void:
 	await t.finished
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
+func _process(_delta: float) -> void:
+	if cube_spawner.stop_loop_in_effect_map:
+		get_tree().paused = true
+		descend_cadre()
+
 func monte_cadre() -> void:
 	# On fait monter les panneaux
-	var t = create_tween().set_ease(Tween.EASE_IN_OUT)
+	var t = create_tween()
 	t.set_trans(Tween.TRANS_BACK)
 	t.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	t.tween_property(cadre, "position", Vector2(0.0, 0.0), 0.8)
 	await t.finished
 	cadre.visible = false
+
+func descend_cadre() -> void:
+	# On fait descendre les panneaux
+	var t = create_tween().set_ease(Tween.EASE_OUT)
+	cadre.visible = true
+	t.set_trans(Tween.TRANS_BACK)
+	t.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	t.tween_property(cadre, "position", Vector2(0.0, 700.0), 0.8)
+	await t.finished
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _onOKButton_pressed() -> void:
 	click_sound.play()
@@ -77,12 +94,17 @@ func _onOKButton_pressed() -> void:
 	ok_button.visible = false
 	continue_button.visible = true
 	stop_button.visible = true
+	line.visible = true
+	cube_spawner.start_loop_in_effect_map = true
 	label.text = "Do you want to repeat\nthe experience ?"
 	get_tree().paused = false
 
 func _onContinueButton_pressed() -> void:
 	click_sound.play()
 	monte_cadre()
+	cube_spawner.showed_cubes = 0
+	cube_spawner.start_loop_in_effect_map = true
+	cube_spawner.stop_loop_in_effect_map = false
 	await get_tree().create_timer(0.5).timeout
 	get_tree().paused = false
 
@@ -90,15 +112,17 @@ func _onStopButton_pressed() -> void:
 	click_sound.play()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	monte_cadre()
-	var transition = create_tween()
-	transition.chain().tween_interval(0.1)
-	transition.tween_callback(func():
+	var t = create_tween()
+	t.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	t.chain().tween_interval(0.1)
+	t.tween_callback(func():
 		fondu_noir.modulate.a = 0.0
 		fondu_noir.visible = true)
-	transition.tween_property(fondu_noir, "modulate:a", 1.0, 0.5)
-	transition.chain().tween_interval(0.3)
-	await transition.finished
+	t.tween_property(fondu_noir, "modulate:a", 1.0, 0.5)
+	t.chain().tween_interval(0.3)
+	await t.finished
 	get_tree().paused = false
+	Global.launched_mode = 0
 	get_tree().change_scene_to_file("res://scenes/menus/main_menu_3d.tscn")
 
 func _onOKButtonEnter() -> void:
