@@ -1,0 +1,297 @@
+[gd_scene format=3 uid="uid://4ffbpo0s5dtp"]
+
+[ext_resource type="Script" uid="uid://dms8t5qyvhcf7" path="res://scripts/game_scenes/scene_effects.gd" id="1_p8p8s"]
+[ext_resource type="Shader" uid="uid://vno46ensk36y" path="res://shaders/generation_image.gdshader" id="2_c5uaf"]
+[ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="3_nnt2t"]
+[ext_resource type="Texture2D" uid="uid://c0mapru3i8pig" path="res://addons/assets/chain.png" id="4_8qt6g"]
+[ext_resource type="AudioStream" uid="uid://b5jcoe2bhj7hl" path="res://addons/sfx/effect_level_music.mp3" id="4_c5uaf"]
+[ext_resource type="Texture2D" uid="uid://vtvfwglow2to" path="res://addons/assets/tuto_game_panel.png" id="5_j5h06"]
+[ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/pixel_art_typeface.ttf" id="6_fauai"]
+[ext_resource type="Shader" uid="uid://crf7jc6x8vo3h" path="res://shaders/button.gdshader" id="7_7m7xu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rap8m"]
+resource_local_to_scene = true
+shader = ExtResource("2_c5uaf")
+shader_parameter/N = 8
+shader_parameter/decalage = -1
+shader_parameter/invertViews = false
+shader_parameter/offset = 0.01
+shader_parameter/pixelisation = false
+shader_parameter/pixelisationPower = 200.0
+shader_parameter/pixelisation_mask = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_sgwr3"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ob6nf"]
+gradient = SubResource("Gradient_sgwr3")
+width = 1920
+height = 1080
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_27sum"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gnijy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_euogu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fauai"]
+shader = ExtResource("7_7m7xu")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_a001x"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tmg8i"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_h5j6t"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6tjkf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3qig7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_avp5h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8qt6g"]
+shader = ExtResource("7_7m7xu")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j5h06"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fauai"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7m7xu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r6h0b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e6gv3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1dj8r"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j5h06"]
+shader = ExtResource("7_7m7xu")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8qt6g"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vwwnv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_14hxk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yp8q7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1toyl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5w4bw"]
+
+[node name="SceneEffects" type="Node3D" unique_id=581838564]
+script = ExtResource("1_p8p8s")
+
+[node name="Vue1" type="SubViewport" parent="." unique_id=160941604]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+
+[node name="Camera" type="Camera3D" parent="Vue1" unique_id=1489187963]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, -0.03, 2.25, 20.3)
+current = true
+fov = 90.0
+
+[node name="Vue2" type="SubViewport" parent="." unique_id=587016621]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+
+[node name="Camera" type="Camera3D" parent="Vue2" unique_id=905825031]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0.03, 2.25, 20.3)
+current = true
+fov = 90.0
+
+[node name="Vue3" type="SubViewport" parent="." unique_id=1004834437]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="Vue3" unique_id=1075956504]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10, 7)
+current = true
+
+[node name="Vue4" type="SubViewport" parent="." unique_id=1560641159]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="Vue4" unique_id=87969037]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10, 7)
+current = true
+
+[node name="Vue5" type="SubViewport" parent="." unique_id=2371605]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+
+[node name="Camera" type="Camera3D" parent="Vue5" unique_id=930155445]
+transform = Transform3D(-1, 2.990035e-08, -8.2150535e-08, 0, 0.9396926, 0.34202012, 8.742278e-08, 0.34202012, -0.9396926, -0.030000025, 2.25, -20.3)
+current = true
+fov = 90.0
+
+[node name="Vue6" type="SubViewport" parent="." unique_id=1672245773]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+
+[node name="Camera" type="Camera3D" parent="Vue6" unique_id=965164895]
+transform = Transform3D(-1, 2.990035e-08, -8.2150535e-08, 0, 0.9396926, 0.34202012, 8.742278e-08, 0.34202012, -0.9396926, 0.029999973, 2.25, -20.3)
+current = true
+fov = 90.0
+
+[node name="Vue7" type="SubViewport" parent="." unique_id=1709861060]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="Vue7" unique_id=1176547702]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10, 7)
+current = true
+
+[node name="Vue8" type="SubViewport" parent="." unique_id=1934610525]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="Vue8" unique_id=1785708641]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10, 7)
+current = true
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1745168556]
+texture_filter = 2
+material = SubResource("ShaderMaterial_rap8m")
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = SubResource("GradientTexture2D_ob6nf")
+
+[node name="Game" parent="." unique_id=1026699542 instance=ExtResource("3_nnt2t")]
+
+[node name="Cadre" type="Panel" parent="." unique_id=116058263]
+process_mode = 3
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_27sum")
+
+[node name="Chains" type="Panel" parent="Cadre" unique_id=1401519466]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_gnijy")
+
+[node name="Chain1" type="Sprite2D" parent="Cadre/Chains" unique_id=294408214]
+position = Vector2(855, -730)
+scale = Vector2(1.4, 2)
+texture = ExtResource("4_8qt6g")
+
+[node name="Chain2" type="Sprite2D" parent="Cadre/Chains" unique_id=572868510]
+position = Vector2(1065, -730)
+scale = Vector2(1.4, 2)
+texture = ExtResource("4_8qt6g")
+
+[node name="Frame" type="Sprite2D" parent="Cadre" unique_id=178689115]
+position = Vector2(960, -250)
+scale = Vector2(2.5, 1.75)
+texture = ExtResource("5_j5h06")
+
+[node name="Label" type="Label" parent="Cadre" unique_id=1556424997]
+layout_mode = 0
+offset_left = 705.0
+offset_top = -400.0
+offset_right = 1212.0
+offset_bottom = -145.0
+theme_override_fonts/font = ExtResource("6_fauai")
+theme_override_font_sizes/font_size = 40
+text = "Attention, these effects
+may cause headaches or
+nausea. Please be careful
+and stop the experience
+if necessary.
+"
+horizontal_alignment = 1
+
+[node name="Buttons" type="Panel" parent="Cadre" unique_id=1498871818]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_euogu")
+
+[node name="OKButton" type="Button" parent="Cadre/Buttons" unique_id=329869384]
+process_mode = 3
+material = SubResource("ShaderMaterial_fauai")
+layout_mode = 0
+offset_left = 900.0
+offset_top = -160.0
+offset_right = 1029.0
+offset_bottom = -69.0
+pivot_offset = Vector2(64.5, 45.5)
+theme_override_fonts/font = ExtResource("6_fauai")
+theme_override_font_sizes/font_size = 90
+theme_override_styles/normal = SubResource("StyleBoxEmpty_a001x")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_tmg8i")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_h5j6t")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_6tjkf")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_3qig7")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_avp5h")
+text = "OK"
+
+[node name="ContinueButton" type="Button" parent="Cadre/Buttons" unique_id=2138085664]
+process_mode = 3
+visible = false
+material = SubResource("ShaderMaterial_8qt6g")
+layout_mode = 0
+offset_left = 770.0
+offset_top = -280.0
+offset_right = 1153.0
+offset_bottom = -189.0
+pivot_offset = Vector2(191.5, 45.5)
+theme_override_fonts/font = ExtResource("6_fauai")
+theme_override_font_sizes/font_size = 90
+theme_override_styles/normal = SubResource("StyleBoxEmpty_j5h06")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_fauai")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7m7xu")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_r6h0b")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_e6gv3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1dj8r")
+text = "Continue"
+
+[node name="StopButton" type="Button" parent="Cadre/Buttons" unique_id=1569551576]
+process_mode = 3
+visible = false
+material = SubResource("ShaderMaterial_j5h06")
+layout_mode = 0
+offset_left = 870.0
+offset_top = -160.0
+offset_right = 1067.0
+offset_bottom = -69.0
+pivot_offset = Vector2(98.5, 45.5)
+theme_override_fonts/font = ExtResource("6_fauai")
+theme_override_font_sizes/font_size = 90
+theme_override_styles/normal = SubResource("StyleBoxEmpty_8qt6g")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vwwnv")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_14hxk")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_yp8q7")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_1toyl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_5w4bw")
+text = "Stop"
+
+[node name="LevelMusic" type="AudioStreamPlayer" parent="." unique_id=1506636180]
+stream = ExtResource("4_c5uaf")
+volume_db = -15.0
+bus = &"Musique"
+parameters/looping = true
+
+[connection signal="mouse_entered" from="Cadre/Buttons/OKButton" to="." method="_onOKButtonEnter"]
+[connection signal="mouse_exited" from="Cadre/Buttons/OKButton" to="." method="_onOKButtonExit"]
+[connection signal="pressed" from="Cadre/Buttons/OKButton" to="." method="_onOKButton_pressed"]
+[connection signal="mouse_entered" from="Cadre/Buttons/ContinueButton" to="." method="_onContinueButtonEnter"]
+[connection signal="mouse_exited" from="Cadre/Buttons/ContinueButton" to="." method="_onContinueButtonExit"]
+[connection signal="pressed" from="Cadre/Buttons/ContinueButton" to="." method="_onContinueButton_pressed"]
+[connection signal="mouse_entered" from="Cadre/Buttons/StopButton" to="." method="_onStopButtonEnter"]
+[connection signal="mouse_exited" from="Cadre/Buttons/StopButton" to="." method="_onStopButtonExit"]
+[connection signal="pressed" from="Cadre/Buttons/StopButton" to="." method="_onStopButton_pressed"]
+
+[editable path="Game"]

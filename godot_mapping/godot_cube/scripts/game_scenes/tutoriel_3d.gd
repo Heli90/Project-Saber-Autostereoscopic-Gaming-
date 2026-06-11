@@ -20,10 +20,6 @@ var combo_bar_list: Array[Control] = []
 @onready var pause_menu: ColorRect = $Game/HUD/PauseMenu
 @onready var click_sound: AudioStreamPlayer = $Game/HUD/PauseMenu/ClickSound
 
-var rd: RenderingDevice
-var last_gpu_time_ms: float = 0.0
-var last_gpu_vues_ms: float = 0.0
-
 func _ready() -> void:
 	# On masque les barres de combo hors du jeu
 	combo_bar_list = [combo_bar_vue1, combo_bar_vue2, combo_bar_vue5, combo_bar_vue6]
@@ -33,8 +29,6 @@ func _ready() -> void:
 	# On ne lance pas le thread de caméra au début pour optimiser les FPS
 	landmarks_proceed.camera_feed.feed_is_active = false
 
-	rd = RenderingServer.get_rendering_device()
-	await get_tree().process_frame
 	# On récupère le monde 3D
 	var world_3d = get_viewport().world_3d
 	if has_node("Game"):

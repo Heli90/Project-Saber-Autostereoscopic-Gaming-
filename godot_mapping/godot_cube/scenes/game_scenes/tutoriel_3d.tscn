@@ -725,7 +725,7 @@ offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_hp6y6")
 
 [node name="Frame1" type="Sprite2D" parent="Cadres/Frames" unique_id=2090551779]
-position = Vector2(225, -198)
+position = Vector2(225, -200)
 scale = Vector2(1.4, 1.4)
 texture = ExtResource("17_j2wie")
 

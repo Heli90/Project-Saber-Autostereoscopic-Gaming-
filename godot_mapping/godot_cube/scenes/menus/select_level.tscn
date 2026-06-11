@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://8msptkcdmu7b" path="res://scripts/menus/arrows.gd" id="7_0vyn2"]
 [ext_resource type="AudioStream" uid="uid://myrda2i0e3y4" path="res://addons/assets/insert_cassette.mp3" id="7_a7w0q"]
 [ext_resource type="Shader" uid="uid://crf7jc6x8vo3h" path="res://shaders/button.gdshader" id="7_axkwj"]
+[ext_resource type="Texture2D" uid="uid://dowsvsndxp58x" path="res://addons/assets/cassette_effects.png" id="7_xgvxu"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8ow2l"]
 texture = ExtResource("1_eiguw")
@@ -89,6 +90,23 @@ theme_override_font_sizes/font_size = 80
 text = "Hexagon Force"
 horizontal_alignment = 1
 
+[node name="EffectLevelSign" type="Sprite2D" parent="Titles" unique_id=660294214]
+visible = false
+position = Vector2(950, 200)
+scale = Vector2(3.5, 1.5)
+texture = ExtResource("2_v1pdx")
+
+[node name="EffectLevel" type="Label" parent="Titles" unique_id=1837156933]
+visible = false
+layout_mode = 0
+offset_left = 725.0
+offset_top = 167.0
+offset_right = 1185.0
+offset_bottom = 247.0
+theme_override_fonts/font = ExtResource("3_8s4k5")
+theme_override_font_sizes/font_size = 80
+text = "Visual Feast"
+
 [node name="Cassettes" type="Panel" parent="." unique_id=1347945102]
 layout_mode = 0
 offset_right = 1920.0
@@ -116,6 +134,18 @@ offset_bottom = 807.0
 scale = Vector2(0.715, 0.715)
 pivot_offset = Vector2(347.5, 219)
 texture_normal = ExtResource("6_tdgyk")
+script = ExtResource("5_8s4k5")
+
+[node name="CassetteEffect" type="TextureButton" parent="Cassettes" unique_id=1105784690]
+visible = false
+layout_mode = 0
+offset_left = 485.0
+offset_top = 280.0
+offset_right = 1421.0
+offset_bottom = 901.0
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(468, 310.5)
+texture_normal = ExtResource("7_xgvxu")
 script = ExtResource("5_8s4k5")
 
 [node name="Menu" type="Panel" parent="." unique_id=151927955]
@@ -182,6 +212,8 @@ direction = 2
 [connection signal="mouse_exited" from="Cassettes/CassetteTuto" to="Cassettes/CassetteTuto" method="_onMouseExit"]
 [connection signal="mouse_entered" from="Cassettes/CassetteGame" to="Cassettes/CassetteGame" method="_onMouseEnter"]
 [connection signal="mouse_exited" from="Cassettes/CassetteGame" to="Cassettes/CassetteGame" method="_onMouseExit"]
+[connection signal="mouse_entered" from="Cassettes/CassetteEffect" to="Cassettes/CassetteEffect" method="_onMouseEnter"]
+[connection signal="mouse_exited" from="Cassettes/CassetteEffect" to="Cassettes/CassetteEffect" method="_onMouseExit"]
 [connection signal="mouse_entered" from="LeftArrows" to="LeftArrows" method="_onMouseEnter"]
 [connection signal="mouse_exited" from="LeftArrows" to="LeftArrows" method="_onMouseExit"]
 [connection signal="mouse_entered" from="RightArrows" to="RightArrows" method="_onMouseEnter"]

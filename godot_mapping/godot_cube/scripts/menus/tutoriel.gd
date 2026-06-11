@@ -12,9 +12,18 @@ extends Control
 @onready var tuto_level: Label = $SelectLevel/Titles/TutoLevel
 @onready var game_level_sign: Sprite2D = $SelectLevel/Titles/GameLevelSign
 @onready var game_level: Label = $SelectLevel/Titles/GameLevel
+@onready var effect_level_sign: Sprite2D = $SelectLevel/Titles/EffectLevelSign
+@onready var effect_level: Label = $SelectLevel/Titles/EffectLevel
 @onready var cassette_tuto: TextureButton = $SelectLevel/Cassettes/CassetteTuto
 @onready var cassette_game: TextureButton = $SelectLevel/Cassettes/CassetteGame
+@onready var cassette_effect: TextureButton = $SelectLevel/Cassettes/CassetteEffect
 @onready var cassette_sound: AudioStreamPlayer2D = $SelectLevel/CassetteSound
+var array_sign: Array[Sprite2D]
+var array_cassette: Array[TextureButton]
+var array_label: Array[Label]
+
+# Tutoriel : 0 / Jeu : 1 / Foire aux effets : 2
+var printed_cassette: int = 0
 
 @onready var sign_start: Sprite2D = $Start/SignStart
 @onready var start_button: Button = $Start/StartButton
@@ -38,9 +47,15 @@ var heal_sound_transition: bool
 const LEADERBOARD_PATH: String = "user://leaderboard.cfg"
 
 func _ready() -> void:
-	game_level_sign.modulate.a = 0.0
-	game_level.modulate.a = 0.0
-	cassette_game.modulate.a = 0.0
+	# Initialisation de tous les tableaux
+	array_sign = [tuto_level_sign, game_level_sign, effect_level_sign]
+	array_cassette = [cassette_tuto, cassette_game, cassette_effect]
+	array_label = [tuto_level, game_level, effect_level]
+	
+	for i in range(1, len(array_sign)):
+		array_cassette[i].modulate.a = 0.0
+		array_sign[i].modulate.a = 0.0
+		array_label[i].modulate.a = 0.0
 	
 	# Définition de la taille de tous les boutons et de tous les panneaux
 	menu_scale = menu_button.scale
@@ -55,6 +70,7 @@ func _ready() -> void:
 	start_button.material.set_shader_parameter("is_hovered", false)
 	back_button.material.set_shader_parameter("is_hovered", false)
 	menu_button.material.set_shader_parameter("is_hovered", false)
+	
 	
 	# Mise en place de l'enlèvement du fondu
 	tutoriel_music.volume_db = -15.0
@@ -141,6 +157,18 @@ func _onCassetteGame_pressed() -> void:
 	Global.launched_mode = 2
 	get_tree().change_scene_to_file("res://scenes/game_scenes/scene_TV.tscn")
 
+func _onCassetteEffect_pressed() -> void:
+	cassette_sound.play()
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	var t = create_tween().set_parallel(true)
+	fondu_noir.visible = true
+	t.tween_property(fondu_noir, "modulate:a", 1.0, 0.5)
+	t.chain().tween_property(tutoriel_music, "volume_db", -80.0, 0.5)
+	t.chain().tween_interval(0.3)
+	await t.finished
+	Global.launched_mode = 3
+	get_tree().change_scene_to_file("res://scenes/game_scenes/scene_effects.tscn")
+
 func _onMenuButton_pressed() -> void:
 	click_sound.play()
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -175,135 +203,84 @@ func _onBackButton_pressed() -> void:
 func _onLeftArrows_pressed() -> void: onArrows_pressed(0)
 func _onRightArrows_pressed() -> void: onArrows_pressed(1)
 
+func get_new_pos(node: Node, pos: Vector2) -> Vector2:
+	return node.position + pos
+
+func move_cassette_to_left(i: int) -> void:
+	var t_out: Tween = create_tween().set_parallel(true)
+	var j: int = (i-1)%3
+	# Disparition de l'ancienne cassette
+	t_out.tween_property(array_cassette[i], "position", get_new_pos(array_cassette[i], Vector2(100, 0)), 0.2)
+	t_out.tween_property(array_sign[i], "position", get_new_pos(array_sign[i], Vector2(100, 0)), 0.2)
+	t_out.tween_property(array_label[i], "position", get_new_pos(array_label[i], Vector2(100, 0)), 0.2)
+	t_out.tween_property(array_cassette[j], "position", get_new_pos(array_cassette[j], Vector2(-100, 0)), 0.2)
+	t_out.tween_property(array_sign[j], "position", get_new_pos(array_sign[j], Vector2(-100, 0)), 0.2)
+	t_out.tween_property(array_label[j], "position", get_new_pos(array_label[j], Vector2(-100, 0)), 0.2)
+	t_out.tween_property(array_cassette[i], "modulate:a", 0.0, 0.2)
+	t_out.tween_property(array_sign[i], "modulate:a", 0.0, 0.2)
+	t_out.tween_property(array_label[i], "modulate:a", 0.0, 0.2)
+	await t_out.finished
+	
+	array_cassette[i].visible = false
+	array_sign[i].visible = false
+	array_label[i].visible = false
+	array_cassette[j].visible = true
+	array_sign[j].visible = true
+	array_label[j].visible = true
+	
+	# Apparition de la nouvelle cassette
+	var t_in: Tween = create_tween().set_parallel(true)
+	t_in.tween_property(array_cassette[i], "position", get_new_pos(array_cassette[i], Vector2(-100, 0)), 0.2)
+	t_in.tween_property(array_sign[i], "position", get_new_pos(array_sign[i], Vector2(-100, 0)), 0.2)
+	t_in.tween_property(array_label[i], "position", get_new_pos(array_label[i], Vector2(-100, 0)), 0.2)
+	t_in.tween_property(array_cassette[j], "position", get_new_pos(array_cassette[j], Vector2(100, 0)), 0.2)
+	t_in.tween_property(array_sign[j], "position", get_new_pos(array_sign[j], Vector2(100, 0)), 0.2)
+	t_in.tween_property(array_label[j], "position", get_new_pos(array_label[j], Vector2(100, 0)), 0.2)
+	t_in.tween_property(array_cassette[j], "modulate:a", 1.0, 0.2)
+	t_in.tween_property(array_sign[j], "modulate:a", 1.0, 0.2)
+	t_in.tween_property(array_label[j], "modulate:a", 1.0, 0.2)
+	await t_in.finished
+	printed_cassette = j
+
+func move_cassette_to_right(i: int) -> void:
+	var t_out: Tween = create_tween().set_parallel(true)
+	var j: int = (i+1)%3
+	# Disparition de l'ancienne cassette
+	t_out.tween_property(array_cassette[i], "position", get_new_pos(array_cassette[i], Vector2(-100, 0)), 0.2)
+	t_out.tween_property(array_sign[i], "position", get_new_pos(array_sign[i], Vector2(-100, 0)), 0.2)
+	t_out.tween_property(array_label[i], "position", get_new_pos(array_label[i], Vector2(-100, 0)), 0.2)
+	t_out.tween_property(array_cassette[j], "position", get_new_pos(array_cassette[j], Vector2(100, 0)), 0.2)
+	t_out.tween_property(array_sign[j], "position", get_new_pos(array_sign[j], Vector2(100, 0)), 0.2)
+	t_out.tween_property(array_label[j], "position", get_new_pos(array_label[j], Vector2(100, 0)), 0.2)
+	t_out.tween_property(array_cassette[i], "modulate:a", 0.0, 0.2)
+	t_out.tween_property(array_sign[i], "modulate:a", 0.0, 0.2)
+	t_out.tween_property(array_label[i], "modulate:a", 0.0, 0.2)
+	await t_out.finished
+	
+	array_cassette[i].visible = false
+	array_sign[i].visible = false
+	array_label[i].visible = false
+	array_cassette[j].visible = true
+	array_sign[j].visible = true
+	array_label[j].visible = true
+	
+	# Apparition de la nouvelle cassette
+	var t_in: Tween = create_tween().set_parallel(true)
+	t_in.tween_property(array_cassette[i], "position", get_new_pos(array_cassette[i], Vector2(100, 0)), 0.2)
+	t_in.tween_property(array_sign[i], "position", get_new_pos(array_sign[i], Vector2(100, 0)), 0.2)
+	t_in.tween_property(array_label[i], "position", get_new_pos(array_label[i], Vector2(100, 0)), 0.2)
+	t_in.tween_property(array_cassette[j], "position", get_new_pos(array_cassette[j], Vector2(-100, 0)), 0.2)
+	t_in.tween_property(array_sign[j], "position", get_new_pos(array_sign[j], Vector2(-100, 0)), 0.2)
+	t_in.tween_property(array_label[j], "position", get_new_pos(array_label[j], Vector2(-100, 0)), 0.2)
+	t_in.tween_property(array_cassette[j], "modulate:a", 1.0, 0.2)
+	t_in.tween_property(array_sign[j], "modulate:a", 1.0, 0.2)
+	t_in.tween_property(array_label[j], "modulate:a", 1.0, 0.2)
+	await t_in.finished
+	printed_cassette = j
+
 func onArrows_pressed(direction: int) -> void:
-	var t_in : Tween
-	var t_out = create_tween().set_parallel(true).set_ease(Tween.EASE_IN_OUT)
-	if direction == 0:
-		if tuto_level.visible:
-			# Appui sur la flèche de gauche avec la cassette de tutoriel affichée
-			t_out.tween_property(cassette_tuto, "position", Vector2(303, 280), 0.2)
-			t_out.tween_property(tuto_level_sign, "position", Vector2(897, 199), 0.2)
-			t_out.tween_property(tuto_level, "position", Vector2(753, 167), 0.2)
-
-			t_out.tween_property(cassette_game, "position", Vector2(787, 369), 0.2)
-			t_out.tween_property(game_level_sign, "position", Vector2(995, 199), 0.2)
-			t_out.tween_property(game_level, "position", Vector2(705, 167), 0.2)
-
-			t_out.tween_property(cassette_tuto, "modulate:a", 0.0, 0.2)
-			t_out.tween_property(tuto_level_sign, "modulate:a", 0.0, 0.2)
-			t_out.tween_property(tuto_level, "modulate:a", 0.0, 0.2)
-			await t_out.finished
-
-			cassette_tuto.visible = false
-			tuto_level_sign.visible = false
-			tuto_level.visible = false
-			cassette_game.visible = true
-			game_level_sign.visible = true
-			game_level.visible = true
-			
-			t_in = create_tween().set_parallel(true).set_ease(Tween.EASE_IN_OUT)
-			t_in.tween_property(cassette_game, "position", Vector2(606, 369), 0.2)
-			t_in.tween_property(game_level_sign, "position", Vector2(940, 199), 0.2)
-			t_in.tween_property(game_level, "position", Vector2(650, 167), 0.2)
-
-			t_in.tween_property(cassette_game, "modulate:a", 1.0, 0.2)
-			t_in.tween_property(game_level_sign, "modulate:a", 1.0, 0.2)
-			t_in.tween_property(game_level, "modulate:a", 1.0, 0.2)
-			await t_in.finished
-		else:
-			# Appui sur la flèche de gauche avec la cassette de jeu affichée
-			t_out.tween_property(cassette_game, "position", Vector2(425, 369), 0.2)
-			t_out.tween_property(game_level_sign, "position", Vector2(885, 199), 0.2)
-			t_out.tween_property(game_level, "position", Vector2(595, 167), 0.2)
-
-			t_out.tween_property(cassette_tuto, "position", Vector2(657, 280), 0.2)
-			t_out.tween_property(tuto_level_sign, "position", Vector2(1007, 199), 0.2)
-			t_out.tween_property(tuto_level, "position", Vector2(863, 167), 0.2)
-
-			t_out.tween_property(cassette_game, "modulate:a", 0.0, 0.2)
-			t_out.tween_property(game_level_sign, "modulate:a", 0.0, 0.2)
-			t_out.tween_property(game_level, "modulate:a", 0.0, 0.2)
-			await t_out.finished
-
-			cassette_game.visible = false
-			game_level_sign.visible = false
-			game_level.visible = false
-			cassette_tuto.visible = true
-			tuto_level_sign.visible = true
-			tuto_level.visible = true
-			
-			t_in = create_tween().set_parallel(true).set_ease(Tween.EASE_IN_OUT)
-			t_in.tween_property(cassette_tuto, "position", Vector2(480, 280), 0.2)
-			t_in.tween_property(tuto_level_sign, "position", Vector2(952, 199), 0.2)
-			t_in.tween_property(tuto_level, "position", Vector2(808, 167), 0.2)
-
-			t_in.tween_property(cassette_tuto, "modulate:a", 1.0, 0.2)
-			t_in.tween_property(tuto_level_sign, "modulate:a", 1.0, 0.2)
-			t_in.tween_property(tuto_level, "modulate:a", 1.0, 0.2)
-			await t_in.finished
-	else:
-		if tuto_level.visible:
-			# Appui sur la flèche de droite avec la cassette de tutoriel affichée
-			t_out.tween_property(cassette_tuto, "position", Vector2(657, 280), 0.2)
-			t_out.tween_property(tuto_level_sign, "position", Vector2(1007, 199), 0.2)
-			t_out.tween_property(tuto_level, "position", Vector2(863, 167), 0.2)
-
-			t_out.tween_property(cassette_game, "position", Vector2(425, 369), 0.2)
-			t_out.tween_property(game_level_sign, "position", Vector2(885, 199), 0.2)
-			t_out.tween_property(game_level, "position", Vector2(595, 167), 0.2)
-
-			t_out.tween_property(cassette_tuto, "modulate:a", 0.0, 0.2)
-			t_out.tween_property(tuto_level_sign, "modulate:a", 0.0, 0.2)
-			t_out.tween_property(tuto_level, "modulate:a", 0.0, 0.2)
-			await t_out.finished
-
-			cassette_tuto.visible = false
-			tuto_level_sign.visible = false
-			tuto_level.visible = false
-			cassette_game.visible = true
-			game_level_sign.visible = true
-			game_level.visible = true
-			
-			t_in = create_tween().set_parallel(true).set_ease(Tween.EASE_IN_OUT)
-			t_in.tween_property(cassette_game, "position", Vector2(606, 369), 0.2)
-			t_in.tween_property(game_level_sign, "position", Vector2(940, 199), 0.2)
-			t_in.tween_property(game_level, "position", Vector2(650, 167), 0.2)
-
-			t_in.tween_property(cassette_game, "modulate:a", 1.0, 0.2)
-			t_in.tween_property(game_level_sign, "modulate:a", 1.0, 0.2)
-			t_in.tween_property(game_level, "modulate:a", 1.0, 0.2)
-			await t_in.finished
-		else:
-			# Appui sur la flèche de gauche avec la cassette de jeu affichée
-			t_out.tween_property(cassette_game, "position", Vector2(787, 369), 0.2)
-			t_out.tween_property(game_level_sign, "position", Vector2(995, 199), 0.2)
-			t_out.tween_property(game_level, "position", Vector2(705, 167), 0.2)
-
-			t_out.tween_property(cassette_tuto, "position", Vector2(303, 280), 0.2)
-			t_out.tween_property(tuto_level_sign, "position", Vector2(897, 199), 0.2)
-			t_out.tween_property(tuto_level, "position", Vector2(753, 167), 0.2)
-
-			t_out.tween_property(cassette_game, "modulate:a", 0.0, 0.2)
-			t_out.tween_property(game_level_sign, "modulate:a", 0.0, 0.2)
-			t_out.tween_property(game_level, "modulate:a", 0.0, 0.2)
-			await t_out.finished
-
-			cassette_game.visible = false
-			game_level_sign.visible = false
-			game_level.visible = false
-			cassette_tuto.visible = true
-			tuto_level_sign.visible = true
-			tuto_level.visible = true
-			
-			t_in = create_tween().set_parallel(true).set_ease(Tween.EASE_IN_OUT)
-			t_in.tween_property(cassette_tuto, "position", Vector2(480, 280), 0.2)
-			t_in.tween_property(tuto_level_sign, "position", Vector2(952, 199), 0.2)
-			t_in.tween_property(tuto_level, "position", Vector2(808, 167), 0.2)
-
-			t_in.tween_property(cassette_tuto, "modulate:a", 1.0, 0.2)
-			t_in.tween_property(tuto_level_sign, "modulate:a", 1.0, 0.2)
-			t_in.tween_property(tuto_level, "modulate:a", 1.0, 0.2)
-			await t_in.finished
+	if direction == 0: move_cassette_to_left(printed_cassette)
+	else: move_cassette_to_right(printed_cassette)
 
 func _onMenuButtonEnter() -> void:
 	Global.ButtonEnter(menu_button, menu_scale, false, sign_menu, sign_menu_scale)

@@ -96,55 +96,56 @@ func activation() -> void:
 		ink_overlay.append(get_node("../../SplitScreens/Camera1/POV1/InkLayerJ1/InkOverlayJ1"))
 		ink_overlay.append(get_node("../../SplitScreens/Camera2/POV2/InkLayerJ2/InkOverlayJ2"))
 	else:
-		j1 = get_node("../../J1")
-		j2 = get_node("../../J2")
 		level_music = get_node("../../LevelMusic")
-		healing = Global.healing
-		texture = get_node("../../TextureRect")
-		
-		if Global.launched_mode == 2:
-			score_uis.append(get_node("../../J1/CameraController/Vue1/ScoreUI"))
-			score_uis.append(get_node("../../J2/CameraController/Vue5/ScoreUI"))
-			score_uis.append(get_node("../../J1/CameraController/Vue2/ScoreUI"))
-			score_uis.append(get_node("../../J2/CameraController/Vue6/ScoreUI"))
+		if Global.launched_mode != 3:
+			j1 = get_node("../../J1")
+			j2 = get_node("../../J2")
+			healing = Global.healing
+			texture = get_node("../../TextureRect")
+			
+			if Global.launched_mode == 2:
+				score_uis.append(get_node("../../J1/CameraController/Vue1/ScoreUI"))
+				score_uis.append(get_node("../../J2/CameraController/Vue5/ScoreUI"))
+				score_uis.append(get_node("../../J1/CameraController/Vue2/ScoreUI"))
+				score_uis.append(get_node("../../J2/CameraController/Vue6/ScoreUI"))
 
-			health_bars.append(get_node("../../J1/CameraController/Vue1/HealthBar"))
-			health_bars.append(get_node("../../J2/CameraController/Vue5/HealthBar"))
-			health_bars.append(get_node("../../J1/CameraController/Vue2/HealthBar"))
-			health_bars.append(get_node("../../J2/CameraController/Vue6/HealthBar"))
-			start_label.text = "Ready ?"
+				health_bars.append(get_node("../../J1/CameraController/Vue1/HealthBar"))
+				health_bars.append(get_node("../../J2/CameraController/Vue5/HealthBar"))
+				health_bars.append(get_node("../../J1/CameraController/Vue2/HealthBar"))
+				health_bars.append(get_node("../../J2/CameraController/Vue6/HealthBar"))
+				start_label.text = "Ready ?"
 
-		shield_bars.append(get_node("../../J1/CameraController/Vue1/ShieldBar"))
-		shield_bars.append(get_node("../../J2/CameraController/Vue5/ShieldBar"))
-		shield_bars.append(get_node("../../J1/CameraController/Vue2/ShieldBar"))
-		shield_bars.append(get_node("../../J2/CameraController/Vue6/ShieldBar"))
+			shield_bars.append(get_node("../../J1/CameraController/Vue1/ShieldBar"))
+			shield_bars.append(get_node("../../J2/CameraController/Vue5/ShieldBar"))
+			shield_bars.append(get_node("../../J1/CameraController/Vue2/ShieldBar"))
+			shield_bars.append(get_node("../../J2/CameraController/Vue6/ShieldBar"))
 
-		ink_overlay.append(get_node("../../J1/CameraController/Vue1/InkLayerJ1/InkOverlayJ1"))
-		ink_overlay.append(get_node("../../J2/CameraController/Vue5/InkLayerJ2/InkOverlayJ2"))
-		ink_overlay.append(get_node("../../J1/CameraController/Vue2/InkLayerJ1/InkOverlayJ1"))
-		ink_overlay.append(get_node("../../J2/CameraController/Vue6/InkLayerJ2/InkOverlayJ2"))
+			ink_overlay.append(get_node("../../J1/CameraController/Vue1/InkLayerJ1/InkOverlayJ1"))
+			ink_overlay.append(get_node("../../J2/CameraController/Vue5/InkLayerJ2/InkOverlayJ2"))
+			ink_overlay.append(get_node("../../J1/CameraController/Vue2/InkLayerJ1/InkOverlayJ1"))
+			ink_overlay.append(get_node("../../J2/CameraController/Vue6/InkLayerJ2/InkOverlayJ2"))
 
-		texture_progress_bars.append(get_node("../../J1/CameraController/Vue1/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar"))
-		texture_progress_bars.append(get_node("../../J2/CameraController/Vue5/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar"))
-		texture_progress_bars.append(get_node("../../J1/CameraController/Vue2/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar"))
-		texture_progress_bars.append(get_node("../../J2/CameraController/Vue6/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar"))
+			texture_progress_bars.append(get_node("../../J1/CameraController/Vue1/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar"))
+			texture_progress_bars.append(get_node("../../J2/CameraController/Vue5/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar"))
+			texture_progress_bars.append(get_node("../../J1/CameraController/Vue2/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar"))
+			texture_progress_bars.append(get_node("../../J2/CameraController/Vue6/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar"))
 
-		progress_bar_labels.append(get_node("../../J1/CameraController/Vue1/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar/ProgressBarLabel"))
-		progress_bar_labels.append(get_node("../../J2/CameraController/Vue5/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar/ProgressBarLabel"))
-		progress_bar_labels.append(get_node("../../J1/CameraController/Vue2/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar/ProgressBarLabel"))
-		progress_bar_labels.append(get_node("../../J2/CameraController/Vue6/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar/ProgressBarLabel"))
-		
-	for progress_bar in texture_progress_bars:
-		progress_bar.max_value = paliers[0]
-	for shield_bar in shield_bars:
-		shield_bar.modulate.a = 0.0
-	for health_bar in health_bars:
-		if healing and Global.launched_mode == 2:
-			health_bar.visible = true
-			health_bar.modulate.a = 1.0
-		else:
-			health_bar.visible = false
-			health_bar.modulate.a = 0.0
+			progress_bar_labels.append(get_node("../../J1/CameraController/Vue1/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar/ProgressBarLabel"))
+			progress_bar_labels.append(get_node("../../J2/CameraController/Vue5/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar/ProgressBarLabel"))
+			progress_bar_labels.append(get_node("../../J1/CameraController/Vue2/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar/ProgressBarLabel"))
+			progress_bar_labels.append(get_node("../../J2/CameraController/Vue6/ComboBar/MarginContainer/VBoxContainer/TextureProgressBar/ProgressBarLabel"))
+			
+		for progress_bar in texture_progress_bars:
+			progress_bar.max_value = paliers[0]
+		for shield_bar in shield_bars:
+			shield_bar.modulate.a = 0.0
+		for health_bar in health_bars:
+			if healing and Global.launched_mode == 2:
+				health_bar.visible = true
+				health_bar.modulate.a = 1.0
+			else:
+				health_bar.visible = false
+				health_bar.modulate.a = 0.0
 	start_game()
 
 func start_game() -> void:
@@ -159,59 +160,61 @@ func start_game() -> void:
 	start_spawn = true
 
 func _process(delta: float) -> void:
-	if start_spawn:
-		elapsed_time += delta
-		
-		if pixelisation_active_j1: pixelisation_time_j1 += delta
-		if pixelisation_active_j2: pixelisation_time_j2 += delta
+	if Global.launched_mode == 3: effect_loop()
+	else:
+		if start_spawn:
+			elapsed_time += delta
+			
+			if pixelisation_active_j1: pixelisation_time_j1 += delta
+			if pixelisation_active_j2: pixelisation_time_j2 += delta
 
-		# On retire les blocs qui ont été supprimés du jeu
-		blocs = blocs.filter(func(bloc): return is_instance_valid(bloc))
+			# On retire les blocs qui ont été supprimés du jeu
+			blocs = blocs.filter(func(bloc): return is_instance_valid(bloc))
 
-		for i in range(2):
-			# On vérifie si les boucliers de chaque joueur doivent écourtés
-			if shield_actif[i] == 0 and shields[i].emitting :
-				shields[i].emitting = false
-				shields[i].speed_scale = 10.0
+			for i in range(2):
+				# On vérifie si les boucliers de chaque joueur doivent écourtés
+				if shield_actif[i] == 0 and shields[i].emitting :
+					shields[i].emitting = false
+					shields[i].speed_scale = 10.0
 
-				# Si le bouclier tombe à 0, on efface la barre associée
-				var t = create_tween().set_parallel(true)
-				t.tween_property(shield_bars[i], "modulate:a", 0.0, 0.01)
-				if Global.launched_mode > 0: t.tween_property(shield_bars[i+2], "modulate:a", 0.0, 0.01)
-				await t.finished
+					# Si le bouclier tombe à 0, on efface la barre associée
+					var t = create_tween().set_parallel(true)
+					t.tween_property(shield_bars[i], "modulate:a", 0.0, 0.01)
+					if Global.launched_mode > 0: t.tween_property(shield_bars[i+2], "modulate:a", 0.0, 0.01)
+					await t.finished
 
-			elif shields[i].emitting:
-				time_shield_actif[i] -= delta
+				elif shields[i].emitting:
+					time_shield_actif[i] -= delta
 
-			# Si le temps d'activité est dépassé, on réinitialise le nombre de cubes pouvant être ratés
-			if time_shield_actif[i] <= 0.0:
-				shield_actif[i] = 0
-				shields[i].emitting = false
-				shields[i].speed_scale = 10.0
+				# Si le temps d'activité est dépassé, on réinitialise le nombre de cubes pouvant être ratés
+				if time_shield_actif[i] <= 0.0:
+					shield_actif[i] = 0
+					shields[i].emitting = false
+					shields[i].speed_scale = 10.0
 
-				# On efface les barres des boucliers sur l'écran
-				var t = create_tween().set_parallel(true)
-				t.tween_property(shield_bars[i], "modulate:a", 0.0, 0.01)
-				if Global.launched_mode > 0: t.tween_property(shield_bars[i+2], "modulate:a", 0.0, 0.01)
-				await t.finished
+					# On efface les barres des boucliers sur l'écran
+					var t = create_tween().set_parallel(true)
+					t.tween_property(shield_bars[i], "modulate:a", 0.0, 0.01)
+					if Global.launched_mode > 0: t.tween_property(shield_bars[i+2], "modulate:a", 0.0, 0.01)
+					await t.finished
 
-			# On calcule le temps de bonus pour chacun des 2 joueurs et on arrête le bonus une fois que ce temps est dépassé
-			if count_bonus_time[i]: bonus_time[i] += delta
-			if bonus_time[i] >= 10.0 and multiplicateur[i] > 1:
-				bonus_time[i] = 0.0
-				multiplicateur[i] /= 2
+				# On calcule le temps de bonus pour chacun des 2 joueurs et on arrête le bonus une fois que ce temps est dépassé
+				if count_bonus_time[i]: bonus_time[i] += delta
+				if bonus_time[i] >= 10.0 and multiplicateur[i] > 1:
+					bonus_time[i] = 0.0
+					multiplicateur[i] /= 2
 
-		# On actualise le meilleur combo de cubes
-		if best_combo < stocked_combo.max():
-			best_combo = stocked_combo.max()
-		
-		match Global.launched_mode:
-			# Boucle de jeu du jeu dans le menu
-			0: menu_loop()
-			# Boucle de jeu dans le tutoriel
-			1: tutoriel_loop()
-			# Boucle de jeu dans la partie
-			2: game_loop()
+			# On actualise le meilleur combo de cubes
+			if best_combo < stocked_combo.max():
+				best_combo = stocked_combo.max()
+			
+			match Global.launched_mode:
+				# Boucle de jeu du jeu dans le menu
+				0: menu_loop()
+				# Boucle de jeu dans le tutoriel
+				1: tutoriel_loop()
+				# Boucle de jeu dans la partie
+				2: game_loop()
 
 func menu_loop() -> void:
 	if blocs == []:
@@ -226,6 +229,9 @@ func menu_loop() -> void:
 				2: n = rng.randi_range(0, 1)
 				3: pass
 		spawn_cube(cube_list[n])
+
+func effect_loop() -> void:
+	pass
 
 # On actualise la barre de combo visuelle et on vérifie si un palier a été dépassé
 func check_progress_bars() -> void:

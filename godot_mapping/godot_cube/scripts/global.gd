@@ -2,7 +2,7 @@ extends Node
 
 # Booléen décidant si le mode avec vie limitée est activé
 var healing: bool = false
-# Menu : 0 / Tutoriel : 1 / Partie : 2
+# Menu : 0 / Tutoriel : 1 / Partie : 2 / Test d'effets : 3
 var launched_mode: int = 0
 # Cubes classiques : 0 / Cubes bonus : 1 / Cubes classiques et bonus : 2 / Tous les cubes : 3
 var tutoriel_played_mode: int = -1
@@ -18,6 +18,16 @@ const SCALE_DURATION: float = 0.4
 var first_scale_transition: Tween
 var loop_scale_transition_button: Tween
 var loop_scale_transition_sign: Tween
+
+# Tableau de textures d'encre globaux
+var ink_texture_list : Array = []
+var ink_small_texture_list : Array = []
+
+# Variables associées à l'amplitude des bras de chaque joueur
+var d1_x: float = 1.0
+var d2_x : float = 1.0
+var d1_y : float = 1.0
+var d2_y : float = 1.0
 
 func ButtonEnter(button, button_scale: Vector2, life: bool = false, sign_sprite: Sprite2D = null,  sign_scale: Vector2 = Vector2(0, 0)) -> void:
 	if first_scale_transition: first_scale_transition.kill()
@@ -64,13 +74,3 @@ func ButtonExit(button, button_scale: Vector2, life: bool = false, sign_sprite: 
 	out.set_parallel(true)
 	out.tween_property(button, "scale", button_scale, SCALE_DURATION)
 	if sign_sprite: out.tween_property(sign_sprite, "scale", sign_scale, SCALE_DURATION)
-
-# Tableau de textures d'encre globaux
-var ink_texture_list : Array = []
-var ink_small_texture_list : Array = []
-
-# Variables associées à l'amplitude des bras de chaque joueur
-var d1_x: float = 1.0
-var d2_x : float = 1.0
-var d1_y : float = 1.0
-var d2_y : float = 1.0
