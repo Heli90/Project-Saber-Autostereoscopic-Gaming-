@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://cgkfgtcw64vj"]
+
+[ext_resource type="AudioStream" uid="uid://bqjkoeah1m37j" path="res://addons/sfx/main_menu_music.mp3" id="1_eg84y"]
+
+[node name="MainMenuMusic" type="AudioStreamPlayer" unique_id=413438924]
+process_mode = 3
+stream = ExtResource("1_eg84y")
+volume_db = -15.0
+bus = &"Musique"
+parameters/looping = true

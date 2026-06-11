@@ -1,0 +1,446 @@
+[gd_scene format=3 uid="uid://dnjcdcjfugqr2"]
+
+[ext_resource type="Script" uid="uid://b6rffg8gyemkl" path="res://scripts/game_scenes/scene_camera.gd" id="1_clnk0"]
+[ext_resource type="Shader" uid="uid://vno46ensk36y" path="res://shaders/generation_image.gdshader" id="2_ji78e"]
+[ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="3_ksw31"]
+[ext_resource type="Texture2D" uid="uid://cy5no81nhebpm" path="res://addons/assets/sign_name_panel.png" id="4_ksw31"]
+[ext_resource type="Shader" uid="uid://crf7jc6x8vo3h" path="res://shaders/button.gdshader" id="5_2jvac"]
+[ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/pixel_art_typeface.ttf" id="5_bpe7x"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bpe7x"]
+resource_local_to_scene = true
+shader = ExtResource("2_ji78e")
+shader_parameter/N = 8
+shader_parameter/decalage = -1
+shader_parameter/invertViews = false
+shader_parameter/offset = 0.01
+shader_parameter/pixelisation = false
+shader_parameter/pixelisationPower = 200.0
+shader_parameter/pixelisation_mask = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_sgwr3"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2jvac"]
+gradient = SubResource("Gradient_sgwr3")
+width = 1920
+height = 1080
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_clnk0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oouwh"]
+shader = ExtResource("5_2jvac")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2jvac"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oouwh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5g4fp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xkf4e"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nf6xk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kllfr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5g4fp"]
+shader = ExtResource("5_2jvac")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rfhw2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ijara"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1cbbk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b2vw2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_coib1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rytxh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xkf4e"]
+shader = ExtResource("5_2jvac")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_onsxk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_42pa1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_olrxq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d7yvy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_olan5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tsh7v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2jvac"]
+shader = ExtResource("5_2jvac")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ae06s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mmu8k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_312bq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qrbvg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_llhsl"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_47ga6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nf6xk"]
+shader = ExtResource("5_2jvac")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k1bph"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_507qh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8ovtu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7xavk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xo2j1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x6gp3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kllfr"]
+shader = ExtResource("5_2jvac")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bfo8l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1aaip"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ph6br"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oiroy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dmvxn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dsewm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rfhw2"]
+shader = ExtResource("5_2jvac")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7x2cc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cnoux"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5e2dn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o76vy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8sp8x"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uao1c"]
+
+[node name="SceneCamera" type="Node3D" unique_id=1797258505]
+script = ExtResource("1_clnk0")
+
+[node name="Vue1" type="SubViewport" parent="." unique_id=1363052030]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+
+[node name="Camera" type="Camera3D" parent="Vue1" unique_id=96756209]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, -0.03, 2.25, 20.3)
+current = true
+fov = 90.0
+
+[node name="Vue2" type="SubViewport" parent="." unique_id=2110492440]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+
+[node name="Camera" type="Camera3D" parent="Vue2" unique_id=295820389]
+transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0.03, 2.25, 20.3)
+current = true
+fov = 90.0
+
+[node name="Vue3" type="SubViewport" parent="." unique_id=668510386]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="Vue3" unique_id=1678614705]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10, 7)
+current = true
+
+[node name="Vue4" type="SubViewport" parent="." unique_id=872279374]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="Vue4" unique_id=2058091928]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10, 7)
+current = true
+
+[node name="Vue5" type="SubViewport" parent="." unique_id=1297611000]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+
+[node name="Camera" type="Camera3D" parent="Vue5" unique_id=223873921]
+transform = Transform3D(-1, 2.990035e-08, -8.2150535e-08, 0, 0.9396926, 0.34202012, 8.742278e-08, 0.34202012, -0.9396926, -0.030000025, 2.25, -20.3)
+current = true
+fov = 90.0
+
+[node name="Vue6" type="SubViewport" parent="." unique_id=362470679]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+
+[node name="Camera" type="Camera3D" parent="Vue6" unique_id=1010416512]
+transform = Transform3D(-1, 2.990035e-08, -8.2150535e-08, 0, 0.9396926, 0.34202012, 8.742278e-08, 0.34202012, -0.9396926, 0.029999973, 2.25, -20.3)
+current = true
+fov = 90.0
+
+[node name="Vue7" type="SubViewport" parent="." unique_id=1183386634]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="Vue7" unique_id=1951470713]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10, 7)
+current = true
+
+[node name="Vue8" type="SubViewport" parent="." unique_id=887460442]
+handle_input_locally = false
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="Vue8" unique_id=1645908359]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 100, 10, 7)
+current = true
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=861097842]
+texture_filter = 2
+material = SubResource("ShaderMaterial_bpe7x")
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = SubResource("GradientTexture2D_2jvac")
+
+[node name="Game" parent="." unique_id=1026699542 instance=ExtResource("3_ksw31")]
+
+[node name="Buttons" type="Panel" parent="." unique_id=421331801]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_clnk0")
+
+[node name="SignIS_J1" type="Sprite2D" parent="Buttons" unique_id=728165308]
+position = Vector2(380, 980)
+scale = Vector2(2.5, 1.5)
+texture = ExtResource("4_ksw31")
+
+[node name="ISButton_J1" type="Button" parent="Buttons" unique_id=1058692082]
+process_mode = 3
+material = SubResource("ShaderMaterial_oouwh")
+layout_mode = 0
+offset_left = 245.0
+offset_top = 957.5
+offset_right = 523.0
+offset_bottom = 997.5
+pivot_offset = Vector2(139, 20)
+theme_override_fonts/font = ExtResource("5_bpe7x")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2jvac")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_oouwh")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5g4fp")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_xkf4e")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_nf6xk")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_kllfr")
+text = "Change For J1"
+
+[node name="SignIS_J2" type="Sprite2D" parent="Buttons" unique_id=1904270898]
+position = Vector2(1535, 980)
+scale = Vector2(2.5, 1.5)
+texture = ExtResource("4_ksw31")
+
+[node name="ISButton_J2" type="Button" parent="Buttons" unique_id=1067837764]
+process_mode = 3
+material = SubResource("ShaderMaterial_5g4fp")
+layout_mode = 0
+offset_left = 1395.0
+offset_top = 957.5
+offset_right = 1678.0
+offset_bottom = 997.5
+pivot_offset = Vector2(141.5, 20)
+theme_override_fonts/font = ExtResource("5_bpe7x")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_rfhw2")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ijara")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_1cbbk")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_b2vw2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_coib1")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rytxh")
+text = "Change For J2"
+
+[node name="SignIncreaseJ1" type="Sprite2D" parent="Buttons" unique_id=689759718]
+visible = false
+position = Vector2(180, 980)
+scale = Vector2(1.5, 1)
+texture = ExtResource("4_ksw31")
+
+[node name="Increase_J1" type="Button" parent="Buttons" unique_id=849326071]
+process_mode = 3
+visible = false
+material = SubResource("ShaderMaterial_xkf4e")
+layout_mode = 0
+offset_left = 97.5
+offset_top = 957.5
+offset_right = 272.5
+offset_bottom = 997.5
+pivot_offset = Vector2(87.5, 20)
+theme_override_fonts/font = ExtResource("5_bpe7x")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_onsxk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_42pa1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_olrxq")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_d7yvy")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_olan5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tsh7v")
+text = "Increase"
+
+[node name="SignDecreaseJ1" type="Sprite2D" parent="Buttons" unique_id=188168028]
+visible = false
+position = Vector2(580, 980)
+scale = Vector2(1.5, 1)
+texture = ExtResource("4_ksw31")
+
+[node name="Decrease_J1" type="Button" parent="Buttons" unique_id=150348940]
+process_mode = 3
+visible = false
+material = SubResource("ShaderMaterial_2jvac")
+layout_mode = 0
+offset_left = 492.5
+offset_top = 957.5
+offset_right = 677.5
+offset_bottom = 997.5
+pivot_offset = Vector2(92.5, 20)
+theme_override_fonts/font = ExtResource("5_bpe7x")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ae06s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_mmu8k")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_312bq")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_qrbvg")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_llhsl")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_47ga6")
+text = "Decrease"
+
+[node name="SignIncreaseJ2" type="Sprite2D" parent="Buttons" unique_id=749061159]
+visible = false
+position = Vector2(1340, 980)
+scale = Vector2(1.5, 1)
+texture = ExtResource("4_ksw31")
+
+[node name="Increase_J2" type="Button" parent="Buttons" unique_id=897794374]
+process_mode = 3
+visible = false
+material = SubResource("ShaderMaterial_nf6xk")
+layout_mode = 0
+offset_left = 1257.5
+offset_top = 957.5
+offset_right = 1432.5
+offset_bottom = 997.5
+pivot_offset = Vector2(87.5, 20)
+theme_override_fonts/font = ExtResource("5_bpe7x")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_k1bph")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_507qh")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8ovtu")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_7xavk")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_xo2j1")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_x6gp3")
+text = "Increase"
+
+[node name="SignDecreaseJ2" type="Sprite2D" parent="Buttons" unique_id=12054596]
+visible = false
+position = Vector2(1740, 980)
+scale = Vector2(1.5, 1)
+texture = ExtResource("4_ksw31")
+
+[node name="Decrease_J2" type="Button" parent="Buttons" unique_id=139995256]
+process_mode = 3
+visible = false
+material = SubResource("ShaderMaterial_kllfr")
+layout_mode = 0
+offset_left = 1650.0
+offset_top = 957.5
+offset_right = 1835.0
+offset_bottom = 997.5
+pivot_offset = Vector2(92.5, 20)
+theme_override_fonts/font = ExtResource("5_bpe7x")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_bfo8l")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_1aaip")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ph6br")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_oiroy")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_dmvxn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_dsewm")
+text = "Decrease"
+
+[node name="SignValidation" type="Sprite2D" parent="Buttons" unique_id=615024117]
+position = Vector2(965, 980)
+scale = Vector2(2, 1.25)
+texture = ExtResource("4_ksw31")
+
+[node name="ValidationButton" type="Button" parent="Buttons" unique_id=2093435919]
+process_mode = 3
+material = SubResource("ShaderMaterial_rfhw2")
+layout_mode = 0
+offset_left = 869.0
+offset_top = 955.0
+offset_right = 1075.0
+offset_bottom = 1015.0
+pivot_offset = Vector2(103, 30)
+theme_override_fonts/font = ExtResource("5_bpe7x")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7x2cc")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_cnoux")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5e2dn")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_o76vy")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_8sp8x")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uao1c")
+text = "Return"
+
+[connection signal="mouse_entered" from="Buttons/ISButton_J1" to="." method="_onISButton1Enter"]
+[connection signal="mouse_exited" from="Buttons/ISButton_J1" to="." method="_onISButton1Exit"]
+[connection signal="pressed" from="Buttons/ISButton_J1" to="." method="_onISButton1_pressed"]
+[connection signal="mouse_entered" from="Buttons/ISButton_J2" to="." method="_onISButton2Enter"]
+[connection signal="mouse_exited" from="Buttons/ISButton_J2" to="." method="_onISButton2Exit"]
+[connection signal="pressed" from="Buttons/ISButton_J2" to="." method="_onISButton2_pressed"]
+[connection signal="mouse_entered" from="Buttons/Increase_J1" to="." method="_onIncrease1Enter"]
+[connection signal="mouse_exited" from="Buttons/Increase_J1" to="." method="_onIncrease1Exit"]
+[connection signal="pressed" from="Buttons/Increase_J1" to="." method="_onIncrease1_pressed"]
+[connection signal="mouse_entered" from="Buttons/Decrease_J1" to="." method="_onDecrease1Enter"]
+[connection signal="mouse_exited" from="Buttons/Decrease_J1" to="." method="_onDecrease1Exit"]
+[connection signal="pressed" from="Buttons/Decrease_J1" to="." method="_onDecrease1_pressed"]
+[connection signal="mouse_entered" from="Buttons/Increase_J2" to="." method="_onIncrease2Enter"]
+[connection signal="mouse_exited" from="Buttons/Increase_J2" to="." method="_onIncrease2Exit"]
+[connection signal="pressed" from="Buttons/Increase_J2" to="." method="_onIncrease2_pressed"]
+[connection signal="mouse_entered" from="Buttons/Decrease_J2" to="." method="_onDecrease2Enter"]
+[connection signal="mouse_exited" from="Buttons/Decrease_J2" to="." method="_onDecrease2Exit"]
+[connection signal="pressed" from="Buttons/Decrease_J2" to="." method="_onDecrease2_pressed"]
+[connection signal="mouse_entered" from="Buttons/ValidationButton" to="." method="_onValidationEnter"]
+[connection signal="mouse_exited" from="Buttons/ValidationButton" to="." method="_onValidationExit"]
+[connection signal="pressed" from="Buttons/ValidationButton" to="." method="_onValidationButton_pressed"]
+
+[editable path="Game"]

@@ -7,14 +7,13 @@ extends Node3D
 @onready var pause_menu: ColorRect = $Game/HUD/PauseMenu
 @onready var start_label: Label = $Game/StartLabel
 @onready var disappear_bloc_notif: Label = $Game/DisappearBlocNotif
-@onready var main_menu_music: AudioStreamPlayer = $Menu/MainMenuMusic
 
 const IDLE_TIMEOUT = 5.0  # 5 secondes avant de cacher le menu
 var idle_timer: float = 0.0
 var is_hidden: bool = false
 
 func _ready() -> void:
-	main_menu_music.play()
+	GlobalMusic.play()
 
 func _process(delta: float) -> void:
 	idle_timer += delta

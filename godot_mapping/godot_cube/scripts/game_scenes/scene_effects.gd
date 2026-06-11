@@ -9,6 +9,12 @@ extends Node3D
 @onready var pause_menu: ColorRect = $Game/HUD/PauseMenu
 @onready var click_sound: AudioStreamPlayer = $Game/HUD/PauseMenu/ClickSound
 
+@onready var camera1: Camera3D = $Vue1/Camera
+@onready var camera2: Camera3D = $Vue2/Camera
+@onready var camera3: Camera3D = $Vue5/Camera
+@onready var camera4: Camera3D = $Vue6/Camera
+var array_cam: Array[Camera3D]
+
 @onready var cadre: Panel = $Cadre
 @onready var label: Label = $Cadre/Label
 @onready var line: Line2D = $Cadre/Line2D
@@ -20,11 +26,14 @@ var continue_scale: Vector2
 var stop_scale: Vector2
 
 func _ready() -> void:
-	fondu_noir.visible = false
 	# Initialisation des tailles des boutons pour les effets
 	ok_scale = ok_button.scale
 	continue_scale = continue_button.scale
 	stop_scale = stop_button.scale
+	
+	# Définition de la liste des caméras et des positions initiales
+	array_cam = [camera1, camera3, camera2, camera4]
+	for i in range(4): array_cam[i].position.x = Global.array_cam[i]
 	
 	# On ne lance pas le thread de caméra au début pour optimiser les FPS
 	landmarks_proceed.camera_feed.feed_is_active = false
@@ -47,6 +56,12 @@ func _ready() -> void:
 			shader_mat.set_shader_parameter(shader_vue, texture_vue)
 	screen_output.material.set_shader_parameter("offset", 0.0) # Initialise l'effet glitch à 0
 	screen_output.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, true, true, false, false]) # Initialise les vues qui auront l'effet de pixelisation
+	await get_tree().process_frame
+	
+	var t = create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	t.tween_property(fondu_noir, "modulate:a", 0.0, 0.6)
+	await t.finished
+	fondu_noir.visible = false
 	welcoming_effects()
 
 func welcoming_effects() -> void:

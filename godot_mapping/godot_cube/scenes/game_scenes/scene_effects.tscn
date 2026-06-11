@@ -7,7 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://b5jcoe2bhj7hl" path="res://addons/sfx/effect_level_music.mp3" id="4_c5uaf"]
 [ext_resource type="Texture2D" uid="uid://vtvfwglow2to" path="res://addons/assets/tuto_game_panel.png" id="5_j5h06"]
 [ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/pixel_art_typeface.ttf" id="6_fauai"]
-[ext_resource type="Shader" uid="uid://rpaw715m64rd" path="res://scenes/game_scenes/rainbow.gdshader" id="6_j5h06"]
+[ext_resource type="Shader" uid="uid://rpaw715m64rd" path="res://shaders/rainbow.gdshader" id="6_j5h06"]
 [ext_resource type="Shader" uid="uid://crf7jc6x8vo3h" path="res://shaders/button.gdshader" id="7_7m7xu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rap8m"]
@@ -27,6 +27,7 @@ shader_parameter/pixelisation_mask = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0)
 gradient = SubResource("Gradient_sgwr3")
 width = 1920
 height = 1080
+fill_from = Vector2(1, 0)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_27sum"]
 

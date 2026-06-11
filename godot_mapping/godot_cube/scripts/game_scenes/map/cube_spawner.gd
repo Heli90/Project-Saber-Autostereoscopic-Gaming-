@@ -106,8 +106,8 @@ func activation() -> void:
 	else:
 		level_music = get_node("../../LevelMusic")
 		texture = get_node("../../TextureRect")
-		# Dans la zone à effets, il n'y a pas de joueurs, donc, on retire ce cas
-		if Global.launched_mode != 3:
+		# Dans les autres zones, il n'y a pas de joueurs
+		if Global.launched_mode < 3:
 			j1 = get_node("../../J1")
 			j2 = get_node("../../J2")
 			healing = Global.healing
@@ -175,6 +175,8 @@ func _process(delta: float) -> void:
 	if Global.launched_mode == 3:
 		if start_loop_in_effect_map: effect_loop()
 		else: pass
+	elif Global.launched_mode == 4:
+		get_tree().paused = true
 	else:
 		if start_spawn:
 			elapsed_time += delta

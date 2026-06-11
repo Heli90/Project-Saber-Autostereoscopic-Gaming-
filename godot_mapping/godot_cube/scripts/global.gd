@@ -2,7 +2,7 @@ extends Node
 
 # Booléen décidant si le mode avec vie limitée est activé
 var healing: bool = false
-# Menu : 0 / Tutoriel : 1 / Partie : 2 / Test d'effets : 3
+# Menu : 0 / Tutoriel : 1 / Partie : 2 / Test d'effets : 3 / Réglage d'espace interoculaire : 4
 var launched_mode: int = 0
 # Cubes classiques : 0 / Cubes bonus : 1 / Cubes classiques et bonus : 2 / Tous les cubes : 3
 var tutoriel_played_mode: int = -1
@@ -22,6 +22,10 @@ var loop_scale_transition_sign: Tween
 # Tableau de textures d'encre globaux
 var ink_texture_list : Array = []
 var ink_small_texture_list : Array = []
+
+# Tableau associé au décalage interoculaire de chaque joueur
+# L'ordre est le suivant : la caméra 1 de chaque joueur, puis la caméra 2 de chaque joueur
+var array_cam = [-0.03, -0.03, 0.03, 0.03]
 
 # Variables associées à l'amplitude des bras de chaque joueur
 var d1_x: float = 1.0

@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://cx3d6alfd6nrm" path="res://scripts/game_scenes/visuals/ink_overlay.gd" id="5_dg8ca"]
 [ext_resource type="Script" uid="uid://dnfkxpf3p8gki" path="res://scripts/game_scenes/visuals/shield_bar.gd" id="6_tqn45"]
 [ext_resource type="Shader" uid="uid://dk5jixryl8es3" path="res://shaders/shield_bar.gdshader" id="7_favsk"]
-[ext_resource type="Texture2D" uid="uid://cwgkhf1f7wdtp" path="res://addons/assets/shield_icon_v2.png" id="9_ohtsu"]
+[ext_resource type="Texture2D" uid="uid://cwgkhf1f7wdtp" path="res://addons/assets/shield_icon.png" id="9_ohtsu"]
 [ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="9_uud71"]
 [ext_resource type="PackedScene" uid="uid://dcjdygsrwf41g" path="res://scenes/menus/main_menu_2d.tscn" id="10_2j4hv"]
 
@@ -310,9 +310,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Game" parent="." unique_id=1026699542 instance=ExtResource("9_uud71")]
-
-[node name="StartLabel" parent="Game" index="11" unique_id=40376002]
-visible = false
 
 [node name="Menu" parent="." unique_id=505296238 instance=ExtResource("10_2j4hv")]
 

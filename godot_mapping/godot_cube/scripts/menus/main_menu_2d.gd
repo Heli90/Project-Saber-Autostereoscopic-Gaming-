@@ -36,17 +36,18 @@ var sign_back_setting_scale: Vector2
 var back_credits_scale: Vector2
 var sign_back_credits_scale: Vector2
 
-@onready var options_title: Label = $Options/OptionsTitle
-@onready var music_title: Label = $Options/MusicTitle
-@onready var sfx_title: Label = $Options/SFXTitle
+@onready var sign_change: Sprite2D = $Options/SignChange
+@onready var change_button: Button = $Options/ChangeButton
+var change_scale: Vector2
+var sign_change_scale: Vector2
 
-@onready var main_menu_music: AudioStreamPlayer = $MainMenuMusic
+@onready var options_title: Label = $Options/OptionsTitle
 @onready var click_sound: AudioStreamPlayer = $ClickSound
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	get_tree().paused = false
-	main_menu_music.volume_db = -15.0
+	GlobalMusic.volume_db = -15.0
 	
 	# Définition de la taille de tous les boutons et de tous les panneaux
 	start_scale = start_button.scale
@@ -61,6 +62,8 @@ func _ready() -> void:
 	sign_back_setting_scale = sign_back_setting.scale
 	back_credits_scale = back_credits_button.scale
 	sign_back_credits_scale = sign_back_credit.scale
+	change_scale = change_button.scale
+	sign_change_scale = sign_change.scale
 	
 	# On cache les dégradés sur les boutons
 	start_button.material.set_shader_parameter("is_hovered", false)
@@ -122,7 +125,7 @@ func transition(appear_list: Array[Control], disappear_list: Array[Control], bac
 		# Il y a un changement de scène, donc, on fait un fondu.
 		t.set_parallel(false)
 		t.tween_property(fondu_noir, "modulate:a", 1.0, 0.5)
-		t.tween_property(main_menu_music, "volume_db", -80.0, 0.8)
+		if options not in disappear_list: t.tween_property(GlobalMusic, "volume_db", -80.0, 0.8)
 		t.chain().tween_interval(0.3)
 	else:
 		for panel in appear_list:
@@ -159,6 +162,11 @@ func _onCreditsButton_pressed() -> void:
 	transition([credits], [main_buttons, game_name], false)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
+func _onChangeButton_pressed() -> void:
+	await transition([], [options], false)
+	Global.launched_mode = 4
+	get_tree().change_scene_to_file("res://scenes/game_scenes/scene_camera.tscn")
+
 func _onStartButtonEnter() -> void:
 	Global.ButtonEnter(start_button, start_scale, false, sign_start, sign_start_scale)
 
@@ -194,3 +202,9 @@ func _onBackButtonCreditEnter() -> void:
 
 func _onBackButtonCreditExit() -> void:
 	Global.ButtonExit(back_credits_button, back_credits_scale, false, sign_back_credit, sign_back_credits_scale)
+
+func _onChangeButtonEnter() -> void:
+	Global.ButtonEnter(change_button, change_scale, false, sign_change, sign_change_scale)
+
+func _onChangeButtonExit() -> void:
+	Global.ButtonExit(change_button, change_scale, false, sign_change, sign_change_scale)

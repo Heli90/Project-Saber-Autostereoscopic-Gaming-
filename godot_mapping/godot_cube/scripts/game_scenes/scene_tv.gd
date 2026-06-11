@@ -10,6 +10,7 @@ extends Node3D
 @onready var remote2_j1: RemoteTransform3D = $J1/CameraController/RemoteVue2
 @onready var remote1_j2: RemoteTransform3D = $J2/CameraController/RemoteVue5
 @onready var remote2_j2: RemoteTransform3D = $J2/CameraController/RemoteVue6
+var array_cam: Array[RemoteTransform3D]
 
 @onready var label_fps: Label = $TechnicalInfos/FPS
 @onready var label_cpu = $TechnicalInfos/CPU
@@ -31,6 +32,10 @@ func _ready() -> void:
 	var world_3d = get_viewport().world_3d
 	if has_node("Game"):
 		world_3d = game.get_world_3d()
+	
+	# Définition de la liste des caméras et des positions initiales
+	array_cam = [remote1_j1, remote1_j2, remote2_j1, remote2_j2]
+	for i in range(4): array_cam[i].position.x = Global.array_cam[i]
 	
 	var shader_mat = screen_output.material as ShaderMaterial
 	# On configure chaque vue

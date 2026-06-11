@@ -1144,6 +1144,7 @@ text = "Ready ?"
 horizontal_alignment = 1
 
 [node name="DisappearBlocNotif" type="Label" parent="." unique_id=626708433]
+visible = false
 offset_left = 850.0
 offset_top = 540.0
 offset_right = 1052.0
