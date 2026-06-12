@@ -37,10 +37,12 @@ var grille = [[0.0, 0.5], [-2.0, 0.5], [2.0, 0.5], [0.0, 1.75], [-2.0, 1.75], [2
 # Stockage des différents blocs du terrain
 var blocs: Array[Node3D]
 
-# Nombre de cubes à faire apparaître dans la zone d'effets
-var to_show_cubes: int = 10
-# Nombre de cubes montrés dans la zone d'effets
-var showed_cubes: int = 0
+# Booléens pour générer le cube dans la zone d'effets, une seule fois, et pour appliquer l'effet, une seule fois
+var is_effect_cube_generated: bool = false
+var is_effect_applied: bool = false
+# Nombre de rebonds effectués par ce cube
+var rebonds: int = 0
+
 # Booléen de départ pour décider quand il faut commencer la boucle d'effets dans la zone d'effets
 var start_loop_in_effect_map: bool = false
 # Booléen de départ pour décider quand il faut arrêter la boucle d'effets dans la zone d'effets
@@ -243,12 +245,6 @@ func menu_loop() -> void:
 				3: pass
 		spawn_cube(cube_list[n])
 
-func spawn_cubes_in_effect_map() -> void:
-	spawn_cube(classic_bloc, 10.0, 0, 3, [0.0, 2.0])
-	await get_tree().create_timer(0.5).timeout
-	spawn_cube(classic_bloc, 10.0, 1, 3, [0.0, 2.0])
-	showed_cubes += 1
-
 func increase_pixelisation() -> void:
 	var pixelisationPower = texture.material.get_shader_parameter("pixelisationPower")
 	texture.material.set_shader_parameter("pixelisation", true)
@@ -261,39 +257,125 @@ func reset_pixelisation() -> void:
 func increase_pixelisation_in_effect_map() -> void:
 	texture.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, true, true, false, false])
 	increase_pixelisation()
-	spawn_cubes_in_effect_map()
 
 func increase_glitch() -> void:
 	var offset = texture.material.get_shader_parameter("offset")
 	texture.material.set_shader_parameter("offset", offset+0.01)
+
+func increase_glitch_in_effect_map() -> void:
+	increase_glitch()
 	
 func reset_glitch() -> void:
 	texture.material.set_shader_parameter("offset", 0.0)
 
-func increase_glitch_in_effect_map() -> void:
-	increase_glitch()
-	spawn_cubes_in_effect_map()
+func red_screen() -> void:
+	texture.material.set_shader_parameter("red_screen", true)
+	var t: Tween = create_tween()
+	t.tween_method(func(v: float): texture.material.set_shader_parameter("intensity_color", v), 0.0, 1.0, 0.5)
+	await t.finished
+
+func reset_red_screen() -> void:
+	var t: Tween = create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	t.tween_method(func(v: float): texture.material.set_shader_parameter("intensity_color", v), 1.0, 0.0, 0.5)
+	await t.finished
+	texture.material.set_shader_parameter("red_screen", false)
+
+func green_screen() -> void:
+	texture.material.set_shader_parameter("green_screen", true)
+	var t: Tween = create_tween()
+	t.tween_method(func(v: float): texture.material.set_shader_parameter("intensity_color", v), 0.0, 1.0, 0.5)
+	await t.finished
+
+func reset_green_screen() -> void:
+	var t: Tween = create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	t.tween_method(func(v: float): texture.material.set_shader_parameter("intensity_color", v), 1.0, 0.0, 0.5)
+	await t.finished
+	texture.material.set_shader_parameter("green_screen", false)
+
+func blue_screen() -> void:
+	texture.material.set_shader_parameter("blue_screen", true)
+	var t: Tween = create_tween()
+	t.tween_method(func(v: float): texture.material.set_shader_parameter("intensity_color", v), 0.0, 1.0, 0.5)
+	await t.finished
+
+func reset_blue_screen() -> void:
+	var t: Tween = create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	t.tween_method(func(v: float): texture.material.set_shader_parameter("intensity_color", v), 1.0, 0.0, 0.5)
+	await t.finished
+	texture.material.set_shader_parameter("blue_screen", false)
+
+func change_color_on_effect_map(i: int) -> void:
+	match i:
+		0: await red_screen()
+		1: await green_screen()
+		2: await blue_screen()
 
 func effect_loop() -> void:
 	# De 1 à 5, on teste l'effet de pixelisation
 	# De 7 à 9, on teste l'effet de "glitch"
-	# A 10, on a fini la boucle et on demande aux joueurs s'ils veulent répéter la séquence d'effets
-	if blocs == []:
-		match showed_cubes:
-			0: spawn_cubes_in_effect_map()
-			1: increase_pixelisation_in_effect_map()
-			2: increase_pixelisation_in_effect_map()
-			3: increase_pixelisation_in_effect_map()
-			4: increase_pixelisation_in_effect_map()
-			5: increase_pixelisation_in_effect_map()
+	# De 11 à 15, on teste l'effet de recoloration
+	# A la fin de la boucle, on demande aux joueurs s'ils veulent répéter la séquence d'effets
+	for bloc in blocs:
+		if abs(bloc.position.z) > 22.0:
+			rebonds += 1
+			is_effect_applied = false
+			bloc.vitesse_deplacement = -bloc.vitesse_deplacement
+	
+	if not is_effect_cube_generated:
+		is_effect_cube_generated = true
+		spawn_cube(classic_bloc, 15.0, 0, 3, [0.0, 2.0])
+	
+	if not is_effect_applied:
+		match rebonds:
+			0: pass
+			1:
+				is_effect_applied = true
+				increase_pixelisation_in_effect_map()
+			2:
+				is_effect_applied = true
+				increase_pixelisation_in_effect_map()
+			3:
+				is_effect_applied = true
+				increase_pixelisation_in_effect_map()
+			4:
+				is_effect_applied = true
+				increase_pixelisation_in_effect_map()
+			5:
+				is_effect_applied = true
+				increase_pixelisation_in_effect_map()
 			6:
+				is_effect_applied = true
 				reset_pixelisation()
-				spawn_cubes_in_effect_map()
-			7: increase_glitch_in_effect_map()
-			8: increase_glitch_in_effect_map()
-			9: increase_glitch_in_effect_map()
+			7:
+				is_effect_applied = true
+				increase_glitch_in_effect_map()
+			8:
+				is_effect_applied = true
+				increase_glitch_in_effect_map()
+			9:
+				is_effect_applied = true
+				increase_glitch_in_effect_map()
 			10:
+				is_effect_applied = true
 				reset_glitch()
+			11:
+				is_effect_applied = true
+				change_color_on_effect_map(0)
+			12:
+				is_effect_applied = true
+				reset_red_screen()
+			13:
+				is_effect_applied = true
+				change_color_on_effect_map(1)
+			14:
+				is_effect_applied = true
+				reset_green_screen()
+			15:
+				is_effect_applied = true
+				change_color_on_effect_map(2)
+			16:
+				reset_blue_screen()
+				is_effect_applied = true
 				start_loop_in_effect_map = false
 				stop_loop_in_effect_map = true
 

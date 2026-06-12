@@ -19,6 +19,10 @@ uniform float offset = 0.000;
 uniform bool pixelisation = false;
 uniform float pixelisationPower = 200.0;
 uniform bool pixelisation_mask[8];
+uniform float intensity_color: hint_range(0., 1.) = 0.5;
+uniform bool red_screen = false;
+uniform bool green_screen = false;
+uniform bool blue_screen = false;
 
 // Fonction utilitaire pour récupérer la couleur du bon point de vue
 float get_subpixel_color(int view_index, vec2 uv, int channel) {
@@ -54,7 +58,6 @@ float get_subpixel_color(int view_index, vec2 uv, int channel) {
 			col = texture(vue_5, uv).rgb;
 		}
 	} 
-	
 	return col[channel];
 }
 
@@ -71,14 +74,11 @@ void fragment() {
     float r = get_subpixel_color(view_r, UV+vec2(offset,0), 0);
     float g = get_subpixel_color(view_g, UV-vec2(offset,0), 1);
     float b = get_subpixel_color(view_b, UV+vec2(0,offset), 2);
-	
-	// if (pixelisation){
-		//vec2 pixelUV = floor(UV * vec2(pixelisationPower))/pixelisationPower;
-		//r = get_subpixel_color(view_r, pixelUV, 0);
-    	//g = get_subpixel_color(view_g, pixelUV, 1);
-    	//b = get_subpixel_color(view_b, pixelUV, 2);
-	//}
-		
-    
-    COLOR = vec4(r, g, b, 1.0);
+	   
+    vec4 original_color = vec4(r, g, b, 1.0);
+	vec4 teinte = vec4(1.0);
+	if (red_screen){teinte = vec4(1.0, 0.3, 0.3, 1.0);}
+	if (green_screen){teinte = vec4(0.3, 1.0, 0.3, 1.0);}
+	if (blue_screen){teinte = vec4(0.3, 0.3, 1.0, 1.0);}
+	COLOR = mix(original_color, original_color * teinte, intensity_color);
 }

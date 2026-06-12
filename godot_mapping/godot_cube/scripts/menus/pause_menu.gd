@@ -84,12 +84,13 @@ func _ready() -> void:
 	switch_scale = switch_game_button.scale
 	sign_switch_scale = sign_switch_game.scale
 	
-	# Récupération de toutes les barres de combo visuelles dans le cas du tutoriel
-	var combo_bar_vue1 = get_node_or_null("../../../J1/CameraController/Vue1/ComboBar")
-	var combo_bar_vue2 = get_node_or_null("../../../J1/CameraController/Vue2/ComboBar")
-	var combo_bar_vue5 = get_node_or_null("../../../J2/CameraController/Vue5/ComboBar")
-	var combo_bar_vue6 = get_node_or_null("../../../J2/CameraController/Vue6/ComboBar")
-	combo_bar_list = [combo_bar_vue1, combo_bar_vue2, combo_bar_vue5, combo_bar_vue6]
+	if Global.launched_mode < 4:
+		# Récupération de toutes les barres de combo visuelles dans le cas du tutoriel
+		var combo_bar_vue1 = get_node_or_null("../../../J1/CameraController/Vue1/ComboBar")
+		var combo_bar_vue2 = get_node_or_null("../../../J1/CameraController/Vue2/ComboBar")
+		var combo_bar_vue5 = get_node_or_null("../../../J2/CameraController/Vue5/ComboBar")
+		var combo_bar_vue6 = get_node_or_null("../../../J2/CameraController/Vue6/ComboBar")
+		combo_bar_list = [combo_bar_vue1, combo_bar_vue2, combo_bar_vue5, combo_bar_vue6]
 	material.set_shader_parameter("lod", 0.0)
 
 func _process(delta: float) -> void:

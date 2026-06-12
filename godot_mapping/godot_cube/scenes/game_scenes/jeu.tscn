@@ -1069,9 +1069,9 @@ expand_mode = 2
 flip_h = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="LandMarksProceed" unique_id=688860276]
+visible = false
 
 [node name="DebugOverlay" type="TextureRect" parent="LandMarksProceed/CanvasLayer" unique_id=1751420981]
-visible = false
 offset_left = 810.0
 offset_right = 850.0
 offset_bottom = 40.0

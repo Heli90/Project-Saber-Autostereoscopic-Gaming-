@@ -75,6 +75,7 @@ func welcoming_effects() -> void:
 	t.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	t.tween_property(cadre, "position", Vector2(0.0, 700.0), 0.8)
 	await t.finished
+	await get_tree().create_timer(0.5).timeout
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _process(_delta: float) -> void:
@@ -116,8 +117,10 @@ func _onOKButton_pressed() -> void:
 
 func _onContinueButton_pressed() -> void:
 	click_sound.play()
+	cube_spawner.is_effect_cube_generated = false
+	cube_spawner.blocs[0].queue_free()
+	cube_spawner.rebonds = 0
 	monte_cadre()
-	cube_spawner.showed_cubes = 0
 	cube_spawner.start_loop_in_effect_map = true
 	cube_spawner.stop_loop_in_effect_map = false
 	await get_tree().create_timer(0.5).timeout

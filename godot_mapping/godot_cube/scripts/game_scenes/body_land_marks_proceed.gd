@@ -150,7 +150,7 @@ func _start_camera():
 	# Gestion de l'effet miroir (Auto-flip si caméra frontale)
 	texture_rect.flip_h = (camera_feed.get_position() != CameraFeed.FEED_BACK)
 	
-	if Global.launched_mode == 2: camera_feed.feed_is_active = true
+	if Global.launched_mode == 0 or Global.launched_mode == 2: camera_feed.feed_is_active = true
 	else: camera_feed.feed_is_active = false
 	
 	# Création de la texture selon le type de flux

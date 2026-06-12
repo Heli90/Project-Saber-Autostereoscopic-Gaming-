@@ -90,6 +90,7 @@ func _ready() -> void:
 	
 	# On ne lance pas le thread de caméra au début pour optimiser les FPS
 	landmarks_proceed.camera_feed.feed_is_active = false
+	Input.warp_mouse(Vector2(960.0, 1080.0))
 	
 	# On récupère le monde 3D
 	var world_3d = get_viewport().world_3d
