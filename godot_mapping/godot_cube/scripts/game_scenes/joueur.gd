@@ -43,7 +43,7 @@ func _ready() -> void:
 	d1_x = Global.d1_x
 	d1_y = Global.d1_y
 	d2_x = Global.d2_x
-	d2_x = Global.d2_x
+	d2_y = Global.d2_y
 	if player_id == 2: apply_blue_shader()
 		
 func apply_blue_shader():
@@ -88,6 +88,39 @@ func dilatate_x(f : float) -> float :
 		return -saber_range_x
 	return s
 
+func calc_dilatate(p_id : float, axis : int, pos : float) :
+	var d : float
+	if p_id == 1 :
+		if axis == 0:
+			if pos > max_x_1 and pos < 1 :
+				max_x_1 = pos
+				d = saber_range_x/max_x_1
+				if d < d1_x and d >= 1:
+					Global.d1_x = d
+					d1_x = d
+		if axis == 1:
+			if pos >= max_y_1 and pos < 1:
+				max_y_1 = pos
+				d = (saber_y_max+saber_y_min)/(2*max_y_1)
+				if d < d1_y and d >= 1 :
+					Global.d1_y = d
+					d1_y = d
+	else:
+		if axis == 0:
+			if pos > max_x_2 and pos < 1:
+				max_x_2 = pos
+				d = saber_range_x/max_x_2
+				if d < d2_x and d >= 1:
+					Global.d2_x = d
+					d2_x = d
+		if axis == 1:
+			if pos > max_y_2 and pos < 1:
+				max_y_2 = pos
+				d = (saber_y_max+saber_y_min)/(2*max_y_2)
+				if d < d2_y and d >= 1:
+					Global.d2_y = d
+					d2_y = d
+
 func _physics_process(_delta: float) -> void:
 	if not landmarks or landmarks.hand_data.is_empty(): return
 	for data in landmarks.hand_data:
@@ -102,35 +135,10 @@ func _physics_process(_delta: float) -> void:
 			var pos_x : float = lerp(-saber_range_x, saber_range_x, local_x)
 			var pos_y : float = lerp(saber_y_max, saber_y_min, local_y)
 			if Global.launched_mode <= 1 :
-				if player_id == 1 :
-					if pos_x > max_x_1 and pos_x < 1 :
-						max_x_1 = (pos_x+max_x_1)/2
-						var d =  saber_range_x/max_x_1 
-						if d < d1_x and d >= 1:
-							Global.d1_x = d
-							d1_x = d
-					if pos_y > max_y_1 and pos_y < 1 :
-						max_y_1 = (pos_y+max_y_1)/2
-						var d =  saber_range_x/max_y_1
-						if d < d1_y and d >= 1:
-							Global.d1_y = d
-							d1_y = d
-				else :
-					if pos_x > max_x_2 and pos_x < 1:
-						max_x_2 = (pos_x+max_x_2)/2
-						var d = saber_range_x/max_x_2
-						if d < d2_x and d >= 1 :
-							Global.d2_x = d
-							d2_x = d
-					if pos_y > max_y_2 and pos_y < 1:
-						max_y_2 = (pos_y+max_y_2)/2
-						var d = saber_range_x/max_y_2
-						if d < d2_y and d >= 1 :
-							Global.d2_y =d
-							d2_y = d
-			
-			
-							
+				calc_dilatate(player_id, 0, pos_x)
+				calc_dilatate(player_id, 1, pos_x)
+				calc_dilatate(player_id, 0, pos_y)
+				calc_dilatate(player_id, 1, pos_y)
 			saber.position.x = dilatate_x(pos_x)
 			saber.position.y = dilatate_y(pos_y)
 			
@@ -138,9 +146,9 @@ func _physics_process(_delta: float) -> void:
 			saber.rotation.z = -atan2(0,-1)/2 - data["angle_z"]
 			if data["handedness"] == "Right" :
 				if player_id == 1 :
-					j1_label.text = "x = %.2f, y = %.2f, angle = %.2f\n Max x : %.2f, y : %.2f, Dilatation x : %.2f, y : %.2f" % [local_x, local_y,-atan2(0,-1)/2 - data["angle_z"], max_x_1,max_y_1,d1_x,d1_y]
+					j1_label.text = "x = %.2f, y = %.2f, angle = %.2f\n Max x : %.2f, y : %.2f, Dilatation x : %.2f, y : %.2f" % [pos_x, pos_y,-atan2(0,-1)/2 - data["angle_z"], max_x_1,max_y_1,d1_x,d1_y]
 				elif player_id == 2:
-					j2_label.text = "x = %.2f, y = %.2f, angle = %.2f\n Max x : %.2f, y : %.2f, Dilatation x : %.2f, y : %.2f" % [local_x, local_y,-atan2(0,-1)/2 - data["angle_z"],max_x_2, max_y_2,d2_x,d2_y]
+					j2_label.text = "x = %.2f, y = %.2f, angle = %.2f\n Max x : %.2f, y : %.2f, Dilatation x : %.2f, y : %.2f" % [pos_x, pos_y,-atan2(0,-1)/2 - data["angle_z"],max_x_2, max_y_2,d2_x,d2_y]
 			#if data["handedness"]=="Right":
 			#	saber.rotation.x = data["angle_x"]
 			#else :

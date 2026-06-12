@@ -806,13 +806,14 @@ position = Vector2(810, 0)
 script = ExtResource("6_32rft")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="LandMarksProceed" unique_id=877274248]
+visible = false
 offset_right = 320.0
 offset_bottom = 240.0
 
 [node name="CameraViewport" type="SubViewport" parent="LandMarksProceed/SubViewportContainer" unique_id=861650548]
 handle_input_locally = false
 size = Vector2i(320, 240)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="TestAffichage" type="TextureRect" parent="LandMarksProceed/SubViewportContainer/CameraViewport" unique_id=538163506]
 offset_right = 320.0
@@ -821,6 +822,7 @@ expand_mode = 2
 flip_h = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="LandMarksProceed" unique_id=688860276]
+visible = false
 
 [node name="DebugOverlay" type="TextureRect" parent="LandMarksProceed/CanvasLayer" unique_id=1751420981]
 offset_left = 810.0
@@ -865,6 +867,7 @@ theme_override_fonts/font = ExtResource("16_qmffw")
 theme_override_font_sizes/font_size = 50
 
 [node name="J1Label" type="Label" parent="." unique_id=83790061]
+visible = false
 offset_left = 80.0
 offset_top = 493.0
 offset_right = 472.0
@@ -875,6 +878,7 @@ theme_override_constants/outline_size = 3
 theme_override_font_sizes/font_size = 40
 
 [node name="J2Label" type="Label" parent="." unique_id=587375142]
+visible = false
 offset_left = 974.0
 offset_top = 409.0
 offset_right = 1382.0

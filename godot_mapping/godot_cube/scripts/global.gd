@@ -28,10 +28,10 @@ var ink_small_texture_list : Array = []
 var array_cam = [-0.03, -0.03, 0.03, 0.03]
 
 # Variables associées à l'amplitude des bras de chaque joueur
-var d1_x: float = 1.0
-var d2_x : float = 1.0
-var d1_y : float = 1.0
-var d2_y : float = 1.0
+var d1_x: float = 2.0
+var d2_x : float = 2.0
+var d1_y : float = 2.0
+var d2_y : float = 2.0
 
 func ButtonEnter(button, button_scale: Vector2, life: bool = false, sign_sprite: Sprite2D = null,  sign_scale: Vector2 = Vector2(0, 0)) -> void:
 	if first_scale_transition: first_scale_transition.kill()
