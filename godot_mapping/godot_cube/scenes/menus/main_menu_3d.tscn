@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://dnfkxpf3p8gki" path="res://scripts/game_scenes/visuals/shield_bar.gd" id="6_tqn45"]
 [ext_resource type="Shader" uid="uid://dk5jixryl8es3" path="res://shaders/shield_bar.gdshader" id="7_favsk"]
 [ext_resource type="Texture2D" uid="uid://cwgkhf1f7wdtp" path="res://addons/assets/shield_icon.png" id="9_ohtsu"]
-[ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="9_uud71"]
+[ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/map/jeu.tscn" id="9_uud71"]
 [ext_resource type="PackedScene" uid="uid://dcjdygsrwf41g" path="res://scenes/menus/main_menu_2d.tscn" id="10_2j4hv"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1js1r"]
@@ -33,7 +33,7 @@ stretch = true
 
 [node name="POV1" type="SubViewport" parent="SplitScreens/Camera1" unique_id=519810470]
 handle_input_locally = false
-size = Vector2i(958, 1080)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="J1" parent="SplitScreens/Camera1/POV1" unique_id=1529862946 instance=ExtResource("2_ohtsu")]
@@ -173,7 +173,7 @@ stretch = true
 
 [node name="POV2" type="SubViewport" parent="SplitScreens/Camera2" unique_id=1303971595]
 handle_input_locally = false
-size = Vector2i(958, 1080)
+size = Vector2i(2, 2)
 render_target_update_mode = 4
 
 [node name="J2" parent="SplitScreens/Camera2/POV2" unique_id=1697962834 instance=ExtResource("2_ohtsu")]

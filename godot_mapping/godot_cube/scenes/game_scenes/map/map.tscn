@@ -1,0 +1,262 @@
+[gd_scene format=3 uid="uid://doxuw28k6mnmk"]
+
+[ext_resource type="PackedScene" uid="uid://c4x12na4wh5mf" path="res://scenes/game_scenes/shield.tscn" id="1_40t3y"]
+[ext_resource type="Script" uid="uid://b8hvntdiwpe0p" path="res://scripts/game_scenes/map/ring.gd" id="2_ddnxh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ojswa"]
+size = Vector3(8, 0.1, 120)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bfjfw"]
+albedo_color = Color(0.050980393, 0.050980393, 0.14901961, 1)
+metallic = 0.8
+roughness = 0.2
+emission_enabled = true
+emission = Color(0.101960786, 0.101960786, 0.5019608, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ilgu7"]
+size = Vector3(8, 0.1, 120)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_p2xd7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pfr5t"]
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bx7xn"]
+size = Vector3(0.1, 6, 120)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4mrpf"]
+transparency = 1
+albedo_color = Color(0.050980393, 0.019607844, 0.2, 0.6)
+metallic = 0.9
+emission_enabled = true
+emission = Color(0.3019608, 0, 1, 1)
+emission_energy_multiplier = 1.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_5ncjs"]
+size = Vector3(0.1, 6, 120)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_del27"]
+transparency = 1
+albedo_color = Color(0.050980393, 0.019607844, 0.2, 0.6)
+metallic = 0.9
+emission_enabled = true
+emission = Color(1, 0, 0.3019608, 1)
+emission_energy_multiplier = 1.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_7l6si"]
+size = Vector3(8, 0.1, 120)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_moef4"]
+transparency = 1
+albedo_color = Color(0.019607844, 0.019607844, 0.101960786, 0.4)
+metallic = 0.7
+roughness = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_1e7bp"]
+size = Vector3(0.02, 0.02, 120)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xw8ha"]
+albedo_color = Color(0.5019608, 0.5019608, 1, 1)
+emission_enabled = true
+emission = Color(0.5019608, 0.5019608, 1, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7f2ko"]
+albedo_color = Color(0.19215687, 0.2627451, 0.45490196, 1)
+metallic = 0.5
+roughness = 0.5
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7871q"]
+
+[node name="Map" type="Node3D" unique_id=561308423]
+
+[node name="Sol" type="StaticBody3D" parent="." unique_id=969455469]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Sol" unique_id=1568386009]
+mesh = SubResource("BoxMesh_ojswa")
+surface_material_override/0 = SubResource("StandardMaterial3D_bfjfw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sol" unique_id=788013682]
+shape = SubResource("BoxShape3D_ilgu7")
+
+[node name="Murs" type="Node3D" parent="." unique_id=1259628369]
+
+[node name="MurNoir" type="MeshInstance3D" parent="Murs" unique_id=1753856730]
+transform = Transform3D(10, 0, 0, 0, -4.371139e-07, -10, 0, 10, -4.371139e-07, 100, 8.854675, 0)
+mesh = SubResource("PlaneMesh_p2xd7")
+surface_material_override/0 = SubResource("StandardMaterial3D_pfr5t")
+
+[node name="MurGauche" type="MeshInstance3D" parent="Murs" unique_id=1076237406]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.5, 0)
+mesh = SubResource("BoxMesh_bx7xn")
+surface_material_override/0 = SubResource("StandardMaterial3D_4mrpf")
+
+[node name="MurDroit" type="MeshInstance3D" parent="Murs" unique_id=2126351591]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.5, 0)
+mesh = SubResource("BoxMesh_5ncjs")
+surface_material_override/0 = SubResource("StandardMaterial3D_del27")
+
+[node name="Plafond" type="MeshInstance3D" parent="Murs" unique_id=1797979418]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
+mesh = SubResource("BoxMesh_7l6si")
+surface_material_override/0 = SubResource("StandardMaterial3D_moef4")
+
+[node name="Rails" type="Node3D" parent="." unique_id=761947765]
+
+[node name="Rails-BG" type="MeshInstance3D" parent="Rails" unique_id=239724314]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -0.4, 0)
+mesh = SubResource("BoxMesh_1e7bp")
+surface_material_override/0 = SubResource("StandardMaterial3D_xw8ha")
+
+[node name="Rails-BD" type="MeshInstance3D" parent="Rails" unique_id=973638008]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, -0.4, 0)
+mesh = SubResource("BoxMesh_1e7bp")
+surface_material_override/0 = SubResource("StandardMaterial3D_xw8ha")
+
+[node name="Rails-HG" type="MeshInstance3D" parent="Rails" unique_id=697210565]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 5.4, 0)
+mesh = SubResource("BoxMesh_1e7bp")
+surface_material_override/0 = SubResource("StandardMaterial3D_xw8ha")
+
+[node name="Rails-HD" type="MeshInstance3D" parent="Rails" unique_id=1464497989]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 5.4, 0)
+mesh = SubResource("BoxMesh_1e7bp")
+surface_material_override/0 = SubResource("StandardMaterial3D_xw8ha")
+
+[node name="Boucliers" type="Node3D" parent="." unique_id=364996386]
+
+[node name="ShieldJ1" parent="Boucliers" unique_id=1455074640 instance=ExtResource("1_40t3y")]
+transform = Transform3D(-1, -8.742278e-08, 3.821371e-15, 0, -4.371139e-08, -1, 8.742278e-08, -1, 4.371139e-08, 0, 2, 25)
+emitting = false
+
+[node name="ShieldJ2" parent="Boucliers" unique_id=1842895242 instance=ExtResource("1_40t3y")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 2, -25)
+emitting = false
+
+[node name="Anneaux" type="Node3D" parent="." unique_id=2066101902]
+
+[node name="AnneauxJ1" type="Node3D" parent="Anneaux" unique_id=690715258]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 40)
+
+[node name="Ring1" type="CSGBox3D" parent="Anneaux/AnneauxJ1" unique_id=219756386]
+process_mode = 3
+size = Vector3(20, 20, 2)
+material = SubResource("StandardMaterial3D_7f2ko")
+script = ExtResource("2_ddnxh")
+
+[node name="Intérieur" type="CSGBox3D" parent="Anneaux/AnneauxJ1/Ring1" unique_id=1005050850]
+operation = 2
+size = Vector3(15, 15, 2)
+material = SubResource("StandardMaterial3D_7871q")
+
+[node name="Ring2" type="CSGBox3D" parent="Anneaux/AnneauxJ1" unique_id=1993454301]
+process_mode = 3
+transform = Transform3D(0.9396926, -0.34202012, 0, 0.34202012, 0.9396926, 0, 0, 0, 1, 0, 0, -5)
+size = Vector3(21, 21, 2)
+material = SubResource("StandardMaterial3D_7f2ko")
+script = ExtResource("2_ddnxh")
+
+[node name="Intérieur" type="CSGBox3D" parent="Anneaux/AnneauxJ1/Ring2" unique_id=611694134]
+operation = 2
+size = Vector3(16, 16, 2)
+material = SubResource("StandardMaterial3D_7871q")
+
+[node name="Ring3" type="CSGBox3D" parent="Anneaux/AnneauxJ1" unique_id=1844047615]
+process_mode = 3
+transform = Transform3D(0.7660444, -0.6427875, 0, 0.6427875, 0.7660444, 0, 0, 0, 1, 0, 0, -10)
+size = Vector3(22, 22, 2)
+material = SubResource("StandardMaterial3D_7f2ko")
+script = ExtResource("2_ddnxh")
+
+[node name="Intérieur" type="CSGBox3D" parent="Anneaux/AnneauxJ1/Ring3" unique_id=2082384766]
+operation = 2
+size = Vector3(17, 17, 2)
+material = SubResource("StandardMaterial3D_7871q")
+
+[node name="Ring4" type="CSGBox3D" parent="Anneaux/AnneauxJ1" unique_id=271937328]
+process_mode = 3
+transform = Transform3D(0.93969256, 0.3420201, 0, -0.3420201, 0.93969256, 0, 0, 0, 1, 0, 0, 5)
+size = Vector3(21, 21, 2)
+material = SubResource("StandardMaterial3D_7f2ko")
+script = ExtResource("2_ddnxh")
+
+[node name="Intérieur1" type="CSGBox3D" parent="Anneaux/AnneauxJ1/Ring4" unique_id=167790141]
+operation = 2
+size = Vector3(16, 16, 2)
+material = SubResource("StandardMaterial3D_7871q")
+
+[node name="Ring5" type="CSGBox3D" parent="Anneaux/AnneauxJ1" unique_id=584229663]
+process_mode = 3
+transform = Transform3D(0.7660444, 0.6427875, 0, -0.6427875, 0.7660444, 0, 0, 0, 1, 0, 0, 10)
+size = Vector3(22, 22, 2)
+material = SubResource("StandardMaterial3D_7f2ko")
+script = ExtResource("2_ddnxh")
+
+[node name="Intérieur" type="CSGBox3D" parent="Anneaux/AnneauxJ1/Ring5" unique_id=716929143]
+operation = 2
+size = Vector3(17, 17, 2)
+material = SubResource("StandardMaterial3D_7871q")
+
+[node name="AnneauxJ2" type="Node3D" parent="Anneaux" unique_id=1742493461]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -40)
+
+[node name="Ring1" type="CSGBox3D" parent="Anneaux/AnneauxJ2" unique_id=923199271]
+process_mode = 3
+size = Vector3(20, 20, 2)
+material = SubResource("StandardMaterial3D_7f2ko")
+script = ExtResource("2_ddnxh")
+
+[node name="Intérieur" type="CSGBox3D" parent="Anneaux/AnneauxJ2/Ring1" unique_id=546314512]
+operation = 2
+size = Vector3(15, 15, 2)
+material = SubResource("StandardMaterial3D_7871q")
+
+[node name="Ring2" type="CSGBox3D" parent="Anneaux/AnneauxJ2" unique_id=1298889502]
+process_mode = 3
+transform = Transform3D(0.9396926, -0.34202012, 0, 0.34202012, 0.9396926, 0, 0, 0, 1, 0, 0, -5)
+size = Vector3(21, 21, 2)
+material = SubResource("StandardMaterial3D_7f2ko")
+script = ExtResource("2_ddnxh")
+
+[node name="Intérieur" type="CSGBox3D" parent="Anneaux/AnneauxJ2/Ring2" unique_id=1583332443]
+operation = 2
+size = Vector3(16, 16, 2)
+material = SubResource("StandardMaterial3D_7871q")
+
+[node name="Ring3" type="CSGBox3D" parent="Anneaux/AnneauxJ2" unique_id=1947014173]
+process_mode = 3
+transform = Transform3D(0.7660444, -0.6427875, 0, 0.6427875, 0.7660444, 0, 0, 0, 1, 0, 0, -10)
+size = Vector3(22, 22, 2)
+material = SubResource("StandardMaterial3D_7f2ko")
+script = ExtResource("2_ddnxh")
+
+[node name="Intérieur" type="CSGBox3D" parent="Anneaux/AnneauxJ2/Ring3" unique_id=639634657]
+operation = 2
+size = Vector3(17, 17, 2)
+material = SubResource("StandardMaterial3D_7871q")
+
+[node name="Ring4" type="CSGBox3D" parent="Anneaux/AnneauxJ2" unique_id=1538160471]
+process_mode = 3
+transform = Transform3D(0.93969256, 0.3420201, 0, -0.3420201, 0.93969256, 0, 0, 0, 1, 0, 0, 5)
+size = Vector3(21, 21, 2)
+material = SubResource("StandardMaterial3D_7f2ko")
+script = ExtResource("2_ddnxh")
+
+[node name="Intérieur1" type="CSGBox3D" parent="Anneaux/AnneauxJ2/Ring4" unique_id=500452730]
+operation = 2
+size = Vector3(16, 16, 2)
+material = SubResource("StandardMaterial3D_7871q")
+
+[node name="Ring5" type="CSGBox3D" parent="Anneaux/AnneauxJ2" unique_id=1761026114]
+process_mode = 3
+transform = Transform3D(0.7660444, 0.6427875, 0, -0.6427875, 0.7660444, 0, 0, 0, 1, 0, 0, 10)
+size = Vector3(22, 22, 2)
+material = SubResource("StandardMaterial3D_7f2ko")
+script = ExtResource("2_ddnxh")
+
+[node name="Intérieur" type="CSGBox3D" parent="Anneaux/AnneauxJ2/Ring5" unique_id=529808259]
+operation = 2
+size = Vector3(17, 17, 2)
+material = SubResource("StandardMaterial3D_7871q")

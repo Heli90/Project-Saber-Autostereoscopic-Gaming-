@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b6rffg8gyemkl" path="res://scripts/game_scenes/scene_camera.gd" id="1_clnk0"]
 [ext_resource type="Shader" uid="uid://vno46ensk36y" path="res://shaders/generation_image.gdshader" id="2_ji78e"]
-[ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="3_ksw31"]
+[ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/map/jeu.tscn" id="3_ksw31"]
 [ext_resource type="Texture2D" uid="uid://cy5no81nhebpm" path="res://addons/assets/sign_name_panel.png" id="4_ksw31"]
 [ext_resource type="Shader" uid="uid://crf7jc6x8vo3h" path="res://shaders/button.gdshader" id="5_2jvac"]
 [ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/pixel_art_typeface.ttf" id="5_bpe7x"]
@@ -17,6 +17,13 @@ shader_parameter/offset = 0.01
 shader_parameter/pixelisation = false
 shader_parameter/pixelisationPower = 200.0
 shader_parameter/pixelisation_mask = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/intensity_color = 0.5
+shader_parameter/red_screen = false
+shader_parameter/green_screen = false
+shader_parameter/blue_screen = false
+shader_parameter/rainbow_screen = false
+shader_parameter/rainbow_speed = 0.5
+shader_parameter/rainbow_angle = 0.0
 
 [sub_resource type="Gradient" id="Gradient_sgwr3"]
 
