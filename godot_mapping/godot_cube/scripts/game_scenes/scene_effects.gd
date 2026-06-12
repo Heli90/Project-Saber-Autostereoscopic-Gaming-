@@ -58,7 +58,7 @@ func _ready() -> void:
 	screen_output.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, true, true, false, false]) # Initialise les vues qui auront l'effet de pixelisation
 	await get_tree().process_frame
 	screen_output.material.set_shader_parameter("intensity_color", 0.0)
-	
+
 	var t = create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	t.tween_property(fondu_noir, "modulate:a", 0.0, 0.6)
 	await t.finished

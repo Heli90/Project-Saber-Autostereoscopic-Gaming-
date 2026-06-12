@@ -250,6 +250,7 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 - Ajout d'un paramètre de modification de l'espace interoculaire de chaque joueur avec une instance de jeu lancée depuis le menu principal pour voir le résultat en temps réel pendant la modification
 - Ajout d'un effet de recoloration de toutes les vues de l'écran en 3 couleurs (R,G,B)
 - Ajout d'un effet arc-en-ciel avec une intensité régulable de toutes les vues de l'écran
+- Ajout du logo dans le menu principal
 
 ### Séance 15 - 15/06
 

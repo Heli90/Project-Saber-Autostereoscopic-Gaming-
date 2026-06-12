@@ -1,10 +1,17 @@
 extends Control
 
+@onready var entry_logo: Panel = $EntryLogo
 @onready var main_buttons: Panel = $MainButtons
 @onready var options: Panel = $Options
 @onready var credits: Panel = $Credits
 @onready var game_name: Label = $GameName
 @onready var fondu_noir: ColorRect = $FonduLayer/FonduNoir
+
+@onready var logo: Sprite2D = $EntryLogo/Logo
+var logo_transition: Tween
+var logo_scale: Vector2
+var logo_transition_created: bool = false
+var enter_menu: bool = false
 
 @onready var sign_start: Sprite2D = $MainButtons/SignStart
 @onready var start_button: Button = $MainButtons/StartButton
@@ -41,8 +48,15 @@ var sign_back_credits_scale: Vector2
 var change_scale: Vector2
 var sign_change_scale: Vector2
 
+@onready var sign_begin: Sprite2D = $EntryLogo/SignBegin
+@onready var begin_button: Button = $EntryLogo/BeginButton
+var begin_scale: Vector2
+var sign_begin_scale: Vector2
+
 @onready var options_title: Label = $Options/OptionsTitle
 @onready var click_sound: AudioStreamPlayer = $ClickSound
+
+const SCALE_DURATION: float = 0.4
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -64,21 +78,17 @@ func _ready() -> void:
 	sign_back_credits_scale = sign_back_credit.scale
 	change_scale = change_button.scale
 	sign_change_scale = sign_change.scale
-	
-	# On cache les dégradés sur les boutons
-	start_button.material.set_shader_parameter("is_hovered", false)
-	option_button.material.set_shader_parameter("is_hovered", false)
-	credit_button.material.set_shader_parameter("is_hovered", false)
-	quit_button.material.set_shader_parameter("is_hovered", false)
-	back_setting_button.material.set_shader_parameter("is_hovered", false)
-	back_credits_button.material.set_shader_parameter("is_hovered", false)
+	begin_scale = begin_button.scale
+	sign_begin_scale = sign_begin.scale
+	logo_scale = logo.scale
 	
 	# Mise en place de l'enlèvement du fondu
 	fondu_noir.modulate.a = 1.0
 	main_buttons.modulate.a = 1.0
 	game_name.modulate.a = 1.0
 	fondu_noir.visible = true
-	main_buttons.visible = true
+	entry_logo.visible = true
+	main_buttons.visible = false
 	game_name.visible = true
 	options.visible = false
 	credits.visible = false
@@ -91,6 +101,22 @@ func _ready() -> void:
 	var cursor = load("res://addons/assets/cursor.png")
 	Input.set_custom_mouse_cursor(cursor, Input.CURSOR_ARROW, Vector2(0, 0))
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+func _process(_delta: float) -> void:
+	if logo.visible and not logo_transition_created: create_logo_transition()
+	else:
+		if enter_menu:
+			enter_menu = false
+			await logo_transition.finished
+
+func create_logo_transition() -> void:
+	logo_transition_created = true
+	logo_transition = create_tween().set_loops()
+	logo_transition.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	logo_transition.set_ease(Tween.EASE_OUT)
+	logo_transition.set_trans(Tween.TRANS_BACK)
+	logo_transition.tween_property(logo, "scale", logo_scale * (1.05 ** 2), SCALE_DURATION)
+	logo_transition.tween_property(logo, "scale", logo_scale / (1.05 ** 2), SCALE_DURATION * 1.5)
 
 func transition(appear_list: Array[Control], disappear_list: Array[Control], back: bool) -> void:
 	# Effectue une transition courante entre 2 pages du menu
@@ -142,6 +168,13 @@ func transition(appear_list: Array[Control], disappear_list: Array[Control], bac
 			for button in panel.get_children():
 				if button is Button : button.modulate = Color.WHITE
 
+# Ouvre le menu principal
+func _onBeginButton_pressed() -> void:
+	transition([main_buttons], [entry_logo], false)
+	enter_menu = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+# Lance le menu 2D de la page d'introduction au jeu
 func _onStartButton_pressed() -> void:
 	await transition([], [main_buttons, game_name], false)
 	get_tree().change_scene_to_file("res://scenes/menus/tutoriel.tscn")
@@ -208,3 +241,11 @@ func _onChangeButtonEnter() -> void:
 
 func _onChangeButtonExit() -> void:
 	Global.ButtonExit(change_button, change_scale, false, sign_change, sign_change_scale)
+
+
+
+func _onBeginButtonEnter() -> void:
+	Global.ButtonEnter(begin_button, begin_scale, false, sign_begin, sign_begin_scale)
+
+func _onBeginButtonExit() -> void:
+	Global.ButtonExit(begin_button, begin_scale, false, sign_begin, sign_begin_scale)

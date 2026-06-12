@@ -3,9 +3,31 @@
 [ext_resource type="Script" uid="uid://vt8p43mvn5cs" path="res://scripts/menus/main_menu_2d.gd" id="1_tbmy8"]
 [ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/pixel_art_typeface.ttf" id="4_5epmy"]
 [ext_resource type="Script" uid="uid://crmbnc6adwn05" path="res://scripts/sound/audio_control.gd" id="4_8ln24"]
+[ext_resource type="Texture2D" uid="uid://by2gutctemjef" path="res://addons/assets/logo_artishow.png" id="4_myaa2"]
 [ext_resource type="Texture2D" uid="uid://cy5no81nhebpm" path="res://addons/assets/sign_name_panel.png" id="5_7gh3y"]
 [ext_resource type="Shader" uid="uid://crf7jc6x8vo3h" path="res://shaders/button.gdshader" id="6_myaa2"]
 [ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="8_tbmy8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r1foq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8bqk2"]
+shader = ExtResource("6_myaa2")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4hm2h"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r2x2k"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_spis6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_q66fn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3krkk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nvm4c"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hl5e0"]
 
@@ -151,7 +173,6 @@ script = ExtResource("1_tbmy8")
 [node name="FonduLayer" type="CanvasLayer" parent="." unique_id=1999669690]
 
 [node name="FonduNoir" type="ColorRect" parent="FonduLayer" unique_id=2057717224]
-visible = false
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
@@ -164,19 +185,51 @@ bus = &"SFX"
 
 [node name="GameName" type="Label" parent="." unique_id=839660802]
 layout_mode = 0
-offset_left = 386.0
+offset_left = 620.0
 offset_top = 150.0
-offset_right = 1534.0
+offset_right = 1311.0
 offset_bottom = 270.0
-grow_horizontal = 2
-grow_vertical = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 8
 theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 120
-text = "Project Saber"
+text = "Pong Saber"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="EntryLogo" type="Panel" parent="." unique_id=1166744989]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_r1foq")
+
+[node name="Logo" type="Sprite2D" parent="EntryLogo" unique_id=738184108]
+position = Vector2(970, 526)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("4_myaa2")
+
+[node name="SignBegin" type="Sprite2D" parent="EntryLogo" unique_id=1089218799]
+position = Vector2(950, 940)
+scale = Vector2(3, 2)
+texture = ExtResource("5_7gh3y")
+
+[node name="BeginButton" type="Button" parent="EntryLogo" unique_id=275484977]
+material = SubResource("ShaderMaterial_8bqk2")
+layout_mode = 0
+offset_left = 770.0
+offset_top = 875.0
+offset_right = 1145.0
+offset_bottom = 1026.0
+pivot_offset = Vector2(187.5, 75.5)
+theme_override_fonts/font = ExtResource("4_5epmy")
+theme_override_font_sizes/font_size = 150
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4hm2h")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_r2x2k")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_spis6")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_q66fn")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_3krkk")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_nvm4c")
+text = "Start"
 
 [node name="MainButtons" type="Panel" parent="." unique_id=159356588]
 visible = false
@@ -293,6 +346,7 @@ text = "Quit"
 metadata/_edit_use_anchors_ = true
 
 [node name="Options" type="Panel" parent="." unique_id=708263686]
+visible = false
 material = SubResource("ShaderMaterial_sp26u")
 layout_mode = 1
 anchors_preset = 8
@@ -582,6 +636,9 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_vr8o3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
 text = "Return"
 
+[connection signal="mouse_entered" from="EntryLogo/BeginButton" to="." method="_onBeginButtonEnter"]
+[connection signal="mouse_exited" from="EntryLogo/BeginButton" to="." method="_onBeginButtonExit"]
+[connection signal="pressed" from="EntryLogo/BeginButton" to="." method="_onBeginButton_pressed"]
 [connection signal="mouse_entered" from="MainButtons/StartButton" to="." method="_onStartButtonEnter"]
 [connection signal="mouse_exited" from="MainButtons/StartButton" to="." method="_onStartButtonExit"]
 [connection signal="pressed" from="MainButtons/StartButton" to="." method="_onStartButton_pressed"]
