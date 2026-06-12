@@ -245,6 +245,7 @@ func menu_loop() -> void:
 				3: pass
 		spawn_cube(cube_list[n])
 
+# Fonctions dédiées à l'application de tous les effets visuels
 func increase_pixelisation() -> void:
 	var pixelisationPower = texture.material.get_shader_parameter("pixelisationPower")
 	texture.material.set_shader_parameter("pixelisation", true)
@@ -261,9 +262,6 @@ func increase_pixelisation_in_effect_map() -> void:
 func increase_glitch() -> void:
 	var offset = texture.material.get_shader_parameter("offset")
 	texture.material.set_shader_parameter("offset", offset+0.01)
-
-func increase_glitch_in_effect_map() -> void:
-	increase_glitch()
 	
 func reset_glitch() -> void:
 	texture.material.set_shader_parameter("offset", 0.0)
@@ -310,72 +308,58 @@ func change_color_on_effect_map(i: int) -> void:
 		1: await green_screen()
 		2: await blue_screen()
 
+func rainbow_screen(start_value: float, end_value: float) -> void:
+	texture.material.set_shader_parameter("rainbow_screen", true)
+	var t: Tween = create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	t.tween_method(func(v: float): texture.material.set_shader_parameter("intensity_color", v), start_value, end_value, 0.25)
+	await t.finished
+
+func reset_rainbow_screen(current_value) -> void:
+	var t: Tween = create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	t.tween_method(func(v: float): texture.material.set_shader_parameter("intensity_color", v), current_value, 0.0, 0.5)
+	await t.finished
+	texture.material.set_shader_parameter("rainbow_screen", false)
+
 func effect_loop() -> void:
 	# De 1 à 5, on teste l'effet de pixelisation
 	# De 7 à 9, on teste l'effet de "glitch"
 	# De 11 à 15, on teste l'effet de recoloration
+	# De 17 à 18, on teste l'effet arc-en-ciel
 	# A la fin de la boucle, on demande aux joueurs s'ils veulent répéter la séquence d'effets
+	if not is_effect_cube_generated:
+		is_effect_cube_generated = true
+		spawn_cube(classic_bloc, 30.0, 0, 3, [0.0, 2.0])
+	
 	for bloc in blocs:
-		if abs(bloc.position.z) > 22.0:
+		if abs(bloc.position.z) > 20.0:
 			rebonds += 1
 			is_effect_applied = false
 			bloc.vitesse_deplacement = -bloc.vitesse_deplacement
 	
-	if not is_effect_cube_generated:
-		is_effect_cube_generated = true
-		spawn_cube(classic_bloc, 15.0, 0, 3, [0.0, 2.0])
-	
 	if not is_effect_applied:
+		is_effect_applied = true
 		match rebonds:
 			0: pass
-			1:
-				is_effect_applied = true
-				increase_pixelisation_in_effect_map()
-			2:
-				is_effect_applied = true
-				increase_pixelisation_in_effect_map()
-			3:
-				is_effect_applied = true
-				increase_pixelisation_in_effect_map()
-			4:
-				is_effect_applied = true
-				increase_pixelisation_in_effect_map()
-			5:
-				is_effect_applied = true
-				increase_pixelisation_in_effect_map()
-			6:
-				is_effect_applied = true
-				reset_pixelisation()
-			7:
-				is_effect_applied = true
-				increase_glitch_in_effect_map()
-			8:
-				is_effect_applied = true
-				increase_glitch_in_effect_map()
-			9:
-				is_effect_applied = true
-				increase_glitch_in_effect_map()
-			10:
-				is_effect_applied = true
-				reset_glitch()
-			11:
-				is_effect_applied = true
-				change_color_on_effect_map(0)
-			12:
-				is_effect_applied = true
-				reset_red_screen()
-			13:
-				is_effect_applied = true
-				change_color_on_effect_map(1)
-			14:
-				is_effect_applied = true
-				reset_green_screen()
-			15:
-				is_effect_applied = true
-				change_color_on_effect_map(2)
-			16:
-				reset_blue_screen()
-				is_effect_applied = true
+			1: increase_pixelisation_in_effect_map()
+			2: increase_pixelisation_in_effect_map()
+			3: increase_pixelisation_in_effect_map()
+			4: increase_pixelisation_in_effect_map()
+			5: increase_pixelisation_in_effect_map()
+			6: reset_pixelisation()
+			7: increase_glitch()
+			8: increase_glitch()
+			9: increase_glitch()
+			10: reset_glitch()
+			11: change_color_on_effect_map(0)
+			12: reset_red_screen()
+			13: change_color_on_effect_map(1)
+			14: reset_green_screen()
+			15: change_color_on_effect_map(2)
+			16: reset_blue_screen()
+			17: rainbow_screen(0.0, 0.5)
+			18: rainbow_screen(0.5, 1.0)
+			19:
+				reset_rainbow_screen(1.0)
 				start_loop_in_effect_map = false
 				stop_loop_in_effect_map = true
 

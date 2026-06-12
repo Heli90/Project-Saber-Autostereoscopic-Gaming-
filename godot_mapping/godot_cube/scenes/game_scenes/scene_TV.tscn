@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dnfkxpf3p8gki" path="res://scripts/game_scenes/visuals/shield_bar.gd" id="5_3cheo"]
 [ext_resource type="Script" uid="uid://cx3d6alfd6nrm" path="res://scripts/game_scenes/visuals/ink_overlay.gd" id="5_hrdja"]
 [ext_resource type="Script" uid="uid://b488bjxdcwo2m" path="res://scripts/game_scenes/visuals/health_bar.gd" id="6_af46e"]
-[ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="6_qo1rj"]
+[ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/map/jeu.tscn" id="6_qo1rj"]
 [ext_resource type="Shader" uid="uid://dk5jixryl8es3" path="res://shaders/shield_bar.gdshader" id="7_af46e"]
 [ext_resource type="Shader" uid="uid://bws066256p50k" path="res://shaders/health_bar.gdshader" id="7_k3crr"]
 [ext_resource type="Texture2D" uid="uid://cwgkhf1f7wdtp" path="res://addons/assets/shield_icon.png" id="9_af46e"]
@@ -44,6 +44,13 @@ shader_parameter/offset = 0.01
 shader_parameter/pixelisation = false
 shader_parameter/pixelisationPower = 200.0
 shader_parameter/pixelisation_mask = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/intensity_color = 0.5
+shader_parameter/red_screen = false
+shader_parameter/green_screen = false
+shader_parameter/blue_screen = false
+shader_parameter/rainbow_screen = false
+shader_parameter/rainbow_speed = 0.5
+shader_parameter/rainbow_angle = 0.0
 
 [sub_resource type="Gradient" id="Gradient_sgwr3"]
 

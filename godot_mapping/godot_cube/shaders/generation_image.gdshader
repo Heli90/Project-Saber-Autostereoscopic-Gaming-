@@ -13,16 +13,24 @@ uniform sampler2D vue_8;
 uniform int N = 8;
 uniform int decalage = -1;
 
-//Variables pour les effets visuels
-uniform bool invertViews = false; 
+// Variables pour les effets visuels
+// 1. Inversion de vues
+uniform bool invertViews = false;
+// 2. Glitch
 uniform float offset = 0.000;
+// 3. Pixelisation
 uniform bool pixelisation = false;
 uniform float pixelisationPower = 200.0;
 uniform bool pixelisation_mask[8];
+// 4. Recoloration
 uniform float intensity_color: hint_range(0., 1.) = 0.5;
 uniform bool red_screen = false;
 uniform bool green_screen = false;
 uniform bool blue_screen = false;
+// 5. Effet arc-en-ciel
+uniform bool rainbow_screen = false;
+uniform float rainbow_speed: hint_range(0., 10.) = 0.5;
+uniform float rainbow_angle: hint_range(0., 360.) = 0.;
 
 // Fonction utilitaire pour récupérer la couleur du bon point de vue
 float get_subpixel_color(int view_index, vec2 uv, int channel) {
@@ -61,6 +69,21 @@ float get_subpixel_color(int view_index, vec2 uv, int channel) {
 	return col[channel];
 }
 
+vec4 rainbow_texture(vec2 uv) {
+	float hue = uv.x * cos(radians(rainbow_angle)) - uv.y * sin(radians(rainbow_angle));
+    hue = fract(hue + fract(TIME * rainbow_speed));
+	
+    float x = 1.0 - abs(mod(hue / (1.0 / 6.0), 2.0) - 1.0);
+    vec3 rainbow;
+    if (hue < 1.0/6.0){rainbow = vec3(1., x, 0.);}
+    else if (hue < 1.0/3.0){rainbow = vec3(x, 1., 0.);}
+    else if (hue < 0.5){rainbow = vec3(0., 1., x);}
+    else if (hue < 2.0/3.0){rainbow = vec3(0., x, 1.);}
+    else if (hue < 5.0/6.0){rainbow = vec3(x, 0., 1.);}
+    else {rainbow = vec3(1., 0., x);}
+    return vec4(rainbow, 1.0);
+}
+
 void fragment() {
     // Coordonnées en pixels
     int x = int(FRAGCOORD.x);
@@ -80,5 +103,6 @@ void fragment() {
 	if (red_screen){teinte = vec4(1.0, 0.3, 0.3, 1.0);}
 	if (green_screen){teinte = vec4(0.3, 1.0, 0.3, 1.0);}
 	if (blue_screen){teinte = vec4(0.3, 0.3, 1.0, 1.0);}
+	if (rainbow_screen){teinte = rainbow_texture(UV);}
 	COLOR = mix(original_color, original_color * teinte, intensity_color);
 }

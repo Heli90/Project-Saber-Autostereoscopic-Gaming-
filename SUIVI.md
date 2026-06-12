@@ -248,7 +248,8 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 **Van-Kévin :**
 - Ajout d'une zone de tests de tous les effets créés au cours du projet, même s'ils ne sont pas retenus dans la version finale, pour faire office de démonstration technique
 - Ajout d'un paramètre de modification de l'espace interoculaire de chaque joueur avec une instance de jeu lancée depuis le menu principal pour voir le résultat en temps réel pendant la modification
-- Ajout d'un effet de recoloration de l'écran en 3 couleurs (R,G,B)
+- Ajout d'un effet de recoloration de toutes les vues de l'écran en 3 couleurs (R,G,B)
+- Ajout d'un effet arc-en-ciel avec une intensité régulable de toutes les vues de l'écran
 
 ### Séance 15 - 15/06
 

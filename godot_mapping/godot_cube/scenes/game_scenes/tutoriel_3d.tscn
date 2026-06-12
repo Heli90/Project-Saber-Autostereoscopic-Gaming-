@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c7vtx5e2brkk1" path="res://addons/assets/combo_bar_empty.png" id="10_myxsx"]
 [ext_resource type="Texture2D" uid="uid://lj6bxsd50fjh" path="res://addons/assets/combo_bar.png" id="11_r1cjm"]
 [ext_resource type="Shader" uid="uid://vno46ensk36y" path="res://shaders/generation_image.gdshader" id="12_vtjlb"]
-[ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="13_nru1m"]
+[ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/map/jeu.tscn" id="13_nru1m"]
 [ext_resource type="AudioStream" uid="uid://dk8rg1cdygmea" path="res://addons/sfx/level_music.mp3" id="14_l8vux"]
 [ext_resource type="Texture2D" uid="uid://c0mapru3i8pig" path="res://addons/assets/chain.png" id="16_aonxi"]
 [ext_resource type="Texture2D" uid="uid://ddg7sw25opsrs" path="res://addons/assets/classic_cube_icon.png" id="17_2peqq"]

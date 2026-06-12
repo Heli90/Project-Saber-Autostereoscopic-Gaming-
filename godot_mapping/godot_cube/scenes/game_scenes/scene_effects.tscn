@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dms8t5qyvhcf7" path="res://scripts/game_scenes/scene_effects.gd" id="1_p8p8s"]
 [ext_resource type="Shader" uid="uid://vno46ensk36y" path="res://shaders/generation_image.gdshader" id="2_c5uaf"]
-[ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/jeu.tscn" id="3_nnt2t"]
+[ext_resource type="PackedScene" uid="uid://vkh3oc4hwdmv" path="res://scenes/game_scenes/map/jeu.tscn" id="3_nnt2t"]
 [ext_resource type="Texture2D" uid="uid://c0mapru3i8pig" path="res://addons/assets/chain.png" id="4_8qt6g"]
 [ext_resource type="AudioStream" uid="uid://b5jcoe2bhj7hl" path="res://addons/sfx/effect_level_music.mp3" id="4_c5uaf"]
 [ext_resource type="Texture2D" uid="uid://vtvfwglow2to" path="res://addons/assets/tuto_game_panel.png" id="5_j5h06"]
@@ -24,6 +24,9 @@ shader_parameter/intensity_color = 0.0
 shader_parameter/red_screen = false
 shader_parameter/green_screen = false
 shader_parameter/blue_screen = false
+shader_parameter/rainbow_screen = false
+shader_parameter/rainbow_speed = 0.5
+shader_parameter/rainbow_angle = 0.0
 
 [sub_resource type="Gradient" id="Gradient_sgwr3"]
 
