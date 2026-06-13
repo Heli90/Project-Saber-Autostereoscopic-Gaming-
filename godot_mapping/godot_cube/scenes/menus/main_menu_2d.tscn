@@ -173,6 +173,7 @@ script = ExtResource("1_tbmy8")
 [node name="FonduLayer" type="CanvasLayer" parent="." unique_id=1999669690]
 
 [node name="FonduNoir" type="ColorRect" parent="FonduLayer" unique_id=2057717224]
+visible = false
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
@@ -185,15 +186,15 @@ bus = &"SFX"
 
 [node name="GameName" type="Label" parent="." unique_id=839660802]
 layout_mode = 0
-offset_left = 620.0
+offset_left = 520.0
 offset_top = 150.0
-offset_right = 1311.0
+offset_right = 1376.0
 offset_bottom = 270.0
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 8
 theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 120
-text = "Pong Saber"
+text = "Project Saber"
 horizontal_alignment = 1
 vertical_alignment = 1
 
