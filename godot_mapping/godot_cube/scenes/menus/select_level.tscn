@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://myrda2i0e3y4" path="res://addons/assets/insert_cassette.mp3" id="7_a7w0q"]
 [ext_resource type="Shader" uid="uid://crf7jc6x8vo3h" path="res://shaders/button.gdshader" id="7_axkwj"]
 [ext_resource type="Texture2D" uid="uid://dowsvsndxp58x" path="res://addons/assets/cassette_effects.png" id="7_xgvxu"]
+[ext_resource type="Shader" uid="uid://rpaw715m64rd" path="res://shaders/rainbow.gdshader" id="12_honup"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8ow2l"]
 texture = ExtResource("1_eiguw")
@@ -39,6 +40,20 @@ shader_parameter/angle = 0.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_axkwj"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xgvxu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2kl1k"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6oaro"]
+shader = ExtResource("12_honup")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2kl1k"]
+shader = ExtResource("12_honup")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
 
 [node name="SelectLevel" type="Control" unique_id=877177698]
 layout_mode = 3
@@ -207,6 +222,38 @@ pivot_offset = Vector2(48, 33)
 texture_normal = ExtResource("6_562s2")
 script = ExtResource("7_0vyn2")
 direction = 2
+
+[node name="EasterEggs" type="Panel" parent="." unique_id=669526871]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_2kl1k")
+
+[node name="EasterEgg1" type="Label" parent="EasterEggs" unique_id=458019771]
+material = SubResource("ShaderMaterial_6oaro")
+layout_mode = 0
+offset_left = 33.0
+offset_top = 217.0
+offset_right = 335.0
+offset_bottom = 240.0
+theme_override_fonts/font = ExtResource("3_8s4k5")
+theme_override_font_sizes/font_size = 20
+text = "Armoire de Meff Josoine Antax"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EasterEgg2" type="Label" parent="EasterEggs" unique_id=2098495436]
+material = SubResource("ShaderMaterial_2kl1k")
+layout_mode = 0
+offset_left = 1314.0
+offset_top = 617.0
+offset_right = 1407.0
+offset_bottom = 640.0
+theme_override_fonts/font = ExtResource("3_8s4k5")
+theme_override_font_sizes/font_size = 18
+text = "Hexarame"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="mouse_entered" from="Cassettes/CassetteTuto" to="Cassettes/CassetteTuto" method="_onMouseEnter"]
 [connection signal="mouse_exited" from="Cassettes/CassetteTuto" to="Cassettes/CassetteTuto" method="_onMouseExit"]

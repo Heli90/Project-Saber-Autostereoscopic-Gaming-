@@ -3,10 +3,10 @@
 [ext_resource type="Script" uid="uid://vt8p43mvn5cs" path="res://scripts/menus/main_menu_2d.gd" id="1_tbmy8"]
 [ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/pixel_art_typeface.ttf" id="4_5epmy"]
 [ext_resource type="Script" uid="uid://crmbnc6adwn05" path="res://scripts/sound/audio_control.gd" id="4_8ln24"]
-[ext_resource type="Texture2D" uid="uid://by2gutctemjef" path="res://addons/assets/logo_artishow.png" id="4_myaa2"]
 [ext_resource type="Texture2D" uid="uid://cy5no81nhebpm" path="res://addons/assets/sign_name_panel.png" id="5_7gh3y"]
 [ext_resource type="Shader" uid="uid://crf7jc6x8vo3h" path="res://shaders/button.gdshader" id="6_myaa2"]
 [ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="8_tbmy8"]
+[ext_resource type="Texture2D" uid="uid://dgfh1xh7pjdus" path="res://addons/assets/poulpe_credits.png" id="8_ymobg"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r1foq"]
 
@@ -203,11 +203,6 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_r1foq")
-
-[node name="Logo" type="Sprite2D" parent="EntryLogo" unique_id=738184108]
-position = Vector2(970, 526)
-scale = Vector2(0.7, 0.7)
-texture = ExtResource("4_myaa2")
 
 [node name="SignBegin" type="Sprite2D" parent="EntryLogo" unique_id=1089218799]
 position = Vector2(950, 940)
@@ -528,9 +523,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -211.0
-offset_top = 160.0
+offset_top = 320.0
 offset_right = 223.0
-offset_bottom = 220.0
+offset_bottom = 380.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
@@ -546,9 +541,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -121.0
-offset_top = 280.0
+offset_top = 400.0
 offset_right = 145.0
-offset_bottom = 340.0
+offset_bottom = 460.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
@@ -564,9 +559,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -131.0
-offset_top = 520.0
+offset_top = 560.0
 offset_right = 156.0
-offset_bottom = 580.0
+offset_bottom = 620.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
@@ -600,9 +595,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -161.0
-offset_top = 400.0
+offset_top = 480.0
 offset_right = 197.0
-offset_bottom = 460.0
+offset_bottom = 540.0
 grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 2
@@ -636,6 +631,11 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_a8gd2")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_vr8o3")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
 text = "Return"
+
+[node name="Poulpe" type="Sprite2D" parent="Credits" unique_id=529589299]
+position = Vector2(300, 215)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("8_ymobg")
 
 [connection signal="mouse_entered" from="EntryLogo/BeginButton" to="." method="_onBeginButtonEnter"]
 [connection signal="mouse_exited" from="EntryLogo/BeginButton" to="." method="_onBeginButtonExit"]

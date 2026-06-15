@@ -44,6 +44,9 @@ var sign_menu_scale: Vector2
 var heal_scale: Vector2
 var heal_sound_transition: bool
 
+@onready var easter_egg_plane: Sprite2D = $EasterEgg/EasterEggPlane
+var vitesse_deplacement: float = 50.0
+
 const LEADERBOARD_PATH: String = "user://leaderboard.cfg"
 
 func _ready() -> void:
@@ -88,9 +91,15 @@ func _ready() -> void:
 	Input.set_custom_mouse_cursor(cursor, Input.CURSOR_ARROW, Vector2(0, 0))
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if heal_sound.is_playing(): heal_sound_transition = true
 	else: heal_sound_transition = false
+	
+	if not select_level.visible: easter_egg_plane.visible = true
+	else: easter_egg_plane.visible = false
+
+	if easter_egg_plane.position.x < -235.0: easter_egg_plane.position.x = 2145.0
+	else: easter_egg_plane.position.x -= vitesse_deplacement * delta
 
 func _onStartButton_pressed() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)

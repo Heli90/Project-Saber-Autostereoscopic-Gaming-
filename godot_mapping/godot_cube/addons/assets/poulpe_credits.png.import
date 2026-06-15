@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://by2gutctemjef"
-path="res://.godot/imported/logo_artishow.png-7ab5ad0937b862db2899886d6c2f3554.ctex"
+uid="uid://dgfh1xh7pjdus"
+path="res://.godot/imported/poulpe_credits.png-297e80428781cb035f1625dfaeb06bf1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/assets/logo_artishow.png"
-dest_files=["res://.godot/imported/logo_artishow.png-7ab5ad0937b862db2899886d6c2f3554.ctex"]
+source_file="res://addons/assets/poulpe_credits.png"
+dest_files=["res://.godot/imported/poulpe_credits.png-297e80428781cb035f1625dfaeb06bf1.ctex"]
 
 [params]
 

@@ -13,9 +13,19 @@
 [ext_resource type="Shader" uid="uid://crf7jc6x8vo3h" path="res://shaders/button.gdshader" id="9_1mkbs"]
 [ext_resource type="Texture2D" uid="uid://c700kg3wk8oe2" path="res://addons/assets/empty_heart.png" id="9_phf8o"]
 [ext_resource type="PackedScene" uid="uid://jtm1okvkvobu" path="res://scenes/menus/select_level.tscn" id="10_gjwrx"]
+[ext_resource type="Texture2D" uid="uid://dxfkpinwvr4aa" path="res://addons/assets/plane.png" id="14_8jpt8"]
+[ext_resource type="Shader" uid="uid://rpaw715m64rd" path="res://shaders/rainbow.gdshader" id="14_cshns"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gjwrx"]
 texture = ExtResource("2_phf8o")
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kr8bg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vfcph"]
+shader = ExtResource("14_cshns")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b7lfr"]
 
@@ -129,17 +139,40 @@ volume_db = -15.0
 bus = &"Musique"
 parameters/looping = true
 
+[node name="EasterEgg" type="Panel" parent="." unique_id=1060312849]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_kr8bg")
+
+[node name="EasterEggPlane" type="Sprite2D" parent="EasterEgg" unique_id=1183552243]
+position = Vector2(2145, 73)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("14_8jpt8")
+
+[node name="EasterEgg1" type="Label" parent="EasterEgg/EasterEggPlane" unique_id=539479214]
+material = SubResource("ShaderMaterial_vfcph")
+offset_left = 6.2499924
+offset_top = -19.999977
+offset_right = 238.25
+offset_bottom = 8.000023
+theme_override_fonts/font = ExtResource("5_phf8o")
+theme_override_font_sizes/font_size = 20
+text = "Si Vanil ram, Malëx rally."
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="VideoFrame" type="Sprite2D" parent="." unique_id=412137103]
-position = Vector2(1215, 460)
+position = Vector2(1215, 480)
 scale = Vector2(1.05, 1.05)
 texture = ExtResource("6_h0cxi")
 
 [node name="TutorielVideo" type="VideoStreamPlayer" parent="." unique_id=897146802]
 layout_mode = 0
 offset_left = 575.0
-offset_top = 100.0
+offset_top = 120.0
 offset_right = 1855.0
-offset_bottom = 820.0
+offset_bottom = 840.0
 pivot_offset = Vector2(640, 360)
 autoplay = true
 loop = true
@@ -211,8 +244,9 @@ expand_to_text_length = true
 
 [node name="Start" type="Panel" parent="." unique_id=146466681]
 layout_mode = 0
+offset_top = 30.0
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 70.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_gs0rj")
 
 [node name="SignStart" type="Sprite2D" parent="Start" unique_id=11834707]
@@ -240,8 +274,9 @@ text = "Start"
 
 [node name="Menu" type="Panel" parent="." unique_id=831305918]
 layout_mode = 0
+offset_top = 30.0
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 70.0
 theme_override_styles/panel = SubResource("StyleBoxEmpty_q35cj")
 
 [node name="SignMenu" type="Sprite2D" parent="Menu" unique_id=1179866710]

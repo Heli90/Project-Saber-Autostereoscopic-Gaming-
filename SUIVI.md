@@ -255,9 +255,12 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 ### Séance 15 - 15/06
 
 **Hugo :**
-- Finalisation du poster pour la presentation de la semaien Artishow
+- Finalisation du poster pour la presentation de la semaine Artishow
 
 **Birame :**
-- Nouvel approche pour le calibrage (linéaire -> racine carré) : modification des données envoyées par MediaPipe pour augmenter la sensibilté au centre
+- Nouvelle approche pour le calibrage (linéaire -> racine carrée) : modification des données envoyées par MediaPipe pour augmenter la sensibilté au centre
+
+**Van-Kévin :**
+- Ajout de détails graphiques pour l'interface du jeu
 
 ### Séance 16-20 - Semaine du 22/06
