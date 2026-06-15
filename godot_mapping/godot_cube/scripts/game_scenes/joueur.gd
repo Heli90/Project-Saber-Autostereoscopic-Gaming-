@@ -17,14 +17,7 @@ var landmarks: Node2D
 var saber_range_x : float = 2.5
 var saber_y_min : float = 0.0
 var saber_y_max : float = 3.0
-var d1_x : float
-var d2_x : float
-var d1_y : float
-var d2_y : float
-var max_x_1 : float = 0.5
-var max_y_1 : float = 0.5
-var max_x_2 : float = 0.5
-var max_y_2 : float = 0.5
+var alpha : float = 2.0 # Quantifie le degré de transformation des données. Plus alpha est grand, plus on étire les données vers leurs valeurs extrémales.
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -40,10 +33,6 @@ func _ready() -> void:
 	left_saber.body_entered.connect(collision)
 	right_saber.body_entered.connect(collision)
 	# On récupère les amplitudes globales des bras de chaque joueur
-	d1_x = Global.d1_x
-	d1_y = Global.d1_y
-	d2_x = Global.d2_x
-	d2_y = Global.d2_y
 	if player_id == 2: apply_blue_shader()
 		
 func apply_blue_shader():
@@ -57,69 +46,12 @@ func collision(body: Node3D) -> void:
 
 func transform_data_x(f : float) -> float :
 	if f < 0.5 :
-		return 0.5 - sqrt(0.5)*sqrt(0.5-f)
+		return 0.5 - pow(0.5,1.0-1.0/alpha)*pow(0.5-f,1.0/alpha)
 	else :
-		return 0.5 + sqrt(0.5)*sqrt(f-0.5)
+		return 0.5 + pow(0.5,1.0-1.0/alpha)*pow(f-0.5,1.0/alpha)
 		
 func transform_data_y(f :float) -> float :
 	return sqrt(f)
-
-func dilatate_y(f : float) -> float :
-	var s = f
-	if player_id == 1:
-		s = d1_y * (f-1.5) + 1.5
-	else :
-		s = d2_y * (f-1.5) + 1.5
-	if s >= saber_y_max :
-		return saber_y_max
-	if s<=saber_y_min :
-		return saber_y_min
-	return s
-	
-func dilatate_x(f : float) -> float :
-	var s = f
-	if player_id == 1:
-		s = d1_x * f
-	else :
-		s = d2_x * f
-	if s >= saber_range_x :
-		return saber_range_x
-	if s<=-saber_range_x :
-		return -saber_range_x
-	return s
-
-func calc_dilatate(p_id : float, axis : int, pos : float) :
-	var d : float
-	if p_id == 1 :
-		if axis == 0:
-			if pos > max_x_1 and pos < 1 :
-				max_x_1 = pos
-				d = saber_range_x/max_x_1
-				if d < d1_x and d >= 1:
-					Global.d1_x = d
-					d1_x = d
-		if axis == 1:
-			if pos >= max_y_1 and pos < 1:
-				max_y_1 = pos
-				d = (saber_y_max+saber_y_min)/(2*max_y_1)
-				if d < d1_y and d >= 1 :
-					Global.d1_y = d
-					d1_y = d
-	else:
-		if axis == 0:
-			if pos > max_x_2 and pos < 1:
-				max_x_2 = pos
-				d = saber_range_x/max_x_2
-				if d < d2_x and d >= 1:
-					Global.d2_x = d
-					d2_x = d
-		if axis == 1:
-			if pos > max_y_2 and pos < 1:
-				max_y_2 = pos
-				d = (saber_y_max+saber_y_min)/(2*max_y_2)
-				if d < d2_y and d >= 1:
-					Global.d2_y = d
-					d2_y = d
 
 func _physics_process(_delta: float) -> void:
 	if not landmarks or landmarks.hand_data.is_empty(): return
@@ -134,21 +66,17 @@ func _physics_process(_delta: float) -> void:
 			
 			var pos_x : float = lerp(-saber_range_x, saber_range_x, local_x)
 			var pos_y : float = lerp(saber_y_max, saber_y_min, local_y)
-			if Global.launched_mode <= 1 :
-				calc_dilatate(player_id, 0, pos_x)
-				calc_dilatate(player_id, 1, pos_x)
-				calc_dilatate(player_id, 0, pos_y)
-				calc_dilatate(player_id, 1, pos_y)
-			saber.position.x = dilatate_x(pos_x)
-			saber.position.y = dilatate_y(pos_y)
+			
+			saber.position.x = pos_x
+			saber.position.y = pos_y
 			
 			# Rotation du sabre selon l'axe de l'avant-bras
 			saber.rotation.z = -atan2(0,-1)/2 - data["angle_z"]
 			if data["handedness"] == "Right" :
 				if player_id == 1 :
-					j1_label.text = "x = %.2f, y = %.2f, angle = %.2f\n Max x : %.2f, y : %.2f, Dilatation x : %.2f, y : %.2f" % [pos_x, pos_y,-atan2(0,-1)/2 - data["angle_z"], max_x_1,max_y_1,d1_x,d1_y]
+					j1_label.text = "x = %.2f, y = %.2f, angle = %.2f\n" % [pos_x, pos_y,-atan2(0,-1)/2 - data["angle_z"]]
 				elif player_id == 2:
-					j2_label.text = "x = %.2f, y = %.2f, angle = %.2f\n Max x : %.2f, y : %.2f, Dilatation x : %.2f, y : %.2f" % [pos_x, pos_y,-atan2(0,-1)/2 - data["angle_z"],max_x_2, max_y_2,d2_x,d2_y]
+					j2_label.text = "x = %.2f, y = %.2f, angle = %.2f\n " % [pos_x, pos_y,-atan2(0,-1)/2 - data["angle_z"]]
 			#if data["handedness"]=="Right":
 			#	saber.rotation.x = data["angle_x"]
 			#else :
