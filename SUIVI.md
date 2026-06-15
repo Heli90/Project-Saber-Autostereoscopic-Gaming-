@@ -254,6 +254,9 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 ### Séance 15 - 15/06
 
+**Hugo**
+-Finalisation du poster pour la presentation de la semaien Artishow
+
 
 
 ### Séance 16-20 - Semaine du 22/06
