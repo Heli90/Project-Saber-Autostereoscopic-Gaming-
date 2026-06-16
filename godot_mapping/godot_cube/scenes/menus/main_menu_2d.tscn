@@ -173,7 +173,6 @@ script = ExtResource("1_tbmy8")
 [node name="FonduLayer" type="CanvasLayer" parent="." unique_id=1999669690]
 
 [node name="FonduNoir" type="ColorRect" parent="FonduLayer" unique_id=2057717224]
-visible = false
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)

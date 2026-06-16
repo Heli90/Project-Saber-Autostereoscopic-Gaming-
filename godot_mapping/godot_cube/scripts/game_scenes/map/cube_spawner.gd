@@ -331,7 +331,7 @@ func effect_loop() -> void:
 		spawn_cube(classic_bloc, 30.0, 0, 3, [0.0, 2.0])
 	
 	for bloc in blocs:
-		if abs(bloc.position.z) > 20.0:
+		if abs(bloc.position.z) > 20.0 and (not is_effect_applied):
 			rebonds += 1
 			is_effect_applied = false
 			bloc.vitesse_deplacement = -bloc.vitesse_deplacement
