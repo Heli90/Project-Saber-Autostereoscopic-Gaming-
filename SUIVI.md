@@ -268,8 +268,8 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 **Van-Kévin :**
 - Correction de l'apparition des cubes pendant que le jeu est en pause
-- Ajout d'un effet de nausée
-- Ajout de l'effet de nausée et d'inversion des vues dans le diaporama d'effets
+- Ajout d'un effet de nausée et d'un effet de vignette
+- Ajout des effets précédents et de l'effet d'inversion des vues dans le diaporama d'effets
 - Complétion du README.md
 
 ### Séance 16-20 - Semaine du 22/06

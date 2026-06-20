@@ -35,6 +35,9 @@ uniform float rainbow_angle: hint_range(0., 360.) = 0.;
 uniform bool nausea_screen = false;
 uniform float nausea_strength: hint_range(0., 0.05) = 0.01;
 uniform float nausea_speed: hint_range(0., 5.) = 1.0;
+// 7. Effet de vignette
+uniform bool vignette_screen = false;
+uniform float vignette_strength: hint_range(0., 1.) = 0.5;
 
 // Fonction utilitaire pour récupérer la couleur du bon point de vue
 float get_subpixel_color(int view_index, vec2 uv, int channel) {
@@ -94,6 +97,13 @@ vec2 nausea_texture(vec2 uv){
 	return uv + vec2(a,b);
 }
 
+vec3 vignette_texture(vec2 uv, vec4 original_color, bool color){
+	vec2 centered = uv - vec2(0.5);
+    float dist = length(centered);
+    float vignette = smoothstep(0.3, 0.75, dist);
+	return mix(original_color.rgb, vec3(0.0), vignette * vignette_strength);
+}
+
 void fragment() {
     // Coordonnées en pixels
     int x = int(FRAGCOORD.x);
@@ -112,6 +122,7 @@ void fragment() {
 	   
     vec4 original_color = vec4(r, g, b, 1.0);
 	vec4 teinte = vec4(1.0);
+	if (vignette_screen){original_color.rgb = vignette_texture(UV, original_color, false);}
 	if (red_screen){teinte = vec4(1.0, 0.3, 0.3, 1.0);}
 	if (green_screen){teinte = vec4(0.3, 1.0, 0.3, 1.0);}
 	if (blue_screen){teinte = vec4(0.3, 0.3, 1.0, 1.0);}

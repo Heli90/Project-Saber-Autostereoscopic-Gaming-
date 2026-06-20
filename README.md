@@ -128,6 +128,7 @@ res://
   - Effet de changement de couleur (R,G,B)
   - Effet d'arc-en-ciel en mouvement
   - Effet de nausée
+  - Effet de vignette
 
 ---
 

@@ -114,6 +114,7 @@ func _onOKButton_pressed() -> void:
 	line.visible = true
 	cube_spawner.start_loop_in_effect_map = true
 	label.text = "Do you want to repeat\nthe experience ?"
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	get_tree().paused = false
 
 func _onContinueButton_pressed() -> void:
@@ -126,6 +127,7 @@ func _onContinueButton_pressed() -> void:
 	cube_spawner.start_loop_in_effect_map = true
 	cube_spawner.stop_loop_in_effect_map = false
 	await get_tree().create_timer(0.5).timeout
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	get_tree().paused = false
 
 func _onStopButton_pressed() -> void:

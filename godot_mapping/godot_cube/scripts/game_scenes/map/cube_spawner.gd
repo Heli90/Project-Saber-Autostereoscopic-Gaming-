@@ -330,14 +330,26 @@ func reset_rainbow_screen(current_value) -> void:
 func nausea_screen() -> void:
 	texture.material.set_shader_parameter("nausea_screen", true)
 	var t := create_tween()
-	t.tween_method(func(v: float): texture.material.set_shader_parameter("nausea_strength", v), 0.0, 0.01, 1.5)
+	t.tween_method(func(v: float): texture.material.set_shader_parameter("nausea_strength", v), 0.0, 0.01, 1.0)
 	await t.finished
 
 func reset_nausea_screen() -> void:
 	var t: Tween = create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-	t.tween_method(func(v: float): texture.material.set_shader_parameter("nausea_strength", v), 0.01, 0.0, 0.5)
+	t.tween_method(func(v: float): texture.material.set_shader_parameter("nausea_strength", v), 0.01, 0.0, 1.0)
 	await t.finished
-	texture.material.set_shader_parameter("rainbow_screen", false)
+	texture.material.set_shader_parameter("nausea_screen", false)
+
+func vignette_screen() -> void:
+	texture.material.set_shader_parameter("vignette_screen", true)
+	var t := create_tween()
+	t.tween_method(func(v: float): texture.material.set_shader_parameter("vignette_strength", v), 0.0, 1.0, 0.5)
+	await t.finished
+
+func reset_vignette_screen() -> void:
+	var t := create_tween()
+	t.tween_method(func(v: float): texture.material.set_shader_parameter("vignette_strength", v), 1.0, 0.0, 0.5)
+	await t.finished
+	texture.material.set_shader_parameter("vignette_screen", false)
 
 func effect_loop(delta: float) -> void:
 	# De 1 à 2, on teste l'effet d'inversion des vues
@@ -346,6 +358,7 @@ func effect_loop(delta: float) -> void:
 	# De 13 à 17, on teste l'effet de recoloration
 	# De 19 à 20, on teste l'effet arc-en-ciel
 	# De 22 à 23, on teste l'effet de nausée
+	# De 24 à 25, on teste l'effet de vignette
 	# A la fin de la boucle, on demande aux joueurs s'ils veulent répéter la séquence d'effets
 	if not is_effect_cube_generated:
 		is_effect_cube_generated = true
@@ -386,8 +399,10 @@ func effect_loop(delta: float) -> void:
 			20: rainbow_screen(0.5, 1.0)
 			21: reset_rainbow_screen(1.0)
 			22: nausea_screen()
-			23:
-				reset_nausea_screen()
+			23: reset_nausea_screen()
+			24: vignette_screen()
+			25:
+				reset_vignette_screen()
 				start_loop_in_effect_map = false
 				stop_loop_in_effect_map = true
 
