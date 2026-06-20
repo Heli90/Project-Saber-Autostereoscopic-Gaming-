@@ -31,6 +31,10 @@ uniform bool blue_screen = false;
 uniform bool rainbow_screen = false;
 uniform float rainbow_speed: hint_range(0., 10.) = 0.5;
 uniform float rainbow_angle: hint_range(0., 360.) = 0.;
+// 6. Effet de nausée
+uniform bool nausea_screen = false;
+uniform float nausea_strength: hint_range(0., 0.05) = 0.01;
+uniform float nausea_speed: hint_range(0., 5.) = 1.0;
 
 // Fonction utilitaire pour récupérer la couleur du bon point de vue
 float get_subpixel_color(int view_index, vec2 uv, int channel) {
@@ -84,6 +88,12 @@ vec4 rainbow_texture(vec2 uv) {
     return vec4(rainbow, 1.0);
 }
 
+vec2 nausea_texture(vec2 uv){
+	float a = sin(uv.y * 8.0 + TIME * nausea_speed) * nausea_strength;
+	float b = cos(uv.x * 6.0 + TIME * nausea_speed * 0.7) * nausea_strength;
+	return uv + vec2(a,b);
+}
+
 void fragment() {
     // Coordonnées en pixels
     int x = int(FRAGCOORD.x);
@@ -93,10 +103,12 @@ void fragment() {
     int view_r = ((3 * x + 0 + decalage * y) % N + N) % N;
     int view_g = ((3 * x + 1 + decalage * y) % N + N) % N;
     int view_b = ((3 * x + 2 + decalage * y) % N + N) % N;
-    
-    float r = get_subpixel_color(view_r, UV+vec2(offset,0), 0);
-    float g = get_subpixel_color(view_g, UV-vec2(offset,0), 1);
-    float b = get_subpixel_color(view_b, UV+vec2(0,offset), 2);
+	
+	vec2 uv = UV;
+	if (nausea_screen){uv = nausea_texture(uv);}
+    float r = get_subpixel_color(view_r, uv+vec2(offset,0), 0);
+    float g = get_subpixel_color(view_g, uv-vec2(offset,0), 1);
+    float b = get_subpixel_color(view_b, uv+vec2(0,offset), 2);
 	   
     vec4 original_color = vec4(r, g, b, 1.0);
 	vec4 teinte = vec4(1.0);

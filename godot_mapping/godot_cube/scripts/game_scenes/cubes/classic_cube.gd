@@ -31,6 +31,7 @@ signal striked_cube_j2
 signal missed_cube_j2
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_PAUSABLE
 	# On duplique le matériau pour pouvoir modifier la couleur de ce cube uniquement
 	forme_cube.mesh = forme_cube.mesh.duplicate()
 	var mat = forme_cube.get_active_material(0)

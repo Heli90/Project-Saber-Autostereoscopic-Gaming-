@@ -262,5 +262,14 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 **Van-Kévin :**
 - Ajout de détails graphiques pour l'interface du jeu
+- Retrait du logo dans le menu principal, considérant qu'il s'intègre mal dans celui-ci
+
+### Entre la séance 15 et la séance 16
+
+**Van-Kévin :**
+- Correction de l'apparition des cubes pendant que le jeu est en pause
+- Ajout d'un effet de nausée
+- Ajout de l'effet de nausée et d'inversion des vues dans le diaporama d'effets
+- Complétion du README.md
 
 ### Séance 16-20 - Semaine du 22/06

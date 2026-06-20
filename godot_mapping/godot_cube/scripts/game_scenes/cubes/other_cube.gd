@@ -14,6 +14,7 @@ signal striked_cube_j1
 signal striked_cube_j2
 
 func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_PAUSABLE
 	all_meshes = find_children("*", "MeshInstance3D", true, false)
 	for mesh in all_meshes:
 		mesh.mesh = mesh.mesh.duplicate()

@@ -40,6 +40,8 @@ var blocs: Array[Node3D]
 # Booléens pour générer le cube dans la zone d'effets, une seule fois, et pour appliquer l'effet, une seule fois
 var is_effect_cube_generated: bool = false
 var is_effect_applied: bool = false
+# Temps depuis le dernier effet appliqué
+var last_effect_applied_time: float = 0.0
 # Nombre de rebonds effectués par ce cube
 var rebonds: int = 0
 
@@ -175,8 +177,9 @@ func _process(delta: float) -> void:
 
 	# Une boucle à part est dédiée à la zone de test des effets
 	if Global.launched_mode == 3:
-		if start_loop_in_effect_map: effect_loop()
+		if start_loop_in_effect_map: effect_loop(delta)
 		else: pass
+	# Le jeu est mis en pause lorsqu'on modifie l'espace interoculaire
 	elif Global.launched_mode == 4:
 		get_tree().paused = true
 	else:
@@ -246,6 +249,10 @@ func menu_loop() -> void:
 		spawn_cube(cube_list[n])
 
 # Fonctions dédiées à l'application de tous les effets visuels
+func invert_views() -> void:
+	var invert = texture.material.get_shader_parameter("invertViews")
+	texture.material.set_shader_parameter("invertViews", not invert)
+
 func increase_pixelisation() -> void:
 	var pixelisationPower = texture.material.get_shader_parameter("pixelisationPower")
 	texture.material.set_shader_parameter("pixelisation", true)
@@ -320,46 +327,67 @@ func reset_rainbow_screen(current_value) -> void:
 	await t.finished
 	texture.material.set_shader_parameter("rainbow_screen", false)
 
-func effect_loop() -> void:
-	# De 1 à 5, on teste l'effet de pixelisation
-	# De 7 à 9, on teste l'effet de "glitch"
-	# De 11 à 15, on teste l'effet de recoloration
-	# De 17 à 18, on teste l'effet arc-en-ciel
+func nausea_screen() -> void:
+	texture.material.set_shader_parameter("nausea_screen", true)
+	var t := create_tween()
+	t.tween_method(func(v: float): texture.material.set_shader_parameter("nausea_strength", v), 0.0, 0.01, 1.5)
+	await t.finished
+
+func reset_nausea_screen() -> void:
+	var t: Tween = create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	t.tween_method(func(v: float): texture.material.set_shader_parameter("nausea_strength", v), 0.01, 0.0, 0.5)
+	await t.finished
+	texture.material.set_shader_parameter("rainbow_screen", false)
+
+func effect_loop(delta: float) -> void:
+	# De 1 à 2, on teste l'effet d'inversion des vues
+	# De 3 à 7, on teste l'effet de pixelisation
+	# De 9 à 11, on teste l'effet de "glitch"
+	# De 13 à 17, on teste l'effet de recoloration
+	# De 19 à 20, on teste l'effet arc-en-ciel
+	# De 22 à 23, on teste l'effet de nausée
 	# A la fin de la boucle, on demande aux joueurs s'ils veulent répéter la séquence d'effets
 	if not is_effect_cube_generated:
 		is_effect_cube_generated = true
 		spawn_cube(classic_bloc, 30.0, 0, 3, [0.0, 2.0])
 	
 	for bloc in blocs:
-		if abs(bloc.position.z) > 20.0 and (not is_effect_applied):
+		if abs(bloc.position.z) > 15.0 and last_effect_applied_time <= 0.0:
 			rebonds += 1
 			is_effect_applied = false
+			last_effect_applied_time = 1.0
 			bloc.vitesse_deplacement = -bloc.vitesse_deplacement
 	
-	if not is_effect_applied:
+	if last_effect_applied_time > 0.0: last_effect_applied_time -= delta
+	
+	if not is_effect_applied and last_effect_applied_time > 0.0:
 		is_effect_applied = true
 		match rebonds:
 			0: pass
-			1: increase_pixelisation_in_effect_map()
-			2: increase_pixelisation_in_effect_map()
+			1: invert_views()
+			2: invert_views()
 			3: increase_pixelisation_in_effect_map()
 			4: increase_pixelisation_in_effect_map()
 			5: increase_pixelisation_in_effect_map()
-			6: reset_pixelisation()
-			7: increase_glitch()
-			8: increase_glitch()
+			6: increase_pixelisation_in_effect_map()
+			7: increase_pixelisation_in_effect_map()
+			8: reset_pixelisation()
 			9: increase_glitch()
-			10: reset_glitch()
-			11: change_color_on_effect_map(0)
-			12: reset_red_screen()
-			13: change_color_on_effect_map(1)
-			14: reset_green_screen()
-			15: change_color_on_effect_map(2)
-			16: reset_blue_screen()
-			17: rainbow_screen(0.0, 0.5)
-			18: rainbow_screen(0.5, 1.0)
-			19:
-				reset_rainbow_screen(1.0)
+			10: increase_glitch()
+			11: increase_glitch()
+			12: reset_glitch()
+			13: change_color_on_effect_map(0)
+			14: reset_red_screen()
+			15: change_color_on_effect_map(1)
+			16: reset_green_screen()
+			17: change_color_on_effect_map(2)
+			18: reset_blue_screen()
+			19: rainbow_screen(0.0, 0.5)
+			20: rainbow_screen(0.5, 1.0)
+			21: reset_rainbow_screen(1.0)
+			22: nausea_screen()
+			23:
+				reset_nausea_screen()
 				start_loop_in_effect_map = false
 				stop_loop_in_effect_map = true
 
@@ -482,7 +510,7 @@ spawn: Array[float] = [0.0, -1.0], absolute_speed: float = -1.0, color: int = rn
 
 func spawn_cube_after_delay(scene_bloc: PackedScene, absolute_speed: float, direction: int,
 color: int, spawn: Array[float], delay_spawn_time: float) -> void:
-	await get_tree().create_timer(delay_spawn_time).timeout
+	await get_tree().create_timer(delay_spawn_time, false).timeout
 	spawn_cube(scene_bloc, absolute_speed, direction, color, spawn)
 
 func spawn_cube(scene_bloc: PackedScene, absolute_speed: float = -1.0, direction: int = rng.randi_range(0, 1),

@@ -122,6 +122,7 @@ func _onContinueButton_pressed() -> void:
 	cube_spawner.blocs[0].queue_free()
 	cube_spawner.rebonds = 0
 	monte_cadre()
+	cube_spawner.last_effect_applied_time = 0.0
 	cube_spawner.start_loop_in_effect_map = true
 	cube_spawner.stop_loop_in_effect_map = false
 	await get_tree().create_timer(0.5).timeout
