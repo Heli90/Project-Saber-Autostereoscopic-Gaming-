@@ -45,6 +45,7 @@ func collision(body: Node3D) -> void:
 	if body.is_in_group("cube"): body.collision()
 
 func transform_data_x(f : float) -> float :
+	f = clampf(f,0.0,1.0)
 	if f < 0.5 :
 		return 0.5 - pow(0.5,1.0-1.0/alpha)*pow(0.5-f,1.0/alpha)
 	else :
@@ -55,29 +56,35 @@ func transform_data_y(f :float) -> float :
 
 func _physics_process(_delta: float) -> void:
 	if not landmarks or landmarks.hand_data.is_empty(): return
+	
 	for data in landmarks.hand_data:
 		if data["index"] == player_id :
+			# Vérification de sécurité essentielle : on s'assure que les données MediaPipe sont valides
+			if data["x"] == null or data["y"] == null or data["angle_z"] == null:
+				continue
+				
 			var saber : Area3D = left_saber if data["handedness"] == "Left" else right_saber
 			
-			# Recalibrage des sabres dans la zone de chaque joueur
-			
-			var local_x = transform_data_x(data["x"])
-			var local_y = transform_data_y(data["y"])      
-			
+			# On crée des variables locales bien définies à chaque passage
+			var local_x : float = transform_data_x(data["x"])
+			var local_y : float = transform_data_y(data["y"])
+							
 			var pos_x : float = lerp(-saber_range_x, saber_range_x, local_x)
 			var pos_y : float = lerp(saber_y_max, saber_y_min, local_y)
+			var rot_z : float = -atan2(0, -1) / 2.0 - data["angle_z"]
 			
+			# ULTIME SÉCURITÉ : Si un NaN a réussi à s'infiltrer, on ignore cette frame pour ce sabre
+			if not is_finite(pos_x) or not is_finite(pos_y) or not is_finite(rot_z):
+				continue
+			
+			# Application des transformations sécurisées
 			saber.position.x = pos_x
 			saber.position.y = pos_y
+			saber.rotation.z = rot_z
 			
-			# Rotation du sabre selon l'axe de l'avant-bras
-			saber.rotation.z = -atan2(0,-1)/2 - data["angle_z"]
+			# Affichage des labels
 			if data["handedness"] == "Right" :
-				if player_id == 1 :
-					j1_label.text = "x = %.2f, y = %.2f, angle = %.2f\n" % [pos_x, pos_y,-atan2(0,-1)/2 - data["angle_z"]]
-				elif player_id == 2:
-					j2_label.text = "x = %.2f, y = %.2f, angle = %.2f\n " % [pos_x, pos_y,-atan2(0,-1)/2 - data["angle_z"]]
-			#if data["handedness"]=="Right":
-			#	saber.rotation.x = data["angle_x"]
-			#else :
-			#	saber.rotation.x = -data["angle_x"]
+				if player_id == 1 and j1_label:
+					j1_label.text = "x = %.2f, y = %.2f, angle = %.2f\n" % [pos_x, pos_y, rot_z]
+				elif player_id == 2 and j2_label:
+					j2_label.text = "x = %.2f, y = %.2f, angle = %.2f\n " % [pos_x, pos_y, rot_z]
