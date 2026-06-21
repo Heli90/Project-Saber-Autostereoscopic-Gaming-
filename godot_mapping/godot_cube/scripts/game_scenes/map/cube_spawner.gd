@@ -638,9 +638,9 @@ func mode_with_sabers() -> bool:
 func StrikedClassicCube(i: int) -> void:
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 1000
-	if Global.launched_mode == 2:
+	if Global.launched_mode % 2 == 0:
 		score_uis[i].ajouter_score(gain)
-		score_uis[i+2].ajouter_score(gain)
+		if Global.launched_mode == 2: score_uis[i+2].ajouter_score(gain)
 
 func MissedClassicCube(i: int) -> void:
 	if shield_actif[i] > 0:
@@ -667,25 +667,25 @@ func StrikedBonusCube(i: int) -> void:
 	var gain = multiplicateur[i] * 5000
 	multiplicateur[i] *= 2
 	count_bonus_time[i] = true
-	if Global.launched_mode == 2:
+	if Global.launched_mode % 2 == 0:
 		score_uis[i].ajouter_score(gain)
-		score_uis[i+2].ajouter_score(gain)
+		if Global.launched_mode == 2: score_uis[i+2].ajouter_score(gain)
 
 func StrikedBombCube(i: int) -> void:
 	stocked_combo[i] = 0
 	var gain = -500
 	multiplicateur[i] = 1
-	if Global.launched_mode == 2:
+	if Global.launched_mode % 2 == 0:
 		score_uis[i].ajouter_score(gain)
-		score_uis[i+2].ajouter_score(gain)
+		if Global.launched_mode == 2: score_uis[i+2].ajouter_score(gain)
 
 func StrikedDisappearCube(i: int) -> void:
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 15000
 	multiplicateur[i] *= 2
-	if Global.launched_mode == 2:
+	if Global.launched_mode % 2 == 0:
 		score_uis[i].ajouter_score(gain)
-		score_uis[i+2].ajouter_score(gain)
+		if Global.launched_mode == 2: score_uis[i+2].ajouter_score(gain)
 	# On montre une notification au joueur pour lui dire qu'il a frappé le cube
 	disappear_bloc_notif.visible = true
 	await get_tree().create_timer(1.0).timeout
@@ -694,9 +694,9 @@ func StrikedDisappearCube(i: int) -> void:
 func StrikedSplashCube(i: int) -> void:
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 1000
-	if Global.launched_mode == 2:
+	if Global.launched_mode % 2 == 0:
 		score_uis[i].ajouter_score(gain)
-		score_uis[i+2].ajouter_score(gain)
+		if Global.launched_mode == 2: score_uis[i+2].ajouter_score(gain)
 	# On déclenche le visuel d'encre
 	ink_overlay[i].trigger_ink()
 
@@ -718,9 +718,9 @@ func StrikedShieldCube(i: int) -> void:
 
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 1000
-	if Global.launched_mode == 2:
+	if Global.launched_mode % 2 == 0:
 		score_uis[i].ajouter_score(gain)
-		score_uis[i+2].ajouter_score(gain)
+		if Global.launched_mode == 2: score_uis[i+2].ajouter_score(gain)
 
 func StrikedHealCube(i: int) -> void:
 	health[i] += 1

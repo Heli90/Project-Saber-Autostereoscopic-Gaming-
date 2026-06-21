@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://h6nksloi5xja"]
+
+[ext_resource type="AudioStream" uid="uid://b3tp80uiuo18k" path="res://addons/assets/hit_cube.mp3" id="1_b7pef"]
+
+[node name="HitCube" type="AudioStreamPlayer" unique_id=349463712]
+stream = ExtResource("1_b7pef")
+volume_db = -15.0
+bus = &"SFX"

@@ -47,6 +47,7 @@ buses/default_bus_layout="res://addons/sfx/default_bus_layout.tres"
 
 Global="*uid://cechfcl15dokr"
 GlobalMusic="*uid://cgkfgtcw64vj"
+HitCubeSound="*uid://h6nksloi5xja"
 
 [debug]
 

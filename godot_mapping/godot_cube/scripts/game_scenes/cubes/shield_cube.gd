@@ -2,95 +2,31 @@ extends StaticBody3D
 
 var vitesse_deplacement: float = 0.0
 var temps_oscillation: float = 0.0
-var all_meshes: Array[Node]
-var all_polygons: Array[Node]
-
-# Variables associées au fade-in, au fade-out et sa durée
-var fading_in: bool = false
-var fading_out: bool = false
-var fade_duration: float = 0.25
-var elapsed_fade_in: float = 0.0
-var elapsed_fade_out: float = 0.0
 
 signal striked_cube_j1
 signal striked_cube_j2
 
 func _ready() -> void:
-	process_mode = Node.PROCESS_MODE_PAUSABLE
-	all_meshes = find_children("*", "MeshInstance3D", true, false)
-	all_polygons = find_children("*", "CSGPolygon3D", true, false)
-	for mesh in all_meshes:
-		mesh.mesh = mesh.mesh.duplicate()
-		var mat = mesh.get_active_material(0)
-		if mat:
-			mat = mat.duplicate()
-			mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-			mat.albedo_color.a = 0.0
-			mesh.set_surface_override_material(0, mat)
-	for polygon in all_polygons:
-		var mat = polygon.material
-		if mat:
-			mat = mat.duplicate()
-			mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-			mat.albedo_color.a = 0.0
-			polygon.material = mat
-	fading_in = true
 	add_to_group("cube")
-
-func _process(delta: float) -> void:
-	# On fait le fade-in si nécessaire
-	if fading_in:
-		elapsed_fade_in += delta
-		set_all_alpha(elapsed_fade_in / fade_duration)
-		if elapsed_fade_in >= fade_duration:
-			set_all_alpha(1.0)
-			fading_in = false
-			elapsed_fade_in = 0.0
-
-	# On fait le fade-out si nécessaire
-	if fading_out:
-		elapsed_fade_out += delta
-		set_all_alpha(1.0 - (elapsed_fade_out / fade_duration))
-		if elapsed_fade_out >= fade_duration:
-			queue_free()
 
 func _physics_process(delta: float) -> void:
 	# On retourne le cube pour qu'il ait la bonne face pour le joueur qui la reçoit
-	if vitesse_deplacement < 0:
-		rotation.y = TAU/2
-	else:
-		rotation.y = 0
+	if vitesse_deplacement < 0: rotation.y = TAU/2
+	else: rotation.y = 0
 	
 	# Le cube oscille verticalement entre la position la plus haute et la position la plus basse
 	temps_oscillation += delta
 	position.y = 0.5 + (sin(temps_oscillation * 2.0) * 0.5 + 0.5) * 2.5
 	move_and_collide(Vector3(0, 0, 1).normalized() * vitesse_deplacement * delta)
 	# On supprime le cube s'il passe derrière l'un des joueurs
-	if abs(position.z) > 22.5:
-		start_fade_out()
+	if abs(position.z) > 20.0: queue_free()
 
-func set_all_alpha(alpha: float) -> void:
-	for mesh in all_meshes:
-		mesh.mesh = mesh.mesh.duplicate()
-		var mat = mesh.get_active_material(0)
-		if mat:
-			mat.albedo_color.a = clamp(alpha, 0.0, 1.0)
-	for polygon in all_polygons:
-		var mat = polygon.material
-		if mat:
-			mat.albedo_color.a = clamp(alpha, 0.0, 1.0)
-
-func start_fade_out() -> void:
-	if fading_out: return
-	fading_out = true
-	elapsed_fade_out = 0.0
-	set_all_alpha(0.0)
-
-# On supprime le cube et on affiche le bouclier s'il est touché par l'un des joueurs
+# On supprime le cube et on apporte le bonus de cube s'il est touché par l'un des joueurs
 func collision() -> void:
+	HitCubeSound.play()
 	if position.z > 0:
 		emit_signal("striked_cube_j1")
-		start_fade_out()
+		queue_free()
 	else:
 		emit_signal("striked_cube_j2")
-		start_fade_out()
+		queue_free()
