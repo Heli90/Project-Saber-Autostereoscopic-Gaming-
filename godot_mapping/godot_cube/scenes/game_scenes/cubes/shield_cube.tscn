@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://b2scygnmuljbm"]
 
 [ext_resource type="Script" uid="uid://bd8ommpqd8om2" path="res://scripts/game_scenes/cubes/shield_cube.gd" id="1_uyaws"]
+[ext_resource type="PackedScene" uid="uid://buqmagcppsmcc" path="res://scenes/game_scenes/cubes/hit_cube_vfx.tscn" id="2_76vu0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3rv7k"]
 resource_name = "Material"
@@ -56,6 +57,7 @@ roughness = 0.1
 
 [node name="ShieldCube" type="StaticBody3D" unique_id=1892674347]
 script = ExtResource("1_uyaws")
+particles_vfx = ExtResource("2_76vu0")
 
 [node name="Cube" type="MeshInstance3D" parent="." unique_id=1325360842]
 transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)

@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://cy68ifed1fagu"]
 
 [ext_resource type="Script" uid="uid://238dtje66jps" path="res://scripts/game_scenes/cubes/disappear_cube.gd" id="1_7vakl"]
+[ext_resource type="PackedScene" uid="uid://buqmagcppsmcc" path="res://scenes/game_scenes/cubes/hit_cube_vfx.tscn" id="2_b1lb4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3rv7k"]
 resource_name = "Material"
@@ -56,6 +57,7 @@ albedo_color = Color(4.282982, 1.2915568, 1.7735087, 1)
 
 [node name="DisappearCube" type="StaticBody3D" unique_id=472210569]
 script = ExtResource("1_7vakl")
+particles_vfx = ExtResource("2_b1lb4")
 
 [node name="Cube" type="MeshInstance3D" parent="." unique_id=1325360842]
 transform = Transform3D(0.333, 0, 0, 0, 0.333, 0, 0, 0, 0.333, 0, 0, 0)

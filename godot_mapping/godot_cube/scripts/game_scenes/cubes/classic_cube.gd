@@ -1,6 +1,7 @@
 extends StaticBody3D
 
 @onready var forme_cube: MeshInstance3D = $MeshInstance3D
+@export var particles_vfx: PackedScene
 var vitesse_deplacement: float = 0.0
 
 # Couleur représentée par un entier pour déterminer le nombre de coups nécessaires pour supprimer le cube
@@ -78,6 +79,7 @@ func collision() -> void:
 	# On change la couleur du cube et on augmente légèrement la vitesse
 	nb_collisions += 1
 	HitCubeSound.play()
+	apply_vfx()
 	if nb_collisions == 1 :
 		color -= 1
 		setup_color = true
@@ -85,7 +87,22 @@ func collision() -> void:
 		# On change ensuite la direction du cube
 		vitesse_deplacement = -vitesse_deplacement
 		spin = true
-		if position.z > 0:
-			emit_signal("striked_cube_j1")
-		else:
-			emit_signal("striked_cube_j2")
+		if position.z > 0: emit_signal("striked_cube_j1")
+		else: emit_signal("striked_cube_j2")
+
+func apply_vfx() -> void:
+	if particles_vfx == null: return
+	var particles_instance = particles_vfx.instantiate()
+	get_parent().add_child(particles_instance)
+	particles_instance.global_position = global_position
+
+	for child in particles_instance.get_children():
+		if child is GPUParticles3D: child.emitting = true
+
+	# On détruit les particules après leur durée de vie
+	var max_lifetime = 0.0
+	for child in particles_instance.get_children():
+		if child is GPUParticles3D: max_lifetime = max(max_lifetime, child.lifetime)
+
+	await get_tree().create_timer(max_lifetime + 0.5).timeout
+	if is_instance_valid(particles_instance): particles_instance.queue_free()

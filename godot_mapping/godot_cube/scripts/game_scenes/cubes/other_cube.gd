@@ -1,5 +1,6 @@
 extends StaticBody3D
 
+@export var particles_vfx: PackedScene
 var vitesse_deplacement: float = 0.0
 
 signal striked_cube_j1
@@ -20,9 +21,27 @@ func _physics_process(delta: float) -> void:
 # On supprime le cube et on apporte le bonus de cube s'il est touché par l'un des joueurs
 func collision() -> void:
 	HitCubeSound.play()
+	apply_vfx()
 	if position.z > 0:
 		emit_signal("striked_cube_j1")
 		queue_free()
 	else:
 		emit_signal("striked_cube_j2")
 		queue_free()
+
+func apply_vfx() -> void:
+	if particles_vfx == null: return
+	var particles_instance = particles_vfx.instantiate()
+	get_parent().add_child(particles_instance)
+	particles_instance.global_position = global_position
+
+	for child in particles_instance.get_children():
+		if child is GPUParticles3D: child.emitting = true
+
+	# On détruit les particules après leur durée de vie
+	var max_lifetime = 0.0
+	for child in particles_instance.get_children():
+		if child is GPUParticles3D: max_lifetime = max(max_lifetime, child.lifetime)
+
+	await get_tree().create_timer(max_lifetime + 0.5).timeout
+	if is_instance_valid(particles_instance): particles_instance.queue_free()

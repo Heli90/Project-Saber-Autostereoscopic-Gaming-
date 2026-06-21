@@ -271,7 +271,7 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 - Ajout d'un effet de nausée et d'un effet de vignette
 - Ajout des effets précédents et de l'effet d'inversion des vues dans le diaporama d'effets
 - Retrait du fade-in et du fade-out des cubes par manque actuel de visibilité
-- Ajout d'un son quand on frappe un cube
+- Ajout d'un son et d'un effet visuel quand on frappe un cube
 - Complétion du README.md
 
 ### Séance 16-20 - Semaine du 22/06

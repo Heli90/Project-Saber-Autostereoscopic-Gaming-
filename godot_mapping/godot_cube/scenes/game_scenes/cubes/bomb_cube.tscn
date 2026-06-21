@@ -1,6 +1,7 @@
 [gd_scene format=4 uid="uid://bhsti1g7ancuo"]
 
 [ext_resource type="Script" uid="uid://r15a7r51dtbw" path="res://scripts/game_scenes/cubes/other_cube.gd" id="1_30ywe"]
+[ext_resource type="PackedScene" uid="uid://buqmagcppsmcc" path="res://scenes/game_scenes/cubes/hit_cube_vfx.tscn" id="2_mxa80"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3rv7k"]
 resource_name = "Material"
@@ -57,6 +58,7 @@ metallic = 0.8
 
 [node name="BombCube" type="StaticBody3D" unique_id=2129357783]
 script = ExtResource("1_30ywe")
+particles_vfx = ExtResource("2_mxa80")
 
 [node name="Cube" type="MeshInstance3D" parent="." unique_id=1325360842]
 transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)

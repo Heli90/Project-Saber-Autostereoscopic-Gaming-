@@ -2,6 +2,7 @@
 
 [ext_resource type="ArrayMesh" uid="uid://n2015ccy1o4n" path="res://models/heart.obj" id="1_ay1wp"]
 [ext_resource type="Script" uid="uid://r15a7r51dtbw" path="res://scripts/game_scenes/cubes/other_cube.gd" id="1_li3my"]
+[ext_resource type="PackedScene" uid="uid://buqmagcppsmcc" path="res://scenes/game_scenes/cubes/hit_cube_vfx.tscn" id="2_xnrkh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3rv7k"]
 resource_name = "Material"
@@ -57,6 +58,7 @@ roughness = 0.5
 
 [node name="HealCube" type="StaticBody3D" unique_id=166795106]
 script = ExtResource("1_li3my")
+particles_vfx = ExtResource("2_xnrkh")
 
 [node name="Cube" type="MeshInstance3D" parent="." unique_id=1325360842]
 transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)
