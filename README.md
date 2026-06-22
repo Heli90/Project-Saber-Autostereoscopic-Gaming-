@@ -92,6 +92,7 @@ res://
 - Musique
 - SFX
 - Espace interoculaire
+- Calibration des sabres en X et en Y
 - Classement actuel
 
 ---
