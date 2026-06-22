@@ -4,6 +4,7 @@ extends Control
 @onready var main_buttons: Panel = $MainButtons
 @onready var options: Panel = $Options
 @onready var credits: Panel = $Credits
+@onready var calibration: Panel = $Calibration
 @onready var game_name: Label = $GameName
 @onready var fondu_noir: ColorRect = $FonduLayer/FonduNoir
 
@@ -42,6 +43,16 @@ var sign_back_credits_scale: Vector2
 var change_scale: Vector2
 var sign_change_scale: Vector2
 
+@onready var sign_cal_change: Sprite2D = $Options/SignCalChange
+@onready var cal_change_button: Button = $Options/CalChange
+var cal_change_scale: Vector2
+var sign_cal_change_scale: Vector2
+
+@onready var sign_cal_back: Sprite2D = $Calibration/SignBack
+@onready var cal_back_button: Button = $Calibration/BackButton
+var cal_back_scale: Vector2
+var sign_cal_back_scale: Vector2
+
 @onready var sign_begin: Sprite2D = $EntryLogo/SignBegin
 @onready var begin_button: Button = $EntryLogo/BeginButton
 var begin_scale: Vector2
@@ -70,8 +81,12 @@ func _ready() -> void:
 	sign_back_setting_scale = sign_back_setting.scale
 	back_credits_scale = back_credits_button.scale
 	sign_back_credits_scale = sign_back_credit.scale
+	cal_back_scale = cal_back_button.scale
+	sign_cal_back_scale = sign_cal_back.scale
 	change_scale = change_button.scale
 	sign_change_scale = sign_change.scale
+	cal_change_scale = cal_change_button.scale
+	sign_cal_change_scale = sign_cal_change.scale
 	begin_scale = begin_button.scale
 	sign_begin_scale = sign_begin.scale
 	
@@ -85,6 +100,7 @@ func _ready() -> void:
 	main_buttons.visible = false
 	options.visible = false
 	credits.visible = false
+	calibration.visible = false
 	
 	var t = create_tween()
 	t.tween_property(fondu_noir, "modulate:a", 0.0, 0.6)
@@ -95,13 +111,9 @@ func _ready() -> void:
 	Input.set_custom_mouse_cursor(cursor, Input.CURSOR_ARROW, Vector2(0, 0))
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-func transition(appear_list: Array[Control], disappear_list: Array[Control], back: bool) -> void:
+func transition(appear_list: Array[Control], disappear_list: Array[Control]) -> void:
 	# Effectue une transition courante entre 2 pages du menu
 	click_sound.play()
-	if back:
-		# On annule le spam d'appui de boutons
-		for button in main_buttons.get_children():
-			if button is Button: button.disabled = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	
 	var t = create_tween().set_parallel(true)
@@ -120,10 +132,6 @@ func transition(appear_list: Array[Control], disappear_list: Array[Control], bac
 				panel.modulate.a = 0.0
 				panel.visible = true)
 	t.set_parallel(true)
-	if back:
-		for panel in appear_list: 
-			for button in panel.get_children():
-				if button is Button : button.modulate = Color.BLACK
 	if appear_list == []:
 		# Il y a un changement de scène, donc, on fait un fondu.
 		t.set_parallel(false)
@@ -135,46 +143,45 @@ func transition(appear_list: Array[Control], disappear_list: Array[Control], bac
 			t.tween_property(panel, "modulate:a", 1.0, 0.1)
 		t.set_parallel(false)
 	await t.finished
-	
-	if back:
-		# On annule le spam d'appui de boutons
-		for panel in appear_list:
-			for button in panel.get_children():
-				if button is Button : button.disabled = false
-		# On remet la couleur initiale lorsque le curseur passe sur un bouton
-			for button in panel.get_children():
-				if button is Button : button.modulate = Color.WHITE
 
 # Ouvre le menu principal
 func _onBeginButton_pressed() -> void:
-	transition([main_buttons, game_name], [entry_logo], false)
+	transition([main_buttons, game_name], [entry_logo])
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 # Lance le menu 2D de la page d'introduction au jeu
 func _onStartButton_pressed() -> void:
-	await transition([], [main_buttons, game_name], false)
+	await transition([], [main_buttons, game_name])
 	get_tree().change_scene_to_file("res://scenes/menus/tutoriel.tscn")
 
 func _onOptionButton_pressed() -> void:
-	transition([options], [main_buttons, game_name], false)
+	transition([options], [main_buttons, game_name])
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _onQuitButton_pressed() -> void:
-	await transition([], [main_buttons, game_name], false)
+	await transition([], [main_buttons, game_name])
 	get_tree().quit()
 
 func _onBackButton_pressed() -> void:
-	transition([main_buttons, game_name], [options, credits], true)
+	transition([main_buttons, game_name], [options, credits])
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+func _onBackCalButton_pressed() -> void:
+	transition([options], [calibration])
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _onCreditsButton_pressed() -> void:
-	transition([credits], [main_buttons, game_name], false)
+	transition([credits], [main_buttons, game_name])
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _onChangeButton_pressed() -> void:
-	await transition([], [options], false)
+	await transition([], [options])
 	Global.launched_mode = 4
 	get_tree().change_scene_to_file("res://scenes/game_scenes/scene_camera.tscn")
+
+func _onCalChangeButton_pressed() -> void:
+	transition([calibration], [options])
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func _onStartButtonEnter() -> void:
 	Global.ButtonEnter(start_button, start_scale, false, sign_start, sign_start_scale)
@@ -218,18 +225,27 @@ func _onChangeButtonEnter() -> void:
 func _onChangeButtonExit() -> void:
 	Global.ButtonExit(change_button, change_scale, false, sign_change, sign_change_scale)
 
+func _onCalChangeButtonEnter() -> void:
+	Global.ButtonEnter(cal_change_button, cal_change_scale, false, sign_cal_change, sign_cal_change_scale)
+
+func _onCalChangeButtonExit() -> void:
+	Global.ButtonExit(cal_change_button, cal_change_scale, false, sign_cal_change, sign_cal_change_scale)
+
 func _onBeginButtonEnter() -> void:
 	Global.ButtonEnter(begin_button, begin_scale, false, sign_begin, sign_begin_scale)
 
 func _onBeginButtonExit() -> void:
 	Global.ButtonExit(begin_button, begin_scale, false, sign_begin, sign_begin_scale)
 
+func _onBackCalButtonEnter() -> void:
+	Global.ButtonEnter(cal_back_button, cal_back_scale, false, sign_cal_back, sign_cal_back_scale)
+
+func _onBackCalButtonExit() -> void:
+	Global.ButtonExit(cal_back_button, cal_back_scale, false, sign_cal_back, sign_cal_back_scale)
+	
 # Valeur de l'étirement maximal des sabres sur l'écran
 func _onAlpha1Changed(value: float) -> void:
 	Global.alpha1 = value
 
 func _onAlpha2Changed(value: float) -> void:
 	Global.alpha2 = value
-	
-func _onTwoPlayerModePressed() -> void:
-	Global.two_player_mode = false

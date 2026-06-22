@@ -121,6 +121,25 @@ shader_parameter/angle = 0.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sp26u"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4hm2h"]
+shader = ExtResource("6_myaa2")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4l4x5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_434c8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8bqk2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_12rhh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2agnn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cts68"]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r1foq"]
 shader = ExtResource("6_myaa2")
 shader_parameter/is_hovered = false
@@ -149,6 +168,8 @@ thickness = 5
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_rtw2f"]
 color = Color(0, 1, 0, 1)
 thickness = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7e3u0"]
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_myaa2"]
 color = Color(1, 1, 1, 1)
@@ -185,6 +206,7 @@ script = ExtResource("1_tbmy8")
 [node name="FonduLayer" type="CanvasLayer" parent="." unique_id=1999669690]
 
 [node name="FonduNoir" type="ColorRect" parent="FonduLayer" unique_id=2057717224]
+visible = false
 offset_right = 1920.0
 offset_bottom = 1080.0
 color = Color(0, 0, 0, 1)
@@ -196,6 +218,7 @@ volume_db = -15.0
 bus = &"SFX"
 
 [node name="GameName" type="Label" parent="." unique_id=839660802]
+visible = false
 layout_mode = 0
 offset_left = 520.0
 offset_top = 150.0
@@ -354,7 +377,6 @@ text = "Quit"
 metadata/_edit_use_anchors_ = true
 
 [node name="Options" type="Panel" parent="." unique_id=708263686]
-visible = false
 material = SubResource("ShaderMaterial_sp26u")
 layout_mode = 1
 anchors_preset = 8
@@ -389,9 +411,9 @@ vertical_alignment = 1
 [node name="MusicTitle" type="Label" parent="Options" unique_id=767801421]
 layout_mode = 0
 offset_left = -213.0
-offset_top = 200.0
+offset_top = 300.0
 offset_right = 25.0
-offset_bottom = 251.0
+offset_bottom = 351.0
 theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 50
 text = "Music"
@@ -400,40 +422,30 @@ horizontal_alignment = 1
 [node name="SFXTitle" type="Label" parent="Options" unique_id=1942812459]
 layout_mode = 0
 offset_left = -147.0
-offset_top = 300.0
+offset_top = 400.0
 offset_right = -50.0
-offset_bottom = 351.0
+offset_bottom = 451.0
 theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 50
 text = "SFX"
 
-[node name="AlphaTitleJ1" type="Label" parent="Options" unique_id=212690481]
+[node name="CalibrationTitle" type="Label" parent="Options" unique_id=149506956]
 layout_mode = 0
-offset_left = -375.0
-offset_top = 400.0
-offset_right = 206.0
-offset_bottom = 451.0
+offset_left = 775.0
+offset_top = 450.0
+offset_right = 1041.0
+offset_bottom = 501.0
 theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 50
-text = "Movement Amplification J1"
+text = "Calibration"
 horizontal_alignment = 1
-
-[node name="AlphaTitleJ2" type="Label" parent="Options" unique_id=1941669426]
-layout_mode = 0
-offset_left = -375.0
-offset_top = 500.0
-offset_right = 275.0
-offset_bottom = 551.0
-theme_override_fonts/font = ExtResource("4_5epmy")
-theme_override_font_sizes/font_size = 50
-text = "Movement Amplification J2"
-horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="InterocularSpacingTitle" type="Label" parent="Options" unique_id=956831416]
 layout_mode = 0
-offset_left = 650.0
+offset_left = 665.0
 offset_top = 200.0
-offset_right = 1134.0
+offset_right = 1149.0
 offset_bottom = 251.0
 theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 50
@@ -460,6 +472,29 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_ymobg")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_sfpvq")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_r2olw")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_sp26u")
+text = "Change"
+
+[node name="SignCalChange" type="Sprite2D" parent="Options" unique_id=901807086]
+position = Vector2(900, 595)
+scale = Vector2(1.3, 1.1)
+texture = ExtResource("5_7gh3y")
+
+[node name="CalChange" type="Button" parent="Options" unique_id=419798502]
+material = SubResource("ShaderMaterial_4hm2h")
+layout_mode = 0
+offset_left = 827.5
+offset_top = 575.0
+offset_right = 975.5
+offset_bottom = 615.0
+pivot_offset = Vector2(74, 20)
+theme_override_fonts/font = ExtResource("4_5epmy")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_4l4x5")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_434c8")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_8bqk2")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_12rhh")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_2agnn")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cts68")
 text = "Change"
 
 [node name="SignBack" type="Sprite2D" parent="Options" unique_id=2036190015]
@@ -489,9 +524,9 @@ text = "Return"
 [node name="MusicControl" type="HSlider" parent="Options" unique_id=874942043]
 layout_mode = 0
 offset_left = -425.0
-offset_top = 250.0
+offset_top = 350.0
 offset_right = 251.0
-offset_bottom = 280.0
+offset_bottom = 380.0
 theme_override_styles/slider = SubResource("StyleBoxLine_wu84c")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_8ln24")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_rtw2f")
@@ -504,9 +539,9 @@ audio_bus_name = "Musique"
 [node name="SFXControl" type="HSlider" parent="Options" unique_id=1315685405]
 layout_mode = 0
 offset_left = -425.0
-offset_top = 350.0
+offset_top = 450.0
 offset_right = 251.0
-offset_bottom = 380.0
+offset_bottom = 480.0
 theme_override_styles/slider = SubResource("StyleBoxLine_wu84c")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_8ln24")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_rtw2f")
@@ -516,7 +551,61 @@ value = 1.0
 script = ExtResource("4_8ln24")
 audio_bus_name = "SFX"
 
-[node name="AlphaControl1" type="HSlider" parent="Options" unique_id=1495010831]
+[node name="Calibration" type="Panel" parent="." unique_id=69846264]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -356.5
+offset_right = 400.0
+offset_bottom = 356.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_7e3u0")
+
+[node name="CalibrationTitle" type="Label" parent="Calibration" unique_id=1784371137]
+layout_mode = 0
+offset_left = 140.0
+offset_top = 3.5
+offset_right = 659.0
+offset_bottom = 83.5
+size_flags_horizontal = 4
+size_flags_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 5
+theme_override_fonts/font = ExtResource("4_5epmy")
+theme_override_font_sizes/font_size = 80
+text = "Calibration"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AlphaTitleJ1" type="Label" parent="Calibration" unique_id=1217400545]
+layout_mode = 0
+offset_left = -400.0
+offset_top = 400.0
+offset_right = 244.0
+offset_bottom = 451.0
+theme_override_fonts/font = ExtResource("4_5epmy")
+theme_override_font_sizes/font_size = 50
+text = "Movement Amplification J1"
+horizontal_alignment = 1
+
+[node name="AlphaTitleJ2" type="Label" parent="Calibration" unique_id=1776945203]
+layout_mode = 0
+offset_left = -400.0
+offset_top = 500.0
+offset_right = 250.0
+offset_bottom = 551.0
+theme_override_fonts/font = ExtResource("4_5epmy")
+theme_override_font_sizes/font_size = 50
+text = "Movement Amplification J2"
+horizontal_alignment = 1
+
+[node name="AlphaControl1" type="HSlider" parent="Calibration" unique_id=362249450]
 layout_mode = 0
 offset_left = -425.0
 offset_top = 450.0
@@ -530,7 +619,7 @@ max_value = 3.0
 step = 0.1
 value = 2.0
 
-[node name="AlphaControl2" type="HSlider" parent="Options" unique_id=1169277571]
+[node name="AlphaControl2" type="HSlider" parent="Calibration" unique_id=1806876527]
 layout_mode = 0
 offset_left = -425.0
 offset_top = 550.0
@@ -543,6 +632,30 @@ min_value = 1.0
 max_value = 3.0
 step = 0.1
 value = 2.0
+
+[node name="SignBack" type="Sprite2D" parent="Calibration" unique_id=955079048]
+position = Vector2(397.5, 710.5)
+scale = Vector2(1.75, 1.5)
+texture = ExtResource("5_7gh3y")
+
+[node name="BackButton" type="Button" parent="Calibration" unique_id=940094471]
+material = SubResource("ShaderMaterial_r1foq")
+custom_minimum_size = Vector2(0, 127)
+layout_mode = 0
+offset_left = 300.0
+offset_top = 650.0
+offset_right = 506.0
+offset_bottom = 777.0
+pivot_offset = Vector2(103, 63.5)
+theme_override_fonts/font = ExtResource("4_5epmy")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5pajh")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_1acrt")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_j7ex8")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_a8gd2")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_vr8o3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
+text = "Return"
 
 [node name="Credits" type="Panel" parent="." unique_id=1582576228]
 visible = false
@@ -717,13 +830,17 @@ texture = ExtResource("8_ymobg")
 [connection signal="mouse_entered" from="Options/ChangeButton" to="." method="_onChangeButtonEnter"]
 [connection signal="mouse_exited" from="Options/ChangeButton" to="." method="_onChangeButtonExit"]
 [connection signal="pressed" from="Options/ChangeButton" to="." method="_onChangeButton_pressed"]
+[connection signal="mouse_entered" from="Options/CalChange" to="." method="_onCalChangeButtonEnter"]
+[connection signal="mouse_exited" from="Options/CalChange" to="." method="_onCalChangeButtonExit"]
+[connection signal="pressed" from="Options/CalChange" to="." method="_onCalChangeButton_pressed"]
 [connection signal="mouse_entered" from="Options/BackButton" to="." method="_onBackButtonSettingEnter"]
 [connection signal="mouse_exited" from="Options/BackButton" to="." method="_onBackButtonSettingExit"]
 [connection signal="pressed" from="Options/BackButton" to="." method="_onBackButton_pressed"]
 [connection signal="value_changed" from="Options/MusicControl" to="Options/MusicControl" method="_onValueChanged"]
 [connection signal="value_changed" from="Options/SFXControl" to="Options/SFXControl" method="_onValueChanged"]
-[connection signal="value_changed" from="Options/AlphaControl1" to="." method="_onAlpha1Changed"]
-[connection signal="value_changed" from="Options/AlphaControl2" to="." method="_onAlpha2Changed"]
+[connection signal="mouse_entered" from="Calibration/BackButton" to="." method="_onBackCalButtonEnter"]
+[connection signal="mouse_exited" from="Calibration/BackButton" to="." method="_onBackCalButtonExit"]
+[connection signal="pressed" from="Calibration/BackButton" to="." method="_onBackCalButton_pressed"]
 [connection signal="mouse_entered" from="Credits/BackButton" to="." method="_onBackButtonCreditEnter"]
 [connection signal="mouse_exited" from="Credits/BackButton" to="." method="_onBackButtonCreditExit"]
 [connection signal="pressed" from="Credits/BackButton" to="." method="_onBackButton_pressed"]
