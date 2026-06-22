@@ -29,6 +29,7 @@ var result_mediapipe = null
 var hand_data : Array = []
 var is_debug_visible : bool = false
 
+@onready var sub_viewport_container: SubViewportContainer = $SubViewportContainer
 @onready var viewport = $SubViewportContainer/CameraViewport
 @onready var texture_rect = $SubViewportContainer/CameraViewport/TestAffichage
 @onready var debug_view = $CanvasLayer/DebugOverlay # Un TextureRect pour voir le résultat
@@ -250,6 +251,7 @@ func _thread_mediapipe():
 func _process(_delta):
 	camera_fps = Engine.get_frames_per_second()
 	
+	sub_viewport_container.visible = Global.is_camera_visible
 	is_debug_visible = debug_view.visible
 	
 	# Récupération et affichage de l'image de rendu MediaPipe

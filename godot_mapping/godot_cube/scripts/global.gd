@@ -30,6 +30,13 @@ var array_cam = [-0.03, -0.03, 0.03, 0.03]
 # Variables associées à l'amplitude des bras de chaque joueur
 var alpha1: float = 2.0
 var alpha2 : float = 2.0
+var midx1 : float = 0.5
+var midx2 : float = 0.5
+var beta1 : float = 3.0
+var beta2 : float = 3.0
+var midy1 : float = 0.3
+var midy2 : float = 0.3
+var is_camera_visible : bool = false
 var two_player_mode : bool = true
 
 func ButtonEnter(button, button_scale: Vector2, life: bool = false, sign_sprite: Sprite2D = null,  sign_scale: Vector2 = Vector2(0, 0)) -> void:

@@ -180,6 +180,7 @@ func _onChangeButton_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/game_scenes/scene_camera.tscn")
 
 func _onCalChangeButton_pressed() -> void:
+	Global.is_camera_visible = true
 	transition([calibration], [options])
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
@@ -241,11 +242,30 @@ func _onBackCalButtonEnter() -> void:
 	Global.ButtonEnter(cal_back_button, cal_back_scale, false, sign_cal_back, sign_cal_back_scale)
 
 func _onBackCalButtonExit() -> void:
+	Global.is_camera_visible = false
 	Global.ButtonExit(cal_back_button, cal_back_scale, false, sign_cal_back, sign_cal_back_scale)
 	
 # Valeur de l'étirement maximal des sabres sur l'écran
 func _onAlpha1Changed(value: float) -> void:
 	Global.alpha1 = value
 
+func _onMidx1Changed(value: float) -> void:
+	Global.midx1 = value
+	
+func _onBeta1Changed(value: float) -> void:
+	Global.beta1 = value
+	
+func _onMidy1Changed(value: float) -> void:
+	Global.midy1 = value
+
 func _onAlpha2Changed(value: float) -> void:
 	Global.alpha2 = value
+	
+func _onMidx2Changed(value: float) -> void:
+	Global.midx2 = value
+	
+func _onBeta2Changed(value: float) -> void:
+	Global.beta2 = value
+	
+func _onMidy2Changed(value: float) -> void:
+	Global.midy2 = value
