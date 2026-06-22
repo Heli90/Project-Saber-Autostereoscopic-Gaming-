@@ -448,6 +448,7 @@ func check_progress_bars() -> void:
 		if texture_progress_bars[i].value >= texture_progress_bars[i].max_value:
 			texture_progress_bars[i].value = 0
 			texture_progress_bars[i+2].value = 0
+			stocked_combo[i] = 0
 			multiplicateur[i] *= 2
 
 			var current_index = letters.find(progress_bar_labels[i].text)
@@ -459,60 +460,44 @@ func check_progress_bars() -> void:
 				passage_paliers[i] = true
 				texture_progress_bars[i].max_value = paliers[letter_index]
 				texture_progress_bars[i+2].max_value = paliers[letter_index]
-	
-	# A chaque palier passé par l'un des deux joueurs, l'autre subit un effet de pixelisation
-	match passage_paliers:
-		[false, false]:
-			texture.material.set_shader_parameter("pixelisation_mask", [false, false, false, false, false, false, false, false])
-			reset_pixelisation()
-		[false, true]:
-			texture.material.set_shader_parameter("pixelisation_mask", [false, false, false, false, true, true, false, false])
-			if not pixelisation_active_j2:
-				pixelisation_active_j2 = true
-				increase_pixelisation()
-		[true, false]:
-			texture.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, false, false, false, false])
-			if not pixelisation_active_j1:
-				pixelisation_active_j1 = true
-				increase_pixelisation()
-		[true, true]:
-			texture.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, true, true, false, false])
-			if (not pixelisation_active_j1) or (not pixelisation_active_j2):
-				pixelisation_active_j1 = true
-				pixelisation_active_j2 = true
-				increase_pixelisation()
 
+			# On déclenche la pixelisation sur l'adversaire
+			var adversaire = 1 - i
+			if adversaire == 0:
+				pixelisation_active_j1 = true
+				pixelisation_time_j1 = 0.0
+				texture.material.set_shader_parameter("pixelisation_mask",
+					[true, true, false, false, false, false, false, false])
+			else:
+				pixelisation_active_j2 = true
+				pixelisation_time_j2 = 0.0
+				texture.material.set_shader_parameter("pixelisation_mask",
+					[false, false, false, false, true, true, false, false])
+			increase_pixelisation()
+
+	# Gestion des fins de pixelisation
 	if pixelisation_time_j1 > 5.0:
-		passage_paliers[0] = false
+		pixelisation_time_j1 = 0.0
 		pixelisation_active_j1 = false
+		if not pixelisation_active_j2:
+			reset_pixelisation()
+			texture.material.set_shader_parameter("pixelisation_mask",
+				[false, false, false, false, false, false, false, false])
+
 	if pixelisation_time_j2 > 5.0:
-		passage_paliers[1] = false
+		pixelisation_time_j2 = 0.0
 		pixelisation_active_j2 = false
+		if not pixelisation_active_j1:
+			reset_pixelisation()
+			texture.material.set_shader_parameter("pixelisation_mask",
+				[false, false, false, false, false, false, false, false])
+
 
 func tutoriel_loop() -> void:
 	check_progress_bars()
 	# On définit les cubes qui apparaissent selon le mode choisi
-	match Global.tutoriel_played_mode:
-		0:
-			if Global.setup_tutoriel:
-				Global.setup_tutoriel = false
-				cube_list = [classic_bloc]
-			menu_loop()
-		1:
-			if Global.setup_tutoriel:
-				Global.setup_tutoriel = false
-				cube_list = [bonus_bloc]
-			menu_loop()
-		2:
-			if Global.setup_tutoriel:
-				Global.setup_tutoriel = false
-				cube_list = [classic_bloc, bonus_bloc]
-			menu_loop()
-		3:
-			if Global.setup_tutoriel:
-				Global.setup_tutoriel = false
-				cube_list = [classic_bloc, bonus_bloc, bomb_bloc, disappear_bloc, splash_bloc, shield_bloc]
-			menu_loop()
+	if Global.setup_tutoriel: Global.setup_tutoriel = false
+	menu_loop()
 
 func game_loop() -> void:
 	# On lance la musique avec un retard de 3 secondes pour permettre aux premiers cubes d'arriver
@@ -523,26 +508,129 @@ func game_loop() -> void:
 		is_generated = true
 
 		# Pré-génération du niveau de la partie
-		scheduled_bloc(classic_bloc, 4.75, 0, [0.0, 2.0], 4.0, 1)
-		scheduled_bloc(classic_bloc, 5.0, 0, [0.0, 2.0], 4.0, 3)
-		scheduled_bloc(classic_bloc, 4.75, 1, [-2.0, 2.0], 4.0, 1)
-		scheduled_bloc(classic_bloc, 4.75, 1, [2.0, 2.0], 4.0, 1)
-
-		scheduled_bloc(classic_bloc, 7.25, 0, [-2.0, 0.5], 4.0, 1)
-		scheduled_bloc(classic_bloc, 7.25, 1, [-2.0, 2.0], 4.0, 2)
+		scheduled_bloc(classic_bloc, 4.75, 0, [0.0, 2.0], 8.0, 1)
+		scheduled_bloc(classic_bloc, 4.75, 1, [-2.0, 2.0], 8.0, 2)
+		scheduled_bloc(classic_bloc, 4.75, 1, [2.0, 2.0], 8.0, 2)
+		scheduled_bloc(classic_bloc, 6.0, 0, [0.0, 2.0], 8.0, 3)
+		scheduled_bloc(classic_bloc, 7.25, 0, [-2.0, 0.5], 8.0, 1)
+		scheduled_bloc(classic_bloc, 7.25, 1, [-2.0, 2.0], 8.0, 2)
 
 		scheduled_bloc(bonus_bloc, 10.0, 0, [0.0, 3.5], 8.0)
 		scheduled_bloc(bonus_bloc, 10.0, 1, [-2.0, 0.5], 8.0)
 
-		scheduled_bloc(bomb_bloc, 12.5, 0, [-2.0, 0.5], 6.0)
-		scheduled_bloc(bomb_bloc, 12.5, 1, [2.0, 0.5], 6.0)
-		scheduled_bloc(bomb_bloc, 12.5, 0, [2.0, 3.5], 6.0)
-		scheduled_bloc(bomb_bloc, 12.5, 1, [-2.0, 3.5], 6.0)
+		scheduled_bloc(bomb_bloc, 12.5, 0, [-2.0, 0.5], 8.0)
+		scheduled_bloc(bomb_bloc, 12.5, 1, [2.0, 0.5], 8.0)
+		scheduled_bloc(bomb_bloc, 12.5, 0, [2.0, 3.5], 8.0)
+		scheduled_bloc(bomb_bloc, 12.5, 1, [-2.0, 3.5], 8.0)
 		
-		scheduled_bloc(classic_bloc, 14.75, 0, [-2.0, 2.0], 4.0, 1)
-		scheduled_bloc(classic_bloc, 14.75, 0, [2.0, 2.0], 4.0, 1)
-		scheduled_bloc(classic_bloc, 14.75, 1, [-2.0, 0.5], 4.0, 1)
-		scheduled_bloc(classic_bloc, 14.75, 1, [2.0, 0.5], 4.0, 3)
+		scheduled_bloc(classic_bloc, 14.75, 0, [-2.0, 2.0], 8.0, 1)
+		scheduled_bloc(classic_bloc, 14.75, 0, [2.0, 2.0], 8.0, 1)
+		scheduled_bloc(classic_bloc, 14.75, 1, [-2.0, 0.5], 8.0, 1)
+		scheduled_bloc(classic_bloc, 14.75, 1, [2.0, 0.5], 8.0, 3)
+		
+		scheduled_bloc(classic_bloc, 16.5, 0, [-2.0, 2.0], 8.0, 1)
+		
+		scheduled_bloc(classic_bloc, 16.5, 1, [-2.0, 2.0], 8.0, 1)
+		
+		scheduled_bloc(classic_bloc, 19.0, 0, [-2.0, 2.0], 8.0, 1)
+		
+		scheduled_bloc(classic_bloc, 19.0, 1, [-2.0, 2.0], 8.0, 1)
+		
+		scheduled_bloc(classic_bloc, 24.75, 0, [-2.0, 2.0], 8.0, 1)
+		
+		scheduled_bloc(classic_bloc, 24.75, 1, [-2.0, 2.0], 8.0, 1)
+		
+		scheduled_bloc(classic_bloc, 27.5, 0, [-2.0, 2.0], 8.0, 1)
+		
+		scheduled_bloc(classic_bloc, 27.5, 1, [-2.0, 2.0], 8.0, 1)
+		
+		scheduled_bloc(classic_bloc, 30.75, 0, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 30.75, 1, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 33.75, 0, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 33.75, 1, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 36.5, 0, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 36.5, 1, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 40.25, 0, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 40.25, 1, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 42.5, 0, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 42.5, 1, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 45.5, 0, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 45.5, 1, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 47.0, 0, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 47.0, 1, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 48.5, 0, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 48.5, 1, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 53.25, 0, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 53.25, 1, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 54.5, 0, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 54.5, 1, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 57.25, 0, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 57.25, 1, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 59.5, 0, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 59.5, 1, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 62.25, 0, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 62.25, 1, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 66.0, 0, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 66.0, 1, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 67.25, 0, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 67.25, 1, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 68.0, 0, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 68.0, 1, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 68.75, 0, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 68.75, 1, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 71.25, 0, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 71.25, 1, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 78.0, 0, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 78.0, 1, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 80.25, 0, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 80.25, 1, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 83.75, 0, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 83.75, 1, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 89.75, 0, [-2.0, 2.0], 4.0, 1)
+		
+		scheduled_bloc(classic_bloc, 89.75, 1, [-2.0, 2.0], 4.0, 1)
 
 func scheduled_bloc(scene_bloc: PackedScene, arrival_time: float, direction: int = rng.randi_range(0, 1),
 spawn: Array[float] = [0.0, -1.0], absolute_speed: float = -1.0, color: int = rng.randi_range(1, 3)) -> void:
@@ -686,6 +774,8 @@ func MissedClassicCube(i: int) -> void:
 		if mode_with_sabers():
 			texture_progress_bars[i].value = 0
 			texture_progress_bars[i+2].value = 0
+			texture_progress_bars[i].max_value = paliers[0]
+			texture_progress_bars[i+2].max_value = paliers[0]
 			progress_bar_labels[i].text = letters[0]
 			progress_bar_labels[i+2].text = letters[0]
 		if healing and Global.launched_mode == 2:

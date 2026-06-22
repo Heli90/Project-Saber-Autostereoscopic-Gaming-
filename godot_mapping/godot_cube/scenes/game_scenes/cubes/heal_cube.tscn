@@ -2,7 +2,172 @@
 
 [ext_resource type="ArrayMesh" uid="uid://n2015ccy1o4n" path="res://models/heart.obj" id="1_ay1wp"]
 [ext_resource type="Script" uid="uid://r15a7r51dtbw" path="res://scripts/game_scenes/cubes/other_cube.gd" id="1_li3my"]
-[ext_resource type="PackedScene" uid="uid://buqmagcppsmcc" path="res://scenes/game_scenes/cubes/hit_cube_vfx.tscn" id="2_xnrkh"]
+[ext_resource type="Texture2D" uid="uid://5a41ridulogu" path="res://addons/assets/circle.png" id="2_jberu"]
+[ext_resource type="Texture2D" uid="uid://clcv8ugnvnliy" path="res://addons/assets/flare.png" id="3_61yne"]
+[ext_resource type="Texture2D" uid="uid://dadby8y4rud6w" path="res://addons/assets/shockwave.png" id="4_ta4bi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jwsyg"]
+transparency = 1
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("2_jberu")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_rg44f"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_l6vqp"]
+curve = SubResource("Curve_rg44f")
+
+[sub_resource type="Curve" id="Curve_5g3s7"]
+_data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), -0.29594302, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_7ok76"]
+curve = SubResource("Curve_5g3s7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sf4lo"]
+gravity = Vector3(0, 0, 0)
+scale_min = 6.0
+scale_max = 6.0
+scale_curve = SubResource("CurveTexture_7ok76")
+color = Color(0.62352943, 0.45882353, 1, 1)
+alpha_curve = SubResource("CurveTexture_l6vqp")
+
+[sub_resource type="QuadMesh" id="QuadMesh_24nmm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_65ynl"]
+transparency = 1
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_61yne")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_qthrq"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_k3k2k"]
+curve = SubResource("Curve_qthrq")
+
+[sub_resource type="Curve" id="Curve_x3n11"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_hb03b"]
+curve = SubResource("Curve_x3n11")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pinin"]
+gravity = Vector3(0, 0, 0)
+scale_min = 4.0
+scale_max = 6.0
+scale_curve = SubResource("CurveTexture_hb03b")
+color = Color(0.4, 0.3882353, 1, 1)
+emission_curve = SubResource("CurveTexture_k3k2k")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5d234"]
+transparency = 1
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("4_ta4bi")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_4y5rd"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_lvb8p"]
+curve = SubResource("Curve_4y5rd")
+
+[sub_resource type="Curve" id="Curve_k75ww"]
+_data = [Vector2(0, 0), 0.0, 1.0, 0, 1, Vector2(1, 1), -0.25833434, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ctmu4"]
+curve = SubResource("Curve_k75ww")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h3phi"]
+gravity = Vector3(0, 0, 0)
+scale_min = 4.5
+scale_max = 5.0
+scale_curve = SubResource("CurveTexture_ctmu4")
+color = Color(0.40018785, 0.38857287, 1, 0.1)
+alpha_curve = SubResource("CurveTexture_lvb8p")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ipbe3"]
+load_path = "res://.godot/imported/circle.png-49f6a47ab3aae18a067eeddd028109e9.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ul18d"]
+transparency = 1
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = SubResource("CompressedTexture2D_ipbe3")
+billboard_keep_scale = true
+
+[sub_resource type="Curve" id="Curve_ycv33"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_1hqwf"]
+curve = SubResource("Curve_ycv33")
+
+[sub_resource type="Curve" id="Curve_kj2ta"]
+_data = [Vector2(0, 0.44661862), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_pf367"]
+_limits = [0.0, 10.0, 0.0, 1.0]
+_data = [Vector2(0, 4.5554414), 0.0, 0.0, 0, 0, Vector2(0.2542373, 4.5554414), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_1leni"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_qvith"]
+curve_x = SubResource("Curve_kj2ta")
+curve_y = SubResource("Curve_pf367")
+curve_z = SubResource("Curve_1leni")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ty1jx"]
+particle_flag_align_y = true
+spread = 180.0
+initial_velocity_min = 5.0
+initial_velocity_max = 25.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.099999994
+scale_max = 0.19999999
+scale_curve = SubResource("CurveXYZTexture_qvith")
+color = Color(0.23862669, 0.5434099, 0.9999941, 1)
+alpha_curve = SubResource("CurveTexture_1hqwf")
+
+[sub_resource type="PackedScene" id="PackedScene_sgyg6"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array()],
+"names": PackedStringArray("HitCubeVFX", "Node3D", "transform", "Flash", "GPUParticles3D", "material_override", "emitting", "amount", "lifetime", "one_shot", "fixed_fps", "process_material", "draw_pass_1", "Flare", "GPUParticles3D", "material_override", "emitting", "amount", "lifetime", "one_shot", "fixed_fps", "process_material", "draw_pass_1", "Shockwave", "GPUParticles3D", "material_override", "emitting", "amount", "lifetime", "one_shot", "fixed_fps", "process_material", "draw_pass_1", "Sparks", "GPUParticles3D", "material_override", "emitting", "amount", "lifetime", "one_shot", "explosiveness", "fixed_fps", "process_material", "draw_pass_1"),
+"node_count": 5,
+"node_ids": PackedInt32Array(915490267, 1012455316, 672503054, 1613468889, 1076514485),
+"node_paths": [NodePath("."), NodePath("."), NodePath("."), NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 1, 2, 0, 0, 1073741824, 0, 4, 3, -1, 8, 5, 1, 6, 2, 7, 3, 8, 4, 9, 5, 10, 6, 11, 7, 12, 8, 0, 1073741825, 0, 14, 13, -1, 8, 15, 9, 16, 10, 17, 11, 18, 12, 19, 13, 20, 14, 21, 15, 22, 16, 0, 1073741826, 0, 24, 23, -1, 8, 25, 17, 26, 18, 27, 19, 28, 20, 29, 21, 30, 22, 31, 23, 32, 24, 0, 1073741827, 0, 34, 33, -1, 9, 35, 25, 36, 26, 37, 27, 38, 28, 39, 29, 40, 30, 41, 31, 42, 32, 43, 33, 0),
+"variants": [Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0), SubResource("StandardMaterial3D_jwsyg"), false, 1, 0.2, true, 60, SubResource("ParticleProcessMaterial_sf4lo"), SubResource("QuadMesh_24nmm"), SubResource("StandardMaterial3D_65ynl"), false, 1, 0.2, true, 60, SubResource("ParticleProcessMaterial_pinin"), SubResource("QuadMesh_24nmm"), SubResource("StandardMaterial3D_5d234"), false, 1, 0.4, true, 60, SubResource("ParticleProcessMaterial_h3phi"), SubResource("QuadMesh_24nmm"), SubResource("StandardMaterial3D_ul18d"), false, 20, 0.5, true, 1.0, 60, SubResource("ParticleProcessMaterial_ty1jx"), SubResource("QuadMesh_24nmm")],
+"version": 3
+}
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3rv7k"]
 resource_name = "Material"
@@ -58,7 +223,7 @@ roughness = 0.5
 
 [node name="HealCube" type="StaticBody3D" unique_id=166795106]
 script = ExtResource("1_li3my")
-particles_vfx = ExtResource("2_xnrkh")
+particles_vfx = SubResource("PackedScene_sgyg6")
 
 [node name="Cube" type="MeshInstance3D" parent="." unique_id=1325360842]
 transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)
