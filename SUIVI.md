@@ -275,3 +275,8 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 - Complétion du README.md
 
 ### Séance 16-20 - Semaine du 22/06
+
+#### Séance 16 - Lundi 22/06
+
+**Van-Kévin :**
+- Ajout d'un nouveau paramètre réglable (l'amplification des mouvements) et nouveau message de prévention à chaque effet déclenché dans le diaporama d'effets

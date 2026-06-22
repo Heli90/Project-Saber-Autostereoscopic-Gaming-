@@ -223,3 +223,7 @@ func _onBeginButtonEnter() -> void:
 
 func _onBeginButtonExit() -> void:
 	Global.ButtonExit(begin_button, begin_scale, false, sign_begin, sign_begin_scale)
+
+# Valeur de l'étirement maximal des sabres sur l'écran
+func _onAlphaChanged(value: float) -> void:
+	Global.alpha = value

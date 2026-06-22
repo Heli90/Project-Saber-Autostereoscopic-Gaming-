@@ -83,12 +83,14 @@ var shield_bars: Array[Control] = []
 var healing: bool = false
 var health_bars: Array[Control] = []
 var health: Array[int] = [10, 10]
-
 # Variables de pixelisation
 var pixelisation_active_j1: bool = false
 var pixelisation_active_j2: bool = false
 var pixelisation_time_j1: float = 0.0
 var pixelisation_time_j2: float = 0.0
+
+# Message d'avertissement sur l'effet qui va être déclenché dans la zone d'effets
+var warning: Label
 
 # Fonction appelée par le script du jeu pour démarrer l'apparition des cubes et charger les scores visuels
 func activation() -> void:
@@ -110,6 +112,7 @@ func activation() -> void:
 	else:
 		level_music = get_node("../../LevelMusic")
 		texture = get_node("../../TextureRect")
+		if Global.launched_mode == 3: warning = get_node("../../Warning")
 		# Dans les autres zones, il n'y a pas de joueurs
 		if Global.launched_mode < 3:
 			j1 = get_node("../../J1")
@@ -362,7 +365,7 @@ func effect_loop(delta: float) -> void:
 	# A la fin de la boucle, on demande aux joueurs s'ils veulent répéter la séquence d'effets
 	if not is_effect_cube_generated:
 		is_effect_cube_generated = true
-		spawn_cube(classic_bloc, 30.0, 0, 3, [0.0, 2.0])
+		spawn_cube(classic_bloc, 20.0, 0, 3, [0.0, 2.0])
 	
 	for bloc in blocs:
 		if abs(bloc.position.z) > 15.0 and last_effect_applied_time <= 0.0:
@@ -371,38 +374,66 @@ func effect_loop(delta: float) -> void:
 			last_effect_applied_time = 1.0
 			bloc.vitesse_deplacement = -bloc.vitesse_deplacement
 	
+	# On décremente le temps comptant le temps depuis lequel le dernier effet a été déclenché
 	if last_effect_applied_time > 0.0: last_effect_applied_time -= delta
+	
+	# On affiche temporairement le texte pour annoncer le prochain effet
+	if not warning.text.is_empty():
+		warning.modulate.a = 1.0
+		warning.visible = true
+
+		var transition = create_tween()
+		transition.tween_interval(0.5)
+		transition.tween_property(warning, "modulate:a", 0.0, 0.3)
+		await transition.finished
+		warning.visible = false
+		warning.text = ""
 	
 	if not is_effect_applied and last_effect_applied_time > 0.0:
 		is_effect_applied = true
 		match rebonds:
-			0: pass
 			1: invert_views()
-			2: invert_views()
+			2:
+				warning.text = "PIXELISATION"
+				invert_views()
 			3: increase_pixelisation_in_effect_map()
 			4: increase_pixelisation_in_effect_map()
 			5: increase_pixelisation_in_effect_map()
 			6: increase_pixelisation_in_effect_map()
 			7: increase_pixelisation_in_effect_map()
-			8: reset_pixelisation()
+			8:
+				warning.text = "GLITCH"
+				reset_pixelisation()
 			9: increase_glitch()
 			10: increase_glitch()
 			11: increase_glitch()
-			12: reset_glitch()
+			12:
+				warning.text = "RED"
+				reset_glitch()
 			13: change_color_on_effect_map(0)
-			14: reset_red_screen()
+			14:
+				warning.text = "GREEN"
+				reset_red_screen()
 			15: change_color_on_effect_map(1)
-			16: reset_green_screen()
+			16:
+				warning.text = "BLUE"
+				reset_green_screen()
 			17: change_color_on_effect_map(2)
-			18: reset_blue_screen()
+			18:
+				warning.text = "RAINBOW"
+				reset_blue_screen()
 			19: rainbow_screen(0.0, 0.5)
 			20: rainbow_screen(0.5, 1.0)
-			21: reset_rainbow_screen(1.0)
+			21:
+				warning.text = "NAUSEA"
+				reset_rainbow_screen(1.0)
 			22: nausea_screen()
-			23: reset_nausea_screen()
+			23:
+				warning.text = "VIGNETTE"
+				reset_nausea_screen()
 			24: vignette_screen()
 			25:
-				reset_vignette_screen()
+				await reset_vignette_screen()
 				start_loop_in_effect_map = false
 				stop_loop_in_effect_map = true
 

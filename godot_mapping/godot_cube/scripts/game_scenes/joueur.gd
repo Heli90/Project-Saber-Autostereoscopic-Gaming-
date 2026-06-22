@@ -17,7 +17,7 @@ var landmarks: Node2D
 var saber_range_x : float = 2.5
 var saber_y_min : float = 0.0
 var saber_y_max : float = 3.0
-var alpha : float = 2.0 # Quantifie le degré de transformation des données. Plus alpha est grand, plus on étire les données vers leurs valeurs extrémales.
+var alpha : float = 2.0 # Facteur d'amplification des mouvements vers les bords extrémaux
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -25,6 +25,7 @@ func _ready() -> void:
 	landmarks = get_node_or_null("../../../../Game/LandMarksProceed")
 	j1_label = get_node_or_null("../../../../Game/J1Label")
 	j2_label = get_node_or_null("../../../../Game/J2Label")
+	alpha = Global.alpha
 	if not landmarks:
 		landmarks = get_node("../Game/LandMarksProceed")
 		j1_label = get_node("../Game/J1Label")
@@ -57,9 +58,11 @@ func transform_data_y(f :float) -> float :
 func _physics_process(_delta: float) -> void:
 	if not landmarks or landmarks.hand_data.is_empty(): return
 	
+	# Mise à jour du facteur d'amplication des mouvements
+	if alpha != Global.alpha: alpha = Global.alpha
 	for data in landmarks.hand_data:
 		if data["index"] == player_id :
-			# Vérification de sécurité essentielle : on s'assure que les données MediaPipe sont valides
+			# On s'assure que les données MediaPipe sont valides
 			if data["x"] == null or data["y"] == null or data["angle_z"] == null:
 				continue
 				
@@ -73,9 +76,8 @@ func _physics_process(_delta: float) -> void:
 			var pos_y : float = lerp(saber_y_max, saber_y_min, local_y)
 			var rot_z : float = -atan2(0, -1) / 2.0 - data["angle_z"]
 			
-			# ULTIME SÉCURITÉ : Si un NaN a réussi à s'infiltrer, on ignore cette frame pour ce sabre
-			if not is_finite(pos_x) or not is_finite(pos_y) or not is_finite(rot_z):
-				continue
+			# On ignore les frames problématiques
+			if not is_finite(pos_x) or not is_finite(pos_y) or not is_finite(rot_z): continue
 			
 			# Application des transformations sécurisées
 			saber.position.x = pos_x
