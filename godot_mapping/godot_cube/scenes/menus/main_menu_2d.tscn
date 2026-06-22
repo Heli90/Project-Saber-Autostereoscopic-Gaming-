@@ -407,7 +407,7 @@ theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 50
 text = "SFX"
 
-[node name="AlphaTitle" type="Label" parent="Options" unique_id=212690481]
+[node name="AlphaTitleJ1" type="Label" parent="Options" unique_id=212690481]
 layout_mode = 0
 offset_left = -375.0
 offset_top = 400.0
@@ -415,7 +415,18 @@ offset_right = 206.0
 offset_bottom = 451.0
 theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 50
-text = "Movement Amplification"
+text = "Movement Amplification J1"
+horizontal_alignment = 1
+
+[node name="AlphaTitleJ2" type="Label" parent="Options" unique_id=1941669426]
+layout_mode = 0
+offset_left = -375.0
+offset_top = 500.0
+offset_right = 275.0
+offset_bottom = 551.0
+theme_override_fonts/font = ExtResource("4_5epmy")
+theme_override_font_sizes/font_size = 50
+text = "Movement Amplification J2"
 horizontal_alignment = 1
 
 [node name="InterocularSpacingTitle" type="Label" parent="Options" unique_id=956831416]
@@ -505,12 +516,26 @@ value = 1.0
 script = ExtResource("4_8ln24")
 audio_bus_name = "SFX"
 
-[node name="AlphaControl" type="HSlider" parent="Options" unique_id=1495010831]
+[node name="AlphaControl1" type="HSlider" parent="Options" unique_id=1495010831]
 layout_mode = 0
 offset_left = -425.0
 offset_top = 450.0
 offset_right = 251.0
 offset_bottom = 480.0
+theme_override_styles/slider = SubResource("StyleBoxLine_myaa2")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_ymobg")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_sfpvq")
+min_value = 1.0
+max_value = 3.0
+step = 0.1
+value = 2.0
+
+[node name="AlphaControl2" type="HSlider" parent="Options" unique_id=1169277571]
+layout_mode = 0
+offset_left = -425.0
+offset_top = 550.0
+offset_right = 251.0
+offset_bottom = 580.0
 theme_override_styles/slider = SubResource("StyleBoxLine_myaa2")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_ymobg")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_sfpvq")
@@ -697,7 +722,8 @@ texture = ExtResource("8_ymobg")
 [connection signal="pressed" from="Options/BackButton" to="." method="_onBackButton_pressed"]
 [connection signal="value_changed" from="Options/MusicControl" to="Options/MusicControl" method="_onValueChanged"]
 [connection signal="value_changed" from="Options/SFXControl" to="Options/SFXControl" method="_onValueChanged"]
-[connection signal="value_changed" from="Options/AlphaControl" to="." method="_onAlphaChanged"]
+[connection signal="value_changed" from="Options/AlphaControl1" to="." method="_onAlpha1Changed"]
+[connection signal="value_changed" from="Options/AlphaControl2" to="." method="_onAlpha2Changed"]
 [connection signal="mouse_entered" from="Credits/BackButton" to="." method="_onBackButtonCreditEnter"]
 [connection signal="mouse_exited" from="Credits/BackButton" to="." method="_onBackButtonCreditExit"]
 [connection signal="pressed" from="Credits/BackButton" to="." method="_onBackButton_pressed"]

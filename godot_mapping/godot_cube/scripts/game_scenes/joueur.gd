@@ -17,7 +17,8 @@ var landmarks: Node2D
 var saber_range_x : float = 2.5
 var saber_y_min : float = 0.0
 var saber_y_max : float = 3.0
-var alpha : float = 2.0 # Facteur d'amplification des mouvements vers les bords extrémaux
+var alpha1 : float = 2.0 # Facteur d'amplification des mouvements vers les bords extrémaux
+var alpha2 : float = 2.0
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -25,7 +26,8 @@ func _ready() -> void:
 	landmarks = get_node_or_null("../../../../Game/LandMarksProceed")
 	j1_label = get_node_or_null("../../../../Game/J1Label")
 	j2_label = get_node_or_null("../../../../Game/J2Label")
-	alpha = Global.alpha
+	alpha1 = Global.alpha1
+	alpha2 = Global.alpha2
 	if not landmarks:
 		landmarks = get_node("../Game/LandMarksProceed")
 		j1_label = get_node("../Game/J1Label")
@@ -45,7 +47,7 @@ func apply_blue_shader():
 func collision(body: Node3D) -> void:
 	if body.is_in_group("cube"): body.collision()
 
-func transform_data_x(f : float) -> float :
+func transform_data_x(f : float, alpha : float) -> float :
 	f = clampf(f,0.0,1.0)
 	if f < 0.5 :
 		return 0.5 - pow(0.5,1.0-1.0/alpha)*pow(0.5-f,1.0/alpha)
@@ -59,7 +61,8 @@ func _physics_process(_delta: float) -> void:
 	if not landmarks or landmarks.hand_data.is_empty(): return
 	
 	# Mise à jour du facteur d'amplication des mouvements
-	if alpha != Global.alpha: alpha = Global.alpha
+	if alpha1 != Global.alpha1: alpha1 = Global.alpha1
+	if alpha2 != Global.alpha2: alpha2 = Global.alpha2
 	for data in landmarks.hand_data:
 		if data["index"] == player_id :
 			# On s'assure que les données MediaPipe sont valides
@@ -69,7 +72,12 @@ func _physics_process(_delta: float) -> void:
 			var saber : Area3D = left_saber if data["handedness"] == "Left" else right_saber
 			
 			# On crée des variables locales bien définies à chaque passage
-			var local_x : float = transform_data_x(data["x"])
+			var local_x : float = 0.0
+			if player_id == 1:
+				local_x = transform_data_x(data["x"],alpha1)
+			else :
+				local_x = transform_data_x(data["x"],alpha2)
+			
 			var local_y : float = transform_data_y(data["y"])
 							
 			var pos_x : float = lerp(-saber_range_x, saber_range_x, local_x)
@@ -83,6 +91,8 @@ func _physics_process(_delta: float) -> void:
 			saber.position.x = pos_x
 			saber.position.y = pos_y
 			saber.rotation.z = rot_z
+			
+			print("alpha1 = %f, alpha2 = %f" % [alpha1,alpha2])
 			
 			# Affichage des labels
 			if data["handedness"] == "Right" :

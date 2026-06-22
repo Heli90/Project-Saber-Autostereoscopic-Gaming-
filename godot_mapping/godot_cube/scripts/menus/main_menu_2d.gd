@@ -225,5 +225,8 @@ func _onBeginButtonExit() -> void:
 	Global.ButtonExit(begin_button, begin_scale, false, sign_begin, sign_begin_scale)
 
 # Valeur de l'étirement maximal des sabres sur l'écran
-func _onAlphaChanged(value: float) -> void:
-	Global.alpha = value
+func _onAlpha1Changed(value: float) -> void:
+	Global.alpha1 = value
+
+func _onAlpha2Changed(value: float) -> void:
+	Global.alpha2 = value
