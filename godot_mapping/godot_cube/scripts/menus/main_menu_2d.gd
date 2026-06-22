@@ -230,3 +230,6 @@ func _onAlpha1Changed(value: float) -> void:
 
 func _onAlpha2Changed(value: float) -> void:
 	Global.alpha2 = value
+	
+func _onTwoPlayerModePressed() -> void:
+	Global.two_player_mode = false

@@ -97,6 +97,18 @@ thickness = 5
 color = Color(0.5882353, 0.003921569, 0.93333334, 1)
 thickness = 5
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ngtwu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vismm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5otl0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7mylp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5rhm3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lnntt"]
+
 [node name="Tutoriel" type="Control" unique_id=580013353]
 layout_mode = 3
 anchors_preset = 0
@@ -354,6 +366,33 @@ theme_override_fonts/font = ExtResource("5_phf8o")
 theme_override_font_sizes/font_size = 30
 text = "Difficulty"
 
+[node name="TwoPlayerModeLabel" type="Label" parent="Modes" unique_id=1043108254]
+layout_mode = 0
+offset_left = 250.0
+offset_top = 895.0
+offset_right = 494.0
+offset_bottom = 926.0
+theme_override_fonts/font = ExtResource("5_phf8o")
+theme_override_font_sizes/font_size = 30
+text = "Two Player Mode"
+
+[node name="CheckButton" type="CheckButton" parent="Modes" unique_id=1665008349]
+layout_mode = 0
+offset_left = 98.0
+offset_top = 896.99994
+offset_right = 130.0
+offset_bottom = 912.99994
+scale = Vector2(2.5, 2.5)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ngtwu")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_vismm")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5otl0")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_7mylp")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_5rhm3")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_lnntt")
+theme_override_colors/button_checked_color = Color(0.5882353, 0.003921569, 0.93333334, 1)
+theme_override_colors/button_unchecked_color = Color(1, 1, 1, 1)
+button_pressed = true
+
 [node name="SelectLevel" parent="." unique_id=877177698 instance=ExtResource("10_gjwrx")]
 visible = false
 layout_mode = 0
@@ -368,6 +407,7 @@ layout_mode = 0
 [connection signal="mouse_exited" from="Modes/HealModeButton" to="." method="_onHealMouseExit"]
 [connection signal="pressed" from="Modes/HealModeButton" to="." method="_onHealModeButton_pressed"]
 [connection signal="value_changed" from="Modes/DifficultySlider" to="." method="_onValueChanged"]
+[connection signal="toggled" from="Modes/CheckButton" to="." method="_onTwoPlayerModePressed"]
 [connection signal="pressed" from="SelectLevel/Cassettes/CassetteTuto" to="." method="_onTutoCassette_pressed"]
 [connection signal="pressed" from="SelectLevel/Cassettes/CassetteGame" to="." method="_onCassetteGame_pressed"]
 [connection signal="pressed" from="SelectLevel/Cassettes/CassetteEffect" to="." method="_onCassetteEffect_pressed"]
