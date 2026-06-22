@@ -55,9 +55,7 @@ shader_parameter/nausea_screen = false
 shader_parameter/nausea_strength = 0.01
 shader_parameter/nausea_speed = 1.0
 shader_parameter/vignette_screen = false
-shader_parameter/with_color = false
 shader_parameter/vignette_strength = 0.5
-shader_parameter/vignette_color = Color(1, 0, 0, 1)
 
 [sub_resource type="Gradient" id="Gradient_sgwr3"]
 
@@ -1141,9 +1139,6 @@ offset_bottom = 1080.0
 texture = SubResource("GradientTexture2D_6c3ax")
 
 [node name="Game" parent="." unique_id=1026699542 instance=ExtResource("6_qo1rj")]
-
-[node name="FonduLayer" parent="Game/HUD" parent_id_path=PackedInt32Array(1026699542, 2058758241) index="0" unique_id=478103391]
-visible = false
 
 [node name="LevelMusic" type="AudioStreamPlayer" parent="." unique_id=751945284]
 stream = ExtResource("12_4s8qw")

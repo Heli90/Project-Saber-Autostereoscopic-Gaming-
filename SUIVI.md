@@ -280,3 +280,4 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 **Van-Kévin :**
 - Ajout d'un nouveau paramètre réglable (l'amplification des mouvements) et nouveau message de prévention à chaque effet déclenché dans le diaporama d'effets
+- Correction du combo et du déclenchement de l'effet de pixelisation associé
