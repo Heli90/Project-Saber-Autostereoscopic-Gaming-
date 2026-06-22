@@ -22,7 +22,7 @@ var alpha2 : float = 2.0
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	# On initialise les marqueurs de corps
+	# Initialisation des marqueurs de corps
 	landmarks = get_node_or_null("../../../../Game/LandMarksProceed")
 	j1_label = get_node_or_null("../../../../Game/J1Label")
 	j2_label = get_node_or_null("../../../../Game/J2Label")
@@ -68,10 +68,10 @@ func _physics_process(_delta: float) -> void:
 			# On s'assure que les données MediaPipe sont valides
 			if data["x"] == null or data["y"] == null or data["angle_z"] == null:
 				continue
-				
+			
+			# On récupère le bon sabre (droite ou gauche) sur lequel on applique les modifications de positions
 			var saber : Area3D = left_saber if data["handedness"] == "Left" else right_saber
 			
-			# On crée des variables locales bien définies à chaque passage
 			var local_x : float = 0.0
 			if player_id == 1:
 				local_x = transform_data_x(data["x"],alpha1)
@@ -87,12 +87,11 @@ func _physics_process(_delta: float) -> void:
 			# On ignore les frames problématiques
 			if not is_finite(pos_x) or not is_finite(pos_y) or not is_finite(rot_z): continue
 			
-			# Application des transformations sécurisées
 			saber.position.x = pos_x
 			saber.position.y = pos_y
 			saber.rotation.z = rot_z
 			
-			print("alpha1 = %f, alpha2 = %f" % [alpha1,alpha2])
+			#print("alpha1 = %f, alpha2 = %f"%[alpha1,alpha2])
 			
 			# Affichage des labels
 			if data["handedness"] == "Right" :
