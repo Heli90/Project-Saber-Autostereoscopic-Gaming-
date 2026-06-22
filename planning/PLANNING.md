@@ -63,11 +63,11 @@ Des changements de direction et des avancées rapides ont vite rendu le planning
 
 | Tâche                         | Description | Responsables  | État | Priorité |
 | ----------------------------  | ------------- | ----       | ----         | ----       | 
-| Faire l'affiche                         | cf [semaine finale](https://gitlab.telecom-paris.fr/proj104/2025-2026/artishow/-/blob/main/SEMAINE_FINALE.md?ref_type=heads#poster) | Hugo Belle  | En cours | Urgent |
+| Faire l'affiche                         | cf [semaine finale](https://gitlab.telecom-paris.fr/proj104/2025-2026/artishow/-/blob/main/SEMAINE_FINALE.md?ref_type=heads#poster) | Hugo Belle  | Fait | Urgent |
 | Scripter des niveaux                        | Créer des niveaux jouables (musique, timing, trajectoire et nombre de cubes, type de cubes etc.) | VK, Hélias  | En cours | Urgent |
 | Implémenter une phase de calibrage                         | Calibrer : la distance maximale des sabres, sensibilité des sabres, l'orientation et la distance des caméra pour un effet 3D correct, éventuellement placement des joueurs avec caméra active pendant la phase de calibrage | Tous  | Pas commencé | Urgent |
 | Implémenter un timer                         | Limiter les phases de jeu à 2 min et mettre un petit affichage de qui a gagné + les high scores | VK  | Quasiment terminé | Urgent |
-| Préparer des questions pour les beta-testeurs                         | Faire un google form pour récolter des avis constructifs pour améliorer le jeu | Hélias  | Pas commencé | Urgent |
+| Préparer des questions pour les beta-testeurs                         | Faire un google form pour récolter des avis constructifs pour améliorer le jeu | Hélias  | Fait | Urgent |
 | Trouver une place pour la journée artishow                         | Envoyer un mail pour demander une place adéquate au projet | Hélias  | Fait | Urgent |
 | Optimiser les performances du jeu                         | ..... | Tous  | En cours | Faible |
 | Rajouter des effets                         | Notamment de profondeur | Hélias  | En cours | Faible |
