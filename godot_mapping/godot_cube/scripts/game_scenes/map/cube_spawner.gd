@@ -508,129 +508,133 @@ func game_loop() -> void:
 		is_generated = true
 
 		# Pré-génération du niveau de la partie
-		scheduled_bloc(classic_bloc, 4.75, 0, [0.0, 2.0], 8.0, 1)
-		scheduled_bloc(classic_bloc, 4.75, 1, [-2.0, 2.0], 8.0, 2)
-		scheduled_bloc(classic_bloc, 4.75, 1, [2.0, 2.0], 8.0, 2)
-		scheduled_bloc(classic_bloc, 6.0, 0, [0.0, 2.0], 8.0, 3)
-		scheduled_bloc(classic_bloc, 7.25, 0, [-2.0, 0.5], 8.0, 1)
-		scheduled_bloc(classic_bloc, 7.25, 1, [-2.0, 2.0], 8.0, 2)
+		is_generated = true
+		
+		# Phase 1
+		scheduled_bloc(classic_bloc, 4.75, 0, [0.0, 1.75], 8.0, 1)
+		scheduled_bloc(classic_bloc, 4.75, 1, [0.0, 1.75], 8.0, 1)
+		scheduled_bloc(classic_bloc, 6.00, 0, [-2.0, 1.75], 8.0, 1)
+		scheduled_bloc(classic_bloc, 6.00, 1, [2.0, 1.75], 8.0, 1)
+		scheduled_bloc(classic_bloc, 7.25, 0, [0.0, 3.0], 8.0, 2)
+		scheduled_bloc(classic_bloc, 7.25, 1, [0.0, 0.5], 8.0, 2)
 
-		scheduled_bloc(bonus_bloc, 10.0, 0, [0.0, 3.5], 8.0)
-		scheduled_bloc(bonus_bloc, 10.0, 1, [-2.0, 0.5], 8.0)
+		# Phase 2
+		scheduled_bloc(bonus_bloc, 10.00, 0, [2.0, 1.75], 8.0)
+		scheduled_bloc(bonus_bloc, 10.00, 1, [0.0, 1.75], 8.0)
+		scheduled_bloc(bomb_bloc, 12.50, 0, [-2.0, 3.0], 8.0)
+		scheduled_bloc(bomb_bloc, 12.50, 1, [2.0, 3.0],  8.0)
+		scheduled_bloc(classic_bloc, 12.50, 0, [2.0, 0.5],  8.0, 1)
+		scheduled_bloc(classic_bloc, 12.50, 1, [-2.0, 0.5], 8.0, 1)
+		scheduled_bloc(classic_bloc, 14.75, 0, [0.0, 3.0], 8.0, 2)
+		scheduled_bloc(classic_bloc, 14.75, 0, [2.0, 1.75],  8.0, 2)
+		scheduled_bloc(classic_bloc, 14.75, 1, [-2.0, 1.75], 8.0, 2)
+		scheduled_bloc(classic_bloc, 14.75, 1, [2.0, 0.5],  8.0, 2)
+		scheduled_bloc(shield_bloc, 16.50, 0, [-2.0, 0.5], 8.0)
+		scheduled_bloc(shield_bloc, 16.50, 1, [2.0, 3.0], 8.0)
 
-		scheduled_bloc(bomb_bloc, 12.5, 0, [-2.0, 0.5], 8.0)
-		scheduled_bloc(bomb_bloc, 12.5, 1, [2.0, 0.5], 8.0)
-		scheduled_bloc(bomb_bloc, 12.5, 0, [2.0, 3.5], 8.0)
-		scheduled_bloc(bomb_bloc, 12.5, 1, [-2.0, 3.5], 8.0)
+		scheduled_bloc(splash_bloc, 19.00, 0, [0.0, 3.0],  8.0)
+		scheduled_bloc(splash_bloc, 19.00, 1, [0.0, 0.5],  8.0)
+		scheduled_bloc(classic_bloc, 19.00, 0, [-2.0, 0.5], 8.0, 1)
+		scheduled_bloc(classic_bloc, 19.00, 1, [2.0, 0.5],  8.0, 1)
+
+		scheduled_bloc(classic_bloc, 24.75, 0, [0.0, 1.75], 8.0, 3)
+		scheduled_bloc(classic_bloc, 24.75, 1, [0.0, 1.75], 8.0, 3)
+		scheduled_bloc(classic_bloc, 24.75, 0, [-2.0, 3.0], 8.0, 1)
+		scheduled_bloc(classic_bloc, 24.75, 1, [2.0, 3.0],  8.0, 1)
+
+		# Phase 3
+		scheduled_bloc(classic_bloc, 27.50, 0, [-2.0, 0.5],  8.0, 1)
+		scheduled_bloc(classic_bloc, 27.50, 0, [0.0, 1.75],  8.0, 2)
+		scheduled_bloc(classic_bloc, 27.50, 0, [2.0, 3.0],   8.0, 1)
+		scheduled_bloc(classic_bloc, 27.50, 1, [2.0, 0.5],   8.0, 1)
+		scheduled_bloc(classic_bloc, 27.50, 1, [0.0, 1.75],  8.0, 2)
+		scheduled_bloc(classic_bloc, 27.50, 1, [-2.0, 3.0],  8.0, 1)
+		scheduled_bloc(bomb_bloc,    30.75, 0, [0.0, 1.75],  8.0)
+		scheduled_bloc(bomb_bloc,    30.75, 1, [0.0, 1.75],  8.0)
+		scheduled_bloc(classic_bloc, 30.75, 0, [-2.0, 3.0],  8.0, 2)
+		scheduled_bloc(classic_bloc, 30.75, 0, [2.0, 0.5],   8.0, 2)
+		scheduled_bloc(classic_bloc, 30.75, 1, [2.0, 3.0],   8.0, 2)
+		scheduled_bloc(classic_bloc, 30.75, 1, [-2.0, 0.5],  8.0, 2)
+		scheduled_bloc(disappear_bloc, 33.75, 0, [0.0, 3.0], 8.0)
+		scheduled_bloc(disappear_bloc, 33.75, 1, [0.0, 0.5], 8.0)
+		scheduled_bloc(classic_bloc,   33.75, 0, [-2.0, 1.75], 8.0, 1)
+		scheduled_bloc(classic_bloc,   33.75, 1, [2.0, 1.75],  8.0, 1)
+		scheduled_bloc(classic_bloc, 36.50, 0, [-2.0, 0.5],  8.0, 1)
+		scheduled_bloc(classic_bloc, 36.50, 0, [0.0, 1.75],  8.0, 2)
+		scheduled_bloc(classic_bloc, 36.50, 0, [2.0, 3.0],   8.0, 1)
+		scheduled_bloc(classic_bloc, 36.50, 1, [2.0, 0.5],   8.0, 1)
+		scheduled_bloc(classic_bloc, 36.50, 1, [0.0, 1.75],  8.0, 2)
+		scheduled_bloc(classic_bloc, 36.50, 1, [-2.0, 3.0],  8.0, 1)
+		scheduled_bloc(bonus_bloc,   40.25, 0, [0.0, 1.75],  8.0)
+		scheduled_bloc(bonus_bloc,   40.25, 1, [0.0, 1.75],  8.0)
+		scheduled_bloc(bomb_bloc,    40.25, 0, [-2.0, 0.5],  8.0)
+		scheduled_bloc(bomb_bloc,    40.25, 1, [2.0, 0.5],   8.0)
+		scheduled_bloc(classic_bloc, 42.50, 0, [-2.0, 3.0],  8.0, 3)
+		scheduled_bloc(classic_bloc, 42.50, 0, [2.0, 3.0],   8.0, 3)
+		scheduled_bloc(classic_bloc, 42.50, 1, [-2.0, 0.5],  8.0, 3)
+		scheduled_bloc(classic_bloc, 42.50, 1, [2.0, 0.5],   8.0, 3)
+		scheduled_bloc(splash_bloc,  45.50, 0, [-2.0, 1.75], 8.0)
+		scheduled_bloc(splash_bloc,  45.50, 1, [2.0, 1.75],  8.0)
+		scheduled_bloc(classic_bloc, 45.50, 0, [2.0, 3.0],   8.0, 2)
+		scheduled_bloc(classic_bloc, 45.50, 1, [-2.0, 3.0],  8.0, 2)
+		scheduled_bloc(classic_bloc, 47.00, 0, [0.0, 0.5],  9.0, 1)
+		scheduled_bloc(classic_bloc, 47.00, 0, [-2.0, 3.0], 9.0, 2)
+		scheduled_bloc(classic_bloc, 47.00, 1, [0.0, 0.5],  9.0, 1)
+		scheduled_bloc(classic_bloc, 47.00, 1, [2.0, 3.0],  9.0, 2)
+		scheduled_bloc(disappear_bloc, 48.50, 0, [0.0, 1.75], 8.0)
+		scheduled_bloc(disappear_bloc, 48.50, 1, [0.0, 1.75], 8.0)
+		scheduled_bloc(bomb_bloc,      48.50, 0, [-2.0, 0.5], 8.0)
+		scheduled_bloc(bomb_bloc,      48.50, 1, [2.0, 0.5],  8.0)
+		scheduled_bloc(classic_bloc, 53.25, 0, [-2.0, 1.75], 8.0, 1)
+		scheduled_bloc(classic_bloc, 53.25, 0, [2.0, 0.5],   8.0, 2)
+		scheduled_bloc(classic_bloc, 53.25, 0, [0.0, 3.0],   8.0, 3)
+		scheduled_bloc(classic_bloc, 53.25, 1, [2.0, 1.75],  8.0, 1)
+		scheduled_bloc(classic_bloc, 53.25, 1, [-2.0, 0.5],  8.0, 2)
+		scheduled_bloc(classic_bloc, 53.25, 1, [0.0, 3.0],   8.0, 3)
+		scheduled_bloc(bonus_bloc, 54.50, 0, [-2.0, 3.0], 8.0)
+		scheduled_bloc(bonus_bloc, 54.50, 1, [2.0, 3.0],  8.0)
+		scheduled_bloc(bomb_bloc,    57.25, 0, [0.0, 3.0],   8.0)
+		scheduled_bloc(bomb_bloc,    57.25, 1, [0.0, 0.5],   8.0)
+		scheduled_bloc(classic_bloc, 57.25, 0, [-2.0, 0.5],  8.0, 2)
+		scheduled_bloc(classic_bloc, 57.25, 0, [2.0, 1.75],  8.0, 1)
+		scheduled_bloc(classic_bloc, 57.25, 1, [2.0, 0.5],   8.0, 2)
+		scheduled_bloc(classic_bloc, 57.25, 1, [-2.0, 1.75], 8.0, 1)
+		scheduled_bloc(splash_bloc,  59.50, 0, [0.0, 1.75],  8.0)
+		scheduled_bloc(splash_bloc,  59.50, 1, [0.0, 1.75],  8.0)
+		scheduled_bloc(classic_bloc, 59.50, 0, [-2.0, 3.0],  8.0, 3)
+		scheduled_bloc(classic_bloc, 59.50, 1, [2.0, 3.0],   8.0, 3)
+		scheduled_bloc(classic_bloc, 62.25, 0, [-2.0, 0.5],  9.0, 1)
+		scheduled_bloc(classic_bloc, 62.25, 0, [0.0, 1.75],  9.0, 2)
+		scheduled_bloc(classic_bloc, 62.25, 0, [2.0, 3.0],   9.0, 3)
+		scheduled_bloc(classic_bloc, 62.25, 1, [2.0, 0.5],   9.0, 1)
+		scheduled_bloc(classic_bloc, 62.25, 1, [0.0, 1.75],  9.0, 2)
+		scheduled_bloc(classic_bloc, 62.25, 1, [-2.0, 3.0],  9.0, 3)
+		scheduled_bloc(disappear_bloc, 66.00, 0, [-2.0, 1.75], 8.0)
+		scheduled_bloc(disappear_bloc, 66.00, 1, [2.0, 1.75],  8.0)
+		scheduled_bloc(bomb_bloc,      66.00, 0, [0.0, 0.5],   8.0)
+		scheduled_bloc(bomb_bloc,      66.00, 1, [0.0, 0.5],   8.0)
+		scheduled_bloc(classic_bloc, 67.25, 0, [0.0, 3.0],  8.0, 3)
+		scheduled_bloc(classic_bloc, 67.25, 1, [0.0, 3.0],  8.0, 3)
+		scheduled_bloc(classic_bloc, 68.00, 0, [-2.0, 0.5],  9.0, 2)
+		scheduled_bloc(classic_bloc, 68.00, 0, [2.0, 3.0],   9.0, 1)
+		scheduled_bloc(classic_bloc, 68.00, 1, [2.0, 0.5],   9.0, 2)
+		scheduled_bloc(classic_bloc, 68.00, 1, [-2.0, 3.0],  9.0, 1)
+		scheduled_bloc(bonus_bloc, 68.75, 0, [0.0, 1.75], 8.0)
+		scheduled_bloc(bonus_bloc, 68.75, 1, [0.0, 1.75], 8.0)
 		
-		scheduled_bloc(classic_bloc, 14.75, 0, [-2.0, 2.0], 8.0, 1)
-		scheduled_bloc(classic_bloc, 14.75, 0, [2.0, 2.0], 8.0, 1)
-		scheduled_bloc(classic_bloc, 14.75, 1, [-2.0, 0.5], 8.0, 1)
-		scheduled_bloc(classic_bloc, 14.75, 1, [2.0, 0.5], 8.0, 3)
-		
-		scheduled_bloc(classic_bloc, 16.5, 0, [-2.0, 2.0], 8.0, 1)
-		
-		scheduled_bloc(classic_bloc, 16.5, 1, [-2.0, 2.0], 8.0, 1)
-		
-		scheduled_bloc(classic_bloc, 19.0, 0, [-2.0, 2.0], 8.0, 1)
-		
-		scheduled_bloc(classic_bloc, 19.0, 1, [-2.0, 2.0], 8.0, 1)
-		
-		scheduled_bloc(classic_bloc, 24.75, 0, [-2.0, 2.0], 8.0, 1)
-		
-		scheduled_bloc(classic_bloc, 24.75, 1, [-2.0, 2.0], 8.0, 1)
-		
-		scheduled_bloc(classic_bloc, 27.5, 0, [-2.0, 2.0], 8.0, 1)
-		
-		scheduled_bloc(classic_bloc, 27.5, 1, [-2.0, 2.0], 8.0, 1)
-		
-		scheduled_bloc(classic_bloc, 30.75, 0, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 30.75, 1, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 33.75, 0, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 33.75, 1, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 36.5, 0, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 36.5, 1, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 40.25, 0, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 40.25, 1, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 42.5, 0, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 42.5, 1, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 45.5, 0, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 45.5, 1, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 47.0, 0, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 47.0, 1, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 48.5, 0, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 48.5, 1, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 53.25, 0, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 53.25, 1, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 54.5, 0, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 54.5, 1, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 57.25, 0, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 57.25, 1, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 59.5, 0, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 59.5, 1, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 62.25, 0, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 62.25, 1, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 66.0, 0, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 66.0, 1, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 67.25, 0, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 67.25, 1, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 68.0, 0, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 68.0, 1, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 68.75, 0, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 68.75, 1, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 71.25, 0, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 71.25, 1, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 78.0, 0, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 78.0, 1, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 80.25, 0, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 80.25, 1, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 83.75, 0, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 83.75, 1, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 89.75, 0, [-2.0, 2.0], 4.0, 1)
-		
-		scheduled_bloc(classic_bloc, 89.75, 1, [-2.0, 2.0], 4.0, 1)
+		# Phase 4
+		scheduled_bloc(classic_bloc, 71.25, 0, [0.0, 1.75], 8.0, 1)
+		scheduled_bloc(classic_bloc, 71.25, 1, [0.0, 1.75], 8.0, 1)
+		scheduled_bloc(shield_bloc,  78.00, 0, [0.0, 1.75], 8.0)
+		scheduled_bloc(shield_bloc,  78.00, 1, [0.0, 1.75], 8.0)
+		scheduled_bloc(classic_bloc, 80.25, 0, [-2.0, 1.75], 8.0, 1)
+		scheduled_bloc(classic_bloc, 80.25, 1, [2.0, 1.75],  8.0, 1)
+		scheduled_bloc(classic_bloc, 83.75, 0, [0.0, 3.0],  8.0, 1)
+		scheduled_bloc(classic_bloc, 83.75, 0, [0.0, 0.5],  8.0, 2)
+		scheduled_bloc(classic_bloc, 83.75, 1, [0.0, 3.0],  8.0, 1)
+		scheduled_bloc(classic_bloc, 83.75, 1, [0.0, 0.5],  8.0, 2)
+		scheduled_bloc(bonus_bloc, 89.75, 0, [0.0, 1.75], 8.0)
+		scheduled_bloc(bonus_bloc, 89.75, 1, [0.0, 1.75], 8.0)
 
 func scheduled_bloc(scene_bloc: PackedScene, arrival_time: float, direction: int = rng.randi_range(0, 1),
 spawn: Array[float] = [0.0, -1.0], absolute_speed: float = -1.0, color: int = rng.randi_range(1, 3)) -> void:
