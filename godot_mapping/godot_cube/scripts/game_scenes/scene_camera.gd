@@ -15,6 +15,7 @@ extends Node3D
 @onready var camera4: Camera3D = $Vue6/Camera
 # Pas de décalage des caméras
 var step : float = 0.01
+var convergence_step : float = 0.1
 
 @onready var sign_is_j1: Sprite2D = $Buttons/SignIS_J1
 @onready var is_button_j1: Button = $Buttons/ISButton_J1
@@ -51,6 +52,26 @@ var sign_dec2_scale: Vector2
 var val_scale: Vector2
 var sign_val_scale: Vector2
 
+@onready var signIncreaseConv1: Sprite2D = $Buttons/SignIncreaseConvJ1
+@onready var IncreaseConv1: Button = $Buttons/IncreaseConv_J1
+var inconv1_scale: Vector2
+var sign_inconv1_scale: Vector2
+
+@onready var signIncreaseConv2: Sprite2D = $Buttons/SignIncreaseConvJ2
+@onready var IncreaseConv2: Button = $Buttons/IncreaseConv_J2
+var inconv2_scale: Vector2
+var sign_inconv2_scale: Vector2
+
+@onready var signDecreaseConv1: Sprite2D = $Buttons/SignDecreaseConvJ1
+@onready var DecreaseConv1: Button = $Buttons/DecreaseConvJ1
+var deconv1_scale: Vector2
+var sign_deconv1_scale: Vector2
+
+@onready var signDecreaseConv2: Sprite2D = $Buttons/SignDecreaseConvJ2
+@onready var DecreaseConv2: Button = $Buttons/DecreaseConvJ2
+var deconv2_scale: Vector2
+var sign_deconv2_scale: Vector2
+
 var array_IS_button: Array[Button]
 var array_sign_IS_button: Array[Sprite2D]
 var array_inc: Array[Button]
@@ -58,6 +79,10 @@ var array_sign_inc: Array[Sprite2D]
 var array_dec: Array[Button]
 var array_sign_dec: Array[Sprite2D]
 var array_cam: Array[Camera3D]
+var array_inconv: Array[Button]
+var array_sign_inconv: Array[Sprite2D]
+var array_deconv: Array[Button]
+var array_sign_deconv: Array[Sprite2D]
 
 func _ready() -> void:
 	# Définition de la taille de tous les boutons et de tous les panneaux
@@ -75,6 +100,14 @@ func _ready() -> void:
 	sign_dec2_scale = sign_decrease_j2.scale
 	val_scale = validation_button.scale
 	sign_val_scale = sign_validation.scale
+	inconv1_scale = IncreaseConv1.scale
+	sign_inconv1_scale = signIncreaseConv1.scale
+	inconv2_scale = IncreaseConv2.scale
+	sign_inconv2_scale = signIncreaseConv2.scale
+	deconv1_scale = DecreaseConv1.scale
+	sign_deconv1_scale = signDecreaseConv1.scale
+	deconv2_scale = DecreaseConv2.scale
+	sign_deconv2_scale = signDecreaseConv2.scale
 	
 	# Définition des listes de boutons
 	array_IS_button = [is_button_j1, is_button_j2]
@@ -83,6 +116,10 @@ func _ready() -> void:
 	array_sign_IS_button = [sign_is_j1, sign_is_j2]
 	array_sign_inc = [sign_increase_j1, sign_increase_j2]
 	array_sign_dec = [sign_decrease_j1, sign_decrease_j2]
+	array_inconv = [IncreaseConv1, IncreaseConv2]
+	array_sign_inconv = [signIncreaseConv1, signIncreaseConv2]
+	array_deconv =[DecreaseConv1, DecreaseConv2]
+	array_sign_deconv = [signDecreaseConv1, signDecreaseConv2]
 	
 	# Définition de la liste des caméras et des positions initiales
 	array_cam = [camera1, camera3, camera2, camera4]
@@ -127,20 +164,33 @@ func ISButton(i: int) -> void:
 	t_out.tween_property(array_sign_IS_button[i], "modulate:a", 0.0, 0.1)
 	t_out.tween_property(array_sign_inc[1-i], "modulate:a", 0.0, 0.1)
 	t_out.tween_property(array_sign_dec[1-i], "modulate:a", 0.0, 0.1)
+	t_out.tween_property(array_inconv[1-i], "modulate:a", 0.0, 0.1)
+	t_out.tween_property(array_deconv[1-i], "modulate:a", 0.0, 0.1)
+	t_out.tween_property(array_sign_deconv[1-i], "modulate:a", 0.0, 0.1)
+	t_out.tween_property(array_sign_inconv[1-i], "modulate:a", 0.0, 0.1)
 	await t_out.finished
 	
 	array_IS_button[i].visible = false
 	array_inc[1-i].visible = false
 	array_dec[1-i].visible = false
+	array_inconv[1-i].visible = false
+	array_deconv[1-i].visible = false
 	array_IS_button[1-i].visible = true
 	array_inc[i].visible = true
 	array_dec[i].visible = true
+	array_inconv[i].visible = true
+	array_deconv[i].visible = true
 	array_sign_IS_button[i].visible = false
 	array_sign_inc[1-i].visible = false
 	array_sign_dec[1-i].visible = false
+	array_sign_inconv[1-i].visible = false
+	array_sign_deconv[1-i].visible = false
 	array_sign_IS_button[1-i].visible = true
 	array_sign_inc[i].visible = true
 	array_sign_dec[i].visible = true
+	array_sign_inconv[i].visible = true
+	array_sign_deconv[i].visible = true
+	
 	
 	var t_in: Tween = create_tween().set_parallel(true).set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	t_in.tween_property(array_IS_button[1-i], "modulate:a", 1.0, 0.1)
@@ -149,6 +199,10 @@ func ISButton(i: int) -> void:
 	t_in.tween_property(array_sign_IS_button[1-i], "modulate:a", 1.0, 0.1)
 	t_in.tween_property(array_sign_inc[i], "modulate:a", 1.0, 0.1)
 	t_in.tween_property(array_sign_dec[i], "modulate:a", 1.0, 0.1)
+	t_in.tween_property(array_inconv[i], "modulate:a", 1.0, 0.1)
+	t_in.tween_property(array_deconv[i], "modulate:a", 1.0, 0.1)
+	t_in.tween_property(array_sign_deconv[i], "modulate:a", 1.0, 0.1)
+	t_in.tween_property(array_sign_inconv[i], "modulate:a", 1.0, 0.1)
 	await t_in.finished
 
 func _onISButton1_pressed() -> void: ISButton(0)
@@ -167,11 +221,32 @@ func Decrease(i: int) -> void:
 	array_cam[i+2].position.x += step
 	Global.array_cam[i] = array_cam[i].position.x
 	Global.array_cam[i+2] = array_cam[i+2].position.x
+	
+func IncreaseConv(i:int)->void:
+	click_sound.play()
+	if (Global.array_convergence[i]>convergence_step and Global.array_convergence[i+1]>convergence_step):
+		Global.array_convergence[i] -= convergence_step
+		Global.array_convergence[i+1] -= convergence_step
+	Global.update_frustum(array_cam[i], array_cam[i].position.x, Global.array_convergence[i])
+	Global.update_frustum(array_cam[i+2], array_cam[i+2].position.x, Global.array_convergence[i+1])
+	
+func DecreaseConv(i:int)->void:
+	click_sound.play()
+	
+	Global.array_convergence[i] += convergence_step
+	Global.array_convergence[i+1] += convergence_step
+	Global.update_frustum(array_cam[i], array_cam[i].position.x, Global.array_convergence[i])
+	Global.update_frustum(array_cam[i+2], array_cam[i+2].position.x, Global.array_convergence[i+1])
 
 func _onIncrease1_pressed() -> void: Increase(0)
 func _onDecrease1_pressed() -> void: Decrease(0)
 func _onIncrease2_pressed() -> void: Increase(1)
 func _onDecrease2_pressed() -> void: Decrease(1)
+
+func _onIncreaseConv1_pressed()-> void: IncreaseConv(0)
+func _onIncreaseConv2_pressed()-> void: IncreaseConv(1)
+func _onDecreaseConv1_pressed()-> void: DecreaseConv(0)
+func _onDecreaseConv2_pressed()-> void: DecreaseConv(1)
 
 func _onValidationButton_pressed() -> void:
 	click_sound.play()
@@ -230,3 +305,42 @@ func _onValidationEnter() -> void:
 
 func _onValidationExit() -> void:
 	Global.ButtonExit(validation_button, val_scale, false, sign_validation, sign_val_scale)
+
+func _on_increase_conv_j_1_pressed() -> void:IncreaseConv(0)
+
+func _on_increase_conv_j_1_mouse_entered() -> void:
+	Global.ButtonEnter(IncreaseConv1, inconv1_scale, false, signIncreaseConv1, sign_inconv1_scale)
+
+func _on_increase_conv_j_1_mouse_exited() -> void:
+	Global.ButtonExit(IncreaseConv1, inconv1_scale, false, signIncreaseConv1, sign_inconv1_scale)
+
+
+func _on_decrease_conv_j_1_pressed() -> void:DecreaseConv(0)
+	
+func _on_decrease_conv_j_1_mouse_entered() -> void:
+	Global.ButtonEnter(DecreaseConv1, deconv1_scale, false, signDecreaseConv1, sign_deconv1_scale)
+
+func _on_decrease_conv_j_1_mouse_exited() -> void:
+	Global.ButtonExit(DecreaseConv1, deconv1_scale, false, signDecreaseConv1, sign_deconv1_scale)
+
+
+
+func _on_increase_conv_j_2_pressed() -> void:IncreaseConv(1)
+
+func _on_increase_conv_j_2_mouse_entered() -> void:
+	Global.ButtonEnter(IncreaseConv2, inconv2_scale, false, signIncreaseConv2, sign_inconv2_scale)
+
+func _on_increase_conv_j_2_mouse_exited() -> void:
+	Global.ButtonExit(IncreaseConv2, inconv2_scale, false, signIncreaseConv2, sign_inconv2_scale)
+
+
+
+func _on_decrease_conv_j_2_pressed() -> void: DecreaseConv(1)
+
+
+func _on_decrease_conv_j_2_mouse_entered() -> void:
+	Global.ButtonEnter(DecreaseConv2, deconv2_scale, false, signDecreaseConv2, sign_deconv2_scale)
+
+
+func _on_decrease_conv_j_2_mouse_exited() -> void:
+	Global.ButtonExit(DecreaseConv2, deconv2_scale, false, signDecreaseConv2, sign_deconv2_scale)

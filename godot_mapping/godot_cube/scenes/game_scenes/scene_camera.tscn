@@ -24,6 +24,13 @@ shader_parameter/blue_screen = false
 shader_parameter/rainbow_screen = false
 shader_parameter/rainbow_speed = 0.5
 shader_parameter/rainbow_angle = 0.0
+shader_parameter/nausea_screen = false
+shader_parameter/nausea_strength = 0.01
+shader_parameter/nausea_speed = 1.0
+shader_parameter/nausea_mask = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/vignette_screen = false
+shader_parameter/vignette_strength = 0.5
+shader_parameter/vignette_mask = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0)
 
 [sub_resource type="Gradient" id="Gradient_sgwr3"]
 
@@ -247,6 +254,9 @@ texture = SubResource("GradientTexture2D_2jvac")
 
 [node name="Game" parent="." unique_id=1026699542 instance=ExtResource("3_ksw31")]
 
+[node name="FonduNoir" parent="Game/HUD/FonduLayer" parent_id_path=PackedInt32Array(1026699542, 478103391) index="0" unique_id=1283066675]
+visible = false
+
 [node name="Buttons" type="Panel" parent="." unique_id=421331801]
 offset_right = 40.0
 offset_bottom = 40.0
@@ -428,6 +438,110 @@ theme_override_styles/disabled = SubResource("StyleBoxEmpty_8sp8x")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_uao1c")
 text = "Return"
 
+[node name="SignIncreaseConvJ1" type="Sprite2D" parent="Buttons" unique_id=1884335154]
+visible = false
+position = Vector2(320, 894)
+scale = Vector2(3.2435899, 0.6593407)
+texture = ExtResource("4_ksw31")
+
+[node name="IncreaseConv_J1" type="Button" parent="Buttons" unique_id=231478043]
+process_mode = 3
+visible = false
+material = SubResource("ShaderMaterial_xkf4e")
+layout_mode = 0
+offset_left = 96.000015
+offset_top = 875.0
+offset_right = 544.0
+offset_bottom = 915.0
+pivot_offset = Vector2(87.5, 20)
+theme_override_fonts/font = ExtResource("5_bpe7x")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_onsxk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_42pa1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_olrxq")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_d7yvy")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_olan5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tsh7v")
+text = "Decrease convergence"
+
+[node name="SignDecreaseConvJ1" type="Sprite2D" parent="Buttons" unique_id=936678624]
+visible = false
+position = Vector2(320, 824)
+scale = Vector2(3.2435899, 0.6593407)
+texture = ExtResource("4_ksw31")
+
+[node name="DecreaseConvJ1" type="Button" parent="Buttons" unique_id=790117570]
+process_mode = 3
+visible = false
+material = SubResource("ShaderMaterial_xkf4e")
+layout_mode = 0
+offset_left = 96.00003
+offset_top = 805.0
+offset_right = 544.0
+offset_bottom = 845.0
+pivot_offset = Vector2(87.5, 20)
+theme_override_fonts/font = ExtResource("5_bpe7x")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_onsxk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_42pa1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_olrxq")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_d7yvy")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_olan5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tsh7v")
+text = "Increase convergence"
+
+[node name="SignIncreaseConvJ2" type="Sprite2D" parent="Buttons" unique_id=67746380]
+visible = false
+position = Vector2(1474, 892)
+scale = Vector2(3.2435899, 0.6593407)
+texture = ExtResource("4_ksw31")
+
+[node name="IncreaseConv_J2" type="Button" parent="Buttons" unique_id=1446149595]
+process_mode = 3
+visible = false
+material = SubResource("ShaderMaterial_xkf4e")
+layout_mode = 0
+offset_left = 1250.0
+offset_top = 873.0
+offset_right = 1708.0
+offset_bottom = 913.0
+pivot_offset = Vector2(87.5, 20)
+theme_override_fonts/font = ExtResource("5_bpe7x")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_onsxk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_42pa1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_olrxq")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_d7yvy")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_olan5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tsh7v")
+text = "Decrease convergence"
+
+[node name="SignDecreaseConvJ2" type="Sprite2D" parent="Buttons" unique_id=46455723]
+visible = false
+position = Vector2(1474, 822)
+scale = Vector2(3.2435899, 0.6593407)
+texture = ExtResource("4_ksw31")
+
+[node name="DecreaseConvJ2" type="Button" parent="Buttons" unique_id=28412893]
+process_mode = 3
+visible = false
+material = SubResource("ShaderMaterial_xkf4e")
+layout_mode = 0
+offset_left = 1250.0
+offset_top = 803.0
+offset_right = 1698.0
+offset_bottom = 843.0
+pivot_offset = Vector2(87.5, 20)
+theme_override_fonts/font = ExtResource("5_bpe7x")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_onsxk")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_42pa1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_olrxq")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_d7yvy")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_olan5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tsh7v")
+text = "Increase convergence"
+
 [connection signal="mouse_entered" from="Buttons/ISButton_J1" to="." method="_onISButton1Enter"]
 [connection signal="mouse_exited" from="Buttons/ISButton_J1" to="." method="_onISButton1Exit"]
 [connection signal="pressed" from="Buttons/ISButton_J1" to="." method="_onISButton1_pressed"]
@@ -449,5 +563,18 @@ text = "Return"
 [connection signal="mouse_entered" from="Buttons/ValidationButton" to="." method="_onValidationEnter"]
 [connection signal="mouse_exited" from="Buttons/ValidationButton" to="." method="_onValidationExit"]
 [connection signal="pressed" from="Buttons/ValidationButton" to="." method="_onValidationButton_pressed"]
+[connection signal="focus_entered" from="Buttons/IncreaseConv_J1" to="." method="_on_increase_conv_j_1_focus_entered"]
+[connection signal="mouse_entered" from="Buttons/IncreaseConv_J1" to="." method="_on_increase_conv_j_1_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/IncreaseConv_J1" to="." method="_on_increase_conv_j_1_mouse_exited"]
+[connection signal="pressed" from="Buttons/IncreaseConv_J1" to="." method="_on_increase_conv_j_1_pressed"]
+[connection signal="mouse_entered" from="Buttons/DecreaseConvJ1" to="." method="_on_decrease_conv_j_1_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/DecreaseConvJ1" to="." method="_on_decrease_conv_j_1_mouse_exited"]
+[connection signal="pressed" from="Buttons/DecreaseConvJ1" to="." method="_on_decrease_conv_j_1_pressed"]
+[connection signal="mouse_entered" from="Buttons/IncreaseConv_J2" to="." method="_on_increase_conv_j_2_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/IncreaseConv_J2" to="." method="_on_increase_conv_j_2_mouse_exited"]
+[connection signal="pressed" from="Buttons/IncreaseConv_J2" to="." method="_on_increase_conv_j_2_pressed"]
+[connection signal="mouse_entered" from="Buttons/DecreaseConvJ2" to="." method="_on_decrease_conv_j_2_mouse_entered"]
+[connection signal="mouse_exited" from="Buttons/DecreaseConvJ2" to="." method="_on_decrease_conv_j_2_mouse_exited"]
+[connection signal="pressed" from="Buttons/DecreaseConvJ2" to="." method="_on_decrease_conv_j_2_pressed"]
 
 [editable path="Game"]

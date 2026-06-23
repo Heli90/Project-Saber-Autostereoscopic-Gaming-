@@ -95,7 +95,10 @@ func update_frustum(cam:Camera3D, eye_offset:float, convergence:float)-> void:
 	cam.far = 1000
 	cam.fov = 90.0
 	cam.projection = Camera3D.PROJECTION_FRUSTUM
-	cam.frustum_offset = Vector2(eye_offset * cam.near/ convergence, 0.0)
+	if (convergence > 0):
+		cam.frustum_offset = Vector2(eye_offset * cam.near/ convergence, 0.0)
+	
+	
 	print("Valeur de la convergence pour le joueur 1 : ")
 	print(Global.array_convergence[0])
 	print(Global.array_convergence[1])
