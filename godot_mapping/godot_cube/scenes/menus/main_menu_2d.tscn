@@ -427,15 +427,15 @@ theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 50
 text = "SFX"
 
-[node name="CalibrationTitle" type="Label" parent="Options" unique_id=149506956]
+[node name="CalibrationSaberTitle" type="Label" parent="Options" unique_id=149506956]
 layout_mode = 0
-offset_left = 775.0
+offset_left = 710.0
 offset_top = 450.0
-offset_right = 1041.0
+offset_right = 1142.0
 offset_bottom = 501.0
 theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 50
-text = "Calibration"
+text = "Calibration Saber"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -549,7 +549,7 @@ value = 1.0
 script = ExtResource("4_8ln24")
 audio_bus_name = "SFX"
 
-[node name="Calibration" type="Panel" parent="." unique_id=69846264]
+[node name="CalibrationSaber" type="Panel" parent="." unique_id=69846264]
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -565,7 +565,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_7e3u0")
 
-[node name="CalibrationTitle" type="Label" parent="Calibration" unique_id=1784371137]
+[node name="CalibrationTitle" type="Label" parent="CalibrationSaber" unique_id=1784371137]
 layout_mode = 0
 offset_left = 140.0
 offset_top = 3.5
@@ -577,11 +577,11 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_y = 5
 theme_override_fonts/font = ExtResource("4_5epmy")
 theme_override_font_sizes/font_size = 80
-text = "Calibration"
+text = "Calibration Sabre"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AlphaTitleJ1" type="Label" parent="Calibration" unique_id=1217400545]
+[node name="AlphaTitleJ1" type="Label" parent="CalibrationSaber" unique_id=1217400545]
 layout_mode = 0
 offset_left = -550.0
 offset_top = -150.0
@@ -592,7 +592,7 @@ theme_override_font_sizes/font_size = 25
 text = "Horizontal Amplification J1"
 horizontal_alignment = 1
 
-[node name="AlphaControl1" type="HSlider" parent="Calibration" unique_id=362249450]
+[node name="AlphaControl1" type="HSlider" parent="CalibrationSaber" unique_id=362249450]
 layout_mode = 0
 offset_left = -100.0
 offset_top = -150.0
@@ -606,7 +606,7 @@ max_value = 3.0
 step = 0.1
 value = 2.0
 
-[node name="MidXTitleJ1" type="Label" parent="Calibration" unique_id=413917038]
+[node name="MidXTitleJ1" type="Label" parent="CalibrationSaber" unique_id=413917038]
 layout_mode = 0
 offset_left = -550.0
 offset_top = -120.0
@@ -617,7 +617,7 @@ theme_override_font_sizes/font_size = 25
 text = "Horizontal Mid J1"
 horizontal_alignment = 1
 
-[node name="MidXControlJ1" type="HSlider" parent="Calibration" unique_id=892865573]
+[node name="MidXControlJ1" type="HSlider" parent="CalibrationSaber" unique_id=892865573]
 layout_mode = 0
 offset_left = -100.0
 offset_top = -120.0
@@ -631,7 +631,7 @@ max_value = 0.9
 step = 0.1
 value = 0.5
 
-[node name="BetaTitleJ1" type="Label" parent="Calibration" unique_id=886013787]
+[node name="BetaTitleJ1" type="Label" parent="CalibrationSaber" unique_id=886013787]
 layout_mode = 0
 offset_left = -550.0
 offset_top = -90.0
@@ -642,7 +642,7 @@ theme_override_font_sizes/font_size = 25
 text = "Vertical Amplification J1"
 horizontal_alignment = 1
 
-[node name="BetaControl1" type="HSlider" parent="Calibration" unique_id=668871493]
+[node name="BetaControl1" type="HSlider" parent="CalibrationSaber" unique_id=668871493]
 layout_mode = 0
 offset_left = -100.0
 offset_top = -90.0
@@ -656,7 +656,7 @@ max_value = 3.0
 step = 0.1
 value = 2.0
 
-[node name="MidYTitleJ1" type="Label" parent="Calibration" unique_id=2044428945]
+[node name="MidYTitleJ1" type="Label" parent="CalibrationSaber" unique_id=2044428945]
 layout_mode = 0
 offset_left = -550.0
 offset_top = -60.0
@@ -667,7 +667,7 @@ theme_override_font_sizes/font_size = 25
 text = "Vertical Mid J1"
 horizontal_alignment = 1
 
-[node name="MidYControlJ1" type="HSlider" parent="Calibration" unique_id=1384159912]
+[node name="MidYControlJ1" type="HSlider" parent="CalibrationSaber" unique_id=1384159912]
 layout_mode = 0
 offset_left = -100.0
 offset_top = -60.0
@@ -681,7 +681,7 @@ max_value = 0.9
 step = 0.1
 value = 0.30000000000000004
 
-[node name="AlphaTitleJ2" type="Label" parent="Calibration" unique_id=1776945203]
+[node name="AlphaTitleJ2" type="Label" parent="CalibrationSaber" unique_id=1776945203]
 layout_mode = 0
 offset_left = 600.0
 offset_top = -150.0
@@ -692,7 +692,7 @@ theme_override_font_sizes/font_size = 25
 text = "Horizontal Amplification J2"
 horizontal_alignment = 1
 
-[node name="AlphaControl2" type="HSlider" parent="Calibration" unique_id=1806876527]
+[node name="AlphaControl2" type="HSlider" parent="CalibrationSaber" unique_id=1806876527]
 layout_mode = 0
 offset_left = 1050.0
 offset_top = -150.0
@@ -706,7 +706,7 @@ max_value = 3.0
 step = 0.1
 value = 2.0
 
-[node name="MidXTitleJ2" type="Label" parent="Calibration" unique_id=477576058]
+[node name="MidXTitleJ2" type="Label" parent="CalibrationSaber" unique_id=477576058]
 layout_mode = 0
 offset_left = 600.0
 offset_top = -120.0
@@ -717,7 +717,7 @@ theme_override_font_sizes/font_size = 25
 text = "Horizontal Mid J2"
 horizontal_alignment = 1
 
-[node name="MidXControlJ2" type="HSlider" parent="Calibration" unique_id=1058229596]
+[node name="MidXControlJ2" type="HSlider" parent="CalibrationSaber" unique_id=1058229596]
 layout_mode = 0
 offset_left = 1050.0
 offset_top = -120.0
@@ -731,7 +731,7 @@ max_value = 0.9
 step = 0.1
 value = 0.5
 
-[node name="BetaTitleJ2" type="Label" parent="Calibration" unique_id=902528267]
+[node name="BetaTitleJ2" type="Label" parent="CalibrationSaber" unique_id=902528267]
 layout_mode = 0
 offset_left = 600.0
 offset_top = -90.0
@@ -742,7 +742,7 @@ theme_override_font_sizes/font_size = 25
 text = "Vertical Amplification J2"
 horizontal_alignment = 1
 
-[node name="BetaControl2" type="HSlider" parent="Calibration" unique_id=721606633]
+[node name="BetaControl2" type="HSlider" parent="CalibrationSaber" unique_id=721606633]
 layout_mode = 0
 offset_left = 1050.0
 offset_top = -90.0
@@ -756,7 +756,7 @@ max_value = 3.0
 step = 0.1
 value = 2.0
 
-[node name="MidYTitleJ2" type="Label" parent="Calibration" unique_id=1872366972]
+[node name="MidYTitleJ2" type="Label" parent="CalibrationSaber" unique_id=1872366972]
 layout_mode = 0
 offset_left = 600.0
 offset_top = -60.0
@@ -768,7 +768,7 @@ text = "Vertical Mid J2
 "
 horizontal_alignment = 1
 
-[node name="MidYControlJ2" type="HSlider" parent="Calibration" unique_id=1877240275]
+[node name="MidYControlJ2" type="HSlider" parent="CalibrationSaber" unique_id=1877240275]
 layout_mode = 0
 offset_left = 1050.0
 offset_top = -60.0
@@ -782,12 +782,12 @@ max_value = 0.9
 step = 0.1
 value = 0.30000000000000004
 
-[node name="SignBack" type="Sprite2D" parent="Calibration" unique_id=955079048]
+[node name="SignBack" type="Sprite2D" parent="CalibrationSaber" unique_id=955079048]
 position = Vector2(397.5, 710.5)
 scale = Vector2(1.75, 1.5)
 texture = ExtResource("5_7gh3y")
 
-[node name="BackButton" type="Button" parent="Calibration" unique_id=940094471]
+[node name="BackButton" type="Button" parent="CalibrationSaber" unique_id=940094471]
 material = SubResource("ShaderMaterial_r1foq")
 custom_minimum_size = Vector2(0, 127)
 layout_mode = 0
@@ -987,17 +987,17 @@ texture = ExtResource("8_ymobg")
 [connection signal="pressed" from="Options/BackButton" to="." method="_onBackButton_pressed"]
 [connection signal="value_changed" from="Options/MusicControl" to="Options/MusicControl" method="_onValueChanged"]
 [connection signal="value_changed" from="Options/SFXControl" to="Options/SFXControl" method="_onValueChanged"]
-[connection signal="value_changed" from="Calibration/AlphaControl1" to="." method="_onAlpha1Changed"]
-[connection signal="value_changed" from="Calibration/MidXControlJ1" to="." method="_onMidx1Changed"]
-[connection signal="value_changed" from="Calibration/BetaControl1" to="." method="_onBeta1Changed"]
-[connection signal="value_changed" from="Calibration/MidYControlJ1" to="." method="_onMidy1Changed"]
-[connection signal="value_changed" from="Calibration/AlphaControl2" to="." method="_onAlpha2Changed"]
-[connection signal="value_changed" from="Calibration/MidXControlJ2" to="." method="_onMidx2Changed"]
-[connection signal="value_changed" from="Calibration/BetaControl2" to="." method="_onBeta2Changed"]
-[connection signal="value_changed" from="Calibration/MidYControlJ2" to="." method="_onMidy2Changed"]
-[connection signal="mouse_entered" from="Calibration/BackButton" to="." method="_onBackCalButtonEnter"]
-[connection signal="mouse_exited" from="Calibration/BackButton" to="." method="_onBackCalButtonExit"]
-[connection signal="pressed" from="Calibration/BackButton" to="." method="_onBackCalButton_pressed"]
+[connection signal="value_changed" from="CalibrationSaber/AlphaControl1" to="." method="_onAlpha1Changed"]
+[connection signal="value_changed" from="CalibrationSaber/MidXControlJ1" to="." method="_onMidx1Changed"]
+[connection signal="value_changed" from="CalibrationSaber/BetaControl1" to="." method="_onBeta1Changed"]
+[connection signal="value_changed" from="CalibrationSaber/MidYControlJ1" to="." method="_onMidy1Changed"]
+[connection signal="value_changed" from="CalibrationSaber/AlphaControl2" to="." method="_onAlpha2Changed"]
+[connection signal="value_changed" from="CalibrationSaber/MidXControlJ2" to="." method="_onMidx2Changed"]
+[connection signal="value_changed" from="CalibrationSaber/BetaControl2" to="." method="_onBeta2Changed"]
+[connection signal="value_changed" from="CalibrationSaber/MidYControlJ2" to="." method="_onMidy2Changed"]
+[connection signal="mouse_entered" from="CalibrationSaber/BackButton" to="." method="_onBackCalButtonEnter"]
+[connection signal="mouse_exited" from="CalibrationSaber/BackButton" to="." method="_onBackCalButtonExit"]
+[connection signal="pressed" from="CalibrationSaber/BackButton" to="." method="_onBackCalButton_pressed"]
 [connection signal="mouse_entered" from="Credits/BackButton" to="." method="_onBackButtonCreditEnter"]
 [connection signal="mouse_exited" from="Credits/BackButton" to="." method="_onBackButtonCreditExit"]
 [connection signal="pressed" from="Credits/BackButton" to="." method="_onBackButton_pressed"]

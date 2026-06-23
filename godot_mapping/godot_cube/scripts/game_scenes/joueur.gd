@@ -43,6 +43,8 @@ func _ready() -> void:
 	landmarks = get_node_or_null("../../../../Game/LandMarksProceed")
 	j1_label = get_node_or_null("../../../../Game/J1Label")
 	j2_label = get_node_or_null("../../../../Game/J2Label")
+	
+	#Initilisation de scoefficients de dilatations
 	alpha1 = Global.alpha1
 	alpha2 = Global.alpha2
 	beta1 = Global.beta1
@@ -172,8 +174,8 @@ func _physics_process(_delta: float) -> void:
 			#print("alpha1 = %f, midx1 = %f, beta1 = %f, midy1 = %f\n alpha2 = %f, midx2 = %f, beta2 = %f, midy2 = %f"%[alpha1,midx1,beta1,midy1,alpha2,midx2,beta2,midy2])
 			
 			# Affichage des labels
-			if data["handedness"] == "Right" :
-				if player_id == 1 and j1_label:
-					j1_label.text = "x = %.2f, y = %.2f, angle = %.2f\n" % [pos_x, data["y"], rot_z]
-				elif player_id == 2 and j2_label:
-					j2_label.text = "x = %.2f, y = %.2f, angle = %.2f\n " % [pos_x, data["y"], rot_z]
+			#if data["handedness"] == "Right" :
+				#if player_id == 1 and j1_label:
+					#j1_label.text = "x = %.2f, y = %.2f, angle = %.2f\n" % [pos_x, data["y"], rot_z]
+				#elif player_id == 2 and j2_label:
+					#j2_label.text = "x = %.2f, y = %.2f, angle = %.2f\n " % [pos_x, data["y"], rot_z]
