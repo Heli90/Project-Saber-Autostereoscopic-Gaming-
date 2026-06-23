@@ -125,3 +125,5 @@ func _input(event: InputEvent) -> void:
 		for bloc in cube_spawner.blocs:
 			if is_instance_valid(bloc):
 				bloc.set_physics_process(not pause_blocs)
+	if event.is_action_pressed("Camera_Debug"):
+		Global.is_camera_visible = !Global.is_camera_visible

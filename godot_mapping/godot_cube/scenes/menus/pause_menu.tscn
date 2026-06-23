@@ -13,8 +13,6 @@ shader = ExtResource("1_v4r4p")
 shader_parameter/lod = 2.0
 shader_parameter/brightness = 1.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v4r4p"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_71k7c"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dqjbd"]
@@ -182,20 +180,6 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_7l7mv")
-
-[node name="FonduNoir" type="ColorRect" parent="." unique_id=900633217]
-layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
-color = Color(0, 0, 0, 1)
-metadata/_edit_use_anchors_ = true
-
-[node name="VisuelMenu" type="Panel" parent="." unique_id=280165097]
-visible = false
-layout_mode = 0
-offset_right = 1920.0
-offset_bottom = 1080.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_v4r4p")
 
 [node name="ClickSound" type="AudioStreamPlayer" parent="." unique_id=1311986995]
 stream = ExtResource("2_v4r4p")
@@ -491,6 +475,13 @@ step = 0.05
 value = 1.0
 script = ExtResource("5_knqa7")
 audio_bus_name = "SFX"
+
+[node name="FonduNoir" type="ColorRect" parent="." unique_id=900633217]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
 
 [connection signal="mouse_entered" from="MenuButtons/ContinueButton" to="." method="_onContinueButtonEnter"]
 [connection signal="mouse_exited" from="MenuButtons/ContinueButton" to="." method="_onContinueButtonExit"]

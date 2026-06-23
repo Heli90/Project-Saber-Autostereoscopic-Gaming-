@@ -3,8 +3,8 @@ extends StaticBody3D
 @export var particles_vfx: PackedScene
 var vitesse_deplacement: float = 0.0
 
-signal striked_cube_j1
-signal striked_cube_j2
+signal striked_cube_j1(bloc)
+signal striked_cube_j2(bloc)
 
 func _ready() -> void:
 	# On attend 1 seconde puis on lance le clignotement
@@ -28,18 +28,17 @@ func _physics_process(delta: float) -> void:
 
 	move_and_collide(Vector3(0, 0, 1).normalized() * vitesse_deplacement * delta)
 	# On supprime le cube s'il passe derrière l'un des joueurs
-	if abs(position.z) > 20.0: queue_free()
+	if position.z > 20.0: queue_free()
+	elif position.z < -20.0:
+		if Global.two_player_mode: queue_free()
+		else: collision()
 
 	# On supprime le cube et on apporte le bonus de cube s'il est touché par l'un des joueurs
 func collision() -> void:
 	HitCubeSound.play()
 	apply_vfx()
-	if position.z > 0:
-		emit_signal("striked_cube_j1")
-		queue_free()
-	else:
-		emit_signal("striked_cube_j2")
-		queue_free()
+	if position.z > 0: emit_signal("striked_cube_j1", self)
+	else: emit_signal("striked_cube_j2", self)
 
 func apply_vfx() -> void:
 	if particles_vfx == null: return

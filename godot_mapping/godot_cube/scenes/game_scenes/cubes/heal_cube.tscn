@@ -57,6 +57,7 @@ metallic = 0.5
 roughness = 0.5
 
 [node name="HealCube" type="StaticBody3D" unique_id=166795106]
+collision_mask = 2
 script = ExtResource("1_li3my")
 particles_vfx = ExtResource("2_xnrkh")
 

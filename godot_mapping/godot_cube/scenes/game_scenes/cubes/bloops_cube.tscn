@@ -60,6 +60,7 @@ albedo_texture = SubResource("NoiseTexture2D_5hspg")
 [sub_resource type="BoxShape3D" id="BoxShape3D_h6frj"]
 
 [node name="BloopsCube" type="StaticBody3D" unique_id=923453408]
+collision_mask = 2
 script = ExtResource("1_g7kxu")
 particles_vfx = ExtResource("2_nel70")
 

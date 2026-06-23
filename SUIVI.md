@@ -185,6 +185,7 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 ### Séance 12 - 13/05
 
 **Birame :** Séparation du flux caméra en 2 images (droite et gauche) pour gérer chaque joueur indépendamment (cela rend le tracking de chaque joueur plus précis).
+
 **Van-Kévin :** Implémentation d'un menu de tutoriel et correction de l'orientation des cubes.
 
 ### Entre la séance 12 et la séance 13
@@ -280,3 +281,22 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 **Van-Kévin :**
 - Ajout d'un nouveau paramètre réglable (l'amplification des mouvements) et nouveau message de prévention à chaque effet déclenché dans le diaporama d'effets
+- Correction du combo et du déclenchement de l'effet de pixelisation associé
+- Page de calibration ajoutée dans les paramètres du jeu
+- Création du niveau de test (33% effectués à la fin de la séance)
+
+**Birame :**
+- Ajout d'un menu *Calibration* dans le jeu pour pouvoir régler l'amplitude du mouvement des sabres et pouvoir décider de la position de base de chaque joueur.
+- Ajout de quelques questions dans le Google Forms (test utilisateurs).
+
+#### Séance 17 - Mardi 23/06
+**Van-Kévin :**
+- Retrait des collisions entre les cubes pour faciliter la création du niveau et avoir un niveau plus dynamique
+- Mode à 1 joueur implémenté où les cubes de l'autre joueur sont automatiquement détruits et / ou renvoyés
+- Création du niveau de test et mise à jour du timer associé (première version finie à 100%)
+- Retrait de la difficulté
+- Ajout d'une mécanique de gameplay sur l'apparition des cubes classiques lorsqu'on frappe des cubes non classiques
+- Séparation de l'effet de nausée pour chaque joueur
+
+**Birame :**
+- Ajout de réticules sur la caméra affiché en jeu pour faciliter la calibration et la prise en main du jeu.

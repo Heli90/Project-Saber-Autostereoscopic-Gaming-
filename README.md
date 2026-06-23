@@ -92,6 +92,7 @@ res://
 - Musique
 - SFX
 - Espace interoculaire
+- Calibration des sabres en X et en Y
 - Classement actuel
 
 ---
@@ -145,3 +146,33 @@ Lancer le dossier godot_mapping/godot_cube dans **Godot 4.6**.
 ## Collaborateurs
 Projet développé par Hugo BELLE, Birame CISSÉ, Hélias GODARD--DELONGEAS, Adam KHATIRI, Van-Kévin NGUYEN.
 Projet encadré par Jean LEFEUVRE.
+
+
+
+### Projet Open source
+
+## Matériel
+Dans le cadre de ce projet nous nous sommes servis d'un écran autostéréoscopique. Il s'agit d'un écran avec un réseau de lentilles devant chaque pixel afin de pouvoir avoir un effet 3D sans lunettes.
+Attention le jeu est fait pour un tel écran, il n'aura donc pas un rendu comme attendu sur un écran classique.
+
+## Détection des mouvements
+Nous nous servons ici du module mediapipe dont nous avons tiré des informations sur internet tel que sur : 
+https://github.com/google-ai-edge/mediapipe
+https://developers.google.com/edge/mediapipe/solutions/guide
+
+Pour un exemple voici un lien direct pour avoir un exemple de comment fonctionne mediapipe hands. De plus on peut aussi benchmarker les perfs de mediapipe:
+https://google-ai-edge.github.io/mediapipe-samples-web/#/vision/hand_landmarker
+
+
+NB : 
+Dans ces 2 sites nous nous sommes principalement servis de mediapipe pose pour le jeu et de mediapipe hands pour les tests.
+NB 2: 
+Mediapipe ne peut reconnaitre qu'une personne sur une image, la solution que nous avons mis en place est de divisé l'image envoyée par le flux video en 2 (les parties gauche et droite sont 2 images différentes) pour que les 2 images soient traitées séparement afin d'avoir plusieurs joueurs dont on détecte les mouvements.
+
+
+## Moteur de jeu
+
+Le jeu à été développer sur Godot_v4.6.1-stable_win64.
+
+
+

@@ -25,13 +25,15 @@ signal missed_cube_j2
 func _ready() -> void:
 	# On duplique le matériau pour pouvoir modifier la couleur de ce cube uniquement
 	forme_cube.mesh = forme_cube.mesh.duplicate()
+	var mat = forme_cube.get_surface_override_material(0).duplicate()
+	forme_cube.set_surface_override_material(0, mat)
 	forme_cube.visible = false
 	add_to_group("cube")
 
 func _process(delta) -> void:
 	# On met en place la couleur du cube si nécessaire
 	if setup_color:
-		var mat = forme_cube.get_active_material(0)
+		var mat = forme_cube.get_surface_override_material(0)
 		match color:
 			1: mat.albedo_color = Color("d00040")
 			2: mat.albedo_color = Color("ff7e0b")
@@ -60,8 +62,10 @@ func _physics_process(delta: float) -> void:
 		emit_signal("missed_cube_j1")
 		queue_free()
 	elif position.z < -20.0:
-		emit_signal("missed_cube_j2")
-		queue_free()
+		if Global.two_player_mode:
+			emit_signal("missed_cube_j2")
+			queue_free()
+		else: collision()
 	
 	if spin:
 		elapsed_time_since_spin += delta

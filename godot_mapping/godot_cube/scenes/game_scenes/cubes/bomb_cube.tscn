@@ -57,6 +57,7 @@ albedo_color = Color(4.415934, 0.87608105, 1.7735087, 1)
 metallic = 0.8
 
 [node name="BombCube" type="StaticBody3D" unique_id=2129357783]
+collision_mask = 2
 script = ExtResource("1_30ywe")
 particles_vfx = ExtResource("2_mxa80")
 
