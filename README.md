@@ -153,6 +153,6 @@ Projet encadré par Jean LEFEUVRE.
 
 ## Matériel
 Dans le cadre de ce projet nous nous sommes servis d'un écran autostéréoscopique. Il s'agit d'un écran avec un réseau de lentilles devant chaque pixel afin de pouvoir avoir un effet 3D sans lunettes.
-Attention le jeu est fait pour un tel écran, il n'aura donc pas un rendu comme attendu sur un écran classique.
+Attention le jeu est fait pour un tel écran, il n'aura donc pas un rendu comme attendu sur un écran classique
 
 
