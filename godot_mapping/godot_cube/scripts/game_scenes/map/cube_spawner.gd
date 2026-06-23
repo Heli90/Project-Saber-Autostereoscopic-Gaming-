@@ -94,7 +94,10 @@ var pixelisation_active_j2: bool = false
 var pixelisation_time_j1: float = 0.0
 var pixelisation_time_j2: float = 0.0
 # Variables de nausée
+var nausea_tween: Tween
 var hitted_bomb: Array[bool] = [false, false]
+var nausea_time_j1: float = 0.0
+var nausea_time_j2: float = 0.0
 
 # Message d'avertissement sur l'effet qui va être déclenché dans la zone d'effets
 var warning: Label
@@ -242,7 +245,7 @@ func _process(delta: float) -> void:
 				# Boucle de jeu dans le tutoriel
 				1: tutoriel_loop()
 				# Boucle de jeu dans la partie
-				2: game_loop()
+				2: game_loop(delta)
 
 func menu_loop() -> void:
 	if blocs == []:
@@ -338,21 +341,25 @@ func reset_rainbow_screen(current_value) -> void:
 	texture.material.set_shader_parameter("rainbow_screen", false)
 
 func nausea_screen(joueurs: Array[bool]) -> void:
+	if nausea_tween and nausea_tween.is_running(): nausea_tween.kill()
 	texture.material.set_shader_parameter("nausea_screen", true)
 	match joueurs:
+		[false, false]: texture.material.set_shader_parameter("nausea_mask", [false, false, false, false, false, false, false, false])
 		[true, false]: texture.material.set_shader_parameter("nausea_mask", [true, true, false, false, false, false, false, false])
 		[false, true]: texture.material.set_shader_parameter("nausea_mask", [false, false, false, false, true, true, false, false])
 		[true, true]: texture.material.set_shader_parameter("nausea_mask", [true, true, false, false, true, true, false, false])
-	var t := create_tween()
-	t.tween_method(func(v: float): texture.material.set_shader_parameter("nausea_strength", v), 0.0, 0.01, 1.0)
-	await t.finished
+	nausea_tween = create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	nausea_tween.tween_method(func(v: float): texture.material.set_shader_parameter("nausea_strength", v), 0.0, 0.05, 0.05)
+	await nausea_tween.finished
 
 func reset_nausea_screen() -> void:
-	var t: Tween = create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-	t.tween_method(func(v: float): texture.material.set_shader_parameter("nausea_strength", v), 0.01, 0.0, 1.0)
-	await t.finished
-	texture.material.set_shader_parameter("nausea_screen", false)
+	if nausea_tween and nausea_tween.is_running(): nausea_tween.kill()
+	nausea_tween = create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	nausea_tween.tween_method(func(v: float): texture.material.set_shader_parameter("nausea_strength", v), 0.05, 0.0, 0.5)
+	await nausea_tween.finished
+	await get_tree().create_timer(0.25).timeout
 	texture.material.set_shader_parameter("nausea_mask", [false, false, false, false, false, false, false, false])
+	texture.material.set_shader_parameter("nausea_screen", false)
 
 func vignette_screen(start_value: float, end_value: float) -> void:
 	texture.material.set_shader_parameter("vignette_screen", true)
@@ -524,7 +531,11 @@ func tutoriel_loop() -> void:
 	if Global.setup_tutoriel: Global.setup_tutoriel = false
 	menu_loop()
 
-func game_loop() -> void:
+func on_bomb_hit(i: int):
+	if i == 0: nausea_time_j1 = 5.0
+	else: nausea_time_j2 = 5.0
+
+func game_loop(delta: float) -> void:
 	# On lance la musique avec un retard de 1.25 secondes pour permettre aux premiers cubes d'arriver
 	if elapsed_time > 1.25 and (not level_music.playing): level_music.play()
 	check_progress_bars()
@@ -539,18 +550,32 @@ func game_loop() -> void:
 	elif elapsed_time > 70.0 and not end_phase:
 		end_phase = true
 		vignette_screen(1.0, 0.0)
+	
+	if nausea_time_j1 > 0: nausea_time_j1 -= delta
+	else: nausea_time_j1 = 0
+	if nausea_time_j2 > 0: nausea_time_j2 -= delta
+	else: nausea_time_j2 = 0
+
+	var j1_has_nausea = nausea_time_j1 > 0
+	var j2_has_nausea = nausea_time_j2 > 0
+
+	if (not j1_has_nausea) and not (j2_has_nausea):
+		if hitted_bomb != [false, false]:
+			hitted_bomb = [false, false]
+			reset_nausea_screen()
+	else: nausea_screen([j1_has_nausea, j2_has_nausea])
 
 	if not is_generated:
 		# Pré-génération du niveau de la partie
 		is_generated = true
 		
 		# Phase 1
-		scheduled_bloc(classic_bloc, 4.75, 0, [0.0, 1.75], default_speed, 1)
-		scheduled_bloc(classic_bloc, 4.75, 1, [0.0, 1.75], default_speed, 1)
+		scheduled_bloc(classic_bloc, 4.75, 0, [0.0, 1.75], default_speed, 2)
+		scheduled_bloc(classic_bloc, 4.75, 1, [0.0, 1.75], default_speed, 2)
 		scheduled_bloc(classic_bloc, 6.00, 0, [-2.0, 1.75], default_speed, 1)
 		scheduled_bloc(classic_bloc, 6.00, 1, [2.0, 1.75], default_speed, 1)
-		scheduled_bloc(classic_bloc, 7.25, 0, [0.0, 3.0], default_speed, 2)
-		scheduled_bloc(classic_bloc, 7.25, 1, [0.0, 0.5], default_speed, 2)
+		scheduled_bloc(classic_bloc, 7.25, 0, [0.0, 3.0], default_speed, 1)
+		scheduled_bloc(classic_bloc, 7.25, 1, [0.0, 0.5], default_speed, 1)
 
 		# Phase 2
 		scheduled_bloc(bonus_bloc, 10.00, 0, [2.0, 1.75], default_speed)
@@ -567,13 +592,13 @@ func game_loop() -> void:
 		scheduled_bloc(shield_bloc, 16.50, 1, [2.0, 3.0], default_speed)
 		scheduled_bloc(classic_bloc, 24.75, 0, [0.0, 3.0], default_speed, 3)
 		scheduled_bloc(classic_bloc, 24.75, 1, [0.0, 1.75], default_speed, 3)
-		scheduled_bloc(classic_bloc, 24.75, 0, [-2.0, 3.0], default_speed, 1)
-		scheduled_bloc(classic_bloc, 24.75, 1, [2.0, 3.0], default_speed, 1)
+		scheduled_bloc(classic_bloc, 24.75, 0, [-2.0, 3.0], default_speed, 2)
+		scheduled_bloc(classic_bloc, 24.75, 1, [2.0, 3.0], default_speed, 2)
 
 		# Phase 3
 		default_speed *= 1.2
-		scheduled_bloc(classic_bloc, 27.50, 0, [-2.0, 0.5], default_speed, 1)
-		scheduled_bloc(classic_bloc, 27.50, 0, [2.0, 3.0], default_speed, 1)
+		scheduled_bloc(classic_bloc, 27.50, 0, [-2.0, 0.5], default_speed, 2)
+		scheduled_bloc(classic_bloc, 27.50, 0, [2.0, 3.0], default_speed, 2)
 		scheduled_bloc(classic_bloc, 27.50, 1, [2.0, 0.5], default_speed, 1)
 		scheduled_bloc(classic_bloc, 27.50, 1, [-2.0, 3.0], default_speed, 1)
 		scheduled_bloc(bomb_bloc, 30.75, 0, [0.0, 1.75], default_speed)
@@ -822,12 +847,13 @@ func StrikedBonusCube(i: int, bloc: Node3D) -> void:
 		score_uis[i].ajouter_score(gain)
 		if Global.launched_mode == 2: score_uis[i+2].ajouter_score(gain)
 	spawn_classic_replacement(bloc.position, -bloc.vitesse_deplacement)
-	bloc.queue_free()
+	if is_instance_valid(bloc): bloc.queue_free()
 
 func StrikedBombCube(i: int) -> void:
 	stocked_combo[i] = 0
 	var gain = -500
 	multiplicateur[i] = 1
+	on_bomb_hit(i)
 	if Global.launched_mode % 2 == 0:
 		score_uis[i].ajouter_score(gain)
 		hitted_bomb[i] = true
@@ -845,6 +871,7 @@ func StrikedDisappearCube(i: int, bloc: Node3D) -> void:
 	disappear_bloc_notif.visible = true
 	await get_tree().create_timer(1.0).timeout
 	disappear_bloc_notif.visible = false
+	if is_instance_valid(bloc): bloc.queue_free()
 
 func StrikedSplashCube(i: int, bloc: Node3D) -> void:
 	stocked_combo[i] += 1
@@ -854,11 +881,13 @@ func StrikedSplashCube(i: int, bloc: Node3D) -> void:
 		if Global.launched_mode == 2: score_uis[i+2].ajouter_score(gain)
 	# On déclenche le visuel d'encre
 	ink_overlay[i].trigger_ink()
-	if Global.launched_mode % 2 == 0: ink_overlay[i+2].trigger_ink()
+	if Global.launched_mode == 2: ink_overlay[i+2].trigger_ink()
 	spawn_classic_replacement(bloc.position, -bloc.vitesse_deplacement)
+	if is_instance_valid(bloc): bloc.queue_free()
 
 func StrikedShieldCube(i: int, bloc: Node3D) -> void:
 	# On initialise la barre de vie, la durée et le visuel du bouclier
+	spawn_classic_replacement(bloc.position, -bloc.vitesse_deplacement)
 	shields[i].emitting = true
 	shields[i].speed_scale = 1.0
 	shields[i].material_override.set_shader_parameter("MaskPower", -5.0)
@@ -878,7 +907,7 @@ func StrikedShieldCube(i: int, bloc: Node3D) -> void:
 	if Global.launched_mode % 2 == 0:
 		score_uis[i].ajouter_score(gain)
 		if Global.launched_mode == 2: score_uis[i+2].ajouter_score(gain)
-	spawn_classic_replacement(bloc.position, -bloc.vitesse_deplacement)
+	if is_instance_valid(bloc): bloc.queue_free()
 
 func StrikedHealCube(i: int, bloc: Node3D) -> void:
 	health[i] += 1
@@ -900,46 +929,38 @@ func _onMissedClassicCube_j2() -> void:
 
 func _onStrikedBonusCube_j1(bloc: Node3D) -> void:
 	StrikedBonusCube(0, bloc)
-	bloc.queue_free()
 
 func _onStrikedBonusCube_j2(bloc: Node3D) -> void:
 	StrikedBonusCube(1, bloc)
+
+func _onStrikedBombCube_j1(bloc: Node3D) -> void:
+	StrikedBombCube(0)
 	bloc.queue_free()
 
-func _onStrikedBombCube_j1(_bloc: Node3D) -> void:
-	StrikedBombCube(0)
-
-func _onStrikedBombCube_j2(_bloc: Node3D) -> void:
+func _onStrikedBombCube_j2(bloc: Node3D) -> void:
 	StrikedBombCube(1)
+	bloc.queue_free()
 
 func _onStrikedDisappearCube_j1(bloc: Node3D) -> void:
 	StrikedDisappearCube(0, bloc)
-	bloc.queue_free()
 
 func _onStrikedDisappearCube_j2(bloc: Node3D) -> void:
 	StrikedDisappearCube(1, bloc)
-	bloc.queue_free()
 
 func _onStrikedSplashCube_j1(bloc: Node3D) -> void:
 	StrikedSplashCube(0, bloc)
-	bloc.queue_free()
 
 func _onStrikedSplashCube_j2(bloc: Node3D) -> void:
 	StrikedSplashCube(1, bloc)
-	bloc.queue_free()
 
 func _onStrikedShieldCube_j1(bloc: Node3D) -> void:
 	StrikedShieldCube(0, bloc)
-	bloc.queue_free()
 
 func _onStrikedShieldCube_j2(bloc: Node3D) -> void:
 	StrikedShieldCube(1, bloc)
-	bloc.queue_free()
 
 func _onStrikedHealCube_j1(bloc: Node3D) -> void:
 	StrikedHealCube(0, bloc)
-	bloc.queue_free()
 
 func _onStrikedHealCube_j2(bloc: Node3D) -> void:
 	StrikedHealCube(1, bloc)
-	bloc.queue_free()

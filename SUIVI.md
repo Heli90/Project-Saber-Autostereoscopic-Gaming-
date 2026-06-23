@@ -296,7 +296,7 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 - Création du niveau de test et mise à jour du timer associé (première version finie à 100%)
 - Retrait de la difficulté
 - Ajout d'une mécanique de gameplay sur l'apparition des cubes classiques lorsqu'on frappe des cubes non classiques
-- Séparation de l'effet de nausée pour chaque joueur
+- Séparation de l'effet de nausée pour chaque joueur et ajout de cet effet lorsqu'un joueur frappe une bombe
 
 **Birame :**
 - Ajout de réticules sur la caméra affiché en jeu pour faciliter la calibration et la prise en main du jeu.

@@ -39,7 +39,6 @@ uniform bool nausea_mask[8];
 // 7. Effet de vignette
 uniform bool vignette_screen = false;
 uniform float vignette_strength: hint_range(0., 1.) = 0.5;
-uniform bool vignette_mask[8];
 
 vec2 nausea_texture(vec2 uv){
 	float a = sin(uv.y * 8.0 + TIME * nausea_speed) * nausea_strength;
