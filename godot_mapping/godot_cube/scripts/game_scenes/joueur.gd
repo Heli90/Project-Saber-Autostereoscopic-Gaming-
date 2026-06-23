@@ -17,7 +17,9 @@ var landmarks: Node2D
 var saber_range_x : float = 2.5
 var saber_y_min : float = 0.0
 var saber_y_max : float = 3.0
-var alpha1 : float = 2.0 # Facteur d'amplification des mouvements vers les bords extrémaux
+
+# Facteur d'amplification des mouvements vers les bords extrémaux
+var alpha1 : float = 2.0
 var alpha2 : float = 2.0
 var midx1 : float = 0.5
 var midx2 : float = 0.5

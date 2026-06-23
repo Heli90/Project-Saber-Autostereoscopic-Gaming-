@@ -112,7 +112,7 @@ func _open_camera_selection():
 	
 func _on_camera_selected(index: int):
 	selected_format.clear()
-	# On débloque le bouton OK dès qu'une caméra est sélectionnée !
+	# On débloque le bouton OK dès qu'une caméra est sélectionnée
 	confirmation_dialog.get_ok_button().disabled = false
 	
 	var id = selected_feed.get_item_id(index)
@@ -157,7 +157,7 @@ func _start_camera():
 	if Global.launched_mode == 0 or Global.launched_mode == 2: camera_feed.feed_is_active = true
 	else: camera_feed.feed_is_active = false
 	
-	# Création de la texture selon le type de flux
+	# Création de la texture
 	var tex = CameraTexture.new()
 	tex.camera_feed_id = camera_feed.get_id()
 	
@@ -202,47 +202,41 @@ func _on_calibration_overlay_draw() -> void:
 	var view_size = calibration_overlay.size
 	var half_width = view_size.x / 2.0
 	
-	# --- COULEURS ET ÉPAISSEURS ---
-	var color_j1 = Color(1.0, 0.0, 0.0, 0.8) # Vert semi-transparent
-	var color_j2 = Color(0.0, 0.8, 1.0, 0.8) # Cyan/Bleu semi-transparent
+	var color_j1 = Color(1.0, 0.0, 0.0, 0.8)
+	var color_j2 = Color(0.0, 0.8, 1.0, 0.8)
 	var line_thickness = 5.0
 	var dash = 2.0
 	
-	# --- DESSIN JOUEUR 1 (Gauche) ---
 	var j1_mid_x = Global.midx1 * half_width
 	var j1_mid_y = Global.midy1 * view_size.y
 	
-	# Ligne verticale (midx1)
 	calibration_overlay.draw_dashed_line(
 		Vector2(j1_mid_x, 0), 
 		Vector2(j1_mid_x, view_size.y), 
 		color_j1, line_thickness,dash
 	)
-	# Ligne horizontale (midy1)
+	
 	calibration_overlay.draw_dashed_line(
 		Vector2(0, j1_mid_y), 
 		Vector2(half_width, j1_mid_y), 
 		color_j1, line_thickness,dash
 	)
 	
-	# --- DESSIN JOUEUR 2 (Droite) ---
 	var j2_mid_x = half_width + (Global.midx2 * half_width)
 	var j2_mid_y = Global.midy2 * view_size.y
 	
-	# Ligne verticale (midx2)
 	calibration_overlay.draw_dashed_line(
 		Vector2(j2_mid_x, 0), 
 		Vector2(j2_mid_x, view_size.y), 
 		color_j2, line_thickness,dash
 	)
-	# Ligne horizontale (midy2)
+
 	calibration_overlay.draw_dashed_line(
 		Vector2(half_width, j2_mid_y), 
 		Vector2(view_size.x, j2_mid_y), 
 		color_j2, line_thickness,dash
 	)
 	
-	# --- SÉPARATION CENTRALE ---
 	calibration_overlay.draw_line(
 		Vector2(half_width, 0), 
 		Vector2(half_width, view_size.y), 
@@ -267,14 +261,14 @@ func _thread_mediapipe():
 			
 			# Phase Détection
 			var start_detect = Time.get_ticks_usec()
-			# --- Détection JOUEUR 1 (Gauche) ---
+			# Détection JOUEUR 1 (Gauche)
 			
 			var img_left = full_img.get_region(Rect2i(0, 0, half_width, size.y))
 			var mp_img_left = MediaPipeImage.new()
 			mp_img_left.set_image(img_left)
 			var res_left = task.detect(mp_img_left)
 			
-			# --- Détection JOUEUR 2 (Droite) ---
+			# Détection JOUEUR 2 (Droite)
 			var img_right = full_img.get_region(Rect2i(half_width, 0, half_width, size.y))
 			var mp_img_right = MediaPipeImage.new()
 			mp_img_right.set_image(img_right)
@@ -300,6 +294,9 @@ func _thread_mediapipe():
 					output_image = combined_out
 					time_display = (Time.get_ticks_usec()-start_combining)/1000.0
 					mutex.unlock()
+				else :
+					time_render = 0
+					time_display = 0
 				
 				mutex.lock()
 				result_mediapipe = {"left": res_left, "right": res_right}
@@ -307,7 +304,6 @@ func _thread_mediapipe():
 
 func _process(_delta):
 	camera_fps = Engine.get_frames_per_second()
-	
 	sub_viewport_container.visible = Global.is_camera_visible
 	debug_view.visible = Global.is_camera_visible
 	is_debug_visible = debug_view.visible
@@ -359,9 +355,6 @@ func _process(_delta):
 func _process_half_body(pose_landmarks, player_index: int):
 	var lm = pose_landmarks.landmarks
 	
-	# Fonction pour corriger le X
-	# Si c'est le côté droit, le X global = (X_local / 2) + 0.5
-	# Si c'est le côté gauche, le X global = (X_local / 2)
 	# Calcul des vecteurs (on utilise le fix_x pour les coordonnées)
 	var wrist_r := Vector3(lm[15].x, lm[15].y, lm[15].z)
 	var elbow_r := Vector3(lm[13].x, lm[13].y, lm[13].z)
