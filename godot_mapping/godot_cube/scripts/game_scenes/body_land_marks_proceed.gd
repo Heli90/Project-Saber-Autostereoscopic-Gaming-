@@ -33,6 +33,7 @@ var is_debug_visible : bool = false
 @onready var viewport = $SubViewportContainer/CameraViewport
 @onready var texture_rect = $SubViewportContainer/CameraViewport/TestAffichage
 @onready var debug_view = $CanvasLayer/DebugOverlay # Un TextureRect pour voir le résultat
+@onready var calibration_overlay: TextureRect = $CalibrationLayer/CalibrationOverlay
 @onready var confirmation_dialog: ConfirmationDialog = $SelectCamera
 @onready var selected_feed: OptionButton = $SelectCamera/VBoxContainer/HBoxContainer/SelectedFeed
 @onready var selected_format: OptionButton = $SelectCamera/VBoxContainer/SelectedFormat
@@ -44,6 +45,8 @@ func _ready():
 	_setup_camera_selection()
 	_setup_camera_permissions()
 	viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+	if calibration_overlay:
+		calibration_overlay.draw.connect(_on_calibration_overlay_draw)
 
 func _setup_mediapipe():
 	# Récupère le modèle pose_landmarker.task et l'initialise
@@ -192,6 +195,60 @@ func update_debug_overlay(image: Image) -> void:
 		else:
 			debug_view.texture.set_image(image)
 
+func _on_calibration_overlay_draw() -> void:
+	if not calibration_overlay:
+		return
+		
+	var view_size = calibration_overlay.size
+	var half_width = view_size.x / 2.0
+	
+	# --- COULEURS ET ÉPAISSEURS ---
+	var color_j1 = Color(1.0, 0.0, 0.0, 0.8) # Vert semi-transparent
+	var color_j2 = Color(0.0, 0.8, 1.0, 0.8) # Cyan/Bleu semi-transparent
+	var line_thickness = 5.0
+	var dash = 2.0
+	
+	# --- DESSIN JOUEUR 1 (Gauche) ---
+	var j1_mid_x = Global.midx1 * half_width
+	var j1_mid_y = Global.midy1 * view_size.y
+	
+	# Ligne verticale (midx1)
+	calibration_overlay.draw_dashed_line(
+		Vector2(j1_mid_x, 0), 
+		Vector2(j1_mid_x, view_size.y), 
+		color_j1, line_thickness,dash
+	)
+	# Ligne horizontale (midy1)
+	calibration_overlay.draw_dashed_line(
+		Vector2(0, j1_mid_y), 
+		Vector2(half_width, j1_mid_y), 
+		color_j1, line_thickness,dash
+	)
+	
+	# --- DESSIN JOUEUR 2 (Droite) ---
+	var j2_mid_x = half_width + (Global.midx2 * half_width)
+	var j2_mid_y = Global.midy2 * view_size.y
+	
+	# Ligne verticale (midx2)
+	calibration_overlay.draw_dashed_line(
+		Vector2(j2_mid_x, 0), 
+		Vector2(j2_mid_x, view_size.y), 
+		color_j2, line_thickness,dash
+	)
+	# Ligne horizontale (midy2)
+	calibration_overlay.draw_dashed_line(
+		Vector2(half_width, j2_mid_y), 
+		Vector2(view_size.x, j2_mid_y), 
+		color_j2, line_thickness,dash
+	)
+	
+	# --- SÉPARATION CENTRALE ---
+	calibration_overlay.draw_line(
+		Vector2(half_width, 0), 
+		Vector2(half_width, view_size.y), 
+		Color.WHITE, 1.5
+	)
+
 func _thread_mediapipe():
 	_setup_mediapipe()
 	
@@ -252,7 +309,10 @@ func _process(_delta):
 	camera_fps = Engine.get_frames_per_second()
 	
 	sub_viewport_container.visible = Global.is_camera_visible
+	debug_view.visible = Global.is_camera_visible
 	is_debug_visible = debug_view.visible
+	if calibration_overlay:
+		calibration_overlay.visible = Global.is_camera_visible
 	
 	# Récupération et affichage de l'image de rendu MediaPipe
 	var out_img = null
@@ -292,6 +352,9 @@ func _process(_delta):
 		# Traitement DROIT (Joueur 2)
 		if results.right and results.right.pose_landmarks.size() > 0:
 			_process_half_body(results.right.pose_landmarks[0], 2)
+	
+	if calibration_overlay and calibration_overlay.visible:
+		calibration_overlay.queue_redraw()
 
 func _process_half_body(pose_landmarks, player_index: int):
 	var lm = pose_landmarks.landmarks
