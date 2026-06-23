@@ -294,6 +294,9 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 - Retrait des collisions entre les cubes pour faciliter la création du niveau et avoir un niveau plus dynamique
 - Mode à 1 joueur implémenté où les cubes de l'autre joueur sont automatiquement détruits et / ou renvoyés
 - Création du niveau de test et mise à jour du timer associé (première version finie à 100%)
+- Retrait de la difficulté
+- Ajout d'une mécanique de gameplay sur l'apparition des cubes classiques lorsqu'on frappe des cubes non classiques
+- Séparation de l'effet de nausée pour chaque joueur
 
 **Birame :**
 - Ajout de réticules sur la caméra affiché en jeu pour faciliter la calibration et la prise en main du jeu.
