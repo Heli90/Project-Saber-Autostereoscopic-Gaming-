@@ -284,7 +284,16 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 - Page de calibration ajoutée dans les paramètres du jeu
 - Création du niveau de test (33% effectués à la fin de la séance)
 
+
+**Birame :**
+- Ajout d'un menu *Calibration* dans le jeu pour pouvoir régler l'amplitude du mouvement des sabres et pouvoir décider de la position de base de chaque joueur.
+- Ajout de quelques questions dans le Google Forms (test utilisateurs).
+
 #### Séance 17 - Mardi 23/06
 **Van-Kévin :**
 - Retrait des collisions entre les cubes pour faciliter la création du niveau et avoir un niveau plus dynamique
 - Mode à 1 joueur implémenté où les cubes de l'autre joueur sont automatiquement détruits et / ou renvoyés
+  
+
+**Birame :**
+- Ajout de réticules sur la caméra affiché en jeu pour faciliter la calibration et la prise en main du jeu.
