@@ -807,7 +807,7 @@ script = ExtResource("1_fu8w0")
 environment = SubResource("Environment_n65sj")
 
 [node name="PartieTimer" type="Timer" parent="." unique_id=1292462759]
-wait_time = 600.0
+wait_time = 95.0
 one_shot = true
 ignore_time_scale = true
 

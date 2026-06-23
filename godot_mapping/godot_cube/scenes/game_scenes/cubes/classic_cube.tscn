@@ -49,6 +49,7 @@ albedo_color = Color(0.2627451, 0.5921569, 0.3647059, 1)
 [sub_resource type="BoxShape3D" id="BoxShape3D_p5g2x"]
 
 [node name="ClassicCube" type="StaticBody3D" unique_id=2049622243]
+collision_mask = 2
 script = ExtResource("1_kgufc")
 particles_vfx = ExtResource("2_qgqip")
 
