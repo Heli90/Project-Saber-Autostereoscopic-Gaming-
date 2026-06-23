@@ -245,7 +245,7 @@ func _onBackCalButtonExit() -> void:
 	Global.is_camera_visible = false
 	Global.ButtonExit(cal_back_button, cal_back_scale, false, sign_cal_back, sign_cal_back_scale)
 	
-# Valeur de l'étirement maximal des sabres sur l'écran
+# Valeurs de l'étirement maximal des sabres sur l'écran
 func _onAlpha1Changed(value: float) -> void:
 	Global.alpha1 = value
 

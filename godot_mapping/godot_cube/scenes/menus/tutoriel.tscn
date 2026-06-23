@@ -347,9 +347,9 @@ vertical_alignment = 1
 [node name="DifficultySlider" type="HSlider" parent="Modes" unique_id=1369382338]
 layout_mode = 0
 offset_left = 80.0
-offset_top = 950.0
+offset_top = 980.0
 offset_right = 200.0
-offset_bottom = 981.0
+offset_bottom = 1011.0
 theme_override_styles/slider = SubResource("StyleBoxLine_1mkbs")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_cshns")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_8jpt8")
@@ -359,9 +359,9 @@ value = 1.0
 [node name="DifficultyLabel" type="Label" parent="Modes" unique_id=1627231384]
 layout_mode = 0
 offset_left = 260.0
-offset_top = 950.0
+offset_top = 980.0
 offset_right = 395.0
-offset_bottom = 981.0
+offset_bottom = 1011.0
 theme_override_fonts/font = ExtResource("5_phf8o")
 theme_override_font_sizes/font_size = 30
 text = "Difficulty"
@@ -369,19 +369,20 @@ text = "Difficulty"
 [node name="TwoPlayerModeLabel" type="Label" parent="Modes" unique_id=1043108254]
 layout_mode = 0
 offset_left = 250.0
-offset_top = 895.0
+offset_top = 920.0
 offset_right = 494.0
-offset_bottom = 926.0
+offset_bottom = 951.0
 theme_override_fonts/font = ExtResource("5_phf8o")
 theme_override_font_sizes/font_size = 30
 text = "Two Player Mode"
+horizontal_alignment = 1
 
 [node name="CheckButton" type="CheckButton" parent="Modes" unique_id=1665008349]
 layout_mode = 0
 offset_left = 98.0
-offset_top = 896.99994
+offset_top = 920.0
 offset_right = 130.0
-offset_bottom = 912.99994
+offset_bottom = 936.0
 scale = Vector2(2.5, 2.5)
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ngtwu")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_vismm")

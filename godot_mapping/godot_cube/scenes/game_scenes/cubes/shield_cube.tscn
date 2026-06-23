@@ -56,6 +56,7 @@ metallic = 0.8
 roughness = 0.1
 
 [node name="ShieldCube" type="StaticBody3D" unique_id=1892674347]
+collision_mask = 2
 script = ExtResource("1_uyaws")
 particles_vfx = ExtResource("2_76vu0")
 

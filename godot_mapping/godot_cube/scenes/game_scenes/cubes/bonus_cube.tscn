@@ -60,6 +60,7 @@ albedo_color = Color(2.3884127, 2.421651, 4.415934, 1)
 metallic = 0.3
 
 [node name="BonusCube" type="StaticBody3D" unique_id=1740089336]
+collision_mask = 2
 script = ExtResource("1_0jcwg")
 particles_vfx = ExtResource("2_uqml0")
 

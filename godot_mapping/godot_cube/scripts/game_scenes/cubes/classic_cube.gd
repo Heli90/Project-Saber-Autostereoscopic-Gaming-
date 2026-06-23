@@ -62,8 +62,10 @@ func _physics_process(delta: float) -> void:
 		emit_signal("missed_cube_j1")
 		queue_free()
 	elif position.z < -20.0:
-		emit_signal("missed_cube_j2")
-		queue_free()
+		if Global.two_player_mode:
+			emit_signal("missed_cube_j2")
+			queue_free()
+		else: collision()
 	
 	if spin:
 		elapsed_time_since_spin += delta

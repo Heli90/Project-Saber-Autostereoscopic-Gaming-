@@ -62,6 +62,7 @@ near = 0.01
 
 [node name="LeftSaber" type="Area3D" parent="." unique_id=265445266]
 transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, -1, 0.5, -2)
+collision_layer = 2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="LeftSaber" unique_id=1055556400]
 mesh = SubResource("CapsuleMesh_m2kkv")
@@ -76,6 +77,7 @@ mesh = SubResource("CylinderMesh_ks3j3")
 
 [node name="RightSaber" type="Area3D" parent="." unique_id=1964180286]
 transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 1, 0.5, -2)
+collision_layer = 2
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RightSaber" unique_id=147536879]
 mesh = SubResource("CapsuleMesh_ks3j3")

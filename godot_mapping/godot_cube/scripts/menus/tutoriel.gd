@@ -25,6 +25,10 @@ var array_label: Array[Label]
 # Tutoriel : 0 / Jeu : 1 / Foire aux effets : 2
 var printed_cassette: int = 0
 
+# Flèches servant à changer de cassette
+@onready var left_arrows: TextureButton = $SelectLevel/LeftArrows
+@onready var right_arrows: TextureButton = $SelectLevel/RightArrows
+
 @onready var sign_start: Sprite2D = $Start/SignStart
 @onready var start_button: Button = $Start/StartButton
 var start_scale: Vector2
@@ -209,8 +213,17 @@ func _onBackButton_pressed() -> void:
 	fondu_noir.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
-func _onLeftArrows_pressed() -> void: onArrows_pressed(0)
-func _onRightArrows_pressed() -> void: onArrows_pressed(1)
+func _onLeftArrows_pressed() -> void:
+	left_arrows.disabled = true
+	onArrows_pressed(0)
+	await get_tree().create_timer(0.25).timeout
+	left_arrows.disabled = false
+
+func _onRightArrows_pressed() -> void:
+	right_arrows.disabled = true
+	onArrows_pressed(1)
+	await get_tree().create_timer(0.25).timeout
+	right_arrows.disabled = false
 
 func get_new_pos(node: Node, pos: Vector2) -> Vector2:
 	return node.position + pos
@@ -320,7 +333,6 @@ func _onValueChanged(value: float) -> void:
 		0.0: Global.difficulty = 0
 		1.0: Global.difficulty = 1
 		2.0: Global.difficulty = 2
-
 
 func _onTwoPlayerModePressed(toggled_on: bool) -> void:
 	Global.two_player_mode = toggled_on
