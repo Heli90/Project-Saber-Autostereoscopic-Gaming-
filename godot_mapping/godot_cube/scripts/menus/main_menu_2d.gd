@@ -4,7 +4,7 @@ extends Control
 @onready var main_buttons: Panel = $MainButtons
 @onready var options: Panel = $Options
 @onready var credits: Panel = $Credits
-@onready var calibration: Panel = $Calibration
+@onready var calibration: Panel = $CalibrationSaber
 @onready var game_name: Label = $GameName
 @onready var fondu_noir: ColorRect = $FonduLayer/FonduNoir
 
@@ -48,8 +48,8 @@ var sign_change_scale: Vector2
 var cal_change_scale: Vector2
 var sign_cal_change_scale: Vector2
 
-@onready var sign_cal_back: Sprite2D = $Calibration/SignBack
-@onready var cal_back_button: Button = $Calibration/BackButton
+@onready var sign_cal_back: Sprite2D = $CalibrationSaber/SignBack
+@onready var cal_back_button: Button = $CalibrationSaber/BackButton
 var cal_back_scale: Vector2
 var sign_cal_back_scale: Vector2
 
