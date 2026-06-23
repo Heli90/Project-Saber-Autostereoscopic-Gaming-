@@ -35,12 +35,26 @@ uniform float rainbow_angle: hint_range(0., 360.) = 0.;
 uniform bool nausea_screen = false;
 uniform float nausea_strength: hint_range(0., 0.05) = 0.01;
 uniform float nausea_speed: hint_range(0., 5.) = 1.0;
+uniform bool nausea_mask[8];
 // 7. Effet de vignette
 uniform bool vignette_screen = false;
 uniform float vignette_strength: hint_range(0., 1.) = 0.5;
+uniform bool vignette_mask[8];
+
+vec2 nausea_texture(vec2 uv){
+	float a = sin(uv.y * 8.0 + TIME * nausea_speed) * nausea_strength;
+	float b = cos(uv.x * 6.0 + TIME * nausea_speed * 0.7) * nausea_strength;
+	return uv + vec2(a,b);
+}
 
 // Fonction utilitaire pour récupérer la couleur du bon point de vue
-float get_subpixel_color(int view_index, vec2 uv, int channel) {
+float get_subpixel_color(int view_index, vec2 init_uv, int channel) {
+	vec2 uv = init_uv;
+	// On applique les effets associés aux UV au tout début
+	if (nausea_screen && nausea_mask[view_index]) {
+		uv = nausea_texture(init_uv);
+	}
+	
 	// On applique la pixelisation dès le départ sur les vues concernées
     if (pixelisation && pixelisation_mask[view_index]) {
         uv = floor(uv * vec2(pixelisationPower)) / pixelisationPower;
@@ -91,12 +105,6 @@ vec4 rainbow_texture(vec2 uv) {
     return vec4(rainbow, 1.0);
 }
 
-vec2 nausea_texture(vec2 uv){
-	float a = sin(uv.y * 8.0 + TIME * nausea_speed) * nausea_strength;
-	float b = cos(uv.x * 6.0 + TIME * nausea_speed * 0.7) * nausea_strength;
-	return uv + vec2(a,b);
-}
-
 vec3 vignette_texture(vec2 uv, vec4 original_color, bool color){
 	vec2 centered = uv - vec2(0.5);
     float dist = length(centered);
@@ -115,7 +123,6 @@ void fragment() {
     int view_b = ((3 * x + 2 + decalage * y) % N + N) % N;
 	
 	vec2 uv = UV;
-	if (nausea_screen){uv = nausea_texture(uv);}
     float r = get_subpixel_color(view_r, uv+vec2(offset,0), 0);
     float g = get_subpixel_color(view_g, uv-vec2(offset,0), 1);
     float b = get_subpixel_color(view_b, uv+vec2(0,offset), 2);

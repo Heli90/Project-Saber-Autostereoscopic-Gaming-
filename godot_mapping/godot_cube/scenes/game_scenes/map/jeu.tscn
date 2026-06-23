@@ -877,6 +877,7 @@ offset_bottom = 240.0
 [node name="CalibrationLayer" type="CanvasLayer" parent="LandMarksProceed" unique_id=1822275941]
 
 [node name="CalibrationOverlay" type="TextureRect" parent="LandMarksProceed/CalibrationLayer" unique_id=1654114293]
+visible = false
 offset_left = 810.0
 offset_right = 1130.0
 offset_bottom = 240.0

@@ -54,8 +54,10 @@ shader_parameter/rainbow_angle = 0.0
 shader_parameter/nausea_screen = false
 shader_parameter/nausea_strength = 0.01
 shader_parameter/nausea_speed = 1.0
+shader_parameter/nausea_mask = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/vignette_screen = false
 shader_parameter/vignette_strength = 0.5
+shader_parameter/vignette_mask = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0)
 
 [sub_resource type="Gradient" id="Gradient_sgwr3"]
 

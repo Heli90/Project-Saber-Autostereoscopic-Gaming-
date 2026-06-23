@@ -328,11 +328,5 @@ func _onHealMouseEnter() -> void:
 func _onHealMouseExit() -> void:
 	Global.ButtonExit(heal_mode_button, heal_scale, true)
 
-func _onValueChanged(value: float) -> void:
-	match value:
-		0.0: Global.difficulty = 0
-		1.0: Global.difficulty = 1
-		2.0: Global.difficulty = 2
-
 func _onTwoPlayerModePressed(toggled_on: bool) -> void:
 	Global.two_player_mode = toggled_on
