@@ -146,3 +146,10 @@ Lancer le dossier godot_mapping/godot_cube dans **Godot 4.6**.
 ## Collaborateurs
 Projet développé par Hugo BELLE, Birame CISSÉ, Hélias GODARD--DELONGEAS, Adam KHATIRI, Van-Kévin NGUYEN.
 Projet encadré par Jean LEFEUVRE.
+
+
+
+### Projet Open source
+
+## Matériel
+Dans le cadre de ce projet nous nous sommes servis d'un écran autostéréoscopique. Il s'agit d'un écran avec un réseau de lentilles devant chaque pixel afin de pouvoir avoir un effet 3D sans lunettes.
