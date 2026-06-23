@@ -27,6 +27,14 @@ var beta1 : float = 3.0
 var beta2 : float = 3.0
 var midy1 : float = 0.3
 var midy2 : float = 0.3
+var c1_1_x : float = 0.7
+var c2_1_x : float = 0.7
+var c1_2_x : float = 0.7
+var c2_2_x : float = 0.7
+var c1_1_y : float = 0.6
+var c2_1_y : float = 0.91
+var c1_2_y : float = 0.6
+var c2_2_y : float = 0.91
 
 
 func _ready() -> void:
@@ -43,6 +51,18 @@ func _ready() -> void:
 	midx2 = Global.midx2
 	midy1 = Global.midy1
 	midy2 = Global.midy2
+	var tx1 = alpha_mid_to_c1_c2(alpha1,midx1)
+	c1_1_x = tx1[0]
+	c2_1_x = tx1[1]
+	var tx2 = alpha_mid_to_c1_c2(alpha2,midx2)
+	c1_2_x = tx2[0]
+	c2_2_x = tx2[1]
+	var ty1 = alpha_mid_to_c1_c2(beta1,midy1)
+	c1_1_y = ty1[0]
+	c2_1_y = ty1[1]
+	var ty2 = alpha_mid_to_c1_c2(beta2,midy2)
+	c1_2_y = ty2[0]
+	c2_2_y = ty2[1]
 	
 	if not landmarks:
 		landmarks = get_node("../Game/LandMarksProceed")
@@ -63,10 +83,13 @@ func apply_blue_shader():
 func collision(body: Node3D) -> void:
 	if body.is_in_group("cube"): body.collision()
 
-func transform_data(f : float, alpha : float, mid : float) -> float :
-	f = clampf(f,0.0,1.0)
+func alpha_mid_to_c1_c2(alpha : float, mid : float):
 	var c1 = 0.5*pow(1.0-mid, -1.0/alpha)
 	var c2 = 0.5*pow(mid, -1.0/alpha)
+	return [c1,c2]
+
+func transform_data(f : float, alpha : float, mid : float, c1 : float, c2 : float) -> float :
+	f = clampf(f,0.0,1.0)
 	if f < mid :
 		return 0.5 - c2*pow(mid-f,1.0/alpha)
 	else :
@@ -76,14 +99,46 @@ func _physics_process(_delta: float) -> void:
 	if not landmarks or landmarks.hand_data.is_empty(): return
 	
 	# Mise à jour du facteur d'amplication des mouvements
-	if alpha1 != Global.alpha1: alpha1 = Global.alpha1
-	if alpha2 != Global.alpha2: alpha2 = Global.alpha2
-	if beta1 != Global.beta1: beta1 = Global.beta1
-	if beta2 != Global.beta2: beta2 = Global.beta2
-	if midx1 != Global.midx1: midx1 = Global.midx1
-	if midx2 != Global.midx2: midx2 = Global.midx2
-	if midy1 != Global.midy1: midy1 = Global.midy1
-	if midy2 != Global.midy2: midy2 = Global.midy2
+	if alpha1 != Global.alpha1:
+		alpha1 = Global.alpha1
+		var tx1 = alpha_mid_to_c1_c2(alpha1,midx1)
+		c1_1_x = tx1[0]
+		c2_1_x = tx1[1]
+	if alpha2 != Global.alpha2:
+		alpha2 = Global.alpha2
+		var tx2 = alpha_mid_to_c1_c2(alpha2,midx2)
+		c1_2_x = tx2[0]
+		c2_2_x = tx2[1]
+	if beta1 != Global.beta1: 
+		beta1 = Global.beta1
+		var ty1 = alpha_mid_to_c1_c2(beta1,midy1)
+		c1_1_y = ty1[0]
+		c2_1_y = ty1[1]
+	if beta2 != Global.beta2: 
+		beta2 = Global.beta2
+		var ty2 = alpha_mid_to_c1_c2(beta2,midy2)
+		c1_2_y = ty2[0]
+		c2_2_y = ty2[1]
+	if midx1 != Global.midx1: 
+		midx1 = Global.midx1
+		var tx1 = alpha_mid_to_c1_c2(alpha1,midx1)
+		c1_1_x = tx1[0]
+		c2_1_x = tx1[1]
+	if midx2 != Global.midx2:
+		midx2 = Global.midx2
+		var tx2 = alpha_mid_to_c1_c2(alpha2,midx2)
+		c1_2_x = tx2[0]
+		c2_2_x = tx2[1]
+	if midy1 != Global.midy1:
+		midy1 = Global.midy1
+		var ty1 = alpha_mid_to_c1_c2(beta1,midy1)
+		c1_1_y = ty1[0]
+		c2_1_y = ty1[1]
+	if midy2 != Global.midy2:
+		midy2 = Global.midy2
+		var ty2 = alpha_mid_to_c1_c2(beta2,midy2)
+		c1_2_y = ty2[0]
+		c2_2_y = ty2[1]
 	
 	for data in landmarks.hand_data:
 		if data["index"] == player_id :
@@ -97,11 +152,11 @@ func _physics_process(_delta: float) -> void:
 			var local_x : float = 0.0
 			var local_y : float = 0.0
 			if player_id == 1:
-				local_x = transform_data(data["x"],alpha1,midx1)
-				local_y = transform_data(data["y"], beta1, midy1)
+				local_x = transform_data(data["x"],alpha1,midx1,c1_1_x,c2_1_x)
+				local_y = transform_data(data["y"], beta1, midy1,c1_1_y,c2_1_y)
 			else :
-				local_x = transform_data(data["x"],alpha2,midx2)
-				local_y = transform_data(data["y"], beta2, midy2)
+				local_x = transform_data(data["x"],alpha2,midx2,c1_2_x,c2_2_x)
+				local_y = transform_data(data["y"], beta2, midy2,c1_2_y,c2_2_y)
 			
 			var pos_x : float = lerp(-saber_range_x, saber_range_x, local_x)
 			var pos_y : float = lerp(saber_y_max, saber_y_min, local_y)
