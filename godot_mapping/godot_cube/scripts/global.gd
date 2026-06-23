@@ -36,10 +36,10 @@ var alpha1: float = 2.0
 var alpha2 : float = 2.0
 var midx1 : float = 0.5
 var midx2 : float = 0.5
-var beta1 : float = 3.0
-var beta2 : float = 3.0
-var midy1 : float = 0.3
-var midy2 : float = 0.3
+var beta1 : float = 2.0
+var beta2 : float = 2.0
+var midy1 : float = 0.4
+var midy2 : float = 0.4
 var is_camera_visible : bool = false
 var two_player_mode : bool = true
 

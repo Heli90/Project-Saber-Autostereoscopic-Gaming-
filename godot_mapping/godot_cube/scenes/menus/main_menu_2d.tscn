@@ -679,7 +679,7 @@ theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_sfpvq")
 min_value = 0.1
 max_value = 0.9
 step = 0.1
-value = 0.30000000000000004
+value = 0.4
 
 [node name="AlphaTitleJ2" type="Label" parent="CalibrationSaber" unique_id=1776945203]
 layout_mode = 0
@@ -780,7 +780,7 @@ theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_sfpvq")
 min_value = 0.1
 max_value = 0.9
 step = 0.1
-value = 0.30000000000000004
+value = 0.4
 
 [node name="SignBack" type="Sprite2D" parent="CalibrationSaber" unique_id=955079048]
 position = Vector2(397.5, 710.5)

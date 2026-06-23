@@ -19,22 +19,22 @@ var saber_y_min : float = 0.0
 var saber_y_max : float = 3.0
 
 # Facteur d'amplification des mouvements vers les bords extrémaux
-var alpha1 : float = 2.0
-var alpha2 : float = 2.0
-var midx1 : float = 0.5
-var midx2 : float = 0.5
-var beta1 : float = 3.0
-var beta2 : float = 3.0
-var midy1 : float = 0.3
-var midy2 : float = 0.3
-var c1_1_x : float = 0.7
-var c2_1_x : float = 0.7
-var c1_2_x : float = 0.7
-var c2_2_x : float = 0.7
-var c1_1_y : float = 0.6
-var c2_1_y : float = 0.91
-var c1_2_y : float = 0.6
-var c2_2_y : float = 0.91
+var alpha1 : float
+var alpha2 : float
+var midx1 : float
+var midx2 : float
+var beta1 : float
+var beta2 : float
+var midy1 : float
+var midy2 : float
+var c1_1_x : float
+var c2_1_x : float
+var c1_2_x : float
+var c2_2_x : float
+var c1_1_y : float
+var c2_1_y : float
+var c1_2_y : float
+var c2_2_y : float
 
 
 func _ready() -> void:
