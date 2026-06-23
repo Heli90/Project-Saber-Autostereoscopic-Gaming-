@@ -27,6 +27,10 @@ var ink_small_texture_list : Array = []
 # L'ordre est le suivant : la caméra 1 de chaque joueur, puis la caméra 2 de chaque joueur
 var array_cam = [-0.03, -0.03, 0.03, 0.03]
 
+# Table associée à la distance du point de convergence pour chaque caméra
+# Même ordre que ci-dessus
+var array_convergence = [2.2,2.8, 0.7, 1.5]
+
 # Variables associées à l'amplitude des bras de chaque joueur
 var alpha1: float = 2.0
 var alpha2 : float = 2.0
@@ -76,3 +80,18 @@ func ButtonExit(button, button_scale: Vector2, life: bool = false, sign_sprite: 
 	out.set_parallel(true)
 	out.tween_property(button, "scale", button_scale, SCALE_DURATION)
 	if sign_sprite: out.tween_property(sign_sprite, "scale", sign_scale, SCALE_DURATION)
+
+# Paramètres pour la convergence
+func update_frustum(cam:Camera3D, eye_offset:float, convergence:float)-> void:
+	cam.near = 0.5
+	cam.far = 1000
+	cam.fov = 90.0
+	cam.projection = Camera3D.PROJECTION_FRUSTUM
+	cam.frustum_offset = Vector2(eye_offset * cam.near/ convergence, 0.0)
+	print("Valeur de la convergence pour le joueur 1 : ")
+	print(Global.array_convergence[0])
+	print(Global.array_convergence[1])
+	print("Valeur de la convergence pour le joueur 2 : ")
+	print(Global.array_convergence[2])
+	print(Global.array_convergence[3])
+	

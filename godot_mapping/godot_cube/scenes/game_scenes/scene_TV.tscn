@@ -55,9 +55,7 @@ shader_parameter/nausea_screen = false
 shader_parameter/nausea_strength = 0.01
 shader_parameter/nausea_speed = 1.0
 shader_parameter/vignette_screen = false
-shader_parameter/with_color = false
 shader_parameter/vignette_strength = 0.5
-shader_parameter/vignette_color = Color(1, 0, 0, 1)
 
 [sub_resource type="Gradient" id="Gradient_sgwr3"]
 
@@ -549,6 +547,9 @@ theme_override_fonts/font = ExtResource("12_af46e")
 theme_override_font_sizes/font_size = 195
 text = "D"
 horizontal_alignment = 1
+
+[node name="LeftGrip" parent="J1/LeftSaber" parent_id_path=PackedInt32Array(1529862946, 265445266) index="2" unique_id=684452874]
+transform = Transform3D(1, 0, 0, 0, 1.0000002, 0, 0, 0, 1.0000002, 0.003000021, -0.8000002, -0.0049991608)
 
 [node name="J2" parent="." unique_id=890448322 instance=ExtResource("2_rfm68")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1, -20)

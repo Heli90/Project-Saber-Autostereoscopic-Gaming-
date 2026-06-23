@@ -17,42 +17,6 @@ emission_energy_multiplier = 0.5
 [sub_resource type="BoxShape3D" id="BoxShape3D_ilgu7"]
 size = Vector3(8, 0.1, 120)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_p2xd7"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pfr5t"]
-albedo_color = Color(0, 0, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_bx7xn"]
-size = Vector3(0.1, 6, 120)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4mrpf"]
-transparency = 1
-albedo_color = Color(0.050980393, 0.019607844, 0.2, 0.6)
-metallic = 0.9
-emission_enabled = true
-emission = Color(0.3019608, 0, 1, 1)
-emission_energy_multiplier = 1.5
-
-[sub_resource type="BoxMesh" id="BoxMesh_5ncjs"]
-size = Vector3(0.1, 6, 120)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_del27"]
-transparency = 1
-albedo_color = Color(0.050980393, 0.019607844, 0.2, 0.6)
-metallic = 0.9
-emission_enabled = true
-emission = Color(1, 0, 0.3019608, 1)
-emission_energy_multiplier = 1.5
-
-[sub_resource type="BoxMesh" id="BoxMesh_7l6si"]
-size = Vector3(8, 0.1, 120)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_moef4"]
-transparency = 1
-albedo_color = Color(0.019607844, 0.019607844, 0.101960786, 0.4)
-metallic = 0.7
-roughness = 0.1
-
 [sub_resource type="BoxMesh" id="BoxMesh_1e7bp"]
 size = Vector3(0.02, 0.02, 120)
 
@@ -80,28 +44,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_bfjfw")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Sol" unique_id=788013682]
 shape = SubResource("BoxShape3D_ilgu7")
-
-[node name="Murs" type="Node3D" parent="." unique_id=1259628369]
-
-[node name="MurNoir" type="MeshInstance3D" parent="Murs" unique_id=1753856730]
-transform = Transform3D(10, 0, 0, 0, -4.371139e-07, -10, 0, 10, -4.371139e-07, 100, 8.854675, 0)
-mesh = SubResource("PlaneMesh_p2xd7")
-surface_material_override/0 = SubResource("StandardMaterial3D_pfr5t")
-
-[node name="MurGauche" type="MeshInstance3D" parent="Murs" unique_id=1076237406]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.5, 0)
-mesh = SubResource("BoxMesh_bx7xn")
-surface_material_override/0 = SubResource("StandardMaterial3D_4mrpf")
-
-[node name="MurDroit" type="MeshInstance3D" parent="Murs" unique_id=2126351591]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 2.5, 0)
-mesh = SubResource("BoxMesh_5ncjs")
-surface_material_override/0 = SubResource("StandardMaterial3D_del27")
-
-[node name="Plafond" type="MeshInstance3D" parent="Murs" unique_id=1797979418]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.5, 0)
-mesh = SubResource("BoxMesh_7l6si")
-surface_material_override/0 = SubResource("StandardMaterial3D_moef4")
 
 [node name="Rails" type="Node3D" parent="." unique_id=761947765]
 

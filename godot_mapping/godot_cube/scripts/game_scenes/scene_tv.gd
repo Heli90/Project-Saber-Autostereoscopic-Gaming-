@@ -12,6 +12,13 @@ extends Node3D
 @onready var remote2_j2: RemoteTransform3D = $J2/CameraController/RemoteVue6
 var array_cam: Array[RemoteTransform3D]
 
+@onready var cam_vue1: Camera3D = $J1/CameraController/Vue1/Camera
+@onready var cam_vue2: Camera3D = $J1/CameraController/Vue2/Camera
+@onready var cam_vue5: Camera3D = $J2/CameraController/Vue5/Camera
+@onready var cam_vue6: Camera3D = $J2/CameraController/Vue6/Camera
+var array_real_cam: Array[Camera3D]
+
+
 @onready var label_fps: Label = $TechnicalInfos/FPS
 @onready var label_cpu = $TechnicalInfos/CPU
 @onready var label_gpu = $TechnicalInfos/GPU
@@ -35,7 +42,10 @@ func _ready() -> void:
 	
 	# Définition de la liste des caméras et des positions initiales
 	array_cam = [remote1_j1, remote1_j2, remote2_j1, remote2_j2]
-	for i in range(4): array_cam[i].position.x = Global.array_cam[i]
+	array_real_cam = [cam_vue1, cam_vue2, cam_vue5, cam_vue6]
+	for i in range(4): 
+		array_cam[i].position.x = Global.array_cam[i]
+		Global.update_frustum(array_real_cam[i], array_cam[i].position.x, Global.array_convergence[i])
 	
 	var shader_mat = screen_output.material as ShaderMaterial
 	# On configure chaque vue
@@ -100,15 +110,23 @@ func _physics_process(_delta: float) -> void:
 	if Input.is_action_just_pressed("BringCloserCamJ1"):
 		remote1_j1.position.x += step
 		remote2_j1.position.x -= step
+		Global.update_frustum(array_real_cam[0], array_cam[0].position.x, Global.array_convergence[0])
+		Global.update_frustum(array_real_cam[1], array_cam[1].position.x, Global.array_convergence[1])
 	elif Input.is_action_just_pressed("MoveAwayCamJ1"):
 		remote1_j1.position.x -= step
 		remote2_j1.position.x += step
+		Global.update_frustum(array_real_cam[0], array_cam[0].position.x, Global.array_convergence[0])
+		Global.update_frustum(array_real_cam[1], array_cam[1].position.x, Global.array_convergence[1])
 	elif Input.is_action_just_pressed("BringCloserCamJ2"):
 		remote1_j2.position.x += step
 		remote2_j2.position.x -= step
+		Global.update_frustum(array_real_cam[2], array_cam[2].position.x, Global.array_convergence[2])
+		Global.update_frustum(array_real_cam[3], array_cam[3].position.x, Global.array_convergence[3])
 	elif Input.is_action_just_pressed("MoveAwayCamJ2"):
 		remote1_j2.position.x -= step
 		remote2_j2.position.x += step
+		Global.update_frustum(array_real_cam[2], array_cam[2].position.x, Global.array_convergence[2])
+		Global.update_frustum(array_real_cam[3], array_cam[3].position.x, Global.array_convergence[3])
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("StopGame"):
@@ -130,3 +148,29 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("resetPixelisation"):
 		screen_output.material.set_shader_parameter("pixelisation", false)
 		screen_output.material.set_shader_parameter("pixelisationPower", 200.0)
+	var convergence_step = 0.1
+	 # Pour contrôler le décalage de la distance de convergence
+	if event.is_action_pressed("increaseConv1"):
+		Global.array_convergence[0] += convergence_step
+		Global.array_convergence[1] += convergence_step
+		Global.update_frustum(array_real_cam[0], array_cam[0].position.x, Global.array_convergence[0])
+		Global.update_frustum(array_real_cam[1], array_cam[1].position.x, Global.array_convergence[1])
+	if event.is_action_pressed("increaseConv2"):
+		Global.array_convergence[2] += convergence_step
+		Global.array_convergence[3] += convergence_step
+		Global.update_frustum(array_real_cam[2], array_cam[2].position.x, Global.array_convergence[2])
+		Global.update_frustum(array_real_cam[3], array_cam[3].position.x, Global.array_convergence[3])
+	if event.is_action_pressed("decreaseConv1"):
+		Global.array_convergence[0] -= convergence_step
+		Global.array_convergence[1] -= convergence_step
+		Global.update_frustum(array_real_cam[0], array_cam[0].position.x, Global.array_convergence[0])
+		Global.update_frustum(array_real_cam[1], array_cam[1].position.x, Global.array_convergence[1])
+	if event.is_action_pressed("decreaseConv2"):
+		Global.array_convergence[2] -= convergence_step
+		Global.array_convergence[3] -= convergence_step
+		Global.update_frustum(array_real_cam[2], array_cam[2].position.x, Global.array_convergence[2])
+		Global.update_frustum(array_real_cam[3], array_cam[3].position.x, Global.array_convergence[3])
+	
+	
+	
+	
