@@ -170,6 +170,9 @@ NB 2:
 Mediapipe ne peut reconnaitre qu'une personne sur une image, la solution que nous avons mis en place est de divisé l'image envoyée par le flux video en 2 (les parties gauche et droite sont 2 images différentes) pour que les 2 images soient traitées séparement afin d'avoir plusieurs joueurs dont on détecte les mouvements.
 
 
+## Moteur de jeu
+
+Le jeu à été développer sur Godot_v4.6.1-stable_win64.
 
 
 
