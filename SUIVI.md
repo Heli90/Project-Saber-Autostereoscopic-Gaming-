@@ -185,6 +185,7 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 ### Séance 12 - 13/05
 
 **Birame :** Séparation du flux caméra en 2 images (droite et gauche) pour gérer chaque joueur indépendamment (cela rend le tracking de chaque joueur plus précis).
+
 **Van-Kévin :** Implémentation d'un menu de tutoriel et correction de l'orientation des cubes.
 
 ### Entre la séance 12 et la séance 13
@@ -284,7 +285,6 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 - Page de calibration ajoutée dans les paramètres du jeu
 - Création du niveau de test (33% effectués à la fin de la séance)
 
-
 **Birame :**
 - Ajout d'un menu *Calibration* dans le jeu pour pouvoir régler l'amplitude du mouvement des sabres et pouvoir décider de la position de base de chaque joueur.
 - Ajout de quelques questions dans le Google Forms (test utilisateurs).
@@ -293,7 +293,7 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 **Van-Kévin :**
 - Retrait des collisions entre les cubes pour faciliter la création du niveau et avoir un niveau plus dynamique
 - Mode à 1 joueur implémenté où les cubes de l'autre joueur sont automatiquement détruits et / ou renvoyés
-  
+- Création du niveau de test et mise à jour du timer associé (première version finie à 100%)
 
 **Birame :**
 - Ajout de réticules sur la caméra affiché en jeu pour faciliter la calibration et la prise en main du jeu.
