@@ -160,7 +160,7 @@ Nous nous servons ici du module mediapipe dont nous avons tiré des informations
 https://github.com/google-ai-edge/mediapipe
 https://developers.google.com/edge/mediapipe/solutions/guide
 
-Pour un exemple voici un lien direct pour avoir un exemple de comment fonctionne mediapipe. De plus on peut aussi benchmarker les perfs de mediapipe:
+Pour un exemple voici un lien direct pour avoir un exemple de comment fonctionne mediapipe hands. De plus on peut aussi benchmarker les perfs de mediapipe:
 https://google-ai-edge.github.io/mediapipe-samples-web/#/vision/hand_landmarker
 
 
