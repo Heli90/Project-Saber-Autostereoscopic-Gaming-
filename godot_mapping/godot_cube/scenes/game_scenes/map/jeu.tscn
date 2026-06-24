@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://d2j5tgdgelydc" path="res://scenes/game_scenes/cubes/bloops_cube.tscn" id="11_5o4q7"]
 [ext_resource type="PackedScene" uid="uid://djmp5mtek83sy" path="res://scenes/game_scenes/cubes/heal_cube.tscn" id="11_wgmfl"]
 [ext_resource type="PackedScene" uid="uid://b2scygnmuljbm" path="res://scenes/game_scenes/cubes/shield_cube.tscn" id="12_8x66g"]
+[ext_resource type="PackedScene" uid="uid://chpwu3dyv5q3y" path="res://scenes/game_scenes/cubes/target_cube.tscn" id="12_kjk28"]
 [ext_resource type="PackedScene" uid="uid://doxuw28k6mnmk" path="res://scenes/game_scenes/map/map.tscn" id="12_t4fkw"]
 [ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/pixel_art_typeface.ttf" id="16_qmffw"]
 
@@ -807,7 +808,7 @@ script = ExtResource("1_fu8w0")
 environment = SubResource("Environment_n65sj")
 
 [node name="PartieTimer" type="Timer" parent="." unique_id=1292462759]
-wait_time = 95.0
+wait_time = 100.0
 one_shot = true
 ignore_time_scale = true
 
@@ -835,6 +836,7 @@ disappear_bloc = ExtResource("9_ycxfq")
 splash_bloc = ExtResource("11_5o4q7")
 shield_bloc = ExtResource("12_8x66g")
 heal_bloc = ExtResource("11_wgmfl")
+target_bloc = ExtResource("12_kjk28")
 
 [node name="LightJ1" type="DirectionalLight3D" parent="." unique_id=596364777]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)

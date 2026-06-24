@@ -204,7 +204,8 @@ func toggle_pause():
 				t.parallel().tween_property(cadres, "position", Vector2(0.0, 0.0), 0.8)
 		t.set_ease(Tween.EASE_IN_OUT)
 		for combo_bar in combo_bar_list:
-			t.parallel().tween_property(combo_bar, "modulate:a", 0.0, 0.1)
+			if is_instance_valid(combo_bar):
+				t.parallel().tween_property(combo_bar, "modulate:a", 0.0, 0.1)
 		t.parallel().tween_method(set_blur_intensity, 0.0, 2.0, 0.1)
 		await t.finished
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)

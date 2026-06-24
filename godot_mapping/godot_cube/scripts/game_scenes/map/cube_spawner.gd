@@ -7,6 +7,7 @@ extends Node3D
 @export var splash_bloc: PackedScene
 @export var shield_bloc: PackedScene
 @export var heal_bloc: PackedScene
+@export var target_bloc: PackedScene
 @onready var level_music: AudioStreamPlayer
 
 @onready var start_label: Label = $"../StartLabel"
@@ -109,7 +110,7 @@ var temp_conv = Global.array_convergence
 
 # Fonction appelée par le script du jeu pour démarrer l'apparition des cubes et charger les scores visuels
 func activation() -> void:
-	cube_list = [classic_bloc, bonus_bloc, bomb_bloc, disappear_bloc, splash_bloc, shield_bloc]
+	cube_list = [classic_bloc, bonus_bloc, bomb_bloc, disappear_bloc, splash_bloc, shield_bloc, target_bloc]
 	if Global.healing: cube_list.append(heal_bloc)
 	if Global.launched_mode == 0:
 		j1 = get_node("../../SplitScreens/Camera1/POV1/J1")
@@ -258,8 +259,8 @@ func _process(delta: float) -> void:
 func menu_loop() -> void:
 	if blocs == []:
 		var n: int
-		if healing: n = rng.randi_range(0, 6)
-		else: n = rng.randi_range(0, 5)
+		if healing: n = rng.randi_range(0, 7)
+		else: n = rng.randi_range(0, 6)
 		# Si on est en phase de tutoriel, on peut avoir une liste de taille plus petite, donc, on change l'indice
 		if not Global.setup_tutoriel:
 			match Global.tutoriel_played_mode:
@@ -277,7 +278,7 @@ func invert_views() -> void:
 func increase_pixelisation() -> void:
 	var pixelisationPower = texture.material.get_shader_parameter("pixelisationPower")
 	texture.material.set_shader_parameter("pixelisation", true)
-	texture.material.set_shader_parameter("pixelisationPower", pixelisationPower - 8.0)
+	texture.material.set_shader_parameter("pixelisationPower", pixelisationPower - 5.0)
 
 func reset_pixelisation() -> void:
 	texture.material.set_shader_parameter("pixelisation", false)
@@ -353,8 +354,8 @@ func nausea_screen(joueurs: Array[bool]) -> void:
 	texture.material.set_shader_parameter("nausea_screen", true)
 	match joueurs:
 		[false, false]: texture.material.set_shader_parameter("nausea_mask", [false, false, false, false, false, false, false, false])
-		[true, false]: texture.material.set_shader_parameter("nausea_mask", [true, true, false, false, false, false, false, false])
-		[false, true]: texture.material.set_shader_parameter("nausea_mask", [false, false, false, false, true, true, false, false])
+		[true, false]: texture.material.set_shader_parameter("nausea_mask", [false, false, false, false, true, true, false, false])
+		[false, true]: texture.material.set_shader_parameter("nausea_mask", [true, true, false, false, false, false, false, false])
 		[true, true]: texture.material.set_shader_parameter("nausea_mask", [true, true, false, false, true, true, false, false])
 	nausea_tween = create_tween().set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	nausea_tween.tween_method(func(v: float): texture.material.set_shader_parameter("nausea_strength", v), 0.0, 0.05, 0.05)
@@ -579,16 +580,15 @@ func on_bomb_hit(i: int):
 
 func game_loop(delta: float) -> void:
 	# On lance la musique avec un retard de 1.25 secondes pour permettre aux premiers cubes d'arriver
-	if elapsed_time > 1.25 and (not level_music.playing): level_music.play()
+	if elapsed_time > 1.25 and elapsed_time < 70.0 and (not level_music.playing): level_music.play()
+	elif elapsed_time > 70.0 and (not level_music.playing): pass
 	check_progress_bars()
 	
 	# Déclenchement des effets de vignette à des temps précis
 	if elapsed_time > 25.0 and not first_imp_phase:
 		first_imp_phase = true
 		vignette_screen(0.0, 0.5)
-		increase_glitch()
 	elif elapsed_time > 50.0 and not snd_imp_phase:
-		reset_glitch()
 		snd_imp_phase = true
 		vignette_screen(0.5, 1.0)
 	elif elapsed_time > 70.0 and not end_phase:
@@ -663,9 +663,7 @@ func game_loop(delta: float) -> void:
 		scheduled_bloc(bomb_bloc, 40.25, 1, [-2.0, 3.0], default_speed)
 		scheduled_bloc(classic_bloc, 42.50, 0, [-2.0, 3.0], default_speed, 3)
 		scheduled_bloc(classic_bloc, 42.50, 1, [-2.0, 0.5], default_speed, 3)
-		scheduled_bloc(splash_bloc, 45.50, 0, [2.0, 3.0], default_speed, 2)
 		scheduled_bloc(classic_bloc, 45.50, 0, [0.0, 0.5], default_speed, 1)
-		scheduled_bloc(splash_bloc, 45.50, 1, [2.0, 1.75], default_speed)
 		scheduled_bloc(classic_bloc, 47.00, 0, [-2.0, 3.0], default_speed, 2)
 		scheduled_bloc(classic_bloc, 47.00, 1, [2.0, 3.0], default_speed, 2)
 		scheduled_bloc(bomb_bloc, 48.50, 0, [-2.0, 0.5], default_speed)
@@ -699,18 +697,11 @@ func game_loop(delta: float) -> void:
 
 		# Phase 4
 		default_speed /= 1.5
-		scheduled_bloc(classic_bloc, 71.25, 0, [-2.0, 1.75], default_speed, 1)
-		scheduled_bloc(classic_bloc, 71.25, 0, [2.0, 0.5], default_speed, 1)
-		scheduled_bloc(classic_bloc, 71.25, 1, [2.0, 1.75], default_speed, 1)
-		scheduled_bloc(classic_bloc, 71.25, 1, [-2.0, 0.5], default_speed, 1)
-		scheduled_bloc(shield_bloc, 78.00, 0, [0.0, 1.75], default_speed)
-		scheduled_bloc(shield_bloc, 78.00, 1, [0.0, 1.75], default_speed)
-		scheduled_bloc(classic_bloc, 80.25, 0, [2.0, 3.0], default_speed, 2)
-		scheduled_bloc(classic_bloc, 80.25, 1, [-2.0, 3.0], default_speed, 2)
-		scheduled_bloc(classic_bloc, 83.75, 0, [0.0, 3.0], default_speed, 1)
-		scheduled_bloc(classic_bloc, 83.75, 1, [0.0, 0.5], default_speed, 1)
-		scheduled_bloc(bonus_bloc, 89.75, 0, [0.0, 1.75], default_speed)
-		scheduled_bloc(bonus_bloc, 89.75, 1, [0.0, 1.75], default_speed)
+		scheduled_bloc(target_bloc, 71.25, 0, [-2.0, 1.75], default_speed)
+		scheduled_bloc(target_bloc, 71.25, 1, [2.0, 1.75], default_speed)
+		
+		scheduled_bloc(target_bloc, 80.0, 0, [-2.0, 1.75], default_speed)
+		scheduled_bloc(target_bloc, 80.0, 1, [2.0, 1.75], default_speed)
 
 func scheduled_bloc(scene_bloc: PackedScene, arrival_time: float, direction: int = rng.randi_range(0, 1),
 spawn: Array[float] = [0.0, -1.0], absolute_speed: float = -1.0, color: int = rng.randi_range(1, 3)) -> void:
@@ -737,6 +728,7 @@ color: int = rng.randi_range(1, 3), spawn: Array[float] = [0.0, -1.0]) -> void:
 		disappear_bloc: setup_disappear_bloc(new_bloc, absolute_speed, direction, spawn)
 		splash_bloc: setup_splash_bloc(new_bloc, absolute_speed, direction, spawn)
 		shield_bloc: setup_shield_bloc(new_bloc, absolute_speed, direction, spawn)
+		target_bloc: setup_target_bloc(new_bloc, absolute_speed, direction, spawn)
 
 func set_speed(bloc: Node3D, direction: int, absolute_speed: float, disappear: bool) -> void:
 	match disappear:
@@ -831,6 +823,12 @@ func setup_heal_bloc(bloc: Node3D, absolute_speed: float, direction: int, spawn:
 	bloc.striked_cube_j2.connect(func(b): _onStrikedHealCube_j2(b))
 	spawn_valide(bloc, absolute_speed, direction, spawn)
 
+func setup_target_bloc(bloc: Node3D, absolute_speed: float, direction: int, spawn: Array[float]) -> void:
+	# On connecte le bloc au spawner pour qu'il puisse être relié au score actuel
+	bloc.striked_cube_j1.connect(func(b): _onStrikedTargetCube_j1(b))
+	bloc.striked_cube_j2.connect(func(b): _onStrikedTargetCube_j2(b))
+	spawn_valide(bloc, absolute_speed, direction, spawn)
+
 func spawn_classic_replacement(pos: Vector3, speed: float) -> void:
 	var bloc = generate_bloc(classic_bloc)
 	# On place le cube à la position du cube frappé
@@ -895,11 +893,11 @@ func StrikedBonusCube(i: int, bloc: Node3D) -> void:
 
 func StrikedBombCube(i: int) -> void:
 	stocked_combo[i] = 0
-	var gain = -500
+	var gain = -1000
 	multiplicateur[i] = 1
-	on_bomb_hit(i)
 	if Global.launched_mode % 2 == 0:
 		score_uis[i].ajouter_score(gain)
+		on_bomb_hit(i)
 		hitted_bomb[i] = true
 		if Global.launched_mode == 2: score_uis[i+2].ajouter_score(gain)
 
@@ -959,6 +957,15 @@ func StrikedHealCube(i: int, bloc: Node3D) -> void:
 	health_bars[i+2].update_health(health[i])
 	spawn_classic_replacement(bloc.position, -bloc.vitesse_deplacement)
 
+func StrikedTargetCube(i: int, bloc: Node3D) -> void:
+	stocked_combo[i] += 1
+	var gain = multiplicateur[i] * 1000 * (bloc.nb_collisions + 1)
+	bloc.vitesse_deplacement *= 1.5
+	if Global.launched_mode % 2 == 0:
+		score_uis[i].ajouter_score(gain)
+		if Global.launched_mode == 2: score_uis[i+2].ajouter_score(gain)
+	if is_instance_valid(bloc) and bloc.nb_collisions >= 6: bloc.queue_free()
+
 func _onStrikedClassicCube_j1() -> void:
 	StrikedClassicCube(0)
 
@@ -1008,3 +1015,9 @@ func _onStrikedHealCube_j1(bloc: Node3D) -> void:
 
 func _onStrikedHealCube_j2(bloc: Node3D) -> void:
 	StrikedHealCube(1, bloc)
+
+func _onStrikedTargetCube_j1(bloc: Node3D) -> void:
+	StrikedTargetCube(0, bloc)
+
+func _onStrikedTargetCube_j2(bloc: Node3D) -> void:
+	StrikedTargetCube(1, bloc)
