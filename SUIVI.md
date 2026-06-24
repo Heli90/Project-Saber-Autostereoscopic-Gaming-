@@ -316,3 +316,5 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 **Hélias**
 - Mise en place d'un meilleur effet de profondeur/jaillissement et implémentation d'un possibilité de calibrer le point de convergence des deux yeux pour régler le jaillissement et limiter la fatigue oculaire.
+- Ajout des effets de jaillissement dans la scène de tests
+- Écriture de documentation sur la profondeur
