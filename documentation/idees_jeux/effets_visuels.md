@@ -24,14 +24,14 @@ cam.near permet de fixer la distance du plan minimal à partir duquel la caméra
 
 Pour l'effet de profondeur en lui-même, on crée une fonction update_frustum dans global.md pour la rendre accessible à toute les scène. 
 Cette fonction, lorsque appelée, modifie l'effet de profondeur en fonction des paramètres demandés.
-Concrètement, la fonction repose sur la ligne 
-    cam.frustum_offset = Vector2(eye_offset * cam.near/ convergence, 0.0)
-Régler le frustum_offset de chacune des deux caméras permet de décaler légerement le cône (le frustum plus précisemment) qu'elles voient et ainsi faire converger les vues en un point désiré pour donner l'effet de profondeur.
-cam.frustum_offset est un vecteur de taille 2 : la première valeur est le décalage horizontal, et la seconde est la décalage vertical, qui ne nous intéresse pas.
-La formule utilisée est eye_offset * cam.near / convergence
-    - eye_offset est la distance entre les deux yeux, les deux caméras, divisée par deux (c'est la distance des caméras au zéro si on le fixe bien entre les deux yeux)
-    - cf ci-dessus pour cam.near
-    - le paramètre convergence est celui sur lequel on joue pour calibrer l'effet. Si convergence est grand, l'offset final est faible et les deux yeux sont parallèles, regardent à l'infini. Si convergence est faible, l'offset final est très grand et la point de convergence se situe avant l'infini. Les objets derrière le point de convergence semble en profondeur et ceux derrière semble en jaillissement.
+Concrètement, la fonction repose sur la ligne   
+    cam.frustum_offset = Vector2(eye_offset * cam.near/ convergence, 0.0)  
+Régler le frustum_offset de chacune des deux caméras permet de décaler légerement le cône (le frustum plus précisemment) qu'elles voient et ainsi faire converger les vues en un point désiré pour donner l'effet de profondeur.  
+cam.frustum_offset est un vecteur de taille 2 : la première valeur est le décalage horizontal, et la seconde est la décalage vertical, qui ne nous intéresse pas.  
+La formule utilisée est eye_offset * cam.near / convergence  
+    - eye_offset est la distance entre les deux yeux, les deux caméras, divisée par deux (c'est la distance des caméras au zéro si on le fixe bien entre les deux yeux)  
+    - cf ci-dessus pour cam.near  
+    - le paramètre convergence est celui sur lequel on joue pour calibrer l'effet. Si convergence est grand, l'offset final est faible et les deux yeux sont parallèles, regardent à l'infini. Si convergence est faible, l'offset final est très grand et la point de convergence se situe avant l'infini. Les objets derrière le point de convergence semble en profondeur et ceux derrière semble en jaillissement.  
 
 
 On peut ensuite jouer sur le paramètre convergence pour désorienter le joueur pendant la partie.
