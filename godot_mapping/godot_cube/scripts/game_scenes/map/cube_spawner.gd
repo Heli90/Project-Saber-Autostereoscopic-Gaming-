@@ -544,7 +544,9 @@ func game_loop(delta: float) -> void:
 	if elapsed_time > 25.0 and not first_imp_phase:
 		first_imp_phase = true
 		vignette_screen(0.0, 0.5)
+		increase_glitch()
 	elif elapsed_time > 50.0 and not snd_imp_phase:
+		reset_glitch()
 		snd_imp_phase = true
 		vignette_screen(0.5, 1.0)
 	elif elapsed_time > 70.0 and not end_phase:
