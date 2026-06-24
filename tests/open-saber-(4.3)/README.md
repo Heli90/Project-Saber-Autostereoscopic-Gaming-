@@ -30,3 +30,70 @@ The included Music Track is Time Lapse by TheFatRat (https://www.youtube.com/wat
 
 # Licensing
 The source code of the godot beep saber / open saber game in this repository is licensed under an MIT License.
+
+
+## Traduction 
+## Projet Open Source
+
+### Open Saber VR
+
+Notre projet s appuie en partie sur Open Saber VR qui est un fork de Beep Saber développé par NeoSpark314
+
+Open Saber VR est une adaptation de Beep Saber vers Godot 4 et OpenXR dont l objectif est de proposer une implémentation des mécaniques de Beat Saber tout en servant de démonstration technique des capacités du moteur Godot pour les jeux immersifs
+
+Projet original
+
+Open Saber VR  
+https://github.com/Hixor/open-saber
+
+Beep Saber  
+https://github.com/NeoSpark314/BeepSaber
+
+### À propos de l implémentation
+
+Le projet Open Saber VR utilise Godot 4 et permet notamment le chargement et la lecture de cartes provenant de BeatSaver
+
+Parmi les fonctionnalités disponibles dans le projet original on retrouve
+
+- Gestion des cubes et du rythme de jeu inspirés de Beat Saber
+- Système de score
+- Lecture de cartes musicales
+- Téléchargement de musiques personnalisées depuis le jeu
+- Compatibilité OpenXR pour les casques VR
+
+Notre projet reprend certaines idées et une partie de l architecture du projet original mais les adapte à un contexte totalement différent
+
+Les principales modifications apportées sont
+
+- Remplacement de la réalité virtuelle par un affichage sur télévision autostéréoscopique
+- Remplacement des contrôleurs VR par une détection des mouvements à l aide d une caméra externe et de MediaPipe
+- Ajout d un mode multijoueur local à deux joueurs
+- Mise en place d une mécanique hybride entre Beat Saber et Pong où les cubes peuvent être renvoyés à l adversaire
+- Ajout de menus spécifiques à l expérience multijoueur
+- Développement d effets visuels adaptés à l affichage stéréoscopique sans lunettes
+
+### Technologies utilisées
+
+Le projet Open Saber VR a servi de base de travail pour plusieurs systèmes du jeu notamment
+
+- La gestion des cubes
+- La logique de frappe
+- Le système de score
+- L organisation des scènes de jeu
+- Certains éléments de gameplay inspirés de Beat Saber
+
+Ces éléments ont ensuite été adaptés et étendus afin de répondre aux contraintes du projet Gaming Autostéréoscopique Project Saber
+
+### Crédits
+
+Le projet original inclut la piste musicale
+
+Time Lapse par TheFatRat
+
+https://www.youtube.com/watch?v=3fxq7kqyWO8
+
+### Licence
+
+Le code source du projet Open Saber VR et du projet Beep Saber est distribué sous licence MIT
+
+Les développements réalisés dans le cadre du projet Gaming Autostéréoscopique Project Saber ont été adaptés et étendus pour répondre aux objectifs du projet universitaire

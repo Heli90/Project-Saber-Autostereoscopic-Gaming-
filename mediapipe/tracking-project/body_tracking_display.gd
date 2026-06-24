@@ -1,10 +1,13 @@
 extends Node3D
-
+# Gestion de la capture vidéo et de la détection de pose avec MediaPipe
 # Variables MediaPipe
+
 var task
 var renderer
 var model_path = "res://pose_landmarker/pose_landmarker_full.task"
 var delegate := MediaPipeTaskBaseOptions.DELEGATE_CPU
+
+# Configuration du modèle MediaPipe utilisé pour la détection du corps
 
 var running_mode = MediaPipeVisionTask.RUNNING_MODE_IMAGE
 var num_pose = 4
@@ -12,6 +15,9 @@ var num_pose = 4
 # Variables Caméra
 var camera_extension: CameraServerExtension
 var camera_feed: CameraFeed
+
+# Références vers les éléments d'interface utilisés pour le débogage et la sélection de caméra
+# Initialisation générale du système de détection et de la caméra
 
 @onready var viewport = $SubViewportContainer/CameraViewport
 @onready var texture_rect = $SubViewportContainer/CameraViewport/TestAffichage
@@ -27,10 +33,14 @@ var camera_feed: CameraFeed
 @onready var selected_feed: OptionButton = $SelectCamera/VBoxContainer/HBoxContainer/SelectedFeed
 @onready var selected_format: OptionButton = $SelectCamera/VBoxContainer/SelectedFormat
 
+# Initialisation générale du système de détection et de la caméra
+
 func _ready():
 	_setup_mediapipe()
 	_setup_camera_selection()
 	_setup_camera_permissions()
+
+# Chargement du modèle MediaPipe et création des objets de détection et de rendu
 
 func _setup_mediapipe():
 	if not FileAccess.file_exists(model_path):
@@ -45,6 +55,8 @@ func _setup_mediapipe():
 	renderer = MediaPipePoseRenderer.new()
 	print("MediaPipe initialisé.")
 
+# Configuration de la fenêtre de sélection des caméras disponibles
+
 func _setup_camera_selection():
 	# Configuration du dialogue
 	confirmation_dialog.get_ok_button().disabled = true
@@ -54,6 +66,8 @@ func _setup_camera_selection():
 	
 	# Signal système pour détecter les changements de caméras
 	CameraServer.camera_feeds_updated.connect(self._update_camera_list)
+
+# Actualisation de la liste des caméras détectées par le système
 
 func _update_camera_list():
 	selected_feed.clear()
@@ -70,6 +84,8 @@ func _update_camera_list():
 	
 	selected_feed.selected = -1
 
+# Vérification et demande des autorisations nécessaires pour accéder à la caméra
+
 func _setup_camera_permissions():
 	if camera_extension:
 		return
@@ -85,6 +101,8 @@ func _setup_camera_permissions():
 
 func _on_permission(granted: bool):
 	if granted: _open_camera_selection()
+
+# Affichage de la fenêtre permettant de choisir une caméra
 
 func _open_camera_selection():
 	CameraServer.monitoring_feeds = true

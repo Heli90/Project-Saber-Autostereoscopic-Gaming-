@@ -289,6 +289,10 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 - Ajout d'un menu *Calibration* dans le jeu pour pouvoir régler l'amplitude du mouvement des sabres et pouvoir décider de la position de base de chaque joueur.
 - Ajout de quelques questions dans le Google Forms (test utilisateurs).
 
+**Hélias**
+- Édit du form pour les bêta-testeurs et du planning
+- Premiers essais de mise en place d'effets de jaillissement des cubes
+
 #### Séance 17 - Mardi 23/06
 
 **Van-Kévin :**
@@ -306,3 +310,6 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 **Van-Kévin :**
 - Implémentation du calibrage des sabres dans le menu de pause
+
+**Hélias**
+- Mise en place d'un meilleur effet de profondeur/jaillissement et implémentation d'un possibilité de calibrer le point de convergence des deux yeux pour régler le jaillissement et limiter la fatigue oculaire.
