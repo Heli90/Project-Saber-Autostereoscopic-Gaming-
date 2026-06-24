@@ -1,10 +1,13 @@
 extends Node3D
-
+# Gestion de la capture vidéo et de la détection de pose avec MediaPipe
 # Variables MediaPipe
+
 var task
 var renderer
 var model_path = "res://pose_landmarker/pose_landmarker_full.task"
 var delegate := MediaPipeTaskBaseOptions.DELEGATE_CPU
+
+# Configuration du modèle MediaPipe utilisé pour la détection du corps
 
 var running_mode = MediaPipeVisionTask.RUNNING_MODE_IMAGE
 var num_pose = 4
@@ -12,6 +15,8 @@ var num_pose = 4
 # Variables Caméra
 var camera_extension: CameraServerExtension
 var camera_feed: CameraFeed
+
+# Références vers les éléments d'interface utilisés pour le débogage et la sélection de caméra
 
 @onready var viewport = $SubViewportContainer/CameraViewport
 @onready var texture_rect = $SubViewportContainer/CameraViewport/TestAffichage
