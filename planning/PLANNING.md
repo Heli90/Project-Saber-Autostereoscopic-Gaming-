@@ -70,7 +70,7 @@ Des changements de direction et des avancées rapides ont vite rendu le planning
 | Préparer des questions pour les beta-testeurs                         | Faire un google form pour récolter des avis constructifs pour améliorer le jeu | Hélias  | Fait | Urgent |
 | Trouver une place pour la journée artishow                         | Envoyer un mail pour demander une place adéquate au projet | Hélias  | Fait | Urgent |
 | Optimiser les performances du jeu                         | ..... | Tous  | En cours | Faible |
-| Rajouter des effets                         | Notamment de profondeur | Hélias  | En cours | Faible |
+| Rajouter des effets                         | Notamment de profondeur | Hélias  | Fait | Faible |
 | Améliorer le bloops                         | Les tâches d'encre ne sont pas suffisament handicapante, régler ce problème | VK  | Fait | Faible |
 | Effet profondeur sabres                        | Ajouter des effets sur la collision/la trajectoire des cubes selon la profondeur (z) avec laquelle ils sont touchés | Birame  | Pas commencé | Faible |
 | Ajouter des effets audios et de la musique                         | ..... | Tous  | En cours | Faible |

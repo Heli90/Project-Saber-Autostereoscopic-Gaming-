@@ -272,8 +272,12 @@ func menu_loop() -> void:
 
 # Fonctions dédiées à l'application de tous les effets visuels
 func invert_views() -> void:
-	var invert = texture.material.get_shader_parameter("invertViews")
-	texture.material.set_shader_parameter("invertViews", not invert)
+	for i in range(4):
+		if i%2==0:
+			var t = temp_conv[i]
+			temp_conv[i] = temp_conv[i+1]
+			temp_conv[i+1] = t
+		Global.update_frustum(cameras[i], cameras[i].position.x, temp_conv[i])
 
 func increase_pixelisation() -> void:
 	var pixelisationPower = texture.material.get_shader_parameter("pixelisationPower")
@@ -496,6 +500,7 @@ func effect_loop(delta: float) -> void:
 			37: 
 				resetConvergence()
 				await get_tree().create_timer(0.5).timeout
+
 				start_loop_in_effect_map = false
 				stop_loop_in_effect_map = true
 
