@@ -277,7 +277,7 @@ func invert_views() -> void:
 func increase_pixelisation() -> void:
 	var pixelisationPower = texture.material.get_shader_parameter("pixelisationPower")
 	texture.material.set_shader_parameter("pixelisation", true)
-	texture.material.set_shader_parameter("pixelisationPower", pixelisationPower - 10.0)
+	texture.material.set_shader_parameter("pixelisationPower", pixelisationPower - 8.0)
 
 func reset_pixelisation() -> void:
 	texture.material.set_shader_parameter("pixelisation", false)
@@ -386,7 +386,6 @@ func increaseConvergence()-> void:
 		temp_conv[i]+= 1
 		Global.update_frustum(cameras[i], cameras[i].position.x,  temp_conv[i])
 
-
 func decreaseConvergence()->void:
 	for i in range(4):
 		temp_conv[i]-= 1
@@ -494,7 +493,8 @@ func effect_loop(delta: float) -> void:
 			35: decreaseConvergence()
 			36: decreaseConvergence()
 			37: 
-				await resetConvergence()
+				resetConvergence()
+				await get_tree().create_timer(0.5).timeout
 				start_loop_in_effect_map = false
 				stop_loop_in_effect_map = true
 

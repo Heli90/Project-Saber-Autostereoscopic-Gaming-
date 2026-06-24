@@ -186,7 +186,7 @@ func toggle_pause():
 	if (not affichage):
 		affichage = true
 		get_tree().paused = true
-		technical_infos.visible = false
+		if is_instance_valid(technical_infos): technical_infos.visible = false
 		start_label.visible = false
 		disappear_bloc_notif.visible = false
 		# On s'assure que tout est visible avant d'animer
