@@ -42,6 +42,7 @@ var midy1 : float = 0.4
 var midy2 : float = 0.4
 var is_camera_visible : bool = false
 var two_player_mode : bool = true
+var using_depth : bool = false
 
 func ButtonEnter(button, button_scale: Vector2, life: bool = false, sign_sprite: Sprite2D = null,  sign_scale: Vector2 = Vector2(0, 0)) -> void:
 	if first_scale_transition: first_scale_transition.kill()

@@ -731,6 +731,26 @@ max_value = 0.9
 step = 0.1
 value = 0.4
 
+[node name="DepthTitle" type="Label" parent="CalibrationSaber" unique_id=527035594]
+layout_mode = 0
+offset_left = 44.0
+offset_top = 69.0
+offset_right = 366.0
+offset_bottom = 95.0
+theme_override_fonts/font = ExtResource("4_5epmy")
+theme_override_font_sizes/font_size = 25
+text = "Using Depth"
+horizontal_alignment = 1
+
+[node name="DepthCheck" type="CheckButton" parent="CalibrationSaber" unique_id=1253238699]
+layout_mode = 0
+offset_left = 563.0
+offset_top = 62.5
+offset_right = 607.0
+offset_bottom = 86.5
+scale = Vector2(1.5, 1.5)
+theme_override_colors/button_checked_color = Color(0, 1, 0, 1)
+
 [node name="SignBack" type="Sprite2D" parent="CalibrationSaber" unique_id=955079048]
 position = Vector2(397.5, 710.5)
 scale = Vector2(1.75, 1.5)
@@ -942,6 +962,7 @@ texture = ExtResource("8_ymobg")
 [connection signal="value_changed" from="CalibrationSaber/MidXControlJ2" to="." method="_onMidx2Changed"]
 [connection signal="value_changed" from="CalibrationSaber/BetaControl2" to="." method="_onBeta2Changed"]
 [connection signal="value_changed" from="CalibrationSaber/MidYControlJ2" to="." method="_onMidy2Changed"]
+[connection signal="toggled" from="CalibrationSaber/DepthCheck" to="." method="_onUsingDepthPressed"]
 [connection signal="mouse_entered" from="CalibrationSaber/BackButton" to="." method="_onBackCalButtonEnter"]
 [connection signal="mouse_exited" from="CalibrationSaber/BackButton" to="." method="_onBackCalButtonExit"]
 [connection signal="pressed" from="CalibrationSaber/BackButton" to="." method="_onBackCalButton_pressed"]

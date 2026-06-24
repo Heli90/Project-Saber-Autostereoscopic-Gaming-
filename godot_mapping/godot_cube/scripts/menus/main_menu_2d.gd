@@ -243,3 +243,6 @@ func _onBeta2Changed(value: float) -> void:
 	
 func _onMidy2Changed(value: float) -> void:
 	Global.midy2 = value
+
+func _onUsingDepthPressed(toggled_on : bool) -> void :
+	Global.using_depth = toggled_on

@@ -13,6 +13,7 @@
 [ext_resource type="Shader" uid="uid://crf7jc6x8vo3h" path="res://shaders/button.gdshader" id="9_1mkbs"]
 [ext_resource type="Texture2D" uid="uid://c700kg3wk8oe2" path="res://addons/assets/empty_heart.png" id="9_phf8o"]
 [ext_resource type="PackedScene" uid="uid://jtm1okvkvobu" path="res://scenes/menus/select_level.tscn" id="10_gjwrx"]
+[ext_resource type="VideoStream" uid="uid://bs85g2i11qrs" path="res://addons/assets/Video_Tuto.ogv" id="10_vfcph"]
 [ext_resource type="Texture2D" uid="uid://dxfkpinwvr4aa" path="res://addons/assets/plane.png" id="14_8jpt8"]
 [ext_resource type="Shader" uid="uid://rpaw715m64rd" path="res://shaders/rainbow.gdshader" id="14_cshns"]
 
@@ -169,11 +170,13 @@ texture = ExtResource("6_h0cxi")
 
 [node name="TutorielVideo" type="VideoStreamPlayer" parent="." unique_id=897146802]
 layout_mode = 0
-offset_left = 575.0
-offset_top = 120.0
-offset_right = 1855.0
-offset_bottom = 840.0
+offset_left = 372.0
+offset_top = 7.0
+offset_right = 2292.0
+offset_bottom = 1087.0
+scale = Vector2(0.64, 0.64)
 pivot_offset = Vector2(640, 360)
+stream = ExtResource("10_vfcph")
 autoplay = true
 loop = true
 
