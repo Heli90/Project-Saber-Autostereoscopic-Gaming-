@@ -498,10 +498,8 @@ func effect_loop(delta: float) -> void:
 			36: decreaseConvergence()
 			37: 
 				resetConvergence()
-<<<<<<< HEAD
 				await get_tree().create_timer(0.5).timeout
-=======
->>>>>>> 3D
+
 				start_loop_in_effect_map = false
 				stop_loop_in_effect_map = true
 
