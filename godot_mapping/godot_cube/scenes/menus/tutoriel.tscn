@@ -13,7 +13,7 @@
 [ext_resource type="Shader" uid="uid://crf7jc6x8vo3h" path="res://shaders/button.gdshader" id="9_1mkbs"]
 [ext_resource type="Texture2D" uid="uid://c700kg3wk8oe2" path="res://addons/assets/empty_heart.png" id="9_phf8o"]
 [ext_resource type="PackedScene" uid="uid://jtm1okvkvobu" path="res://scenes/menus/select_level.tscn" id="10_gjwrx"]
-[ext_resource type="VideoStream" uid="uid://bs85g2i11qrs" path="res://addons/assets/Video_Tuto.ogv" id="10_vfcph"]
+[ext_resource type="VideoStream" uid="uid://7p3ng1eqtw8s" path="res://addons/assets/Video_Tuto.ogv" id="10_vfcph"]
 [ext_resource type="Texture2D" uid="uid://dxfkpinwvr4aa" path="res://addons/assets/plane.png" id="14_8jpt8"]
 [ext_resource type="Shader" uid="uid://rpaw715m64rd" path="res://shaders/rainbow.gdshader" id="14_cshns"]
 
