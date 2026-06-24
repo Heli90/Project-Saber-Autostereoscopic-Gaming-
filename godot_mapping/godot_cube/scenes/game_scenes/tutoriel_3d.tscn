@@ -34,6 +34,19 @@ shader_parameter/offset = 0.01
 shader_parameter/pixelisation = false
 shader_parameter/pixelisationPower = 200.0
 shader_parameter/pixelisation_mask = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/intensity_color = 0.5
+shader_parameter/red_screen = false
+shader_parameter/green_screen = false
+shader_parameter/blue_screen = false
+shader_parameter/rainbow_screen = false
+shader_parameter/rainbow_speed = 0.5
+shader_parameter/rainbow_angle = 0.0
+shader_parameter/nausea_screen = false
+shader_parameter/nausea_strength = 0.01
+shader_parameter/nausea_speed = 1.0
+shader_parameter/nausea_mask = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/vignette_screen = false
+shader_parameter/vignette_strength = 0.5
 
 [sub_resource type="Gradient" id="Gradient_fqw2t"]
 
@@ -655,15 +668,27 @@ texture = SubResource("GradientTexture2D_qp0uc")
 
 [node name="Game" parent="." unique_id=1026699542 instance=ExtResource("13_nru1m")]
 
-[node name="FonduNoir" parent="Game/HUD/FonduLayer" parent_id_path=PackedInt32Array(1026699542, 478103391) index="0" unique_id=1283066675]
-visible = false
-
 [node name="StartLabel" parent="Game" index="11" unique_id=40376002]
-visible = false
 text = ""
 
-[node name="DisappearBlocNotif" parent="Game" index="12" unique_id=626708433]
-visible = false
+[node name="FinalFrame" type="Sprite2D" parent="." unique_id=602810037]
+position = Vector2(959.99994, -280)
+scale = Vector2(2.5, 2)
+texture = ExtResource("17_j2wie")
+
+[node name="TutoLabel" type="Label" parent="." unique_id=6424141]
+offset_left = 680.0
+offset_top = -470.0
+offset_right = 1240.0
+offset_bottom = -95.0
+theme_override_fonts/font = ExtResource("3_24kdc")
+theme_override_font_sizes/font_size = 60
+text = "Cubes will appear
+in front of you
+and rush to you.
+Block them !"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Cadres" type="Panel" parent="." unique_id=932704625]
 offset_right = 40.0

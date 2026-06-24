@@ -21,9 +21,16 @@ var combo_bar_list: Array[Control] = []
 @onready var pause_menu: ColorRect = $Game/HUD/PauseMenu
 @onready var click_sound: AudioStreamPlayer = $Game/HUD/PauseMenu/ClickSound
 
+@onready var tuto_frame: Sprite2D = $FinalFrame
+@onready var tuto_label: Label = $TutoLabel
+@onready var tuto_chain_1: Sprite2D = $Cadres/Chains/Chain4
+@onready var tuto_chain_2: Sprite2D = $Cadres/Chains/Chain5
+var tuto_list: Array = []
+
 func _ready() -> void:
 	# On masque les barres de combo hors du jeu
 	combo_bar_list = [combo_bar_vue1, combo_bar_vue2, combo_bar_vue5, combo_bar_vue6]
+	tuto_list = [tuto_frame, tuto_label, tuto_chain_1, tuto_chain_2]
 	for combo_bar in combo_bar_list:
 		combo_bar.modulate.a = 0.0
 	
@@ -91,13 +98,31 @@ func _physics_process(_delta: float) -> void:
 
 func monte_cadres() -> void:
 	# On fait monter les panneaux
-	var t = create_tween().set_ease(Tween.EASE_IN_OUT)
+	var t = create_tween()
 	t.set_trans(Tween.TRANS_BACK)
 	t.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	t.tween_property(cadres, "position", Vector2(0.0, 0.0), 0.8)
 	await t.finished
 	cadres.visible = false
 	Global.setup_tutoriel = true
+
+func monte_tuto_cadre() -> void:
+	var t = create_tween().set_parallel(true)
+	t.set_trans(Tween.TRANS_BACK)
+	t.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	for x in tuto_list:
+		var vec = x.position
+		t.tween_property(x, "position", vec - Vector2(0.0, 700.0), 0.8)
+	await t.finished
+
+func descend_tuto_cadre() -> void:
+	var t = create_tween().set_parallel(true)
+	t.set_trans(Tween.TRANS_BACK)
+	t.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
+	for x in tuto_list:
+		var vec = x.position
+		t.tween_property(x, "position", vec + Vector2(0.0, 700.0), 0.8)
+	await t.finished
 
 func appear_combos() -> void:
 	var t = create_tween().set_parallel(true)

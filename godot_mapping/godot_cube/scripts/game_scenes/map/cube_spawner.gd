@@ -28,7 +28,11 @@ var default_speed: float = 8.0
 # Texture sur lesquelles sont projetées les vues
 var texture: TextureRect
 
-# Temps de jeu écoulé et booléens liées aux phases des niveaux
+# Nombre de phases écoulées dans le tutoriel
+@onready var pause_menu: ColorRect = $"../HUD/PauseMenu"
+var tuto_phases: int = 0
+
+# Temps de jeu écoulé et booléens liées aux phases des niveaux dans la vraie partie
 var elapsed_time: float = 0.0
 var first_imp_phase: bool = false
 var snd_imp_phase: bool = false
@@ -577,7 +581,9 @@ func tutoriel_loop() -> void:
 	check_progress_bars()
 	# On définit les cubes qui apparaissent selon le mode choisi
 	if Global.setup_tutoriel: Global.setup_tutoriel = false
-	menu_loop()
+	if blocs == []:
+		match tuto_phases:
+			0: pause_menu.descend_tuto_cadres()
 
 func on_bomb_hit(i: int):
 	if i == 0: nausea_time_j1 = 5.0
