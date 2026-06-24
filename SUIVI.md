@@ -313,6 +313,7 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 **Van-Kévin :**
 - Implémentation du calibrage des sabres dans le menu de pause
+- Ajout d'un nouveau cube cible pour renforcer l'interaction entre les joueurs
 
 **Hélias**
 - Mise en place d'un meilleur effet de profondeur/jaillissement et implémentation d'un possibilité de calibrer le point de convergence des deux yeux pour régler le jaillissement et limiter la fatigue oculaire.
