@@ -30,7 +30,6 @@ shader_parameter/nausea_speed = 1.0
 shader_parameter/nausea_mask = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0)
 shader_parameter/vignette_screen = false
 shader_parameter/vignette_strength = 0.5
-shader_parameter/vignette_mask = PackedInt32Array(0, 0, 0, 0, 0, 0, 0, 0)
 
 [sub_resource type="Gradient" id="Gradient_sgwr3"]
 
@@ -173,6 +172,34 @@ shader_parameter/angle = 0.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8sp8x"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uao1c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ijara"]
+shader = ExtResource("5_2jvac")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1cbbk"]
+shader = ExtResource("5_2jvac")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b2vw2"]
+shader = ExtResource("5_2jvac")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_coib1"]
+shader = ExtResource("5_2jvac")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
 
 [node name="SceneCamera" type="Node3D" unique_id=1797258505]
 script = ExtResource("1_clnk0")
@@ -440,20 +467,20 @@ text = "Return"
 
 [node name="SignIncreaseConvJ1" type="Sprite2D" parent="Buttons" unique_id=1884335154]
 visible = false
-position = Vector2(320, 894)
-scale = Vector2(3.2435899, 0.6593407)
+position = Vector2(400, 850)
+scale = Vector2(3.3, 1)
 texture = ExtResource("4_ksw31")
 
 [node name="IncreaseConv_J1" type="Button" parent="Buttons" unique_id=231478043]
 process_mode = 3
 visible = false
-material = SubResource("ShaderMaterial_xkf4e")
+material = SubResource("ShaderMaterial_ijara")
 layout_mode = 0
-offset_left = 96.000015
-offset_top = 875.0
-offset_right = 544.0
-offset_bottom = 915.0
-pivot_offset = Vector2(87.5, 20)
+offset_left = 176.0
+offset_top = 830.0
+offset_right = 634.0
+offset_bottom = 870.0
+pivot_offset = Vector2(231.5, 20)
 theme_override_fonts/font = ExtResource("5_bpe7x")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_onsxk")
@@ -462,24 +489,24 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_olrxq")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_d7yvy")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_olan5")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_tsh7v")
-text = "Decrease convergence"
+text = "Decrease Convergence"
 
 [node name="SignDecreaseConvJ1" type="Sprite2D" parent="Buttons" unique_id=936678624]
 visible = false
-position = Vector2(320, 824)
-scale = Vector2(3.2435899, 0.6593407)
+position = Vector2(400, 725)
+scale = Vector2(3.3, 1)
 texture = ExtResource("4_ksw31")
 
 [node name="DecreaseConvJ1" type="Button" parent="Buttons" unique_id=790117570]
 process_mode = 3
 visible = false
-material = SubResource("ShaderMaterial_xkf4e")
+material = SubResource("ShaderMaterial_1cbbk")
 layout_mode = 0
-offset_left = 96.00003
-offset_top = 805.0
-offset_right = 544.0
-offset_bottom = 845.0
-pivot_offset = Vector2(87.5, 20)
+offset_left = 176.0
+offset_top = 710.0
+offset_right = 624.0
+offset_bottom = 750.0
+pivot_offset = Vector2(226.5, 20)
 theme_override_fonts/font = ExtResource("5_bpe7x")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_onsxk")
@@ -488,24 +515,24 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_olrxq")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_d7yvy")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_olan5")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_tsh7v")
-text = "Increase convergence"
+text = "Increase Convergence"
 
 [node name="SignIncreaseConvJ2" type="Sprite2D" parent="Buttons" unique_id=67746380]
 visible = false
-position = Vector2(1474, 892)
-scale = Vector2(3.2435899, 0.6593407)
+position = Vector2(1550, 850)
+scale = Vector2(3.244, 1)
 texture = ExtResource("4_ksw31")
 
 [node name="IncreaseConv_J2" type="Button" parent="Buttons" unique_id=1446149595]
 process_mode = 3
 visible = false
-material = SubResource("ShaderMaterial_xkf4e")
+material = SubResource("ShaderMaterial_b2vw2")
 layout_mode = 0
-offset_left = 1250.0
-offset_top = 873.0
-offset_right = 1708.0
-offset_bottom = 913.0
-pivot_offset = Vector2(87.5, 20)
+offset_left = 1325.0
+offset_top = 830.0
+offset_right = 1788.0
+offset_bottom = 870.0
+pivot_offset = Vector2(231.5, 20)
 theme_override_fonts/font = ExtResource("5_bpe7x")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_onsxk")
@@ -514,24 +541,24 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_olrxq")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_d7yvy")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_olan5")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_tsh7v")
-text = "Decrease convergence"
+text = "Decrease Convergence"
 
 [node name="SignDecreaseConvJ2" type="Sprite2D" parent="Buttons" unique_id=46455723]
 visible = false
-position = Vector2(1474, 822)
-scale = Vector2(3.2435899, 0.6593407)
+position = Vector2(1550, 725)
+scale = Vector2(3.3, 1)
 texture = ExtResource("4_ksw31")
 
 [node name="DecreaseConvJ2" type="Button" parent="Buttons" unique_id=28412893]
 process_mode = 3
 visible = false
-material = SubResource("ShaderMaterial_xkf4e")
+material = SubResource("ShaderMaterial_coib1")
 layout_mode = 0
-offset_left = 1250.0
-offset_top = 803.0
-offset_right = 1698.0
-offset_bottom = 843.0
-pivot_offset = Vector2(87.5, 20)
+offset_left = 1325.0
+offset_top = 710.0
+offset_right = 1778.0
+offset_bottom = 750.0
+pivot_offset = Vector2(226.5, 20)
 theme_override_fonts/font = ExtResource("5_bpe7x")
 theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxEmpty_onsxk")
@@ -540,7 +567,7 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_olrxq")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_d7yvy")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_olan5")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_tsh7v")
-text = "Increase convergence"
+text = "Increase Convergence"
 
 [connection signal="mouse_entered" from="Buttons/ISButton_J1" to="." method="_onISButton1Enter"]
 [connection signal="mouse_exited" from="Buttons/ISButton_J1" to="." method="_onISButton1Exit"]
@@ -578,3 +605,4 @@ text = "Increase convergence"
 [connection signal="pressed" from="Buttons/DecreaseConvJ2" to="." method="_on_decrease_conv_j_2_pressed"]
 
 [editable path="Game"]
+[editable path="Game/HUD/PauseMenu"]

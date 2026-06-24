@@ -191,7 +191,6 @@ func ISButton(i: int) -> void:
 	array_sign_inconv[i].visible = true
 	array_sign_deconv[i].visible = true
 	
-	
 	var t_in: Tween = create_tween().set_parallel(true).set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	t_in.tween_property(array_IS_button[1-i], "modulate:a", 1.0, 0.1)
 	t_in.tween_property(array_inc[i], "modulate:a", 1.0, 0.1)
@@ -306,7 +305,7 @@ func _onValidationEnter() -> void:
 func _onValidationExit() -> void:
 	Global.ButtonExit(validation_button, val_scale, false, sign_validation, sign_val_scale)
 
-func _on_increase_conv_j_1_pressed() -> void:IncreaseConv(0)
+func _on_increase_conv_j_1_pressed() -> void: IncreaseConv(0)
 
 func _on_increase_conv_j_1_mouse_entered() -> void:
 	Global.ButtonEnter(IncreaseConv1, inconv1_scale, false, signIncreaseConv1, sign_inconv1_scale)
@@ -314,16 +313,13 @@ func _on_increase_conv_j_1_mouse_entered() -> void:
 func _on_increase_conv_j_1_mouse_exited() -> void:
 	Global.ButtonExit(IncreaseConv1, inconv1_scale, false, signIncreaseConv1, sign_inconv1_scale)
 
-
-func _on_decrease_conv_j_1_pressed() -> void:DecreaseConv(0)
+func _on_decrease_conv_j_1_pressed() -> void: DecreaseConv(0)
 	
 func _on_decrease_conv_j_1_mouse_entered() -> void:
 	Global.ButtonEnter(DecreaseConv1, deconv1_scale, false, signDecreaseConv1, sign_deconv1_scale)
 
 func _on_decrease_conv_j_1_mouse_exited() -> void:
 	Global.ButtonExit(DecreaseConv1, deconv1_scale, false, signDecreaseConv1, sign_deconv1_scale)
-
-
 
 func _on_increase_conv_j_2_pressed() -> void:IncreaseConv(1)
 
@@ -333,14 +329,10 @@ func _on_increase_conv_j_2_mouse_entered() -> void:
 func _on_increase_conv_j_2_mouse_exited() -> void:
 	Global.ButtonExit(IncreaseConv2, inconv2_scale, false, signIncreaseConv2, sign_inconv2_scale)
 
-
-
 func _on_decrease_conv_j_2_pressed() -> void: DecreaseConv(1)
-
 
 func _on_decrease_conv_j_2_mouse_entered() -> void:
 	Global.ButtonEnter(DecreaseConv2, deconv2_scale, false, signDecreaseConv2, sign_deconv2_scale)
-
 
 func _on_decrease_conv_j_2_mouse_exited() -> void:
 	Global.ButtonExit(DecreaseConv2, deconv2_scale, false, signDecreaseConv2, sign_deconv2_scale)

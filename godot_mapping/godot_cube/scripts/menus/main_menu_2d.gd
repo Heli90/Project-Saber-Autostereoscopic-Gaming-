@@ -1,6 +1,5 @@
 extends Control
 
-@onready var entry_logo: Panel = $EntryLogo
 @onready var main_buttons: Panel = $MainButtons
 @onready var options: Panel = $Options
 @onready var credits: Panel = $Credits
@@ -53,11 +52,6 @@ var sign_cal_change_scale: Vector2
 var cal_back_scale: Vector2
 var sign_cal_back_scale: Vector2
 
-@onready var sign_begin: Sprite2D = $EntryLogo/SignBegin
-@onready var begin_button: Button = $EntryLogo/BeginButton
-var begin_scale: Vector2
-var sign_begin_scale: Vector2
-
 @onready var options_title: Label = $Options/OptionsTitle
 @onready var click_sound: AudioStreamPlayer = $ClickSound
 
@@ -87,20 +81,11 @@ func _ready() -> void:
 	sign_change_scale = sign_change.scale
 	cal_change_scale = cal_change_button.scale
 	sign_cal_change_scale = sign_cal_change.scale
-	begin_scale = begin_button.scale
-	sign_begin_scale = sign_begin.scale
 	
 	# Mise en place de l'enlèvement du fondu
 	fondu_noir.modulate.a = 1.0
 	main_buttons.modulate.a = 1.0
 	game_name.modulate.a = 1.0
-	fondu_noir.visible = true
-	entry_logo.visible = true
-	game_name.visible = true
-	main_buttons.visible = false
-	options.visible = false
-	credits.visible = false
-	calibration.visible = false
 	
 	var t = create_tween()
 	t.tween_property(fondu_noir, "modulate:a", 0.0, 0.6)
@@ -143,11 +128,6 @@ func transition(appear_list: Array[Control], disappear_list: Array[Control]) -> 
 			t.tween_property(panel, "modulate:a", 1.0, 0.1)
 		t.set_parallel(false)
 	await t.finished
-
-# Ouvre le menu principal
-func _onBeginButton_pressed() -> void:
-	transition([main_buttons, game_name], [entry_logo])
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 # Lance le menu 2D de la page d'introduction au jeu
 func _onStartButton_pressed() -> void:
@@ -231,12 +211,6 @@ func _onCalChangeButtonEnter() -> void:
 
 func _onCalChangeButtonExit() -> void:
 	Global.ButtonExit(cal_change_button, cal_change_scale, false, sign_cal_change, sign_cal_change_scale)
-
-func _onBeginButtonEnter() -> void:
-	Global.ButtonEnter(begin_button, begin_scale, false, sign_begin, sign_begin_scale)
-
-func _onBeginButtonExit() -> void:
-	Global.ButtonExit(begin_button, begin_scale, false, sign_begin, sign_begin_scale)
 
 func _onBackCalButtonEnter() -> void:
 	Global.ButtonEnter(cal_back_button, cal_back_scale, false, sign_cal_back, sign_cal_back_scale)

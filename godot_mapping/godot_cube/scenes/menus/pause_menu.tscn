@@ -169,6 +169,58 @@ thickness = 5
 color = Color(0.5882353, 0.003921569, 0.93333334, 1)
 thickness = 5
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dec3r"]
+shader = ExtResource("6_xiui8")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_3bdx0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_risa2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7hoix"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_txbk6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0v3il"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uyo5p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xiui8"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_gqhbq"]
+color = Color(1, 1, 1, 1)
+thickness = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_dgi6y"]
+color = Color(0, 1, 0, 1)
+thickness = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_dqjbd"]
+color = Color(0, 1, 0, 1)
+thickness = 5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w5beu"]
+shader = ExtResource("6_xiui8")
+shader_parameter/is_hovered = false
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dec3r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_48dmc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xdkwb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_35se3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5uca4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_36n14"]
+
 [node name="PauseMenu" type="ColorRect" unique_id=1703583179]
 process_mode = 3
 material = SubResource("ShaderMaterial_1s2dm")
@@ -187,6 +239,7 @@ volume_db = -10.0
 bus = &"SFX"
 
 [node name="MenuButtons" type="Panel" parent="." unique_id=230394103]
+visible = false
 layout_mode = 0
 offset_left = 643.0
 offset_top = 215.0
@@ -344,7 +397,6 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_dmw1k")
 text = "Quit"
 
 [node name="Options" type="Panel" parent="." unique_id=1888251166]
-visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -377,10 +429,10 @@ vertical_alignment = 1
 
 [node name="MusicTitle" type="Label" parent="Options" unique_id=1567091736]
 layout_mode = 0
-offset_left = 287.0
-offset_top = 200.0
-offset_right = 525.0
-offset_bottom = 251.0
+offset_left = -213.0
+offset_top = 300.0
+offset_right = 25.0
+offset_bottom = 351.0
 theme_override_fonts/font = ExtResource("5_xiui8")
 theme_override_font_sizes/font_size = 50
 text = "Music"
@@ -388,17 +440,17 @@ horizontal_alignment = 1
 
 [node name="SFXTitle" type="Label" parent="Options" unique_id=1953463545]
 layout_mode = 0
-offset_left = 353.0
-offset_top = 300.0
-offset_right = 446.0
-offset_bottom = 351.0
+offset_left = -147.0
+offset_top = 400.0
+offset_right = -50.0
+offset_bottom = 451.0
 theme_override_fonts/font = ExtResource("5_xiui8")
 theme_override_font_sizes/font_size = 50
 text = "SFX"
 horizontal_alignment = 1
 
 [node name="SignBack" type="Sprite2D" parent="Options" unique_id=1788317128]
-position = Vector2(390, 710)
+position = Vector2(400, 710)
 scale = Vector2(2, 1.5)
 texture = ExtResource("4_eyfc8")
 
@@ -406,9 +458,9 @@ texture = ExtResource("4_eyfc8")
 material = SubResource("ShaderMaterial_gqhbq")
 custom_minimum_size = Vector2(0, 127)
 layout_mode = 0
-offset_left = 290.0
+offset_left = 300.0
 offset_top = 650.0
-offset_right = 496.0
+offset_right = 506.0
 offset_bottom = 777.0
 pivot_offset = Vector2(103, 63.5)
 theme_override_fonts/font = ExtResource("5_xiui8")
@@ -422,17 +474,17 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_7s4e5")
 text = "Return"
 
 [node name="SignCamera" type="Sprite2D" parent="Options" unique_id=1368138276]
-position = Vector2(393, 500)
-scale = Vector2(1.3, 1)
+position = Vector2(-100, 575)
+scale = Vector2(1.5, 1.5)
 texture = ExtResource("4_eyfc8")
 
 [node name="CameraButton" type="Button" parent="Options" unique_id=613085586]
 material = SubResource("ShaderMaterial_dgi6y")
 layout_mode = 1
-offset_left = 318.0
-offset_top = 480.0
-offset_right = 478.0
-offset_bottom = 522.0
+offset_left = -175.0
+offset_top = 535.0
+offset_right = -15.0
+offset_bottom = 615.0
 pivot_offset = Vector2(80, 21)
 theme_override_colors/font_hover_color = Color(0, 1, 1, 1)
 theme_override_colors/font_hover_pressed_color = Color(0, 1, 1, 1)
@@ -444,14 +496,15 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_j7gms")
 theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_oey0u")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_sy5ew")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_w5beu")
-text = "Camera"
+text = "Change
+Camera"
 
 [node name="MusicControl" type="HSlider" parent="Options" unique_id=1086393853]
 layout_mode = 0
-offset_left = 75.0
-offset_top = 250.0
-offset_right = 751.0
-offset_bottom = 280.0
+offset_left = -425.0
+offset_top = 350.0
+offset_right = 251.0
+offset_bottom = 380.0
 theme_override_styles/slider = SubResource("StyleBoxLine_0rd3c")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_tye54")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_ovuwl")
@@ -463,10 +516,10 @@ audio_bus_name = "Musique"
 
 [node name="SFXControl" type="HSlider" parent="Options" unique_id=1708708710]
 layout_mode = 0
-offset_left = 75.0
-offset_top = 350.0
-offset_right = 751.0
-offset_bottom = 380.0
+offset_left = -425.0
+offset_top = 450.0
+offset_right = 251.0
+offset_bottom = 480.0
 theme_override_styles/slider = SubResource("StyleBoxLine_0rd3c")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_tye54")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_ovuwl")
@@ -476,7 +529,299 @@ value = 1.0
 script = ExtResource("5_knqa7")
 audio_bus_name = "SFX"
 
+[node name="CalibrationSaberTitle" type="Label" parent="Options" unique_id=1422755569]
+layout_mode = 0
+offset_left = 680.0
+offset_top = 350.0
+offset_right = 1112.0
+offset_bottom = 401.0
+theme_override_fonts/font = ExtResource("5_xiui8")
+theme_override_font_sizes/font_size = 50
+text = "Saber Calibration"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SignCalChange" type="Sprite2D" parent="Options" unique_id=41819062]
+position = Vector2(900, 465)
+scale = Vector2(1.3, 1.1)
+texture = ExtResource("4_eyfc8")
+
+[node name="CalChange" type="Button" parent="Options" unique_id=102988537]
+material = SubResource("ShaderMaterial_dec3r")
+layout_mode = 0
+offset_left = 827.5
+offset_top = 445.0
+offset_right = 975.5
+offset_bottom = 485.0
+pivot_offset = Vector2(74, 20)
+theme_override_fonts/font = ExtResource("5_xiui8")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxEmpty_3bdx0")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_risa2")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_7hoix")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_txbk6")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_0v3il")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_uyo5p")
+text = "Change"
+
+[node name="CalibrationSaber" type="Panel" parent="." unique_id=267041857]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -356.5
+offset_right = 400.0
+offset_bottom = 356.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_xiui8")
+
+[node name="CalibrationTitle" type="Label" parent="CalibrationSaber" unique_id=1532351739]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 100.0
+offset_right = 740.0
+offset_bottom = 180.0
+size_flags_horizontal = 4
+size_flags_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_y = 5
+theme_override_fonts/font = ExtResource("5_xiui8")
+theme_override_font_sizes/font_size = 80
+text = "Saber Calibration"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AlphaTitleJ1" type="Label" parent="CalibrationSaber" unique_id=714383118]
+layout_mode = 0
+offset_left = -550.0
+offset_top = -150.0
+offset_right = -228.0
+offset_bottom = -124.0
+theme_override_fonts/font = ExtResource("5_xiui8")
+theme_override_font_sizes/font_size = 25
+text = "Horizontal Amplification J1"
+horizontal_alignment = 1
+
+[node name="AlphaControl1" type="HSlider" parent="CalibrationSaber" unique_id=500284831]
+layout_mode = 0
+offset_left = -100.0
+offset_top = -150.0
+offset_right = 200.0
+offset_bottom = -120.0
+theme_override_styles/slider = SubResource("StyleBoxLine_gqhbq")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_dgi6y")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_dqjbd")
+min_value = 1.0
+max_value = 3.0
+step = 0.1
+value = 2.0
+
+[node name="MidXTitleJ1" type="Label" parent="CalibrationSaber" unique_id=139913492]
+layout_mode = 0
+offset_left = -550.0
+offset_top = -120.0
+offset_right = -228.0
+offset_bottom = -94.0
+theme_override_fonts/font = ExtResource("5_xiui8")
+theme_override_font_sizes/font_size = 25
+text = "Horizontal Mid J1"
+horizontal_alignment = 1
+
+[node name="MidXControlJ1" type="HSlider" parent="CalibrationSaber" unique_id=827313453]
+layout_mode = 0
+offset_left = -100.0
+offset_top = -120.0
+offset_right = 200.0
+offset_bottom = -90.0
+theme_override_styles/slider = SubResource("StyleBoxLine_gqhbq")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_dgi6y")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_dqjbd")
+min_value = 0.1
+max_value = 0.9
+step = 0.1
+value = 0.5
+
+[node name="BetaTitleJ1" type="Label" parent="CalibrationSaber" unique_id=843584731]
+layout_mode = 0
+offset_left = -550.0
+offset_top = -90.0
+offset_right = -228.0
+offset_bottom = -64.0
+theme_override_fonts/font = ExtResource("5_xiui8")
+theme_override_font_sizes/font_size = 25
+text = "Vertical Amplification J1"
+horizontal_alignment = 1
+
+[node name="BetaControl1" type="HSlider" parent="CalibrationSaber" unique_id=1455080529]
+layout_mode = 0
+offset_left = -100.0
+offset_top = -90.0
+offset_right = 200.0
+offset_bottom = -60.0
+theme_override_styles/slider = SubResource("StyleBoxLine_gqhbq")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_dgi6y")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_dqjbd")
+min_value = 1.0
+max_value = 3.0
+step = 0.1
+value = 2.0
+
+[node name="MidYTitleJ1" type="Label" parent="CalibrationSaber" unique_id=2010004711]
+layout_mode = 0
+offset_left = -550.0
+offset_top = -60.0
+offset_right = -228.0
+offset_bottom = -34.0
+theme_override_fonts/font = ExtResource("5_xiui8")
+theme_override_font_sizes/font_size = 25
+text = "Vertical Mid J1"
+horizontal_alignment = 1
+
+[node name="MidYControlJ1" type="HSlider" parent="CalibrationSaber" unique_id=746164662]
+layout_mode = 0
+offset_left = -100.0
+offset_top = -60.0
+offset_right = 200.0
+offset_bottom = -30.0
+theme_override_styles/slider = SubResource("StyleBoxLine_gqhbq")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_dgi6y")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_dqjbd")
+min_value = 0.1
+max_value = 0.9
+step = 0.1
+value = 0.4
+
+[node name="AlphaTitleJ2" type="Label" parent="CalibrationSaber" unique_id=755501934]
+layout_mode = 0
+offset_left = 550.0
+offset_top = -150.0
+offset_right = 875.0
+offset_bottom = -124.0
+theme_override_fonts/font = ExtResource("5_xiui8")
+theme_override_font_sizes/font_size = 25
+text = "Horizontal Amplification J2"
+horizontal_alignment = 1
+
+[node name="AlphaControl2" type="HSlider" parent="CalibrationSaber" unique_id=167819799]
+layout_mode = 0
+offset_left = 1000.0
+offset_top = -150.0
+offset_right = 1300.0
+offset_bottom = -120.0
+theme_override_styles/slider = SubResource("StyleBoxLine_gqhbq")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_dgi6y")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_dqjbd")
+min_value = 1.0
+max_value = 3.0
+step = 0.1
+value = 2.0
+
+[node name="MidXTitleJ2" type="Label" parent="CalibrationSaber" unique_id=859845958]
+layout_mode = 0
+offset_left = 550.0
+offset_top = -120.0
+offset_right = 875.0
+offset_bottom = -94.0
+theme_override_fonts/font = ExtResource("5_xiui8")
+theme_override_font_sizes/font_size = 25
+text = "Horizontal Mid J2"
+horizontal_alignment = 1
+
+[node name="MidXControlJ2" type="HSlider" parent="CalibrationSaber" unique_id=1774755397]
+layout_mode = 0
+offset_left = 1000.0
+offset_top = -120.0
+offset_right = 1300.0
+offset_bottom = -90.0
+theme_override_styles/slider = SubResource("StyleBoxLine_gqhbq")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_dgi6y")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_dqjbd")
+min_value = 0.1
+max_value = 0.9
+step = 0.1
+value = 0.5
+
+[node name="BetaTitleJ2" type="Label" parent="CalibrationSaber" unique_id=457183075]
+layout_mode = 0
+offset_left = 550.0
+offset_top = -90.0
+offset_right = 872.0
+offset_bottom = -64.0
+theme_override_fonts/font = ExtResource("5_xiui8")
+theme_override_font_sizes/font_size = 25
+text = "Vertical Amplification J2"
+horizontal_alignment = 1
+
+[node name="BetaControl2" type="HSlider" parent="CalibrationSaber" unique_id=2098569635]
+layout_mode = 0
+offset_left = 1000.0
+offset_top = -90.0
+offset_right = 1300.0
+offset_bottom = -60.0
+theme_override_styles/slider = SubResource("StyleBoxLine_gqhbq")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_dgi6y")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_dqjbd")
+min_value = 1.0
+max_value = 3.0
+step = 0.1
+value = 2.0
+
+[node name="MidYTitleJ2" type="Label" parent="CalibrationSaber" unique_id=2048063673]
+layout_mode = 0
+offset_left = 550.0
+offset_top = -60.0
+offset_right = 872.0
+offset_bottom = -34.0
+theme_override_fonts/font = ExtResource("5_xiui8")
+theme_override_font_sizes/font_size = 25
+text = "Vertical Mid J2"
+horizontal_alignment = 1
+
+[node name="MidYControlJ2" type="HSlider" parent="CalibrationSaber" unique_id=1555332233]
+layout_mode = 0
+offset_left = 1000.0
+offset_top = -60.0
+offset_right = 1300.0
+offset_bottom = -30.0
+theme_override_styles/slider = SubResource("StyleBoxLine_gqhbq")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_dgi6y")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_dqjbd")
+min_value = 0.1
+max_value = 0.9
+step = 0.1
+value = 0.4
+
+[node name="SignBack" type="Sprite2D" parent="CalibrationSaber" unique_id=1258522611]
+position = Vector2(397.5, 710.5)
+scale = Vector2(1.75, 1.5)
+texture = ExtResource("4_eyfc8")
+
+[node name="BackButton" type="Button" parent="CalibrationSaber" unique_id=1806411918]
+material = SubResource("ShaderMaterial_w5beu")
+custom_minimum_size = Vector2(0, 127)
+layout_mode = 0
+offset_left = 300.0
+offset_top = 650.0
+offset_right = 506.0
+offset_bottom = 777.0
+pivot_offset = Vector2(103, 63.5)
+theme_override_fonts/font = ExtResource("5_xiui8")
+theme_override_font_sizes/font_size = 60
+theme_override_styles/normal = SubResource("StyleBoxEmpty_dec3r")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_48dmc")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_xdkwb")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_35se3")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_5uca4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_36n14")
+text = "Return"
+
 [node name="FonduNoir" type="ColorRect" parent="." unique_id=900633217]
+visible = false
 layout_mode = 0
 offset_right = 1920.0
 offset_bottom = 1080.0
@@ -509,3 +854,17 @@ metadata/_edit_use_anchors_ = true
 [connection signal="pressed" from="Options/CameraButton" to="." method="_onCameraButton_pressed"]
 [connection signal="value_changed" from="Options/MusicControl" to="Options/MusicControl" method="_onValueChanged"]
 [connection signal="value_changed" from="Options/SFXControl" to="Options/SFXControl" method="_onValueChanged"]
+[connection signal="mouse_entered" from="Options/CalChange" to="." method="_onCalChangeButtonEnter"]
+[connection signal="mouse_exited" from="Options/CalChange" to="." method="_onCalChangeButtonExit"]
+[connection signal="pressed" from="Options/CalChange" to="." method="_onCalChangeButton_pressed"]
+[connection signal="value_changed" from="CalibrationSaber/AlphaControl1" to="." method="_onAlpha1Changed"]
+[connection signal="value_changed" from="CalibrationSaber/MidXControlJ1" to="." method="_onMidx1Changed"]
+[connection signal="value_changed" from="CalibrationSaber/BetaControl1" to="." method="_onBeta1Changed"]
+[connection signal="value_changed" from="CalibrationSaber/MidYControlJ1" to="." method="_onMidy1Changed"]
+[connection signal="value_changed" from="CalibrationSaber/AlphaControl2" to="." method="_onAlpha2Changed"]
+[connection signal="value_changed" from="CalibrationSaber/MidXControlJ2" to="." method="_onMidx2Changed"]
+[connection signal="value_changed" from="CalibrationSaber/BetaControl2" to="." method="_onBeta2Changed"]
+[connection signal="value_changed" from="CalibrationSaber/MidYControlJ2" to="." method="_onMidy2Changed"]
+[connection signal="mouse_entered" from="CalibrationSaber/BackButton" to="." method="_onBackCalButtonEnter"]
+[connection signal="mouse_exited" from="CalibrationSaber/BackButton" to="." method="_onBackCalButtonExit"]
+[connection signal="pressed" from="CalibrationSaber/BackButton" to="." method="_onBackCalButton_pressed"]

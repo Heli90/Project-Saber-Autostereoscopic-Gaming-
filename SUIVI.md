@@ -290,6 +290,7 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 - Ajout de quelques questions dans le Google Forms (test utilisateurs).
 
 #### Séance 17 - Mardi 23/06
+
 **Van-Kévin :**
 - Retrait des collisions entre les cubes pour faciliter la création du niveau et avoir un niveau plus dynamique
 - Mode à 1 joueur implémenté où les cubes de l'autre joueur sont automatiquement détruits et / ou renvoyés
@@ -300,3 +301,8 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 
 **Birame :**
 - Ajout de réticules sur la caméra affiché en jeu pour faciliter la calibration et la prise en main du jeu.
+
+#### Séance 18 - Mercredi 24/06
+
+**Van-Kévin :**
+- Implémentation du calibrage des sabres dans le menu de pause
