@@ -289,6 +289,9 @@ Problème pour le moment : j'arrive à entrelacer deux images mais je n'arrive p
 - Ajout d'un menu *Calibration* dans le jeu pour pouvoir régler l'amplitude du mouvement des sabres et pouvoir décider de la position de base de chaque joueur.
 - Ajout de quelques questions dans le Google Forms (test utilisateurs).
 
+**Hugo :**
+- Complétion du README.md et des autres documentations
+
 **Hélias**
 - Édit du form pour les bêta-testeurs et du planning
 - Premiers essais de mise en place d'effets de jaillissement des cubes
