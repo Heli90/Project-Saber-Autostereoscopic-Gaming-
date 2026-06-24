@@ -15,6 +15,7 @@ extends Node3D
 @onready var camera4: Camera3D = $Vue6/Camera
 # Pas de décalage des caméras
 var step : float = 0.01
+@export var convergence_distance: float = 4.0
 
 @onready var sign_is_j1: Sprite2D = $Buttons/SignIS_J1
 @onready var is_button_j1: Button = $Buttons/ISButton_J1
@@ -86,7 +87,9 @@ func _ready() -> void:
 	
 	# Définition de la liste des caméras et des positions initiales
 	array_cam = [camera1, camera3, camera2, camera4]
-	for i in range(4): array_cam[i].position.x = Global.array_cam[i]
+	for i in range(4): 
+		array_cam[i].position.x = Global.array_cam[i]
+		update_frustum(array_cam[i], step, convergence_distance)
 	
 	# On ne lance pas le thread de caméra au début pour optimiser les FPS
 	landmarks_proceed.camera_feed.feed_is_active = false
@@ -158,6 +161,8 @@ func Increase(i: int) -> void:
 	click_sound.play()
 	array_cam[i].position.x += step
 	array_cam[i+2].position.x -= step
+	update_frustum(array_cam[i], step, convergence_distance)
+	update_frustum(array_cam[i+2], step, convergence_distance)
 	Global.array_cam[i] = array_cam[i].position.x
 	Global.array_cam[i+2] = array_cam[i+2].position.x
 
@@ -165,6 +170,8 @@ func Decrease(i: int) -> void:
 	click_sound.play()
 	array_cam[i].position.x -= step
 	array_cam[i+2].position.x += step
+	update_frustum(array_cam[i], step, convergence_distance)
+	update_frustum(array_cam[i+2], step, convergence_distance)
 	Global.array_cam[i] = array_cam[i].position.x
 	Global.array_cam[i+2] = array_cam[i+2].position.x
 
@@ -230,3 +237,8 @@ func _onValidationEnter() -> void:
 
 func _onValidationExit() -> void:
 	Global.ButtonExit(validation_button, val_scale, false, sign_validation, sign_val_scale)
+
+# Calcule l'offset à mettre dans le frustum pour placer le point de convergence du regard à l'endroit souhaité
+func update_frustum(cam : Camera3D, eye_offset : float, convergence:float)-> void:
+	cam.projection = Camera3D.PROJECTION_FRUSTUM
+	cam.frustum_offset = Vector2(eye_offset * cam.near / convergence, 0.0)
