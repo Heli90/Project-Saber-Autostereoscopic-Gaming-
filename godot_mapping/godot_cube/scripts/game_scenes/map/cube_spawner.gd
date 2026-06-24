@@ -102,6 +102,11 @@ var nausea_time_j2: float = 0.0
 # Message d'avertissement sur l'effet qui va être déclenché dans la zone d'effets
 var warning: Label
 
+# Tableau des caméras (selon la scène) pour les effets de profondeurs
+# Copie des convergences après calibrage pour modifier les valeurs sans alterer le calibrage
+var cameras: Array[Camera3D] = []
+var temp_conv = Global.array_convergence
+
 # Fonction appelée par le script du jeu pour démarrer l'apparition des cubes et charger les scores visuels
 func activation() -> void:
 	cube_list = [classic_bloc, bonus_bloc, bomb_bloc, disappear_bloc, splash_bloc, shield_bloc]
@@ -122,12 +127,15 @@ func activation() -> void:
 	else:
 		level_music = get_node("../../LevelMusic")
 		texture = get_node("../../TextureRect")
-		if Global.launched_mode == 3: warning = get_node("../../Warning")
+		if Global.launched_mode == 3: 
+			warning = get_node("../../Warning")
+			cameras = [get_node("../../Vue1/Camera"),get_node("../../Vue2/Camera"),get_node("../../Vue5/Camera"),get_node("../../Vue6/Camera")]
 		# Dans les autres zones, il n'y a pas de joueurs
 		if Global.launched_mode < 3:
 			j1 = get_node("../../J1")
 			j2 = get_node("../../J2")
 			healing = Global.healing
+			cameras = [get_node("../../J1/CameraController/Vue1/Camera"),get_node("../../J1/CameraController/Vue2/Camera"), get_node("../../J2/CameraController/Vue5/Camera"), get_node("../../J2/CameraController/Vue6/Camera")]
 			
 			if Global.launched_mode == 2:
 				score_uis.append(get_node("../../J1/CameraController/Vue1/ScoreUI"))
@@ -372,6 +380,23 @@ func reset_vignette_screen(current_value) -> void:
 	t.tween_method(func(v: float): texture.material.set_shader_parameter("vignette_strength", v), current_value, 0.0, 0.5)
 	await t.finished
 	texture.material.set_shader_parameter("vignette_screen", false)
+	
+func increaseConvergence()-> void:
+	for i in range(4):
+		temp_conv[i]+= 1
+		Global.update_frustum(cameras[i], cameras[i].position.x,  temp_conv[i])
+
+
+func decreaseConvergence()->void:
+	for i in range(4):
+		temp_conv[i]-= 1
+		Global.update_frustum(cameras[i], cameras[i].position.x,  temp_conv[i])
+
+func resetConvergence()->void:
+	temp_conv = Global.array_convergence
+	print(temp_conv)
+	for i in range(4):
+		Global.update_frustum(cameras[i], cameras[i].position.x,  temp_conv[i])
 
 func effect_loop(delta: float) -> void:
 	# De 1 à 2, on teste l'effet d'inversion des vues
@@ -381,6 +406,7 @@ func effect_loop(delta: float) -> void:
 	# De 19 à 20, on teste l'effet arc-en-ciel
 	# De 22 à 23, on teste l'effet de nausée
 	# De 24 à 25, on teste l'effet de vignette
+	# De 26 à 37, on teste le changement de profondeur (changement de la distance de convergence)
 	# A la fin de la boucle, on demande aux joueurs s'ils veulent répéter la séquence d'effets
 	if not is_effect_cube_generated:
 		is_effect_cube_generated = true
@@ -452,7 +478,23 @@ func effect_loop(delta: float) -> void:
 				reset_nausea_screen()
 			24: vignette_screen(0.0, 1.0)
 			25:
-				await reset_vignette_screen(1.0)
+				warning.text = "Convergence accrue"
+				reset_vignette_screen(1.0)
+			26: increaseConvergence()
+			27: increaseConvergence()
+			28: increaseConvergence()
+			29: increaseConvergence()
+			30: increaseConvergence()
+			31: 
+				warning.text = "Convergence diminuée"
+				resetConvergence()
+			32: decreaseConvergence()
+			33: decreaseConvergence()
+			34: decreaseConvergence()
+			35: decreaseConvergence()
+			36: decreaseConvergence()
+			37: 
+				await resetConvergence()
 				start_loop_in_effect_map = false
 				stop_loop_in_effect_map = true
 
