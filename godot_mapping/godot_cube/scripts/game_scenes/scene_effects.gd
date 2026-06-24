@@ -25,6 +25,8 @@ var ok_scale: Vector2
 var continue_scale: Vector2
 var stop_scale: Vector2
 
+var convergence_table: Array[float]
+
 func _ready() -> void:
 	# Initialisation des tailles des boutons pour les effets
 	ok_scale = ok_button.scale
@@ -33,7 +35,11 @@ func _ready() -> void:
 	
 	# Définition de la liste des caméras et des positions initiales
 	array_cam = [camera1, camera3, camera2, camera4]
-	for i in range(4): array_cam[i].position.x = Global.array_cam[i]
+	convergence_table = [Global.array_convergence[0], Global.array_convergence[2], Global.array_convergence[1], Global.array_convergence[3]]
+	for i in range(4): 
+		array_cam[i].position.x = Global.array_cam[i]
+		Global.update_frustum(array_cam[i], array_cam[i].position.x, convergence_table[i])
+		
 	
 	# On ne lance pas le thread de caméra au début pour optimiser les FPS
 	landmarks_proceed.camera_feed.feed_is_active = false

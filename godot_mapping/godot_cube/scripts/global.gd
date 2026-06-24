@@ -29,7 +29,7 @@ var array_cam = [-0.03, -0.03, 0.03, 0.03]
 
 # Table associée à la distance du point de convergence pour chaque caméra
 # Même ordre que ci-dessus
-var array_convergence = [2.2,2.8, 0.7, 1.5]
+var array_convergence = [2.2,2.8, 1.0, 1.8]
 
 # Variables associées à l'amplitude des bras de chaque joueur
 var alpha1: float = 2.0
