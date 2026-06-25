@@ -148,6 +148,31 @@ Projet développé par Hugo BELLE, Birame CISSÉ, Hélias GODARD--DELONGEAS, Ada
 Projet encadré par Jean LEFEUVRE.
 
 ### Projet Open source
+---
+
+## Utilisation du projet
+
+Cette section a pour objectif d'expliquer le fonctionnement général du projet afin de permettre à un nouveau développeur de comprendre l'architecture et de pouvoir modifier ou réutiliser certaines parties du jeu.
+
+Le projet est organisé autour de plusieurs systèmes indépendants :
+- le système de rendu autostéréoscopique ;
+- le système de détection des mouvements ;
+- le système de gestion des joueurs ;
+- le système de génération des niveaux ;
+- le système d'effets visuels ;
+- l'interface utilisateur.
+
+Chaque système peut être utilisé ou modifié indépendamment selon les besoins.
+
+---
+
+## Lancement du projet
+
+Pour lancer le projet :
+
+1. Installer **Godot 4.6.1** ou une version compatible.
+2. Cloner le dépôt Git.
+3. Ouvrir le dossier contenant le projet Godot :
 
 ## Matériel
 Dans le cadre de ce projet nous nous sommes servis d'un écran autostéréoscopique. Il s'agit d'un écran avec un réseau de lentilles devant chaque pixel afin de pouvoir avoir un effet 3D sans lunettes.
