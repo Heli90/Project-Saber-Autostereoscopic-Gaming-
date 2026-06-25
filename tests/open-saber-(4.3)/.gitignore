@@ -1,9 +1,0 @@
-.import
-src_data
-.DS_STORE
-
-# ignore exported APKs
-*.apk
-.godot/
-android/build/*
-/addons/godotopenxrvendors

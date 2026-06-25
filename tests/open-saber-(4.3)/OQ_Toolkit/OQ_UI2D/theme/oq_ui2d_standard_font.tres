@@ -1,6 +1,0 @@
-[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://ckoe517v8p3qp"]
-
-[ext_resource type="FontFile" uid="uid://cdsnr8tscm8y6" path="res://OQ_Toolkit/OQ_UI2D/theme/Roboto-Medium.ttf" id="1"]
-
-[resource]
-base_font = ExtResource("1")
