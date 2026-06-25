@@ -175,7 +175,6 @@ func _input(event: InputEvent) -> void:
 	var appui_synchro: bool = event.is_action_pressed("Menu") and latence_pause > 0.75 and (not on_option_menu)
 	if appui_synchro and Global.launched_mode > 0:
 		latence_pause = 0.0
-		landmarks_proceed.camera_feed.feed_is_active = false
 		get_viewport().set_input_as_handled()
 		toggle_pause()
 

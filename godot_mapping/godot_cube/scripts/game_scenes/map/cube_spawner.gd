@@ -29,8 +29,9 @@ var default_speed: float = 8.0
 var texture: TextureRect
 
 # Nombre de phases écoulées dans le tutoriel
-@onready var pause_menu: ColorRect = $"../HUD/PauseMenu"
+@onready var tutoriel: Node3D
 var tuto_phases: int = 0
+var tuto_phase_running: bool = false
 
 # Temps de jeu écoulé et booléens liées aux phases des niveaux dans la vraie partie
 var elapsed_time: float = 0.0
@@ -112,7 +113,10 @@ var warning: Label
 var cameras: Array[Camera3D] = []
 var temp_conv = Global.array_convergence
 
-# Fonction appelée par le script du jeu pour démarrer l'apparition des cubes et charger les scores visuels
+# --- ----------------------------- ---
+# FONCTIONS DE DEMARRAGE DU SPAWNER
+# --- ----------------------------- ---
+
 func activation() -> void:
 	cube_list = [classic_bloc, bonus_bloc, bomb_bloc, disappear_bloc, splash_bloc, shield_bloc, target_bloc]
 	if Global.healing: cube_list.append(heal_bloc)
@@ -132,6 +136,7 @@ func activation() -> void:
 	else:
 		level_music = get_node("../../LevelMusic")
 		texture = get_node("../../TextureRect")
+		if Global.launched_mode == 1: tutoriel = get_node("../..")
 		if Global.launched_mode == 3: 
 			warning = get_node("../../Warning")
 			cameras = [get_node("../../Vue1/Camera"),get_node("../../Vue2/Camera"),get_node("../../Vue5/Camera"),get_node("../../Vue6/Camera")]
@@ -197,84 +202,10 @@ func start_game() -> void:
 		start_label.visible = false
 	start_spawn = true
 
-func _process(delta: float) -> void:
-	# On retire les blocs qui ont été supprimés du jeu
-	blocs = blocs.filter(func(bloc): return is_instance_valid(bloc))
+# --- ----------------------------- ---
+# FONCTIONS LIEES AUX EFFETS DU JEU
+# --- ----------------------------- ---
 
-	# Une boucle à part est dédiée à la zone de test des effets
-	if Global.launched_mode == 3:
-		if start_loop_in_effect_map: effect_loop(delta)
-		else: pass
-	# Le jeu est mis en pause lorsqu'on modifie l'espace interoculaire
-	elif Global.launched_mode == 4:
-		get_tree().paused = true
-	else:
-		if start_spawn:
-			elapsed_time += delta
-			
-			if pixelisation_active_j1: pixelisation_time_j1 += delta
-			if pixelisation_active_j2: pixelisation_time_j2 += delta
-
-			for i in range(2):
-				# On vérifie si les boucliers de chaque joueur doivent écourtés
-				if shield_actif[i] == 0 and shields[i].emitting :
-					shields[i].emitting = false
-					shields[i].speed_scale = 10.0
-
-					# Si le bouclier tombe à 0, on efface la barre associée
-					var t = create_tween().set_parallel(true)
-					t.tween_property(shield_bars[i], "modulate:a", 0.0, 0.01)
-					if mode_with_sabers(): t.tween_property(shield_bars[i+2], "modulate:a", 0.0, 0.01)
-					await t.finished
-
-				elif shields[i].emitting:
-					time_shield_actif[i] -= delta
-
-				# Si le temps d'activité est dépassé, on réinitialise le nombre de cubes pouvant être ratés
-				if time_shield_actif[i] <= 0.0:
-					shield_actif[i] = 0
-					shields[i].emitting = false
-					shields[i].speed_scale = 10.0
-
-					# On efface les barres des boucliers sur l'écran
-					var t = create_tween().set_parallel(true)
-					t.tween_property(shield_bars[i], "modulate:a", 0.0, 0.01)
-					if mode_with_sabers(): t.tween_property(shield_bars[i+2], "modulate:a", 0.0, 0.01)
-					await t.finished
-
-				# On calcule le temps de bonus pour chacun des 2 joueurs et on arrête le bonus une fois que ce temps est dépassé
-				if count_bonus_time[i]: bonus_time[i] += delta
-				if bonus_time[i] >= 10.0 and multiplicateur[i] > 1:
-					bonus_time[i] = 0.0
-					multiplicateur[i] /= 2
-
-			# On actualise le meilleur combo de cubes
-			if best_combo < stocked_combo.max():
-				best_combo = stocked_combo.max()
-			
-			match Global.launched_mode:
-				# Boucle de jeu du jeu dans le menu
-				0: menu_loop()
-				# Boucle de jeu dans le tutoriel
-				1: tutoriel_loop()
-				# Boucle de jeu dans la partie
-				2: game_loop(delta)
-
-func menu_loop() -> void:
-	if blocs == []:
-		var n: int
-		if healing: n = rng.randi_range(0, 7)
-		else: n = rng.randi_range(0, 6)
-		# Si on est en phase de tutoriel, on peut avoir une liste de taille plus petite, donc, on change l'indice
-		if not Global.setup_tutoriel:
-			match Global.tutoriel_played_mode:
-				0: n = 0
-				1: n = 0
-				2: n = rng.randi_range(0, 1)
-				3: pass
-		spawn_cube(cube_list[n])
-
-# Fonctions dédiées à l'application de tous les effets visuels
 func invert_views() -> void:
 	for i in range(4):
 		if i%2==0:
@@ -390,21 +321,122 @@ func reset_vignette_screen(current_value) -> void:
 	await t.finished
 	texture.material.set_shader_parameter("vignette_screen", false)
 	
-func increaseConvergence()-> void:
+func increaseConvergence() -> void:
 	for i in range(4):
 		temp_conv[i]+= 1
 		Global.update_frustum(cameras[i], cameras[i].position.x,  temp_conv[i])
 
-func decreaseConvergence()->void:
+func decreaseConvergence() -> void:
 	for i in range(4):
 		temp_conv[i]-= 1
 		Global.update_frustum(cameras[i], cameras[i].position.x,  temp_conv[i])
 
-func resetConvergence()->void:
+func resetConvergence() -> void:
 	temp_conv = Global.array_convergence
 	print(temp_conv)
 	for i in range(4):
 		Global.update_frustum(cameras[i], cameras[i].position.x,  temp_conv[i])
+
+func invert_cams() -> void:
+	var tmp_position1 = cameras[0].position
+	var tmp_rotation1 = cameras[0].rotation
+	cameras[0].position = cameras[2].position
+	cameras[0].rotation = cameras[2].rotation
+	cameras[2].position = tmp_position1
+	cameras[2].rotation = tmp_rotation1
+	
+	var tmp_position2 = cameras[1].position
+	var tmp_rotation2 = cameras[1].rotation
+	cameras[1].position = cameras[3].position
+	cameras[1].rotation = cameras[3].rotation
+	cameras[3].position = tmp_position2
+	cameras[3].rotation = tmp_rotation2
+
+func deplace_cam(i: int) -> void:
+	cameras[i].position = cameras[(i+2)%4].position
+	cameras[i].rotation = cameras[(i+2)%4].rotation
+
+# --- -------------------------------------------- ---
+# FONCTIONS DE BOUCLES DU JEU SELON LE MODE CHOISI
+# --- -------------------------------------------- ---
+
+# Fonction principale utilisée dans tous les modes de jeux
+func _process(delta: float) -> void:
+	# On retire les blocs qui ont été supprimés du jeu
+	blocs = blocs.filter(func(bloc): return is_instance_valid(bloc))
+
+	# Une boucle à part est dédiée à la zone de test des effets
+	if Global.launched_mode == 3:
+		if start_loop_in_effect_map: effect_loop(delta)
+		else: pass
+	# Le jeu est mis en pause lorsqu'on modifie l'espace interoculaire
+	elif Global.launched_mode == 4:
+		spawn_cube(classic_bloc)
+		get_tree().paused = true
+	else:
+		if start_spawn:
+			elapsed_time += delta
+			
+			if pixelisation_active_j1: pixelisation_time_j1 += delta
+			if pixelisation_active_j2: pixelisation_time_j2 += delta
+
+			for i in range(2):
+				# On vérifie si les boucliers de chaque joueur doivent écourtés
+				if shield_actif[i] == 0 and shields[i].emitting :
+					shields[i].emitting = false
+					shields[i].speed_scale = 10.0
+
+					# Si le bouclier tombe à 0, on efface la barre associée
+					var t = create_tween().set_parallel(true)
+					t.tween_property(shield_bars[i], "modulate:a", 0.0, 0.01)
+					if mode_with_sabers(): t.tween_property(shield_bars[i+2], "modulate:a", 0.0, 0.01)
+					await t.finished
+
+				elif shields[i].emitting:
+					time_shield_actif[i] -= delta
+
+				# Si le temps d'activité est dépassé, on réinitialise le nombre de cubes pouvant être ratés
+				if time_shield_actif[i] <= 0.0:
+					shield_actif[i] = 0
+					shields[i].emitting = false
+					shields[i].speed_scale = 10.0
+
+					# On efface les barres des boucliers sur l'écran
+					var t = create_tween().set_parallel(true)
+					t.tween_property(shield_bars[i], "modulate:a", 0.0, 0.01)
+					if mode_with_sabers(): t.tween_property(shield_bars[i+2], "modulate:a", 0.0, 0.01)
+					await t.finished
+
+				# On calcule le temps de bonus pour chacun des 2 joueurs et on arrête le bonus une fois que ce temps est dépassé
+				if count_bonus_time[i]: bonus_time[i] += delta
+				if bonus_time[i] >= 10.0 and multiplicateur[i] > 1:
+					bonus_time[i] = 0.0
+					multiplicateur[i] /= 2
+
+			# On actualise le meilleur combo de cubes
+			if best_combo < stocked_combo.max():
+				best_combo = stocked_combo.max()
+			
+			match Global.launched_mode:
+				# Boucle de jeu du jeu dans le menu
+				0: menu_loop()
+				# Boucle de jeu dans le tutoriel
+				1: tutoriel_loop()
+				# Boucle de jeu dans la partie
+				2: game_loop(delta)
+
+func menu_loop() -> void:
+	if blocs == []:
+		var n: int
+		if healing: n = rng.randi_range(0, 7)
+		else: n = rng.randi_range(0, 6)
+		# Si on est en phase de tutoriel, on modifie l'indice selon l'option choisie
+		if not Global.setup_tutoriel:
+			match Global.tutoriel_played_mode:
+				0: n = 0
+				1: n = 1
+				2: pass
+		spawn_cube(cube_list[n])
 
 func effect_loop(delta: float) -> void:
 	# De 1 à 2, on teste l'effet d'inversion des vues
@@ -508,86 +540,44 @@ func effect_loop(delta: float) -> void:
 				start_loop_in_effect_map = false
 				stop_loop_in_effect_map = true
 
-# On actualise la barre de combo visuelle et on vérifie si un palier a été dépassé
-func check_progress_bars() -> void:
-	for i in range(2):
-		texture_progress_bars[i].value = snapped(stocked_combo[i], texture_progress_bars[i].step)
-		texture_progress_bars[i+2].value = snapped(stocked_combo[i], texture_progress_bars[i].step)
-
-	# Si un palier a été dépassé, on passe au suivant et on incrémente le multiplicateur
-	for i in range(2):
-		if texture_progress_bars[i].value >= texture_progress_bars[i].max_value:
-			texture_progress_bars[i].value = 0
-			texture_progress_bars[i+2].value = 0
-			stocked_combo[i] = 0
-			multiplicateur[i] *= 2
-
-			var current_index = letters.find(progress_bar_labels[i].text)
-			var letter_index = clamp(current_index + 1, 0, paliers.size() - 1)
-			progress_bar_labels[i].text = letters[letter_index]
-			progress_bar_labels[i+2].text = letters[letter_index]
-			
-			if letter_index < paliers.size():
-				passage_paliers[i] = true
-				texture_progress_bars[i].max_value = paliers[letter_index]
-				texture_progress_bars[i+2].max_value = paliers[letter_index]
-	
-	# On déclenche la pixelisation
-	match passage_paliers:
-		[false, false]: pass
-		[true, false]:
-			if not pixelisation_active_j1:
-				pixelisation_active_j1 = true
-				pixelisation_time_j1 = 0.0
-				texture.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, false, false, false, false])
-				increase_pixelisation()
-		[false, true]:
-			if not pixelisation_active_j2:
-				pixelisation_active_j2 = true
-				pixelisation_time_j2 = 0.0
-				texture.material.set_shader_parameter("pixelisation_mask", [false, false, false, false, true, true, false, false])
-				increase_pixelisation()
-		[true, true]:
-			if (not pixelisation_active_j1) or (not pixelisation_active_j2):
-				pixelisation_active_j1 = true
-				pixelisation_time_j1 = 0.0
-				pixelisation_active_j2 = true
-				pixelisation_time_j2 = 0.0
-				texture.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, true, true, false, false])
-				increase_pixelisation()
-
-	# Gestion des fins de pixelisation
-	if pixelisation_time_j1 > 5.0:
-		pixelisation_time_j1 = 0.0
-		pixelisation_active_j1 = false
-		passage_paliers[0] = false
-		if not pixelisation_active_j2:
-			reset_pixelisation()
-			texture.material.set_shader_parameter("pixelisation_mask", [false, false, false, false, false, false, false, false])
-		else:
-			texture.material.set_shader_parameter("pixelisation_mask", [false, false, false, false, true, true, false, false])
-
-	if pixelisation_time_j2 > 5.0:
-		pixelisation_time_j2 = 0.0
-		pixelisation_active_j2 = false
-		passage_paliers[1] = false
-		if not pixelisation_active_j1:
-			reset_pixelisation()
-			texture.material.set_shader_parameter("pixelisation_mask", [false, false, false, false, false, false, false, false])
-		else:
-			texture.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, false, false, false, false])
-
 func tutoriel_loop() -> void:
 	check_progress_bars()
 	# On définit les cubes qui apparaissent selon le mode choisi
 	if Global.setup_tutoriel: Global.setup_tutoriel = false
-	if blocs == []:
-		match tuto_phases:
-			0: pause_menu.descend_tuto_cadres()
+	if Global.tutoriel_played_mode < 3:
+		# Mode bac à sable
+		menu_loop()
+	else:
+		# Boucle spéciale de jeu expliquant au joueur comment jouer
+		if blocs == [] and not tuto_phase_running and tuto_phases <= 3:
+			tuto_phase_running = true
+			await run_tuto_phase(tuto_phases)
+			tuto_phases += 1
+			tuto_phase_running = false
 
-func on_bomb_hit(i: int):
-	if i == 0: nausea_time_j1 = 5.0
-	else: nausea_time_j2 = 5.0
+func run_tuto_phase(phase: int) -> void:
+	match phase:
+		0:
+			await tutoriel.descend_tuto_cadre()
+			await get_tree().create_timer(2.0).timeout
+			await tutoriel.monte_tuto_cadre()
+			tutoriel.tuto_label.text = "Cubes can be\n reflected to\n your opponent !"
+			spawn_cube(classic_bloc, 10.0, 0, 1, [0.0, 1.75])
+			spawn_cube(classic_bloc, 10.0, 1, 1, [0.0, 1.75])
+		1:
+			await tutoriel.descend_tuto_cadre()
+			await get_tree().create_timer(2.0).timeout
+			await tutoriel.monte_tuto_cadre()
+			tutoriel.tuto_label.text = "Cubes can trigger\n visual effects !"
+			spawn_cube(classic_bloc, 15.0, 0, 2, [0.0, 1.75])
+		2:
+			await tutoriel.descend_tuto_cadre()
+			await get_tree().create_timer(2.0).timeout
+			await tutoriel.monte_tuto_cadre()
+			spawn_cube(bomb_bloc, 15.0, 0, 2, [0.0, 1.75])
+			spawn_cube(bomb_bloc, 15.0, 1, 2, [0.0, 1.75])
+		3:
+			pass
 
 func game_loop(delta: float) -> void:
 	# On lance la musique avec un retard de 1.25 secondes pour permettre aux premiers cubes d'arriver
@@ -625,6 +615,7 @@ func game_loop(delta: float) -> void:
 		is_generated = true
 		
 		# Phase 1
+		default_speed /= 1.25
 		scheduled_bloc(classic_bloc, 4.75, 0, [0.0, 1.75], default_speed, 2)
 		scheduled_bloc(classic_bloc, 4.75, 1, [0.0, 1.75], default_speed, 2)
 		scheduled_bloc(classic_bloc, 6.00, 0, [-2.0, 1.75], default_speed, 1)
@@ -633,6 +624,7 @@ func game_loop(delta: float) -> void:
 		scheduled_bloc(classic_bloc, 7.25, 1, [0.0, 0.5], default_speed, 1)
 
 		# Phase 2
+		default_speed *= 1.25
 		scheduled_bloc(bonus_bloc, 10.00, 0, [2.0, 1.75], default_speed)
 		scheduled_bloc(bonus_bloc, 10.00, 1, [0.0, 1.75], default_speed)
 		scheduled_bloc(bomb_bloc, 12.50, 0, [-2.0, 3.0], default_speed)
@@ -713,6 +705,90 @@ func game_loop(delta: float) -> void:
 		
 		scheduled_bloc(target_bloc, 80.0, 0, [-2.0, 1.75], default_speed)
 		scheduled_bloc(target_bloc, 80.0, 1, [2.0, 1.75], default_speed)
+
+# --- ------------------------------------ ---
+# FONCTIONS AUXILIAIRES ASSOCIEES AU SCORE
+# --- ------------------------------------ ---
+
+func on_bomb_hit(i: int):
+	if i == 0: nausea_time_j1 = 5.0
+	else: nausea_time_j2 = 5.0
+
+func mode_with_sabers() -> bool:
+	return (Global.launched_mode == 1) or (Global.launched_mode == 2)
+
+# On actualise la barre de combo visuelle et on vérifie si un palier a été dépassé
+func check_progress_bars() -> void:
+	for i in range(2):
+		texture_progress_bars[i].value = snapped(stocked_combo[i], texture_progress_bars[i].step)
+		texture_progress_bars[i+2].value = snapped(stocked_combo[i], texture_progress_bars[i].step)
+
+	# Si un palier a été dépassé, on passe au suivant et on incrémente le multiplicateur
+	for i in range(2):
+		if texture_progress_bars[i].value >= texture_progress_bars[i].max_value:
+			texture_progress_bars[i].value = 0
+			texture_progress_bars[i+2].value = 0
+			stocked_combo[i] = 0
+			multiplicateur[i] *= 2
+
+			var current_index = letters.find(progress_bar_labels[i].text)
+			var letter_index = clamp(current_index + 1, 0, paliers.size() - 1)
+			progress_bar_labels[i].text = letters[letter_index]
+			progress_bar_labels[i+2].text = letters[letter_index]
+			
+			if letter_index < paliers.size():
+				passage_paliers[i] = true
+				texture_progress_bars[i].max_value = paliers[letter_index]
+				texture_progress_bars[i+2].max_value = paliers[letter_index]
+	
+	# On déclenche la pixelisation
+	match passage_paliers:
+		[false, false]: pass
+		[true, false]:
+			if not pixelisation_active_j1:
+				pixelisation_active_j1 = true
+				pixelisation_time_j1 = 0.0
+				texture.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, false, false, false, false])
+				increase_pixelisation()
+		[false, true]:
+			if not pixelisation_active_j2:
+				pixelisation_active_j2 = true
+				pixelisation_time_j2 = 0.0
+				texture.material.set_shader_parameter("pixelisation_mask", [false, false, false, false, true, true, false, false])
+				increase_pixelisation()
+		[true, true]:
+			if (not pixelisation_active_j1) or (not pixelisation_active_j2):
+				pixelisation_active_j1 = true
+				pixelisation_time_j1 = 0.0
+				pixelisation_active_j2 = true
+				pixelisation_time_j2 = 0.0
+				texture.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, true, true, false, false])
+				increase_pixelisation()
+
+	# Gestion des fins de pixelisation
+	if pixelisation_time_j1 > 5.0:
+		pixelisation_time_j1 = 0.0
+		pixelisation_active_j1 = false
+		passage_paliers[0] = false
+		if not pixelisation_active_j2:
+			reset_pixelisation()
+			texture.material.set_shader_parameter("pixelisation_mask", [false, false, false, false, false, false, false, false])
+		else:
+			texture.material.set_shader_parameter("pixelisation_mask", [false, false, false, false, true, true, false, false])
+
+	if pixelisation_time_j2 > 5.0:
+		pixelisation_time_j2 = 0.0
+		pixelisation_active_j2 = false
+		passage_paliers[1] = false
+		if not pixelisation_active_j1:
+			reset_pixelisation()
+			texture.material.set_shader_parameter("pixelisation_mask", [false, false, false, false, false, false, false, false])
+		else:
+			texture.material.set_shader_parameter("pixelisation_mask", [true, true, false, false, false, false, false, false])
+
+# --- ---------------------------- ---
+# FONCTIONS D'APPARITION DES CUBES
+# --- ---------------------------- ---
 
 func scheduled_bloc(scene_bloc: PackedScene, arrival_time: float, direction: int = rng.randi_range(0, 1),
 spawn: Array[float] = [0.0, -1.0], absolute_speed: float = -1.0, color: int = rng.randi_range(1, 3)) -> void:
@@ -859,12 +935,14 @@ func spawn_classic_replacement(pos: Vector3, speed: float) -> void:
 	await get_tree().create_timer(1.0).timeout
 	if is_instance_valid(bloc): bloc.get_node("CollisionShape3D").disabled = false
 
-func mode_with_sabers() -> bool:
-	return (Global.launched_mode == 1) or (Global.launched_mode == 2)
+# --- ------------------------ ---
+# FONCTIONS DONNANT LE SCORE DES CUBES
+# --- ------------------------ ---
 
 func StrikedClassicCube(i: int) -> void:
 	stocked_combo[i] += 1
 	var gain = multiplicateur[i] * 1000
+	# if Global.launched_mode == 2: deplace_cam(i)
 	if Global.launched_mode % 2 == 0:
 		score_uis[i].ajouter_score(gain)
 		if Global.launched_mode == 2: score_uis[i+2].ajouter_score(gain)

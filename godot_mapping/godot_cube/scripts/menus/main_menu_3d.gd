@@ -31,3 +31,4 @@ func _input(event: InputEvent) -> void:
 			var t = create_tween()
 			t.tween_property(menu, "modulate:a", 1.0, 0.5)
 			await t.finished
+	if event.is_action_pressed("ResetLeaderboard"): jeu.reset_leaderboard()

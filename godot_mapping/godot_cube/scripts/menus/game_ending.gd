@@ -7,6 +7,8 @@ extends ColorRect
 @onready var best_player_message: Label = $TextContent/BestPlayerMessage
 @onready var best_player_text: Label = $TextContent/BestPlayerText
 @onready var leaderboard_label: Label = $Leaderboard/Label
+@onready var score_j1: Label = $TextContent/ScoreJ1
+@onready var score_j2: Label = $TextContent/ScoreJ2
 
 @onready var back_to_menu_button: Button = $BackToMenuButton
 @onready var sign_back: Sprite2D = $SignBack
@@ -30,6 +32,8 @@ func _onBackToMenuButton_pressed() -> void:
 	transition.tween_property(best_player_message, "modulate:a", 0.0, 0.1)
 	transition.tween_property(best_player_text, "modulate:a", 0.0, 0.1)
 	transition.tween_property(leaderboard_label, "modulate:a", 0.0, 0.1)
+	transition.tween_property(score_j1, "modulate:a", 0.0, 0.1)
+	transition.tween_property(score_j2, "modulate:a", 0.0, 0.1)
 	transition.set_parallel(false)
 	transition.tween_callback(func():
 		fondu_noir.modulate.a = 0.0

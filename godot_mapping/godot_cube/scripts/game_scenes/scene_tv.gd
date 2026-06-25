@@ -5,6 +5,7 @@ extends Node3D
 @onready var game: Node3D = $Game
 @onready var j1: Node3D = $J1
 @onready var j2: Node3D = $J2
+@onready var technical_infos: CanvasLayer = $TechnicalInfos
 
 @onready var remote1_j1: RemoteTransform3D = $J1/CameraController/RemoteVue1
 @onready var remote2_j1: RemoteTransform3D = $J1/CameraController/RemoteVue2
@@ -17,7 +18,6 @@ var array_cam: Array[RemoteTransform3D]
 @onready var cam_vue5: Camera3D = $J2/CameraController/Vue5/Camera
 @onready var cam_vue6: Camera3D = $J2/CameraController/Vue6/Camera
 var array_real_cam: Array[Camera3D]
-
 
 @onready var label_fps: Label = $TechnicalInfos/FPS
 @onready var label_cpu = $TechnicalInfos/CPU
@@ -39,6 +39,8 @@ func _ready() -> void:
 	var world_3d = get_viewport().world_3d
 	if has_node("Game"):
 		world_3d = game.get_world_3d()
+	
+	technical_infos.visible = Global.performances
 	
 	# Définition de la liste des caméras et des positions initiales
 	array_cam = [remote1_j1, remote1_j2, remote2_j1, remote2_j2]

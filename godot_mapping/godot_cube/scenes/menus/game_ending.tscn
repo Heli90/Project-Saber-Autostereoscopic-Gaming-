@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://c017eu1ls6xye" path="res://scripts/menus/game_ending.gd" id="2_nvk6s"]
 [ext_resource type="AudioStream" uid="uid://casguqt0dms81" path="res://addons/sfx/click_sound.mp3" id="3_cplju"]
 [ext_resource type="FontFile" uid="uid://2elnyaxgt7d7" path="res://addons/assets/pixel_art_typeface.ttf" id="4_ko6y7"]
+[ext_resource type="Shader" uid="uid://rpaw715m64rd" path="res://shaders/rainbow.gdshader" id="5_acqe6"]
 [ext_resource type="Texture2D" uid="uid://cy5no81nhebpm" path="res://addons/assets/sign_name_panel.png" id="5_ko6y7"]
 [ext_resource type="Shader" uid="uid://crf7jc6x8vo3h" path="res://shaders/button.gdshader" id="6_acqe6"]
 
@@ -13,6 +14,18 @@ shader_parameter/lod = 2.0
 shader_parameter/brightness = 1.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nvk6s"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g276b"]
+shader = ExtResource("5_acqe6")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_acqe6"]
+shader = ExtResource("5_acqe6")
+shader_parameter/strength = 0.5
+shader_parameter/speed = 0.5
+shader_parameter/angle = 0.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_03p8x"]
 
@@ -77,9 +90,9 @@ vertical_alignment = 1
 [node name="EndingMessage" type="Label" parent="TextContent" unique_id=62404960]
 layout_mode = 0
 offset_left = 55.0
-offset_top = 350.0
+offset_top = 300.0
 offset_right = 905.0
-offset_bottom = 473.0
+offset_bottom = 423.0
 theme_override_fonts/font = ExtResource("4_ko6y7")
 theme_override_font_sizes/font_size = 60
 text = "Thank you for playing
@@ -87,26 +100,50 @@ our game !"
 horizontal_alignment = 1
 
 [node name="BestPlayerMessage" type="Label" parent="TextContent" unique_id=1497782220]
+material = SubResource("ShaderMaterial_g276b")
 layout_mode = 0
 offset_left = 166.0
-offset_top = 650.0
+offset_top = 690.0
 offset_right = 794.0
-offset_bottom = 701.0
+offset_bottom = 741.0
 theme_override_fonts/font = ExtResource("4_ko6y7")
 theme_override_font_sizes/font_size = 50
 text = "Winner :"
 horizontal_alignment = 1
 
 [node name="BestPlayerText" type="Label" parent="TextContent" unique_id=1640638100]
+material = SubResource("ShaderMaterial_acqe6")
 layout_mode = 0
 offset_left = 80.0
-offset_top = 725.0
+offset_top = 765.0
 offset_right = 880.0
-offset_bottom = 785.0
+offset_bottom = 825.0
 theme_override_fonts/font = ExtResource("4_ko6y7")
 theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="ScoreJ1" type="Label" parent="TextContent" unique_id=643755096]
+layout_mode = 0
+offset_left = 260.0
+offset_top = 500.0
+offset_right = 664.0
+offset_bottom = 551.0
+theme_override_fonts/font = ExtResource("4_ko6y7")
+theme_override_font_sizes/font_size = 50
+text = "Score J1 : "
+horizontal_alignment = 1
+
+[node name="ScoreJ2" type="Label" parent="TextContent" unique_id=528554483]
+layout_mode = 0
+offset_left = 260.0
+offset_top = 600.0
+offset_right = 664.0
+offset_bottom = 651.0
+theme_override_fonts/font = ExtResource("4_ko6y7")
+theme_override_font_sizes/font_size = 50
+text = "Score J2 : "
+horizontal_alignment = 1
 
 [node name="Leaderboard" type="Panel" parent="." unique_id=894185344]
 layout_mode = 0
@@ -134,7 +171,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SignBack" type="Sprite2D" parent="." unique_id=162490582]
-position = Vector2(475, 910)
+position = Vector2(475, 950)
 scale = Vector2(2.5, 1.75)
 texture = ExtResource("5_ko6y7")
 
@@ -144,9 +181,9 @@ material = SubResource("ShaderMaterial_yyuai")
 custom_minimum_size = Vector2(0, 127)
 layout_mode = 0
 offset_left = 325.0
-offset_top = 850.0
+offset_top = 890.0
 offset_right = 618.0
-offset_bottom = 977.0
+offset_bottom = 1017.0
 pivot_offset = Vector2(147.5, 63.5)
 theme_override_fonts/font = ExtResource("4_ko6y7")
 theme_override_font_sizes/font_size = 60

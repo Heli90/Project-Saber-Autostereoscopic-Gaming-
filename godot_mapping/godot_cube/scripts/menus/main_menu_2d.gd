@@ -246,3 +246,6 @@ func _onMidy2Changed(value: float) -> void:
 
 func _onUsingDepthPressed(toggled_on : bool) -> void :
 	Global.using_depth = toggled_on
+
+func _onCheckButton_pressed() -> void:
+	Global.performances = !Global.performances

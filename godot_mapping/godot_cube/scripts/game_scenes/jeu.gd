@@ -49,6 +49,9 @@ func onPartieTimerTimeout(death: bool = false, winner: int = 1) -> void:
 	var score_j1 = int(cube_spawner.score_uis[0].score.text)
 	var score_j2 = int(cube_spawner.score_uis[1].score.text)
 	
+	game_ending.score_j1.text += str(score_j1)
+	game_ending.score_j2.text += str(score_j2)
+
 	# Si un des joueurs a perdu tous ses points de vie, son score n'est pas enregistré
 	if death: match winner:
 		1: save_scores_to_leaderboard(0, score_j2)
@@ -117,6 +120,13 @@ func afficher_leaderboard(entrees: Array) -> void:
 	for i in range(entrees.size()):
 		var e = entrees[i]
 		game_ending.leaderboard_label.text += "%d. %s — %d pts\n"%[i+1, e["nom"], e["score"]]
+
+func reset_leaderboard() -> void:
+	var config = ConfigFile.new()
+	config.load(LEADERBOARD_PATH)
+	config.set_value("Leaderboard", "Entrees", [])
+	config.save(LEADERBOARD_PATH)
+	game_ending.leaderboard_label.text = ""
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("StopTime") and (Global.launched_mode > 0):

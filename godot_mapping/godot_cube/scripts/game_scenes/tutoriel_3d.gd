@@ -21,8 +21,8 @@ var combo_bar_list: Array[Control] = []
 @onready var pause_menu: ColorRect = $Game/HUD/PauseMenu
 @onready var click_sound: AudioStreamPlayer = $Game/HUD/PauseMenu/ClickSound
 
-@onready var tuto_frame: Sprite2D = $FinalFrame
-@onready var tuto_label: Label = $TutoLabel
+@onready var tuto_frame: Sprite2D = $Cadres/TutoFrame
+@onready var tuto_label: Label = $Cadres/TutoLabel
 @onready var tuto_chain_1: Sprite2D = $Cadres/Chains/Chain4
 @onready var tuto_chain_2: Sprite2D = $Cadres/Chains/Chain5
 var tuto_list: Array = []
@@ -116,10 +116,19 @@ func monte_tuto_cadre() -> void:
 	await t.finished
 
 func descend_tuto_cadre() -> void:
+	print("hi")
+	for child in cadres.get_children():
+		child.visible = false
+	$Cadres/Chains.visible = true
+	for x in tuto_list:
+		x.visible = true
+		x.modulate.a = 1.0
 	var t = create_tween().set_parallel(true)
 	t.set_trans(Tween.TRANS_BACK)
 	t.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
 	for x in tuto_list:
+		x.visible = true
+		x.modulate.a = 1.0
 		var vec = x.position
 		t.tween_property(x, "position", vec + Vector2(0.0, 700.0), 0.8)
 	await t.finished
@@ -163,5 +172,6 @@ func _onAllButton_pressed() -> void:
 	await get_tree().create_timer(0.5).timeout
 	Global.tutoriel_played_mode = 3
 	appear_combos()
+	cadres.visible = true
 	get_tree().paused = false
 	landmarks_proceed.camera_feed.feed_is_active = true

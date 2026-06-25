@@ -598,9 +598,9 @@ vertical_alignment = 1
 
 [node name="AlphaTitleJ1" type="Label" parent="CalibrationSaber" unique_id=714383118]
 layout_mode = 0
-offset_left = -550.0
+offset_left = -500.0
 offset_top = -150.0
-offset_right = -228.0
+offset_right = -178.0
 offset_bottom = -124.0
 theme_override_fonts/font = ExtResource("5_xiui8")
 theme_override_font_sizes/font_size = 25
@@ -623,9 +623,9 @@ value = 2.0
 
 [node name="MidXTitleJ1" type="Label" parent="CalibrationSaber" unique_id=139913492]
 layout_mode = 0
-offset_left = -550.0
+offset_left = -500.0
 offset_top = -120.0
-offset_right = -228.0
+offset_right = -178.0
 offset_bottom = -94.0
 theme_override_fonts/font = ExtResource("5_xiui8")
 theme_override_font_sizes/font_size = 25
@@ -648,9 +648,9 @@ value = 0.5
 
 [node name="BetaTitleJ1" type="Label" parent="CalibrationSaber" unique_id=843584731]
 layout_mode = 0
-offset_left = -550.0
+offset_left = -500.0
 offset_top = -90.0
-offset_right = -228.0
+offset_right = -178.0
 offset_bottom = -64.0
 theme_override_fonts/font = ExtResource("5_xiui8")
 theme_override_font_sizes/font_size = 25
@@ -673,9 +673,9 @@ value = 2.0
 
 [node name="MidYTitleJ1" type="Label" parent="CalibrationSaber" unique_id=2010004711]
 layout_mode = 0
-offset_left = -550.0
+offset_left = -500.0
 offset_top = -60.0
-offset_right = -228.0
+offset_right = -178.0
 offset_bottom = -34.0
 theme_override_fonts/font = ExtResource("5_xiui8")
 theme_override_font_sizes/font_size = 25
@@ -698,9 +698,9 @@ value = 0.4
 
 [node name="AlphaTitleJ2" type="Label" parent="CalibrationSaber" unique_id=755501934]
 layout_mode = 0
-offset_left = 550.0
+offset_left = 600.0
 offset_top = -150.0
-offset_right = 875.0
+offset_right = 925.0
 offset_bottom = -124.0
 theme_override_fonts/font = ExtResource("5_xiui8")
 theme_override_font_sizes/font_size = 25
@@ -723,9 +723,9 @@ value = 2.0
 
 [node name="MidXTitleJ2" type="Label" parent="CalibrationSaber" unique_id=859845958]
 layout_mode = 0
-offset_left = 550.0
+offset_left = 600.0
 offset_top = -120.0
-offset_right = 875.0
+offset_right = 925.0
 offset_bottom = -94.0
 theme_override_fonts/font = ExtResource("5_xiui8")
 theme_override_font_sizes/font_size = 25
@@ -748,9 +748,9 @@ value = 0.5
 
 [node name="BetaTitleJ2" type="Label" parent="CalibrationSaber" unique_id=457183075]
 layout_mode = 0
-offset_left = 550.0
+offset_left = 600.0
 offset_top = -90.0
-offset_right = 872.0
+offset_right = 922.0
 offset_bottom = -64.0
 theme_override_fonts/font = ExtResource("5_xiui8")
 theme_override_font_sizes/font_size = 25
@@ -773,9 +773,9 @@ value = 2.0
 
 [node name="MidYTitleJ2" type="Label" parent="CalibrationSaber" unique_id=2048063673]
 layout_mode = 0
-offset_left = 550.0
+offset_left = 600.0
 offset_top = -60.0
-offset_right = 872.0
+offset_right = 922.0
 offset_bottom = -34.0
 theme_override_fonts/font = ExtResource("5_xiui8")
 theme_override_font_sizes/font_size = 25

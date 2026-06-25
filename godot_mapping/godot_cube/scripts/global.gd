@@ -8,8 +8,8 @@ var launched_mode: int = 0
 var tutoriel_played_mode: int = -1
 # Booléen décidant s'il faut préparer des cubes bien précis pour le tutoriel
 var setup_tutoriel: bool = true
-# Facile : 0 / Moyen : 1 / Difficile : 2
-var difficulty: int = 1
+# Booléen décidant s'il faut afficher les performances en jeu
+var performances: bool = false
 
 # Transitions associées au hover des boutons du menu
 const BUTTON_SCALE_FACTOR: float = 1.01

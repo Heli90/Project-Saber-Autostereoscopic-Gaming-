@@ -22,6 +22,28 @@ func _physics_process(delta: float) -> void:
 		if Global.two_player_mode: queue_free()
 		else: collision()
 
+func move_x(t: Tween) -> void:
+	match position.x:
+		-2.0: t.tween_property(self, "position:x", 0.0, 1.0)
+		0.0:
+			var n = RandomNumberGenerator.new().randi_range(0, 1)
+			if n == 0:
+				t.tween_property(self, "position:x", -2.0, 1.0)
+			else:
+				t.tween_property(self, "position:x", 2.0, 1.0)
+		2.0: t.tween_property(self, "position:x", 0.0, 1.0)
+
+func move_y(t: Tween) -> void:
+	match position.y:
+		0.5: t.tween_property(self, "position:y", 1.75, 1.0)
+		1.75:
+			var n = RandomNumberGenerator.new().randi_range(0, 1)
+			if n == 0:
+				t.tween_property(self, "position:y", 0.5, 1.0)
+			else:
+				t.tween_property(self, "position:y", 3.0, 1.0)
+		3.0: t.tween_property(self, "position:y", 1.75, 1.0)
+
 # On supprime le cube et on apporte le bonus de cube s'il est touché par l'un des joueurs
 func collision() -> void:
 	nb_collisions += 1
@@ -31,6 +53,16 @@ func collision() -> void:
 	vitesse_deplacement = -vitesse_deplacement
 	if position.z > 0: emit_signal("striked_cube_j1", self)
 	else: emit_signal("striked_cube_j2", self)
+	
+	var t = create_tween().set_ease(Tween.EASE_OUT).set_parallel(true)
+	var k = RandomNumberGenerator.new().randi_range(1, 3)
+	match k:
+		1: move_y(t)
+		2: move_x(t)
+		3:
+			move_x(t)
+			move_y(t)
+	await t.finished
 
 func apply_vfx() -> void:
 	if particles_vfx == null: return
