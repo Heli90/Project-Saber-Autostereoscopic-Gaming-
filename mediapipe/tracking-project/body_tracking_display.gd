@@ -187,6 +187,7 @@ func _on_body_data_received(pose_landmarks, pose_index):
 	pose_landmarks.landmarks[15].y,
 	pose_landmarks.landmarks[15].z, pose_index]
 
+# Boucle principale de capture, détection et affichage des résultats MediaPipe
 
 func _process(_delta):
 	reload_camera_selection()
@@ -199,7 +200,7 @@ func _process(_delta):
 	var img = tex.get_image()
 	if not img: return
 	
-	# Conversion pour MediaPipe
+	# Conversion de l'image du viewport vers le format attendu par MediaPipe
 	img.convert(Image.FORMAT_RGBA8)
 	var mp_image = MediaPipeImage.new()
 	mp_image.set_image(img)
