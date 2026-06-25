@@ -1,6 +1,12 @@
 extends RefCounted
 class_name ObstacleInfo
 
+# Temps d'apparition de l'obstacle dans la musique (en battements)
+# Durée pendant laquelle l'obstacle reste actif
+# Position horizontale de l'obstacle sur la grille de jeu
+# Position verticale de l'obstacle sur la grille de jeu
+# Dimensions de l'obstacle en nombre de cases
+
 var beat: float
 var duration: float
 var line_index: int
@@ -16,6 +22,8 @@ func _init(beat: float, duration: float, line_index: int, line_layer: int, width
 	self.line_layer = line_layer
 	self.width = width
 	self.height = height
+
+# Création d'un obstacle à partir du format de carte Beat Saber version 2
 
 static func new_v2(obstacle_dict: Dictionary) -> ObstacleInfo:
 	var y: int = 0
@@ -38,6 +46,8 @@ static func new_v2(obstacle_dict: Dictionary) -> ObstacleInfo:
 		int(Utils.get_float(obstacle_dict, "_width", 0)),
 		h
 	)
+
+# Création d'un obstacle à partir du format de carte Beat Saber version 3
 
 static func new_v3(obstacle_dict: Dictionary) -> ObstacleInfo:
 	return ObstacleInfo.new(
