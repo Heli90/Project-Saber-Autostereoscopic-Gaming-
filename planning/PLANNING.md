@@ -64,8 +64,8 @@ Des changements de direction et des avancées rapides ont vite rendu le planning
 | Tâche                         | Description | Responsables  | État | Priorité |
 | ----------------------------  | ------------- | ----       | ----         | ----       | 
 | Faire l'affiche                         | cf [semaine finale](https://gitlab.telecom-paris.fr/proj104/2025-2026/artishow/-/blob/main/SEMAINE_FINALE.md?ref_type=heads#poster) | Hugo Belle  | Fait | Urgent |
-| Scripter des niveaux                        | Créer des niveaux jouables (musique, timing, trajectoire et nombre de cubes, type de cubes etc.) | VK, Hélias  | En cours | Urgent |
-| Implémenter une phase de calibrage                         | Calibrer : la distance maximale des sabres, sensibilité des sabres, l'orientation et la distance des caméra pour un effet 3D correct, éventuellement placement des joueurs avec caméra active pendant la phase de calibrage | Tous  | Pas commencé | Urgent |
+| Scripter des niveaux                        | Créer des niveaux jouables (musique, timing, trajectoire et nombre de cubes, type de cubes etc.) | VK, Hélias  | Un niveau fait | Urgent |
+| Implémenter une phase de calibrage                         | Calibrer : la distance maximale des sabres, sensibilité des sabres, l'orientation et la distance des caméra pour un effet 3D correct, éventuellement placement des joueurs avec caméra active pendant la phase de calibrage | Tous  | Fait | Urgent |
 | Implémenter un timer                         | Limiter les phases de jeu à 2 min et mettre un petit affichage de qui a gagné + les high scores | VK  | Quasiment terminé | Urgent |
 | Préparer des questions pour les beta-testeurs                         | Faire un google form pour récolter des avis constructifs pour améliorer le jeu | Hélias  | Fait | Urgent |
 | Trouver une place pour la journée artishow                         | Envoyer un mail pour demander une place adéquate au projet | Hélias  | Fait | Urgent |
@@ -75,7 +75,7 @@ Des changements de direction et des avancées rapides ont vite rendu le planning
 | Effet profondeur sabres                        | Ajouter des effets sur la collision/la trajectoire des cubes selon la profondeur (z) avec laquelle ils sont touchés | Birame  | Pas commencé | Faible |
 | Ajouter des effets audios et de la musique                         | ..... | Tous  | En cours | Faible |
 | Niveau de démonstration des effets                         | Implémenter un niveau (possiblement une vidéo / un niveau auto) pendant lequel tous les effets se jouent, même ceux qu'on aurait finalement pas gardés | VK  | Fait | Faible |
-| Optimiser l'utilisation des sabres                         | Faire en sorte qu'ils ne tournent pas trop sans qu'on le veuille, que le lien bras-sabre semble vraiment bien fluide | Birame  | Pas commencé | Faible |
+| Optimiser l'utilisation des sabres                         | Faire en sorte qu'ils ne tournent pas trop sans qu'on le veuille, que le lien bras-sabre semble vraiment bien fluide | Birame  | Bien avancé | Faible |
 
 
 
