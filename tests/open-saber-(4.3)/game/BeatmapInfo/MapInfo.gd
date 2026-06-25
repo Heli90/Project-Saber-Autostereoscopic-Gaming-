@@ -1,5 +1,8 @@
+# Classe contenant les informations générales d'une carte musicale Beat Saber
 extends RefCounted
 class_name MapInfo
+
+# Informations générales liées à la musique et à la carte
 
 var version: String
 var song_name: String
@@ -16,6 +19,8 @@ var cover_image_filename: String
 var environment_name: String
 var song_time_offset: float
 var custom_data: Dictionary
+
+# Informations liées au chargement et aux difficultés de la carte
 
 var filepath: String
 var difficulty_beatmaps: Array[DifficultyInfo]
@@ -45,6 +50,8 @@ func _init(
 	self.custom_data = custom_data
 	self.filepath = filepath
 	self.difficulty_beatmaps = difficulty_beatmaps
+
+# Vérification de la validité des informations de la carte
 
 func is_empty() -> bool:
 	return (
