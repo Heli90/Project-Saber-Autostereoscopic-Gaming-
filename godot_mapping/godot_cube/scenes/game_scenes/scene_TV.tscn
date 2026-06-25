@@ -579,6 +579,7 @@ fov = 90.0
 
 [node name="ScoreUI" type="CanvasLayer" parent="J2/CameraController/Vue5" unique_id=422092659]
 script = ExtResource("3_k5d3u")
+player_id = 2
 
 [node name="ScoresPanel" type="Control" parent="J2/CameraController/Vue5/ScoreUI" unique_id=219782711]
 layout_mode = 3
@@ -815,6 +816,7 @@ fov = 90.0
 
 [node name="ScoreUI" type="CanvasLayer" parent="J2/CameraController/Vue6" unique_id=580929518]
 script = ExtResource("3_k5d3u")
+player_id = 2
 
 [node name="ScoresPanel" type="Control" parent="J2/CameraController/Vue6/ScoreUI" unique_id=753238388]
 layout_mode = 3

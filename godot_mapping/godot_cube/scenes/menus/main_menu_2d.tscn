@@ -336,6 +336,7 @@ text = "Quit"
 metadata/_edit_use_anchors_ = true
 
 [node name="Options" type="Panel" parent="." unique_id=708263686]
+visible = false
 material = SubResource("ShaderMaterial_sp26u")
 layout_mode = 1
 anchors_preset = 8
@@ -615,7 +616,7 @@ theme_override_styles/grabber_area = SubResource("StyleBoxLine_ymobg")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_sfpvq")
 min_value = 0.1
 max_value = 0.9
-step = 0.1
+step = 0.01
 value = 0.5
 
 [node name="BetaTitleJ1" type="Label" parent="CalibrationSaber" unique_id=886013787]
@@ -665,8 +666,56 @@ theme_override_styles/grabber_area = SubResource("StyleBoxLine_ymobg")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_sfpvq")
 min_value = 0.1
 max_value = 0.9
-step = 0.1
+step = 0.01
 value = 0.4
+
+[node name="DepthAmplificationTitleJ1" type="Label" parent="CalibrationSaber" unique_id=641396715]
+layout_mode = 0
+offset_left = -500.0
+offset_top = -30.0
+offset_right = -178.0
+offset_bottom = 25.0
+theme_override_fonts/font = ExtResource("4_5epmy")
+theme_override_font_sizes/font_size = 25
+text = "Depth Amplification J1
+"
+horizontal_alignment = 1
+
+[node name="DepthAmplificationControlJ1" type="HSlider" parent="CalibrationSaber" unique_id=1892271490]
+layout_mode = 0
+offset_left = -100.0
+offset_top = -30.0
+offset_right = 200.0
+theme_override_styles/slider = SubResource("StyleBoxLine_myaa2")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_ymobg")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_sfpvq")
+max_value = 10.0
+step = 0.5
+value = 2.0
+
+[node name="BaseDepthTitleJ1" type="Label" parent="CalibrationSaber" unique_id=227838870]
+layout_mode = 0
+offset_left = -500.0
+offset_right = -178.0
+offset_bottom = 55.0
+theme_override_fonts/font = ExtResource("4_5epmy")
+theme_override_font_sizes/font_size = 25
+text = "Base Depth J1
+"
+horizontal_alignment = 1
+
+[node name="BaseDepthControlJ1" type="HSlider" parent="CalibrationSaber" unique_id=591840703]
+layout_mode = 0
+offset_left = -100.0
+offset_right = 200.0
+offset_bottom = 30.0
+theme_override_styles/slider = SubResource("StyleBoxLine_myaa2")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_ymobg")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_sfpvq")
+min_value = -10.0
+max_value = 10.0
+step = 0.5
+value = -2.0
 
 [node name="AlphaTitleJ2" type="Label" parent="CalibrationSaber" unique_id=1776945203]
 layout_mode = 0
@@ -715,7 +764,7 @@ theme_override_styles/grabber_area = SubResource("StyleBoxLine_ymobg")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_sfpvq")
 min_value = 0.1
 max_value = 0.9
-step = 0.1
+step = 0.01
 value = 0.5
 
 [node name="BetaTitleJ2" type="Label" parent="CalibrationSaber" unique_id=902528267]
@@ -765,8 +814,55 @@ theme_override_styles/grabber_area = SubResource("StyleBoxLine_ymobg")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_sfpvq")
 min_value = 0.1
 max_value = 0.9
-step = 0.1
+step = 0.01
 value = 0.4
+
+[node name="DepthAmplificationTitleJ2" type="Label" parent="CalibrationSaber" unique_id=1235764270]
+layout_mode = 0
+offset_left = 600.0
+offset_top = -30.0
+offset_right = 922.0
+offset_bottom = 25.0
+theme_override_fonts/font = ExtResource("4_5epmy")
+theme_override_font_sizes/font_size = 25
+text = "Depth Amplification J2
+"
+horizontal_alignment = 1
+
+[node name="DepthAmplificationControlJ2" type="HSlider" parent="CalibrationSaber" unique_id=90014487]
+layout_mode = 0
+offset_left = 1000.0
+offset_top = -30.0
+offset_right = 1300.0
+theme_override_styles/slider = SubResource("StyleBoxLine_myaa2")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_ymobg")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_sfpvq")
+max_value = 10.0
+step = 0.5
+value = 2.0
+
+[node name="BaseDepthTitleJ2" type="Label" parent="CalibrationSaber" unique_id=1864416847]
+layout_mode = 0
+offset_left = 600.0
+offset_right = 922.0
+offset_bottom = 26.0
+theme_override_fonts/font = ExtResource("4_5epmy")
+theme_override_font_sizes/font_size = 25
+text = "Base Depth J2"
+horizontal_alignment = 1
+
+[node name="BaseDepthControlJ2" type="HSlider" parent="CalibrationSaber" unique_id=1037189162]
+layout_mode = 0
+offset_left = 1000.0
+offset_right = 1300.0
+offset_bottom = 30.0
+theme_override_styles/slider = SubResource("StyleBoxLine_myaa2")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_ymobg")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_sfpvq")
+min_value = -10.0
+max_value = 10.0
+step = 0.5
+value = -2.0
 
 [node name="DepthTitle" type="Label" parent="CalibrationSaber" unique_id=527035594]
 layout_mode = 0
@@ -996,10 +1092,14 @@ texture = ExtResource("8_ymobg")
 [connection signal="value_changed" from="CalibrationSaber/MidXControlJ1" to="." method="_onMidx1Changed"]
 [connection signal="value_changed" from="CalibrationSaber/BetaControl1" to="." method="_onBeta1Changed"]
 [connection signal="value_changed" from="CalibrationSaber/MidYControlJ1" to="." method="_onMidy1Changed"]
+[connection signal="value_changed" from="CalibrationSaber/DepthAmplificationControlJ1" to="." method="_onDepthAmplificationJ1Changed"]
+[connection signal="value_changed" from="CalibrationSaber/BaseDepthControlJ1" to="." method="_onBaseDepthJ1Changed"]
 [connection signal="value_changed" from="CalibrationSaber/AlphaControl2" to="." method="_onAlpha2Changed"]
 [connection signal="value_changed" from="CalibrationSaber/MidXControlJ2" to="." method="_onMidx2Changed"]
 [connection signal="value_changed" from="CalibrationSaber/BetaControl2" to="." method="_onBeta2Changed"]
 [connection signal="value_changed" from="CalibrationSaber/MidYControlJ2" to="." method="_onMidy2Changed"]
+[connection signal="value_changed" from="CalibrationSaber/DepthAmplificationControlJ2" to="." method="_onDepthAmplificationJ2Changed"]
+[connection signal="value_changed" from="CalibrationSaber/BaseDepthControlJ2" to="." method="_onBaseDepthJ2Changed"]
 [connection signal="toggled" from="CalibrationSaber/DepthCheck" to="." method="_onUsingDepthPressed"]
 [connection signal="mouse_entered" from="CalibrationSaber/BackButton" to="." method="_onBackCalButtonEnter"]
 [connection signal="mouse_exited" from="CalibrationSaber/BackButton" to="." method="_onBackCalButtonExit"]

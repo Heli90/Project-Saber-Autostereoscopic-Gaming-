@@ -244,6 +244,18 @@ func _onBeta2Changed(value: float) -> void:
 func _onMidy2Changed(value: float) -> void:
 	Global.midy2 = value
 
+func _onDepthAmplificationJ1Changed(value : float) -> void :
+	Global.ampl_z_j1 = value
+
+func _onDepthAmplificationJ2Changed(value : float) -> void :
+	Global.ampl_z_j2 = value
+
+func _onBaseDepthJ1Changed(value : float) -> void :
+	Global.base_depth_j1 = value
+
+func _onBaseDepthJ2Changed(value : float) -> void :
+	Global.base_depth_j2 = value 
+
 func _onUsingDepthPressed(toggled_on : bool) -> void :
 	Global.using_depth = toggled_on
 

@@ -17,7 +17,8 @@ var landmarks: Node2D
 var saber_range_x : float = 2.5
 var saber_y_min : float = 0.0
 var saber_y_max : float = 3.0
-var base_data_z : float = -0.8
+var ampl_z = [2.0,2.0]
+var base_pos_z = [-2.0,-2.0]
 
 # Facteur d'amplification des mouvements vers les bords extrémaux
 var alpha1 : float
@@ -66,6 +67,10 @@ func _ready() -> void:
 	var ty2 = alpha_mid_to_c1_c2(beta2,midy2)
 	c1_2_y = ty2[0]
 	c2_2_y = ty2[1]
+	base_pos_z[0]=Global.base_depth_j1
+	base_pos_z[1]=Global.base_depth_j2
+	ampl_z[0] = Global.ampl_z_j1
+	ampl_z[1] = Global.ampl_z_j2
 	
 	if not landmarks:
 		landmarks = get_node("../Game/LandMarksProceed")
@@ -142,6 +147,14 @@ func _physics_process(_delta: float) -> void:
 		var ty2 = alpha_mid_to_c1_c2(beta2,midy2)
 		c1_2_y = ty2[0]
 		c2_2_y = ty2[1]
+	if ampl_z[0] != Global.ampl_z_j1 :
+		ampl_z[0] = Global.ampl_z_j1
+	if ampl_z[1] != Global.ampl_z_j2 :
+		ampl_z[1] = Global.ampl_z_j2
+	if base_pos_z[0] != Global.base_depth_j1 :
+		base_pos_z[0] = Global.base_depth_j1
+	if base_pos_z[1] != Global.base_depth_j2:
+		base_pos_z[1] = Global.base_depth_j2
 	
 	for data in landmarks.hand_data:
 		if data["index"] == player_id :
@@ -163,7 +176,7 @@ func _physics_process(_delta: float) -> void:
 			
 			var pos_x : float = lerp(-saber_range_x, saber_range_x, local_x)
 			var pos_y : float = lerp(saber_y_max, saber_y_min, local_y)
-			var pos_z : float = -2.0+2.0*(data["z"]-base_data_z)
+			var pos_z : float = base_pos_z[player_id-1]+ampl_z[player_id-1]*data["z"]
 			var rot_z : float = -atan2(0, -1) / 2.0 - data["angle_z"]
 			
 			# On ignore les frames problématiques
@@ -171,10 +184,23 @@ func _physics_process(_delta: float) -> void:
 			
 			saber.position.x = pos_x
 			saber.position.y = pos_y
+			
 			if Global.using_depth :
 				saber.position.z = pos_z
 			else :
-				saber.position.z = -2.0
+				saber.position.z = base_pos_z[player_id-1]
+				
+			if player_id == 1:
+				if data["handedness"] == "Left" :
+					Global.bonus_z_j1_l = -10*(saber.position.z - base_pos_z[player_id-1])
+				else :
+					Global.bonus_z_j1_r = -10*(saber.position.z - base_pos_z[player_id-1])
+			if player_id == 2 :
+				if data["handedness"] == "Left" :
+					Global.bonus_z_j2_l = -10*(saber.position.z - base_pos_z[player_id-1])
+				else :
+					Global.bonus_z_j2_r = -10*(saber.position.z - base_pos_z[player_id-1])
+					
 			saber.rotation.z = rot_z
 			
 			#print("alpha1 = %f, midx1 = %f, beta1 = %f, midy1 = %f\n alpha2 = %f, midx2 = %f, beta2 = %f, midy2 = %f"%[alpha1,midx1,beta1,midy1,alpha2,midx2,beta2,midy2])
