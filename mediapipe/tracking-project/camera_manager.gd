@@ -3,6 +3,7 @@ extends Node3D  # On change Node en Control pour correspondre à la démo
 var camera_extension: CameraServerExtension
 var camera_feed
 
+# Références vers l'extension de gestion des permissions et le flux vidéo sélectionné
 #@onready var display = $SubViewportContainer/CameraViewport/CameraTextureRect # Adapte le chemin
 
 func _ready():
@@ -26,9 +27,11 @@ func _on_camera_permission_result(granted: bool):
 	else:
 		print("Permission refusée par l'utilisateur.")
 
+# Recherche d'une caméra disponible et configuration de son affichage
 # Démarrage de la caméra
+# Attente courte afin de laisser le temps au système de détecter les périphériques vidéo
 func _initialize_camera():
-	await get_tree().create_timer(0.5).timeout
+	await get_tree().create_timer(0.5).timeout  
 	CameraServer.monitoring_feeds = true
 	var feeds = CameraServer.feeds()
 	
