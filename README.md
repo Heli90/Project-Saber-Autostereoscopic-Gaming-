@@ -134,17 +134,13 @@ res://
 ---
 
 ## Installation
-### Gitlab
-Pour lier un dossier de sa machine au git, utiliser la commande suivante dans le dossier :
-```
-git remote add origin https://gitlab.telecom-paris.fr/proj104/2025-2026/gaming-as.git
-```
+
 
 ### Jeu
 Lancer le dossier godot_mapping/godot_cube dans **Godot 4.6**.
 
 ## Collaborateurs
-Projet développé par Hugo BELLE, Birame CISSÉ, Hélias GODARD--DELONGEAS, Adam KHATIRI, Van-Kévin NGUYEN.
+Projet développé par Hugo BELLE, Birame CISSÉ, Hélias GODARD--DELONGEAS et Van-Kévin NGUYEN.
 Projet encadré par Jean LEFEUVRE.
 
 ### Projet Open source
